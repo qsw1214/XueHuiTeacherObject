@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="49" id="KGk-i7-Jjw" customClass="XHNewTextFieldTypeTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="48.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1tK-K5-Vg2" customClass="XHBaseLabel">
+                        <rect key="frame" x="21" y="11" width="116" height="27"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ize-vs-uxs" customClass="XHBaseLabel">
+                        <rect key="frame" x="217" y="11" width="52" height="27"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="52" id="c0e-vS-gx9"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入节数" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nth-tm-ddc">
+                        <rect key="frame" x="142" y="5" width="70" height="38.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="2j8-Hd-8ob"/>
+                        </constraints>
+                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Nth-tm-ddc" firstAttribute="leading" secondItem="1tK-K5-Vg2" secondAttribute="trailing" constant="5" id="7Hg-q4-jTU"/>
+                    <constraint firstAttribute="bottom" secondItem="Nth-tm-ddc" secondAttribute="bottom" constant="5" id="8dT-Fz-bBJ"/>
+                    <constraint firstItem="Nth-tm-ddc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="FoS-AK-jnI"/>
+                    <constraint firstItem="1tK-K5-Vg2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="M0g-e2-q5i"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="1tK-K5-Vg2" secondAttribute="bottom" id="Qgd-7d-fav"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Ize-vs-uxs" secondAttribute="trailing" constant="35" id="RAZ-FZ-bS9"/>
+                    <constraint firstItem="Nth-tm-ddc" firstAttribute="leading" secondItem="1tK-K5-Vg2" secondAttribute="trailing" constant="5" id="RTJ-Wz-juc"/>
+                    <constraint firstItem="Ize-vs-uxs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="TKJ-tL-Sjp"/>
+                    <constraint firstItem="1tK-K5-Vg2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="Vd5-6t-EXG"/>
+                    <constraint firstItem="Ize-vs-uxs" firstAttribute="leading" secondItem="Nth-tm-ddc" secondAttribute="trailing" constant="5" id="hR4-Mi-riY"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Ize-vs-uxs" secondAttribute="bottom" id="rny-cL-Pz1"/>
+                    <constraint firstItem="Ize-vs-uxs" firstAttribute="leading" secondItem="Nth-tm-ddc" secondAttribute="trailing" constant="5" id="zPK-6P-O02"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="selectLabel" destination="Ize-vs-uxs" id="NLP-Ci-GPU"/>
+                <outlet property="textFeild" destination="Nth-tm-ddc" id="a3o-Yh-HXL"/>
+                <outlet property="titleLabel" destination="1tK-K5-Vg2" id="hsV-if-0Nz"/>
+            </connections>
+            <point key="canvasLocation" x="92" y="58.5"/>
+        </tableViewCell>
+    </objects>
+</document>
