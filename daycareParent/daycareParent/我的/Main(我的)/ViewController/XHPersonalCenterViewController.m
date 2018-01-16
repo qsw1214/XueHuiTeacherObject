@@ -54,7 +54,7 @@
     _ChildArry=[NSMutableArray arrayWithArray:[XHUserInfo sharedUserInfo].childListArry];
     [_ChildArry addObject:@""];
 
-    _tableView=[[BaseTableView alloc] initWithFrame:CGRectMake(0, USER_HEARD+70, SCREEN_WIDTH, SCREEN_HEIGHT-49-USER_HEARD-70) style:UITableViewStylePlain];
+    _tableView=[[BaseTableView alloc] initWithFrame:CGRectMake(0, USER_HEARD+170, SCREEN_WIDTH, SCREEN_HEIGHT-49-USER_HEARD-70) style:UITableViewStylePlain];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.sectionHeaderHeight=0;
@@ -233,43 +233,49 @@
 -(UIView *)h_view
 {
     if (_h_view==nil) {
-        _h_view=[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, USER_HEARD+70)];
-        BaseButtonControl *setBtn = [[BaseButtonControl alloc]init];
-        [setBtn setNumberImageView:1];
-        [setBtn resetFrame:CGRectMake(SCREEN_WIDTH-60, 20, 44, 44)];
-        [setBtn setImageEdgeFrame:CGRectMake((44-20.0)/2.0, (44-20.0)/2.0, 20, 20) withNumberType:0 withAllType:NO];
-        [setBtn setImage:@"ico_set" withNumberType:0 withAllType:NO];
-        [setBtn addTarget:self action:@selector(setBtnClick) forControlEvents:UIControlEventTouchUpInside];
-        [_h_view addSubview:setBtn];
-        _h_btn=[[UIButton alloc] initWithFrame:CGRectMake(10, 10+50, USER_HEARD, USER_HEARD)];
+        _h_view=[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, USER_HEARD+170)];
+//        BaseButtonControl *setBtn = [[BaseButtonControl alloc]init];
+//        [setBtn setNumberImageView:1];
+//        [setBtn resetFrame:CGRectMake(SCREEN_WIDTH-60, 20, 44, 44)];
+//        [setBtn setImageEdgeFrame:CGRectMake((44-20.0)/2.0, (44-20.0)/2.0, 20, 20) withNumberType:0 withAllType:NO];
+//        [setBtn setImage:@"ico_set" withNumberType:0 withAllType:NO];
+//        [setBtn addTarget:self action:@selector(setBtnClick) forControlEvents:UIControlEventTouchUpInside];
+//        [_h_view addSubview:setBtn];
+        XHBaseLabel *label=[[XHBaseLabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-100)/2.0, 20, 100, 44)];
+        label.text=@"我的";
+        label.font=FontLevel0;
+        label.textAlignment=NSTextAlignmentCenter;
+        label.textColor=[UIColor whiteColor];
+        [_h_view addSubview:label];
+        _h_btn=[[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-USER_HEARD)/2.0,64,  USER_HEARD, USER_HEARD)];
         _h_btn.layer.cornerRadius=USER_HEARD/2.0;
         _h_btn.layer.masksToBounds=YES;
         [_h_btn addTarget:self action:@selector(heardBtnClick) forControlEvents:UIControlEventTouchUpInside];
         _h_btn.backgroundColor=[UIColor whiteColor];
         _h_view.backgroundColor=MainColor;
         [_h_view addSubview:_h_btn];
-        _nameLabel=[[UILabel alloc] initWithFrame:CGRectMake(USER_HEARD+30,10+50, 90, USER_HEARD/2)];
+        _nameLabel=[[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-90)/2.0,_h_btn.bottom+5, 90, USER_HEARD/2)];
         _nameLabel.font=FontLevel0;
         _nameLabel.textAlignment=NSTextAlignmentCenter;
         _nameLabel.textColor=[UIColor whiteColor];
         [ _h_view addSubview:_nameLabel];
-        _vipbImageView=[[UIImageView alloc] initWithFrame:CGRectMake(USER_HEARD+125, 18+50, USER_HEARD/2-18, USER_HEARD/2.0-18)];
-        [_h_view addSubview:_vipbImageView];
-        _conditionLabel=[[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH*0.3+105,10+50, SCREEN_WIDTH*0.7-115, USER_HEARD/2.0)];
-        _conditionLabel.textColor=[UIColor whiteColor];
-        _conditionLabel.font=FontLevel4;
-        [_h_view addSubview:_conditionLabel];
-        _sigerLabel=[[UILabel alloc] initWithFrame:CGRectMake(USER_HEARD+30,10+USER_HEARD/2.0+50, SCREEN_WIDTH-USER_HEARD*2, SCREEN_WIDTH/8)];
-        _sigerLabel.textColor=[UIColor whiteColor];
-        [ _h_view addSubview:_sigerLabel];
-        UIButton *btn=[[UIButton alloc] initWithFrame:CGRectMake(USER_HEARD+30,10+USER_HEARD/2.0+50, SCREEN_WIDTH-USER_HEARD*2, SCREEN_WIDTH/8)];
-        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [btn addTarget:self action:@selector(signBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [ _h_view addSubview:btn];
-        UIButton *vipBtn=[[UIButton alloc] initWithFrame:CGRectMake(USER_HEARD+125, 10+50, SCREEN_WIDTH*0.8-135, USER_HEARD/2.0)];
-        [vipBtn addTarget:self action:@selector(vipbtnClick) forControlEvents:UIControlEventTouchUpInside];
-        [_h_view addSubview:vipBtn];
-        [self refreshHeadView];
+//        _vipbImageView=[[UIImageView alloc] initWithFrame:CGRectMake(USER_HEARD+125, 18+50, USER_HEARD/2-18, USER_HEARD/2.0-18)];
+//        [_h_view addSubview:_vipbImageView];
+//        _conditionLabel=[[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH*0.3+105,10+50, SCREEN_WIDTH*0.7-115, USER_HEARD/2.0)];
+//        _conditionLabel.textColor=[UIColor whiteColor];
+//        _conditionLabel.font=FontLevel4;
+//        [_h_view addSubview:_conditionLabel];
+//        _sigerLabel=[[UILabel alloc] initWithFrame:CGRectMake(USER_HEARD+30,10+USER_HEARD/2.0+50, SCREEN_WIDTH-USER_HEARD*2, SCREEN_WIDTH/8)];
+//        _sigerLabel.textColor=[UIColor whiteColor];
+//        [ _h_view addSubview:_sigerLabel];
+//        UIButton *btn=[[UIButton alloc] initWithFrame:CGRectMake(USER_HEARD+30,10+USER_HEARD/2.0+50, SCREEN_WIDTH-USER_HEARD*2, SCREEN_WIDTH/8)];
+//        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//        [btn addTarget:self action:@selector(signBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+//        [ _h_view addSubview:btn];
+//        UIButton *vipBtn=[[UIButton alloc] initWithFrame:CGRectMake(USER_HEARD+125, 10+50, SCREEN_WIDTH*0.8-135, USER_HEARD/2.0)];
+//        [vipBtn addTarget:self action:@selector(vipbtnClick) forControlEvents:UIControlEventTouchUpInside];
+//        [_h_view addSubview:vipBtn];
+        //[self refreshHeadView];
     }
         return _h_view;
 }

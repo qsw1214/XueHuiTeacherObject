@@ -13,6 +13,7 @@
 #import "XHAboutUsViewController.h"
 #import <RongIMKit/RongIMKit.h>
 #import "XHLoginViewController.h"
+#import "JPUSHService.h"
 @interface XHSetViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     UITableView *_tableView;
@@ -27,7 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setNavtionTitle:@"设置"];
-    arry=@[@"修改密码",@"更换安全电话",@"关于我们",@"版本更新",@"清除缓存"];
+    arry=@[@"修改密码",@"更换安全电话",@"关于我们",@"当前版本",@"清除缓存"];
     _tableView=[[UITableView alloc] initWithFrame:CGRectMake(0,64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
      _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
     _tableView.delegate=self;
@@ -107,7 +108,7 @@
             break;
         case 3:
         {
-            [self updateVersion];
+            //[self updateVersion];
             
         }
             
@@ -143,6 +144,8 @@
              [XHShowHUD hideHud];
         }];
         [[RCIM sharedRCIM]disconnect];
+        [JPUSHService setTags:nil alias:@"" fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias){
+        }];
         [NSUserDefaults removeObjectItemForKey:AutoLogin];
         XHLoginViewController *login=[XHLoginViewController new];
         UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:login];
@@ -154,6 +157,7 @@
     }]];
     [self presentViewController:alertController animated:YES completion:nil];
 }
+/*
 -(void)updateVersion
 {
     XHNetWorkConfig *Net=[[XHNetWorkConfig alloc] init];
@@ -216,7 +220,7 @@
         
     }];
 }
-
+*/
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
