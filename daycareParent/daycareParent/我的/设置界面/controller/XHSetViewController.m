@@ -50,10 +50,7 @@
     fileSize= (float)[[SDImageCache sharedImageCache] getSize]/1024.0/1024.0;
     [_tableView reloadData];
 }
--(NSString *)DocumentsTruePath
-{
-    return  NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
-}
+
 #pragma mark----tableviewDelegate------
 
 

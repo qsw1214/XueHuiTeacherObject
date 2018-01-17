@@ -25,7 +25,7 @@
     // Do any additional setup after loading the view.
     [self setNavtionTitle:@"个人信息"];
     [self setNavtionTitleColor:[UIColor whiteColor]];
-    _titleArry=@[@"头像",@"昵称",@"性别",@"真实姓名",@"联系电话"];
+    _titleArry=@[@"头像",@"昵称",@"性别",@"真实姓名",@"联系电话",@"个性签名"];
     _tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
     _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
     _tableView.delegate=self;
@@ -36,7 +36,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return 6;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -45,7 +45,7 @@
     cell.frontLabel.frame=CGRectMake(10, 0, 80, cell.bounds.size.height);
     cell.backLabel.frame=CGRectMake(90, 0, SCREEN_WIDTH-120, cell.bounds.size.height);
     cell.frontLabel.text=_titleArry[indexPath.row];
-    cell.headBtn.frame=CGRectMake(SCREEN_WIDTH-USER_HEARD-30, 10, USER_HEARD, USER_HEARD);
+    cell.headBtn.frame=CGRectMake(SCREEN_WIDTH-100, 10, 70, 70);
     [cell.headBtn sd_setImageWithURL:[NSURL URLWithString:ALGetFileHeadThumbnail(userInfo.headPic)] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
     if (indexPath.row==0) {
         cell.headBtn.hidden=NO;
@@ -66,6 +66,9 @@
         }
         if (indexPath.row==4) {
             cell.backLabel.text=userInfo.telphoneNumber;
+        }
+        if (indexPath.row==5) {
+            cell.backLabel.text=userInfo.signature;
         }
     }
     [cell.headBtn addTarget:self action:@selector(headClick) forControlEvents:UIControlEventTouchUpInside];
@@ -127,15 +130,18 @@
     if (indexPath.row==4) {
         [self showAlertViewWithTitle:@"请输入联系电话" Index:indexPath.row];
     }
+    if (indexPath.row==5) {
+        [self showAlertViewWithTitle:@"请输入个性签名" Index:indexPath.row];
+    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row==0) {
-        return USER_HEARD+20;
+        return 90;
     }
     else
     {
-        return USER_HEARD-10;
+        return 60;
     }
 }
 #pragma mark-------修改头像
@@ -182,6 +188,9 @@
         if (index==4) {
             [self.netWorkConfig setObject:feild.text forKey:@"telphoneNumber"];
         }
+        if (index==5) {
+           [self.netWorkConfig setObject:feild.text forKey:@"signature"];
+        }
         [self.netWorkConfig postWithUrl:@"zzjt-app-api_user004" sucess:^(id object, BOOL verifyObject) {
             if (verifyObject) {
                 NSIndexPath *  indexPath = [NSIndexPath indexPathForRow:index inSection:0];
@@ -192,6 +201,7 @@
                 [XHUserInfo sharedUserInfo].nickName=[dic objectItemKey:@"nickName"];
                  [XHUserInfo sharedUserInfo].guardianModel.guardianName=[dic objectItemKey:@"guardianName"];
                  [XHUserInfo sharedUserInfo].telphoneNumber=[dic objectItemKey:@"telphoneNumber"];
+                [XHUserInfo sharedUserInfo].signature=[dic objectItemKey:@"signature"];
                  self.isRefresh(YES);
             }
         } error:^(NSError *error) {

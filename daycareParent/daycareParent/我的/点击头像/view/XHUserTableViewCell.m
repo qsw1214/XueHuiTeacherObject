@@ -22,7 +22,7 @@
         _backLabel.textAlignment=NSTextAlignmentRight;
         [self.contentView addSubview:_backLabel];
         _headBtn=[[UIButton alloc] init];
-        _headBtn.layer.cornerRadius=USER_HEARD/2.0;
+        _headBtn.layer.cornerRadius=35;
         _headBtn.layer.masksToBounds=YES;
         [self.contentView addSubview:_headBtn];
         _famman=[[UIImageView alloc] init];

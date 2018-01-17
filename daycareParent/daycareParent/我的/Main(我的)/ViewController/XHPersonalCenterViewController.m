@@ -23,6 +23,8 @@
 #import "XHVIPModel.h"
 #import "XHEducationCloudWebViewController.h"
 #import "BaseTableView.h"
+#import "XHPasswordViewController.h"
+#import "XHAboutUsViewController.h"
 #define TITLE_LIST @[@"学习记录",@"收藏资源",@"下载记录",@"我的课程"]
 
 @interface XHPersonalCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -31,16 +33,13 @@
     BaseTableView *_tableView;
     NSArray *arry;
     NSArray *contentArry;
-    NSMutableArray *_ChildArry;
     UIButton *_h_btn;
     UILabel *_nameLabel;
-    UIImageView* _vipbImageView;
-    UILabel* _conditionLabel;
+//    UILabel* _conditionLabel;
     UILabel *_sigerLabel;
+    float fileSize;
 }
 @property(nonatomic,strong)UIView *h_view;
-@property(nonatomic,strong)XHNetWorkConfig *getVIPNet;
-@property(nonatomic,strong)XHNetWorkConfig *getChildListNet;
 @end
 
 @implementation XHPersonalCenterViewController
@@ -49,16 +48,14 @@
     [super viewDidLoad];
 
     [self navtionHidden:YES];
-    arry=@[@"课程/辅导",@"VIP升级",@"我的优惠券",@"我的收货地址",@"联系客服"];
-    contentArry=@[@"ico_order",@"ico_vip",@"ico_coupon",@"ico_location",@"ico_service"];
-    _ChildArry=[NSMutableArray arrayWithArray:[XHUserInfo sharedUserInfo].childListArry];
-    [_ChildArry addObject:@""];
-
-    _tableView=[[BaseTableView alloc] initWithFrame:CGRectMake(0, USER_HEARD+170, SCREEN_WIDTH, SCREEN_HEIGHT-49-USER_HEARD-70) style:UITableViewStylePlain];
+    arry=@[@"修改密码",@"食谱管理",@"清除缓存",@"关于我们"];
+    contentArry=@[@"ico-modify",@"icoshiouguanli",@"ico-clean",@"ico-about"];
+    _tableView=[[BaseTableView alloc] initWithFrame:CGRectMake(0, 240, SCREEN_WIDTH, SCREEN_HEIGHT-49-USER_HEARD-70) style:UITableViewStyleGrouped];
+     _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.sectionHeaderHeight=0;
-    //_tableView.bounces=NO;
+    _tableView.bounces=NO;
     [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     _tableView.showsVerticalScrollIndicator=NO;
      [_tableView registerClass:[XHChildTableViewCell class] forCellReuseIdentifier:@"childcell"];
@@ -67,16 +64,6 @@
     [self.view addSubview:_tableView];
 
      [self.view addSubview:self.h_view];
-   [_tableView showRefresHeaderWithTarget:self withSelector:@selector(refreshHead)];
-    [_tableView beginRefreshing];
-    @WeakObj(self);
-    self.isRefresh = ^(BOOL ok) {
-        @StrongObj(self);
-        if (ok) {
-            [self getChildListNet];
-            [self refreshUserInfo];
-        }
-    };
     //去掉留白方法
     if (@available(iOS 11.0, *)) {
         _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -84,207 +71,103 @@
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
 }
--(void)refreshHead
+-(void)viewWillAppear:(BOOL)animated
 {
-    [self getVIPNet];
-    [self refreshHeadView];
-    [self getChildListNet];
-     [self refreshUserInfo];
-    [_tableView refreshReload];
+    [super viewWillAppear:YES];
+    fileSize= (float)[[SDImageCache sharedImageCache] getSize]/1024.0/1024.0;
+    [_tableView reloadData];
 }
 #pragma mark----tableviewDelegate------
-- (NSInteger)numberOfSectionsInTableView:(BaseTableView *)tableView
-{
-    return 3;
-}
+
 - (NSInteger)tableView:(BaseTableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section==0||section==1) {
-        return 1;
-    }
-    else
-    {
-        return 5;
-    }
+    return 4;
 }
 - (UITableViewCell *)tableView:(BaseTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
     {
-        
-        if (indexPath.section==0)
-        {
-            XHChildTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"childcell" forIndexPath:indexPath];
-            [cell setItemArray:_ChildArry];
-            @WeakObj(self);
-            cell.selectBlock = ^(NSInteger index,NSString *childName) {
-                @StrongObj(self);
-                if (index==_ChildArry.count-1) {
-#pragma mark -------------跳转到绑定孩子界面------=============
-                    XHBindViewController *bind=[[XHBindViewController alloc] initHiddenWhenPushHidden];
-                    [self.navigationController pushViewController:bind animated:YES];
-                }
-                else
-                {
-#pragma mark -------------跳转到绑定孩子详情界面------=============
-                    @StrongObj(self);
-                    XHStudentInfoViewController *student=[[XHStudentInfoViewController alloc] initHiddenWhenPushHidden];
-                      student.model=[XHUserInfo sharedUserInfo].childListArry[index];
-                    student.isRefresh = ^(BOOL ok) {
-                        if (ok) {
-                            [self getChildListNet];
-                        }
-                    };
-                    [self.navigationController pushViewController:student animated:YES];
-                }
-            };
-            return cell;
-        }
-        if (indexPath.section==1) {
-            XHListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"listcell" forIndexPath:indexPath];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            @WeakObj(self);
-            cell.selectListBlock = ^(NSInteger index) {
-                //跳转到哪个界面
-#pragma mark -------------跳转学习记录或者我的课程等界面------=============
-                @StrongObj(self);
-                XHStudyRecordViewController *study=[[XHStudyRecordViewController alloc] initHiddenWhenPushHidden];
-                study.index=index;
-                [self.navigationController pushViewController:study animated:YES];
-            };
-            return cell;
-        }
-        else
-        {
             XHSetTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
             cell.setImageView.image=[UIImage imageNamed:contentArry[indexPath.row]];
+            cell.setLabel.font=FontLevel2;
             cell.setLabel.text=arry[indexPath.row];
-            if (indexPath.row==0||indexPath.row==4) {
-                cell.setContentLabel.hidden=NO;
-            }
-            else
-            {
-                cell.setContentLabel.hidden=YES;
-            }
-            cell.setContentLabel.text=indexPath.row==0?@"我的全部订单":@"400-6778-599";
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            return cell;
+        switch (indexPath.row) {
+            case 2:
+                cell.setContentLabel.text=[NSString stringWithFormat:@"清理缓存(%.2fM)",fileSize];
+                break;
         }
+            return cell;
+
     }
-- (CGFloat)tableView:(BaseTableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    if (section==0) {
-        return section ==0?0.1f:8.0f;// 0.1f:防止tableView顶部留白一块
-    }
-    else
-    {
-        return 10;
-    }
-    
-}
+
 -(CGFloat)tableView:(BaseTableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section==0)
-    {
-        return USER_HEARD*2;
-    }
-    if (indexPath.section==1) {
-        return SCREEN_WIDTH/4;
-    }
-    else
-    {
-        return USER_HEARD;
-    }
+    return 60;
 }
 -(void)tableView:(BaseTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section==2&&indexPath.row==0) {
-         NSString *webUrl = [NSString stringWithFormat:@"%@?tel=%@#/order",OrderBaseUrl,[XHUserInfo sharedUserInfo].loginName];
-        XHEducationCloudWebViewController *webView = [[XHEducationCloudWebViewController alloc]initHiddenWhenPushHidden];
-        [webView setWebViewUrl:webUrl];
-        [webView setNavtionTitle:@"我的订单"];
-        [self.navigationController pushViewController:webView animated:YES];
-    }
-    if (indexPath.section==2&&indexPath.row==1) {
-        XHVIPViewController *vip=[[XHVIPViewController alloc] initHiddenWhenPushHidden];
-        vip.isRefresh = ^(BOOL ok) {
-            if (ok) {
-                [self getVIPNet];
-                 [self refreshHeadView];
-            }
-        };
-        [self.navigationController pushViewController:vip animated:YES];
-    }
-    if (indexPath.section==2&&indexPath.row==2) {
-        XHDiscuntViewController *discunt=[[XHDiscuntViewController alloc] initHiddenWhenPushHidden];
-        [self.navigationController pushViewController:discunt animated:YES];
-        
-    }
-    if (indexPath.section==2&&indexPath.row==3) {
-        XHMyAddressViewController *address=[[XHMyAddressViewController alloc] initHiddenWhenPushHidden];
-        [self.navigationController pushViewController:address animated:YES];
-    }
-    
-    if (indexPath.section==2&&indexPath.row==4) {
-        
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://400-6778-599"]];
-        
+    switch (indexPath.row) {
+        case 0:
+        {
+            XHPasswordViewController *password=[[XHPasswordViewController alloc] initHiddenWhenPushHidden];
+            [self.navigationController pushViewController:password animated:YES];
+        }
+            break;
+            case 1:
+        {
+            //跳转到食谱管理界面
+        }
+            break;
+        case 2:
+        {
+            [XHShowHUD showTextHud];
+            [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
+                [XHShowHUD showOKHud:@"清除完成!"];
+                fileSize=0;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [_tableView reloadData];
+                });
+            }];
+        }
+            break;
+        case 3:
+        {
+            XHAboutUsViewController *about=[[XHAboutUsViewController alloc] initHiddenWhenPushHidden];
+            [self.navigationController pushViewController:about animated:YES];
+        }
+            break;
+       
     }
 }
 #pragma mark----导航栏视图
 -(UIView *)h_view
 {
     if (_h_view==nil) {
-        _h_view=[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, USER_HEARD+170)];
-//        BaseButtonControl *setBtn = [[BaseButtonControl alloc]init];
-//        [setBtn setNumberImageView:1];
-//        [setBtn resetFrame:CGRectMake(SCREEN_WIDTH-60, 20, 44, 44)];
-//        [setBtn setImageEdgeFrame:CGRectMake((44-20.0)/2.0, (44-20.0)/2.0, 20, 20) withNumberType:0 withAllType:NO];
-//        [setBtn setImage:@"ico_set" withNumberType:0 withAllType:NO];
-//        [setBtn addTarget:self action:@selector(setBtnClick) forControlEvents:UIControlEventTouchUpInside];
-//        [_h_view addSubview:setBtn];
-        XHBaseLabel *label=[[XHBaseLabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-100)/2.0, 20, 100, 44)];
-        label.text=@"我的";
-        label.font=FontLevel0;
-        label.textAlignment=NSTextAlignmentCenter;
-        label.textColor=[UIColor whiteColor];
-        [_h_view addSubview:label];
-        _h_btn=[[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-USER_HEARD)/2.0,64,  USER_HEARD, USER_HEARD)];
-        _h_btn.layer.cornerRadius=USER_HEARD/2.0;
+        _h_view=[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 240)];
+        UIImageView *imgV=[[UIImageView alloc] initWithFrame:_h_view.bounds];
+        imgV.image=[UIImage imageNamed:@"bg_jiaoshiduan"];
+        [imgV setContentMode:UIViewContentModeScaleAspectFill];
+        [_h_view addSubview:imgV];
+//        XHBaseLabel *label=[[XHBaseLabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-100)/2.0, 20, 100, 44)];
+//        label.text=@"我的";
+//        label.font=FontLevel1;
+//        label.textAlignment=NSTextAlignmentCenter;
+//        label.textColor=[UIColor whiteColor];
+//        [_h_view addSubview:label];
+        _h_btn=[[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-70)/2.0,54,  70, 70)];
+        _h_btn.layer.cornerRadius=35;
         _h_btn.layer.masksToBounds=YES;
         [_h_btn addTarget:self action:@selector(heardBtnClick) forControlEvents:UIControlEventTouchUpInside];
         _h_btn.backgroundColor=[UIColor whiteColor];
         _h_view.backgroundColor=MainColor;
         [_h_view addSubview:_h_btn];
-        _nameLabel=[[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-90)/2.0,_h_btn.bottom+5, 90, USER_HEARD/2)];
-        _nameLabel.font=FontLevel0;
+        _nameLabel=[[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-90)/2.0,_h_btn.bottom+5, 90, 25)];
+        //_nameLabel.font=FontLevel2;
         _nameLabel.textAlignment=NSTextAlignmentCenter;
-        _nameLabel.textColor=[UIColor whiteColor];
+        _nameLabel.textColor=[UIColor blackColor];
         [ _h_view addSubview:_nameLabel];
-//        _vipbImageView=[[UIImageView alloc] initWithFrame:CGRectMake(USER_HEARD+125, 18+50, USER_HEARD/2-18, USER_HEARD/2.0-18)];
-//        [_h_view addSubview:_vipbImageView];
-//        _conditionLabel=[[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH*0.3+105,10+50, SCREEN_WIDTH*0.7-115, USER_HEARD/2.0)];
-//        _conditionLabel.textColor=[UIColor whiteColor];
-//        _conditionLabel.font=FontLevel4;
-//        [_h_view addSubview:_conditionLabel];
-//        _sigerLabel=[[UILabel alloc] initWithFrame:CGRectMake(USER_HEARD+30,10+USER_HEARD/2.0+50, SCREEN_WIDTH-USER_HEARD*2, SCREEN_WIDTH/8)];
-//        _sigerLabel.textColor=[UIColor whiteColor];
-//        [ _h_view addSubview:_sigerLabel];
-//        UIButton *btn=[[UIButton alloc] initWithFrame:CGRectMake(USER_HEARD+30,10+USER_HEARD/2.0+50, SCREEN_WIDTH-USER_HEARD*2, SCREEN_WIDTH/8)];
-//        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//        [btn addTarget:self action:@selector(signBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-//        [ _h_view addSubview:btn];
-//        UIButton *vipBtn=[[UIButton alloc] initWithFrame:CGRectMake(USER_HEARD+125, 10+50, SCREEN_WIDTH*0.8-135, USER_HEARD/2.0)];
-//        [vipBtn addTarget:self action:@selector(vipbtnClick) forControlEvents:UIControlEventTouchUpInside];
-//        [_h_view addSubview:vipBtn];
-        //[self refreshHeadView];
+        [self refreshHeadView];
     }
         return _h_view;
-}
-#pragma mark------setbtnClick----
--(void)setBtnClick
-{
-    XHSetViewController *set=[XHSetViewController new];
-     [set setHidesBottomBarWhenPushed:YES];
-    [self.navigationController pushViewController:set animated:YES];
 }
 #pragma mark------heardBtnClick----
 -(void)heardBtnClick
@@ -297,18 +180,6 @@
         }
     };
     [self.navigationController pushViewController:userVC animated:YES];
-}
-#pragma mark------vipbtnClick----
--(void)vipbtnClick
-{
-    XHVIPViewController *vip=[[XHVIPViewController alloc] initHiddenWhenPushHidden];
-    vip.isRefresh = ^(BOOL ok) {
-        if (ok) {
-            [self getVIPNet];
-             [self refreshHeadView];
-        }
-    };
-    [self.navigationController pushViewController:vip animated:YES];
 }
 
 #pragma mark---------签名按钮绑定方法-------
@@ -362,109 +233,109 @@
         _sigerLabel.text=@"无签名，不个性";
     }
 }
--(NSMutableAttributedString *)chageTextColor:(NSString *)text fontColor:(UIColor *)fontColor
-{
-    NSString *labelStr = text; //初始化string为传入label.text的值
-    NSCharacterSet *nonDigits = [[NSCharacterSet decimalDigitCharacterSet]invertedSet];//创建一个字符串过滤参数,decimalDigitCharacterSet为过滤小数,过滤某个关键词,只需改变 decimalDigitCharacterSet类型  在将此方法增加一个 NSString参数即可
-    NSInteger remainSeconde = [[labelStr stringByTrimmingCharactersInSet:nonDigits]intValue];//获取过滤出来的数值
-    NSString *stringRange = [NSString stringWithFormat:@"%ld",(long)remainSeconde];//将过滤出来的Integer的值转换成String
-    NSRange range = [labelStr rangeOfString:stringRange];//获取过滤出来的数值的位置
-    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:text];//创建一个带属性的string
-    [attrStr addAttribute:NSForegroundColorAttributeName value:fontColor range:range];//给带属性的string添加属性,attrubute:添加的属性类型（颜色\文字大小\字体等等）,value:改变成的属性参数,range:更改的位置
-    [attrStr addAttribute:NSForegroundColorAttributeName value:fontColor range:NSMakeRange(0,5)];
-    return attrStr;
-}
--(XHNetWorkConfig *)getVIPNet
-{
-    
-    if (_getVIPNet==nil) {
-        _getVIPNet=[[XHNetWorkConfig alloc] init];
-    }
-    [_getVIPNet setObject:[XHUserInfo sharedUserInfo].ID forKey:@"userId"];
-    [_getVIPNet postWithUrl:@"zzjt-app-api_vipInfo004" sucess:^(id object, BOOL verifyObject) {
-        if (verifyObject) {
-            id  dic=[object objectItemKey:@"object"];
-            if (![dic isEqual:@""]) {
-                XHVIPModel *model=[[XHVIPModel alloc] initWithDic:[dic objectItemKey:@"propValue"]];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if ([model.expireType intValue]==0) {
-                        _conditionLabel.attributedText = [self chageTextColor:@"开通VIP" fontColor:KAITONG_VIPCOLOR];
-                        _vipbImageView.image=[UIImage imageNamed:@"ico_novip"];
-                    }
-                    if ([model.expireType intValue]==2) {
-                        _conditionLabel.attributedText = [self chageTextColor:@"续费VIP会员已过期" fontColor:KAITONG_VIPCOLOR];
-                        _vipbImageView.image=[UIImage imageNamed:@"ico_novip"];
-                    }
-                    if ([model.expireType intValue]==1) {
-                        if ([model.level intValue]==1) {
-                            _conditionLabel.attributedText = [self chageTextColor:[NSString stringWithFormat:@"白金VIP剩余%@天",model.day] fontColor:BAIJIN_VIPCOLOR];
-                            _vipbImageView.image=[UIImage imageNamed:@"ico_platinumvip"];
-                        }
-                        else
-                        {
-                            _conditionLabel.attributedText = [self chageTextColor:[NSString stringWithFormat:@"黄金VIP剩余%@天",model.day] fontColor:HUANGJIN_VIPCOLOR];
-                            _vipbImageView.image=[UIImage imageNamed:@"ico_vip"];
-                        }
-                    }
-                });
-            }
-            
-        }
-    } error:^(NSError *error) {
-        
-    }];
-    return _getVIPNet;
-}
--(XHNetWorkConfig *)getChildListNet
-{
-    if (_getChildListNet==nil) {
-        _getChildListNet=[[XHNetWorkConfig alloc] init];
-    }
-    [_getChildListNet setObject:[XHUserInfo sharedUserInfo].guardianModel.guardianId forKey:@"guardianId"];
-    [_getChildListNet postWithUrl:@"zzjt-app-api_smartCampus011" sucess:^(id object, BOOL verifyObject) {
-        if (verifyObject) {
-            [_ChildArry removeAllObjects];
-            for (NSDictionary *dic in [object objectItemKey:@"object"]) {
-                XHChildListModel *model=[[XHChildListModel alloc] initWithDic:dic];
-                [_ChildArry addObject:model];
-            }
-            [[XHUserInfo sharedUserInfo].childListArry setArray:_ChildArry];
-            [_ChildArry addObject:@""];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [_tableView refreshReload];
-            });
-
-        }
-
-    } error:^(NSError *error) {
-        [_tableView refreshReload];
-    }];
-    return _getChildListNet;
-}
-
--(void)refreshUserInfo
-{
-    if (![[XHUserInfo sharedUserInfo].guardianModel.familyId isEqualToString:@""]) {
-        
-        return ;
-    }
-    XHLoginModel *model=[NSUserDefaults getLoginModel];
-    XHNetWorkConfig *net=[XHNetWorkConfig new];
-    [net setObject:model.loginName forKey:@"loginName"];
-    [net setObject:model.pwd forKey:@"pwd"];
-    [net setObject:@"3" forKey:@"type"];
-    [XHShowHUD showTextHud];
-    [net postWithUrl:@"zzjt-app-api_login" sucess:^(id object, BOOL verifyObject) {
-        if (verifyObject)
-        {
-            XHGuardianInfo *guardianModel=[[XHGuardianInfo alloc] initWithDic:[[[object objectItemKey:@"object"] objectItemKey:@"propValue"] objectItemKey:@"guardian"]];
-            [XHUserInfo sharedUserInfo].guardianModel=guardianModel;
-        }
-       
-    } error:^(NSError *error) {
-        
-    }];
-}
+//-(NSMutableAttributedString *)chageTextColor:(NSString *)text fontColor:(UIColor *)fontColor
+//{
+//    NSString *labelStr = text; //初始化string为传入label.text的值
+//    NSCharacterSet *nonDigits = [[NSCharacterSet decimalDigitCharacterSet]invertedSet];//创建一个字符串过滤参数,decimalDigitCharacterSet为过滤小数,过滤某个关键词,只需改变 decimalDigitCharacterSet类型  在将此方法增加一个 NSString参数即可
+//    NSInteger remainSeconde = [[labelStr stringByTrimmingCharactersInSet:nonDigits]intValue];//获取过滤出来的数值
+//    NSString *stringRange = [NSString stringWithFormat:@"%ld",(long)remainSeconde];//将过滤出来的Integer的值转换成String
+//    NSRange range = [labelStr rangeOfString:stringRange];//获取过滤出来的数值的位置
+//    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:text];//创建一个带属性的string
+//    [attrStr addAttribute:NSForegroundColorAttributeName value:fontColor range:range];//给带属性的string添加属性,attrubute:添加的属性类型（颜色\文字大小\字体等等）,value:改变成的属性参数,range:更改的位置
+//    [attrStr addAttribute:NSForegroundColorAttributeName value:fontColor range:NSMakeRange(0,5)];
+//    return attrStr;
+//}
+//-(XHNetWorkConfig *)getVIPNet
+//{
+//
+//    if (_getVIPNet==nil) {
+//        _getVIPNet=[[XHNetWorkConfig alloc] init];
+//    }
+//    [_getVIPNet setObject:[XHUserInfo sharedUserInfo].ID forKey:@"userId"];
+//    [_getVIPNet postWithUrl:@"zzjt-app-api_vipInfo004" sucess:^(id object, BOOL verifyObject) {
+//        if (verifyObject) {
+//            id  dic=[object objectItemKey:@"object"];
+//            if (![dic isEqual:@""]) {
+//                XHVIPModel *model=[[XHVIPModel alloc] initWithDic:[dic objectItemKey:@"propValue"]];
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    if ([model.expireType intValue]==0) {
+//                        _conditionLabel.attributedText = [self chageTextColor:@"开通VIP" fontColor:KAITONG_VIPCOLOR];
+//                        _vipbImageView.image=[UIImage imageNamed:@"ico_novip"];
+//                    }
+//                    if ([model.expireType intValue]==2) {
+//                        _conditionLabel.attributedText = [self chageTextColor:@"续费VIP会员已过期" fontColor:KAITONG_VIPCOLOR];
+//                        _vipbImageView.image=[UIImage imageNamed:@"ico_novip"];
+//                    }
+//                    if ([model.expireType intValue]==1) {
+//                        if ([model.level intValue]==1) {
+//                            _conditionLabel.attributedText = [self chageTextColor:[NSString stringWithFormat:@"白金VIP剩余%@天",model.day] fontColor:BAIJIN_VIPCOLOR];
+//                            _vipbImageView.image=[UIImage imageNamed:@"ico_platinumvip"];
+//                        }
+//                        else
+//                        {
+//                            _conditionLabel.attributedText = [self chageTextColor:[NSString stringWithFormat:@"黄金VIP剩余%@天",model.day] fontColor:HUANGJIN_VIPCOLOR];
+//                            _vipbImageView.image=[UIImage imageNamed:@"ico_vip"];
+//                        }
+//                    }
+//                });
+//            }
+//
+//        }
+//    } error:^(NSError *error) {
+//
+//    }];
+//    return _getVIPNet;
+//}
+//-(XHNetWorkConfig *)getChildListNet
+//{
+//    if (_getChildListNet==nil) {
+//        _getChildListNet=[[XHNetWorkConfig alloc] init];
+//    }
+//    [_getChildListNet setObject:[XHUserInfo sharedUserInfo].guardianModel.guardianId forKey:@"guardianId"];
+//    [_getChildListNet postWithUrl:@"zzjt-app-api_smartCampus011" sucess:^(id object, BOOL verifyObject) {
+//        if (verifyObject) {
+//            [_ChildArry removeAllObjects];
+//            for (NSDictionary *dic in [object objectItemKey:@"object"]) {
+//                XHChildListModel *model=[[XHChildListModel alloc] initWithDic:dic];
+//                [_ChildArry addObject:model];
+//            }
+//            [[XHUserInfo sharedUserInfo].childListArry setArray:_ChildArry];
+//            [_ChildArry addObject:@""];
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [_tableView refreshReload];
+//            });
+//
+//        }
+//
+//    } error:^(NSError *error) {
+//        [_tableView refreshReload];
+//    }];
+//    return _getChildListNet;
+//}
+//
+//-(void)refreshUserInfo
+//{
+//    if (![[XHUserInfo sharedUserInfo].guardianModel.familyId isEqualToString:@""]) {
+//
+//        return ;
+//    }
+//    XHLoginModel *model=[NSUserDefaults getLoginModel];
+//    XHNetWorkConfig *net=[XHNetWorkConfig new];
+//    [net setObject:model.loginName forKey:@"loginName"];
+//    [net setObject:model.pwd forKey:@"pwd"];
+//    [net setObject:@"3" forKey:@"type"];
+//    [XHShowHUD showTextHud];
+//    [net postWithUrl:@"zzjt-app-api_login" sucess:^(id object, BOOL verifyObject) {
+//        if (verifyObject)
+//        {
+//            XHGuardianInfo *guardianModel=[[XHGuardianInfo alloc] initWithDic:[[[object objectItemKey:@"object"] objectItemKey:@"propValue"] objectItemKey:@"guardian"]];
+//            [XHUserInfo sharedUserInfo].guardianModel=guardianModel;
+//        }
+//
+//    } error:^(NSError *error) {
+//
+//    }];
+//}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

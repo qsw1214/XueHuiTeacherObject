@@ -2224,7 +2224,8 @@
 		4B80F1FC1FCBE43E00BC7B52 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
-				8C6240911FD8DD0B00E6C031 /* 课程:辅导(我的订单) */,
+				8CF34176200EE17F0055D6BD /* 关于我们 */,
+				8CF34172200EE09F0055D6BD /* 修改密码 */,
 				8C3E55BB1FD5494B0013002A /* 学习记录 */,
 				04291A7B1FD2DB77002D3B5B /* 学生信息 */,
 				8CCD7E631FD1565F00F7F54E /* 绑定学生 */,
@@ -3142,17 +3143,12 @@
 			children = (
 				8C5EB0B81FCFE604002ED0D7 /* XHSetViewController.h */,
 				8C5EB0B91FCFE604002ED0D7 /* XHSetViewController.m */,
-				8C5EB0BB1FCFEF6C002ED0D7 /* XHPasswordViewController.h */,
-				8C5EB0BC1FCFEF6C002ED0D7 /* XHPasswordViewController.m */,
-				8C5EB0BD1FCFEF6C002ED0D7 /* XHPasswordViewController.xib */,
 				8CCD7E1C1FD0EE0D00F7F54E /* XHChagePhoneViewController.h */,
 				8CCD7E1D1FD0EE0D00F7F54E /* XHChagePhoneViewController.m */,
 				8CCD7E1E1FD0EE0D00F7F54E /* XHChagePhoneViewController.xib */,
 				8CCD7E541FD12C2600F7F54E /* XHScuessViewController.h */,
 				8CCD7E551FD12C2600F7F54E /* XHScuessViewController.m */,
 				8CCD7E561FD12C2600F7F54E /* XHScuessViewController.xib */,
-				8C62409D1FD8E3BF00E6C031 /* XHAboutUsViewController.h */,
-				8C62409E1FD8E3BF00E6C031 /* XHAboutUsViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -3160,9 +3156,6 @@
 		8C5EB0B71FCFE4B0002ED0D7 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				8C5EB0C01FCFF22C002ED0D7 /* XHPassWordTableViewCell.h */,
-				8C5EB0C11FCFF22C002ED0D7 /* XHPassWordTableViewCell.m */,
-				8C5EB0C21FCFF22C002ED0D7 /* XHPassWordTableViewCell.xib */,
 				8CCD7E241FD0F3B000F7F54E /* XHChagePhoneTableViewCell.h */,
 				8CCD7E251FD0F3B000F7F54E /* XHChagePhoneTableViewCell.m */,
 				8CCD7E261FD0F3B000F7F54E /* XHChagePhoneTableViewCell.xib */,
@@ -3189,37 +3182,6 @@
 				8C6240871FD8D2B800E6C031 /* XHComplieAddressViewController.xib */,
 			);
 			path = controller;
-			sourceTree = "<group>";
-		};
-		8C6240911FD8DD0B00E6C031 /* 课程:辅导(我的订单) */ = {
-			isa = PBXGroup;
-			children = (
-				8C6240921FD8DD0B00E6C031 /* controller */,
-				8C6240931FD8DD0B00E6C031 /* model */,
-				8C6240941FD8DD0B00E6C031 /* view */,
-			);
-			path = "课程:辅导(我的订单)";
-			sourceTree = "<group>";
-		};
-		8C6240921FD8DD0B00E6C031 /* controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = controller;
-			sourceTree = "<group>";
-		};
-		8C6240931FD8DD0B00E6C031 /* model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = model;
-			sourceTree = "<group>";
-		};
-		8C6240941FD8DD0B00E6C031 /* view */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = view;
 			sourceTree = "<group>";
 		};
 		8C6282B91FE3BD700023BB67 /* model */ = {
@@ -3716,6 +3678,76 @@
 				8CDDA8FE1FDA7A25000B3BAB /* AssetsLibrary.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8CF34172200EE09F0055D6BD /* 修改密码 */ = {
+			isa = PBXGroup;
+			children = (
+				8CF34173200EE09F0055D6BD /* controller */,
+				8CF34174200EE09F0055D6BD /* model */,
+				8CF34175200EE09F0055D6BD /* view */,
+			);
+			path = "修改密码";
+			sourceTree = "<group>";
+		};
+		8CF34173200EE09F0055D6BD /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				8C5EB0BB1FCFEF6C002ED0D7 /* XHPasswordViewController.h */,
+				8C5EB0BC1FCFEF6C002ED0D7 /* XHPasswordViewController.m */,
+				8C5EB0BD1FCFEF6C002ED0D7 /* XHPasswordViewController.xib */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		8CF34174200EE09F0055D6BD /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		8CF34175200EE09F0055D6BD /* view */ = {
+			isa = PBXGroup;
+			children = (
+				8C5EB0C01FCFF22C002ED0D7 /* XHPassWordTableViewCell.h */,
+				8C5EB0C11FCFF22C002ED0D7 /* XHPassWordTableViewCell.m */,
+				8C5EB0C21FCFF22C002ED0D7 /* XHPassWordTableViewCell.xib */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		8CF34176200EE17F0055D6BD /* 关于我们 */ = {
+			isa = PBXGroup;
+			children = (
+				8CF34177200EE17F0055D6BD /* controller */,
+				8CF34178200EE17F0055D6BD /* model */,
+				8CF34179200EE17F0055D6BD /* view */,
+			);
+			path = "关于我们";
+			sourceTree = "<group>";
+		};
+		8CF34177200EE17F0055D6BD /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				8C62409D1FD8E3BF00E6C031 /* XHAboutUsViewController.h */,
+				8C62409E1FD8E3BF00E6C031 /* XHAboutUsViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		8CF34178200EE17F0055D6BD /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		8CF34179200EE17F0055D6BD /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 		8CFFCA6C1FF3833F00B6DA39 /* model */ = {

@@ -54,7 +54,7 @@
     UILabel *label1=[[UILabel alloc] initWithFrame:CGRectMake(10, 200, SCREEN_WIDTH-20, 1)];
     label1.backgroundColor=RGB(224, 224, 224);
     [scrollView addSubview:label1];
-    UIImageView *teleIV2=[[UIImageView  alloc] initWithFrame:CGRectMake(10, 215, 20, 25)];
+    UIImageView *teleIV2=[[UIImageView  alloc] initWithFrame:CGRectMake(10, 220, 20, 20)];
     teleIV2.image=[UIImage imageNamed:@"ico-company"];
     [scrollView addSubview:teleIV2];
     UILabel *teleLabel2=[[UILabel alloc] initWithFrame:CGRectMake(40, 215, 80, 30)];
