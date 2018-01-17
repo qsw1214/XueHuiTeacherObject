@@ -10,6 +10,9 @@
 #import "XHUserTableViewCell.h"
 #import "XHHelper.h"
 #import "CameraManageViewController.h"
+#import <RongIMKit/RongIMKit.h>
+#import "XHLoginViewController.h"
+#import "JPUSHService.h"
 @interface XHUserViewController ()<UITableViewDelegate,UITableViewDataSource,CameraManageDeletage>
 {
     UITableView *_tableView;
@@ -33,10 +36,26 @@
     [_tableView registerClass:[XHUserTableViewCell class] forCellReuseIdentifier:@"cell"];
     _tableView.bounces=NO;
     [self.view addSubview:_tableView];
+    XHBaseBtn *btn=[[XHBaseBtn alloc] initWithFrame:CGRectMake(10, 470, SCREEN_WIDTH-20, 50)];
+    btn.backgroundColor=[UIColor redColor];
+    [btn setTitle:@"退出" forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(logOutClick) forControlEvents:UIControlEventTouchUpInside];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.view  addSubview:btn];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 6;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row==0) {
+        return 90;
+    }
+    else
+    {
+        return 60;
+    }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -134,16 +153,7 @@
         [self showAlertViewWithTitle:@"请输入个性签名" Index:indexPath.row];
     }
 }
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row==0) {
-        return 90;
-    }
-    else
-    {
-        return 60;
-    }
-}
+
 #pragma mark-------修改头像
 -(void)headClick
 {
@@ -214,7 +224,33 @@
     }]];
     [self presentViewController:alertController animated:YES completion:nil];
 }
-
+-(void)logOutClick
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"确定要退出登录？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        XHNetWorkConfig *net=[XHNetWorkConfig new];
+        [net setObject:[XHUserInfo sharedUserInfo].ID forKey:@"id"];
+        [net postWithUrl:@"zzjt-app-api_logOut" sucess:^(id object, BOOL verifyObject) {
+            [XHShowHUD hideHud];
+            if (verifyObject) {
+            }
+        } error:^(NSError *error) {
+            [XHShowHUD hideHud];
+        }];
+        [[RCIM sharedRCIM]disconnect];
+        [JPUSHService setTags:nil alias:@"" fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias){
+        }];
+        [NSUserDefaults removeObjectItemForKey:AutoLogin];
+        XHLoginViewController *login=[XHLoginViewController new];
+        UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:login];
+        [kWindow setRootViewController:nav];
+        
+    }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
 -(void)openImagePiker
 {
     

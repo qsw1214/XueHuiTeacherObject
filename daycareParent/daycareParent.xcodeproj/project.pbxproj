@@ -485,6 +485,8 @@
 		8CDDA92B1FDA7BF9000B3BAB /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CDDA92A1FDA7BF4000B3BAB /* Photos.framework */; };
 		8CDDA92D1FDA7C0B000B3BAB /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CDDA92C1FDA7C05000B3BAB /* SafariServices.framework */; };
 		8CEDB9721FE3932E003E791F /* XHFamilyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEDB9711FE3932E003E791F /* XHFamilyModel.m */; };
+		8CF3417C200EF3AC0055D6BD /* XHNewChageTypeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3417B200EF3AC0055D6BD /* XHNewChageTypeTableViewCell.m */; };
+		8CF3417F200F3ECF0055D6BD /* XHNewDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3417E200F3ECF0055D6BD /* XHNewDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1359,6 +1361,10 @@
 		8CDDA92C1FDA7C05000B3BAB /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		8CEDB9701FE3932E003E791F /* XHFamilyModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XHFamilyModel.h; path = "daycareParent/我的/学生信息/model/XHFamilyModel.h"; sourceTree = SOURCE_ROOT; };
 		8CEDB9711FE3932E003E791F /* XHFamilyModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XHFamilyModel.m; path = "daycareParent/我的/学生信息/model/XHFamilyModel.m"; sourceTree = SOURCE_ROOT; };
+		8CF3417A200EF3AC0055D6BD /* XHNewChageTypeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNewChageTypeTableViewCell.h; sourceTree = "<group>"; };
+		8CF3417B200EF3AC0055D6BD /* XHNewChageTypeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNewChageTypeTableViewCell.m; sourceTree = "<group>"; };
+		8CF3417D200F3ECF0055D6BD /* XHNewDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNewDetailViewController.h; sourceTree = "<group>"; };
+		8CF3417E200F3ECF0055D6BD /* XHNewDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNewDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3517,6 +3523,8 @@
 				8CC7647C200C8C13007887C7 /* XHNewBulidViewController.m */,
 				8CC7647E200C8C2A007887C7 /* XHHistoryViewController.h */,
 				8CC7647F200C8C2A007887C7 /* XHHistoryViewController.m */,
+				8CF3417D200F3ECF0055D6BD /* XHNewDetailViewController.h */,
+				8CF3417E200F3ECF0055D6BD /* XHNewDetailViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -3540,6 +3548,8 @@
 				8CC7648B200CAA69007887C7 /* XHNewHeardTableViewCell.h */,
 				8CC7648C200CAA69007887C7 /* XHNewHeardTableViewCell.m */,
 				8CC7648D200CAA69007887C7 /* XHNewHeardTableViewCell.xib */,
+				8CF3417A200EF3AC0055D6BD /* XHNewChageTypeTableViewCell.h */,
+				8CF3417B200EF3AC0055D6BD /* XHNewChageTypeTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -3951,6 +3961,7 @@
 				4B3418781FFDC14C00A5EC56 /* UIWindow+CurrentViewController.m in Sources */,
 				4BB792B01FD7783700E0ED72 /* XHAskforLeaveContentView.m in Sources */,
 				4BB792CD1FD7930D00E0ED72 /* XHAchievementViewController.m in Sources */,
+				8CF3417F200F3ECF0055D6BD /* XHNewDetailViewController.m in Sources */,
 				4B3126401FDA1F26000CE894 /* XHAddressBookContentView.m in Sources */,
 				8C019F661FF4C365005EBC2C /* FMDatabase.m in Sources */,
 				4BA8C4C21FCFD09A006CBEBC /* XHLoginViewController.m in Sources */,
@@ -4247,6 +4258,7 @@
 				4B632AAC1FE0CC4500B90B94 /* XHTeacherAddressBookContentView.m in Sources */,
 				4B80F2EB1FCBF08800BC7B52 /* AFURLRequestSerialization.m in Sources */,
 				4B80F2121FCBE81600BC7B52 /* NSObject+Category.m in Sources */,
+				8CF3417C200EF3AC0055D6BD /* XHNewChageTypeTableViewCell.m in Sources */,
 				4BB9BEAC1FDE5629004F5622 /* XHEducationCloudFrame.m in Sources */,
 				8CCD7E271FD0F3B000F7F54E /* XHChagePhoneTableViewCell.m in Sources */,
 				4B11C9FE1FCE3A7900FD0D8F /* XHFunctionMenuFrame.m in Sources */,

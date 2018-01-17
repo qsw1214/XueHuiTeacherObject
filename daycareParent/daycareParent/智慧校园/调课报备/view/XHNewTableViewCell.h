@@ -10,6 +10,6 @@
 
 @interface XHNewTableViewCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet XHBaseLabel *titleLabel;
-@property (strong, nonatomic) IBOutlet XHBackLabel *selectLabel;
+@property (strong, nonatomic) IBOutlet XHBaseLabel *selectLabel;
 
 @end

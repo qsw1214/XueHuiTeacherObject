@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface XHNewHeardTableViewCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UIButton *headBtn;
+@property (strong, nonatomic) IBOutlet XHBaseBtn *sureBtn;
+@property (strong, nonatomic) IBOutlet UILabel *approveLabel;
 
 @end

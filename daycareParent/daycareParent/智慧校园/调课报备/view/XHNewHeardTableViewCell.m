@@ -13,7 +13,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.headBtn.layer.cornerRadius=25;
+    self.headBtn.layer.masksToBounds=YES;
+    [self.headBtn sd_setBackgroundImageWithURL:nil forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
 }
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

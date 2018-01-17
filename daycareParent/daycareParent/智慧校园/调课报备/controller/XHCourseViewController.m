@@ -16,14 +16,14 @@
     UIViewController *currentController;
     UISegmentedControl *_sc;
 }
+@property(nonatomic,strong)UIView *navigationV;
 @end
 
 @implementation XHCourseViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    [self setNavtionTitle:@"课程报备"];
+    //[self navtionHidden:YES];
     _sc = [[UISegmentedControl alloc] initWithItems:@[@"新建",@"记录"]];
     _sc.selectedSegmentIndex = 0;
     _sc.tintColor = [UIColor whiteColor];
@@ -41,12 +41,13 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.navigationController.navigationBar.hidden=YES;
+    [kWindow addSubview:self.navigationV];
     [kWindow addSubview:_sc];
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
     [_sc removeFromSuperview];
+    [_navigationV removeFromSuperview];
 }
 - (void)changeMail:(UISegmentedControl *)control
 {
@@ -96,7 +97,31 @@
     }
     
 }
-
+-(UIView *)navigationV
+{
+    if (_navigationV == nil)
+    {
+        _navigationV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64.0)];
+        _navigationV.backgroundColor=MainColor;
+        UIImageView *iconImageView=[[UIImageView alloc] initWithFrame:CGRectMake(10, 32, 20, 20)];
+        iconImageView.image=[UIImage imageNamed:@"ico_return"];
+        [_navigationV addSubview:iconImageView];
+        UILabel *Label=[[UILabel alloc] initWithFrame:CGRectMake(20, 30, 50, 24)];
+        Label.text=@"返回";
+        Label.textColor=[UIColor whiteColor];
+        Label.font=FontLevel3;
+        Label.textAlignment=NSTextAlignmentCenter;
+        [_navigationV addSubview:Label];
+        UIButton *btn=[[UIButton alloc] initWithFrame:CGRectMake(10, 30, 50, 24)];
+        [btn addTarget:self action:@selector(backMethod) forControlEvents:UIControlEventTouchUpInside];
+        [_navigationV addSubview:btn];
+    }
+    return _navigationV;
+}
+-(void)backMethod
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

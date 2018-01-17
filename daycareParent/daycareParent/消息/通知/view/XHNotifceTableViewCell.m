@@ -34,7 +34,8 @@
         [self.contentView addSubview:_detailLab];
         _ContentLab=[[XHBackLabel alloc] init];
         [self.contentView addSubview:_ContentLab];
-
+        _myApplyLabel=[[XHBaseLabel alloc] init];
+        [self.contentView addSubview:_myApplyLabel];
     }
     return self;
 }

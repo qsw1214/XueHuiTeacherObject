@@ -52,7 +52,7 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [_sc removeFromSuperview];
-    [self.navigationView removeFromSuperview];
+    [_navigationView removeFromSuperview];
 }
 - (void)changeMail:(UISegmentedControl *)control
 {
@@ -107,7 +107,7 @@
     if (_navigationView == nil)
     {
         _navigationView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64.0)];
-        self.navigationView.backgroundColor=MainColor;
+        _navigationView.backgroundColor=MainColor;
     }
     return _navigationView;
 }

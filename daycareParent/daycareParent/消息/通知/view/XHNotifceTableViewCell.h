@@ -14,5 +14,5 @@
 @property(nonatomic,strong)XHBackLabel *ContentLab;
 @property(nonatomic,strong)XHBackLabel *detailLab;
 @property(nonatomic,strong)UILabel *smallLab;
-@property(nonatomic,strong)UIImageView *smalImage;
+@property(nonatomic,strong)XHBaseLabel *myApplyLabel;
 @end

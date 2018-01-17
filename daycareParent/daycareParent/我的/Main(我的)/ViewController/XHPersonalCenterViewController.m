@@ -25,6 +25,7 @@
 #import "BaseTableView.h"
 #import "XHPasswordViewController.h"
 #import "XHAboutUsViewController.h"
+
 #define TITLE_LIST @[@"学习记录",@"收藏资源",@"下载记录",@"我的课程"]
 
 @interface XHPersonalCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
