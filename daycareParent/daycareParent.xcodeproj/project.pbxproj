@@ -308,6 +308,10 @@
 		4BD33DE61FCD5D6900BC52B6 /* XHFunctionMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD33DE51FCD5D6900BC52B6 /* XHFunctionMenuModel.m */; };
 		4BEBC8D420045EDA00FD6915 /* XHDynamicsHeaderControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BEBC8D320045EDA00FD6915 /* XHDynamicsHeaderControl.m */; };
 		4BFB975D1FCCF8CD003EEC8C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BFB975C1FCCF8CD003EEC8C /* Images.xcassets */; };
+		8C007D7320107EDF00DD0635 /* XHHistoryDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C007D7120107EDF00DD0635 /* XHHistoryDetailTableViewCell.m */; };
+		8C007D7420107EDF00DD0635 /* XHHistoryDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C007D7220107EDF00DD0635 /* XHHistoryDetailTableViewCell.xib */; };
+		8C007D772010858900DD0635 /* XHHistoryHeadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C007D762010858900DD0635 /* XHHistoryHeadTableViewCell.m */; };
+		8C007D7A2010943D00DD0635 /* XHApplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C007D792010943D00DD0635 /* XHApplyTableViewCell.m */; };
 		8C019F661FF4C365005EBC2C /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C019F5C1FF4C365005EBC2C /* FMDatabase.m */; };
 		8C019F671FF4C365005EBC2C /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C019F5E1FF4C365005EBC2C /* FMDatabaseAdditions.m */; };
 		8C019F681FF4C365005EBC2C /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C019F601FF4C365005EBC2C /* FMDatabasePool.m */; };
@@ -1087,6 +1091,13 @@
 		4BEBC8D220045EDA00FD6915 /* XHDynamicsHeaderControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHDynamicsHeaderControl.h; sourceTree = "<group>"; };
 		4BEBC8D320045EDA00FD6915 /* XHDynamicsHeaderControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHDynamicsHeaderControl.m; sourceTree = "<group>"; };
 		4BFB975C1FCCF8CD003EEC8C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		8C007D7020107EDF00DD0635 /* XHHistoryDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHHistoryDetailTableViewCell.h; sourceTree = "<group>"; };
+		8C007D7120107EDF00DD0635 /* XHHistoryDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHHistoryDetailTableViewCell.m; sourceTree = "<group>"; };
+		8C007D7220107EDF00DD0635 /* XHHistoryDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XHHistoryDetailTableViewCell.xib; sourceTree = "<group>"; };
+		8C007D752010858900DD0635 /* XHHistoryHeadTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHHistoryHeadTableViewCell.h; sourceTree = "<group>"; };
+		8C007D762010858900DD0635 /* XHHistoryHeadTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHHistoryHeadTableViewCell.m; sourceTree = "<group>"; };
+		8C007D782010943D00DD0635 /* XHApplyTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHApplyTableViewCell.h; sourceTree = "<group>"; };
+		8C007D792010943D00DD0635 /* XHApplyTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHApplyTableViewCell.m; sourceTree = "<group>"; };
 		8C019F5B1FF4C365005EBC2C /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		8C019F5C1FF4C365005EBC2C /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
 		8C019F5D1FF4C365005EBC2C /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
@@ -3550,6 +3561,13 @@
 				8CC7648D200CAA69007887C7 /* XHNewHeardTableViewCell.xib */,
 				8CF3417A200EF3AC0055D6BD /* XHNewChageTypeTableViewCell.h */,
 				8CF3417B200EF3AC0055D6BD /* XHNewChageTypeTableViewCell.m */,
+				8C007D7020107EDF00DD0635 /* XHHistoryDetailTableViewCell.h */,
+				8C007D7120107EDF00DD0635 /* XHHistoryDetailTableViewCell.m */,
+				8C007D7220107EDF00DD0635 /* XHHistoryDetailTableViewCell.xib */,
+				8C007D752010858900DD0635 /* XHHistoryHeadTableViewCell.h */,
+				8C007D762010858900DD0635 /* XHHistoryHeadTableViewCell.m */,
+				8C007D782010943D00DD0635 /* XHApplyTableViewCell.h */,
+				8C007D792010943D00DD0635 /* XHApplyTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -3860,6 +3878,7 @@
 				8C8336EE1FDCD6A000F48A25 /* RCConfig.plist in Resources */,
 				8C7AE73F1FE795ED00BE7A02 /* Pingpp.bundle in Resources */,
 				8C6240891FD8D2B800E6C031 /* XHComplieAddressViewController.xib in Resources */,
+				8C007D7420107EDF00DD0635 /* XHHistoryDetailTableViewCell.xib in Resources */,
 				4B3800FE20075DF3004E74AC /* pageControlDot@3x.png in Resources */,
 				8C7EF53B1FE0BBFD00C029F2 /* 37x-Checkmark.png in Resources */,
 				8C8336E91FDCD6A000F48A25 /* Emoji.plist in Resources */,
@@ -3950,6 +3969,7 @@
 				4B4A00171FE2411200B8A8F8 /* XHDynamicsCell.m in Sources */,
 				4B80F31F1FCBFD6F00BC7B52 /* MTLTransformerErrorHandling.m in Sources */,
 				4B07CC4A1FD5106800B2DBDA /* RotateRect.m in Sources */,
+				8C007D7320107EDF00DD0635 /* XHHistoryDetailTableViewCell.m in Sources */,
 				4B80F2801FCBF04800BC7B52 /* MJRefreshAutoNormalFooter.m in Sources */,
 				4B577FA41FF5C4F60023ACBC /* XHNoticeDetailViewController.m in Sources */,
 				4B80F2461FCBF01B00BC7B52 /* BaseTextView.m in Sources */,
@@ -4082,6 +4102,7 @@
 				4B07CC191FD4DAB800B2DBDA /* XHLeaveRecordModel.m in Sources */,
 				8C4DB5D91FEBB55D00B14073 /* XHHomeWorkDetailView.m in Sources */,
 				8CC76480200C8C2A007887C7 /* XHHistoryViewController.m in Sources */,
+				8C007D772010858900DD0635 /* XHHistoryHeadTableViewCell.m in Sources */,
 				4B11AF321FCCE958002738F1 /* XHSmartCampusViewController.m in Sources */,
 				4B11CA011FCE591100FD0D8F /* XHTestView.m in Sources */,
 				4B3418741FFDC14C00A5EC56 /* UINavigationController+ZFPlayerRotation.m in Sources */,
@@ -4253,6 +4274,7 @@
 				4B4A000B1FE2408F00B8A8F8 /* XHDynamicsContentView.m in Sources */,
 				8C019F681FF4C365005EBC2C /* FMDatabasePool.m in Sources */,
 				4B07CC481FD5106800B2DBDA /* KYSpringLayerAnimation.m in Sources */,
+				8C007D7A2010943D00DD0635 /* XHApplyTableViewCell.m in Sources */,
 				4BBC434E1FD11A1D00555846 /* BaseView.m in Sources */,
 				8CB5A2861FD7DF4B008E97D8 /* ProvinceModel.m in Sources */,
 				4B632AAC1FE0CC4500B90B94 /* XHTeacherAddressBookContentView.m in Sources */,

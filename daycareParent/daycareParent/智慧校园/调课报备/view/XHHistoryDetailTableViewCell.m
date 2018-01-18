@@ -1,14 +1,14 @@
 //
-//  XHNewHeardTableViewCell.m
+//  XHHistoryDetailTableViewCell.m
 //  daycareParent
 //
-//  Created by 钧泰科技 on 2018/1/15.
+//  Created by 钧泰科技 on 2018/1/18.
 //  Copyright © 2018年 XueHui. All rights reserved.
 //
 
-#import "XHNewHeardTableViewCell.h"
+#import "XHHistoryDetailTableViewCell.h"
 
-@implementation XHNewHeardTableViewCell
+@implementation XHHistoryDetailTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -18,7 +18,6 @@
     [_headBtn sd_setBackgroundImageWithURL:nil forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
     _nameLabel.font=FontLevel3;
 }
-
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

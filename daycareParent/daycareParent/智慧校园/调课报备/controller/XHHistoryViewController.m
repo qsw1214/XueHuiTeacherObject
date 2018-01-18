@@ -16,7 +16,7 @@
     BaseTableView *_tableView;
     NSInteger _tag;
 }
-@property(nonatomic,strong)XHNewDetailViewController *detailVC;
+//@property(nonatomic,strong)XHNewDetailViewController *detailVC;
 
 @end
 
@@ -79,9 +79,9 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self presentViewController:self.detailVC animated:YES completion:^{
-        NSLog(@"跳转成功");
-    }];
+    XHNewDetailViewController *detail=[XHNewDetailViewController new];
+    [detail setNavtionTitle:_tag==10?@"待审批":@"已审批"];
+    [self.navigationController pushViewController:detail animated:YES];
 }
 #pragma mark-------------审批选项--------------
 -(void)getApproveBtn
@@ -118,13 +118,13 @@
     [_tableView beginRefreshing];
     
 }
--(XHNewDetailViewController *)detailVC
-{
-    if (_detailVC==nil) {
-        _detailVC=[XHNewDetailViewController new];
-    }
-    return _detailVC;
-}
+//-(XHNewDetailViewController *)detailVC
+//{
+//    if (_detailVC==nil) {
+//        _detailVC=[XHNewDetailViewController new];
+//    }
+//    return _detailVC;
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

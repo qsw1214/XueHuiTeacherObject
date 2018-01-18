@@ -12,5 +12,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *headBtn;
 @property (strong, nonatomic) IBOutlet XHBaseBtn *sureBtn;
 @property (strong, nonatomic) IBOutlet UILabel *approveLabel;
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 
 @end

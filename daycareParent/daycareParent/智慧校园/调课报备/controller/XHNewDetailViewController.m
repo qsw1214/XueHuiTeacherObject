@@ -10,6 +10,9 @@
 #import "BaseTableView.h"
 #import "XHNewTableViewCell.h"
 #import "XHNewHeardTableViewCell.h"
+#import "XHHistoryDetailTableViewCell.h"
+#import "XHHistoryHeadTableViewCell.h"
+#import "XHApplyTableViewCell.h"
 #define TITLE  @[@"李某某的课程",@"调整类型",@"原任课教师",@"课程名称",@"委任教师",@"委任课程",@"上课时间",@"上课班级",@"请假时长",@"审批人"]
 @interface XHNewDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -28,10 +31,12 @@
     _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
     _tableView.delegate=self;
     _tableView.dataSource=self;
-    _tableView.sectionHeaderHeight=10;
+    _tableView.sectionHeaderHeight=0;
     [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     [_tableView registerNib:[UINib nibWithNibName:@"XHNewTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
-    [_tableView registerNib:[UINib nibWithNibName:@"XHNewHeardTableViewCell" bundle:nil] forCellReuseIdentifier:@"headcell"];
+    [_tableView registerNib:[UINib nibWithNibName:@"XHHistoryDetailTableViewCell" bundle:nil] forCellReuseIdentifier:@"headcell"];
+    [_tableView registerClass:[XHHistoryHeadTableViewCell class] forCellReuseIdentifier:@"historyHeadCell"];
+     [_tableView registerClass:[XHApplyTableViewCell class] forCellReuseIdentifier:@"applyCell"];
     [self.view addSubview:_tableView];
     [_tableView addSubview:self.imageV];
     //去掉留白方法
@@ -52,7 +57,7 @@
     }
     else
     {
-       return 5;
+       return 0;
     }
     
 }
@@ -73,7 +78,13 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row==9) {
-        return 180;
+        return 110;
+    }
+    if (indexPath.section==0&&indexPath.row==0) {
+        return 60;
+    }
+    if (indexPath.section==1) {
+        return 80;
     }
     else
     {
@@ -82,46 +93,67 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (indexPath.row) {
-        case 9:
-            switch (indexPath.section) {
-                case 0:
+    switch (indexPath.section) {
+        case 0:
+            switch (indexPath.row) {
+                    case 0:
                 {
-                    XHNewHeardTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"headcell" forIndexPath:indexPath];
-                    [cell.sureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-                    //[cell.headBtn addTarget:self action:@selector(headBtnClick) forControlEvents:UIControlEventTouchUpInside];
-                   // [cell.sureBtn addTarget:self action:@selector(sureBtnClick) forControlEvents:UIControlEventTouchUpInside];
+                    XHHistoryHeadTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"historyHeadCell" forIndexPath:indexPath];
+                    cell.titleLabel.text=@"张三的调课";
                     return cell;
                 }
-                    
+                    break;
+                    break;
+                case 9:
+                {
+                    XHHistoryDetailTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"headcell" forIndexPath:indexPath];
+                    cell.approveLabel.text=TITLE[indexPath.row];
+                    cell.nameLabel.text=@"李四";
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    return cell;
+                }
                     break;
             }
             break;
-            
+            case 1:
+        {
+             XHApplyTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"applyCell" forIndexPath:indexPath];
+            cell.nameLabel.text=@"张明";
+            cell.applyLabel.text=@"发起申请";
+            cell.dateLabel.text=@"2018-01-02";
+            return cell;
+        }
+            break;
+        
     }
+    
     {
         XHNewTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.titleLabel.text=TITLE[indexPath.row];
+         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        switch (indexPath.row) {
+            case 1:
+                cell.selectLabel.hidden=YES;
+                break;
+                
+            default:
+                cell.selectLabel.hidden=NO;
+                break;
+        }
         return cell;
     }
 }
 -(UIImageView *)imageV
 {
     if (_imageV==nil) {
-        _imageV=[[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-80, 10, 60, 60)];
+        _imageV=[[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-80, 30, 60, 60)];
         _imageV.layer.cornerRadius=30;
         _imageV.layer.masksToBounds=YES;
         _imageV.backgroundColor=[UIColor redColor];
     }
     return _imageV;
 }
--(void)letfItemAction:(BaseNavigationControlItem *)sender
-{
-    [self dismissViewControllerAnimated:YES completion:^{
-        NSLog(@"-------消失成功");
-    }];
-}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

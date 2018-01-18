@@ -89,6 +89,8 @@
         {
             XHNewHeardTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"headcell" forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.approveLabel.text=TITLE[indexPath.row];
+            cell.nameLabel.text=@"张三";
             [cell.sureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [cell.headBtn addTarget:self action:@selector(headBtnClick) forControlEvents:UIControlEventTouchUpInside];
             [cell.sureBtn addTarget:self action:@selector(sureBtnClick) forControlEvents:UIControlEventTouchUpInside];
@@ -113,6 +115,7 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+   [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
         case 2:
         {

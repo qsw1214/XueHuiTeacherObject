@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="XHHistoryDetailTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="109.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="审批人" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RbW-kz-WrS" customClass="XHBaseLabel">
+                        <rect key="frame" x="15" y="0.0" width="60" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="6YH-ai-RR4"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="REs-xY-kQV"/>
+                            <constraint firstAttribute="height" constant="30" id="inz-YJ-xhl"/>
+                            <constraint firstAttribute="width" constant="60" id="t9s-SC-syG"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cZB-kT-guM">
+                        <rect key="frame" x="21" y="30" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="14i-O3-xff"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="8MH-Jb-tNx"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="Esf-7j-OBj"/>
+                            <constraint firstAttribute="width" constant="50" id="NpG-Oh-kvv"/>
+                        </constraints>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mR2-qk-996" customClass="XHBaseLabel">
+                        <rect key="frame" x="20" y="80" width="50" height="29.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="PZU-GZ-W5g"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="Q0k-zY-gc8"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="mR2-qk-996" firstAttribute="top" secondItem="cZB-kT-guM" secondAttribute="bottom" id="3OG-AJ-FwD"/>
+                    <constraint firstItem="mR2-qk-996" firstAttribute="top" secondItem="cZB-kT-guM" secondAttribute="bottom" id="Dej-G9-Juc"/>
+                    <constraint firstItem="mR2-qk-996" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="MaN-cm-db1"/>
+                    <constraint firstItem="RbW-kz-WrS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="YRP-br-eIp"/>
+                    <constraint firstAttribute="bottom" secondItem="mR2-qk-996" secondAttribute="bottom" id="c5V-nK-Lwh"/>
+                    <constraint firstItem="cZB-kT-guM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="day-Sm-BVo"/>
+                    <constraint firstItem="RbW-kz-WrS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="fJc-Y8-WGK"/>
+                    <constraint firstItem="cZB-kT-guM" firstAttribute="top" secondItem="RbW-kz-WrS" secondAttribute="bottom" id="htv-dT-oz4"/>
+                    <constraint firstItem="cZB-kT-guM" firstAttribute="top" secondItem="RbW-kz-WrS" secondAttribute="bottom" id="jLT-GG-FIV"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="approveLabel" destination="RbW-kz-WrS" id="Ucc-Vm-Lf2"/>
+                <outlet property="headBtn" destination="cZB-kT-guM" id="qZx-BY-F64"/>
+                <outlet property="nameLabel" destination="mR2-qk-996" id="Pgc-YP-cUY"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>
