@@ -440,6 +440,8 @@
 		8CB5A2861FD7DF4B008E97D8 /* ProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5A2831FD7DF4B008E97D8 /* ProvinceModel.m */; };
 		8CB5A2891FD7E029008E97D8 /* XHAddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5A2881FD7E029008E97D8 /* XHAddressPickerView.m */; };
 		8CB8AA2A1FE8A2920043B4EA /* UIImage+Resizing.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB8AA291FE8A2920043B4EA /* UIImage+Resizing.m */; };
+		8CBA35F520117ABC00485643 /* XHApproverTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA35F420117ABC00485643 /* XHApproverTableViewCell.m */; };
+		8CBA35F8201189F500485643 /* XHHistoryApproverDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA35F7201189F500485643 /* XHHistoryApproverDetailTableViewCell.m */; };
 		8CC7647A200C8B31007887C7 /* XHCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC76479200C8B31007887C7 /* XHCourseViewController.m */; };
 		8CC7647D200C8C13007887C7 /* XHNewBulidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC7647C200C8C13007887C7 /* XHNewBulidViewController.m */; };
 		8CC76480200C8C2A007887C7 /* XHHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC7647F200C8C2A007887C7 /* XHHistoryViewController.m */; };
@@ -1312,6 +1314,10 @@
 		8CB5A2881FD7E029008E97D8 /* XHAddressPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XHAddressPickerView.m; path = "daycareParent/我的/我的收获地址/view/XHAddressPickerView.m"; sourceTree = SOURCE_ROOT; };
 		8CB8AA281FE8A2910043B4EA /* UIImage+Resizing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resizing.h"; path = "../../daycareParent.xcodeproj/UIImage+Resizing.h"; sourceTree = "<group>"; };
 		8CB8AA291FE8A2920043B4EA /* UIImage+Resizing.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resizing.m"; path = "../../daycareParent.xcodeproj/UIImage+Resizing.m"; sourceTree = "<group>"; };
+		8CBA35F320117ABC00485643 /* XHApproverTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHApproverTableViewCell.h; sourceTree = "<group>"; };
+		8CBA35F420117ABC00485643 /* XHApproverTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHApproverTableViewCell.m; sourceTree = "<group>"; };
+		8CBA35F6201189F500485643 /* XHHistoryApproverDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHHistoryApproverDetailTableViewCell.h; sourceTree = "<group>"; };
+		8CBA35F7201189F500485643 /* XHHistoryApproverDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHHistoryApproverDetailTableViewCell.m; sourceTree = "<group>"; };
 		8CC76478200C8B31007887C7 /* XHCourseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHCourseViewController.h; sourceTree = "<group>"; };
 		8CC76479200C8B31007887C7 /* XHCourseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHCourseViewController.m; sourceTree = "<group>"; };
 		8CC7647B200C8C13007887C7 /* XHNewBulidViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNewBulidViewController.h; sourceTree = "<group>"; };
@@ -3583,6 +3589,10 @@
 				8C007D762010858900DD0635 /* XHHistoryHeadTableViewCell.m */,
 				8C007D782010943D00DD0635 /* XHApplyTableViewCell.h */,
 				8C007D792010943D00DD0635 /* XHApplyTableViewCell.m */,
+				8CBA35F320117ABC00485643 /* XHApproverTableViewCell.h */,
+				8CBA35F420117ABC00485643 /* XHApproverTableViewCell.m */,
+				8CBA35F6201189F500485643 /* XHHistoryApproverDetailTableViewCell.h */,
+				8CBA35F7201189F500485643 /* XHHistoryApproverDetailTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -3964,6 +3974,7 @@
 				4BB792B31FD77AB800E0ED72 /* XHAskforLeaveAddPhotoControl.m in Sources */,
 				4B07CC4D1FD535FD00B2DBDA /* XHParentsMeetingModel.m in Sources */,
 				4B80F2451FCBF01B00BC7B52 /* BaseTextFieldControl.m in Sources */,
+				8CBA35F520117ABC00485643 /* XHApproverTableViewCell.m in Sources */,
 				4B80F2E91FCBF08800BC7B52 /* AFNetworkReachabilityManager.m in Sources */,
 				4BB9BEA01FDE4C23004F5622 /* XHEducationCloudMenuView.m in Sources */,
 				8C019F711FF4C373005EBC2C /* JKDBModel.m in Sources */,
@@ -3978,6 +3989,7 @@
 				04E5D1481FD39F0D0021B842 /* XHVIPTableViewCell.m in Sources */,
 				8C5EB0C31FCFF22C002ED0D7 /* XHPassWordTableViewCell.m in Sources */,
 				4B80F2C91FCBF04F00BC7B52 /* SDWebImageCompat.m in Sources */,
+				8CBA35F8201189F500485643 /* XHHistoryApproverDetailTableViewCell.m in Sources */,
 				4B80F2CC1FCBF04F00BC7B52 /* SDWebImageGIFCoder.m in Sources */,
 				8C67F82F1FD666BA007DFD53 /* XHSelectTableViewCell.m in Sources */,
 				8C3E55C11FD549B60013002A /* XHStudyRecordViewController.m in Sources */,

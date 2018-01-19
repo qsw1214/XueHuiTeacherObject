@@ -60,7 +60,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.ContentLab.frame=CGRectMake(80, 35, SCREEN_WIDTH-180, 30);
     cell.ContentLab.textColor=[UIColor blackColor];
-    cell.myApplyLabel.frame=CGRectMake(SCREEN_WIDTH-90, 30, 80, 20);
+    cell.myApplyLabel.frame=CGRectMake(SCREEN_WIDTH-90, 40, 80, 20);
     cell.myApplyLabel.textAlignment=NSTextAlignmentCenter;
     cell.myApplyLabel.textColor=[UIColor whiteColor];
     cell.myApplyLabel.backgroundColor=[UIColor orangeColor];
@@ -75,12 +75,51 @@
     cell.titleLab.text=@"李某某的调课";
     cell.ContentLab.text=@"等待王某某的审批";
     cell.detailLab.text=@"2018-01-02";
+    if (indexPath.row==0&&_tag==10) {
+        cell.myApplyLabel.text=@"我的申请";
+        cell.myApplyLabel.hidden=NO;
+    }
+    else
+    {
+          cell.myApplyLabel.hidden=YES;
+    }
+    
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XHNewDetailViewController *detail=[XHNewDetailViewController new];
     [detail setNavtionTitle:_tag==10?@"待审批":@"已审批"];
+    detail.Tag=_tag;
+    switch (indexPath.row) {
+        case 0:
+        {
+            detail.isSelf=YES;
+        }
+           
+            break;
+            
+        default:
+        {
+            detail.isSelf=NO;
+        }
+            break;
+    }
+    detail.isRefresh = ^(BOOL ok) {
+        if (ok) {
+#pragma mark-------------点击按钮前状态改变--------------
+            BaseButtonControl *lastBtn=[self.view viewWithTag:10];
+            [lastBtn setTextColor:[UIColor blackColor] withTpe:0 withAllType:NO];
+            [lastBtn setTextBackGroundColor:[UIColor clearColor] withTpe:1 withAllType:NO];
+#pragma mark-------------现在点击按钮状态改变--------------
+            BaseButtonControl *btn=[self.view viewWithTag:11];
+            [btn setTextColor:[UIColor orangeColor] withTpe:0 withAllType:NO];
+            [btn setTextBackGroundColor:[UIColor orangeColor] withTpe:1 withAllType:NO];
+            _tag=11;
+            [_tableView beginRefreshing];
+            //[_tableView refreshReloadData];
+        }
+    };
     [self.navigationController pushViewController:detail animated:YES];
 }
 #pragma mark-------------审批选项--------------

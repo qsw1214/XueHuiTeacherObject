@@ -13,6 +13,8 @@
 #import "XHHistoryDetailTableViewCell.h"
 #import "XHHistoryHeadTableViewCell.h"
 #import "XHApplyTableViewCell.h"
+#import "XHApproverTableViewCell.h"
+#import "XHHistoryApproverDetailTableViewCell.h"
 #define TITLE  @[@"李某某的课程",@"调整类型",@"原任课教师",@"课程名称",@"委任教师",@"委任课程",@"上课时间",@"上课班级",@"请假时长",@"审批人"]
 @interface XHNewDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -37,6 +39,8 @@
     [_tableView registerNib:[UINib nibWithNibName:@"XHHistoryDetailTableViewCell" bundle:nil] forCellReuseIdentifier:@"headcell"];
     [_tableView registerClass:[XHHistoryHeadTableViewCell class] forCellReuseIdentifier:@"historyHeadCell"];
      [_tableView registerClass:[XHApplyTableViewCell class] forCellReuseIdentifier:@"applyCell"];
+     [_tableView registerClass:[XHApproverTableViewCell class] forCellReuseIdentifier:@"approverCell"];
+     [_tableView registerClass:[XHHistoryApproverDetailTableViewCell class] forCellReuseIdentifier:@"historyApproverCell"];
     [self.view addSubview:_tableView];
     [_tableView addSubview:self.imageV];
     //去掉留白方法
@@ -77,71 +81,135 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row==9) {
-        return 110;
-    }
-    if (indexPath.section==0&&indexPath.row==0) {
-        return 60;
-    }
+   
     if (indexPath.section==1) {
-        return 80;
+        if (self.isSelf&&self.Tag==10) {
+            return 80;
+        }
+        else
+        {
+            return 145;
+        }
     }
     else
     {
-        return 50;
+        if (indexPath.row==0) {
+            return 60;
+        }
+        if (indexPath.row==9) {
+            return 110;
+        }
+        else
+        {
+            return 50;
+        }
+        
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (indexPath.section) {
-        case 0:
-            switch (indexPath.row) {
-                    case 0:
-                {
-                    XHHistoryHeadTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"historyHeadCell" forIndexPath:indexPath];
-                    cell.titleLabel.text=@"张三的调课";
-                    return cell;
-                }
-                    break;
-                    break;
-                case 9:
-                {
-                    XHHistoryDetailTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"headcell" forIndexPath:indexPath];
-                    cell.approveLabel.text=TITLE[indexPath.row];
-                    cell.nameLabel.text=@"李四";
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    return cell;
-                }
-                    break;
-            }
-            break;
-            case 1:
-        {
-             XHApplyTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"applyCell" forIndexPath:indexPath];
-            cell.nameLabel.text=@"张明";
-            cell.applyLabel.text=@"发起申请";
-            cell.dateLabel.text=@"2018-01-02";
+    if (indexPath.section==0) {
+        if (indexPath.row==0) {
+            XHHistoryHeadTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"historyHeadCell" forIndexPath:indexPath];
+            cell.titleLabel.text=@"张三的调课";
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
-            break;
-        
+        if (indexPath.row==9) {
+            XHHistoryDetailTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"headcell" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.approveLabel.text=TITLE[indexPath.row];
+            cell.nameLabel.text=@"李四";
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+        }
+        else
+        {
+            XHNewTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+            cell.titleLabel.text=TITLE[indexPath.row];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            switch (indexPath.row) {
+                case 1:
+                    cell.selectLabel.hidden=YES;
+                    break;
+                    
+                default:
+                    cell.selectLabel.hidden=NO;
+                    break;
+            }
+            return cell;
+        }
+    }
+    else {
+        if (self.Tag==11) {
+#pragma mark-------------审批人显示cell--------------
+            XHHistoryApproverDetailTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"historyApproverCell" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            for (int i=0; i<2; i++) {
+                UIImageView *selectImage=[cell.contentView viewWithTag:100+i];
+                UIButton *headBtn=[cell.contentView viewWithTag:200+i];
+                XHBaseLabel *nameLabel=[cell.contentView viewWithTag:300+i];
+                XHBaseLabel *dateLabel=[cell.contentView viewWithTag:400+i];
+                XHBaseLabel *applyLabel=[cell.contentView viewWithTag:500+i];
+                if (i==1) {
+                    selectImage.backgroundColor=[UIColor greenColor];
+                    headBtn.backgroundColor=[UIColor redColor];
+                    nameLabel.text=@"李四";
+                    dateLabel.text=@"2018-01-03";
+                    applyLabel.text=@"已同意";
+                }
+                else
+                {
+                    nameLabel.text=@"张明";
+                    applyLabel.text=@"发起申请";
+                    dateLabel.text=@"2018-01-02";
+                }
+                
+            }
+            
+            return cell;
+        }
+        else
+        {
+            if (self.isSelf)
+            {
+#pragma mark--------------发起人显示cell--------------
+                XHApplyTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"applyCell" forIndexPath:indexPath];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.nameLabel.text=@"张明";
+                cell.applyLabel.text=@"发起申请";
+                cell.dateLabel.text=@"2018-01-02";
+                return cell;
+            }
+            else
+            {
+#pragma mark-------------审批人显示cell--------------
+                XHApproverTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"approverCell" forIndexPath:indexPath];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.nameLabel.text=@"张明";
+                cell.applyLabel.text=@"发起申请";
+                cell.dateLabel.text=@"2018-01-02";
+                for (int i=0; i<2; i++) {
+                    XHBaseBtn *btn=[cell.contentView viewWithTag:10+i];
+                    [btn addTarget:self action:@selector(selectBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+                }
+                
+                return cell;
+            }
+        }
+    }
+
+}
+-(void)selectBtnClick:(XHBaseBtn *)btn
+
+{
+    NSLog(@"-----%zd-----%@",btn.tag,btn.tag==10?@"拒绝":@"同意");
+    //跳转到已审列表
+    if (self.isRefresh) {
+       self.isRefresh(YES);
+        [self.navigationController popViewControllerAnimated:YES];
     }
     
-    {
-        XHNewTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-        cell.titleLabel.text=TITLE[indexPath.row];
-         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        switch (indexPath.row) {
-            case 1:
-                cell.selectLabel.hidden=YES;
-                break;
-                
-            default:
-                cell.selectLabel.hidden=NO;
-                break;
-        }
-        return cell;
-    }
 }
 -(UIImageView *)imageV
 {
