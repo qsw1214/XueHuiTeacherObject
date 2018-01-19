@@ -30,12 +30,14 @@
 
 @implementation XHSmartCampusViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     [self navtionHidden:YES];
     [self setNavtionTitle:@"智慧校园"];
     [self navtionItemHidden:NavigationItemLeftType];
     [self updateVersion];
+    [self setAutomaticallyAdjustsScrollViewInsets:NO];
 }
 - (void)didReceiveMemoryWarning
 {

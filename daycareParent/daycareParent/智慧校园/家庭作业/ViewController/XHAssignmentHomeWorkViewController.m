@@ -7,8 +7,14 @@
 //
 
 #import "XHAssignmentHomeWorkViewController.h"
+#import "XHAssignmentHomeWorkContentView.h"
+
 
 @interface XHAssignmentHomeWorkViewController ()
+
+@property (nonatomic,strong) XHAssignmentHomeWorkContentView *contentView;
+
+
 
 @end
 
@@ -26,5 +32,25 @@
     [super didReceiveMemoryWarning];
 }
 
+-(void)addSubViews:(BOOL)subview
+{
+    if (subview)
+    {
+        [self.view addSubview:self.contentView];
+        [self.contentView resetFrame:CGRectMake(0, self.navigationView.bottom, SCREEN_WIDTH, SCREEN_HEIGHT-self.navigationView.height)];
+    }
+}
+
+
+
+#pragma mark - Getter / Setter
+-(XHAssignmentHomeWorkContentView *)contentView
+{
+    if (!_contentView)
+    {
+        _contentView = [[XHAssignmentHomeWorkContentView alloc]init];
+    }
+    return _contentView;
+}
 
 @end

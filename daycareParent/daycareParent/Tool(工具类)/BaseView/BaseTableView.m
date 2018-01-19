@@ -25,6 +25,12 @@
     self = [super initWithFrame:frame style:style];
     if (self)
     {
+        if (@available(iOS 11.0, *))
+        {
+            [self setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+        }
+        
+        
         [self setBackgroundColor:RGB(238.0, 238.0, 238.0)];
         [self setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         [self setShowsVerticalScrollIndicator:NO];
