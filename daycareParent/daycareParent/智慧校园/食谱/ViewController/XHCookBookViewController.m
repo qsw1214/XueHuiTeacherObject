@@ -9,6 +9,8 @@
 #import "XHCookBookViewController.h"
 #import "XHCookDateContentView.h"
 #import "XHCookDetailsContentView.h"
+#import "XHCreateRecipeViewController.h"
+
 
 @interface XHCookBookViewController () <XHCookDateContentViewDeletage,XHCustomViewDelegate>
 
@@ -23,6 +25,8 @@
 {
     [super viewDidLoad];
     [self setNavtionTitle:@"食谱"];
+    [self setItemContentType:NavigationIconype withItemType:NavigationItemRightype withIconName:@"ico_createrecipe" withTitle:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,9 +54,19 @@
         [self.view addSubview:self.detailsContentView];
         [self.dateContentView resetFrame:CGRectMake(0, self.navigationView.bottom, 90.0, SCREEN_HEIGHT-self.navigationView.height)];
         [self.detailsContentView resetFrame:CGRectMake(self.dateContentView.right, self.dateContentView.top, SCREEN_WIDTH-self.dateContentView.width, self.dateContentView.height)];
-        [self setChildListArry:[XHUserInfo sharedUserInfo].childListArry];
     }
 }
+
+
+#pragma mark - Action Method
+#pragma mark 右侧按钮相应的方法
+-(void)rightItemAction:(BaseNavigationControlItem *)sender
+{
+    XHCreateRecipeViewController *recipe = [[XHCreateRecipeViewController alloc]init];
+    [self.navigationController pushViewController:recipe animated:YES];
+}
+
+
 
 #pragma mark - Deletage Method
 #pragma mark XHCookDateContentViewDeletage
@@ -131,20 +145,7 @@
 }
 
 
-#pragma mark 右侧按钮相应的方法
--(void)rightItemAction:(BaseNavigationControlItem*)sender
-{
-    if (self.childListView.isExist==NO) {
-        self.childListView.delegate=self;
-        [self.view addSubview:self.childListView];
-        self.childListView.isExist=YES;
-    }
-    else
-    {
-        [self.childListView removeFromSuperview];
-        self.childListView.isExist=NO;
-    }
-}
+
 
 
 

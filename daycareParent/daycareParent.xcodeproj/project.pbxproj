@@ -158,6 +158,8 @@
 		4B632AC81FE11CB800B90B94 /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B632AC41FE11CB700B90B94 /* MAMapKit.framework */; };
 		4B632ACA1FE11DFD00B90B94 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B632AC91FE11DFD00B90B94 /* JavaScriptCore.framework */; };
 		4B632ACC1FE11E3A00B90B94 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B632ACB1FE11E3A00B90B94 /* libstdc++.6.0.9.tbd */; };
+		4B68C9E6201174F60078FEDB /* XHCreateRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B68C9E5201174F60078FEDB /* XHCreateRecipeViewController.m */; };
+		4B68C9E9201177120078FEDB /* XHCreateRecipeContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B68C9E8201177120078FEDB /* XHCreateRecipeContentView.m */; };
 		4B71A1BA20060B9D00818046 /* XHCookBookImageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71A1B920060B9D00818046 /* XHCookBookImageControl.m */; };
 		4B80F1E01FCBE3F700BC7B52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B80F1DF1FCBE3F700BC7B52 /* Assets.xcassets */; };
 		4B80F1E61FCBE3F700BC7B52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B80F1E51FCBE3F700BC7B52 /* main.m */; };
@@ -785,6 +787,10 @@
 		4B632AC41FE11CB700B90B94 /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MAMapKit.framework; sourceTree = "<group>"; };
 		4B632AC91FE11DFD00B90B94 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		4B632ACB1FE11E3A00B90B94 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		4B68C9E4201174F60078FEDB /* XHCreateRecipeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHCreateRecipeViewController.h; sourceTree = "<group>"; };
+		4B68C9E5201174F60078FEDB /* XHCreateRecipeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHCreateRecipeViewController.m; sourceTree = "<group>"; };
+		4B68C9E7201177120078FEDB /* XHCreateRecipeContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHCreateRecipeContentView.h; sourceTree = "<group>"; };
+		4B68C9E8201177120078FEDB /* XHCreateRecipeContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHCreateRecipeContentView.m; sourceTree = "<group>"; };
 		4B71A1B820060B9D00818046 /* XHCookBookImageControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHCookBookImageControl.h; sourceTree = "<group>"; };
 		4B71A1B920060B9D00818046 /* XHCookBookImageControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHCookBookImageControl.m; sourceTree = "<group>"; };
 		4B80F1D31FCBE3F700BC7B52 /* daycareParent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = daycareParent.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2740,6 +2746,8 @@
 				4B8E661D1FD643400006D641 /* XHCookBookCell.m */,
 				4B71A1B820060B9D00818046 /* XHCookBookImageControl.h */,
 				4B71A1B920060B9D00818046 /* XHCookBookImageControl.m */,
+				4B68C9E7201177120078FEDB /* XHCreateRecipeContentView.h */,
+				4B68C9E8201177120078FEDB /* XHCreateRecipeContentView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2749,6 +2757,8 @@
 			children = (
 				4B8E66131FD63FDD0006D641 /* XHCookBookViewController.h */,
 				4B8E66141FD63FDD0006D641 /* XHCookBookViewController.m */,
+				4B68C9E4201174F60078FEDB /* XHCreateRecipeViewController.h */,
+				4B68C9E5201174F60078FEDB /* XHCreateRecipeViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -4062,6 +4072,7 @@
 				4B80F2081FCBE4E400BC7B52 /* AppDelegate.m in Sources */,
 				4B3126321FD93CC6000CE894 /* TADotView.m in Sources */,
 				4B80F2821FCBF04800BC7B52 /* MJRefreshBackGifFooter.m in Sources */,
+				4B68C9E6201174F60078FEDB /* XHCreateRecipeViewController.m in Sources */,
 				4B80F2E81FCBF08800BC7B52 /* AFHTTPSessionManager.m in Sources */,
 				4B07CC471FD5106800B2DBDA /* KYAnimatedPageControl.m in Sources */,
 				4B5A3AFD1FCEAECA00504229 /* BaseControl.m in Sources */,
@@ -4278,6 +4289,7 @@
 				4BBC434E1FD11A1D00555846 /* BaseView.m in Sources */,
 				8CB5A2861FD7DF4B008E97D8 /* ProvinceModel.m in Sources */,
 				4B632AAC1FE0CC4500B90B94 /* XHTeacherAddressBookContentView.m in Sources */,
+				4B68C9E9201177120078FEDB /* XHCreateRecipeContentView.m in Sources */,
 				4B80F2EB1FCBF08800BC7B52 /* AFURLRequestSerialization.m in Sources */,
 				4B80F2121FCBE81600BC7B52 /* NSObject+Category.m in Sources */,
 				8CF3417C200EF3AC0055D6BD /* XHNewChageTypeTableViewCell.m in Sources */,

@@ -11,16 +11,16 @@
 @interface BaseButtonControl ()
 
 #pragma mark 显示标签
-@property (nonatomic,strong) NSMutableArray *labelArray; //!< 标签数组
+@property (nonatomic,strong) NSMutableArray <UILabel*> *labelArray; //!< 标签数组
 #pragma mark 输入标签
-@property (nonatomic,strong) NSMutableArray *textFieldArray; //!< 标签数组
+@property (nonatomic,strong) NSMutableArray <UITextField*> *textFieldArray; //!< 标签数组
 #pragma mark 图片视图
-@property (nonatomic,strong) NSMutableArray *imageViewArray; //!< 标签数组
+@property (nonatomic,strong) NSMutableArray <UIImageView*> *imageViewArray; //!< 标签数组
 #pragma mark 分割线
-@property (nonatomic,strong) NSMutableArray *lineViewArray; //!< 标签数组
+@property (nonatomic,strong) NSMutableArray <UIView*> *lineViewArray; //!< 标签数组
 
 #pragma mark 文本域输入框
-@property (nonatomic,strong) NSMutableArray *textViewArray; //!< 标签数组
+@property (nonatomic,strong) NSMutableArray <BaseTextView*> *textViewArray; //!< 标签数组
 
 
 @end
@@ -35,11 +35,39 @@
     self = [super init];
     if (self)
     {
-        [self setItemColor:NO];
+        
     }
     return self;
 }
 
+
+
+
+-(void)setItemColor:(BOOL)color
+{
+    if (color)
+    {
+        [self.labelArray enumerateObjectsUsingBlock:^(UILabel *obj, NSUInteger idx, BOOL *stop)
+         {
+             [obj setBackgroundColor:[UIColor colorWithRed:((idx+78)/255.0) green:((idx+235)/255.0) blue:((idx+199)/255.0) alpha:1.0]];
+         }];
+        
+        [self.imageViewArray enumerateObjectsUsingBlock:^(UIImageView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop)
+         {
+             [obj setBackgroundColor:[UIColor colorWithRed:((idx+198)/255.0) green:((idx+115)/255.0) blue:((idx+109)/255.0) alpha:1.0]];
+         }];
+        
+        [self.textViewArray enumerateObjectsUsingBlock:^(BaseTextView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop)
+         {
+             [obj setBackgroundColor:[UIColor colorWithRed:((idx+98)/255.0) green:((idx+215)/255.0) blue:((idx+189)/255.0) alpha:1.0]];
+         }];
+        
+        [self.textFieldArray enumerateObjectsUsingBlock:^(UITextField * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop)
+         {
+             [obj setBackgroundColor:[UIColor colorWithRed:((idx+145)/255.0) green:((idx+217)/255.0) blue:((idx+167)/255.0) alpha:1.0]];
+         }];
+    }
+}
 
 
 
@@ -657,10 +685,12 @@
          if (allType)
          {
              [obj setContentMode:mode];
+             [obj.layer setMasksToBounds:YES];
          }
          else if (idx == type)
          {
              [obj setContentMode:mode];
+             [obj.layer setMasksToBounds:YES];
              *stop = YES;
          }
          
@@ -838,16 +868,6 @@
     }
     return _lineViewArray;
 }
-
--(void)setItemColor:(BOOL)color
-{
-    if (color)
-    {
-        
-    }
-}
-
-
 
 
 
