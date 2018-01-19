@@ -160,6 +160,7 @@
 		4B632ACC1FE11E3A00B90B94 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B632ACB1FE11E3A00B90B94 /* libstdc++.6.0.9.tbd */; };
 		4B68C9E6201174F60078FEDB /* XHCreateRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B68C9E5201174F60078FEDB /* XHCreateRecipeViewController.m */; };
 		4B68C9E9201177120078FEDB /* XHCreateRecipeContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B68C9E8201177120078FEDB /* XHCreateRecipeContentView.m */; };
+		4B68C9EC20119D460078FEDB /* XHAssignmentHomeWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B68C9EB20119D460078FEDB /* XHAssignmentHomeWorkViewController.m */; };
 		4B71A1BA20060B9D00818046 /* XHCookBookImageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71A1B920060B9D00818046 /* XHCookBookImageControl.m */; };
 		4B80F1E01FCBE3F700BC7B52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B80F1DF1FCBE3F700BC7B52 /* Assets.xcassets */; };
 		4B80F1E61FCBE3F700BC7B52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B80F1E51FCBE3F700BC7B52 /* main.m */; };
@@ -791,6 +792,8 @@
 		4B68C9E5201174F60078FEDB /* XHCreateRecipeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHCreateRecipeViewController.m; sourceTree = "<group>"; };
 		4B68C9E7201177120078FEDB /* XHCreateRecipeContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHCreateRecipeContentView.h; sourceTree = "<group>"; };
 		4B68C9E8201177120078FEDB /* XHCreateRecipeContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHCreateRecipeContentView.m; sourceTree = "<group>"; };
+		4B68C9EA20119D460078FEDB /* XHAssignmentHomeWorkViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHAssignmentHomeWorkViewController.h; sourceTree = "<group>"; };
+		4B68C9EB20119D460078FEDB /* XHAssignmentHomeWorkViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHAssignmentHomeWorkViewController.m; sourceTree = "<group>"; };
 		4B71A1B820060B9D00818046 /* XHCookBookImageControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHCookBookImageControl.h; sourceTree = "<group>"; };
 		4B71A1B920060B9D00818046 /* XHCookBookImageControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHCookBookImageControl.m; sourceTree = "<group>"; };
 		4B80F1D31FCBE3F700BC7B52 /* daycareParent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = daycareParent.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2859,6 +2862,8 @@
 				4BA8C4D81FCFF305006CBEBC /* XHHomeWorkViewController.m */,
 				4B523BC21FD12D43006DD565 /* XHHomeWorkDetailsViewController.h */,
 				4B523BC31FD12D43006DD565 /* XHHomeWorkDetailsViewController.m */,
+				4B68C9EA20119D460078FEDB /* XHAssignmentHomeWorkViewController.h */,
+				4B68C9EB20119D460078FEDB /* XHAssignmentHomeWorkViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -3945,6 +3950,7 @@
 				4B80F2421FCBF01B00BC7B52 /* BaseLabelView.m in Sources */,
 				4B07CC2B1FD4EC2D00B2DBDA /* XHParentsMeetingContentView.m in Sources */,
 				4B3126191FD90AAA000CE894 /* XHDatePickerControl.m in Sources */,
+				4B68C9EC20119D460078FEDB /* XHAssignmentHomeWorkViewController.m in Sources */,
 				4B31265C1FDA8F9C000CE894 /* XHAddressBookLecturesControl.m in Sources */,
 				4B80F3191FCBFD6F00BC7B52 /* EXTScope.m in Sources */,
 				8C6240A21FD915BB00E6C031 /* XHDiscuntViewController.m in Sources */,
