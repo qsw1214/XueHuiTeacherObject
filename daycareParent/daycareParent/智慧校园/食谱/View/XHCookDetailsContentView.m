@@ -41,11 +41,13 @@
     [self.titleControl resetFrame:CGRectMake(0, 0, frame.size.width, 40.0)];
     [self.titleControl setTitleEdgeFrame:CGRectMake(10.0, 0, self.titleControl.width-20.0, self.titleControl.height) withNumberType:0 withAllType:NO];
     [self.tableView resetFrame:CGRectMake(0, self.titleControl.bottom, frame.size.width, frame.size.height-self.titleControl.height)];
+    [self.titleControl setHidden:YES];
 }
 
 
 -(void)setItemObject:(XHCookBookFrame*)object
 {
+    [self.titleControl setHidden:NO];
     [self.titleControl setText:object.model.weekAndDate withNumberType:0 withAllType:NO];
     [self.dataArray setArray:object.model.contentArray];
     [self.tableView reloadData];

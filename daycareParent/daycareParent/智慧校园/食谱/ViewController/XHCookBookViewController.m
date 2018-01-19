@@ -89,6 +89,7 @@
 #pragma mark - NetWork Method (请求网络内容)
 -(void)getCookBookWithSchoolId:(NSString*)schoolId
 {
+    [XHShowHUD showTextHud];
     [self.netWorkConfig setObject:schoolId forKey:@"schoolId"];
     [self.netWorkConfig postWithUrl:@"zzjt-app-api_smartCampus005" sucess:^(id object, BOOL verifyObject)
      {
@@ -119,8 +120,11 @@
              
              [self.dateContentView setItemArray:self.dataArray];
          }
+         
+         [XHShowHUD hideHud];
      } error:^(NSError *error)
      {
+         [XHShowHUD hideHud];
          [self.dateContentView setItemArray:self.dataArray];
      }];
 }
