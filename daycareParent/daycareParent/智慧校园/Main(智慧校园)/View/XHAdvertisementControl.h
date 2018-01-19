@@ -14,6 +14,9 @@
 
 @interface XHAdvertisementControl : UIControl
 
+@property (nonatomic,strong) BaseButtonControl *registerControl; //!< 日常点名
+@property (nonatomic,strong) BaseButtonControl *homeworkControl; //!< 家庭作业
+
 -(instancetype)init;
 -(void)resetFrame:(CGRect)frame;
 -(void)setItemArray:(NSMutableArray*)itemArray;
