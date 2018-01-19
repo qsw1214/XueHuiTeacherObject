@@ -28,20 +28,24 @@
     // Do any additional setup after loading the view.
     [self setNavtionTitle:@"个人信息"];
     [self setNavtionTitleColor:[UIColor whiteColor]];
+    UIScrollView *scrollView=[[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
+    scrollView.contentSize=CGSizeMake(SCREEN_WIDTH, 500);
+    [self.view addSubview:scrollView];
     _titleArry=@[@"头像",@"昵称",@"性别",@"真实姓名",@"联系电话",@"个性签名"];
-    _tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
-    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
+    _tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 390) style:UITableViewStylePlain];
+//    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
+    _tableView.bounces=NO;
     _tableView.delegate=self;
     _tableView.dataSource=self;
     [_tableView registerClass:[XHUserTableViewCell class] forCellReuseIdentifier:@"cell"];
     _tableView.bounces=NO;
-    [self.view addSubview:_tableView];
-    XHBaseBtn *btn=[[XHBaseBtn alloc] initWithFrame:CGRectMake(10, 470, SCREEN_WIDTH-20, 50)];
+    [scrollView addSubview:_tableView];
+    XHBaseBtn *btn=[[XHBaseBtn alloc] initWithFrame:CGRectMake(10, 420, SCREEN_WIDTH-20, 50)];
     btn.backgroundColor=[UIColor redColor];
     [btn setTitle:@"退出" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(logOutClick) forControlEvents:UIControlEventTouchUpInside];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.view  addSubview:btn];
+    [scrollView  addSubview:btn];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -96,6 +100,7 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row==0) {
         [self openImagePiker];
     }

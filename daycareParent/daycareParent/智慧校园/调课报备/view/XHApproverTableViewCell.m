@@ -1,14 +1,14 @@
 //
-//  XHApplyTableViewCell.m
+//  XHApproverTableViewCell.m
 //  daycareParent
 //
-//  Created by 钧泰科技 on 2018/1/18.
+//  Created by 钧泰科技 on 2018/1/19.
 //  Copyright © 2018年 XueHui. All rights reserved.
 //
 
-#import "XHApplyTableViewCell.h"
+#import "XHApproverTableViewCell.h"
 
-@implementation XHApplyTableViewCell
+@implementation XHApproverTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -34,17 +34,38 @@
         [_headBtn sd_setBackgroundImageWithURL:nil forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
         [self.contentView addSubview:_headBtn];
         _nameLabel=[[XHBaseLabel alloc] initWithFrame:CGRectMake(_headBtn.right+5, label.top+5, SCREEN_WIDTH-_headBtn.right-110, 25)];
-       // _nameLabel.backgroundColor=[UIColor redColor];
-           [self.contentView addSubview:_nameLabel];
+        // _nameLabel.backgroundColor=[UIColor redColor];
+        [self.contentView addSubview:_nameLabel];
         _dateLabel=[[XHBackLabel alloc] initWithFrame:CGRectMake(_nameLabel.right+5, label.top+5, 90, 25)];
         _dateLabel.font=FontLevel3;
-       // _dateLabel.backgroundColor=[UIColor orangeColor];
+        // _dateLabel.backgroundColor=[UIColor orangeColor];
         [self.contentView addSubview:_dateLabel];
         _applyLabel=[[XHBaseLabel alloc] initWithFrame:CGRectMake(_headBtn.right+5, _dateLabel.bottom, SCREEN_WIDTH-_headBtn.right-15, 25)];
         _applyLabel.font=FontLevel3;
         _applyLabel.textColor=RGB(44, 118, 44);
-       // _applyLabel.backgroundColor=[UIColor blueColor];
+        
         [self.contentView addSubview:_applyLabel];
+        for (int i=0; i<2; i++) {
+            _selectBtn=[[XHBaseBtn alloc] initWithFrame:CGRectMake(10+i*SCREEN_WIDTH/2.0, label.bottom+15, SCREEN_WIDTH/2.0-20, 45)];
+            [_selectBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            _selectBtn.tag=10+i;
+            [self.contentView addSubview:_selectBtn];
+            switch (i) {
+                case 0:
+                {
+                    [_selectBtn setTitle:@"拒绝" forState:UIControlStateNormal];
+                    [_selectBtn setBackgroundColor:RGB(232, 59, 63)];
+                }
+                    break;
+                    
+                default:
+                {
+                    [_selectBtn setTitle:@"同意" forState:UIControlStateNormal];
+                    [_selectBtn setBackgroundColor:RGB(44, 118, 44)];
+                }
+                    break;
+            }
+        }
     }
     return self;
 }

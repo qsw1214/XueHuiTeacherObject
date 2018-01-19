@@ -9,5 +9,6 @@
 #import "BaseViewController.h"
 #pragma mark-------------审批详情--------------
 @interface XHNewDetailViewController : BaseViewController
-
+@property(nonatomic,assign)BOOL isSelf;
+@property(nonatomic,assign)NSInteger Tag;
 @end
