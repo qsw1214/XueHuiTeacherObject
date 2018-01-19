@@ -442,6 +442,7 @@
 		8CB8AA2A1FE8A2920043B4EA /* UIImage+Resizing.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB8AA291FE8A2920043B4EA /* UIImage+Resizing.m */; };
 		8CBA35F520117ABC00485643 /* XHApproverTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA35F420117ABC00485643 /* XHApproverTableViewCell.m */; };
 		8CBA35F8201189F500485643 /* XHHistoryApproverDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA35F7201189F500485643 /* XHHistoryApproverDetailTableViewCell.m */; };
+		8CBA35FF2011BBDB00485643 /* XHDayRollCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA35FE2011BBDB00485643 /* XHDayRollCallViewController.m */; };
 		8CC7647A200C8B31007887C7 /* XHCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC76479200C8B31007887C7 /* XHCourseViewController.m */; };
 		8CC7647D200C8C13007887C7 /* XHNewBulidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC7647C200C8C13007887C7 /* XHNewBulidViewController.m */; };
 		8CC76480200C8C2A007887C7 /* XHHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC7647F200C8C2A007887C7 /* XHHistoryViewController.m */; };
@@ -1318,6 +1319,8 @@
 		8CBA35F420117ABC00485643 /* XHApproverTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHApproverTableViewCell.m; sourceTree = "<group>"; };
 		8CBA35F6201189F500485643 /* XHHistoryApproverDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHHistoryApproverDetailTableViewCell.h; sourceTree = "<group>"; };
 		8CBA35F7201189F500485643 /* XHHistoryApproverDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHHistoryApproverDetailTableViewCell.m; sourceTree = "<group>"; };
+		8CBA35FD2011BBDB00485643 /* XHDayRollCallViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHDayRollCallViewController.h; sourceTree = "<group>"; };
+		8CBA35FE2011BBDB00485643 /* XHDayRollCallViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHDayRollCallViewController.m; sourceTree = "<group>"; };
 		8CC76478200C8B31007887C7 /* XHCourseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHCourseViewController.h; sourceTree = "<group>"; };
 		8CC76479200C8B31007887C7 /* XHCourseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHCourseViewController.m; sourceTree = "<group>"; };
 		8CC7647B200C8C13007887C7 /* XHNewBulidViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNewBulidViewController.h; sourceTree = "<group>"; };
@@ -2379,6 +2382,7 @@
 		4B80F2031FCBE43E00BC7B52 /* 智慧校园 */ = {
 			isa = PBXGroup;
 			children = (
+				8CBA35F92011BAB900485643 /* 日常点名 */,
 				8CC76474200C8AE3007887C7 /* 调课报备 */,
 				4B4A00021FE23EF200B8A8F8 /* 班级动态 */,
 				4B632AB91FE1173700B90B94 /* 定位 */,
@@ -3536,6 +3540,39 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		8CBA35F92011BAB900485643 /* 日常点名 */ = {
+			isa = PBXGroup;
+			children = (
+				8CBA35FA2011BAB900485643 /* controller */,
+				8CBA35FB2011BAB900485643 /* model */,
+				8CBA35FC2011BAB900485643 /* view */,
+			);
+			path = "日常点名";
+			sourceTree = "<group>";
+		};
+		8CBA35FA2011BAB900485643 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				8CBA35FD2011BBDB00485643 /* XHDayRollCallViewController.h */,
+				8CBA35FE2011BBDB00485643 /* XHDayRollCallViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		8CBA35FB2011BAB900485643 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		8CBA35FC2011BAB900485643 /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		8CC76474200C8AE3007887C7 /* 调课报备 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4242,6 +4279,7 @@
 				8CB5A2641FD796FF008E97D8 /* XHAddressModel.m in Sources */,
 				4B80F2ED1FCBF08800BC7B52 /* AFURLSessionManager.m in Sources */,
 				4BA8C4C51FCFD0AF006CBEBC /* XHRegisterViewController.m in Sources */,
+				8CBA35FF2011BBDB00485643 /* XHDayRollCallViewController.m in Sources */,
 				4B80F27E1FCBF04800BC7B52 /* MJRefreshHeader.m in Sources */,
 				4BB792C61FD7923C00E0ED72 /* XHSyllabusFrame.m in Sources */,
 				8C79740A1FE772A700AF6F6A /* NYXImagesHelper.m in Sources */,

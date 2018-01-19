@@ -25,7 +25,7 @@
 #import "BaseTableView.h"
 #import "XHPasswordViewController.h"
 #import "XHAboutUsViewController.h"
-
+#import "XHCookBookViewController.h"
 #define TITLE_LIST @[@"学习记录",@"收藏资源",@"下载记录",@"我的课程"]
 
 @interface XHPersonalCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -47,11 +47,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     [self navtionHidden:YES];
     arry=@[@"修改密码",@"食谱管理",@"清除缓存",@"关于我们"];
     contentArry=@[@"ico-modify",@"icoshiouguanli",@"ico-clean",@"ico-about"];
-    _tableView=[[BaseTableView alloc] initWithFrame:CGRectMake(0, 240, SCREEN_WIDTH, SCREEN_HEIGHT-49-USER_HEARD-70) style:UITableViewStyleGrouped];
+    _tableView=[[BaseTableView alloc] initWithFrame:CGRectMake(0, 240, SCREEN_WIDTH, SCREEN_HEIGHT-240) style:UITableViewStyleGrouped];
      _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
     _tableView.delegate=self;
     _tableView.dataSource=self;
@@ -117,6 +116,8 @@
             case 1:
         {
             //跳转到食谱管理界面
+                XHCookBookViewController *cookBook = [[XHCookBookViewController alloc]initHiddenWhenPushHidden];
+                [self.navigationController pushViewController:cookBook animated:YES];
         }
             break;
         case 2:
