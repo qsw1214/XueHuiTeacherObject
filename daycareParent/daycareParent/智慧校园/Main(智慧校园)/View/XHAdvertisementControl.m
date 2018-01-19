@@ -14,7 +14,8 @@
 @interface XHAdvertisementControl () <SDCycleScrollViewDelegate>
 
 
-
+@property (nonatomic,strong) BaseButtonControl *registerControl; //!< 日常点名
+@property (nonatomic,strong) BaseButtonControl *homeworkControl; //!< 家庭作业
 
 @property (nonatomic,strong) NSMutableArray *dataArray; //!< 数据数组
 @property (nonatomic,strong) UIImageView *bannerView; //!< 弧度视图
@@ -54,12 +55,14 @@
     [self setItemArray:self.dataArray];
     NSLog(@"%f=%f",self.bannerView.bottom,frame.size.height);
     //添加日常点名和发布作业
-    [self.registerControl resetFrame:CGRectMake(40.0, (self.bannerView.bottom+15.0), ((frame.size.width-(40*3))/2.0), 40.0)];
-    [self.registerControl setImageEdgeFrame:CGRectMake(10.0, 10.0, 20.0, 20.0) withNumberType:0 withAllType:NO];
-    [self.registerControl setTitleEdgeFrame:CGRectMake(30.0, 0.0, self.registerControl.width-30.0, self.registerControl.height) withNumberType:0 withAllType:NO];
-    [self.homeworkControl resetFrame:CGRectMake((self.registerControl.right+40), self.registerControl.top, self.registerControl.width, self.registerControl.height)];
-    [self.homeworkControl setImageEdgeFrame:CGRectMake(10.0, 10.0, 20.0, 20.0) withNumberType:0 withAllType:NO];
-    [self.homeworkControl setTitleEdgeFrame:CGRectMake(30.0, 0.0, self.homeworkControl.width-30.0, self.homeworkControl.height) withNumberType:0 withAllType:NO];
+    [self.registerControl resetFrame:CGRectMake(30.0, (self.bannerView.bottom+15.0), ((frame.size.width-(30*3))/2.0), 40.0)];
+    [self.registerControl setImageEdgeFrame:CGRectMake(15.0, 10.0, 20.0, 20.0) withNumberType:0 withAllType:NO];
+    [self.registerControl setTitleEdgeFrame:CGRectMake(35.0, 0.0, self.registerControl.width-45.0, self.registerControl.height) withNumberType:0 withAllType:NO];
+    [self.registerControl setLayerCornerRadius:(self.registerControl.height/2.0)];
+    [self.homeworkControl resetFrame:CGRectMake((self.registerControl.right+30), self.registerControl.top, self.registerControl.width, self.registerControl.height)];
+    [self.homeworkControl setImageEdgeFrame:CGRectMake(15.0, 10.0, 20.0, 20.0) withNumberType:0 withAllType:NO];
+    [self.homeworkControl setTitleEdgeFrame:CGRectMake(35.0, 0.0, self.homeworkControl.width-45.0, self.homeworkControl.height) withNumberType:0 withAllType:NO];
+    [self.homeworkControl setLayerCornerRadius:(self.homeworkControl.height/2.0)];
     [self addSubview:self.registerControl];
     [self addSubview:self.homeworkControl];
 }
@@ -96,7 +99,10 @@
         [_registerControl setText:@"日常点名" withNumberType:0 withAllType:NO];
         [_registerControl setTextColor:[UIColor whiteColor] withTpe:0 withAllType:NO];
         [_registerControl setFont:FontLevel3 withNumberType:0 withAllType:NO];
-        
+        [_registerControl setTextAlignment:NSTextAlignmentCenter withNumberType:0 withAllType:NO];
+        [_registerControl setItemColor:NO];
+        [_registerControl addTarget:self action:@selector(advertisementAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_registerControl setTag:1];
     }
     return _registerControl;
     
@@ -114,10 +120,21 @@
         [_homeworkControl setText:@"发布作业" withNumberType:0 withAllType:NO];
         [_homeworkControl setTextColor:[UIColor whiteColor] withTpe:0 withAllType:NO];
         [_homeworkControl setFont:FontLevel3 withNumberType:0 withAllType:NO];
-        
+        [_homeworkControl setTextAlignment:NSTextAlignmentCenter withNumberType:0 withAllType:NO];
+        [_homeworkControl setItemColor:NO];
+        [_homeworkControl addTarget:self action:@selector(advertisementAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_homeworkControl setTag:2];
     }
     return _homeworkControl;
-    
+}
+
+
+-(void)advertisementAction:(BaseButtonControl*)sender
+{
+    if ([self.deletage respondsToSelector:@selector(advertisementAction:)])
+    {
+        [self.deletage advertisementAction:sender];
+    }
 }
 
 

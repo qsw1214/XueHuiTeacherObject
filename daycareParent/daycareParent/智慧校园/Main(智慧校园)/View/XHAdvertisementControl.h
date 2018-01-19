@@ -9,13 +9,22 @@
 #pragma mark 智慧校园主页->内容承载视图->广告预览视图
 
 
+@protocol XHAdvertisementControlDeletage <NSObject>
+
+-(void)advertisementAction:(BaseButtonControl*)sender;
+
+@end
+
 
 #import <UIKit/UIKit.h>
 
 @interface XHAdvertisementControl : UIControl
 
-@property (nonatomic,strong) BaseButtonControl *registerControl; //!< 日常点名
-@property (nonatomic,strong) BaseButtonControl *homeworkControl; //!< 家庭作业
+
+@property (nonatomic,weak) id <XHAdvertisementControlDeletage> deletage;//!< 代理对象
+
+
+
 
 -(instancetype)init;
 -(void)resetFrame:(CGRect)frame;
