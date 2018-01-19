@@ -50,6 +50,9 @@ typedef NS_ENUM(NSInteger,BaseControlModelType)
 
 -(instancetype)init;
 
+-(void)setItemColor:(BOOL)color;
+
+
 -(void)setNumberLabel:(NSInteger)numberLabel;
 -(void)setNumberTextField:(NSInteger)numberTextField;
 -(void)setNumberTextView:(NSInteger)numberTextView;

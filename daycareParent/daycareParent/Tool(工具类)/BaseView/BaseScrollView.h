@@ -16,6 +16,8 @@
 @property (nonatomic,strong) MJRefreshAutoNormalFooter *animateFooter; //!< 脚部
 
 
+
+-(void)resetFrame:(CGRect)frame;
 -(void)setItemColor:(BOOL)color;
 
 
