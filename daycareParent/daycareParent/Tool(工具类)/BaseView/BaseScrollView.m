@@ -12,6 +12,19 @@
 
 
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self)
+    {
+        if (@available(iOS 11.0, *))
+        {
+            [self setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+        }
+    }
+    return self;
+}
+
 
 
 #pragma mark 是否隐藏头部刷新，不调用该方法，默认为隐藏，调用该方法后即可显示
@@ -61,6 +74,15 @@
     [self.footer endRefreshing];
 }
 
+-(void)setItemColor:(BOOL)color
+{
+    
+}
+
+-(void)resetFrame:(CGRect)frame
+{
+    
+}
 
 #pragma mark - Getter / Setter
 -(NSMutableArray *)dataArray

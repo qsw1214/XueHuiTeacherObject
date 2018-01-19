@@ -20,6 +20,13 @@
 
 @property (nonatomic,weak) id <BaseTextViewDeletage> textDeletage;
 
+
+/**
+ 设置limit限制字数
+
+ @param limit 限制的字数
+ */
+-(void)setLimit:(NSInteger)limit;
 -(void)resetText:(NSString*)text;
 -(void)setPlaceholderColor:(UIColor*)color; //!< 占位字符的颜色
 

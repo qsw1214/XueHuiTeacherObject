@@ -45,7 +45,7 @@
         [self addSubview:self.functionMenuControl];
         [self addSubview:self.advertisementControl];
 
-        
+        [self.advertisementControl setDeletage:deletage];
         [self.functionMenuControl setItemArray:self.itemArray];
         [self.functionMenuControl setDeletage:deletage];
         

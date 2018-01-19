@@ -13,6 +13,9 @@
 
 @property (nonatomic,strong) UILabel *placeholderLabel; //!< 占位字符
 
+@property (nonatomic,assign) NSInteger limitNumer;
+
+
 
 @end
 
@@ -47,6 +50,16 @@
 -(void)setPlaceholderColor:(UIColor*)color //!< 占位字符的颜色
 {
     [self.placeholderLabel setTextColor:color];
+}
+
+/**
+ 设置limit限制字数
+ 
+ @param limit 限制的字数
+ */
+-(void)setLimit:(NSInteger)limit
+{
+    [self setLimitNumer:limit];
 }
 
 -(void)resetText:(NSString*)text

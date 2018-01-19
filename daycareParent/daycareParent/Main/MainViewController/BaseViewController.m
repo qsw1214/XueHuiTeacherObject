@@ -32,12 +32,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.extendedLayoutIncludesOpaqueBars = YES;
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     [self.view setBackgroundColor:RGB(235.0, 235.0, 235.0)];
     [self.navigationController.navigationBar setHidden:YES];
     [self.view addSubview:self.navigationView];
     [self setNavtionColor:MainColor];
-    self.view.backgroundColor=[UIColor whiteColor];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     [self setItemContentItemHiddenWithType:NavigationRightType withHidden:YES];
     [self setItemContentType:NavigationIconAndTitle withItemType:NavigationItemLeftType withIconName:@"ico_return" withTitle:@"返回"];
     [self addSubViews:YES];
