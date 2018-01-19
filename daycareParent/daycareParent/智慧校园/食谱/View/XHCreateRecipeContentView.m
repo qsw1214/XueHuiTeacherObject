@@ -130,6 +130,7 @@
         [_inputContent setLayerCornerRadius:2.0];
         [_inputContent setLayerBorderWidth:0.5];
         [_inputContent setBorderColor:LineViewColor];
+        [_inputContent setPlaceholderColor:RGB(169.0, 169.0, 169.0)];
     }
     return _inputContent;
 }
