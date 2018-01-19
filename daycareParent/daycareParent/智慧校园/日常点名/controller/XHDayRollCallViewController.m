@@ -7,10 +7,11 @@
 //
 
 #import "XHDayRollCallViewController.h"
-#import "XHAddressPickerView.h"
-@interface XHDayRollCallViewController ()<XHAddressPickerViewDelegate>
+#import "XHCustomDatePickerView.h"
+@interface XHDayRollCallViewController ()<XHCustomDatePickerViewDelegate>
 @property(nonatomic,strong)UIView *headView;
-@property(nonatomic,strong)XHAddressPickerView *datePickerView;
+@property(nonatomic,strong)XHCustomDatePickerView *datePickerView;
+@property(nonatomic,strong)BaseButtonControl *rightBtn;
 @end
 
 @implementation XHDayRollCallViewController
@@ -20,7 +21,26 @@
     // Do any additional setup after loading the view.
     [self setNavtionTitle:@"日常点名"];
     [self.view addSubview:self.headView];
-    [self setItemContentType:NavigationTitleType withItemType:NavigationItemRightype withIconName:nil withTitle:@"123"];
+//    [self setItemContentType:NavigationIconAndTitle withItemType:NavigationItemRightype withIconName:@"ico_date" withTitle:@"123"];
+    [self.view addSubview:self.rightBtn];
+}
+-(BaseButtonControl *)rightBtn
+{
+    if (_rightBtn==nil) {
+        _rightBtn=[[BaseButtonControl alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-110, 20, 100, 44)];
+        //_rightBtn.backgroundColor=[UIColor yellowColor];
+        [_rightBtn setNumberImageView:1];
+        [_rightBtn setNumberLabel:1];
+        [_rightBtn setImageEdgeFrame:CGRectMake(5, 15, 16, 16) withNumberType:0 withAllType:NO];
+        [_rightBtn setImage:@"ico_date" withNumberType:0 withAllType:NO];
+        [_rightBtn setTitleEdgeFrame:CGRectMake(25, 0, 70, 45) withNumberType:0 withAllType:NO];
+        [_rightBtn setTextColor:[UIColor whiteColor] withTpe:0 withAllType:NO];
+        [_rightBtn setFont:FontLevel3 withNumberType:0 withAllType:NO];
+        //[_rightBtn setTextBackGroundColor:[UIColor redColor] withTpe:0 withAllType:NO];
+        [_rightBtn setText:[NSString dateWithDateFormatter:@"MM月dd日" Date:[NSDate date]] withNumberType:0 withAllType:NO];
+        [_rightBtn addTarget:self action:@selector(rightBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _rightBtn;
 }
 -(UIView *)headView
 {
@@ -32,14 +52,15 @@
     }
     return _headView;
 }
--(void)rightItemAction:(BaseNavigationControlItem *)sender
+#pragma mark-------------点击显示日历--------------
+-(void)rightBtnClick
 {
     [self.view addSubview:self.datePickerView];
 }
--(XHAddressPickerView *)datePickerView
+-(XHCustomDatePickerView *)datePickerView
 {
     if (_datePickerView==nil) {
-        _datePickerView=[[XHAddressPickerView alloc] initWithFrame:WindowScreen];
+        _datePickerView=[[XHCustomDatePickerView alloc] initWithFrame:WindowScreen];
         _datePickerView.delegate=self;
     }
     [self.view addSubview:_datePickerView];
@@ -49,12 +70,12 @@
     [UIView commitAnimations];
     return _datePickerView;
 }
-#pragma mark-----------选择地址后回调代理方法----------
+#pragma mark-----------选择日期后回调代理方法----------
 -(void)getDateStr:(NSString *)dateStr
 {
-    if (dateStr) {
-        
-        NSLog(@"=============%@",dateStr);
+    if (dateStr)
+    {
+        [self.rightBtn setText:dateStr withNumberType:0 withAllType:NO];
     }
     
 }

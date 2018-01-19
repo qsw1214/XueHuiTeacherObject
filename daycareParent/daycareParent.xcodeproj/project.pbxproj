@@ -444,6 +444,7 @@
 		8CBA35F520117ABC00485643 /* XHApproverTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA35F420117ABC00485643 /* XHApproverTableViewCell.m */; };
 		8CBA35F8201189F500485643 /* XHHistoryApproverDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA35F7201189F500485643 /* XHHistoryApproverDetailTableViewCell.m */; };
 		8CBA35FF2011BBDB00485643 /* XHDayRollCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA35FE2011BBDB00485643 /* XHDayRollCallViewController.m */; };
+		8CBA36462011D7B200485643 /* XHCustomDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA36452011D7B200485643 /* XHCustomDatePickerView.m */; };
 		8CC7647A200C8B31007887C7 /* XHCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC76479200C8B31007887C7 /* XHCourseViewController.m */; };
 		8CC7647D200C8C13007887C7 /* XHNewBulidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC7647C200C8C13007887C7 /* XHNewBulidViewController.m */; };
 		8CC76480200C8C2A007887C7 /* XHHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC7647F200C8C2A007887C7 /* XHHistoryViewController.m */; };
@@ -1324,6 +1325,8 @@
 		8CBA35F7201189F500485643 /* XHHistoryApproverDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHHistoryApproverDetailTableViewCell.m; sourceTree = "<group>"; };
 		8CBA35FD2011BBDB00485643 /* XHDayRollCallViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHDayRollCallViewController.h; sourceTree = "<group>"; };
 		8CBA35FE2011BBDB00485643 /* XHDayRollCallViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHDayRollCallViewController.m; sourceTree = "<group>"; };
+		8CBA36442011D7B200485643 /* XHCustomDatePickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHCustomDatePickerView.h; sourceTree = "<group>"; };
+		8CBA36452011D7B200485643 /* XHCustomDatePickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHCustomDatePickerView.m; sourceTree = "<group>"; };
 		8CC76478200C8B31007887C7 /* XHCourseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHCourseViewController.h; sourceTree = "<group>"; };
 		8CC76479200C8B31007887C7 /* XHCourseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHCourseViewController.m; sourceTree = "<group>"; };
 		8CC7647B200C8C13007887C7 /* XHNewBulidViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNewBulidViewController.h; sourceTree = "<group>"; };
@@ -3574,6 +3577,8 @@
 		8CBA35FC2011BAB900485643 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				8CBA36442011D7B200485643 /* XHCustomDatePickerView.h */,
+				8CBA36452011D7B200485643 /* XHCustomDatePickerView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -3988,6 +3993,7 @@
 				4B80F2441FCBF01B00BC7B52 /* BaseTableView.m in Sources */,
 				4B80F27F1FCBF04800BC7B52 /* MJRefreshAutoGifFooter.m in Sources */,
 				4B577FA01FF5C4F60023ACBC /* XHNoticeContentViwCell.m in Sources */,
+				8CBA36462011D7B200485643 /* XHCustomDatePickerView.m in Sources */,
 				4B3418761FFDC14C00A5EC56 /* UIView+CustomControlView.m in Sources */,
 				4B577FE31FF63FB30023ACBC /* View+MASAdditions.m in Sources */,
 				8CB5A2681FD79DEF008E97D8 /* XHMyAddressViewController.m in Sources */,
