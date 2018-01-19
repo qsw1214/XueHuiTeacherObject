@@ -19,19 +19,14 @@
 #import "XHAddressBookViewController.h" //!< 班级通讯录
 #import "XHSafeLocationViewController.h" //!< 定位
 #import "XHDynamicsViewController.h" //!< 班级动态
-<<<<<<< HEAD
 #import "XHLoginViewController.h"
 #import "AppDelegate.h"
 #import <AVFoundation/AVFoundation.h>
-#import "XHBindCardViewController.h"//!<扫一扫
 #import "XHDayRollCallViewController.h"//!<日常点名
-@interface XHSmartCampusViewController () <XHFunctionMenuControlDeletage>
-=======
 #import "XHBindCardViewController.h"//!<扫一扫绑定卡
 #import "XHAssignmentHomeWorkViewController.h"  //!< 发布作业
-
+#import "XHDayRollCallViewController.h"//!< 日常点名
 @interface XHSmartCampusViewController () <XHFunctionMenuControlDeletage,XHAdvertisementControlDeletage>
->>>>>>> 1590d366e831e8e3edfd3880c8aa572a01fabd11
 
 @property (nonatomic,strong) XHSmartCampusContentView *contentView;
 
@@ -171,7 +166,8 @@
 #pragma mark case 1 日常点名
         case 1:
         {
-            
+            XHDayRollCallViewController *rollCall=[[XHDayRollCallViewController alloc] initHiddenWhenPushHidden];
+             [self.navigationController pushViewController:rollCall animated:YES];
         }
             break;
 #pragma mark case 2 发布作业
