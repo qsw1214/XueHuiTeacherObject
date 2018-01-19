@@ -161,6 +161,7 @@
 		4B68C9E6201174F60078FEDB /* XHCreateRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B68C9E5201174F60078FEDB /* XHCreateRecipeViewController.m */; };
 		4B68C9E9201177120078FEDB /* XHCreateRecipeContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B68C9E8201177120078FEDB /* XHCreateRecipeContentView.m */; };
 		4B68C9EC20119D460078FEDB /* XHAssignmentHomeWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B68C9EB20119D460078FEDB /* XHAssignmentHomeWorkViewController.m */; };
+		4B68C9EF2011B2350078FEDB /* XHAssignmentHomeWorkContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B68C9EE2011B2350078FEDB /* XHAssignmentHomeWorkContentView.m */; };
 		4B71A1BA20060B9D00818046 /* XHCookBookImageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71A1B920060B9D00818046 /* XHCookBookImageControl.m */; };
 		4B80F1E01FCBE3F700BC7B52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B80F1DF1FCBE3F700BC7B52 /* Assets.xcassets */; };
 		4B80F1E61FCBE3F700BC7B52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B80F1E51FCBE3F700BC7B52 /* main.m */; };
@@ -796,6 +797,8 @@
 		4B68C9E8201177120078FEDB /* XHCreateRecipeContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHCreateRecipeContentView.m; sourceTree = "<group>"; };
 		4B68C9EA20119D460078FEDB /* XHAssignmentHomeWorkViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHAssignmentHomeWorkViewController.h; sourceTree = "<group>"; };
 		4B68C9EB20119D460078FEDB /* XHAssignmentHomeWorkViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHAssignmentHomeWorkViewController.m; sourceTree = "<group>"; };
+		4B68C9ED2011B2350078FEDB /* XHAssignmentHomeWorkContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHAssignmentHomeWorkContentView.h; sourceTree = "<group>"; };
+		4B68C9EE2011B2350078FEDB /* XHAssignmentHomeWorkContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHAssignmentHomeWorkContentView.m; sourceTree = "<group>"; };
 		4B71A1B820060B9D00818046 /* XHCookBookImageControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHCookBookImageControl.h; sourceTree = "<group>"; };
 		4B71A1B920060B9D00818046 /* XHCookBookImageControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHCookBookImageControl.m; sourceTree = "<group>"; };
 		4B80F1D31FCBE3F700BC7B52 /* daycareParent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = daycareParent.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2857,6 +2860,8 @@
 				4B523BC91FD14A27006DD565 /* XHHomeWorkContentViwCell.m */,
 				4BBC43491FD1086000555846 /* XHHomeWorkCellContentView.h */,
 				4BBC434A1FD1086000555846 /* XHHomeWorkCellContentView.m */,
+				4B68C9ED2011B2350078FEDB /* XHAssignmentHomeWorkContentView.h */,
+				4B68C9EE2011B2350078FEDB /* XHAssignmentHomeWorkContentView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4032,6 +4037,7 @@
 				4B07CC1C1FD4DAC800B2DBDA /* XHLeaveRecordFrame.m in Sources */,
 				4B4A000E1FE240AF00B8A8F8 /* XHDynamicsModel.m in Sources */,
 				4B80F2241FCBEC2B00BC7B52 /* MainRootControllerHelper.m in Sources */,
+				4B68C9EF2011B2350078FEDB /* XHAssignmentHomeWorkContentView.m in Sources */,
 				4B80F2C71FCBF04F00BC7B52 /* SDWebImageCoder.m in Sources */,
 				4B8E660E1FD63A460006D641 /* BaseWebView.m in Sources */,
 				4B07CC461FD5106800B2DBDA /* Indicator.m in Sources */,
