@@ -466,6 +466,10 @@
 		8CCD7E621FD145E200F7F54E /* XHVideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CCD7E601FD145E200F7F54E /* XHVideoTableViewCell.xib */; };
 		8CCD7E6A1FD156BB00F7F54E /* XHBindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CCD7E681FD156BB00F7F54E /* XHBindViewController.m */; };
 		8CCD7E6B1FD156BB00F7F54E /* XHBindViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CCD7E691FD156BB00F7F54E /* XHBindViewController.xib */; };
+		8CD8CE082015A9BF0085DD70 /* XHDayRollCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8CE072015A9BF0085DD70 /* XHDayRollCollectionViewCell.m */; };
+		8CD8CE0B2015AC4D0085DD70 /* XHDayRollCallModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8CE0A2015AC4D0085DD70 /* XHDayRollCallModel.m */; };
+		8CD8CE0E2015D23E0085DD70 /* XHDayRollCallDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8CE0D2015D23E0085DD70 /* XHDayRollCallDetailViewController.m */; };
+		8CD8CE142015E0550085DD70 /* XHDayRollReasonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8CE132015E0550085DD70 /* XHDayRollReasonTableViewCell.m */; };
 		8CDC90611FE4B1DB00040D19 /* AliyunOSSiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CDC90601FE4B1DB00040D19 /* AliyunOSSiOS.framework */; };
 		8CDC90651FE4B86A00040D19 /* XHStudentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CDC90631FE4B86A00040D19 /* XHStudentDetailViewController.m */; };
 		8CDC90661FE4B86A00040D19 /* XHStudentDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CDC90641FE4B86A00040D19 /* XHStudentDetailViewController.xib */; };
@@ -1360,6 +1364,14 @@
 		8CCD7E671FD156BB00F7F54E /* XHBindViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHBindViewController.h; sourceTree = "<group>"; };
 		8CCD7E681FD156BB00F7F54E /* XHBindViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHBindViewController.m; sourceTree = "<group>"; };
 		8CCD7E691FD156BB00F7F54E /* XHBindViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XHBindViewController.xib; sourceTree = "<group>"; };
+		8CD8CE062015A9BF0085DD70 /* XHDayRollCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHDayRollCollectionViewCell.h; sourceTree = "<group>"; };
+		8CD8CE072015A9BF0085DD70 /* XHDayRollCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHDayRollCollectionViewCell.m; sourceTree = "<group>"; };
+		8CD8CE092015AC4D0085DD70 /* XHDayRollCallModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHDayRollCallModel.h; sourceTree = "<group>"; };
+		8CD8CE0A2015AC4D0085DD70 /* XHDayRollCallModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHDayRollCallModel.m; sourceTree = "<group>"; };
+		8CD8CE0C2015D23E0085DD70 /* XHDayRollCallDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHDayRollCallDetailViewController.h; sourceTree = "<group>"; };
+		8CD8CE0D2015D23E0085DD70 /* XHDayRollCallDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHDayRollCallDetailViewController.m; sourceTree = "<group>"; };
+		8CD8CE122015E0550085DD70 /* XHDayRollReasonTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHDayRollReasonTableViewCell.h; sourceTree = "<group>"; };
+		8CD8CE132015E0550085DD70 /* XHDayRollReasonTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHDayRollReasonTableViewCell.m; sourceTree = "<group>"; };
 		8CDC90601FE4B1DB00040D19 /* AliyunOSSiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AliyunOSSiOS.framework; sourceTree = "<group>"; };
 		8CDC90621FE4B86A00040D19 /* XHStudentDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHStudentDetailViewController.h; sourceTree = "<group>"; };
 		8CDC90631FE4B86A00040D19 /* XHStudentDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHStudentDetailViewController.m; sourceTree = "<group>"; };
@@ -3563,6 +3575,8 @@
 			children = (
 				8CBA35FD2011BBDB00485643 /* XHDayRollCallViewController.h */,
 				8CBA35FE2011BBDB00485643 /* XHDayRollCallViewController.m */,
+				8CD8CE0C2015D23E0085DD70 /* XHDayRollCallDetailViewController.h */,
+				8CD8CE0D2015D23E0085DD70 /* XHDayRollCallDetailViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -3570,6 +3584,8 @@
 		8CBA35FB2011BAB900485643 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				8CD8CE092015AC4D0085DD70 /* XHDayRollCallModel.h */,
+				8CD8CE0A2015AC4D0085DD70 /* XHDayRollCallModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -3579,6 +3595,10 @@
 			children = (
 				8CBA36442011D7B200485643 /* XHCustomDatePickerView.h */,
 				8CBA36452011D7B200485643 /* XHCustomDatePickerView.m */,
+				8CD8CE062015A9BF0085DD70 /* XHDayRollCollectionViewCell.h */,
+				8CD8CE072015A9BF0085DD70 /* XHDayRollCollectionViewCell.m */,
+				8CD8CE122015E0550085DD70 /* XHDayRollReasonTableViewCell.h */,
+				8CD8CE132015E0550085DD70 /* XHDayRollReasonTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -4003,6 +4023,7 @@
 				4B8E661E1FD643400006D641 /* XHCookBookCell.m in Sources */,
 				4B523BDB1FD157F8006DD565 /* XHLeaveRecordViewController.m in Sources */,
 				4B4A001A1FE2437300B8A8F8 /* XHDynamicsCollectionView.m in Sources */,
+				8CD8CE0B2015AC4D0085DD70 /* XHDayRollCallModel.m in Sources */,
 				8C7E98331FECF1660096288E /* SGQRCodeHelperTool.m in Sources */,
 				4B3418701FFDC14C00A5EC56 /* ASValuePopUpView.m in Sources */,
 				4B80F2421FCBF01B00BC7B52 /* BaseLabelView.m in Sources */,
@@ -4041,6 +4062,7 @@
 				4B80F2CC1FCBF04F00BC7B52 /* SDWebImageGIFCoder.m in Sources */,
 				8C67F82F1FD666BA007DFD53 /* XHSelectTableViewCell.m in Sources */,
 				8C3E55C11FD549B60013002A /* XHStudyRecordViewController.m in Sources */,
+				8CD8CE142015E0550085DD70 /* XHDayRollReasonTableViewCell.m in Sources */,
 				8C42CFCE1FF5D86D00CEDBDA /* XHNewUserInfoViewController.m in Sources */,
 				4B4A00171FE2411200B8A8F8 /* XHDynamicsCell.m in Sources */,
 				4B80F31F1FCBFD6F00BC7B52 /* MTLTransformerErrorHandling.m in Sources */,
@@ -4328,6 +4350,7 @@
 				4B3126521FDA2123000CE894 /* XHAddressBookToolBarItemControl.m in Sources */,
 				8C019F6A1FF4C365005EBC2C /* FMResultSet.m in Sources */,
 				4B80F31E1FCBFD6F00BC7B52 /* MTLReflection.m in Sources */,
+				8CD8CE082015A9BF0085DD70 /* XHDayRollCollectionViewCell.m in Sources */,
 				8C8081621FCE722000C7945A /* XHSetTableViewCell.m in Sources */,
 				4B07CC371FD4FAFA00B2DBDA /* XHGuideCollectionViewCell.m in Sources */,
 				4B1066A41FD7D1D9004A7CB7 /* XHXHAchievementCell.m in Sources */,
@@ -4357,6 +4380,7 @@
 				4BBC434E1FD11A1D00555846 /* BaseView.m in Sources */,
 				8CB5A2861FD7DF4B008E97D8 /* ProvinceModel.m in Sources */,
 				4B632AAC1FE0CC4500B90B94 /* XHTeacherAddressBookContentView.m in Sources */,
+				8CD8CE0E2015D23E0085DD70 /* XHDayRollCallDetailViewController.m in Sources */,
 				4B68C9E9201177120078FEDB /* XHCreateRecipeContentView.m in Sources */,
 				4B80F2EB1FCBF08800BC7B52 /* AFURLRequestSerialization.m in Sources */,
 				4B80F2121FCBE81600BC7B52 /* NSObject+Category.m in Sources */,

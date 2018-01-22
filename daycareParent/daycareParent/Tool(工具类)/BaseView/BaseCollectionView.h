@@ -24,8 +24,10 @@
 
 
 -(void)resetFrame:(CGRect)frame;
-
-
+/**
+ 开始刷新
+ */
+-(void)beginRefreshing;
 
 #pragma mark 设置头部和脚部的标题
 /**
