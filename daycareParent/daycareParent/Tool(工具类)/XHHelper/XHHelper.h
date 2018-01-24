@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface XHHelper : NSObject
+
 @property(nonatomic,strong) BaseViewController *currentVC;//!< 获取当前视图控制器
 
 /**

@@ -20,16 +20,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [XHHelper sharedHelper].currentVC=self;
-    if ([XHUserInfo sharedUserInfo].childListArry.count)
-    {
-        XHChildListModel *childModel=[XHUserInfo sharedUserInfo].childListArry[0];
-        [self.contentView getModel:childModel];
-    }
-    else
-    {
-        [self.contentView.tableView beginRefreshing];
-    }
+    [[XHHelper sharedHelper] setCurrentVC:self];
+    [self.contentView.tableView beginRefreshing];
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,20 +45,13 @@
     [self.contentView getModel:childModel];
     
 }
+
+
+
 #pragma mark 右侧按钮相应的方法
 -(void)rightItemAction:(BaseNavigationControlItem*)sender
 {
-    if (self.childListView.isExist==NO)
-    {
-        self.childListView.delegate=self;
-        [self.view addSubview:self.childListView];
-        self.childListView.isExist=YES;
-    }
-    else
-    {
-        [self.childListView removeFromSuperview];
-        self.childListView.isExist=NO;
-    }
+    
 }
 
 #pragma mark - Getter / Setter
