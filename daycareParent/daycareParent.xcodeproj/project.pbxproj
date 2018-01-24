@@ -446,6 +446,8 @@
 		8CBA35F8201189F500485643 /* XHHistoryApproverDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA35F7201189F500485643 /* XHHistoryApproverDetailTableViewCell.m */; };
 		8CBA35FF2011BBDB00485643 /* XHDayRollCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA35FE2011BBDB00485643 /* XHDayRollCallViewController.m */; };
 		8CBA36462011D7B200485643 /* XHCustomDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA36452011D7B200485643 /* XHCustomDatePickerView.m */; };
+		8CBEE21420185A57007EB93A /* SegmentedControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBEE21320185A57007EB93A /* SegmentedControlViewController.m */; };
+		8CBEE21720186D41007EB93A /* XHCourseReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBEE21620186D41007EB93A /* XHCourseReportViewController.m */; };
 		8CC7647A200C8B31007887C7 /* XHCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC76479200C8B31007887C7 /* XHCourseViewController.m */; };
 		8CC7647D200C8C13007887C7 /* XHNewBulidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC7647C200C8C13007887C7 /* XHNewBulidViewController.m */; };
 		8CC76480200C8C2A007887C7 /* XHHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC7647F200C8C2A007887C7 /* XHHistoryViewController.m */; };
@@ -1334,6 +1336,10 @@
 		8CBA35FE2011BBDB00485643 /* XHDayRollCallViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHDayRollCallViewController.m; sourceTree = "<group>"; };
 		8CBA36442011D7B200485643 /* XHCustomDatePickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHCustomDatePickerView.h; sourceTree = "<group>"; };
 		8CBA36452011D7B200485643 /* XHCustomDatePickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHCustomDatePickerView.m; sourceTree = "<group>"; };
+		8CBEE21220185A57007EB93A /* SegmentedControlViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SegmentedControlViewController.h; sourceTree = "<group>"; };
+		8CBEE21320185A57007EB93A /* SegmentedControlViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SegmentedControlViewController.m; sourceTree = "<group>"; };
+		8CBEE21520186D41007EB93A /* XHCourseReportViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHCourseReportViewController.h; sourceTree = "<group>"; };
+		8CBEE21620186D41007EB93A /* XHCourseReportViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHCourseReportViewController.m; sourceTree = "<group>"; };
 		8CC76478200C8B31007887C7 /* XHCourseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHCourseViewController.h; sourceTree = "<group>"; };
 		8CC76479200C8B31007887C7 /* XHCourseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHCourseViewController.m; sourceTree = "<group>"; };
 		8CC7647B200C8C13007887C7 /* XHNewBulidViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNewBulidViewController.h; sourceTree = "<group>"; };
@@ -3621,6 +3627,10 @@
 		8CC76475200C8AE3007887C7 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				8CBEE21220185A57007EB93A /* SegmentedControlViewController.h */,
+				8CBEE21320185A57007EB93A /* SegmentedControlViewController.m */,
+				8CBEE21520186D41007EB93A /* XHCourseReportViewController.h */,
+				8CBEE21620186D41007EB93A /* XHCourseReportViewController.m */,
 				8CC76478200C8B31007887C7 /* XHCourseViewController.h */,
 				8CC76479200C8B31007887C7 /* XHCourseViewController.m */,
 				8CC7647B200C8C13007887C7 /* XHNewBulidViewController.h */,
@@ -4016,6 +4026,7 @@
 				4BB792E41FD7B3B400E0ED72 /* BaseMenuControl.m in Sources */,
 				4B07CC1D1FD4E48500B2DBDA /* XHLeaveRecordContentView.m in Sources */,
 				4B80F2441FCBF01B00BC7B52 /* BaseTableView.m in Sources */,
+				8CBEE21720186D41007EB93A /* XHCourseReportViewController.m in Sources */,
 				4B80F27F1FCBF04800BC7B52 /* MJRefreshAutoGifFooter.m in Sources */,
 				4B577FA01FF5C4F60023ACBC /* XHNoticeContentViwCell.m in Sources */,
 				8CBA36462011D7B200485643 /* XHCustomDatePickerView.m in Sources */,
@@ -4121,6 +4132,7 @@
 				8C7AE74B1FE7BE6A00BE7A02 /* XHvipInfo.m in Sources */,
 				4B577FE21FF63FB30023ACBC /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				4BA8C4E21FCFF788006CBEBC /* XHHomeWorkContentView.m in Sources */,
+				8CBEE21420185A57007EB93A /* SegmentedControlViewController.m in Sources */,
 				4B3418731FFDC14C00A5EC56 /* UIImageView+ZFCache.m in Sources */,
 				4B80F3271FCBFD6F00BC7B52 /* NSValueTransformer+MTLInversionAdditions.m in Sources */,
 				4B80F33A1FCC130C00BC7B52 /* MBProgressHUD.m in Sources */,
