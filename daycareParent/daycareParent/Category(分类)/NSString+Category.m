@@ -154,4 +154,11 @@
     NSString *String=[myDateFormatter stringFromDate:date];
     return String;
 }
++(NSString *)dateWithDateFormatter:(NSString *)dateFormatter Date:(NSDate *)date
+{
+    NSDateFormatter *dateFor = [[NSDateFormatter alloc]init];
+    dateFor.dateFormat = dateFormatter;
+    NSString * dateStr = [dateFor stringFromDate:date];
+    return dateStr;
+}
 @end

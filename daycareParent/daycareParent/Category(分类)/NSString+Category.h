@@ -60,4 +60,5 @@
  @return 得到时间格式
  */
 +(NSString *)dateStr:(NSString *)dateStr;
++(NSString *)dateWithDateFormatter:(NSString *)dateFormatter Date:(NSDate *)date;
 @end

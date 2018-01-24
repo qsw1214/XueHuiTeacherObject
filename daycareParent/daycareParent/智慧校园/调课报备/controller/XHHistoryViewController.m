@@ -157,13 +157,6 @@
     [_tableView beginRefreshing];
     
 }
-//-(XHNewDetailViewController *)detailVC
-//{
-//    if (_detailVC==nil) {
-//        _detailVC=[XHNewDetailViewController new];
-//    }
-//    return _detailVC;
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

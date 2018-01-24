@@ -37,14 +37,35 @@
     return self;
 }
 
-
+-(id)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout
+{
+    
+    self = [super initWithFrame:frame collectionViewLayout:layout];
+    {
+        [self setBackgroundColor:RGB(238.0, 238.0, 238.0)];
+        [self setShowsVerticalScrollIndicator:NO];
+        [self setShowsHorizontalScrollIndicator:NO];
+        [self addSubview:self.tipView];
+        [self.tipView setFrame:CGRectMake(0, 0, frame.size.width,frame.size.height)];
+    }
+    return self;
+}
 -(void)resetFrame:(CGRect)frame
 {
     [self setFrame:frame];
     [self setHidden:NO];
+    [self.tipView setFrame:CGRectMake(0, 0, frame.size.width,frame.size.height)];
 }
 
+#pragma mark 进入刷新
 
+/**
+ 开始刷新
+ */
+-(void)beginRefreshing
+{
+    [self.header beginRefreshing];
+}
 #pragma mark 设置头部和脚部的标题
 -(void)setFooterTitle:(NSString*)title forState:(MJRefreshState)state
 {
@@ -119,6 +140,8 @@
     if (_tipView == nil)
     {
         _tipView = [[BaseTipView alloc]init];
+        [_tipView.tipButton addTarget:self action:@selector(tipButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_tipView setHidden:YES];
     }
     return _tipView;
 }
@@ -163,6 +186,9 @@
     }
     return _dataArray;
 }
-
+-(void)tipButtonAction:(BaseButtonControl*)sender
+{
+    [self beginRefreshing];
+}
 
 @end
