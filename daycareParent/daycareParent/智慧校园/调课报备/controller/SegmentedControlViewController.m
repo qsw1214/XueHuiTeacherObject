@@ -206,14 +206,15 @@
             
             if (_currentController == vc)
             { return; }
-            if (_selectNumber<i) {
+            if (_selectNumber<i)
+            {
                 [self transitionFromViewController:_currentController toViewController:vc duration:0 options:UIViewAnimationOptionTransitionNone animations:^{
-                    CATransition *transtion = [CATransition animation];
-                    transtion.duration = 0.25;
-                    transtion.timingFunction = UIViewAnimationCurveEaseInOut;
-                    transtion.type = kCATransitionPush;
-                    transtion.subtype = kCATransitionFromRight;
-                    [[self.view layer] addAnimation:transtion forKey:@"animation"];
+//                    CATransition *transtion = [CATransition animation];
+//                    transtion.duration = 0.25;
+//                    transtion.timingFunction = UIViewAnimationCurveEaseInOut;
+//                    transtion.type = kCATransitionPush;
+//                    transtion.subtype = kCATransitionFromRight;
+//                    [[self.view layer] addAnimation:transtion forKey:@"animation"];
                 } completion:^(BOOL finished) {
                     _currentController = vc;
                 }];
@@ -223,13 +224,13 @@
             {
                 [self transitionFromViewController:_currentController toViewController:vc duration:0 options:UIViewAnimationOptionTransitionNone animations:^{
                     
-                                    CATransition *transtion = [CATransition animation];
-                                    transtion.duration = 0.25;
-                                    transtion.timingFunction = UIViewAnimationCurveEaseInOut;
-                                    transtion.type = kCATransitionPush;
-                                    transtion.subtype = kCATransitionFromLeft;
-                    
-                                    [[self.view layer] addAnimation:transtion forKey:@"animation"];
+//                                    CATransition *transtion = [CATransition animation];
+//                                    transtion.duration = 0.25;
+//                                    transtion.timingFunction = UIViewAnimationCurveEaseInOut;
+//                                    transtion.type = kCATransitionPush;
+//                                    transtion.subtype = kCATransitionFromLeft;
+//                    
+//                                    [[self.view layer] addAnimation:transtion forKey:@"animation"];
                     
                                 } completion:^(BOOL finished) {
                                     _currentController = vc;

@@ -26,7 +26,7 @@
 #import "XHAssignmentHomeWorkViewController.h"  //!< 发布作业
 #import "XHNoticeListViewController.h" //!< 通知公告
 #import "XHDayRollCallViewController.h"//!< 日常点名
-
+#import "XHCourseReportViewController.h"//!< 课程报备
 
 @interface XHSmartCampusViewController () <XHFunctionMenuControlDeletage,XHAdvertisementControlDeletage>
 
@@ -84,10 +84,11 @@
 #pragma mark case 2: 课程报备
         case 2:
         {
-            if ([self refreshChild]) {
-                XHCourseViewController *course = [[XHCourseViewController alloc]initHiddenWhenPushHidden];
+                XHCourseReportViewController *course = [[XHCourseReportViewController alloc]initHiddenWhenPushHidden];
                 [self.navigationController pushViewController:course animated:YES];
-            }
+
+//                XHCourseViewController *course = [[XHCourseViewController alloc]initHiddenWhenPushHidden];
+//                [self.navigationController pushViewController:course animated:YES];
             
         }
             break;
