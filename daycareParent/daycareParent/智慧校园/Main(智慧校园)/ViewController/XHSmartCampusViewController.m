@@ -10,7 +10,6 @@
 #import "XHSmartCampusContentView.h"
 #import "XHSafeRegisterViewController.h" //!< 安全签到
 #import "XHHomeWorkViewController.h" //!< 家庭作业
-#import "XHCourseViewController.h"//!< 课程报备
 #import "XHAskforLeaveViewController.h" //!< 请假
 #import "XHEducationCloudViewController.h" //!< 浩学云（教育云）
 #import "XHCookBookViewController.h" //!<  食谱
@@ -27,6 +26,7 @@
 #import "XHNoticeListViewController.h" //!< 通知公告
 #import "XHDayRollCallViewController.h"//!< 日常点名
 #import "XHCourseReportViewController.h"//!< 课程报备
+#import "XHPunchSignViewController.h"//!< 打卡签到
 
 @interface XHSmartCampusViewController () <XHFunctionMenuControlDeletage,XHAdvertisementControlDeletage>
 
@@ -68,9 +68,9 @@
 #pragma mark case 0 打卡签到
         case 0:
         {
-            XHSafeRegisterViewController *regis = [[XHSafeRegisterViewController alloc]initHiddenWhenPushHidden];
-            [regis setHidesBottomBarWhenPushed:YES];
-            [self.navigationController pushViewController:regis animated:YES];
+             XHPunchSignViewController *punch = [[XHPunchSignViewController alloc]initHiddenWhenPushHidden];
+            [punch setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:punch animated:YES];
           
         }
             break;
@@ -86,10 +86,6 @@
         {
                 XHCourseReportViewController *course = [[XHCourseReportViewController alloc]initHiddenWhenPushHidden];
                 [self.navigationController pushViewController:course animated:YES];
-
-//                XHCourseViewController *course = [[XHCourseViewController alloc]initHiddenWhenPushHidden];
-//                [self.navigationController pushViewController:course animated:YES];
-            
         }
             break;
 #pragma mark case 3 课程表

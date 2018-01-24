@@ -21,7 +21,6 @@
     XHIMNoticeModel *_informationModel;
     XHIMNoticeModel *_noticeModel;
 }
-@property(nonatomic,strong)UIView *navigationView;
 @end
 
 @implementation XHNoticeViewController
@@ -29,7 +28,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.view addSubview:self.navigationView];
     _tableView=[[BaseTableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
      [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     _tableView.delegate=self;
@@ -47,12 +45,6 @@
 {
     [self refresh];
 }
-//-(void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:animated];
-//    self.navigationController.navigationBar.hidden=YES;
-//    [self refresh];
-//}
 
 - (NSInteger)tableView:(BaseTableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -141,16 +133,6 @@
     }
     return _net;
 }
--(UIView *)navigationView
-{
-    if (_navigationView == nil)
-    {
-        _navigationView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64.0)];
-        self.navigationView.backgroundColor=MainColor;
-    }
-    return _navigationView;
-}
-
 -(void)refresh
 {
     [self.net setObject:[XHUserInfo sharedUserInfo].guardianModel.guardianId forKey:@"guardianId"];

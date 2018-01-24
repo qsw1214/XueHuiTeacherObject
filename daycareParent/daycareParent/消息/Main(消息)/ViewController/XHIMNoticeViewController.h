@@ -11,8 +11,8 @@
 
 
 
-#import "BaseViewController.h"
+#import "SegmentedControlViewController.h"
 
-@interface XHIMNoticeViewController : UIViewController
+@interface XHIMNoticeViewController : SegmentedControlViewController
 
 @end

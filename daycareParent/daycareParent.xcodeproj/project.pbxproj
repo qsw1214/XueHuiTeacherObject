@@ -448,7 +448,7 @@
 		8CBA36462011D7B200485643 /* XHCustomDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA36452011D7B200485643 /* XHCustomDatePickerView.m */; };
 		8CBEE21420185A57007EB93A /* SegmentedControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBEE21320185A57007EB93A /* SegmentedControlViewController.m */; };
 		8CBEE21720186D41007EB93A /* XHCourseReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBEE21620186D41007EB93A /* XHCourseReportViewController.m */; };
-		8CC7647A200C8B31007887C7 /* XHCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC76479200C8B31007887C7 /* XHCourseViewController.m */; };
+		8CBEE21E201884F8007EB93A /* XHPunchSignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBEE21D201884F8007EB93A /* XHPunchSignViewController.m */; };
 		8CC7647D200C8C13007887C7 /* XHNewBulidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC7647C200C8C13007887C7 /* XHNewBulidViewController.m */; };
 		8CC76480200C8C2A007887C7 /* XHHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC7647F200C8C2A007887C7 /* XHHistoryViewController.m */; };
 		8CC76484200C9993007887C7 /* XHNewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC76482200C9993007887C7 /* XHNewTableViewCell.m */; };
@@ -1340,8 +1340,8 @@
 		8CBEE21320185A57007EB93A /* SegmentedControlViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SegmentedControlViewController.m; sourceTree = "<group>"; };
 		8CBEE21520186D41007EB93A /* XHCourseReportViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHCourseReportViewController.h; sourceTree = "<group>"; };
 		8CBEE21620186D41007EB93A /* XHCourseReportViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHCourseReportViewController.m; sourceTree = "<group>"; };
-		8CC76478200C8B31007887C7 /* XHCourseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHCourseViewController.h; sourceTree = "<group>"; };
-		8CC76479200C8B31007887C7 /* XHCourseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHCourseViewController.m; sourceTree = "<group>"; };
+		8CBEE21C201884F8007EB93A /* XHPunchSignViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHPunchSignViewController.h; sourceTree = "<group>"; };
+		8CBEE21D201884F8007EB93A /* XHPunchSignViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHPunchSignViewController.m; sourceTree = "<group>"; };
 		8CC7647B200C8C13007887C7 /* XHNewBulidViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNewBulidViewController.h; sourceTree = "<group>"; };
 		8CC7647C200C8C13007887C7 /* XHNewBulidViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNewBulidViewController.m; sourceTree = "<group>"; };
 		8CC7647E200C8C2A007887C7 /* XHHistoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHHistoryViewController.h; sourceTree = "<group>"; };
@@ -2411,6 +2411,7 @@
 		4B80F2031FCBE43E00BC7B52 /* 智慧校园 */ = {
 			isa = PBXGroup;
 			children = (
+				8CBEE218201884BA007EB93A /* 打卡签到 */,
 				8CBA35F92011BAB900485643 /* 日常点名 */,
 				8CC76474200C8AE3007887C7 /* 调课报备 */,
 				4B4A00021FE23EF200B8A8F8 /* 班级动态 */,
@@ -3614,6 +3615,39 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		8CBEE218201884BA007EB93A /* 打卡签到 */ = {
+			isa = PBXGroup;
+			children = (
+				8CBEE219201884BA007EB93A /* controller */,
+				8CBEE21A201884BA007EB93A /* model */,
+				8CBEE21B201884BA007EB93A /* view */,
+			);
+			path = "打卡签到";
+			sourceTree = "<group>";
+		};
+		8CBEE219201884BA007EB93A /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				8CBEE21C201884F8007EB93A /* XHPunchSignViewController.h */,
+				8CBEE21D201884F8007EB93A /* XHPunchSignViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		8CBEE21A201884BA007EB93A /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		8CBEE21B201884BA007EB93A /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		8CC76474200C8AE3007887C7 /* 调课报备 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3631,8 +3665,6 @@
 				8CBEE21320185A57007EB93A /* SegmentedControlViewController.m */,
 				8CBEE21520186D41007EB93A /* XHCourseReportViewController.h */,
 				8CBEE21620186D41007EB93A /* XHCourseReportViewController.m */,
-				8CC76478200C8B31007887C7 /* XHCourseViewController.h */,
-				8CC76479200C8B31007887C7 /* XHCourseViewController.m */,
 				8CC7647B200C8C13007887C7 /* XHNewBulidViewController.h */,
 				8CC7647C200C8C13007887C7 /* XHNewBulidViewController.m */,
 				8CC7647E200C8C2A007887C7 /* XHHistoryViewController.h */,
@@ -4281,7 +4313,6 @@
 				4B80F2411FCBF01B00BC7B52 /* BaseDynamicLabel.m in Sources */,
 				4B80F28C1FCBF04800BC7B52 /* UIScrollView+MJExtension.m in Sources */,
 				04E5D1431FD399800021B842 /* XHVIPViewController.m in Sources */,
-				8CC7647A200C8B31007887C7 /* XHCourseViewController.m in Sources */,
 				8C5121E41FDF64BB00973E77 /* NSDictionary+Category.m in Sources */,
 				4B80F28D1FCBF04800BC7B52 /* UIScrollView+MJRefresh.m in Sources */,
 				4B80F2CE1FCBF04F00BC7B52 /* SDWebImageManager.m in Sources */,
@@ -4401,6 +4432,7 @@
 				8CD8CE0E2015D23E0085DD70 /* XHDayRollCallDetailViewController.m in Sources */,
 				4B68C9E9201177120078FEDB /* XHCreateRecipeContentView.m in Sources */,
 				4B80F2EB1FCBF08800BC7B52 /* AFURLRequestSerialization.m in Sources */,
+				8CBEE21E201884F8007EB93A /* XHPunchSignViewController.m in Sources */,
 				4B80F2121FCBE81600BC7B52 /* NSObject+Category.m in Sources */,
 				8CF3417C200EF3AC0055D6BD /* XHNewChageTypeTableViewCell.m in Sources */,
 				4BB9BEAC1FDE5629004F5622 /* XHEducationCloudFrame.m in Sources */,
