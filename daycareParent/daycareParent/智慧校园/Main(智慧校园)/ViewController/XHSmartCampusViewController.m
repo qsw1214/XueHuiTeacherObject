@@ -21,6 +21,7 @@
 #import "XHDynamicsViewController.h" //!< 班级动态
 #import "XHBindCardViewController.h"//!<扫一扫绑定卡
 #import "XHAssignmentHomeWorkViewController.h"  //!< 发布作业
+#import "XHNoticeListViewController.h" //!< 通知公告
 
 @interface XHSmartCampusViewController () <XHFunctionMenuControlDeletage,XHAdvertisementControlDeletage>
 
@@ -59,22 +60,20 @@
 {
     switch (object.model.tage)
     {
-#pragma mark case 0 平安记录
+#pragma mark case 0 打卡签到
         case 0:
         {
-            if ([self refreshChild]) {
-                XHSafeRegisterViewController *regis = [[XHSafeRegisterViewController alloc]initHiddenWhenPushHidden];
-                [regis setHidesBottomBarWhenPushed:YES];
-                [self.navigationController pushViewController:regis animated:YES];
-            }
+            XHSafeRegisterViewController *regis = [[XHSafeRegisterViewController alloc]initHiddenWhenPushHidden];
+            [regis setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:regis animated:YES];
           
         }
             break;
-#pragma mark case 1实时定位
+#pragma mark case 1 通知公告
         case 1:
         {
-            XHSafeLocationViewController *location = [[XHSafeLocationViewController alloc]initHiddenWhenPushHidden];
-            [self.navigationController pushViewController:location animated:YES];
+            XHNoticeListViewController *notice = [[XHNoticeListViewController alloc]initHiddenWhenPushHidden];
+            [self.navigationController pushViewController:notice animated:YES];
         }
             break;
 #pragma mark case 2: 课程报备
@@ -87,66 +86,48 @@
             
         }
             break;
-#pragma mark case 3 食谱
+#pragma mark case 3 课程表
         case 3:
         {
-            if ([self refreshChild]) {
-                XHCookBookViewController *cookBook = [[XHCookBookViewController alloc]initHiddenWhenPushHidden];
-                [self.navigationController pushViewController:cookBook animated:YES];
-            }
-            
+            XHSyllabusViewController *syllabus = [[XHSyllabusViewController alloc]initHiddenWhenPushHidden];
+            [self.navigationController pushViewController:syllabus animated:YES];
         }
             break;
-#pragma mark case 4 课程表
+#pragma mark case 4 成绩管理
         case 4:
         {
-            if ([self refreshChild]) {
-                XHSyllabusViewController *syllabus = [[XHSyllabusViewController alloc]initHiddenWhenPushHidden];
-                [self.navigationController pushViewController:syllabus animated:YES];
-            }
-            
+            XHAchievementViewController *achievement = [[XHAchievementViewController alloc]initHiddenWhenPushHidden];
+            [self.navigationController pushViewController:achievement animated:YES];
         }
             break;
-#pragma mark case 5 成绩
+#pragma mark case 5 请假
         case 5:
         {
-            if ([self refreshChild]) {
-                XHAchievementViewController *achievement = [[XHAchievementViewController alloc]initHiddenWhenPushHidden];
-                [self.navigationController pushViewController:achievement animated:YES];
-            }
-           
+            XHAskforLeaveViewController *leave = [[XHAskforLeaveViewController alloc]initHiddenWhenPushHidden];
+            [self.navigationController pushViewController:leave animated:YES];
         }
             break;
-#pragma mark case 6 请假
+#pragma mark case 6 食谱管理
         case 6:
         {
-            if ([self refreshChild]) {
-                XHAskforLeaveViewController *leave = [[XHAskforLeaveViewController alloc]initHiddenWhenPushHidden];
-                [self.navigationController pushViewController:leave animated:YES];
-            }
-            
+            XHCookBookViewController *cookBook = [[XHCookBookViewController alloc]initHiddenWhenPushHidden];
+            [self.navigationController pushViewController:cookBook animated:YES];
         }
             break;
 #pragma mark case 7 班级通讯录
         case 7:
         {
-            if ([self refreshChild]) {
-                XHAddressBookViewController *addressBook = [[XHAddressBookViewController alloc]initHiddenWhenPushHidden];
-                [addressBook setNavtionTitle:@"班级通讯录"];
-                [self.navigationController pushViewController:addressBook animated:YES];
-            }
+            XHAddressBookViewController *addressBook = [[XHAddressBookViewController alloc]initHiddenWhenPushHidden];
+            [addressBook setNavtionTitle:@"班级通讯录"];
+            [self.navigationController pushViewController:addressBook animated:YES];
            
         }
             break;
 #pragma mark case 8 班级动态
         case 8:
         {
-            if ([self refreshChild])
-            {
-                XHDynamicsViewController *dynamics = [[XHDynamicsViewController alloc]initHiddenWhenPushHidden];
-                [self.navigationController pushViewController:dynamics animated:YES];
-            }
-            
+            XHDynamicsViewController *dynamics = [[XHDynamicsViewController alloc]initHiddenWhenPushHidden];
+            [self.navigationController pushViewController:dynamics animated:YES];
         }
             break;
     }
