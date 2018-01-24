@@ -46,7 +46,7 @@
 		4B11AF411FCCEAF2002738F1 /* XHIMNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B11AF401FCCEAF2002738F1 /* XHIMNoticeViewController.m */; };
 		4B11C9FE1FCE3A7900FD0D8F /* XHFunctionMenuFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B11C9FD1FCE3A7900FD0D8F /* XHFunctionMenuFrame.m */; };
 		4B11CA011FCE591100FD0D8F /* XHTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B11CA001FCE591100FD0D8F /* XHTestView.m */; };
-		4B2BBAF8201865AA007DAFCC /* XHParentAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2BBAF7201865AA007DAFCC /* XHParentAddressViewController.m */; };
+		4B2BBAF8201865AA007DAFCC /* XHAddressBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2BBAF7201865AA007DAFCC /* XHAddressBoardViewController.m */; };
 		4B3043D51FEE566C004017C7 /* BaseScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3043D41FEE566C004017C7 /* BaseScrollView.m */; };
 		4B3126111FD8D7EE000CE894 /* XHFunctionMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3126101FD8D7EE000CE894 /* XHFunctionMenuCell.m */; };
 		4B3126161FD90A6E000CE894 /* XHDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3126141FD909A6000CE894 /* XHDatePickerView.m */; };
@@ -580,8 +580,8 @@
 		4B11C9FD1FCE3A7900FD0D8F /* XHFunctionMenuFrame.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHFunctionMenuFrame.m; sourceTree = "<group>"; };
 		4B11C9FF1FCE591100FD0D8F /* XHTestView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHTestView.h; sourceTree = "<group>"; };
 		4B11CA001FCE591100FD0D8F /* XHTestView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHTestView.m; sourceTree = "<group>"; };
-		4B2BBAF6201865AA007DAFCC /* XHParentAddressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHParentAddressViewController.h; sourceTree = "<group>"; };
-		4B2BBAF7201865AA007DAFCC /* XHParentAddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHParentAddressViewController.m; sourceTree = "<group>"; };
+		4B2BBAF6201865AA007DAFCC /* XHAddressBoardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHAddressBoardViewController.h; sourceTree = "<group>"; };
+		4B2BBAF7201865AA007DAFCC /* XHAddressBoardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHAddressBoardViewController.m; sourceTree = "<group>"; };
 		4B3043D31FEE566C004017C7 /* BaseScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseScrollView.h; sourceTree = "<group>"; };
 		4B3043D41FEE566C004017C7 /* BaseScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseScrollView.m; sourceTree = "<group>"; };
 		4B31260F1FD8D7ED000CE894 /* XHFunctionMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHFunctionMenuCell.h; sourceTree = "<group>"; };
@@ -715,7 +715,6 @@
 		4B523BDD1FD1584A006DD565 /* XHLeaveRecordContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHLeaveRecordContentView.m; sourceTree = "<group>"; };
 		4B523BDF1FD15873006DD565 /* XHLeaveRecordTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHLeaveRecordTableViewCell.h; sourceTree = "<group>"; };
 		4B523BE01FD15873006DD565 /* XHLeaveRecordTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHLeaveRecordTableViewCell.m; sourceTree = "<group>"; };
-		4B550E4A1FF327FF004CF7ED /* 123456789.doc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 123456789.doc; sourceTree = "<group>"; };
 		4B550E4B1FF364AC004CF7ED /* XHSortedArrayComparator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHSortedArrayComparator.h; sourceTree = "<group>"; };
 		4B550E4C1FF364AC004CF7ED /* XHSortedArrayComparator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHSortedArrayComparator.m; sourceTree = "<group>"; };
 		4B577F851FF5C4F50023ACBC /* XHNoticeCellContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHNoticeCellContentView.h; sourceTree = "<group>"; };
@@ -1940,8 +1939,8 @@
 			children = (
 				4B31263B1FD93D78000CE894 /* XHAddressBookViewController.h */,
 				4B31263C1FD93D78000CE894 /* XHAddressBookViewController.m */,
-				4B2BBAF6201865AA007DAFCC /* XHParentAddressViewController.h */,
-				4B2BBAF7201865AA007DAFCC /* XHParentAddressViewController.m */,
+				4B2BBAF6201865AA007DAFCC /* XHAddressBoardViewController.h */,
+				4B2BBAF7201865AA007DAFCC /* XHAddressBoardViewController.m */,
 				4B632AA71FE0C5A000B90B94 /* XHTeacherAddressBookViewController.h */,
 				4B632AA81FE0C5A000B90B94 /* XHTeacherAddressBookViewController.m */,
 			);
@@ -2353,7 +2352,6 @@
 		4B80F2001FCBE43E00BC7B52 /* Tool(工具类) */ = {
 			isa = PBXGroup;
 			children = (
-				4B550E4A1FF327FF004CF7ED /* 123456789.doc */,
 				8C7AE70C1FE795ED00BE7A02 /* ping++ */,
 				8CDC90601FE4B1DB00040D19 /* AliyunOSSiOS.framework */,
 				4B4338B11FDF5C7A0047AC52 /* XHUserInfo */,
@@ -4383,7 +4381,7 @@
 				4B80F2C61FCBF04F00BC7B52 /* SDImageCacheConfig.m in Sources */,
 				04E5D14D1FD39F3F0021B842 /* XHPriviTableViewCell.m in Sources */,
 				4BA8C4DF1FCFF36C006CBEBC /* XHHomeWorkFrame.m in Sources */,
-				4B2BBAF8201865AA007DAFCC /* XHParentAddressViewController.m in Sources */,
+				4B2BBAF8201865AA007DAFCC /* XHAddressBoardViewController.m in Sources */,
 				4B4338BA1FDF9C3F0047AC52 /* XHEducationCloudItemCell.m in Sources */,
 				4B80F2C81FCBF04F00BC7B52 /* SDWebImageCodersManager.m in Sources */,
 				4B3126591FDA7D5D000CE894 /* XHAddressBookKey.m in Sources */,

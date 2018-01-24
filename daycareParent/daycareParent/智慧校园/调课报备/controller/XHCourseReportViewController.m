@@ -18,8 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    XHNewBulidViewController *new=[XHNewBulidViewController new];
-    XHHistoryViewController *history=[XHHistoryViewController new];
+    XHNewBulidViewController *new = [XHNewBulidViewController new];
+    XHHistoryViewController *history = [XHHistoryViewController new];
     [self setSegmentedControlItems:@[@"新建",@"记录"] WithControllersArry:@[new,history]];
 }
 

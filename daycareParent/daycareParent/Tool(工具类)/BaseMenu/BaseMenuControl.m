@@ -62,24 +62,6 @@
 -(void)setItemSelectArray:(nullable NSMutableArray *)itemSelectArray
 {
     [self.dataArray setArray:itemSelectArray];
-    [self didSelectAtIndexItem:[self getWeekDay]];
-}
-
--(NSInteger)getWeekDay
-{
-    NSDate *nowDate = [NSDate date];
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *comp = [calendar components:NSCalendarUnitWeekday fromDate:nowDate];
-    // 获取今天是周几
-    NSInteger weekDay = [comp weekday];
-    if (weekDay==1) {
-        return 6;
-    }
-    else
-    {
-       return weekDay -2;
-    }
-    
 }
 
 #pragma mark - Action Method
