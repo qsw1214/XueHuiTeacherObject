@@ -27,6 +27,8 @@
 #import "XHNoticeListViewController.h" //!< 通知公告
 #import "XHDayRollCallViewController.h"//!< 日常点名
 #import "XHCourseReportViewController.h"//!< 课程报备
+#import "XHAddressBoardViewController.h" //!< 通讯录
+
 
 @interface XHSmartCampusViewController () <XHFunctionMenuControlDeletage,XHAdvertisementControlDeletage>
 
@@ -120,11 +122,11 @@
             [self.navigationController pushViewController:cookBook animated:YES];
         }
             break;
-#pragma mark case 7 班级通讯录
+#pragma mark case 7 通讯录
         case 7:
         {
-            XHAddressBookViewController *addressBook = [[XHAddressBookViewController alloc]initHiddenWhenPushHidden];
-            [addressBook setNavtionTitle:@"班级通讯录"];
+            XHAddressBoardViewController *addressBook = [[XHAddressBoardViewController alloc]initHiddenWhenPushHidden];
+            [addressBook setNavtionTitle:@"通讯录"];
             [self.navigationController pushViewController:addressBook animated:YES];
            
         }

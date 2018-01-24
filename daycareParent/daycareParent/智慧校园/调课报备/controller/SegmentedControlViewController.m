@@ -214,6 +214,9 @@
                     transtion.type = kCATransitionPush;
                     transtion.subtype = kCATransitionFromRight;
                     [[self.view layer] addAnimation:transtion forKey:@"animation"];
+                    
+                    
+                    
                 } completion:^(BOOL finished) {
                     _currentController = vc;
                 }];
