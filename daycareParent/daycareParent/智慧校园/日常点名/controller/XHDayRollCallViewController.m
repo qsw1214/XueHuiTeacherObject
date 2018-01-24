@@ -197,6 +197,8 @@
     [self.dataArray removeAllObjects];
     for (int i=0; i<25; i++) {
         XHDayRollCallModel *model=[[XHDayRollCallModel alloc] init];
+        model.reasonStr=@"http://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=123&step_word=&hs=0&pn=4&spn=0&di=196973662930&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=2&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=-1&cs=3187992390%2C4014544366&os=2200788253%2C1058291308&simid=4136928266%2C611208284&adpicid=0&lpn=0&ln=1895&fr=&fmq=1516762023736_R&fm=detail&ic=0&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&ist=&jit=&cg=&bdtype=0&oriquery=&objurl=http%3A%2F%2Ff.hiphotos.baidu.com%2Fbaike%2Fw%3D268%2Fsign%3D150ca7320ef3d7ca0cf63870ca1fbe3c%2F11385343fbf2b2111e3d6542c88065380cd78eaf.jpg&fromurl=ippr_z2C%24qAzdH3FAzdH3Fkwthj_z%26e3Bkwt17_z%26e3Bv54AzdH3FetjoAzdH3Fd0d8c_z%26e3Bip4%3Fu654I1%3Ddabd9cc&gsm=0&rpstart=0&rpn";
+        model.imagPic=@"http://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=123&step_word=&hs=0&pn=4&spn=0&di=196973662930&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=2&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=-1&cs=3187992390%2C4014544366&os=2200788253%2C1058291308&simid=4136928266%2C611208284&adpicid=0&lpn=0&ln=1895&fr=&fmq=1516762023736_R&fm=detail&ic=0&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&ist=&jit=&cg=&bdtype=0&oriquery=&objurl=http%3A%2F%2Ff.hiphotos.baidu.com%2Fbaike%2Fw%3D268%2Fsign%3D150ca7320ef3d7ca0cf63870ca1fbe3c%2F11385343fbf2b2111e3d6542c88065380cd78eaf.jpg&fromurl=ippr_z2C%24qAzdH3FAzdH3Fkwthj_z%26e3Bkwt17_z%26e3Bv54AzdH3FetjoAzdH3Fd0d8c_z%26e3Bip4%3Fu654I1%3Ddabd9cc&gsm=0&rpstart=0&rpnum=0";
         if (_tag==10) {
             model.modelType=DayRollCallNOSignType;
             self.collectionView.frame=CGRectMake(0, 184, SCREEN_WIDTH,SCREEN_HEIGHT-234);
@@ -287,6 +289,7 @@
     }
     if (_tag==12) {
         XHDayRollCallDetailViewController *detail=[[XHDayRollCallDetailViewController alloc] init];
+        detail.model=self.dataArray[indexPath.row];
         [self.navigationController pushViewController:detail animated:YES];
     }
     
@@ -390,7 +393,7 @@
         [self.collectionView refreshReloadData];
     }
     #pragma mark-------------刷新请假列表--------------
-    if (btn.tag==52) {
+    if (btn.tag==52&&_selectNumber!=0) {
         _selectNumber=0;
         [self refreshSelectAll];
 #pragma mark-------------点击按钮前状态改变--------------
@@ -406,7 +409,7 @@
         [self.collectionView refreshReloadData];
     }
     #pragma mark-------------刷新签到列表--------------
-    if (btn.tag==53) {
+    if (btn.tag==53&&_selectNumber!=0) {
         _selectNumber=0;
         [self refreshSelectAll];
 #pragma mark-------------点击按钮前状态改变--------------

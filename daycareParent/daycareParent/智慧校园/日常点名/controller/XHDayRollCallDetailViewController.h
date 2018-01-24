@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-
+#import "XHDayRollCallModel.h"
 @interface XHDayRollCallDetailViewController : BaseViewController
-
+@property(nonatomic,strong)XHDayRollCallModel *model;
 @end

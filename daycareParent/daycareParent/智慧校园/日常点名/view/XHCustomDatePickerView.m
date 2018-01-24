@@ -83,10 +83,8 @@
     NSLog(@"date=%@",datePicker.date);
     if ([[NSString dateWithDateFormatter:@"yyyy-MM-dd" Date:datePicker.date] compare:[NSString dateWithDateFormatter:@"yyyy-MM-dd" Date:[NSDate date]]]== NSOrderedDescending) {
         [datePickerView setDate:[NSDate date] animated:YES];
-        return;
     }
     _dateStr=[NSString dateWithDateFormatter:@"MM月dd日" Date:datePicker.date];
-    NSLog(@"dateStr===========%@",_dateStr);
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "XHDayRollCallModel.h"
 @interface XHDayRollReasonTableViewCell : UITableViewCell
 @property(nonatomic,strong)XHBaseLabel *titleLabel;
 @property(nonatomic,strong)XHBackLabel *reasonLabel;
 @property(nonatomic,strong)UIImageView *imageV;
+-(void)setItemObject:(XHDayRollCallModel *)model;
 @end

@@ -7,8 +7,9 @@
 //
 
 #import "XHDayRollCallDetailViewController.h"
-#import "XHHistoryHeadTableViewCell.h"
+#import "XHDayRollReasonTableViewCell.h"
 #import "XHNewTableViewCell.h"
+#import "XHHistoryHeadTableViewCell.h"
 #import "XHHistoryDetailTableViewCell.h"
 #define TITLE  @[@"请假",@"申请时长",@"开始时间",@"结束时间",@"理由"]
 @interface XHDayRollCallDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -31,7 +32,8 @@
    
     [_tableView registerNib:[UINib nibWithNibName:@"XHNewTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     [_tableView registerNib:[UINib nibWithNibName:@"XHHistoryDetailTableViewCell" bundle:nil] forCellReuseIdentifier:@"headcell"];
-      [_tableView registerClass:[XHHistoryHeadTableViewCell class] forCellReuseIdentifier:@"historyHeadCell"];
+    [_tableView registerClass:[XHHistoryHeadTableViewCell class] forCellReuseIdentifier:@"historyHeadCell"];
+      [_tableView registerClass:[XHDayRollReasonTableViewCell class] forCellReuseIdentifier:@"reasonCell"];
     [self.view addSubview:_tableView];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -45,7 +47,8 @@
         return 60;
     }
     if (indexPath.row==4) {
-        return 120;
+       
+        return [self getCellHeight];
     }
     else
     {
@@ -63,11 +66,11 @@
         return cell;
     }
     if (indexPath.row==4) {
-        XHHistoryDetailTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"headcell" forIndexPath:indexPath];
+        XHDayRollReasonTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"reasonCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.approveLabel.text=TITLE[indexPath.row];
-        cell.nameLabel.text=@"李四";
+        cell.titleLabel.text=TITLE[indexPath.row];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell setItemObject:self.model];
         return cell;
     }
     else
@@ -86,6 +89,30 @@
         }
         return cell;
     }
+}
+-(CGFloat )getCellHeight
+{
+    if ([self.model.imagPic isEqualToString:@""]) {
+        if ([NSString contentSizeWithTitle:self.model.reasonStr withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height<50) {
+            return 50;
+        }
+        else
+        {
+            return [NSString contentSizeWithTitle:self.model.reasonStr withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height-10;
+        }
+        
+    }
+    else
+    {
+        if ([NSString contentSizeWithTitle:self.model.reasonStr withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height<50) {
+            return 120;
+        }
+        {
+            return [NSString contentSizeWithTitle:self.model.reasonStr withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height+70;
+        }
+        
+    }
+   
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

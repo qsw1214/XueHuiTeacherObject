@@ -16,6 +16,8 @@ typedef NS_ENUM(NSInteger,XHDayRollCallModelType)
 };
 
 @interface XHDayRollCallModel : NSObject
+@property(nonatomic,copy)NSString *imagPic;
+@property(nonatomic,copy)NSString *reasonStr;
 @property(nonatomic,assign)BOOL IfSelect;
 @property(nonatomic,assign)XHDayRollCallModelType modelType;
 @end
