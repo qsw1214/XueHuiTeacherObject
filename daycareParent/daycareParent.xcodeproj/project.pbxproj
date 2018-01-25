@@ -2429,6 +2429,8 @@
 		4B80F2131FCBEC2A00BC7B52 /* MainViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8CBEE21220185A57007EB93A /* SegmentedControlViewController.h */,
+				8CBEE21320185A57007EB93A /* SegmentedControlViewController.m */,
 				4B80F2141FCBEC2A00BC7B52 /* BaseNavigationControlItem.h */,
 				4B80F2151FCBEC2A00BC7B52 /* BaseNavigationControlItem.m */,
 				4B80F2161FCBEC2A00BC7B52 /* BaseNavigationView.h */,
@@ -3659,8 +3661,6 @@
 		8CC76475200C8AE3007887C7 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				8CBEE21220185A57007EB93A /* SegmentedControlViewController.h */,
-				8CBEE21320185A57007EB93A /* SegmentedControlViewController.m */,
 				8CBEE21520186D41007EB93A /* XHCourseReportViewController.h */,
 				8CBEE21620186D41007EB93A /* XHCourseReportViewController.m */,
 				8CC7647B200C8C13007887C7 /* XHNewBulidViewController.h */,

@@ -73,9 +73,24 @@
         }
         else
         {
-            [_delegate getDateStr:[NSString dateWithDateFormatter:@"MM月dd日" Date:[NSDate date]]];
+            switch (self.modelyTpe) {
+                case XHCustomDatePickerViewModelMouthAndDayType:
+                    
+                {
+                   [_delegate getDateStr:[NSString dateWithDateFormatter:@"MM月dd日" Date:[NSDate date]]];
+                }
+                    break;
+                    
+                case XHCustomDatePickerViewModelAllDayType:
+                {
+                    [_delegate getDateStr:[NSString dateWithDateFormatter:@"yyy-MM-dd" Date:[NSDate date]]];
+                }
+                    break;
+            }
+            
         }
     }
+    
 }
 
 -(void)changeDate:(UIDatePicker*)datePicker
@@ -84,7 +99,21 @@
     if ([[NSString dateWithDateFormatter:@"yyyy-MM-dd" Date:datePicker.date] compare:[NSString dateWithDateFormatter:@"yyyy-MM-dd" Date:[NSDate date]]]== NSOrderedDescending) {
         [datePickerView setDate:[NSDate date] animated:YES];
     }
-    _dateStr=[NSString dateWithDateFormatter:@"MM月dd日" Date:datePicker.date];
+    switch (self.modelyTpe) {
+        case XHCustomDatePickerViewModelMouthAndDayType:
+        {
+           _dateStr=[NSString dateWithDateFormatter:@"MM月dd日" Date:datePicker.date];
+        }
+            break;
+            
+       case XHCustomDatePickerViewModelAllDayType:
+        {
+              _dateStr=[NSString dateWithDateFormatter:@"yyy-MM-dd" Date:datePicker.date];
+        }
+            break;
+    }
+    
+  
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
