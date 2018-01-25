@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface XHNoticeViewController : UIViewController
+@interface XHNoticeViewController : BaseViewController
 
 @property(nonatomic,strong)XHNetWorkConfig *net;
 

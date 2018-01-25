@@ -239,72 +239,9 @@
             }
             _selectNumber=(int)control.selectedSegmentIndex;
         }
-//        else
-//        {
-//            _selectNumber=i;
-//            if (_currentController ==vc )
-//                            {
-//                                return;
-//                            }
-//                            [self transitionFromViewController:_currentController toViewController:vc duration:0 options:UIViewAnimationOptionTransitionNone animations:^{
-//
-//                                CATransition *transtion = [CATransition animation];
-//                                transtion.duration = 0.25;
-//                                transtion.timingFunction = UIViewAnimationCurveEaseInOut;
-//                                transtion.type = kCATransitionPush;
-//                                transtion.subtype = kCATransitionFromLeft;
-//
-//                                [[self.view layer] addAnimation:transtion forKey:@"animation"];
-//
-//                            } completion:^(BOOL finished) {
-//                                _currentController = vc;
-//                            }];
-//        }
+
     }
-//    switch (control.selectedSegmentIndex) {
-//        case 1:
-//        {
-//            if (currentController == history) {
-//                return;
-//            }
-//            [self transitionFromViewController:currentController toViewController:history duration:0 options:UIViewAnimationOptionTransitionNone animations:^{
-//                CATransition *transtion = [CATransition animation];
-//                transtion.duration = 0.25;
-//                transtion.timingFunction = UIViewAnimationCurveEaseInOut;
-//                transtion.type = kCATransitionPush;
-//                transtion.subtype = kCATransitionFromRight;
-//                [[self.view layer] addAnimation:transtion forKey:@"animation"];
-//            } completion:^(BOOL finished) {
-//                currentController = history;
-//            }];
-//            break;
-//        }
-//        case 0:
-//        {
-//            if (currentController == new)
-//            {
-//                return;
-//            }
-//            [self transitionFromViewController:currentController toViewController:new duration:0 options:UIViewAnimationOptionTransitionNone animations:^{
-//
-//                CATransition *transtion = [CATransition animation];
-//                transtion.duration = 0.25;
-//                transtion.timingFunction = UIViewAnimationCurveEaseInOut;
-//                transtion.type = kCATransitionPush;
-//                transtion.subtype = kCATransitionFromLeft;
-//
-//                [[self.view layer] addAnimation:transtion forKey:@"animation"];
-//
-//            } completion:^(BOOL finished) {
-//                currentController = new;
-//            }];
-//            break;
-//        }
-//
-//        default:
-//            break;
-//    }
-    
+
 }
 /*
 #pragma mark - Navigation
