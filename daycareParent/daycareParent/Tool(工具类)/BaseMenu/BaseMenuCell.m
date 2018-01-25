@@ -46,7 +46,6 @@
         {
             [self.titleLabel setTextColor:RGB(4, 4, 4)];
             [self.markView setHidden:YES];
-            [self.lineView setFrame:CGRectMake((model.itemSize.width-model.lineSize.width)/2.0, model.itemSize.height-model.lineSize.height, model.lineSize.width, model.lineSize.height)];
         }
             break;
         case BaseMenuSelectType:
@@ -62,12 +61,12 @@
     {
         case BaseMenuTopLineType:
         {
-            [self.markView setFrame:CGRectMake(0, 0, self.width, 2.0)];
+            [self.markView setFrame:CGRectMake(((model.itemSize.width-model.lineSize.width)/2.0), 0, model.lineSize.width, 2.0)];
         }
             break;
         case BaseMenuBottomLineType:
         {
-            [self.markView setFrame:CGRectMake(0, self.height-2.0, self.width, 2.0)];
+            [self.markView setFrame:CGRectMake(((model.itemSize.width-model.lineSize.width)/2.0), self.height-2.0, model.lineSize.width, 2.0)];
         }
             break;
     }
@@ -98,14 +97,4 @@
     return _markView;
 }
 
-
--(UIView *)lineView
-{
-    if (!_lineView)
-    {
-        _lineView = [[UIView alloc]init];
-        [_lineView setBackgroundColor:LineViewColor];
-    }
-    return _lineView;
-}
 @end

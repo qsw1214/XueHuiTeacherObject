@@ -39,10 +39,8 @@
     }
 }
 
--(void)getChildModel:(XHChildListModel *)childModel
+-(void)getChildModel:(id*)childModel
 {
-    [self setRightItemTitle:[childModel studentName]];
-    [self.contentView getModel:childModel];
     
 }
 

@@ -258,6 +258,7 @@
 		4B80F3321FCC114400BC7B52 /* NSUserDefaults+UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B80F3301FCC114300BC7B52 /* NSUserDefaults+UserInfo.m */; };
 		4B80F3361FCC12DD00BC7B52 /* XHShowHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B80F3351FCC12DD00BC7B52 /* XHShowHUD.m */; };
 		4B80F33A1FCC130C00BC7B52 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B80F3391FCC130C00BC7B52 /* MBProgressHUD.m */; };
+		4B8D4B6F201978990043E0F4 /* XHParentAddressBookContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8D4B6E201978990043E0F4 /* XHParentAddressBookContentView.m */; };
 		4B8E660E1FD63A460006D641 /* BaseWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8E660D1FD63A460006D641 /* BaseWebView.m */; };
 		4B8E66151FD63FDD0006D641 /* XHCookBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8E66141FD63FDD0006D641 /* XHCookBookViewController.m */; };
 		4B8E66181FD641600006D641 /* XHCookDateContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8E66171FD641600006D641 /* XHCookDateContentView.m */; };
@@ -1006,6 +1007,8 @@
 		4B80F3351FCC12DD00BC7B52 /* XHShowHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHShowHUD.m; sourceTree = "<group>"; };
 		4B80F3381FCC130C00BC7B52 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		4B80F3391FCC130C00BC7B52 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		4B8D4B6D201978990043E0F4 /* XHParentAddressBookContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHParentAddressBookContentView.h; sourceTree = "<group>"; };
+		4B8D4B6E201978990043E0F4 /* XHParentAddressBookContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHParentAddressBookContentView.m; sourceTree = "<group>"; };
 		4B8E660C1FD63A460006D641 /* BaseWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseWebView.h; sourceTree = "<group>"; };
 		4B8E660D1FD63A460006D641 /* BaseWebView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseWebView.m; sourceTree = "<group>"; };
 		4B8E66131FD63FDD0006D641 /* XHCookBookViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHCookBookViewController.h; sourceTree = "<group>"; };
@@ -1910,6 +1913,8 @@
 		4B3126391FD93D3F000CE894 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4B8D4B6D201978990043E0F4 /* XHParentAddressBookContentView.h */,
+				4B8D4B6E201978990043E0F4 /* XHParentAddressBookContentView.m */,
 				4B31263E1FDA1F26000CE894 /* XHAddressBookContentView.h */,
 				4B31263F1FDA1F26000CE894 /* XHAddressBookContentView.m */,
 				4B3126411FDA1F4B000CE894 /* XHAddressBookCell.h */,
@@ -4090,6 +4095,7 @@
 				4B07CC4D1FD535FD00B2DBDA /* XHParentsMeetingModel.m in Sources */,
 				4B80F2451FCBF01B00BC7B52 /* BaseTextFieldControl.m in Sources */,
 				8CBA35F520117ABC00485643 /* XHApproverTableViewCell.m in Sources */,
+				4B8D4B6F201978990043E0F4 /* XHParentAddressBookContentView.m in Sources */,
 				4B80F2E91FCBF08800BC7B52 /* AFNetworkReachabilityManager.m in Sources */,
 				4BB9BEA01FDE4C23004F5622 /* XHEducationCloudMenuView.m in Sources */,
 				8C019F711FF4C373005EBC2C /* JKDBModel.m in Sources */,

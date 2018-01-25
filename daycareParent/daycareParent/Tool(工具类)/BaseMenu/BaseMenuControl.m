@@ -11,7 +11,7 @@
 @interface BaseMenuControl () <UICollectionViewDelegate,UICollectionViewDataSource>
 
 
-
+@property (nonatomic,strong) UIView *markView; //!< 选中条
 @property (nonatomic,strong) UIView *lineView;
 @property (nonatomic,strong) NSMutableArray *itemArrays;
 @property (nonatomic,strong) UIColor *clicktColor;
@@ -27,17 +27,61 @@
     self = [super init];
     if (self)
     {
+        
+        [self addSubview:self.lineView];
         [self registerClass:[BaseMenuCell class] forCellWithReuseIdentifier:CellIdentifier];
         [self setBackgroundColor:[UIColor whiteColor]];
         [self setShowsVerticalScrollIndicator:NO];
         [self setShowsHorizontalScrollIndicator:NO];
         [self setDelegate:self];
         [self setDataSource:self];
-        
+        [self setLineHeight:0.5];
     }
     return self;
 }
 
+-(void)resetFrame:(CGRect)frame
+{
+    [self setFrame:frame];
+    
+    
+    
+    switch (self.lineViewType)
+    {
+        case BaseMenuLineViewTopType:
+        {
+            [self.lineView setFrame:CGRectMake(0, 0.0, frame.size.width, self.lineHeight)];
+        }
+            break;
+        case BaseMenuLineViewBottomType:
+        {
+            [self.lineView setFrame:CGRectMake(0, frame.size.height-self.lineHeight, frame.size.width, self.lineHeight)];
+        }
+            break;
+    }
+}
+
+
+
+
+-(void)setLineViewType:(BaseMenuLineViewType)lineViewType
+{
+    _lineViewType = lineViewType;
+    
+    switch (lineViewType)
+    {
+        case BaseMenuLineViewTopType:
+        {
+            [self.lineView setFrame:CGRectMake(0, 0.0, self.frame.size.width, self.lineHeight)];
+        }
+            break;
+        case BaseMenuLineViewBottomType:
+        {
+            [self.lineView setFrame:CGRectMake(0, self.frame.size.height-self.lineHeight, self.frame.size.width, self.lineHeight)];
+        }
+            break;
+    }
+}
 
 
 /**
@@ -71,13 +115,15 @@
      {
          if (idx == index)
          {
-             [obj setSelectType:BaseMenuSelectType];
+            [obj setSelectType:BaseMenuSelectType];
          }
          else
          {
              [obj setSelectType:BaseMenuNormalType];
          }
      }];
+    
+    [self setSelectIndex:index];
     
     [self reloadData];
     
@@ -88,20 +134,12 @@
 }
 
 
-
-
-
-
-
-
 #pragma mark - Deletage Method
 #pragma mark UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return [self.dataArray count];
 }
-
-
 
 
 - (BaseMenuCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -164,7 +202,7 @@
     if (_lineView == nil)
     {
         _lineView = [[UIView alloc]init];
-        [_lineView setBackgroundColor:[UIColor blackColor]];
+        [_lineView setBackgroundColor:LineViewColor];
     }
     return _lineView;
 }
@@ -177,7 +215,5 @@
     }
     return _itemArrays;
 }
-
-
 
 @end

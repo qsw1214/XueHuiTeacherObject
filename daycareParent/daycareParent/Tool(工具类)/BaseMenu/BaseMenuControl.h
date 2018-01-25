@@ -11,6 +11,15 @@
 #import "BaseMenuCell.h"
 
 
+
+typedef NS_ENUM(NSInteger,BaseMenuLineViewType)
+{
+    BaseMenuLineViewBottomType = 0, //!< 选中分割线在下面
+    BaseMenuLineViewTopType = 1, //!< 选中分割线在上面
+};
+
+
+
 @protocol BaseMenuControlDeletage <NSObject>
 
 -(void)didSelectItem:(BaseMenuModel*)object;
@@ -24,6 +33,7 @@
 @property (nonatomic,weak) id <BaseMenuControlDeletage> menuDeletage;
 @property (nonatomic,assign) CGFloat lineHeight; //!< 默认0.5
 @property (nonatomic,assign) NSInteger selectIndex; //!< 默认为0
+@property (nonatomic,assign) BaseMenuLineViewType lineViewType; //!< 分割线显示位置
 
 
 /**

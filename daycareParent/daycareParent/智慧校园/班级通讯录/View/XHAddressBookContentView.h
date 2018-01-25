@@ -6,10 +6,18 @@
 //  Copyright © 2017年 XueHui. All rights reserved.
 //
 
+
+#pragma mark 教师通讯录
+
+
+
+
 #import "BaseControl.h"
 #import "XHAddressBookCell.h"
-#import "XHChildListModel.h"
+
+
 @interface XHAddressBookContentView : BaseControl
-@property(nonatomic,strong)XHChildListModel *childModel;
--(void)getModel:(XHChildListModel *)model;
+
+
+
 @end

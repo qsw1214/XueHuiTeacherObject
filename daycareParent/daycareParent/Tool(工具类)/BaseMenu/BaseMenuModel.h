@@ -25,6 +25,7 @@ typedef NS_ENUM(NSInteger,BaseMenuMarkLineType)
 };
 
 
+
 #import <Foundation/Foundation.h>
 #import "BaseModel.h"
 
@@ -41,6 +42,9 @@ typedef NS_ENUM(NSInteger,BaseMenuMarkLineType)
 @property (nonatomic,strong) UIColor *markColor; //!< 选中分割线
 @property (nonatomic,assign) BaseMenuMarkLineType markLineType; //!< 选中分割线的分布状态
 @property (nonatomic,assign) BaseMenuModelSelectType selectType; //!< 是否选中
+
+
+
 @property (nonatomic,strong) NSMutableArray *dataArray; //!< 数据源数组
 
 

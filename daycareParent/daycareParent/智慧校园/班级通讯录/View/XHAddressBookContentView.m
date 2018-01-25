@@ -36,7 +36,7 @@
 
 -(void)refreshHead
 {
-    [self getAddressBookWithModel:self.childModel];
+    [self getAddressBookWithModel:nil];
 }
 
 
@@ -163,20 +163,19 @@
     
     [tableView reloadData];
 }
--(void)getModel:(XHChildListModel *)model
+-(void)getModel:(id *)model
 {
-    self.childModel = model;
     [self getAddressBookWithModel:model];
 }
 
 /**
  @param model 孩子模型
  */
--(void)getAddressBookWithModel:(XHChildListModel *)model
+-(void)getAddressBookWithModel:(id *)model
 {
     if (model)
     {
-        [self.netWorkConfig setObject:model.clazzId forKey:@"classId"];
+        [self.netWorkConfig setObject:@"" forKey:@"classId"];
         [self.netWorkConfig postWithUrl:@"zzjt-app-api_smartCampus009" sucess:^(id object, BOOL verifyObject)
         {
             if (verifyObject)
