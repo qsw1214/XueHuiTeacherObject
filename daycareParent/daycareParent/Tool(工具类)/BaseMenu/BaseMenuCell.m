@@ -11,6 +11,7 @@
 
 @interface BaseMenuCell ()
 
+@property (nonatomic,strong) UIView *lineView; //!< 分割线
 @property (nonatomic,strong) UILabel *titleLabel; //!< 标题标签
 @property (nonatomic,strong) UIView *markView; //!< 选中条
 
@@ -27,6 +28,7 @@
     {
         [self.contentView addSubview:self.titleLabel];
         [self.contentView addSubview:self.markView];
+        [self.contentView addSubview:self.lineView];
         
         [self.titleLabel setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
     }
@@ -44,6 +46,7 @@
         {
             [self.titleLabel setTextColor:RGB(4, 4, 4)];
             [self.markView setHidden:YES];
+            [self.lineView setFrame:CGRectMake((model.itemSize.width-model.lineSize.width)/2.0, model.itemSize.height-model.lineSize.height, model.lineSize.width, model.lineSize.height)];
         }
             break;
         case BaseMenuSelectType:
@@ -93,5 +96,16 @@
         [_markView setHidden:YES];
     }
     return _markView;
+}
+
+
+-(UIView *)lineView
+{
+    if (!_lineView)
+    {
+        _lineView = [[UIView alloc]init];
+        [_lineView setBackgroundColor:LineViewColor];
+    }
+    return _lineView;
 }
 @end

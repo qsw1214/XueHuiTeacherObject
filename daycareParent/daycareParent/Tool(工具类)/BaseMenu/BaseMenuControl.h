@@ -25,10 +25,6 @@
 @property (nonatomic,assign) CGFloat lineHeight; //!< 默认0.5
 @property (nonatomic,assign) NSInteger selectIndex; //!< 默认为0
 
--(void)didSelectAtIndexItem:(NSInteger)index;
-
-
-
 
 /**
  初始化方法
@@ -53,4 +49,14 @@
  */
 
 -(void)setItemSelectArray:(NSMutableArray *)itemSelectArray;
+
+
+
+
+/**
+ 选择第几个
+ @param index 选择index
+ */
+-(void)didSelectAtIndexItem:(NSInteger)index;
+
 @end

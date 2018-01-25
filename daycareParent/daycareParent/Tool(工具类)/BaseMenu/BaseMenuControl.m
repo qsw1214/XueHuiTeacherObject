@@ -49,7 +49,6 @@
 -(void)setItemArray:(nullable NSMutableArray *)itemArray
 {
     [self.dataArray setArray:itemArray];
-    [self didSelectAtIndexItem:0];
 }
 /**
  设置数据源
@@ -62,6 +61,7 @@
 -(void)setItemSelectArray:(nullable NSMutableArray *)itemSelectArray
 {
     [self.dataArray setArray:itemSelectArray];
+    [self didSelectAtIndexItem:0];
 }
 
 #pragma mark - Action Method
@@ -78,6 +78,7 @@
              [obj setSelectType:BaseMenuNormalType];
          }
      }];
+    
     [self reloadData];
     
     if ([self.menuDeletage respondsToSelector:@selector(didSelectItem:)])

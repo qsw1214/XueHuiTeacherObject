@@ -10,7 +10,7 @@
 #import "BaseMenuControl.h"
 
 
-@interface XHAddressBoardViewController ()
+@interface XHAddressBoardViewController () <BaseMenuControlDeletage>
 
 @property (nonatomic,strong) BaseMenuControl *menuControl; //!< 操作菜单
 
@@ -39,17 +39,19 @@
         BaseMenuModel *teacherModel = [[BaseMenuModel alloc]init];
         [teacherModel setTitle:@"教师通讯录"];
         [teacherModel setTage:0];
-        [teacherModel setItemSize:CGSizeMake(120, 60.0)];
+        [teacherModel setItemSize:CGSizeMake((SCREEN_WIDTH/2.0), 60.0)];
+        [teacherModel  setLineSize:CGSizeMake(((SCREEN_WIDTH/2.0)-40.0), 0.5)];
         [teacherModel setFont:FontLevel4];
         [teacherModel setSelectColor:MainColor];
         [teacherModel setNormalColor:RGB(4, 4, 4)];
         [teacherModel setMarkColor:MainColor];
-        [teacherModel setSelectType:BaseMenuNormalType];
+        [teacherModel setSelectType:BaseMenuSelectType];
         [dataArray addObject:teacherModel];
         BaseMenuModel *parentModel = [[BaseMenuModel alloc]init];
         [parentModel setTitle:@"家长通讯录"];
         [parentModel setTage:0];
-        [parentModel setItemSize:CGSizeMake(120, 60.0)];
+        [parentModel setItemSize:CGSizeMake((SCREEN_WIDTH/2.0), 60.0)];
+        [parentModel setLineSize:CGSizeMake(((SCREEN_WIDTH/2.0)-40.0), 0.5)];
         [parentModel setFont:FontLevel4];
         [parentModel setSelectColor:MainColor];
         [parentModel setNormalColor:RGB(4, 4, 4)];
@@ -61,12 +63,22 @@
 }
 
 
+
+#pragma mark - Deletage Method
+#pragma mark BaseMenuControlDeletage
+-(void)didSelectItem:(BaseMenuModel*)object
+{
+    
+}
+
+
 #pragma mark - Getter / Setter
 -(BaseMenuControl *)menuControl
 {
     if (!_menuControl)
     {
         _menuControl = [[BaseMenuControl alloc]init];
+        [_menuControl setMenuDeletage:self];
     }
     return _menuControl;
 }

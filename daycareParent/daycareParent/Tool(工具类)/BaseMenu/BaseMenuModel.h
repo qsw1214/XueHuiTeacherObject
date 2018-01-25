@@ -33,6 +33,7 @@ typedef NS_ENUM(NSInteger,BaseMenuMarkLineType)
 
 @property (nonatomic,copy) NSString *title; //!< 当前标题
 @property (nonatomic,assign) CGSize itemSize; //!< 单个数据模型的大小
+@property (nonatomic,assign) CGSize lineSize; //!< 分割线的宽高
 @property (nonatomic,strong) UIFont *font; //!< 单钱数据模型的大小
 @property (nonatomic,strong) UIColor *selectColor; //!< 选中状态下字体颜色
 @property (nonatomic,strong) UIColor *normalColor; //!< 正常状态下字体颜色
