@@ -25,7 +25,8 @@
 @property (nonatomic,strong) NSMutableArray *dataArray; //!< 数组
 @property (nonatomic,strong) XHNetWorkConfig *netWorkConfig;
 @property(nonatomic,strong)XHCustomView *childListView;
-@property(nonatomic,strong)XHCustomDatePickerView *datePickerView;
+@property(nonatomic,strong)XHCustomDatePickerView *datePickerView;//!< 日期选择器
+
 @property(nonatomic,copy)void(^isRefresh)(BOOL);
 #pragma mark 初始化Tabbar自动隐藏
 -(instancetype)initHiddenWhenPushHidden;
