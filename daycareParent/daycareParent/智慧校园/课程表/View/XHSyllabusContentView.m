@@ -87,14 +87,16 @@
          [self.menuArray addObject:model];
      }];
     
-    [self.menuControl setItemSelectArray:self.menuArray];
+    [self.menuControl setItemArray:self.menuArray];
+    [self.menuControl didSelectAtIndexItem:[self getWeekDay]];
 }
 
 
 -(void)getModel:(XHChildListModel *)model
 {
     _selectIndex=[self getWeekDay];
-    [self.menuControl setItemSelectArray:self.menuArray];
+    [self.menuControl setItemArray:self.menuArray];
+    [self.menuControl didSelectAtIndexItem:[self getWeekDay]];
     self.childModel=model;
     [self getSyllabusWithMode:model];
 }

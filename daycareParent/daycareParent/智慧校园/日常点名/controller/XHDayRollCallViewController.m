@@ -19,7 +19,6 @@
     NSInteger _selectNumber;
 }
 @property(nonatomic,strong)UIView *headView;
-@property(nonatomic,strong)XHCustomDatePickerView *datePickerView;
 @property(nonatomic,strong)BaseButtonControl *rightBtn;
 @property(nonatomic,strong)UIView *signView;
 @property(nonatomic,strong)BaseCollectionView *collectionView;
@@ -100,23 +99,11 @@
 #pragma mark-------------点击显示日历按钮--------------
 -(void)rightBtnClick
 {
+    self.datePickerView.delegate=self;
+    self.datePickerView.modelyTpe=XHCustomDatePickerViewModelMouthAndDayType;
     [self.view addSubview:self.datePickerView];
 }
-#pragma mark-------------显示日历视图--------------
--(XHCustomDatePickerView *)datePickerView
-{
-    if (_datePickerView==nil) {
-        _datePickerView=[[XHCustomDatePickerView alloc] initWithFrame:WindowScreen];
-        _datePickerView.delegate=self;
-    }
-    [self.view addSubview:_datePickerView];
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.5];
-    _datePickerView.view.frame=CGRectMake(0, SCREEN_HEIGHT-220, SCREEN_WIDTH, 220);
-    [UIView commitAnimations];
-    return _datePickerView;
-    
-}
+
 #pragma mark-----------选择日期后回调代理方法----------
 -(void)getDateStr:(NSString *)dateStr
 {

@@ -50,12 +50,12 @@
     [self navtionHidden:YES];
     arry=@[@"修改密码",@"食谱管理",@"清除缓存",@"关于我们"];
     contentArry=@[@"ico-modify",@"icoshiouguanli",@"ico-clean",@"ico-about"];
-    _tableView=[[BaseTableView alloc] initWithFrame:CGRectMake(0, 240, SCREEN_WIDTH, SCREEN_HEIGHT-240) style:UITableViewStyleGrouped];
+    _tableView=[[BaseTableView alloc] initWithFrame:CGRectMake(0, 239, SCREEN_WIDTH, SCREEN_HEIGHT-239) style:UITableViewStyleGrouped];
      _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.sectionHeaderHeight=0;
-    _tableView.bounces=NO;
+    //_tableView.bounces=NO;
     [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     _tableView.showsVerticalScrollIndicator=NO;
      [_tableView registerClass:[XHChildTableViewCell class] forCellReuseIdentifier:@"childcell"];

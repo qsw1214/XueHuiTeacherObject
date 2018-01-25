@@ -8,9 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger,XHCustomDatePickerViewModelType)
+{
+    XHCustomDatePickerViewModelAllDayType = 0,   //!< 年月日
+    XHCustomDatePickerViewModelMouthAndDayType=1, //!< 月日
+};
+
 @protocol XHCustomDatePickerViewDelegate <NSObject>
 
 - (void)getDateStr:(NSString *)dateStr;
+
 
 @end
 
@@ -20,5 +27,6 @@
     NSString *_dateStr;
 }
 @property(nonatomic,strong)UIView *view;
+@property(nonatomic,assign)XHCustomDatePickerViewModelType modelyTpe;
 @property(nonatomic,assign)id <XHCustomDatePickerViewDelegate> delegate;
 @end

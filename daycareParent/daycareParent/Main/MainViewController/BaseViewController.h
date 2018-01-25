@@ -11,7 +11,7 @@
 #import "XHChildListModel.h"
 #import "XHNetWorkConfig.h"
 #import "XHCustomView.h"//!< 孩子列表自定义视图
-
+#import "XHCustomDatePickerView.h"
 
 
 
@@ -25,6 +25,7 @@
 @property (nonatomic,strong) NSMutableArray *dataArray; //!< 数组
 @property (nonatomic,strong) XHNetWorkConfig *netWorkConfig;
 @property(nonatomic,strong)XHCustomView *childListView;
+@property(nonatomic,strong)XHCustomDatePickerView *datePickerView;
 @property(nonatomic,copy)void(^isRefresh)(BOOL);
 #pragma mark 初始化Tabbar自动隐藏
 -(instancetype)initHiddenWhenPushHidden;
