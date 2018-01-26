@@ -24,8 +24,20 @@
     if (self)
     {
         [self setHidesBottomBarWhenPushed:YES];
+        [[XHHelper sharedHelper] setCurrentViewController:self];
     }
    return self;
+}
+
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self)
+    {
+        [[XHHelper sharedHelper] setCurrentViewController:self];
+    }
+    return self;
 }
 
 
