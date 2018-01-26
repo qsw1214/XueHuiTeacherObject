@@ -8,6 +8,7 @@
 
 #import "BaseTableViewCell.h"
 #import "XHAddressBookToolBar.h"
+#import "XHParentAddressBookToolBar.h"
 
 
 @interface XHAddressBookCell : BaseTableViewCell

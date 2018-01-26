@@ -15,7 +15,9 @@
 @property (nonatomic,strong) UILabel *nameLabel; //!< 名字标签
 @property (nonatomic,strong) UILabel *phoneLabel; //!< 手机标签
 @property (nonatomic,strong) UIImageView *accessoryImageView; //!< 附件
-@property (nonatomic,strong) XHAddressBookToolBar *toolBar; //!< 工具条
+@property (nonatomic,strong) XHAddressBookToolBar *teacherToolBar; //!< 教师工具条
+@property (nonatomic,strong) XHParentAddressBookToolBar *parentToolBar;  //!< 家长工具条
+
 @property (nonatomic,strong) UIView *lineView; //!< 分割线
 
 
@@ -33,20 +35,27 @@
     self = [super init];
     if (self)
     {
+        [self setItemColor:NO];
+        [self addSubViews:YES];
+    }
+    return self;
+}
+
+
+-(void)addSubViews:(BOOL)subview
+{
+    if (subview)
+    {
         [self.contentView setBackgroundColor:[UIColor whiteColor]];
         [self.contentView addSubview:self.headerImageView];
         [self.contentView addSubview:self.nameLabel];
         [self.contentView addSubview:self.phoneLabel];
         [self.contentView addSubview:self.accessoryImageView];
-        [self.contentView addSubview:self.toolBar];
+        [self.contentView addSubview:self.teacherToolBar];
+        [self.contentView addSubview:self.parentToolBar];
         [self.contentView addSubview:self.lineView];
-        
-        
-        [self setItemColor:NO];
     }
-    return self;
 }
-
 
 
 -(void)setItemFrame:(XHAddressBookFrame*)frame
@@ -59,28 +68,40 @@
     [self.phoneLabel setFrame:CGRectMake(self.nameLabel.left, self.nameLabel.bottom, self.nameLabel.width, self.nameLabel.height)];
     
     
-    [self.toolBar resetFrame:CGRectMake(10.0, (self.headerImageView.bottom+5.0), frame.itemFrame.size.width, 45.0)];
+    [self.teacherToolBar resetFrame:CGRectMake(10.0, (self.headerImageView.bottom+5.0), frame.itemFrame.size.width, 45.0)];
+    [self.parentToolBar resetFrame:self.teacherToolBar.frame];
     
-    [self.lineView setFrame:CGRectMake(self.toolBar.left,frame.itemFrame.size.height-0.5 , frame.itemFrame.size.width, 0.5)];
+    [self.lineView setFrame:CGRectMake(self.teacherToolBar.left,frame.itemFrame.size.height-0.5 , frame.itemFrame.size.width, 0.5)];
     
+    
+    [self.teacherToolBar setHidden:YES];
+    [self.parentToolBar setHidden:YES];
     
     //根据数据模型类型设置图片的转动方向
-    switch (frame.model.modelType)
+    switch (frame.model.selectType)
     {
         case XHAddressBookModelNormalType:
         {
+            
             [UIView animateWithDuration:0.3 animations:^{
                 
                 [self.accessoryImageView setTransform:CGAffineTransformMakeRotation(0)];
                 
             }];
             
-            [self.toolBar setHidden:YES];
-            
-            
-            
-            
-            
+            switch (frame.model.modelType)
+            {
+                case XHAddressBookTeacherType:
+                {
+                    [self.teacherToolBar setHidden:YES];
+                }
+                    break;
+                case XHAddressBookParentType:
+                {
+                    [self.parentToolBar setHidden:YES];
+                }
+                    break;
+            }    
         }
             break;
         case XHAddressBookSelectType:
@@ -91,7 +112,20 @@
                 
             }];
             
-            [self.toolBar setHidden:NO];
+        
+            switch (frame.model.modelType)
+            {
+                case XHAddressBookTeacherType:
+                {
+                    [self.teacherToolBar setHidden:NO];
+                }
+                    break;
+                case XHAddressBookParentType:
+                {
+                    [self.parentToolBar setHidden:NO];
+                }
+                    break;
+            }
             
           
         }
@@ -102,7 +136,8 @@
     [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:frame.model.headerUrl] placeholderImage:[UIImage imageNamed:@"addman"]];
     [self.nameLabel setText:frame.model.teacherName];
     [self.phoneLabel setText:frame.model.phone];
-    [self.toolBar setItemFrame:frame];
+    [self.teacherToolBar setItemFrame:frame];
+    [self.parentToolBar setItemFrame:frame];
 }
 
 
@@ -158,14 +193,25 @@
     return _accessoryImageView;
 }
 
--(XHAddressBookToolBar *)toolBar
+-(XHAddressBookToolBar *)teacherToolBar
 {
-    if (!_toolBar)
+    if (!_teacherToolBar)
     {
-        _toolBar = [[XHAddressBookToolBar alloc]init];
-        [_toolBar setHidden:YES];
+        _teacherToolBar = [[XHAddressBookToolBar alloc]init];
+        [_teacherToolBar setHidden:YES];
     }
-    return _toolBar;
+    return _teacherToolBar;
+}
+
+
+-(XHParentAddressBookToolBar *)parentToolBar
+{
+    if (!_parentToolBar)
+    {
+        _parentToolBar = [[XHParentAddressBookToolBar alloc]init];
+        [_parentToolBar setHidden:YES];
+    }
+    return _parentToolBar;
 }
 
 
@@ -188,7 +234,8 @@
         [self.headerImageView setBackgroundColor:[UIColor orangeColor]];
         [self.nameLabel setBackgroundColor:[UIColor purpleColor]];
         [self.phoneLabel setBackgroundColor:[UIColor magentaColor]];
-        [self.toolBar setBackgroundColor:[UIColor cyanColor]];
+        [self.teacherToolBar setBackgroundColor:[UIColor cyanColor]];
+        [self.parentToolBar setBackgroundColor:[UIColor brownColor]];
         [self.accessoryImageView setBackgroundColor:[UIColor greenColor]];
     }
 }

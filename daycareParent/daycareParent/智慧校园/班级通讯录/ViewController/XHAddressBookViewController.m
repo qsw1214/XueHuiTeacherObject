@@ -20,7 +20,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[XHHelper sharedHelper] setCurrentVC:self];
+    [[XHHelper sharedHelper] setCurrentViewController:self];
     [self.contentView.tableView beginRefreshing];
 }
 

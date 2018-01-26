@@ -29,15 +29,14 @@
         [self.tableView setDelegate:self];
         [self.tableView setDataSource:self];
         [self.tableView setTipType:TipImage withTipTitle:nil withTipImage:@"ico-no-data"];
-        [self.tableView showRefresHeaderWithTarget:self withSelector:@selector(refreshHead)];
+        [self.tableView showRefresHeaderWithTarget:self withSelector:@selector(refreshHeaderAction)];
+        [self.tableView beginRefreshing];
     }
     return self;
 }
 
--(void)refreshHead
-{
-    [self getAddressBookWithModel:nil];
-}
+
+
 
 
 -(void)resetFrame:(CGRect)frame
@@ -122,19 +121,19 @@
               {
                   if (idx == indexPath.row)
                   {
-                      switch (obj.model.modelType)
+                      switch (obj.model.selectType)
                       {
                         #pragma mark 如果当前行为选中状态的话就设置为未选中状态
                           case XHAddressBookSelectType:
                           {
-                              [obj.model setModelType:XHAddressBookModelNormalType];
+                              [obj.model setSelectType:XHAddressBookModelNormalType];
                               [obj setModel:obj.model];
                           }
                               break;
                          #pragma mark 如果是未选中状态的话，就设置为选中状态
                           case XHAddressBookModelNormalType:
                           {
-                              [obj.model setModelType:XHAddressBookSelectType];
+                              [obj.model setSelectType:XHAddressBookSelectType];
                               [obj setModel:obj.model];
                           }
                               break;
@@ -143,7 +142,7 @@
                   else
                   {
                       #pragma mark 未选中的元素关闭
-                      [obj.model setModelType:XHAddressBookModelNormalType];
+                      [obj.model setSelectType:XHAddressBookModelNormalType];
                       [obj setModel:obj.model];
                   }
               }];
@@ -153,7 +152,7 @@
              #pragma mark 如果为选中当前分组就把该分组下所有的元素设置为未选中状态（如果之前打开过该分组的某项，在点击另一分组的时候就关闭该分组中打开的元素）
              [bookKey.itemArray enumerateObjectsUsingBlock:^(XHAddressBookFrame *obj, NSUInteger idx, BOOL *stop)
               {
-                  [obj.model setModelType:XHAddressBookModelNormalType];
+                  [obj.model setSelectType:XHAddressBookModelNormalType];
                   [obj setModel:obj.model];
               }];
          }
@@ -167,9 +166,54 @@
     [self getAddressBookWithModel:model];
 }
 
-/**
- @param model 孩子模型
- */
+
+
+
+#pragma mark - NetWork  Method 网络请求
+#pragma mark 表刷新头部视图
+-(void)refreshHeaderAction
+{
+//    [self getAddressBookWithModel:nil];
+    
+    NSMutableArray *addressArray = [NSMutableArray array];
+    for (int i = 0; i < 30; i++)
+    {
+        XHAddressBookFrame *frame = [XHAddressBookFrame alloc];
+        XHAddressBookModel *model = [[XHAddressBookModel alloc]init];
+        [model setTeacherName:[NSString stringWithFormat:@"%d姚立志",(i+1)]];
+        [model setHeaderUrl:ALGetFileHeadThumbnail(@"原头像")];
+        [model setHeadPic:@"原头像"];
+        [model setPhone:@"15515667760"];
+        [model setUserID:@"15515667760"];
+        [model.courseArray addObject:@"英语"];
+        [model.courseArray addObject:@"数学"];
+        [model.courseArray addObject:@"语文"];
+        [model.courseArray addObject:@"化学"];
+        [model setModelType:XHAddressBookTeacherType];
+        [model setSelectType:XHAddressBookModelNormalType];
+        
+        [frame setModel:model];
+        [addressArray addObject:frame];
+    }
+    
+    [self.dataArray setArray:addressArray];
+    
+    
+    
+    if ([self.dataArray count])
+    {
+        [self.dataArray setArray:[XHSortedArrayComparator sortedArrayUsingComparatorWithKeyArray:self.dataArray]];
+    }
+    [self.tableView refreshReloadData];
+    
+    
+    
+    
+    
+    
+}
+
+#pragma mark 获取教师通讯录接口
 -(void)getAddressBookWithModel:(id *)model
 {
     if (model)
@@ -185,6 +229,7 @@
                  {
                      XHAddressBookFrame *frame = [XHAddressBookFrame alloc];
                      XHAddressBookModel *model = [[XHAddressBookModel alloc]init];
+                     [model setModelType:XHAddressBookTeacherType];
                      [model setItemObject:obj];
                      [frame setModel:model];
                      [self.dataArray addObject:frame];

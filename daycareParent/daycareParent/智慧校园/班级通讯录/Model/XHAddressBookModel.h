@@ -8,10 +8,16 @@
 
 
 
-typedef NS_ENUM(NSInteger,XHAddressBookModelType)
+typedef NS_ENUM(NSInteger,XHAddressBookModelSelectType)
 {
     XHAddressBookSelectType = 1,   //!< 选中类型
     XHAddressBookModelNormalType = 2, //正常类型
+};
+
+typedef NS_ENUM(NSInteger,XHAddressBookModelType)
+{
+    XHAddressBookTeacherType = 1,   //!< 教师类型
+    XHAddressBookParentType = 2, // 家长端类型
 };
 
 
@@ -30,8 +36,7 @@ typedef NS_ENUM(NSInteger,XHAddressBookModelType)
 
 
 
-
-
 @property (nonatomic,assign) XHAddressBookModelType modelType;
+@property (nonatomic,assign) XHAddressBookModelSelectType selectType;
 
 @end

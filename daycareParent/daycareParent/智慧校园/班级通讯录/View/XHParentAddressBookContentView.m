@@ -38,6 +38,7 @@
     [self setFrame:frame];
     [self.tableView resetFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
     [self.tableView showRefresHeaderWithTarget:self withSelector:@selector(refreshHeaderAction)];
+    [self.tableView beginRefreshing];
 }
 
 -(void)addSubViews:(BOOL)subview
@@ -77,7 +78,8 @@
             [model.courseArray addObject:@"英语"];
             [model.courseArray addObject:@"语文"];
             [model.courseArray addObject:@"数学"];
-            [model setModelType:XHAddressBookModelNormalType];
+            [model setModelType:XHAddressBookParentType];
+            [model setSelectType:XHAddressBookModelNormalType];
             [frame setModel:model];
             [section.itemArray addObject:frame];
         }
@@ -174,19 +176,19 @@
               {
                   if (idx == indexPath.row)
                   {
-                      switch (obj.model.modelType)
+                      switch (obj.model.selectType)
                       {
 #pragma mark 如果当前行为选中状态的话就设置为未选中状态
                           case XHAddressBookSelectType:
                           {
-                              [obj.model setModelType:XHAddressBookModelNormalType];
+                              [obj.model setSelectType:XHAddressBookModelNormalType];
                               [obj setModel:obj.model];
                           }
                               break;
 #pragma mark 如果是未选中状态的话，就设置为选中状态
                           case XHAddressBookModelNormalType:
                           {
-                              [obj.model setModelType:XHAddressBookSelectType];
+                              [obj.model setSelectType:XHAddressBookSelectType];
                               [obj setModel:obj.model];
                           }
                               break;
@@ -195,7 +197,7 @@
                   else
                   {
 #pragma mark 未选中的元素关闭
-                      [obj.model setModelType:XHAddressBookModelNormalType];
+                      [obj.model setSelectType:XHAddressBookModelNormalType];
                       [obj setModel:obj.model];
                   }
               }];
@@ -205,7 +207,7 @@
 #pragma mark 如果为选中当前分组就把该分组下所有的元素设置为未选中状态（如果之前打开过该分组的某项，在点击另一分组的时候就关闭该分组中打开的元素）
              [bookKey.itemArray enumerateObjectsUsingBlock:^(XHAddressBookFrame *obj, NSUInteger idx, BOOL *stop)
               {
-                  [obj.model setModelType:XHAddressBookModelNormalType];
+                  [obj.model setSelectType:XHAddressBookModelNormalType];
                   [obj setModel:obj.model];
               }];
          }
