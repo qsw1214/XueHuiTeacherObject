@@ -20,12 +20,26 @@
 @end
 
 @implementation SegmentedControlViewController
+
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self)
+    {
+        [[XHHelper sharedHelper] setCurrentViewController:self];
+    }
+    return self;
+}
+
+
 -(instancetype)initHiddenWhenPushHidden
 {
     self = [super init];
     if (self)
     {
         [self setHidesBottomBarWhenPushed:YES];
+        [[XHHelper sharedHelper] setCurrentViewController:self];
     }
     return self;
 }

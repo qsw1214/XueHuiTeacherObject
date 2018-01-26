@@ -10,7 +10,7 @@
 
 @interface XHHelper : NSObject
 
-@property(nonatomic,strong) BaseViewController *currentViewController;//!< 获取当前视图控制器
+@property(nonatomic,strong) UIViewController *currentViewController;//!< 获取当前视图控制器
 
 /**
  单例初始化方法
@@ -39,13 +39,6 @@
 -(void)sendMessage:(NSString*)phone;
 
 
-#pragma mark 获取当前视图所在的视图控制器
-/**
- 获取当前视图所在的视图控制器
- 
- @return 当前视图控制器
- */
-- (UIViewController *)currentlyViewController;
 
 + (void)uploadImage:(UIImage *)image name:(NSString *)name uploadCallback:(void (^)(BOOL success, NSError *error))uploadCallback withProgressCallback:(void (^)(float progress))progressCallback;
 + (NSString *)ageFarment:(NSDate *)date;

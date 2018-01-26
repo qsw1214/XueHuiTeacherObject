@@ -158,6 +158,13 @@ typedef NS_ENUM(NSInteger,BaseControlModelType)
 -(void)setinputTextFont:(UIFont*)font withNumberType:(NSInteger)type withAllType:(BOOL)allType;
 
 
+#pragma mark 设置文本输入框的占位字符
+/**
+ 设置占位字符
+ */
+-(void)setinputTextPlaceholder:(NSString*)placeholder withNumberType:(NSInteger)type withAllType:(BOOL)allType;
+
+
 #pragma mark - 文本输入域内容颜色
 /**
  文本输入域内容颜色

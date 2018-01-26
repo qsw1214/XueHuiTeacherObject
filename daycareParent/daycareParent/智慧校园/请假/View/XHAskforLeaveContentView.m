@@ -24,15 +24,12 @@
 @property (nonatomic,strong) UIAlertController *alertController; //!< 弹出框视图控制器
 @property (nonatomic,strong) BaseViewController *viewController;
 @property (nonatomic,strong) UILabel *limitLabel; //!< 输入内容限制
-@property (nonatomic,strong) BaseView *topAccessoryView;   //!< 顶部附件视图
-@property (nonatomic,strong) BaseView *bottomAccessoryView;   //!< 底部附件视图
-@property (nonatomic,strong) XHAskforLeaveArrowCell *childOptionsControl;   //!< 孩子选项
 @property (nonatomic,strong) BaseTextView *reasonTextView;  //!< 原因输入文本域
 @property (nonatomic,strong) XHAskforLeaveAddPhotoControl *addPhotoControl;   //!< 添加照片选项
 @property (nonatomic,strong) XHAskforLeaveArrowCell *startTimeControl;   //!< 开始时间选项
 @property (nonatomic,strong) XHAskforLeaveArrowCell *endTimeControl;   //!< 开始时间选项
-@property (nonatomic,strong) XHAskforLeaveChargeTeacherControl *chargeTeacherControl;   //!< 班主任
-@property (nonatomic,strong) XHAskforLeaveChargeTeacherControl *otherControl;   //!< 相关人员
+@property (nonatomic,strong) BaseButtonControl *daysleaveControl;   //!< 请假天数
+@property (nonatomic,strong) XHAskforLeaveChargeTeacherControl *chargeTeacherControl;   //!< 审批人
 @property (nonatomic,strong) XHAskforLeaveSubmitControl *submitControl;   //!< 提交
 
 @property (nonatomic,assign) NSInteger selectTimeControl; //!< 记录选择的是哪个时间选择器
@@ -49,17 +46,7 @@
     if (self)
     {
         [self setViewController:object];
-        [self addSubview:self.topAccessoryView];
-        [self addSubview:self.childOptionsControl];
-        [self addSubview:self.reasonTextView];
-        [self addSubview:self.addPhotoControl];
-        [self addSubview:self.limitLabel];
-        [self addSubview:self.startTimeControl];
-        [self addSubview:self.endTimeControl];
-        [self addSubview:self.bottomAccessoryView];
-        [self addSubview:self.chargeTeacherControl];
-        [self addSubview:self.otherControl];
-        [self addSubview:self.submitControl];
+       
         
         [self setShowsVerticalScrollIndicator:NO];
         [self setShowsHorizontalScrollIndicator:NO];
@@ -72,18 +59,22 @@
 {
     [self setFrame:frame];
     
-    [self.topAccessoryView resetFrame:CGRectMake(0, 0, frame.size.width, 10.0)];
-    [self.childOptionsControl resetFrame:CGRectMake(self.topAccessoryView.left, self.topAccessoryView.bottom, frame.size.width, 60.0)];
-    [self.reasonTextView resetFrame:CGRectMake(10.0, self.childOptionsControl.bottom+10.0, frame.size.width-20.0, 60.0)];
+    [self.reasonTextView resetFrame:CGRectMake(10.0,10.0, frame.size.width-20.0, 60.0)];
     [self.addPhotoControl resetFrame:CGRectMake(self.reasonTextView.left, self.reasonTextView.bottom+10.0, 70.0, 70.0)];
     [self.limitLabel setFrame:CGRectMake(self.addPhotoControl.right, self.addPhotoControl.bottom-20.0, frame.size.width-self.addPhotoControl.right-20.0, 20.0)];
-    [self.startTimeControl resetFrame:CGRectMake(self.topAccessoryView.left, self.addPhotoControl.bottom+10.0, frame.size.width, self.childOptionsControl.height)];
+    [self.startTimeControl resetFrame:CGRectMake(0, self.addPhotoControl.bottom+10.0, frame.size.width, 60.0)];
     [self.endTimeControl resetFrame:CGRectMake(self.startTimeControl.left, self.startTimeControl.bottom, self.startTimeControl.width, self.startTimeControl.height)];
-    [self.bottomAccessoryView resetFrame:CGRectMake(self.topAccessoryView.left,self.endTimeControl.bottom,self.topAccessoryView.width, self.topAccessoryView.height)];
-    [self.chargeTeacherControl resetFrame:CGRectMake(self.bottomAccessoryView.left, self.bottomAccessoryView.bottom, 80.0, 105)];
-    [self.otherControl resetFrame:CGRectMake(self.chargeTeacherControl.right, self.chargeTeacherControl.top, self.chargeTeacherControl.width, self.chargeTeacherControl.height)];
+    //设置请假几天的控件Frame
+    [self.daysleaveControl resetFrame:CGRectMake(self.endTimeControl.left, self.endTimeControl.bottom, self.endTimeControl.width, self.endTimeControl.height)];
+    [self.daysleaveControl setTitleEdgeFrame:CGRectMake(10, 0, self.daysleaveControl.width/2.0, self.daysleaveControl.height) withNumberType:0 withAllType:NO];
+    [self.daysleaveControl setInputEdgeFrame:CGRectMake((self.daysleaveControl.width-130.0), 0, 100.0, self.daysleaveControl.height) withNumberType:0 withAllType:NO];
+    [self.daysleaveControl setTitleEdgeFrame:CGRectMake(self.daysleaveControl.width-30, 0, 30, self.daysleaveControl.height) withNumberType:1 withAllType:NO];
+    [self.daysleaveControl resetLineViewFrame:CGRectMake(0, self.daysleaveControl.height-0.5, self.daysleaveControl.width, 0.5) withNumberType:0 withAllType:NO];
+    //审批人
+    [self.chargeTeacherControl resetFrame:CGRectMake(self.daysleaveControl.left, self.daysleaveControl.bottom+10.0, 80.0, 105)];
+    
     [self.submitControl resetFrame:CGRectMake(10, self.chargeTeacherControl.bottom+20.0, (frame.size.width-20.0), 40.0)];
-    [self setContentSize:CGSizeMake(frame.size.width, self.submitControl.bottom+20.0)];
+    [self setContentSize:CGSizeMake(frame.size.width, self.submitControl.bottom+60.0)];
     
     
   
@@ -93,6 +84,7 @@
 #pragma mark - Action Method
 -(void)controlAction:(UIControl*)sender
 {
+    [self.daysleaveControl resignInputFirstResponder];
     [self.reasonTextView resignFirstResponder];
     switch (sender.tag)
     {
@@ -118,11 +110,10 @@
             [[XHDatePickerControl sharedObject] showWithDeletage:self];
         }
             break;
-#pragma mark case 5  班主任
-        case 5:
+#pragma mark case 6  班主任
+        case 6:
         {
             XHTeacherAddressBookViewController *teacherAddressBook = [[XHTeacherAddressBookViewController alloc]init];
-            [teacherAddressBook setModel:self.childOptionsControl.model];
             [self.viewController.navigationController pushViewController:teacherAddressBook animated:YES];
             teacherAddressBook.didselectBack = ^(XHTeacherAddressBookFrame *itemObject)
             {
@@ -130,22 +121,10 @@
             };
         }
             break;
-#pragma mark case 6 相关人
-        case 6:
-        {
-            XHTeacherAddressBookViewController *teacherAddressBook = [[XHTeacherAddressBookViewController alloc]init];
-            [teacherAddressBook setModel:self.childOptionsControl.model];
-            [self.viewController.navigationController pushViewController:teacherAddressBook animated:YES];
-            teacherAddressBook.didselectBack = ^(XHTeacherAddressBookFrame *itemObject)
-            {
-                [self.otherControl setTeacherAddressBook:itemObject];
-            };
-        }
-            break;
 #pragma mark case 7 提交
         case 7:
         {
-            [self uploadImageWithImage:self.addPhotoControl.image withImageName:[XHHelper createGuid] WithContent:self.reasonTextView.text withBeginTime:self.startTimeControl.describe withEndTime:self.endTimeControl.describe withActorId:[XHUserInfo sharedUserInfo].guardianModel.guardianId withStudentBaseId:self.childOptionsControl.model.studentBaseId withShr:self.chargeTeacherControl.teacherAddressBook.model.ID withCsr:self.otherControl.teacherAddressBook.model.ID];
+            [self uploadImageWithImage:self.addPhotoControl.image withImageName:[XHHelper createGuid] WithContent:self.reasonTextView.text withBeginTime:self.startTimeControl.describe withEndTime:self.endTimeControl.describe withActorId:[XHUserInfo sharedUserInfo].guardianModel.guardianId withStudentBaseId:@"" withShr:self.chargeTeacherControl.teacherAddressBook.model.ID withCsr:@""];
             
         }
             break;
@@ -184,43 +163,14 @@
 {
     if (subview)
     {
-        [[XHUserInfo sharedUserInfo].childListArry enumerateObjectsUsingBlock:^(XHChildListModel *obj, NSUInteger idx, BOOL * _Nonnull stop)
-         {
-             if (idx == 0)
-             {
-                 [obj setMarkType:ChildListSelectType];
-                 [self.childOptionsControl setModel:obj];
-             }
-             else
-             {
-                 [obj setMarkType:ChildListNormalType];
-             }
-             
-             UIAlertAction *action = [UIAlertAction actionWithTitle:obj.studentName style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
-             {
-                 [[XHUserInfo sharedUserInfo].childListArry enumerateObjectsUsingBlock:^(XHChildListModel *obj, NSUInteger itemidx, BOOL * _Nonnull stop)
-                  {
-                      [self.chargeTeacherControl reset];
-                      [self.otherControl reset];
-                      [self.reasonTextView reset];
-                      
-                      
-                      if (idx == itemidx)
-                      {
-                          [obj setMarkType:ChildListSelectType];
-                          [self.childOptionsControl setModel:obj];
-                      }
-                      else
-                      {
-                          [obj setMarkType:ChildListNormalType];
-                      }
-                      
-                  }];
-                 
-             }];
-             
-             [self.alertController addAction:action];
-         }];
+        [self addSubview:self.reasonTextView];
+        [self addSubview:self.addPhotoControl];
+        [self addSubview:self.limitLabel];
+        [self addSubview:self.startTimeControl];
+        [self addSubview:self.endTimeControl];
+        [self addSubview:self.chargeTeacherControl];
+        [self addSubview:self.daysleaveControl];
+        [self addSubview:self.submitControl];
     }
 }
 
@@ -378,9 +328,9 @@
          {
              if (verifyObject)
              {
-                 XHLeaveRecordViewController *leaveRecord=[[XHLeaveRecordViewController alloc] init];
-                 [leaveRecord setModel:self.childOptionsControl.model];
-                 [self.viewController.navigationController popViewControllerAnimated:YES];
+                 
+                 
+                 
              }
          } error:^(NSError *error){}];
     }
@@ -390,21 +340,6 @@
 
 
 #pragma mark - Getter / Setter
-#pragma mark 请假孩子
--(XHAskforLeaveArrowCell *)childOptionsControl
-{
-    if (_childOptionsControl == nil)
-    {
-        _childOptionsControl = [[XHAskforLeaveArrowCell alloc]init];
-        [_childOptionsControl setTitle:@"请假孩子"];
-        [_childOptionsControl setImageName:@"ico_arrow"];
-        [_childOptionsControl addTarget:self action:@selector(controlAction:) forControlEvents:UIControlEventTouchUpInside];
-        [_childOptionsControl setTag:1];
-    }
-    return _childOptionsControl;
-}
-
-
 #pragma mark 请输入请假理由
 -(BaseTextView *)reasonTextView
 {
@@ -482,36 +417,40 @@
     return _endTimeControl;
 }
 
-
-#pragma mark 班主任
+#pragma mark 请输入天数
+-(BaseButtonControl *)daysleaveControl
+{
+    if (!_daysleaveControl)
+    {
+        _daysleaveControl = [[BaseButtonControl alloc]init];
+        [_daysleaveControl setNumberLabel:2];
+        [_daysleaveControl setNumberTextField:1];
+        [_daysleaveControl setNumberLineView:1];
+        [_daysleaveControl setText:@"请假时长" withNumberType:0 withAllType:NO];
+        [_daysleaveControl setText:@"天" withNumberType:1 withAllType:NO];
+        [_daysleaveControl setFont:FontLevel3 withNumberType:0 withAllType:YES];
+        [_daysleaveControl setTextColor:RGB(14.0, 14.0, 14.0) withTpe:0 withAllType:NO];
+        [_daysleaveControl setTextColor:RGB(64.0, 64.0, 64.0) withTpe:1 withAllType:NO];
+        [_daysleaveControl setinputTextPlaceholder:@"请输入天数" withNumberType:0 withAllType:NO];
+        [_daysleaveControl setInputTintColor:MainColor withNumberType:0 withAllType:NO];
+        [_daysleaveControl addTarget:self action:@selector(controlAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_daysleaveControl setTag:5];
+        [_daysleaveControl setItemColor:NO];
+    }
+    return _daysleaveControl;
+}
+#pragma mark 审批人
 -(XHAskforLeaveChargeTeacherControl *)chargeTeacherControl
 {
     if (_chargeTeacherControl == nil)
     {
         _chargeTeacherControl = [[XHAskforLeaveChargeTeacherControl alloc]init];
-        [_chargeTeacherControl setTitle:@"班主任"];
+        [_chargeTeacherControl setTitle:@"审批人"];
         [_chargeTeacherControl setImaeg:[UIImage imageNamed:@"addman"]];
         [_chargeTeacherControl addTarget:self action:@selector(controlAction:) forControlEvents:UIControlEventTouchUpInside];
-        [_chargeTeacherControl setTag:5];
+        [_chargeTeacherControl setTag:6];
     }
     return _chargeTeacherControl;
-}
-
-
-
-
-#pragma mark 相关人
--(XHAskforLeaveChargeTeacherControl *)otherControl
-{
-    if (_otherControl == nil)
-    {
-        _otherControl = [[XHAskforLeaveChargeTeacherControl alloc]init];
-        [_otherControl setTitle:@"相关人"];
-        [_otherControl setImaeg:[UIImage imageNamed:@"addman"]];
-        [_otherControl addTarget:self action:@selector(controlAction:) forControlEvents:UIControlEventTouchUpInside];
-        [_otherControl setTag:6];
-    }
-    return _otherControl;
 }
 
 
@@ -530,25 +469,6 @@
 }
 
 
--(BaseView *)topAccessoryView
-{
-    if (_topAccessoryView == nil)
-    {
-        _topAccessoryView = [[BaseView alloc]init];
-        [_topAccessoryView setBackgroundColor:RGB(243, 243, 243)];
-    }
-    return _topAccessoryView;
-}
-
--(BaseView *)bottomAccessoryView
-{
-    if (_bottomAccessoryView == nil)
-    {
-        _bottomAccessoryView = [[BaseView alloc]init];
-        [_bottomAccessoryView setBackgroundColor:RGB(243, 243, 243)];
-    }
-    return _bottomAccessoryView;
-}
 
 
 #pragma mark 孩子列表

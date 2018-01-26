@@ -65,43 +65,6 @@ static XHHelper *helper = nil;
 
 
 
-#pragma mark 获取当前视图所在的视图控制器
-/**
- 获取当前视图所在的视图控制器
-
- @return 当前视图控制器
- */
-- (UIViewController *)currentlyViewController
-{
-    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
-    if (window.windowLevel != UIWindowLevelNormal)
-    {
-        NSArray *windows = [[UIApplication sharedApplication] windows];
-        for(UIWindow * tmpWin in windows)
-        {
-            if (tmpWin.windowLevel == UIWindowLevelNormal)
-            {
-                window = tmpWin;
-                break;
-            }
-        }
-    }
-    UIViewController *result = window.rootViewController;
-    while (result.presentedViewController)
-    {
-        result = result.presentedViewController;
-    }
-//    if ([result isKindOfClass:[MYTabBarViewController class]])
-//    {
-//        result = [(MYTabBarViewController *)result selectedViewController];
-//    }
-    if ([result isKindOfClass:[UINavigationController class]])
-    {
-        result = [(UINavigationController *)result topViewController];
-    }
-    return result;
-}
-
 + (void)uploadImage:(UIImage *)image name:(NSString *)name uploadCallback:(void (^)(BOOL success, NSError *error))uploadCallback withProgressCallback:(void (^)(float progress))progressCallback
 {
     image = [image scaleToSize:xOriginImageSize usingMode:NYXResizeModeAspectFit];
