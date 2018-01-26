@@ -40,24 +40,22 @@
 
 - (void)getDatePicker
 {
-    
-    
     //初始化， DatePicker有默认宽高，实例后就可以获得系统提供的frame值
-    datePickerView = [[UIDatePicker alloc]init];
-    datePickerView.frame = CGRectMake(0,50, SCREEN_WIDTH, 170);
+    _datePickerView = [[UIDatePicker alloc]init];
+    _datePickerView.frame = CGRectMake(0,50, SCREEN_WIDTH, 170);
     //    datePickerView.backgroundColor = [UIColor redColor];
-    [self.view addSubview:datePickerView];
+    [self.view addSubview:_datePickerView];
     
     //监听值的改变
-    [datePickerView addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventValueChanged];
-    datePickerView.datePickerMode = UIDatePickerModeDate;
+    [_datePickerView addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventValueChanged];
+    _datePickerView.datePickerMode = UIDatePickerModeDate;
     /**
      *  主动修改显示语言 CFStringTokenizer  默认根据设备语言变换
      *  英文："en"  简体中文："zh-Hans"  繁体中文:"zh-Hant"
      *
      */
     NSLocale *locale = [[NSLocale alloc]initWithLocaleIdentifier:@"zh-Hans"];
-    datePickerView.locale = locale;
+    _datePickerView.locale = locale;
 }
 
 -(void)btnClick
@@ -97,7 +95,7 @@
 {
     NSLog(@"date=%@",datePicker.date);
     if ([[NSString dateWithDateFormatter:@"yyyy-MM-dd" Date:datePicker.date] compare:[NSString dateWithDateFormatter:@"yyyy-MM-dd" Date:[NSDate date]]]== NSOrderedDescending) {
-        [datePickerView setDate:[NSDate date] animated:YES];
+        [_datePickerView setDate:[NSDate date] animated:YES];
     }
     switch (self.modelyTpe) {
         case XHCustomDatePickerViewModelMouthAndDayType:
@@ -116,9 +114,17 @@
   
 }
 
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+//-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+//{
+//    [self removeCustomView];
+//}
+-(void)setItemMaxiDate:(NSDate *)date
 {
-    [self removeCustomView];
+    self.datePickerView.maximumDate=date;
+}
+-(void)setItemMiniDate:(NSDate *)date
+{
+    self.datePickerView.minimumDate=date;
 }
 -(void)removeCustomView
 {

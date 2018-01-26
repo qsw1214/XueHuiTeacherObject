@@ -23,10 +23,12 @@ typedef NS_ENUM(NSInteger,XHCustomDatePickerViewModelType)
 
 @interface XHCustomDatePickerView : UIView
 {
-    UIDatePicker *datePickerView;
     NSString *_dateStr;
 }
 @property(nonatomic,strong)UIView *view;
+@property(nonatomic,strong)  UIDatePicker *datePickerView;
 @property(nonatomic,assign)XHCustomDatePickerViewModelType modelyTpe;
 @property(nonatomic,assign)id <XHCustomDatePickerViewDelegate> delegate;
+-(void)setItemMaxiDate:(NSDate *)date;
+-(void)setItemMiniDate:(NSDate *)date;
 @end
