@@ -10,7 +10,7 @@
 #import "XHParentsMeetingContentView.h"
 #import "XHIMNoticeViewController.h"
 #import "BaseTableView.h"
-#import "XHEducationCloudWebViewController.h" //!< 家长学堂详情
+#import "XHEducationCloudWebViewController.h" //!< 教师资讯详情
 @interface XHParentsMeetingViewController () <XHParentsMeetingContentViewDeletage>
 
 {

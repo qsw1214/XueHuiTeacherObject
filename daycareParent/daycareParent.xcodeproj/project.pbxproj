@@ -1634,14 +1634,14 @@
 			path = "平安记录";
 			sourceTree = "<group>";
 		};
-		4B07CC221FD4EB5800B2DBDA /* 家长学堂 */ = {
+		4B07CC221FD4EB5800B2DBDA /* 教师资讯 */ = {
 			isa = PBXGroup;
 			children = (
 				4B07CC231FD4EB5800B2DBDA /* Model */,
 				4B07CC241FD4EB5800B2DBDA /* View */,
 				4B07CC251FD4EB5800B2DBDA /* ViewController */,
 			);
-			path = "家长学堂";
+			path = "教师资讯";
 			sourceTree = "<group>";
 		};
 		4B07CC231FD4EB5800B2DBDA /* Model */ = {
@@ -2410,7 +2410,7 @@
 			children = (
 				8CDDA8B01FDA5CD3000B3BAB /* 通知 */,
 				8CDDA8AC1FDA5CCE000B3BAB /* 聊天 */,
-				4B07CC221FD4EB5800B2DBDA /* 家长学堂 */,
+				4B07CC221FD4EB5800B2DBDA /* 教师资讯 */,
 				4B11AF2F1FCCE892002738F1 /* Main(消息) */,
 			);
 			path = "消息";

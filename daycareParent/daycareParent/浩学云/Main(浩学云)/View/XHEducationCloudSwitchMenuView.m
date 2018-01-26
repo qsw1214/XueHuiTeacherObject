@@ -42,6 +42,7 @@
 -(void)setItemArray:(NSMutableArray*)array;
 {
     [self.menuControl setItemArray:array];
+    [self.menuControl didSelectAtIndexItem:0];
 }
 
 #pragma mark - Getter / Setter

@@ -121,8 +121,8 @@
 {
         [self.netWorkConfig setObject:@"20" forKey:@"pageSize"];
         [self.netWorkConfig setObject:[NSString stringWithFormat:@"%zd",_pageNumber] forKey:@"pageNumber"];
-        [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].guardianModel.guardianId forKey:@"guardianId"];
-        [self.netWorkConfig postWithUrl:@"zzjt-app-api_smartCampus019" sucess:^(id object, BOOL verifyObject)
+        [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].ID forKey:@"teacherId"];
+        [self.netWorkConfig postWithUrl:@"zzjt-app-api_notice006" sucess:^(id object, BOOL verifyObject)
          {
             if (verifyObject)
             {

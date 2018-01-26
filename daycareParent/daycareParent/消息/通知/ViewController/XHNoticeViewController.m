@@ -135,8 +135,8 @@
 }
 -(void)refresh
 {
-    [self.net setObject:[XHUserInfo sharedUserInfo].guardianModel.guardianId forKey:@"guardianId"];
-    [self.net postWithUrl:@"zzjt-app-api_smartCampus018" sucess:^(id object, BOOL verifyObject) {
+    [self.net setObject:[XHUserInfo sharedUserInfo].ID forKey:@"teacherId"];
+    [self.net postWithUrl:@"zzjt-app-api_notice007" sucess:^(id object, BOOL verifyObject) {
         if (verifyObject) {
             NSDictionary *dic=[object objectItemKey:@"object"];
             _informationModel=[[XHIMNoticeModel alloc] initWithDic:[dic objectItemKey:@"informationText"]];

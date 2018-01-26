@@ -6,7 +6,7 @@
 //  Copyright © 2017年 XueHui. All rights reserved.
 //
 
-#pragma mark 通知->家长学堂
+#pragma mark 通知->教师资讯
 
 #import "BaseViewController.h"
 
