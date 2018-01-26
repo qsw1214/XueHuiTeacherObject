@@ -26,7 +26,7 @@
 @property (nonatomic,copy) NSString *loginIp; //!<loginIp
 @property (nonatomic,copy) NSString *isActive; //!<isActive
 @property (nonatomic,copy) NSString *isRoot; //!<isRoot
-@property (nonatomic,copy) NSString *relationCode; //!<relationCode
+@property (nonatomic,copy) NSString *schoolId; //!<schoolId
 @property (nonatomic,copy) NSString *primaryFamilyId; //!<主监护人家庭ID
 @property (nonatomic,strong) XHGuardianInfo *guardianModel; //!<主监护人信息
 @property (nonatomic,strong) NSMutableArray <XHChildListModel*> *childListArry; //!<孩子列表信息

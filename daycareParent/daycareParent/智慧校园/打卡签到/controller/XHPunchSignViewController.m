@@ -8,12 +8,16 @@
 
 #import "XHPunchSignViewController.h"
 #import "XHCustomDatePickerView.h"
-@interface XHPunchSignViewController ()<XHCustomDatePickerViewDelegate>
+#import <AMapFoundationKit/AMapFoundationKit.h>
+
+#import <AMapLocationKit/AMapLocationKit.h>
+@interface XHPunchSignViewController ()<XHCustomDatePickerViewDelegate,AMapLocationManagerDelegate>
 {
     NSInteger _Tag;
     NSDate *_beginDate;
     NSDate *_endDate;
 }
+@property(nonatomic,strong)AMapLocationManager *locationManager;
 @property(nonatomic,strong)BaseButtonControl *signBtn;
 @property(nonatomic,strong)BaseButtonControl *beginDateBtn;
 @property(nonatomic,strong)BaseButtonControl *endDateBtn;
@@ -88,6 +92,56 @@
     [_endDateBtn setTitleEdgeFrame:CGRectMake(5, 10, _endDateBtn.width-20, _endDateBtn.height-20) withNumberType:0 withAllType:NO];
     [_endDateBtn setText:[NSString dateWithDateFormatter:YY_DEFAULT_TIME_FORM Date:_endDate] withNumberType:0 withAllType:NO];
     [_endDateBtn setFont:FontLevel4 withNumberType:0 withAllType:NO];
+}
+#pragma mark    定位获取区域编码
+- (void)startLocation
+{
+    self.locationManager = [[AMapLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    // 带逆地理信息的一次定位（返回坐标和地址信息）
+    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    //   定位超时时间，最低2s，此处设置为10s
+    self.locationManager.locationTimeout =10;
+    //   逆地理请求超时时间，最低2s，此处设置为10s
+    self.locationManager.reGeocodeTimeout = 10;
+    
+    [XHShowHUD showTextHud:@"获取位置..."];
+    // 带逆地理（返回坐标和地址信息）
+    @WeakObj(self);
+    [_locationManager requestLocationWithReGeocode:YES completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
+        [XHShowHUD hideHud];
+        if (error)
+        {
+            NSLog(@"locError:---%ld===%@",(long)error.code, error.localizedDescription);
+            [XHShowHUD showNOHud:@"获取位置信息失败"];
+        }
+        if (regeocode)
+        {
+            @StrongObj(self);
+            [self sign:location];
+        }
+    }];
+    
+}
+#pragma mark  打卡方法
+- (void)sign:(CLLocation *)location
+{
+    [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
+    [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
+    [self.netWorkConfig setObject:[NSString stringWithFormat:@"%@",@(location.coordinate.latitude)] forKey:@"latitude"];
+    [self.netWorkConfig setObject:[NSString stringWithFormat:@"%@",@(location.coordinate.longitude)] forKey:@"longitude"];
+    [self.netWorkConfig postWithUrl:@"pmschool-teacher-api_/teacher/attendanceSheet/signIn" sucess:^(id object, BOOL verifyObject) {
+        if (verifyObject)
+        {
+            
+        }
+       else
+        {
+            
+        }
+    } error:^(NSError *error) {
+        
+    }];
 }
 #pragma mark  显示日历按钮方法
 -(void)dateBtnMethod:(BaseButtonControl *)btn

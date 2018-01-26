@@ -47,7 +47,7 @@ static XHUserInfo *userInfo = nil;
     _loginIp=[dic objectItemKey:@"loginIp"];
     _isActive=[dic objectItemKey:@"isActive"];
     _isRoot=[dic objectItemKey:@"isRoot"];
-    _relationCode=[dic objectItemKey:@"relationCode"];
+    _schoolId=[dic objectItemKey:@"relationCode"];
     _primaryFamilyId=[[object objectItemKey:@"propValue"] objectItemKey:@"primaryFamilyId"];
     _guardianModel=[[XHGuardianInfo alloc] initWithDic:[[object objectItemKey:@"propValue"] objectItemKey:@"guardian"]];
     switch ([self.sex integerValue])
