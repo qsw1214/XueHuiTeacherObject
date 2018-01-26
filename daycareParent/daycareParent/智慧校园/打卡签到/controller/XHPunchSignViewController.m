@@ -14,6 +14,7 @@
     NSDate *_beginDate;
     NSDate *_endDate;
 }
+@property(nonatomic,strong)BaseButtonControl *signBtn;
 @property(nonatomic,strong)BaseButtonControl *beginDateBtn;
 @property(nonatomic,strong)BaseButtonControl *endDateBtn;
 @property(nonatomic,strong)XHCustomDatePickerView *beginPickerView;
@@ -35,17 +36,17 @@
     UIImageView *imgV=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 130)];
     imgV.image=[UIImage imageNamed:@"user_qiandao_bg"];
     [scr addSubview:imgV];
-    BaseButtonControl *btn=[[BaseButtonControl alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-80)/2.0, 10, 80, 100)];
-    [btn addTarget:self action:@selector(signBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [scr addSubview:btn];
-    [btn setNumberImageView:1];
-    [btn setImageEdgeFrame:CGRectMake(0, 0, 80, 80) withNumberType:0 withAllType:NO];
-    [btn setImage:@"user_qiandao" withNumberType:0 withAllType:NO];
-    [btn setNumberLabel:1];
-    [btn setTitleEdgeFrame:CGRectMake(0, 90, 80, 20) withNumberType:0 withAllType:NO];
-    [btn setTextAlignment:NSTextAlignmentCenter withNumberType:0 withAllType:NO];
-    [btn setTextColor:[UIColor orangeColor] withTpe:0 withAllType:NO];
-    [btn setText:@"打卡签到" withNumberType:0 withAllType:NO];
+   _signBtn=[[BaseButtonControl alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-80)/2.0, 10, 80, 100)];
+    [_signBtn addTarget:self action:@selector(signBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [scr addSubview:_signBtn];
+    [_signBtn setNumberImageView:1];
+    [_signBtn setImageEdgeFrame:CGRectMake(0, 0, 80, 80) withNumberType:0 withAllType:NO];
+    [_signBtn setImage:@"user_qiandao" withNumberType:0 withAllType:NO];
+    [_signBtn setNumberLabel:1];
+    [_signBtn setTitleEdgeFrame:CGRectMake(0, 90, 80, 20) withNumberType:0 withAllType:NO];
+    [_signBtn setTextAlignment:NSTextAlignmentCenter withNumberType:0 withAllType:NO];
+    [_signBtn setTextColor:[UIColor orangeColor] withTpe:0 withAllType:NO];
+    [_signBtn setText:@"打卡签到" withNumberType:0 withAllType:NO];
     UIView *bgView=[[UIView alloc] initWithFrame:CGRectMake(0, 131, SCREEN_WIDTH, 40)];
     bgView.backgroundColor=RGB(240, 240, 240);
     [scr addSubview:bgView];
@@ -70,7 +71,7 @@
     [_beginDateBtn setImage:@"time-select" withNumberType:0 withAllType:NO];
     [_beginDateBtn setNumberLabel:1];
     [_beginDateBtn setTitleEdgeFrame:CGRectMake(5, 10, _beginDateBtn.width-20, _beginDateBtn.height-20) withNumberType:0 withAllType:NO];
-    [_beginDateBtn setText:[NSString dateWithDateFormatter:@"yyyy-MM-dd" Date:_beginDate] withNumberType:0 withAllType:NO];
+    [_beginDateBtn setText:[NSString dateWithDateFormatter:YY_DEFAULT_TIME_FORM Date:_beginDate] withNumberType:0 withAllType:NO];
     [_beginDateBtn setFont:FontLevel4 withNumberType:0 withAllType:NO];
     #pragma mark  注释
    _endDateBtn=[[BaseButtonControl alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2.0+20, 0, SCREEN_WIDTH/2.0-50, 40)];
@@ -85,7 +86,7 @@
     [_endDateBtn setImage:@"time-select" withNumberType:0 withAllType:NO];
     [_endDateBtn setNumberLabel:1];
     [_endDateBtn setTitleEdgeFrame:CGRectMake(5, 10, _endDateBtn.width-20, _endDateBtn.height-20) withNumberType:0 withAllType:NO];
-    [_endDateBtn setText:[NSString dateWithDateFormatter:@"yyyy-MM-dd" Date:_endDate] withNumberType:0 withAllType:NO];
+    [_endDateBtn setText:[NSString dateWithDateFormatter:YY_DEFAULT_TIME_FORM Date:_endDate] withNumberType:0 withAllType:NO];
     [_endDateBtn setFont:FontLevel4 withNumberType:0 withAllType:NO];
 }
 #pragma mark  显示日历按钮方法
@@ -105,8 +106,6 @@
         {
             [self.view addSubview:self.endPickerView];
             _endPickerView.datePickerView.minimumDate=_beginDate;
-            //_endPickerView.datePickerView.maximumDate=[NSDate getDayAfterWithDate:_beginDate dayAfter:6];
-           
         }
             break;
     }
@@ -125,20 +124,18 @@
             case 10:
             {
                 [self.beginDateBtn setText:dateStr withNumberType:0 withAllType:NO];
-                _beginDate=[NSDate getDateWithDateStr:dateStr formatter:@"yyyy-MM-dd"];
+                _beginDate=[NSDate getDateWithDateStr:dateStr formatter:YY_DEFAULT_TIME_FORM];
                  _endPickerView.datePickerView.minimumDate=_beginDate;
-                //_endPickerView.datePickerView.maximumDate=[NSDate getDayAfterWithDate:_beginDate dayAfter:6];
-                 //[self.endDateBtn setText:[NSString dateWithDateFormatter:@"yyyy-MM-dd" Date:_beginPickerView.datePickerView.maximumDate] withNumberType:0 withAllType:NO];
             }
                 break;
                 
            case 11:
             {
                 [self.endDateBtn setText:dateStr withNumberType:0 withAllType:NO];
-                _endDate=[NSDate getDateWithDateStr:dateStr formatter:@"yyyy-MM-dd"];
+                _endDate=[NSDate getDateWithDateStr:dateStr formatter:YY_DEFAULT_TIME_FORM];
                 _beginPickerView.datePickerView.maximumDate=[NSDate getDayAfterWithDate:_endDate dayAfter:0];
                 _beginDate=[NSDate getDayBeforWithDate:_endDate dayBefor:6];
-                 [self.beginDateBtn setText:[NSString dateWithDateFormatter:@"yyyy-MM-dd" Date:_beginDate] withNumberType:0 withAllType:NO];
+                 [self.beginDateBtn setText:[NSString dateWithDateFormatter:YY_DEFAULT_TIME_FORM Date:_beginDate] withNumberType:0 withAllType:NO];
                 _beginPickerView.datePickerView.date=_beginDate;
                 
             }

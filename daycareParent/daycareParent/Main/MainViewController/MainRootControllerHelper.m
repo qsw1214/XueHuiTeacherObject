@@ -114,14 +114,14 @@ static MainRootControllerHelper *rootHelper = nil;
         XHLoginModel *model=[NSUserDefaults getLoginModel];
         XHNetWorkConfig *net=[XHNetWorkConfig new];
         [net setObject:model.loginName forKey:@"loginName"];
-        [net setObject:model.pwd forKey:@"pwd"];
-        [net setObject:@"3" forKey:@"type"];
+        [net setObject:model.pwd forKey:@"password"];
+        [net setObject:@"2" forKey:@"userType"];
         [XHShowHUD showTextHud];
-        [net postWithUrl:@"zzjt-app-api_login" sucess:^(id object, BOOL verifyObject) {
+        [net postWithUrl:@"pmschool-teacher-api_/teacher/login" sucess:^(id object, BOOL verifyObject) {
             if (verifyObject)
             {
                 [[XHUserInfo sharedUserInfo] setItemObject:[object objectItemKey:@"object"]];
-                if ([[XHUserInfo sharedUserInfo].guardianModel.guardianId isEqualToString:@""]) {
+                if ([[XHUserInfo sharedUserInfo].selfId isEqualToString:@""]) {
                     [XHShowHUD showNOHud:@"自动登录失败！"];
                     XHLoginViewController *login=[XHLoginViewController new];
                     UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:login];
@@ -129,49 +129,21 @@ static MainRootControllerHelper *rootHelper = nil;
                     [window setRootViewController:nav];
                     return ;
                 }
-                XHNetWorkConfig *netWork=[XHNetWorkConfig new];
-                [netWork setObject:[XHUserInfo sharedUserInfo].guardianModel.guardianId forKey:@"guardianId"];
-                [XHShowHUD showTextHud];
-                [netWork postWithUrl:@"zzjt-app-api_smartCampus011" sucess:^(id object, BOOL verifyObject) {
-                    if (verifyObject) {
-                        NSMutableArray *tempChildArray = [NSMutableArray array];
-                        for (NSDictionary *dic in [object objectItemKey:@"object"]) {
-                            XHChildListModel *model=[[XHChildListModel alloc] initWithDic:dic];
-                            [tempChildArray addObject:model];
-                        }
-                        [[XHUserInfo sharedUserInfo].childListArry setArray:tempChildArray];
-                        
-                        AppDelegate *app=(AppDelegate *)[[UIApplication sharedApplication] delegate];
-                        [app loginRongCloud:[XHUserInfo sharedUserInfo].token];
-                        [app setJpushAlias:[XHUserInfo sharedUserInfo].loginName];
-                        if ([[XHUserInfo sharedUserInfo].nickName isEqualToString:@""]) {
-                            XHNewUserInfoViewController *newUser = [[XHNewUserInfoViewController alloc]init];
-                            UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:newUser];
-                            [window setRootViewController:nav];
-                            
-                        }
-                        else
-                        {
-                            
-                            MianTabBarViewController *mianViewController = [[MianTabBarViewController alloc]init];
-                            [window setRootViewController:mianViewController];
-                        }
-                        
-                    }
-                    else{
-                        XHLoginViewController *login=[XHLoginViewController new];
-                        UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:login];
-                        
-                        [window setRootViewController:nav];
-                    }
-                    
-                } error:^(NSError *error) {
-                    XHLoginViewController *login=[XHLoginViewController new];
-                    UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:login];
-                    
+                AppDelegate *app=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+                [app loginRongCloud:[XHUserInfo sharedUserInfo].token];
+                [app setJpushAlias:[XHUserInfo sharedUserInfo].loginName];
+                if ([[XHUserInfo sharedUserInfo].nickName isEqualToString:@""]) {
+                    XHNewUserInfoViewController *newUser = [[XHNewUserInfoViewController alloc]init];
+                    UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:newUser];
                     [window setRootViewController:nav];
-                }];
-                
+                    
+                }
+                else
+                {
+                    
+                    MianTabBarViewController *mianViewController = [[MianTabBarViewController alloc]init];
+                    [window setRootViewController:mianViewController];
+                }
             }
             else
             {
@@ -183,16 +155,12 @@ static MainRootControllerHelper *rootHelper = nil;
         } error:^(NSError *error) {
             XHLoginViewController *login=[XHLoginViewController new];
             UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:login];
+            
             [window setRootViewController:nav];
         }];
+        
     }
-    else
-    {
-        XHLoginViewController *login=[XHLoginViewController new];
-        UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:login];
-        [window setRootViewController:nav];
-    }
-
+        
 }
 
 @end

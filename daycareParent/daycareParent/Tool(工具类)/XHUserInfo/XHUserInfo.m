@@ -31,18 +31,23 @@ static XHUserInfo *userInfo = nil;
 
 -(void)setItemObject:(NSDictionary*)object
 {
-     _age=[object  objectItemKey:@"age"];
-    _birthdate=[object  objectItemKey:@"birthdate"];
-    _headPic=[object objectItemKey:@"headPic"];
-    _ID=[object objectItemKey:@"id"];
-    _loginName=[object objectItemKey:@"loginName"];
-    _nickName=[object objectItemKey:@"nickName"];
-    _selfId=[object objectItemKey:@"selfId"];
     _sessionId=[object objectItemKey:@"sessionId"];
-    _signature=[object objectItemKey:@"signature"];
-    _telphoneNumber=[object objectItemKey:@"telphoneNumber"];
     _token=[object objectItemKey:@"token"];
-    _sex=[object objectItemKey:@"sex"];
+    NSDictionary *dic=[object objectItemKey:@"user"];
+    _birthdate=[dic  objectItemKey:@"birthdate"];
+    _headPic=[dic objectItemKey:@"headPic"];
+    _ID=[dic objectItemKey:@"id"];
+    _loginName=[dic objectItemKey:@"loginName"];
+     _nickName=[dic objectItemKey:@"nickName"];
+    _selfId=[dic objectItemKey:@"selfId"];
+      _sex=[dic objectItemKey:@"sex"];
+     _signature=[dic objectItemKey:@"signature"];
+    _telphoneNumber=[dic objectItemKey:@"telphoneNumber"];
+     _userType=[dic  objectItemKey:@"userType"];
+    _loginIp=[dic objectItemKey:@"loginIp"];
+    _isActive=[dic objectItemKey:@"isActive"];
+    _isRoot=[dic objectItemKey:@"isRoot"];
+    _relationCode=[dic objectItemKey:@"relationCode"];
     _primaryFamilyId=[[object objectItemKey:@"propValue"] objectItemKey:@"primaryFamilyId"];
     _guardianModel=[[XHGuardianInfo alloc] initWithDic:[[object objectItemKey:@"propValue"] objectItemKey:@"guardian"]];
     switch ([self.sex integerValue])

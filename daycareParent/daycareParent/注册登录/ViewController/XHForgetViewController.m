@@ -97,10 +97,10 @@
     }
     if (_ifSelect==NO) {
         XHNetWorkConfig *net=[XHNetWorkConfig new];
-        [net setObject:phonepwd.text forKey:@"telephoneNumber"];
+        [net setObject:phonepwd.text forKey:@"telphoneNumber"];
         [net setObject:@"1" forKey:@"type"];
         [XHShowHUD showTextHud];
-        [net postWithUrl:@"zzjt-app-api_personalCenter000" sucess:^(id object, BOOL verifyObject) {
+        [net postWithUrl:@"pmschool-teacher-api_/teacher/sms/get" sucess:^(id object, BOOL verifyObject) {
             if (verifyObject) {
                 [self startCountdown];
             }
@@ -166,7 +166,7 @@
     [net setObject:pwd.text forKey:@"password"];
     [net setObject:verrifypwd.text forKey:@"verificationCode"];
      [XHShowHUD showTextHud];
-    [net postWithUrl:@"zzjt-app-api_user002" sucess:^(id object, BOOL verifyObject) {
+    [net postWithUrl:@"pmschool-teacher-api_/teacher/teacher/retrieve" sucess:^(id object, BOOL verifyObject) {
         if (verifyObject) {
             [self.navigationController popViewControllerAnimated:YES];
         }

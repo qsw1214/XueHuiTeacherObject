@@ -14,8 +14,8 @@
 {
     //如何对属性进行编码？
     [aCoder encodeObject:self.loginName forKey:@"loginName"];
-    [aCoder encodeObject:self.pwd forKey:@"pwd"];
-    [aCoder encodeInteger:self.type forKey:@"type"];
+    [aCoder encodeObject:self.pwd forKey:@"password"];
+    [aCoder encodeInteger:self.type forKey:@"userType"];
 }
 //解码器，aDecoder在解码的时候，会将对象 对属性进行解码
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -26,8 +26,8 @@
         //Decode解码
         //如何对属性进行解码
         self.loginName = [aDecoder decodeObjectForKey:@"loginName"];
-        self.pwd = [aDecoder decodeObjectForKey:@"pwd"];
-        self.type=[aDecoder decodeIntegerForKey:@"type"];
+        self.pwd = [aDecoder decodeObjectForKey:@"password"];
+        self.type=[aDecoder decodeIntegerForKey:@"userType"];
       
     }
     return self;

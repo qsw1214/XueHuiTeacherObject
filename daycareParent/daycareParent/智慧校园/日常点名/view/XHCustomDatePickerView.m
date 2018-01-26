@@ -49,6 +49,7 @@
     //监听值的改变
     [_datePickerView addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventValueChanged];
     _datePickerView.datePickerMode = UIDatePickerModeDate;
+    _datePickerView.maximumDate=[NSDate date];
     /**
      *  主动修改显示语言 CFStringTokenizer  默认根据设备语言变换
      *  英文："en"  简体中文："zh-Hans"  繁体中文:"zh-Hant"
@@ -66,12 +67,14 @@
 {
     [self removeCustomView];
     if ([_delegate respondsToSelector:@selector(getDateStr:)]) {
-        if (![[NSString safeString:_dateStr] isEqualToString:@""]) {
+        if (![[NSString safeString:_dateStr] isEqualToString:@""])
+        {
             [_delegate getDateStr:_dateStr];
         }
         else
         {
-            switch (self.modelyTpe) {
+            switch (self.modelyTpe)
+            {
                 case XHCustomDatePickerViewModelMouthAndDayType:
                     
                 {
@@ -93,10 +96,6 @@
 
 -(void)changeDate:(UIDatePicker*)datePicker
 {
-    NSLog(@"date=%@",datePicker.date);
-    if ([[NSString dateWithDateFormatter:@"yyyy-MM-dd" Date:datePicker.date] compare:[NSString dateWithDateFormatter:@"yyyy-MM-dd" Date:[NSDate date]]]== NSOrderedDescending) {
-        [_datePickerView setDate:[NSDate date] animated:YES];
-    }
     switch (self.modelyTpe) {
         case XHCustomDatePickerViewModelMouthAndDayType:
         {

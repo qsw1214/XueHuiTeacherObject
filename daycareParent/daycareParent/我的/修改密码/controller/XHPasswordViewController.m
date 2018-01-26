@@ -62,18 +62,19 @@
     }
     XHNetWorkConfig *net=[XHNetWorkConfig new];
     [net setObject:[XHUserInfo sharedUserInfo].ID forKey:@"id"];
-    [net setObject:oldpwd.text forKey:@"oldPwd"];
-    [net setObject:newpwd.text forKey:@"newPwd"];
-    [net setObject:surepwd.text forKey:@"confirmPwd"];
+    [net setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
+    [net setObject:oldpwd.text forKey:@"password"];
+    [net setObject:newpwd.text forKey:@"newPassword"];
     [XHShowHUD showTextHud];
-    [net postWithUrl:@"zzjt-app-api_personalCenter001" sucess:^(id object, BOOL verifyObject) {
+    [net postWithUrl:@"pmschool-teacher-api_/teacher/user/updatePwd" sucess:^(id object, BOOL verifyObject) {
         if (verifyObject) {
+            [XHShowHUD showOKHud:@"修改成功!"];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:AutoLogin];
             XHLoginViewController *login=[XHLoginViewController new];
             [self.navigationController pushViewController:login animated:YES];
         }
     } error:^(NSError *error) {
-        
+       
     }];
 }
 -(void)textChage

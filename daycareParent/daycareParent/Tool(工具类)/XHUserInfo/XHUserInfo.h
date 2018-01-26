@@ -10,7 +10,7 @@
 #import "XHGuardianInfo.h"
 @interface XHUserInfo : NSObject
 
-@property (nonatomic,copy) NSString *age; //!< age
+@property (nonatomic,copy) NSString *userType; //!< 类别
 @property (nonatomic,copy) NSString *birthdate;//!< birthdate
 @property (nonatomic,copy) NSString *headPic;//!< 头像
 @property (nonatomic,copy) NSString *ID;//!< ID
@@ -23,6 +23,10 @@
 @property (nonatomic,copy) NSString *signature;//!< 签名
 @property (nonatomic,copy) NSString *telphoneNumber;//!< 电话
 @property (nonatomic,copy) NSString *token; //!<token
+@property (nonatomic,copy) NSString *loginIp; //!<loginIp
+@property (nonatomic,copy) NSString *isActive; //!<isActive
+@property (nonatomic,copy) NSString *isRoot; //!<isRoot
+@property (nonatomic,copy) NSString *relationCode; //!<relationCode
 @property (nonatomic,copy) NSString *primaryFamilyId; //!<主监护人家庭ID
 @property (nonatomic,strong) XHGuardianInfo *guardianModel; //!<主监护人信息
 @property (nonatomic,strong) NSMutableArray <XHChildListModel*> *childListArry; //!<孩子列表信息

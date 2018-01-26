@@ -105,57 +105,39 @@
     }
     XHNetWorkConfig *net=[[XHNetWorkConfig alloc] init];
     [net setObject:telePhone.text forKey:@"loginName"];
-    [net setObject:pwd.text forKey:@"pwd"];
-    [net setObject:@"3" forKey:@"type"];
+    [net setObject:pwd.text forKey:@"password"];
+    [net setObject:@"2" forKey:@"userType"];
     [XHShowHUD showTextHud];
-    [net postWithUrl:@"zzjt-app-api_login" sucess:^(id object, BOOL verifyObject) {
+    [net postWithUrl:@"pmschool-teacher-api_/teacher/login" sucess:^(id object, BOOL verifyObject) {
         if (verifyObject)
         {
             XHLoginModel *loginModel=[[XHLoginModel alloc] init];
             loginModel.loginName=telePhone.text;
             loginModel.pwd=pwd.text;
-            loginModel.type=[@"3" integerValue];
+            loginModel.type=[@"2" integerValue];
             [[XHUserInfo sharedUserInfo] setItemObject:[object objectItemKey:@"object"]];
-            if ([[XHUserInfo sharedUserInfo].guardianModel.guardianId isEqualToString:@""]) {
+            if ([[XHUserInfo sharedUserInfo].selfId isEqualToString:@""]) {
                 [XHShowHUD showNOHud:@"登录失败！"];
                 return ;
             }
             [NSUserDefaults  saveLocalObject:loginModel forKey:AutoLogin];
-            XHNetWorkConfig *netWork=[[XHNetWorkConfig alloc] init];
-           [netWork setObject:[XHUserInfo sharedUserInfo].guardianModel.guardianId forKey:@"guardianId"];
-            [XHShowHUD showTextHud];
-            [netWork postWithUrl:@"zzjt-app-api_smartCampus011" sucess:^(id object, BOOL verifyObject) {
-                if (verifyObject) {
-                    
-                    NSMutableArray *tempChildArray = [NSMutableArray array];
-                    for (NSDictionary *dic in [object objectItemKey:@"object"]) {
-                        XHChildListModel *model=[[XHChildListModel alloc] initWithDic:dic];
-                        [tempChildArray addObject:model];
-                    }
-                    [[XHUserInfo sharedUserInfo].childListArry setArray:tempChildArray];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        AppDelegate *app=(AppDelegate *)[UIApplication sharedApplication].delegate;
-                        [app loginRongCloud:[XHUserInfo sharedUserInfo].token];
-                        [app setJpushAlias:[XHUserInfo sharedUserInfo].loginName];
-                        if ([[XHUserInfo sharedUserInfo].nickName isEqualToString:@""]) {
-                            //跳转补全信息界面
-                            XHNewUserInfoViewController *newUser = [[XHNewUserInfoViewController alloc]init];
-                            UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:newUser];
-                            [kWindow setRootViewController:nav];
-                        }
-                        else
-                        {
-                            MianTabBarViewController *main=[MianTabBarViewController new];
-                            [kWindow setRootViewController:main];
-                        }
-                       
-                    });
-                    
-                }
-                
-            } error:^(NSError *error) {
-                
-            }];
+            AppDelegate *app=(AppDelegate *)[UIApplication sharedApplication].delegate;
+            [app loginRongCloud:[XHUserInfo sharedUserInfo].token];
+            [app setJpushAlias:[XHUserInfo sharedUserInfo].loginName];
+            if ([[XHUserInfo sharedUserInfo].nickName isEqualToString:@""]) {
+                //跳转补全信息界面
+                XHNewUserInfoViewController *newUser = [[XHNewUserInfoViewController alloc]init];
+                UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:newUser];
+                [kWindow setRootViewController:nav];
+            }
+            else
+            {
+                MianTabBarViewController *main=[MianTabBarViewController new];
+                [kWindow setRootViewController:main];
+            }
+        }
+        else
+        {
             
         }
     } error:^(NSError *error) {

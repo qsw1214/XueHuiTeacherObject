@@ -13,7 +13,7 @@
 #import <RongIMKit/RongIMKit.h>
 #import "XHLoginViewController.h"
 #import "JPUSHService.h"
-@interface XHUserViewController ()<UITableViewDelegate,UITableViewDataSource,CameraManageDeletage>
+@interface XHUserViewController ()<UITableViewDelegate,UITableViewDataSource,CameraManageDeletage,XHCustomDatePickerViewDelegate>
 {
     UITableView *_tableView;
     NSArray *_titleArry;
@@ -31,7 +31,7 @@
     UIScrollView *scrollView=[[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
     scrollView.contentSize=CGSizeMake(SCREEN_WIDTH, 500);
     [self.view addSubview:scrollView];
-    _titleArry=@[@"头像",@"昵称",@"性别",@"真实姓名",@"联系电话",@"个性签名"];
+    _titleArry=@[@"头像",@"昵称",@"性别",@"年龄",@"联系电话",@"个性签名"];
     _tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 390) style:UITableViewStylePlain];
 //    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
     _tableView.bounces=NO;
@@ -70,6 +70,8 @@
     cell.frontLabel.text=_titleArry[indexPath.row];
     cell.headBtn.frame=CGRectMake(SCREEN_WIDTH-100, 10, 70, 70);
     [cell.headBtn sd_setImageWithURL:[NSURL URLWithString:ALGetFileHeadThumbnail(userInfo.headPic)] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
+    [cell.headBtn addTarget:self action:@selector(headClick) forControlEvents:UIControlEventTouchUpInside];
+    cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     if (indexPath.row==0) {
         cell.headBtn.hidden=NO;
         cell.backLabel.hidden=YES;
@@ -85,17 +87,17 @@
             cell.backLabel.text=userInfo.sexName;
         }
         if (indexPath.row==3) {
-            cell.backLabel.text=userInfo.guardianModel.guardianName;
+            cell.backLabel.text=[NSString stringWithFormat:@"%zd",[[NSDate howLongFromeDateStr:[XHUserInfo sharedUserInfo].birthdate toDateStr:[NSDate getDateStrWithDateFormatter:YY_DEFAULT_TIME_FORM Date:[NSDate date]] formatter:YY_DEFAULT_TIME_FORM] year]];
         }
         if (indexPath.row==4) {
             cell.backLabel.text=userInfo.telphoneNumber;
+             cell.accessoryType=UITableViewCellAccessoryNone;
         }
         if (indexPath.row==5) {
             cell.backLabel.text=userInfo.signature;
         }
     }
-    [cell.headBtn addTarget:self action:@selector(headClick) forControlEvents:UIControlEventTouchUpInside];
-    cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+   
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -113,7 +115,7 @@
             [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].ID forKey:@"id"];
             [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
             [self.netWorkConfig setObject:@"1" forKey:@"sex"];
-            [self.netWorkConfig postWithUrl:@"zzjt-app-api_user004" sucess:^(id object, BOOL verifyObject) {
+            [self.netWorkConfig postWithUrl:@"pmschool-teacher-api_/teacher/user/updateSex" sucess:^(id object, BOOL verifyObject) {
                 if (verifyObject) {
                     NSIndexPath *  indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
                     XHUserTableViewCell *nextCell = [tableView cellForRowAtIndexPath:indexPath];
@@ -130,7 +132,7 @@
             [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].ID forKey:@"id"];
             [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
             [self.netWorkConfig setObject:@"0" forKey:@"sex"];
-            [self.netWorkConfig postWithUrl:@"zzjt-app-api_user004" sucess:^(id object, BOOL verifyObject) {
+            [self.netWorkConfig postWithUrl:@"pmschool-teacher-api_/teacher/user/updateSex" sucess:^(id object, BOOL verifyObject) {
                 if (verifyObject) {
                     NSIndexPath *  indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
                     XHUserTableViewCell *nextCell = [tableView cellForRowAtIndexPath:indexPath];
@@ -149,11 +151,11 @@
         [self presentViewController:alertController animated:YES completion:nil];
     }
     if (indexPath.row==3) {
-        [self showAlertViewWithTitle:@"请输入真实姓名" Index:indexPath.row];
+        self.datePickerView.datePickerView.date=[NSDate getDateWithDateStr:[XHUserInfo sharedUserInfo].birthdate formatter:YY_DEFAULT_TIME_FORM];
+        self.datePickerView.delegate=self;
+        [self.view addSubview:self.datePickerView];
     }
-    if (indexPath.row==4) {
-        [self showAlertViewWithTitle:@"请输入联系电话" Index:indexPath.row];
-    }
+
     if (indexPath.row==5) {
         [self showAlertViewWithTitle:@"请输入个性签名" Index:indexPath.row];
     }
@@ -170,9 +172,6 @@
 {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        if (index==4) {
-            textField.keyboardType=UIKeyboardTypeNumberPad;
-        }
     }];
     [alertController addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         UITextField *feild=[alertController.textFields firstObject];
@@ -186,48 +185,68 @@
             [XHShowHUD showNOHud:@"请输入内容!"];
             return ;
         }
-        if (feild.text.length>4&&index==3)
-        {
-            [XHShowHUD showNOHud:@"姓名最多为四个字!"];
-            return ;
-        }
         [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].ID forKey:@"id"];
         [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
-        if (index==1) {
+        if (index==1)
+        {
             [self.netWorkConfig setObject:feild.text forKey:@"nickName"];
+            [self.netWorkConfig postWithUrl:@"pmschool-teacher-api_/teacher/user/updateNickName" sucess:^(id object, BOOL verifyObject) {
+                if (verifyObject) {
+                    NSIndexPath *  indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+                    //找到对应的cell
+                    XHUserTableViewCell *nextCell = [_tableView cellForRowAtIndexPath:indexPath];
+                    nextCell.backLabel.text=feild.text;
+                    NSDictionary *dic=[object objectItemKey:@"object"];
+                    [XHUserInfo sharedUserInfo].nickName=[dic objectItemKey:@"nickName"];
+                    self.isRefresh(YES);
+                }
+                
+            } error:^(NSError *error) {
+                
+            }];
         }
-        if (index==3) {
-            [self.netWorkConfig setObject:feild.text forKey:@"guardianName"];
-        
-        }
-        if (index==4) {
-            [self.netWorkConfig setObject:feild.text forKey:@"telphoneNumber"];
-        }
-        if (index==5) {
+        if (index==5)
+        {
            [self.netWorkConfig setObject:feild.text forKey:@"signature"];
+            [self.netWorkConfig postWithUrl:@"pmschool-teacher-api_/teacher/user/updateSignature" sucess:^(id object, BOOL verifyObject) {
+                if (verifyObject) {
+                    NSIndexPath *  indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+                    //找到对应的cell
+                    XHUserTableViewCell *nextCell = [_tableView cellForRowAtIndexPath:indexPath];
+                    nextCell.backLabel.text=feild.text;
+                    NSDictionary *dic=[object objectItemKey:@"object"];
+                    [XHUserInfo sharedUserInfo].signature=[dic objectItemKey:@"signature"];
+                    self.isRefresh(YES);
+                }
+            } error:^(NSError *error) {
+                
+            }];
         }
-        [self.netWorkConfig postWithUrl:@"zzjt-app-api_user004" sucess:^(id object, BOOL verifyObject) {
-            if (verifyObject) {
-                NSIndexPath *  indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-                //找到对应的cell
-                XHUserTableViewCell *nextCell = [_tableView cellForRowAtIndexPath:indexPath];
-                nextCell.backLabel.text=feild.text;
-                NSDictionary *dic=[object objectItemKey:@"object"];
-                [XHUserInfo sharedUserInfo].nickName=[dic objectItemKey:@"nickName"];
-                 [XHUserInfo sharedUserInfo].guardianModel.guardianName=[dic objectItemKey:@"guardianName"];
-                 [XHUserInfo sharedUserInfo].telphoneNumber=[dic objectItemKey:@"telphoneNumber"];
-                [XHUserInfo sharedUserInfo].signature=[dic objectItemKey:@"signature"];
-                 self.isRefresh(YES);
-            }
-        } error:^(NSError *error) {
-            
-        }];
-        
     }]];
     [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
     }]];
     [self presentViewController:alertController animated:YES completion:nil];
+}
+#pragma mark  datePickerViewDelegate
+-(void)getDateStr:(NSString *)dateStr
+{
+    [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].ID forKey:@"id"];
+    [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
+    [self.netWorkConfig setObject:dateStr forKey:@"birthDate"];
+    [self.netWorkConfig postWithUrl:@"pmschool-teacher-api_/teacher/user/updateBirthDate" sucess:^(id object, BOOL verifyObject) {
+        if (verifyObject) {
+            NSIndexPath *  indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+            //找到对应的cell
+            XHUserTableViewCell *nextCell = [_tableView cellForRowAtIndexPath:indexPath];
+            nextCell.backLabel.text=[NSString stringWithFormat:@"%zd",[[NSDate howLongFromeDateStr:dateStr toDateStr:[NSDate getDateStrWithDateFormatter:YY_DEFAULT_TIME_FORM Date:[NSDate date]] formatter:YY_DEFAULT_TIME_FORM] year]];
+            NSDictionary *dic=[object objectItemKey:@"object"];
+            [XHUserInfo sharedUserInfo].birthdate=[dic objectItemKey:@"birthdate"];
+            self.isRefresh(YES);
+        }
+    } error:^(NSError *error) {
+        
+    }];
 }
 -(void)logOutClick
 {
@@ -235,7 +254,7 @@
     [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         XHNetWorkConfig *net=[XHNetWorkConfig new];
         [net setObject:[XHUserInfo sharedUserInfo].ID forKey:@"id"];
-        [net postWithUrl:@"zzjt-app-api_logOut" sucess:^(id object, BOOL verifyObject) {
+        [net postWithUrl:@"pmschool-teacher-api_/teacher/logout" sucess:^(id object, BOOL verifyObject) {
             [XHShowHUD hideHud];
             if (verifyObject) {
             }
@@ -285,7 +304,7 @@
             [self.netWorkConfig setObject:fileName forKey:@"headPic"];
             [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].ID forKey:@"id"];
             [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
-            [self.netWorkConfig postWithUrl:@"zzjt-app-api_user004" sucess:^(id object, BOOL verifyObject) {
+            [self.netWorkConfig postWithUrl:@"pmschool-teacher-api_/teacher/user/updateHeadPic" sucess:^(id object, BOOL verifyObject) {
                 if (verifyObject) {
                     [XHUserInfo sharedUserInfo].headPic=[[object objectItemKey:@"object"] objectItemKey:@"headPic"];
                     self.isRefresh(YES);

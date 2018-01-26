@@ -29,14 +29,25 @@
  @return 时间date转时间字符串
  */
 +(NSString *)getDateStrWithDateFormatter:(NSString *)dateFormatter Date:(NSDate *)date;
+
 /**
  时间字符串转日期date
-
+ 
  @param dateStr 时间字符串
  @param formatter 时间格式
  @return 日期date
  */
 +(NSDate *)getDateWithDateStr:(NSString *)dateStr formatter:(NSString *)formatter;
+
+/**
+ 时间字符串转换为指定时间格式字符串
+
+ @param dateStr 时间字符串
+ @param fromFormatter 时间字符串转时间date格式
+ @param toFormatter 时间date转时间字符串格式
+ @return 时间字符串
+ */
++(NSString *)dateStr:(NSString *)dateStr FromFormatter:(NSString *)fromFormatter ToFormatter:(NSString *)toFormatter;
 /**
  制定日期几天前日期
 
@@ -54,4 +65,14 @@
  @return 制定日期几天后日期
  */
 +(NSDate *)getDayAfterWithDate:(NSDate *)date dayAfter:(NSInteger )dayAfter;
+
+/**
+ 比较两个时间相差多长时间（年、月、日、时、分、秒）
+
+ @param fromeDateStr 第一个时间字符串
+ @param toDateStr 第二个时间字符串
+ @param formatterStr 时间格式
+ @return 时间差
+ */
++(NSDateComponents *)howLongFromeDateStr:(NSString *)fromeDateStr toDateStr:(NSString *)toDateStr formatter:(NSString *)formatterStr;
 @end
