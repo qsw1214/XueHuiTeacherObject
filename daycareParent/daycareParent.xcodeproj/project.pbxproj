@@ -108,6 +108,9 @@
 		4B4A001A1FE2437300B8A8F8 /* XHDynamicsCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4A00191FE2437300B8A8F8 /* XHDynamicsCollectionView.m */; };
 		4B4A001D1FE243C900B8A8F8 /* XHDynamicsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4A001C1FE243C900B8A8F8 /* XHDynamicsCollectionViewCell.m */; };
 		4B4A00201FE276A500B8A8F8 /* XHPreviewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4A001F1FE276A500B8A8F8 /* XHPreviewModel.m */; };
+		4B4D7FE920198A79001D0BB0 /* XHParentAddressBookSectionBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4D7FE820198A79001D0BB0 /* XHParentAddressBookSectionBar.m */; };
+		4B4D7FEC2019A4B1001D0BB0 /* XHAddressBookSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4D7FEB2019A4B1001D0BB0 /* XHAddressBookSection.m */; };
+		4B4D7FEF2019C86D001D0BB0 /* XHParentHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4D7FEE2019C86C001D0BB0 /* XHParentHeaderFooterView.m */; };
 		4B523BC41FD12D43006DD565 /* XHHomeWorkDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B523BC31FD12D43006DD565 /* XHHomeWorkDetailsViewController.m */; };
 		4B523BC71FD14782006DD565 /* XHHomeWorkCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B523BC61FD14782006DD565 /* XHHomeWorkCollectionView.m */; };
 		4B523BCA1FD14A27006DD565 /* XHHomeWorkContentViwCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B523BC91FD14A27006DD565 /* XHHomeWorkContentViwCell.m */; };
@@ -701,6 +704,12 @@
 		4B4A001C1FE243C900B8A8F8 /* XHDynamicsCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHDynamicsCollectionViewCell.m; sourceTree = "<group>"; };
 		4B4A001E1FE276A500B8A8F8 /* XHPreviewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHPreviewModel.h; sourceTree = "<group>"; };
 		4B4A001F1FE276A500B8A8F8 /* XHPreviewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHPreviewModel.m; sourceTree = "<group>"; };
+		4B4D7FE720198A79001D0BB0 /* XHParentAddressBookSectionBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHParentAddressBookSectionBar.h; sourceTree = "<group>"; };
+		4B4D7FE820198A79001D0BB0 /* XHParentAddressBookSectionBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHParentAddressBookSectionBar.m; sourceTree = "<group>"; };
+		4B4D7FEA2019A4B1001D0BB0 /* XHAddressBookSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHAddressBookSection.h; sourceTree = "<group>"; };
+		4B4D7FEB2019A4B1001D0BB0 /* XHAddressBookSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHAddressBookSection.m; sourceTree = "<group>"; };
+		4B4D7FED2019C86C001D0BB0 /* XHParentHeaderFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHParentHeaderFooterView.h; sourceTree = "<group>"; };
+		4B4D7FEE2019C86C001D0BB0 /* XHParentHeaderFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHParentHeaderFooterView.m; sourceTree = "<group>"; };
 		4B523BC21FD12D43006DD565 /* XHHomeWorkDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHHomeWorkDetailsViewController.h; sourceTree = "<group>"; };
 		4B523BC31FD12D43006DD565 /* XHHomeWorkDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHHomeWorkDetailsViewController.m; sourceTree = "<group>"; };
 		4B523BC51FD14782006DD565 /* XHHomeWorkCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHHomeWorkCollectionView.h; sourceTree = "<group>"; };
@@ -1906,6 +1915,8 @@
 				4B632AB71FE0F49D00B90B94 /* XHTeacherAddressBookKey.m */,
 				4B550E4B1FF364AC004CF7ED /* XHSortedArrayComparator.h */,
 				4B550E4C1FF364AC004CF7ED /* XHSortedArrayComparator.m */,
+				4B4D7FEA2019A4B1001D0BB0 /* XHAddressBookSection.h */,
+				4B4D7FEB2019A4B1001D0BB0 /* XHAddressBookSection.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1915,6 +1926,10 @@
 			children = (
 				4B8D4B6D201978990043E0F4 /* XHParentAddressBookContentView.h */,
 				4B8D4B6E201978990043E0F4 /* XHParentAddressBookContentView.m */,
+				4B4D7FED2019C86C001D0BB0 /* XHParentHeaderFooterView.h */,
+				4B4D7FEE2019C86C001D0BB0 /* XHParentHeaderFooterView.m */,
+				4B4D7FE720198A79001D0BB0 /* XHParentAddressBookSectionBar.h */,
+				4B4D7FE820198A79001D0BB0 /* XHParentAddressBookSectionBar.m */,
 				4B31263E1FDA1F26000CE894 /* XHAddressBookContentView.h */,
 				4B31263F1FDA1F26000CE894 /* XHAddressBookContentView.m */,
 				4B3126411FDA1F4B000CE894 /* XHAddressBookCell.h */,
@@ -4218,6 +4233,7 @@
 				4B80F2E81FCBF08800BC7B52 /* AFHTTPSessionManager.m in Sources */,
 				4B07CC471FD5106800B2DBDA /* KYAnimatedPageControl.m in Sources */,
 				4B5A3AFD1FCEAECA00504229 /* BaseControl.m in Sources */,
+				4B4D7FEF2019C86D001D0BB0 /* XHParentHeaderFooterView.m in Sources */,
 				8CB5A2841FD7DF4B008E97D8 /* AreaModel.m in Sources */,
 				8C8081611FCE722000C7945A /* XHListTableViewCell.m in Sources */,
 				4B80F2D91FCBF04F00BC7B52 /* UIView+WebCacheOperation.m in Sources */,
@@ -4367,6 +4383,7 @@
 				4BA8C4C51FCFD0AF006CBEBC /* XHRegisterViewController.m in Sources */,
 				8CBA35FF2011BBDB00485643 /* XHDayRollCallViewController.m in Sources */,
 				4B80F27E1FCBF04800BC7B52 /* MJRefreshHeader.m in Sources */,
+				4B4D7FE920198A79001D0BB0 /* XHParentAddressBookSectionBar.m in Sources */,
 				4BB792C61FD7923C00E0ED72 /* XHSyllabusFrame.m in Sources */,
 				8C79740A1FE772A700AF6F6A /* NYXImagesHelper.m in Sources */,
 				8C0CCF7E1FFF16FE0008C0CE /* WebViewJavascriptBridge.m in Sources */,
@@ -4435,6 +4452,7 @@
 				4B632AAC1FE0CC4500B90B94 /* XHTeacherAddressBookContentView.m in Sources */,
 				8CD8CE0E2015D23E0085DD70 /* XHDayRollCallDetailViewController.m in Sources */,
 				4B68C9E9201177120078FEDB /* XHCreateRecipeContentView.m in Sources */,
+				4B4D7FEC2019A4B1001D0BB0 /* XHAddressBookSection.m in Sources */,
 				4B80F2EB1FCBF08800BC7B52 /* AFURLRequestSerialization.m in Sources */,
 				8CBEE21E201884F8007EB93A /* XHPunchSignViewController.m in Sources */,
 				4B80F2121FCBE81600BC7B52 /* NSObject+Category.m in Sources */,

@@ -158,11 +158,10 @@
               }];
          }
      }];
-    
-
-    
-    [tableView reloadData];
+    [tableView refreshReloadData];
 }
+
+
 -(void)getModel:(id *)model
 {
     [self getAddressBookWithModel:model];

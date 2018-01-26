@@ -178,4 +178,15 @@
     [self beginRefreshing];
 }
 
+/**
+ 刷新分组
+ 
+ @param sectionsIndex 要刷新的分组的index而不是“NSIndexSet”
+ @param animation UITableViewRowAnimation 动画类型
+ */
+-(void)reloadSectionsWithIndex:(NSInteger )sectionsIndex withRowAnimation:(UITableViewRowAnimation)animation
+{
+    [self reloadSections:[NSIndexSet indexSetWithIndex:sectionsIndex] withRowAnimation:animation];
+}
+
 @end
