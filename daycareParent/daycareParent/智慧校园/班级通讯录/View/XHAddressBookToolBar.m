@@ -105,7 +105,7 @@
     if (_phoneControl == nil)
     {
         _phoneControl = [[XHAddressBookToolBarItemControl alloc]init];
-        [_phoneControl setImageName:@"ico_call"];
+        [_phoneControl setImageName:@"ico_call_teacher"];
         [_phoneControl setTitle:@"拨打电话"];
         [_phoneControl addTarget:self action:@selector(controlAction:) forControlEvents:UIControlEventTouchUpInside];
         [_phoneControl setTag:1];
@@ -119,7 +119,7 @@
     if (_messageControl == nil)
     {
         _messageControl = [[XHAddressBookToolBarItemControl alloc]init];
-        [_messageControl setImageName:@"ico_msm"];
+        [_messageControl setImageName:@"ico_smessage_teacher"];
         [_messageControl setTitle:@"发送短信"];
         [_messageControl addTarget:self action:@selector(controlAction:) forControlEvents:UIControlEventTouchUpInside];
         [_messageControl setTag:2];
@@ -132,7 +132,7 @@
     if (_imControl == nil)
     {
         _imControl = [[XHAddressBookToolBarItemControl alloc]init];
-        [_imControl setImageName:@"ico_news"];
+        [_imControl setImageName:@"ico_message_teacher"];
         [_imControl setTitle:@"发送消息"];
         [_imControl addTarget:self action:@selector(controlAction:) forControlEvents:UIControlEventTouchUpInside];
         [_imControl setTag:3];
@@ -145,7 +145,7 @@
     if (_courseControl == nil)
     {
         _courseControl = [[XHAddressBookToolBarItemControl alloc]init];
-        [_courseControl setImageName:@"ico_course"];
+        [_courseControl setImageName:@"ico_course_teacher"];
         [_courseControl setTitle:@"所授课程"];
         [_courseControl addTarget:self action:@selector(controlAction:) forControlEvents:UIControlEventTouchUpInside];
         [_courseControl setTag:4];

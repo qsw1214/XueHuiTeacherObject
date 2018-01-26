@@ -8,6 +8,8 @@
 
 #import "XHAssignmentHomeWorkViewController.h"
 #import "XHAssignmentHomeWorkContentView.h"
+#import "XHHomeWorkViewController.h"
+
 
 
 @interface XHAssignmentHomeWorkViewController ()
@@ -39,6 +41,13 @@
         [self.view addSubview:self.contentView];
         [self.contentView resetFrame:CGRectMake(0, self.navigationView.bottom, SCREEN_WIDTH, SCREEN_HEIGHT-self.navigationView.height)];
     }
+}
+
+
+-(void)rightItemAction:(BaseNavigationControlItem *)sender
+{
+    XHHomeWorkViewController *homeWork = [[XHHomeWorkViewController alloc]init];
+    [self.navigationController pushViewController:homeWork animated:YES];
 }
 
 
