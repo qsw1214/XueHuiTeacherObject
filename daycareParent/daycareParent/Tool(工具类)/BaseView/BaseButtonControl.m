@@ -466,6 +466,28 @@
 
 
 
+#pragma mark 设置文本输入框的占位字符
+/**
+ 设置占位字符
+ */
+-(void)setinputTextPlaceholder:(NSString*)placeholder withNumberType:(NSInteger)type withAllType:(BOOL)allType
+{
+    [self.textFieldArray enumerateObjectsUsingBlock:^(UITextField   *obj, NSUInteger idx, BOOL *  stop)
+     {
+         if (allType)
+         {
+             [obj setPlaceholder:placeholder];
+         }
+         else if (type == idx)
+         {
+             [obj setPlaceholder:placeholder];
+             *stop = YES;
+         }
+     }];
+}
+
+
+
 #pragma mark - 文本输入域内容颜色
 /**
  文本输入域内容颜色

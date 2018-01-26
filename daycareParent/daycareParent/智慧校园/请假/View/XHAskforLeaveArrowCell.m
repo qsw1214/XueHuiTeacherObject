@@ -98,7 +98,7 @@
     {
         _titleLabel = [[UILabel alloc]init];
         [_titleLabel setTextColor:RGB(14, 14, 14)];
-        [_titleLabel setFont:[UIFont boldSystemFontOfSize:14.0]];
+        [_titleLabel setFont:FontLevel3];
     }
     return _titleLabel;
 }

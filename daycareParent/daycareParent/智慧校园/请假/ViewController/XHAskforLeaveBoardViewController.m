@@ -25,8 +25,8 @@
     self = [super init];
     if (self)
     {
-        XHAskforLeaveViewController *askforLeave = [XHAskforLeaveViewController new];
-        XHHistoryViewController *history = [XHHistoryViewController new];
+        XHAskforLeaveViewController *askforLeave = [[XHAskforLeaveViewController alloc]init];
+        XHHistoryViewController *history = [[XHHistoryViewController alloc]init];
         [self setSegmentedControlItems:@[@"新建",@"记录"] WithControllersArry:@[askforLeave,history]];
     }
     return self;

@@ -74,7 +74,6 @@
     if (_contentView == nil)
     {
         _contentView = [[XHAskforLeaveContentView alloc]initWithObject:self];
-        
     }
     return _contentView;
 }
