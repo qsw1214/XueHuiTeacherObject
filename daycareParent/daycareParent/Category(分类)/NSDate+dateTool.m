@@ -73,4 +73,19 @@
     NSLog(@"两个时间相差%ld年%ld月%ld日%ld小时%ld分钟%ld秒", cmps.year, cmps.month, cmps.day, cmps.hour, cmps.minute, cmps.second);
     return cmps;
 }
+#pragma mark  某时距离现在多长时间
++ (NSString *)formateDateNow:(NSDate *)date
+{
+    NSInteger day = [[self howLongFromeDateStr:[NSDate getDateStrWithDateFormatter:YY_DEFAULT_TIME_FORM Date:date] toDateStr:[NSDate getDateStrWithDateFormatter:YY_DEFAULT_TIME_FORM Date:[NSDate date]] formatter:YY_DEFAULT_TIME_FORM] day];
+    
+    if (day == 0)
+    {
+        return @"今天";
+    }
+    if (day == 1)
+    {
+        return @"昨天";
+    }
+    return [self getDateStrWithDateFormatter:YY_DEFAULT_TIME_FORM Date:date];
+}
 @end

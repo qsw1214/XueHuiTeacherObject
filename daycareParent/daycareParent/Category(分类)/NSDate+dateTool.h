@@ -75,4 +75,11 @@
  @return 时间差
  */
 +(NSDateComponents *)howLongFromeDateStr:(NSString *)fromeDateStr toDateStr:(NSString *)toDateStr formatter:(NSString *)formatterStr;
+/**
+ 比较某时距离现在多长时间
+ @param date 时间格式
+ @return 时间判断
+ */
+
++ (NSString *)formateDateNow:(NSDate *)date;
 @end
