@@ -435,6 +435,8 @@
 		8C922BD91FDE65EB00BA0EAB /* XHForgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C922BD81FDE65EB00BA0EAB /* XHForgetViewController.m */; };
 		8C9D92EA201EC8F600F4A28E /* XHNattendanceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9D92E9201EC8F600F4A28E /* XHNattendanceModel.m */; };
 		8C9D92ED201EEBF200F4A28E /* XHPunchSignTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9D92EC201EEBF200F4A28E /* XHPunchSignTableViewCell.m */; };
+		8C9D92FB201F197100F4A28E /* XHClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9D92FA201F197100F4A28E /* XHClassViewController.m */; };
+		8C9D92FE201F1A8600F4A28E /* XHClassTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9D92FD201F1A8600F4A28E /* XHClassTableViewCell.m */; };
 		8CB5A25B1FD7825D008E97D8 /* XHNameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5A2591FD7825D008E97D8 /* XHNameTableViewCell.m */; };
 		8CB5A25C1FD7825D008E97D8 /* XHNameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CB5A25A1FD7825D008E97D8 /* XHNameTableViewCell.xib */; };
 		8CB5A2601FD78270008E97D8 /* XHAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5A25E1FD78270008E97D8 /* XHAddressTableViewCell.m */; };
@@ -1327,6 +1329,10 @@
 		8C9D92E9201EC8F600F4A28E /* XHNattendanceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNattendanceModel.m; sourceTree = "<group>"; };
 		8C9D92EB201EEBF200F4A28E /* XHPunchSignTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHPunchSignTableViewCell.h; sourceTree = "<group>"; };
 		8C9D92EC201EEBF200F4A28E /* XHPunchSignTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHPunchSignTableViewCell.m; sourceTree = "<group>"; };
+		8C9D92F9201F197100F4A28E /* XHClassViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHClassViewController.h; sourceTree = "<group>"; };
+		8C9D92FA201F197100F4A28E /* XHClassViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHClassViewController.m; sourceTree = "<group>"; };
+		8C9D92FC201F1A8600F4A28E /* XHClassTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHClassTableViewCell.h; sourceTree = "<group>"; };
+		8C9D92FD201F1A8600F4A28E /* XHClassTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHClassTableViewCell.m; sourceTree = "<group>"; };
 		8CB5A2581FD7825D008E97D8 /* XHNameTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XHNameTableViewCell.h; path = "daycareParent/我的/我的收获地址/view/XHNameTableViewCell.h"; sourceTree = SOURCE_ROOT; };
 		8CB5A2591FD7825D008E97D8 /* XHNameTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XHNameTableViewCell.m; path = "daycareParent/我的/我的收获地址/view/XHNameTableViewCell.m"; sourceTree = SOURCE_ROOT; };
 		8CB5A25A1FD7825D008E97D8 /* XHNameTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = XHNameTableViewCell.xib; path = "daycareParent/我的/我的收获地址/view/XHNameTableViewCell.xib"; sourceTree = SOURCE_ROOT; };
@@ -3630,6 +3636,8 @@
 				8CBA35FE2011BBDB00485643 /* XHDayRollCallViewController.m */,
 				8CD8CE0C2015D23E0085DD70 /* XHDayRollCallDetailViewController.h */,
 				8CD8CE0D2015D23E0085DD70 /* XHDayRollCallDetailViewController.m */,
+				8C9D92F9201F197100F4A28E /* XHClassViewController.h */,
+				8C9D92FA201F197100F4A28E /* XHClassViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -3652,6 +3660,8 @@
 				8CD8CE072015A9BF0085DD70 /* XHDayRollCollectionViewCell.m */,
 				8CD8CE122015E0550085DD70 /* XHDayRollReasonTableViewCell.h */,
 				8CD8CE132015E0550085DD70 /* XHDayRollReasonTableViewCell.m */,
+				8C9D92FC201F1A8600F4A28E /* XHClassTableViewCell.h */,
+				8C9D92FD201F1A8600F4A28E /* XHClassTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -4303,6 +4313,7 @@
 				8C007D772010858900DD0635 /* XHHistoryHeadTableViewCell.m in Sources */,
 				4B11AF321FCCE958002738F1 /* XHSmartCampusViewController.m in Sources */,
 				4B11CA011FCE591100FD0D8F /* XHTestView.m in Sources */,
+				8C9D92FE201F1A8600F4A28E /* XHClassTableViewCell.m in Sources */,
 				4B3418741FFDC14C00A5EC56 /* UINavigationController+ZFPlayerRotation.m in Sources */,
 				4B80F3281FCBFD6F00BC7B52 /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */,
 				8C6240881FD8D2B800E6C031 /* XHComplieAddressViewController.m in Sources */,
@@ -4435,6 +4446,7 @@
 				04E5D14D1FD39F3F0021B842 /* XHPriviTableViewCell.m in Sources */,
 				4BA8C4DF1FCFF36C006CBEBC /* XHHomeWorkFrame.m in Sources */,
 				4B2BBAF8201865AA007DAFCC /* XHAddressBoardViewController.m in Sources */,
+				8C9D92FB201F197100F4A28E /* XHClassViewController.m in Sources */,
 				4B4338BA1FDF9C3F0047AC52 /* XHEducationCloudItemCell.m in Sources */,
 				4B80F2C81FCBF04F00BC7B52 /* SDWebImageCodersManager.m in Sources */,
 				4B3126591FDA7D5D000CE894 /* XHAddressBookKey.m in Sources */,
@@ -4679,7 +4691,7 @@
 					"$(PROJECT_DIR)/daycareParent/Tool(工具类)/ping++/One",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jt.xhm;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jt.xhm-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4751,7 +4763,7 @@
 					"$(PROJECT_DIR)/daycareParent/Tool(工具类)/ping++/One",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jt.xhm;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jt.xhm-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

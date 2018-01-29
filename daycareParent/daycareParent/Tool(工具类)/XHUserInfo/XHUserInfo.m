@@ -74,8 +74,22 @@ static XHUserInfo *userInfo = nil;
     }
     return _childListArry;
 }
-
-
+-(NSMutableArray *)classListArry
+{
+    if (!_classListArry)
+    {
+        _classListArry = [NSMutableArray array];
+    }
+    return _classListArry;
+}
+-(NSMutableArray *)subjectListArry
+{
+    if (!_subjectListArry)
+    {
+        _subjectListArry = [NSMutableArray array];
+    }
+    return _subjectListArry;
+}
                   
 
 
