@@ -181,6 +181,8 @@
                 XHNattendanceModel *model=[[XHNattendanceModel alloc] initWithDic:dic];
                 [self.dataArray addObject:model];
             }
+            [_keys removeAllObjects];
+            [_dataDic removeAllObjects];
             [self dataGroup:self.dataArray];
             [_tableView reloadData];
         }
