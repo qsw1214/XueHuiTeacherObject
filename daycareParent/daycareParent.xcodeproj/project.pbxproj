@@ -113,6 +113,8 @@
 		4B4D7FEF2019C86D001D0BB0 /* XHParentHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4D7FEE2019C86C001D0BB0 /* XHParentHeaderFooterView.m */; };
 		4B4D7FF2201AC5C0001D0BB0 /* XHParentAddressBookToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4D7FF1201AC5C0001D0BB0 /* XHParentAddressBookToolBar.m */; };
 		4B4D7FF5201AF5A1001D0BB0 /* XHAskforLeaveBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4D7FF4201AF5A1001D0BB0 /* XHAskforLeaveBoardViewController.m */; };
+		4B4D7FF8201B2533001D0BB0 /* XHAddNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4D7FF7201B2533001D0BB0 /* XHAddNoticeViewController.m */; };
+		4B4D7FFB201B27AF001D0BB0 /* XHAddNoticeContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4D7FFA201B27AF001D0BB0 /* XHAddNoticeContentView.m */; };
 		4B523BC41FD12D43006DD565 /* XHHomeWorkDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B523BC31FD12D43006DD565 /* XHHomeWorkDetailsViewController.m */; };
 		4B523BC71FD14782006DD565 /* XHHomeWorkCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B523BC61FD14782006DD565 /* XHHomeWorkCollectionView.m */; };
 		4B523BCA1FD14A27006DD565 /* XHHomeWorkContentViwCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B523BC91FD14A27006DD565 /* XHHomeWorkContentViwCell.m */; };
@@ -717,6 +719,10 @@
 		4B4D7FF1201AC5C0001D0BB0 /* XHParentAddressBookToolBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHParentAddressBookToolBar.m; sourceTree = "<group>"; };
 		4B4D7FF3201AF5A1001D0BB0 /* XHAskforLeaveBoardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHAskforLeaveBoardViewController.h; sourceTree = "<group>"; };
 		4B4D7FF4201AF5A1001D0BB0 /* XHAskforLeaveBoardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHAskforLeaveBoardViewController.m; sourceTree = "<group>"; };
+		4B4D7FF6201B2533001D0BB0 /* XHAddNoticeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHAddNoticeViewController.h; sourceTree = "<group>"; };
+		4B4D7FF7201B2533001D0BB0 /* XHAddNoticeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHAddNoticeViewController.m; sourceTree = "<group>"; };
+		4B4D7FF9201B27AF001D0BB0 /* XHAddNoticeContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHAddNoticeContentView.h; sourceTree = "<group>"; };
+		4B4D7FFA201B27AF001D0BB0 /* XHAddNoticeContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHAddNoticeContentView.m; sourceTree = "<group>"; };
 		4B523BC21FD12D43006DD565 /* XHHomeWorkDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHHomeWorkDetailsViewController.h; sourceTree = "<group>"; };
 		4B523BC31FD12D43006DD565 /* XHHomeWorkDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHHomeWorkDetailsViewController.m; sourceTree = "<group>"; };
 		4B523BC51FD14782006DD565 /* XHHomeWorkCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHHomeWorkCollectionView.h; sourceTree = "<group>"; };
@@ -2177,6 +2183,8 @@
 				4B577F8E1FF5C4F50023ACBC /* XHNoticeDetailView.m */,
 				4B577F8F1FF5C4F50023ACBC /* XHNoticeTableViewCell.h */,
 				4B577F901FF5C4F50023ACBC /* XHNoticeTableViewCell.m */,
+				4B4D7FF9201B27AF001D0BB0 /* XHAddNoticeContentView.h */,
+				4B4D7FFA201B27AF001D0BB0 /* XHAddNoticeContentView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2184,6 +2192,8 @@
 		4B577F911FF5C4F50023ACBC /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				4B4D7FF6201B2533001D0BB0 /* XHAddNoticeViewController.h */,
+				4B4D7FF7201B2533001D0BB0 /* XHAddNoticeViewController.m */,
 				4B577FA81FF5EF770023ACBC /* XHNoticeViewController.h */,
 				4B577FA91FF5EF770023ACBC /* XHNoticeViewController.m */,
 				4B577F921FF5C4F50023ACBC /* XHNoticeListViewController.h */,
@@ -4331,6 +4341,7 @@
 				8C8081701FCEAB7C00C7945A /* XHBaseLabel.m in Sources */,
 				4B3126361FD93CC6000CE894 /* UIView+SDExtension.m in Sources */,
 				8CB8AA2A1FE8A2920043B4EA /* UIImage+Resizing.m in Sources */,
+				4B4D7FFB201B27AF001D0BB0 /* XHAddNoticeContentView.m in Sources */,
 				8CDC906C1FE4CF6500040D19 /* XHFamilyListModel.m in Sources */,
 				8C0CCF801FFF16FE0008C0CE /* WebViewJavascriptBridgeBase.m in Sources */,
 				4B577FA31FF5C4F60023ACBC /* XHNoticeListViewController.m in Sources */,
@@ -4402,6 +4413,7 @@
 				8CBA35FF2011BBDB00485643 /* XHDayRollCallViewController.m in Sources */,
 				4B80F27E1FCBF04800BC7B52 /* MJRefreshHeader.m in Sources */,
 				4B4D7FE920198A79001D0BB0 /* XHParentAddressBookSectionBar.m in Sources */,
+				4B4D7FF8201B2533001D0BB0 /* XHAddNoticeViewController.m in Sources */,
 				4BB792C61FD7923C00E0ED72 /* XHSyllabusFrame.m in Sources */,
 				8C79740A1FE772A700AF6F6A /* NYXImagesHelper.m in Sources */,
 				8C0CCF7E1FFF16FE0008C0CE /* WebViewJavascriptBridge.m in Sources */,
