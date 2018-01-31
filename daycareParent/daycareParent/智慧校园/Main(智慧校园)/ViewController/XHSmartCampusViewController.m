@@ -23,7 +23,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "XHBindCardViewController.h"//!<扫一扫绑定卡
 #import "XHAssignmentHomeWorkViewController.h"  //!< 发布作业
-#import "XHNoticeListViewController.h" //!< 通知公告
+#import "XHAddNoticeViewController.h" //!< 通知公告
 #import "XHDayRollCallViewController.h"//!< 日常点名
 #import "XHCourseReportViewController.h"//!< 课程报备
 
@@ -80,7 +80,7 @@
 #pragma mark case 1 通知公告
         case 1:
         {
-            XHNoticeListViewController *notice = [[XHNoticeListViewController alloc]initHiddenWhenPushHidden];
+            XHAddNoticeViewController *notice = [[XHAddNoticeViewController alloc]initHiddenWhenPushHidden];
             [self.navigationController pushViewController:notice animated:YES];
         }
             break;
