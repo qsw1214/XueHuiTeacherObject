@@ -82,4 +82,13 @@
  */
 
 + (NSString *)formateDateNow:(NSDate *)date;
+
+/**
+ 时间转换格式
+
+ @param date 时间date
+ @param formatter 时间格式
+ @return 时间date
+ */
++(NSDate *)getDate:(NSDate *)date formatter:(NSString *)formatter;
 @end

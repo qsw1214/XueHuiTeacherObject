@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "XHGuardianInfo.h"
+#import "XHTeacherInfo.h"
+typedef void(^ClassListBlock)(BOOL isOK,NSMutableArray *classListArry);
+typedef void(^SubjectListBlock)(BOOL isOK,NSMutableArray *subjectListArry);
+
 @interface XHUserInfo : NSObject
 
 @property (nonatomic,copy) NSString *userType; //!< 类别
@@ -27,8 +31,12 @@
 @property (nonatomic,copy) NSString *isActive; //!<isActive
 @property (nonatomic,copy) NSString *isRoot; //!<isRoot
 @property (nonatomic,copy) NSString *schoolId; //!<schoolId
+@property(nonatomic,copy)XHTeacherInfo *teacherModel;//!< 老师对象
+
 @property (nonatomic,strong) NSMutableArray *classListArry; //!班级列表信息
+@property(nonatomic,strong)XHNetWorkConfig *classListNet;//!班级列表请求
 @property (nonatomic,strong) NSMutableArray *subjectListArry; //!学科列表信息
+@property(nonatomic,strong)XHNetWorkConfig *subjectListNet;//!学科列表请求
 @property (nonatomic,copy) NSString *primaryFamilyId; //!<主监护人家庭ID
 @property (nonatomic,strong) XHGuardianInfo *guardianModel; //!<主监护人信息
 @property (nonatomic,strong) NSMutableArray <XHChildListModel*> *childListArry; //!<孩子列表信息
@@ -49,4 +57,6 @@
  @param object 传入数据源字典
  */
 -(void)setItemObject:(NSDictionary*)object;
+-(void)getClassList:(ClassListBlock)calssListBock;
+-(void)getSubjectList:(SubjectListBlock)subjectListBock;
 @end

@@ -35,21 +35,21 @@
 -(void)setItemObject:(XHDayRollCallModel *)model
 {
     _reasonLabel.frame=CGRectMake(60, 0, SCREEN_WIDTH-70, [self getCellHeight:model]);
-    _reasonLabel.text=model.reasonStr;
-    if (![model.imagPic isEqualToString:@""]) {
+    _reasonLabel.text=model.content;
+    if (![model.picUrl isEqualToString:@""]) {
         _imageV.frame=CGRectMake(20, _reasonLabel.bottom+10, 50, 50);
-        [_imageV sd_setImageWithURL:[NSURL URLWithString:model.imagPic] placeholderImage:[UIImage imageNamed:@"addman"]];
+        [_imageV sd_setImageWithURL:[NSURL URLWithString:model.picUrl] placeholderImage:[UIImage imageNamed:@"addman"]];
     }
 }
 -(CGFloat )getCellHeight:(XHDayRollCallModel *)model
 {
 //    if ([model.imagPic isEqualToString:@""]) {
-        if ([NSString contentSizeWithTitle:model.reasonStr withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height<50) {
+        if ([NSString contentSizeWithTitle:model.content withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height<50) {
             return 50;
         }
         else
         {
-            return [NSString contentSizeWithTitle:model.reasonStr withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height;
+            return [NSString contentSizeWithTitle:model.content withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height;
         }
         
 //    }

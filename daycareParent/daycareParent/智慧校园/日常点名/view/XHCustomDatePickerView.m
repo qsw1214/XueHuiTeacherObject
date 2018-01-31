@@ -78,7 +78,7 @@
                 case XHCustomDatePickerViewModelMouthAndDayType:
                     
                 {
-                   [_delegate getDateStr:[NSString dateWithDateFormatter:@"MM月dd日" Date:[NSDate date]]];
+                   [_delegate getDateStr:[NSString dateWithDateFormatter:@"yyyy年MM月dd日" Date:[NSDate date]]];
                 }
                     break;
                     
@@ -99,7 +99,7 @@
     switch (self.modelyTpe) {
         case XHCustomDatePickerViewModelMouthAndDayType:
         {
-           _dateStr=[NSString dateWithDateFormatter:@"MM月dd日" Date:datePicker.date];
+           _dateStr=[NSString dateWithDateFormatter:@"yyyy年MM月dd日" Date:datePicker.date];
         }
             break;
             

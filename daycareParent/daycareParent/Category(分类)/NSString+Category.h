@@ -13,7 +13,6 @@
 
 @interface NSString (Category)
 
-
 #pragma mark 字符串安全保护，防止字符串为 nil <null> 导致程序崩溃问题
 /**
  @param title 传入的对象
@@ -61,4 +60,5 @@
  */
 +(NSString *)dateStr:(NSString *)dateStr;
 +(NSString *)dateWithDateFormatter:(NSString *)dateFormatter Date:(NSDate *)date;
+
 @end

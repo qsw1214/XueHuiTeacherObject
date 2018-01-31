@@ -349,6 +349,9 @@
 		8C3E55B71FD5216F0013002A /* XHPayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C3E55B51FD5216F0013002A /* XHPayTableViewCell.xib */; };
 		8C3E55C11FD549B60013002A /* XHStudyRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3E55C01FD549B60013002A /* XHStudyRecordViewController.m */; };
 		8C42CFCE1FF5D86D00CEDBDA /* XHNewUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C42CFCD1FF5D86D00CEDBDA /* XHNewUserInfoViewController.m */; };
+		8C4C2087202012D10051642B /* XHClassListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4C2086202012D10051642B /* XHClassListModel.m */; };
+		8C4C208A202021040051642B /* XHTeacherInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4C2089202021040051642B /* XHTeacherInfo.m */; };
+		8C4C208D202039000051642B /* XHSubjectListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4C208C202039000051642B /* XHSubjectListModel.m */; };
 		8C4DB5D91FEBB55D00B14073 /* XHHomeWorkDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4DB5D81FEBB55D00B14073 /* XHHomeWorkDetailView.m */; };
 		8C5121E41FDF64BB00973E77 /* NSDictionary+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5121E31FDF64BB00973E77 /* NSDictionary+Category.m */; };
 		8C5121E81FDF7B9300973E77 /* XHLoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5121E71FDF7B9300973E77 /* XHLoginModel.m */; };
@@ -1195,6 +1198,12 @@
 		8C3E55C01FD549B60013002A /* XHStudyRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHStudyRecordViewController.m; sourceTree = "<group>"; };
 		8C42CFCC1FF5D86D00CEDBDA /* XHNewUserInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNewUserInfoViewController.h; sourceTree = "<group>"; };
 		8C42CFCD1FF5D86D00CEDBDA /* XHNewUserInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNewUserInfoViewController.m; sourceTree = "<group>"; };
+		8C4C2085202012D10051642B /* XHClassListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHClassListModel.h; sourceTree = "<group>"; };
+		8C4C2086202012D10051642B /* XHClassListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHClassListModel.m; sourceTree = "<group>"; };
+		8C4C2088202021040051642B /* XHTeacherInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHTeacherInfo.h; sourceTree = "<group>"; };
+		8C4C2089202021040051642B /* XHTeacherInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHTeacherInfo.m; sourceTree = "<group>"; };
+		8C4C208B202039000051642B /* XHSubjectListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHSubjectListModel.h; sourceTree = "<group>"; };
+		8C4C208C202039000051642B /* XHSubjectListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHSubjectListModel.m; sourceTree = "<group>"; };
 		8C4DB5D71FEBB55D00B14073 /* XHHomeWorkDetailView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHHomeWorkDetailView.h; sourceTree = "<group>"; };
 		8C4DB5D81FEBB55D00B14073 /* XHHomeWorkDetailView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHHomeWorkDetailView.m; sourceTree = "<group>"; };
 		8C5121E21FDF64BB00973E77 /* NSDictionary+Category.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Category.h"; sourceTree = "<group>"; };
@@ -2052,6 +2061,8 @@
 				4B4338B31FDF5C8E0047AC52 /* XHUserInfo.m */,
 				8C7EF53D1FE0C72E00C029F2 /* XHGuardianInfo.h */,
 				8C7EF53E1FE0C72E00C029F2 /* XHGuardianInfo.m */,
+				8C4C2088202021040051642B /* XHTeacherInfo.h */,
+				8C4C2089202021040051642B /* XHTeacherInfo.m */,
 			);
 			path = XHUserInfo;
 			sourceTree = "<group>";
@@ -3647,6 +3658,10 @@
 			children = (
 				8CD8CE092015AC4D0085DD70 /* XHDayRollCallModel.h */,
 				8CD8CE0A2015AC4D0085DD70 /* XHDayRollCallModel.m */,
+				8C4C2085202012D10051642B /* XHClassListModel.h */,
+				8C4C2086202012D10051642B /* XHClassListModel.m */,
+				8C4C208B202039000051642B /* XHSubjectListModel.h */,
+				8C4C208C202039000051642B /* XHSubjectListModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -4278,6 +4293,7 @@
 				4B80F2C51FCBF04F00BC7B52 /* SDImageCache.m in Sources */,
 				8CDC90651FE4B86A00040D19 /* XHStudentDetailViewController.m in Sources */,
 				4B80F27A1FCBF04800BC7B52 /* MJRefreshAutoFooter.m in Sources */,
+				8C4C208D202039000051642B /* XHSubjectListModel.m in Sources */,
 				4B80F2D61FCBF04F00BC7B52 /* UIImageView+HighlightedWebCache.m in Sources */,
 				4B8E66151FD63FDD0006D641 /* XHCookBookViewController.m in Sources */,
 				4B80F23F1FCBF01B00BC7B52 /* BaseButtonControl.m in Sources */,
@@ -4367,6 +4383,7 @@
 				4B34187C1FFDC14C00A5EC56 /* ZFPlayerControlView.m in Sources */,
 				4B80F2851FCBF04800BC7B52 /* MJRefreshGifHeader.m in Sources */,
 				8C37D3401FE8A8EF00F157D1 /* XHIMNoticeModel.m in Sources */,
+				8C4C208A202021040051642B /* XHTeacherInfo.m in Sources */,
 				4B80F2811FCBF04800BC7B52 /* MJRefreshAutoStateFooter.m in Sources */,
 				4B8E66241FD6463C0006D641 /* XHCookBookFrame.m in Sources */,
 				4B31264C1FDA1FF5000CE894 /* XHAddressBookFrame.m in Sources */,
@@ -4388,6 +4405,7 @@
 				4B07CC2E1FD4ED7500B2DBDA /* XHParentsMeetingCell.m in Sources */,
 				8C0CCF7F1FFF16FE0008C0CE /* WebViewJavascriptBridge_JS.m in Sources */,
 				04B7400D1FD81D89008627CF /* XHAddTableViewCell.m in Sources */,
+				8C4C2087202012D10051642B /* XHClassListModel.m in Sources */,
 				4B71A1BA20060B9D00818046 /* XHCookBookImageControl.m in Sources */,
 				8C7E98311FECF1660096288E /* SGQRCodeAlbumManager.m in Sources */,
 				8C922BD91FDE65EB00BA0EAB /* XHForgetViewController.m in Sources */,

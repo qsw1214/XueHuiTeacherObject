@@ -88,4 +88,11 @@
     }
     return [self getDateStrWithDateFormatter:YY_DEFAULT_TIME_FORM Date:date];
 }
+#pragma mark  时间转换格式
++(NSDate *)getDate:(NSDate *)date formatter:(NSString *)formatter
+{
+    NSString *dateStr=[self getDateStrWithDateFormatter:formatter Date:date];
+    NSDate *_date=[NSDate getDateWithDateStr:dateStr formatter:formatter];
+    return _date;
+}
 @end

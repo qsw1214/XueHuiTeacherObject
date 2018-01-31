@@ -17,4 +17,5 @@ typedef NS_ENUM(NSInteger ,XHClassModelType)
 @interface XHClassViewController : BaseViewController
 
 @property(nonatomic,assign)XHClassModelType classModelType;
+@property(nonatomic,copy)void(^getClassBock)(NSInteger number);
 @end

@@ -29,6 +29,12 @@
     }
     return self;
 }
+-(void)setItemObject:(XHDayRollCallModel *)model
+{
+    [_headBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:ALGetFileHeadThumbnail(model.headPic)] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
+    _titleLabel.text=[NSString stringWithFormat:@"%@的请假",model.studentName];
+    
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

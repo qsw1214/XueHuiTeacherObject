@@ -50,8 +50,7 @@
     [self navtionHidden:YES];
     arry=@[@"修改密码",@"食谱管理",@"清除缓存",@"关于我们"];
     contentArry=@[@"ico-modify",@"icoshiouguanli",@"ico-clean",@"ico-about"];
-    _tableView=[[BaseTableView alloc] initWithFrame:CGRectMake(0, 239, SCREEN_WIDTH, SCREEN_HEIGHT-239) style:UITableViewStyleGrouped];
-     _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
+    _tableView=[[BaseTableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-20) style:UITableViewStyleGrouped];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.sectionHeaderHeight=0;
@@ -62,8 +61,10 @@
       [_tableView registerClass:[XHListTableViewCell class] forCellReuseIdentifier:@"listcell"];
      [_tableView registerClass:[XHSetTableViewCell class] forCellReuseIdentifier:@"cell"];
     [self.view addSubview:_tableView];
-
-     [self.view addSubview:self.h_view];
+    _tableView.tableHeaderView=self.h_view;
+    [_tableView showRefresHeaderWithTarget:self withSelector:@selector(refreshHead)];
+    [_tableView beginRefreshing];
+     //[self.view addSubview:self.h_view];
     //去掉留白方法
     if (@available(iOS 11.0, *)) {
         _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -76,6 +77,10 @@
     [super viewWillAppear:YES];
     fileSize= (float)[[SDImageCache sharedImageCache] getSize]/1024.0/1024.0;
     [_tableView reloadData];
+}
+-(void)refreshHead
+{
+    [self refreshHeadView];
 }
 #pragma mark----tableviewDelegate------
 
@@ -235,6 +240,7 @@
     {
         _sigerLabel.text=@"无签名，不个性";
     }
+    [_tableView refreshReload];
 }
 //-(NSMutableAttributedString *)chageTextColor:(NSString *)text fontColor:(UIColor *)fontColor
 //{

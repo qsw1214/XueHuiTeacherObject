@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "XHDayRollCallModel.h"
 @interface XHHistoryHeadTableViewCell : UITableViewCell
 @property(nonatomic,strong)UIButton *headBtn;
 @property(nonatomic,strong)UILabel *titleLabel;
+-(void)setItemObject:(XHDayRollCallModel *)model;
 @end

@@ -12,18 +12,27 @@
 #import "XHDayRollCallModel.h"
 #import "XHDayRollCollectionViewCell.h"
 #import "XHDayRollCallDetailViewController.h"
+#import "XHClassListModel.h"
+#import "XHDayRollCallModel.h"
+#import "XHClassViewController.h"
 #define SIGN_TITLE @[@"未签到",@"已签到",@"请假"]
 @interface XHDayRollCallViewController ()<XHCustomDatePickerViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 {
     NSInteger _tag;
     NSInteger _selectNumber;
+    NSString *_dateStr;
+    NSInteger _number;
 }
 @property(nonatomic,strong)UIView *headView;
 @property(nonatomic,strong)BaseButtonControl *rightBtn;
 @property(nonatomic,strong)UIView *signView;
 @property(nonatomic,strong)BaseCollectionView *collectionView;
 @property(nonatomic,strong)UIView *selectAllView;//!< 处理未签到视图
-
+@property(nonatomic,strong)NSMutableArray *noSignArry;//!< 未签到学生数组
+@property(nonatomic,strong)NSMutableArray *signArry;//!< 签到学生数组
+@property(nonatomic,strong)NSMutableArray *otherArry;//!< 请假学生数组
+@property(nonatomic,strong)NSMutableArray *selectArry;//!< 已选学生数组
+@property(nonatomic,copy)NSMutableString *mutableStr;
 @end
 
 @implementation XHDayRollCallViewController
@@ -32,6 +41,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setNavtionTitle:@"日常点名"];
+    _number=0;
     [self.view addSubview:self.headView];
     [self.view addSubview:self.rightBtn];
     [self.view addSubview:self.signView];
@@ -39,31 +49,287 @@
      [self.collectionView showRefresHeaderWithTarget:self withSelector:@selector(refreshHead)];
     [self.collectionView beginRefreshing];
     [self.collectionView setTipType:TipTitleAndTipImage withTipTitle:nil withTipImage:@"ico-no-data"];
+    
 }
 #pragma mark-------------刷新collectionView头视图--------------
 -(void)refreshHead
 {
     [self refreshAll];
-    [self getModel];
-    [self.collectionView refreshReloadData];
 }
--(BaseButtonControl *)rightBtn
+
+#pragma mark-----------选择日期后回调代理方法----------
+-(void)getDateStr:(NSString *)dateStr
 {
-    if (_rightBtn==nil) {
-        _rightBtn=[[BaseButtonControl alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-110, 20, 100, 44)];
-        //_rightBtn.backgroundColor=[UIColor yellowColor];
-        [_rightBtn setNumberImageView:1];
-        [_rightBtn setNumberLabel:1];
-        [_rightBtn setImageEdgeFrame:CGRectMake(5, 15, 16, 16) withNumberType:0 withAllType:NO];
-        [_rightBtn setImage:@"ico_date" withNumberType:0 withAllType:NO];
-        [_rightBtn setTitleEdgeFrame:CGRectMake(25, 0, 70, 45) withNumberType:0 withAllType:NO];
-        [_rightBtn setTextColor:[UIColor whiteColor] withTpe:0 withAllType:NO];
-        [_rightBtn setFont:FontLevel3 withNumberType:0 withAllType:NO];
-        //[_rightBtn setTextBackGroundColor:[UIColor redColor] withTpe:0 withAllType:NO];
-        [_rightBtn setText:[NSString dateWithDateFormatter:@"MM月dd日" Date:[NSDate date]] withNumberType:0 withAllType:NO];
-        [_rightBtn addTarget:self action:@selector(rightBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    if (dateStr)
+    {
+        NSString *str=[dateStr componentsSeparatedByString:@"年"][1];
+        [self.rightBtn setText:str withNumberType:0 withAllType:NO];
+        _dateStr=[NSDate dateStr:dateStr FromFormatter:@"yyyy年MM月dd日" ToFormatter:YY_DEFAULT_TIME_FORM];
+        [_collectionView beginRefreshing];
     }
-    return _rightBtn;
+    
+}
+#pragma mark-------------选择班级按钮--------------
+-(void)classBtnMethod
+{
+    XHClassViewController *class=[XHClassViewController new];
+    class.classModelType=XHClassListType;
+    class.getClassBock = ^(NSInteger number) {
+        _number=number;
+        [self.collectionView beginRefreshing];
+    };
+    [self.navigationController pushViewController:class animated:YES];
+}
+
+#pragma mark-------------未签到列表按钮方法--------------
+-(void)btnClick:(BaseButtonControl *)btn
+{
+
+    BaseButtonControl *lastBtn=[self.view viewWithTag:_tag];
+    [lastBtn setTextColor:[UIColor blackColor] withTpe:0 withAllType:NO];
+    [lastBtn setTextBackGroundColor:[UIColor clearColor] withTpe:1 withAllType:NO];
+    [btn setTextColor:[UIColor orangeColor] withTpe:0 withAllType:NO];
+    [btn setTextBackGroundColor:[UIColor orangeColor] withTpe:1 withAllType:NO];
+    _tag=btn.tag;
+    [self getDataArry];
+    [_collectionView refreshReloadData];
+    
+}
+#pragma mark-------------刷新全选视图数据--------------
+-(void)getSelectAllView
+{
+    if (_tag==10) {
+        self.collectionView.frame=CGRectMake(0, 184, SCREEN_WIDTH,SCREEN_HEIGHT-234);
+    }
+    else if (_tag==11)
+    {
+        self.collectionView.frame=CGRectMake(0, 184, SCREEN_WIDTH,SCREEN_HEIGHT-184);
+    }
+    else
+    {
+        self.collectionView.frame=CGRectMake(0, 184, SCREEN_WIDTH,SCREEN_HEIGHT-184);
+    }
+
+    if ([self.dataArray count]&&_tag==10) {
+        [self.view addSubview:self.selectAllView];
+    }
+    else
+    {
+        [self.selectAllView  removeFromSuperview];
+    }
+}
+#pragma mark-------------刷新表数据--------------
+-(void)refreshAll
+{
+    [[XHUserInfo sharedUserInfo] getClassList:^(BOOL isOK, NSMutableArray *classListArry) {
+        if (isOK) {
+            XHClassListModel *model=[XHUserInfo sharedUserInfo].classListArry[_number];
+            [self.netWorkConfig setObject:_dateStr forKey:@"time"];
+            [self.netWorkConfig setObject:model.clazzId forKey:@"clazzId"];
+            [self.netWorkConfig postWithUrl:@"zzjt-app-api_attendanceSheet001" sucess:^(id object, BOOL verifyObject) {
+                if (verifyObject)
+                {
+                    NSDictionary *objectDic=[object objectItemKey:@"object"];
+                    NSDictionary *propValueDic=[objectDic objectItemKey:@"propValue"];
+                    NSArray *arr=[propValueDic objectItemKey:@"attendanceSheetList"];
+                    [self.noSignArry removeAllObjects];
+                    [self.signArry removeAllObjects];
+                    [self.otherArry removeAllObjects];
+                    for (NSDictionary *dic in arr)
+                    {
+                        NSDictionary *Dic=[dic objectItemKey:@"propValue"];
+                        XHDayRollCallModel *model=[[XHDayRollCallModel alloc] initWithDic:Dic];
+                        switch (model.modelType)
+                        {
+                            case DayRollCallNOSignType:
+                            {
+                                [self.noSignArry addObject:model];
+                            }
+                                break;
+                            case DayRollCallSignType:
+                            {
+                                [self.signArry addObject:model];
+                            }
+                                break;
+                            case DayRollCallOtherType:
+                            {
+                                [self.otherArry addObject:model];
+                            }
+                                break;
+                        }
+                    }
+                     [self refreshClassView:model propValueDic:propValueDic];
+                     [self getDataArry];
+                    
+                }
+                [_collectionView refreshReloadData];
+            } error:^(NSError *error) {
+                [_collectionView refreshReloadData];
+            }];
+        }
+    }];
+   
+}
+#pragma mark  刷新出勤率列表视图数据
+-(void)refreshClassView:(XHClassListModel *)model propValueDic:(NSDictionary *)propValueDic
+{
+    for (int i=0; i<4; i++)
+    {
+        
+        XHBaseBtn *classBtn=[self.view viewWithTag:100+i];
+        switch (i) {
+            case 0:
+            {
+                [classBtn setTitle:model.clazz forState:UIControlStateNormal];
+            }
+                break;
+                
+            case 1:
+            {
+                [classBtn setTitle:[propValueDic objectItemKey:@"sum"] forState:UIControlStateNormal];
+            }
+                break;
+            case 2:
+            {
+                [classBtn setTitle:[propValueDic objectItemKey:@"attendanceCnt"] forState:UIControlStateNormal];
+            }
+                break;
+            case 3:
+            {
+                [classBtn setTitle:[propValueDic objectItemKey:@"pre"] forState:UIControlStateNormal];
+            }
+                break;
+        }
+        
+    }
+}
+#pragma mark-------------未签到列表数据刷新--------------
+-(void)refreshSignView
+{
+
+    for (int i=0; i<3; i++) {
+        
+        BaseButtonControl *signBtn=[self.view viewWithTag:10+i];
+        switch (i) {
+            case 0:
+            {
+                [signBtn setText:[NSString stringWithFormat:@"%@(%zd)",SIGN_TITLE[i],self.noSignArry.count] withNumberType:0 withAllType:NO];
+            }
+                break;
+            case 1:
+            {
+                [signBtn setText:[NSString stringWithFormat:@"%@(%zd)",SIGN_TITLE[i],self.signArry.count] withNumberType:0 withAllType:NO];
+            }
+                break;
+            case 2:
+            {
+                [signBtn setText:[NSString stringWithFormat:@"%@(%zd)",SIGN_TITLE[i],self.otherArry.count] withNumberType:0 withAllType:NO];
+            }
+                break;
+                
+        }
+        
+    }
+}
+#pragma mark-------------全选视图列表数据刷新--------------
+-(void)refreshSelectAll
+{
+    BaseButtonControl *selectbtn=[self.view viewWithTag:50];
+    BaseButtonControl *btn=[self.view viewWithTag:51];
+    [btn setText:[NSString stringWithFormat:@"已选%zd人",_selectNumber] withNumberType:0 withAllType:NO];
+    if (_selectNumber==self.dataArray.count)
+    {
+        [selectbtn setImage:@"icoyixuan" withNumberType:0 withAllType:NO];
+    }
+    else
+    {
+        selectbtn.selected=NO;
+        [selectbtn setImage:@"icoweixuan" withNumberType:0 withAllType:NO];
+    }
+}
+#pragma mark-------------全选视图列表按钮方法--------------
+-(void)selectBtnMethod:(BaseButtonControl *)btn
+{
+    if (btn.tag==50)
+    {
+        btn.selected=!btn.selected;
+        if (btn.selected==YES)
+        {
+            [btn setImage:@"icoyixuan" withNumberType:0 withAllType:NO];
+            _selectNumber=self.dataArray.count;
+            [self.selectArry setArray:self.dataArray];
+            for (int i=0; i<self.dataArray.count; i++) {
+                XHDayRollCallModel *model=self.dataArray[i];
+                model.IfSelect=YES;
+                [self.dataArray replaceObjectAtIndex:i withObject:model];
+            }
+        }
+        else
+        {
+            _selectNumber=0;
+            [self.selectArry removeAllObjects];
+            [btn setImage:@"icoweixuan" withNumberType:0 withAllType:NO];
+            for (int i=0; i<self.dataArray.count; i++) {
+                XHDayRollCallModel *model=self.dataArray[i];
+                model.IfSelect=NO;
+                [self.dataArray replaceObjectAtIndex:i withObject:model];
+            }
+        }
+        [self refreshSelectAll];
+        [self.collectionView refreshReloadData];
+    }
+    else
+    {
+        if (_selectNumber!=0)
+        {
+            [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
+            [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].teacherModel.userId forKey:@"teacherId"];
+            [self.mutableStr setString:@""];
+            for (XHDayRollCallModel *model in self.selectArry) {
+                [self.mutableStr appendFormat:@"%@,",model.ID];
+            }
+            [self.netWorkConfig setObject:self.mutableStr forKey:@"studentBaseIds"];
+            [self.netWorkConfig postWithUrl:btn.tag==52?@"zzjt-app-api_bizInfo006":@"zzjt-app-api_attendanceSheet002" sucess:^(id object, BOOL verifyObject) {
+                if (verifyObject)
+                {
+                    [XHShowHUD hideHud];
+                    BaseButtonControl *lastBtn=[self.view viewWithTag:_tag];
+                    [lastBtn setTextColor:[UIColor blackColor] withTpe:0 withAllType:NO];
+                    [lastBtn setTextBackGroundColor:[UIColor clearColor] withTpe:1 withAllType:NO];
+                    BaseButtonControl *nowBtn=[self.view viewWithTag:btn.tag==52?12:11];
+                    [nowBtn setTextColor:[UIColor orangeColor] withTpe:0 withAllType:NO];
+                    [nowBtn setTextBackGroundColor:[UIColor orangeColor] withTpe:1 withAllType:NO];
+                    _tag=btn.tag==52?12:11;
+                }
+                [self.collectionView beginRefreshing];
+            } error:^(NSError *error) {
+                [self.collectionView beginRefreshing];
+            }];
+        }
+    }
+}
+#pragma mark  刷新数据源
+-(void)getDataArry
+{
+     [self refreshSignView];
+    if (_tag==10) {
+        [self.dataArray setArray:self.noSignArry];
+    }
+    if (_tag==11) {
+        [self.dataArray setArray:self.signArry];
+    }
+    if (_tag==12) {
+       [self.dataArray setArray:self.otherArry];
+    }
+    [_selectArry removeAllObjects];
+    _selectNumber=0;
+    for (int i=0; i<self.dataArray.count; i++) {
+        XHDayRollCallModel *model=self.dataArray[i];
+        model.IfSelect=NO;
+        [self.dataArray replaceObjectAtIndex:i withObject:model];
+    }
+    [self getSelectAllView];
+    [self refreshSelectAll];//!< 恢复未选中状态
 }
 #pragma mark-------------出勤率视图--------------
 -(UIView *)headView
@@ -73,7 +339,6 @@
         _headView.backgroundColor=RGB(254, 248, 242);
         [self.view addSubview:_headView];
         NSArray *arry=@[@"班级",@"应到人数",@"实到人数",@"出勤率"];
-        NSArray *arr=@[@"三二班>",@"26",@"24",@"92%"];
         for (int i=0; i<4; i++) {
             XHBaseLabel *label=[[XHBaseLabel alloc] initWithFrame:CGRectMake(i*SCREEN_WIDTH/4.0, 0, SCREEN_WIDTH/4.0, 40)];
             label.text=arry[i];
@@ -84,51 +349,17 @@
             btn.tag=100+i;
             btn.layer.cornerRadius=0;
             btn.backgroundColor=[UIColor clearColor];
-            [btn setTitle:arr[i] forState:UIControlStateNormal];
+            //[btn setTitle:arr[i] forState:UIControlStateNormal];
             [btn setTitleColor:RGB(63, 163, 63) forState:UIControlStateNormal];
             if (i==0) {
-                  [btn addTarget:self action:@selector(classBtnMethod) forControlEvents:UIControlEventTouchUpInside];
+                [btn addTarget:self action:@selector(classBtnMethod) forControlEvents:UIControlEventTouchUpInside];
             }
-         
+            
             [_headView addSubview:btn];
         }
         
     }
     return _headView;
-}
-#pragma mark-------------点击显示日历按钮--------------
--(void)rightBtnClick
-{
-    self.datePickerView.delegate=self;
-    self.datePickerView.modelyTpe=XHCustomDatePickerViewModelMouthAndDayType;
-    [self.view addSubview:self.datePickerView];
-}
-
-#pragma mark-----------选择日期后回调代理方法----------
--(void)getDateStr:(NSString *)dateStr
-{
-    if (dateStr)
-    {
-        [self.rightBtn setText:dateStr withNumberType:0 withAllType:NO];
-    }
-    
-}
-#pragma mark-------------选择班级按钮--------------
--(void)classBtnMethod
-{
-    NSLog(@"选择班级按钮");
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"选择班级" preferredStyle:UIAlertControllerStyleActionSheet];
-    for (int i=0; i<4; i++) {
-        
-        [alertController addAction:[UIAlertAction actionWithTitle:[NSString stringWithFormat:@"%zd",i] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            //刷新数据
-            [self refreshAll];
-        }]];
-    }
-    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-    }]];
-    [self presentViewController:alertController animated:YES completion:nil];
 }
 #pragma mark-------------未签到列表视图--------------
 -(UIView *)signView
@@ -139,11 +370,10 @@
             label.backgroundColor=RGB(224, 224, 224);
             [self.view addSubview:label];
         }
-        NSArray  *arry=@[@"未签到",@"已签到",@"请假"];
         for (int i=0; i<3; i++) {
             BaseButtonControl *btn=[[BaseButtonControl alloc] initWithFrame:CGRectMake(i*SCREEN_WIDTH/3.0, _headView.bottom, SCREEN_WIDTH/3.0, 50)];
             [btn setNumberLabel:2];
-            [btn setText:[NSString stringWithFormat:@"%@（%zd)",arry[i],i] withNumberType:0 withAllType:NO];
+            [btn setText:SIGN_TITLE[i] withNumberType:0 withAllType:NO];
             [btn setTextAlignment:NSTextAlignmentCenter withNumberType:0 withAllType:NO];
             [btn setTitleEdgeFrame:CGRectMake(0, 0, btn.width, btn.height-2) withNumberType:0 withAllType:NO];
             [btn setTitleEdgeFrame:CGRectMake(btn.width*0.15, btn.height-2, btn.width*0.7, 2) withNumberType:1 withAllType:NO];
@@ -161,70 +391,87 @@
     
     return _signView;
 }
-#pragma mark-------------签到按钮方法--------------
--(void)btnClick:(BaseButtonControl *)btn
+-(BaseButtonControl *)rightBtn
 {
-    _selectNumber=0;
-    [self refreshSelectAll];
-#pragma mark-------------点击按钮前状态改变--------------
-    BaseButtonControl *lastBtn=[self.view viewWithTag:_tag];
-    [lastBtn setTextColor:[UIColor blackColor] withTpe:0 withAllType:NO];
-    [lastBtn setTextBackGroundColor:[UIColor clearColor] withTpe:1 withAllType:NO];
-#pragma mark-------------现在点击按钮状态改变--------------
-    [btn setTextColor:[UIColor orangeColor] withTpe:0 withAllType:NO];
-    [btn setTextBackGroundColor:[UIColor orangeColor] withTpe:1 withAllType:NO];
-    _tag=btn.tag;
-    [self getModel];
-    [self.collectionView refreshReloadData];
-    
+    if (_rightBtn==nil) {
+        _rightBtn=[[BaseButtonControl alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-110, 20, 100, 44)];
+        //_rightBtn.backgroundColor=[UIColor yellowColor];
+        [_rightBtn setNumberImageView:1];
+        [_rightBtn setNumberLabel:1];
+        [_rightBtn setImageEdgeFrame:CGRectMake(5, 15, 16, 16) withNumberType:0 withAllType:NO];
+        [_rightBtn setImage:@"ico_date" withNumberType:0 withAllType:NO];
+        [_rightBtn setTitleEdgeFrame:CGRectMake(25, 0, 70, 45) withNumberType:0 withAllType:NO];
+        [_rightBtn setTextColor:[UIColor whiteColor] withTpe:0 withAllType:NO];
+        [_rightBtn setFont:FontLevel3 withNumberType:0 withAllType:NO];
+        //[_rightBtn setTextBackGroundColor:[UIColor redColor] withTpe:0 withAllType:NO];
+        [_rightBtn setText:[NSString dateWithDateFormatter:@"MM月dd日" Date:[NSDate date]] withNumberType:0 withAllType:NO];
+        _dateStr=[NSDate getDateStrWithDateFormatter:YY_DEFAULT_TIME_FORM Date:[NSDate date]];
+        [_rightBtn addTarget:self action:@selector(rightBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _rightBtn;
 }
-#pragma mark-------------建立数据--------------
--(void)getModel
-{
-    [self.dataArray removeAllObjects];
-    for (int i=0; i<25; i++) {
-        XHDayRollCallModel *model=[[XHDayRollCallModel alloc] init];
-        model.reasonStr=@"http://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=123&step_word=&hs=0&pn=4&spn=0&di=196973662930&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=2&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=-1&cs=3187992390%2C4014544366&os=2200788253%2C1058291308&simid=4136928266%2C611208284&adpicid=0&lpn=0&ln=1895&fr=&fmq=1516762023736_R&fm=detail&ic=0&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&ist=&jit=&cg=&bdtype=0&oriquery=&objurl=http%3A%2F%2Ff.hiphotos.baidu.com%2Fbaike%2Fw%3D268%2Fsign%3D150ca7320ef3d7ca0cf63870ca1fbe3c%2F11385343fbf2b2111e3d6542c88065380cd78eaf.jpg&fromurl=ippr_z2C%24qAzdH3FAzdH3Fkwthj_z%26e3Bkwt17_z%26e3Bv54AzdH3FetjoAzdH3Fd0d8c_z%26e3Bip4%3Fu654I1%3Ddabd9cc&gsm=0&rpstart=0&rpn";
-        model.imagPic=@"http://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=123&step_word=&hs=0&pn=4&spn=0&di=196973662930&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=2&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=-1&cs=3187992390%2C4014544366&os=2200788253%2C1058291308&simid=4136928266%2C611208284&adpicid=0&lpn=0&ln=1895&fr=&fmq=1516762023736_R&fm=detail&ic=0&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&ist=&jit=&cg=&bdtype=0&oriquery=&objurl=http%3A%2F%2Ff.hiphotos.baidu.com%2Fbaike%2Fw%3D268%2Fsign%3D150ca7320ef3d7ca0cf63870ca1fbe3c%2F11385343fbf2b2111e3d6542c88065380cd78eaf.jpg&fromurl=ippr_z2C%24qAzdH3FAzdH3Fkwthj_z%26e3Bkwt17_z%26e3Bv54AzdH3FetjoAzdH3Fd0d8c_z%26e3Bip4%3Fu654I1%3Ddabd9cc&gsm=0&rpstart=0&rpnum=0";
-        if (_tag==10) {
-            model.modelType=DayRollCallNOSignType;
-            self.collectionView.frame=CGRectMake(0, 184, SCREEN_WIDTH,SCREEN_HEIGHT-234);
-        }
-        else if (_tag==11)
-        {
-            model.modelType=DayRollCallSignType;
-            self.collectionView.frame=CGRectMake(0, 184, SCREEN_WIDTH,SCREEN_HEIGHT-184);
-        }
-        else
-        {
-            model.modelType=DayRollCallOtherType;
-            self.collectionView.frame=CGRectMake(0, 184, SCREEN_WIDTH,SCREEN_HEIGHT-184);
-        }
-        [self.dataArray addObject:model];
-    }
-    if ([self.dataArray count]&&_tag==10) {
-        [self.view addSubview:self.selectAllView];
-    }
-    else
-    {
-        [self.selectAllView  removeFromSuperview];
-    }
-}
-#pragma mark-------------刷新数据--------------
--(void)refreshAll
-{
-   #pragma mark-------------出勤率列表数据刷新--------------
-    for (int i=0; i<4; i++) {
 
-        XHBaseBtn *classBtn=[self.view viewWithTag:100+i];
-        [classBtn setTitle:@"111" forState:UIControlStateNormal];
+#pragma mark-------------点击显示日历按钮--------------
+-(void)rightBtnClick
+{
+    self.datePickerView.delegate=self;
+    self.datePickerView.modelyTpe=XHCustomDatePickerViewModelMouthAndDayType;
+    [self.view addSubview:self.datePickerView];
+}
+#pragma mark-------------全选列表视图--------------
+-(UIView *)selectAllView
+{
+    if (_selectAllView==nil) {
+        _selectAllView=[[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-50, SCREEN_WIDTH, 50)];
+        _selectAllView.backgroundColor=RGB(239, 239, 239);
+        UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 1)];
+        label.backgroundColor=RGB(224, 224, 224);
+        [_selectAllView addSubview:label];
+        for (int i=0; i<4; i++) {
+            BaseButtonControl *btn=[[BaseButtonControl alloc] initWithFrame:CGRectMake(i*SCREEN_WIDTH/4.0, 0, SCREEN_WIDTH/4.0, 50)];
+            btn.tag=50+i;
+            [btn addTarget:self action:@selector(selectBtnMethod:) forControlEvents:UIControlEventTouchUpInside];
+            [btn setNumberLabel:1];
+            switch (i) {
+                case 0:
+                {
+                    [btn setNumberImageView:1];
+                    [btn setImageEdgeFrame:CGRectMake(10, 15, 20, 20) withNumberType:0 withAllType:NO];
+                    [btn setImage:@"icoweixuan" withNumberType:0 withAllType:NO];
+                    [btn setTitleEdgeFrame:CGRectMake(40, 0, btn.width-40, 50) withNumberType:0 withAllType:NO];
+                    [btn setText:@"全选" withNumberType:0 withAllType:NO];
+                }
+                    break;
+                case 1:
+                {
+                    [btn setTitleEdgeFrame:CGRectMake(0, 0, btn.width, 50) withNumberType:0 withAllType:NO];
+                    [btn setTextAlignment:NSTextAlignmentCenter withNumberType:0 withAllType:NO];
+                    [btn setText:@"已选0人" withNumberType:0 withAllType:NO];
+                }
+                    break;
+                case 2:
+                {
+                    [btn setTitleEdgeFrame:CGRectMake(0, 0, btn.width, 50) withNumberType:0 withAllType:NO];
+                    [btn setText:@"请假" withNumberType:0 withAllType:NO];
+                    [btn setTextBackGroundColor:RGB(236, 63, 27) withTpe:0 withAllType:NO];
+                    [btn setTextAlignment:NSTextAlignmentCenter withNumberType:0 withAllType:NO];
+                    [btn setTextColor:[UIColor whiteColor] withTpe:0 withAllType:NO];
+                }
+                    break;
+                case 3:
+                {
+                    [btn setTitleEdgeFrame:CGRectMake(0, 0, btn.width, 50) withNumberType:0 withAllType:NO];
+                    [btn setText:@"签到" withNumberType:0 withAllType:NO];
+                    [btn setTextBackGroundColor:RGB(63, 163, 63) withTpe:0 withAllType:NO];
+                    [btn setTextAlignment:NSTextAlignmentCenter withNumberType:0 withAllType:NO];
+                    [btn setTextColor:[UIColor whiteColor] withTpe:0 withAllType:NO];
+                }
+                    break;
+            }
+            [_selectAllView addSubview:btn];
+        }
     }
-    #pragma mark-------------签到列表数据刷新--------------
-    for (int i=0; i<3; i++) {
-     
-        BaseButtonControl *signBtn=[self.view viewWithTag:10+i];
-        [signBtn setText:[NSString stringWithFormat:@"%@(%zd)",SIGN_TITLE[i],i+10] withNumberType:0 withAllType:NO];
-    }
+    return _selectAllView;
 }
 -(BaseCollectionView *)collectionView
 {
@@ -254,7 +501,6 @@
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     XHDayRollCollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell" forIndexPath:indexPath];
-    //cell.backgroundColor=[UIColor redColor];
     [cell setItemObject:self.dataArray[indexPath.row]];
     return cell;
 }
@@ -262,15 +508,19 @@
 {
     XHDayRollCollectionViewCell *cell=[_collectionView cellForItemAtIndexPath:indexPath];
     XHDayRollCallModel *model=self.dataArray[indexPath.row];
-    if (_tag==10) {
+    if (_tag==10)
+    {
        model.IfSelect=!model.IfSelect;
         [cell setItemObject:model];
-        if (model.IfSelect) {
+        if (model.IfSelect)
+        {
             _selectNumber++;
+            [self.selectArry addObject:model];
         }
         else
         {
             _selectNumber--;
+            [self.selectArry removeObject:model];
         }
         [self refreshSelectAll];
     }
@@ -281,136 +531,42 @@
     }
     
 }
-#pragma mark-------------请假、签到列表视图--------------
--(UIView *)selectAllView
+
+
+-(NSMutableArray *)noSignArry
 {
-    if (_selectAllView==nil) {
-        _selectAllView=[[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-50, SCREEN_WIDTH, 50)];
-        _selectAllView.backgroundColor=RGB(239, 239, 239);
-        UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 1)];
-        label.backgroundColor=RGB(224, 224, 224);
-        [_selectAllView addSubview:label];
-        for (int i=0; i<4; i++) {
-            BaseButtonControl *btn=[[BaseButtonControl alloc] initWithFrame:CGRectMake(i*SCREEN_WIDTH/4.0, 0, SCREEN_WIDTH/4.0, 50)];
-            btn.tag=50+i;
-            [btn addTarget:self action:@selector(selectBtnMethod:) forControlEvents:UIControlEventTouchUpInside];
-            [btn setNumberLabel:1];
-            switch (i) {
-                case 0:
-                {
-                    [btn setNumberImageView:1];
-                    [btn setImageEdgeFrame:CGRectMake(10, 15, 20, 20) withNumberType:0 withAllType:NO];
-                    [btn setImage:@"icoweixuan" withNumberType:0 withAllType:NO];
-                    [btn setTitleEdgeFrame:CGRectMake(40, 0, btn.width-40, 50) withNumberType:0 withAllType:NO];
-                    [btn setText:@"全选" withNumberType:0 withAllType:NO];
-                }
-                    break;
-                    case 1:
-                {
-                    [btn setTitleEdgeFrame:CGRectMake(0, 0, btn.width, 50) withNumberType:0 withAllType:NO];
-                    [btn setTextAlignment:NSTextAlignmentCenter withNumberType:0 withAllType:NO];
-                    [btn setText:@"已选0人" withNumberType:0 withAllType:NO];
-                }
-                    break;
-                    case 2:
-                {
-                    [btn setTitleEdgeFrame:CGRectMake(0, 0, btn.width, 50) withNumberType:0 withAllType:NO];
-                    [btn setText:@"请假" withNumberType:0 withAllType:NO];
-                    [btn setTextBackGroundColor:RGB(236, 63, 27) withTpe:0 withAllType:NO];
-                    [btn setTextAlignment:NSTextAlignmentCenter withNumberType:0 withAllType:NO];
-                    [btn setTextColor:[UIColor whiteColor] withTpe:0 withAllType:NO];
-                }
-                    break;
-                case 3:
-                {
-                    [btn setTitleEdgeFrame:CGRectMake(0, 0, btn.width, 50) withNumberType:0 withAllType:NO];
-                    [btn setText:@"签到" withNumberType:0 withAllType:NO];
-                    [btn setTextBackGroundColor:RGB(63, 163, 63) withTpe:0 withAllType:NO];
-                    [btn setTextAlignment:NSTextAlignmentCenter withNumberType:0 withAllType:NO];
-                    [btn setTextColor:[UIColor whiteColor] withTpe:0 withAllType:NO];
-                }
-                    break;
-            }
-            [_selectAllView addSubview:btn];
-        }
+    if (_noSignArry==nil) {
+        _noSignArry=[NSMutableArray array];
     }
-    return _selectAllView;
+    return _noSignArry;
 }
-#pragma mark-------------请假、签到已选择数据刷新--------------
--(void)refreshSelectAll
+-(NSMutableArray *)signArry
 {
-     BaseButtonControl *selectbtn=[self.view viewWithTag:50];
-    BaseButtonControl *btn=[self.view viewWithTag:51];
-    [btn setText:[NSString stringWithFormat:@"已选%zd人",_selectNumber] withNumberType:0 withAllType:NO];
-    if (_selectNumber==self.dataArray.count) {
-        [selectbtn setImage:@"icoyixuan" withNumberType:0 withAllType:NO];
+    if (_signArry==nil) {
+        _signArry=[NSMutableArray array];
     }
-    else
-    {
-        selectbtn.selected=NO;
-        [selectbtn setImage:@"icoweixuan" withNumberType:0 withAllType:NO];
-    }
+    return _signArry;
 }
-#pragma mark-------------请假，签到，全选按钮方法--------------
--(void)selectBtnMethod:(BaseButtonControl *)btn
+-(NSMutableArray *)otherArry
 {
-    
-    if (btn.tag==50) {
-        btn.selected=!btn.selected;
-        if (btn.selected==YES) {
-            [btn setImage:@"icoyixuan" withNumberType:0 withAllType:NO];
-            _selectNumber=self.dataArray.count;
-            for (int i=0; i<self.dataArray.count; i++) {
-                XHDayRollCallModel *model=self.dataArray[i];
-                model.IfSelect=YES;
-                [self.dataArray replaceObjectAtIndex:i withObject:model];
-            }
-        }
-        else
-        {
-            _selectNumber=0;
-              [btn setImage:@"icoweixuan" withNumberType:0 withAllType:NO];
-            for (int i=0; i<self.dataArray.count; i++) {
-                XHDayRollCallModel *model=self.dataArray[i];
-                model.IfSelect=NO;
-                [self.dataArray replaceObjectAtIndex:i withObject:model];
-            }
-        }
-        [self refreshSelectAll];
-        [self.collectionView refreshReloadData];
+    if (_otherArry==nil) {
+        _otherArry=[NSMutableArray array];
     }
-    #pragma mark-------------刷新请假列表--------------
-    if (btn.tag==52&&_selectNumber!=0) {
-        _selectNumber=0;
-        [self refreshSelectAll];
-#pragma mark-------------点击按钮前状态改变--------------
-        BaseButtonControl *lastBtn=[self.view viewWithTag:_tag];
-        [lastBtn setTextColor:[UIColor blackColor] withTpe:0 withAllType:NO];
-        [lastBtn setTextBackGroundColor:[UIColor clearColor] withTpe:1 withAllType:NO];
-#pragma mark-------------现在点击按钮状态改变--------------
-         BaseButtonControl *nowBtn=[self.view viewWithTag:12];
-        [nowBtn setTextColor:[UIColor orangeColor] withTpe:0 withAllType:NO];
-        [nowBtn setTextBackGroundColor:[UIColor orangeColor] withTpe:1 withAllType:NO];
-        _tag=12;
-        [self getModel];
-        [self.collectionView refreshReloadData];
+    return _otherArry;
+}
+-(NSMutableArray *)selectArry
+{
+    if (_selectArry==nil) {
+        _selectArry=[NSMutableArray array];
     }
-    #pragma mark-------------刷新签到列表--------------
-    if (btn.tag==53&&_selectNumber!=0) {
-        _selectNumber=0;
-        [self refreshSelectAll];
-#pragma mark-------------点击按钮前状态改变--------------
-        BaseButtonControl *lastBtn=[self.view viewWithTag:_tag];
-        [lastBtn setTextColor:[UIColor blackColor] withTpe:0 withAllType:NO];
-        [lastBtn setTextBackGroundColor:[UIColor clearColor] withTpe:1 withAllType:NO];
-#pragma mark-------------现在点击按钮状态改变--------------
-        BaseButtonControl *nowBtn=[self.view viewWithTag:11];
-        [nowBtn setTextColor:[UIColor orangeColor] withTpe:0 withAllType:NO];
-        [nowBtn setTextBackGroundColor:[UIColor orangeColor] withTpe:1 withAllType:NO];
-        _tag=11;
-        [self getModel];
-        [self.collectionView refreshReloadData];
+    return _selectArry;
+}
+-(NSMutableString *)mutableStr
+{
+    if (_mutableStr==nil) {
+        _mutableStr=[[NSMutableString alloc] init];
     }
+    return _mutableStr;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

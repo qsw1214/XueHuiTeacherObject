@@ -7,7 +7,8 @@
 //
 
 #import "XHUserInfo.h"
-
+#import "XHClassListModel.h"
+#import "XHSubjectListModel.h"
 @implementation XHUserInfo
 
 static XHUserInfo *userInfo = nil;
@@ -65,7 +66,60 @@ static XHUserInfo *userInfo = nil;
             break;
     }
 }
-
+-(void)getClassList:(ClassListBlock)calssListBock
+{
+    [self.classListNet setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
+    [self.classListNet postWithUrl:@"pmschool-teacher-api_/teacher/attendanceSheet/classList" sucess:^(id object, BOOL verifyObject) {
+        if (verifyObject)
+        {
+            NSArray *arr=[object objectItemKey:@"object"];
+            [self.classListArry removeAllObjects];
+            for (NSDictionary *dic in arr)
+            {
+                XHClassListModel *model=[[XHClassListModel alloc] initWithDic:dic];
+                [self.classListArry addObject:model];
+            }
+            calssListBock(YES,self.classListArry);
+        }
+        else
+        {
+            calssListBock(NO,self.classListArry);
+        }
+    } error:^(NSError *error) {
+        calssListBock(NO,self.classListArry);
+    }];
+}
+-(void)getSubjectList:(SubjectListBlock)subjectListBock
+{
+    [self.subjectListNet setObject:[XHUserInfo sharedUserInfo].teacherModel.userId forKey:@"teacherId"];
+    [self.subjectListNet postWithUrl:@"pmschool-teacher-api_/teacher/schoolwork/getSubjectAll" sucess:^(id object, BOOL verifyObject){
+        if (verifyObject)
+        {
+                NSArray *arr=[object objectItemKey:@"object"];
+                [self.subjectListArry removeAllObjects];
+                for (NSDictionary *dic in arr)
+                {
+                    XHSubjectListModel *model=[[XHSubjectListModel alloc] initWithDic:dic];
+                    [self.subjectListArry addObject:model];
+                }
+            
+                subjectListBock(YES,self.subjectListArry);
+        }
+        else
+        {
+             subjectListBock(NO,self.subjectListArry);
+        }
+    } error:^(NSError *error) {
+        subjectListBock(NO,self.subjectListArry);
+    }];
+}
+-(XHTeacherInfo *)teacherModel
+{
+    if (_teacherModel==nil) {
+      _teacherModel=[XHTeacherInfo new];
+    }
+    return _teacherModel;
+}
 -(NSMutableArray *)childListArry
 {
     if (!_childListArry)
@@ -91,6 +145,18 @@ static XHUserInfo *userInfo = nil;
     return _subjectListArry;
 }
                   
-
-
+-(XHNetWorkConfig *)classListNet
+{
+    if (_classListNet==nil) {
+        _classListNet=[XHNetWorkConfig new];
+    }
+    return _classListNet;
+}
+-(XHNetWorkConfig *)subjectListNet
+{
+    if (_subjectListNet==nil) {
+        _subjectListNet=[XHNetWorkConfig new];
+    }
+    return _subjectListNet;
+}
 @end

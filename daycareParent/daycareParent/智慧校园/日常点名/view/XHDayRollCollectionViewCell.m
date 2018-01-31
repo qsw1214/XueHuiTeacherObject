@@ -18,7 +18,7 @@
         [_headImgView sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:@"studentphoto"]];
         [self.contentView addSubview:_headImgView];
          _nameLabel=[[XHBaseLabel alloc] initWithFrame:CGRectMake(-5, _headImgView.bottom, self.contentView.bounds.size.width+10, self.contentView.bounds.size.width/2.0)];
-        _nameLabel.text=@"完颜忍忍";
+//        _nameLabel.text=@"完颜忍忍";
         _nameLabel.textAlignment=NSTextAlignmentCenter;
         _nameLabel.font=FontLevel3;
         [self.contentView addSubview:_nameLabel];
@@ -31,6 +31,8 @@
 }
 -(void)setItemObject:(XHDayRollCallModel *)model
 {
+    _nameLabel.text=model.studentName;
+    [_headImgView sd_setImageWithURL:[NSURL URLWithString:ALGetFileHeadThumbnail(model.headPic)] placeholderImage:[UIImage imageNamed:@"studentphoto"]];
     switch (model.modelType) {
         case DayRollCallNOSignType:
         {

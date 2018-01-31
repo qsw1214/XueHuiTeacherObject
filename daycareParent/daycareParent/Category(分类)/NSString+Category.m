@@ -148,10 +148,9 @@
     NSDateFormatter *setDateFormatter = [[NSDateFormatter alloc] init];
     [setDateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *date= [setDateFormatter dateFromString:dateStr];
-    NSDateFormatter *myDateFormatter = [[NSDateFormatter alloc] init];
     //设置日期格式
-    [myDateFormatter setDateFormat:@"MM-dd HH:mm"];
-    NSString *String=[myDateFormatter stringFromDate:date];
+    [setDateFormatter setDateFormat:@"MM-dd HH:mm"];
+    NSString *String=[setDateFormatter stringFromDate:date];
     return String;
 }
 +(NSString *)dateWithDateFormatter:(NSString *)dateFormatter Date:(NSDate *)date
@@ -161,4 +160,6 @@
     NSString * dateStr = [dateFor stringFromDate:date];
     return dateStr;
 }
+
+
 @end

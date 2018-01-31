@@ -41,12 +41,22 @@
     _tableView.dataSource=self;
     [_tableView registerClass:[XHPunchSignTableViewCell class] forCellReuseIdentifier:@"cell"];
     [self.view addSubview:_tableView];
+     [self headView];
+    [_tableView setTipType:TipTitleAndTipImage withTipTitle:nil withTipImage:@"ico-no-data"];
+    [_tableView showRefresHeaderWithTarget:self withSelector:@selector(refreshHead)];
+    [_tableView beginRefreshing];
+    
+    
+}
+#pragma mark  表头视图
+-(void)headView
+{
     UIView *tableHeadView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 172)];
     _tableView.tableHeaderView=tableHeadView;
     UIImageView *imgV=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 130)];
     imgV.image=[UIImage imageNamed:@"user_qiandao_bg"];
     [tableHeadView addSubview:imgV];
-   _signBtn=[[BaseButtonControl alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-80)/2.0, 10, 80, 100)];
+    _signBtn=[[BaseButtonControl alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-80)/2.0, 10, 80, 100)];
     [_signBtn addTarget:self action:@selector(signBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [tableHeadView addSubview:_signBtn];
     [_signBtn setNumberImageView:1];
@@ -72,7 +82,7 @@
     _beginDateBtn=[[BaseButtonControl alloc] initWithFrame:CGRectMake(30, 0, SCREEN_WIDTH/2.0-50, 40)];
     _beginDateBtn.tag=10;
     [_beginDateBtn addTarget:self action:@selector(dateBtnMethod:) forControlEvents:UIControlEventTouchUpInside];
-     [bgView addSubview:_beginDateBtn];
+    [bgView addSubview:_beginDateBtn];
     //beginDate.backgroundColor=[UIColor orangeColor];
     [_beginDateBtn setNumberImageView:1];
     [_beginDateBtn setImageEdgeFrame:CGRectMake(0, 10, _beginDateBtn.width, _beginDateBtn.height-20) withNumberType:0 withAllType:NO];
@@ -83,12 +93,12 @@
     [_beginDateBtn setTitleEdgeFrame:CGRectMake(5, 10, _beginDateBtn.width-20, _beginDateBtn.height-20) withNumberType:0 withAllType:NO];
     [_beginDateBtn setText:[NSString dateWithDateFormatter:YY_DEFAULT_TIME_FORM Date:_beginDate] withNumberType:0 withAllType:NO];
     [_beginDateBtn setFont:FontLevel4 withNumberType:0 withAllType:NO];
-    #pragma mark  注释
-   _endDateBtn=[[BaseButtonControl alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2.0+20, 0, SCREEN_WIDTH/2.0-50, 40)];
+#pragma mark  注释
+    _endDateBtn=[[BaseButtonControl alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2.0+20, 0, SCREEN_WIDTH/2.0-50, 40)];
     _endDateBtn.tag=11;
     [_endDateBtn addTarget:self action:@selector(dateBtnMethod:) forControlEvents:UIControlEventTouchUpInside];
     [bgView addSubview:_endDateBtn];
-   // endDate.backgroundColor=[UIColor orangeColor];
+    // endDate.backgroundColor=[UIColor orangeColor];
     [_endDateBtn setNumberImageView:1];
     [_endDateBtn setImageEdgeFrame:CGRectMake(0, 10, _endDateBtn.width, _endDateBtn.height-20) withNumberType:0 withAllType:NO];
     //[beginDate setIconImageViewBackGroundColor:[UIColor redColor] withNumberType:0 withAllType:NO];
@@ -105,8 +115,12 @@
         [self.signBtn setTextColor:RGB(240, 240, 240) withTpe:0 withAllType:NO];
         [self.signBtn setText:@"已打卡" withNumberType:0 withAllType:NO];
     }
-     _endDate=[NSDate date];
+    _endDate=[NSDate date];
     _beginDate=[NSDate getDayBeforWithDate:_endDate dayBefor:6];
+    
+}
+-(void)refreshHead
+{
     [self loadData:_endDate beginDate:_beginDate];
 }
 #pragma mark    定位获取区域编码
@@ -169,10 +183,8 @@
     [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
     [self.netWorkConfig setObject:[NSDate getDateStrWithDateFormatter:ALL_DEFAULT_TIME_FORM Date:beginDate] forKey:@"beginTime"];
     [self.netWorkConfig setObject:[NSDate getDateStrWithDateFormatter:ALL_DEFAULT_TIME_FORM Date:endDate] forKey:@"endTime"];
-    [XHShowHUD showTextHud];
     [self.netWorkConfig postWithUrl:@"pmschool-teacher-api_/teacher/attendanceSheet/list" sucess:^(id object, BOOL verifyObject) {
         if (verifyObject) {
-            [XHShowHUD hideHud];
             [self.beginDateBtn setText:[NSDate getDateStrWithDateFormatter:YY_DEFAULT_TIME_FORM Date:_beginDate] withNumberType:0 withAllType:NO];
             [self.endDateBtn setText:[NSDate getDateStrWithDateFormatter:YY_DEFAULT_TIME_FORM Date:_endDate] withNumberType:0 withAllType:NO];
             NSMutableArray *arry=[object objectItemKey:@"object"];
@@ -184,11 +196,15 @@
             [_keys removeAllObjects];
             [_dataDic removeAllObjects];
             [self dataGroup:self.dataArray];
-            [_tableView reloadData];
+            [_tableView refreshReloadData];
+        }
+        else
+        {
+            [_tableView refreshReloadData];
         }
         
     } error:^(NSError *error) {
-        [self loadData:endDate beginDate:beginDate];
+         [_tableView refreshReloadData];
     }];
    
 }
@@ -196,6 +212,7 @@
 #pragma mark tableDelegta
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    [_tableView tableTipViewWithArray:_keys];
     return [_keys count];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -328,7 +345,7 @@
                 [self.beginDateBtn setText:dateStr withNumberType:0 withAllType:NO];
                 _beginDate=[NSDate getDateWithDateStr:dateStr formatter:YY_DEFAULT_TIME_FORM];
                  _endPickerView.datePickerView.minimumDate=_beginDate;
-                [self loadData:_endDate beginDate:_beginDate];
+                [_tableView beginRefreshing];
             }
                 break;
                 
@@ -340,7 +357,7 @@
                 _beginDate=[NSDate getDayBeforWithDate:_endDate dayBefor:6];
                  [self.beginDateBtn setText:[NSString dateWithDateFormatter:YY_DEFAULT_TIME_FORM Date:_beginDate] withNumberType:0 withAllType:NO];
                 _beginPickerView.datePickerView.date=_beginDate;
-                [self loadData:_endDate beginDate:_beginDate];
+                [_tableView beginRefreshing];
             }
                 
                 break;

@@ -61,8 +61,9 @@
 {
     if (indexPath.row==0) {
         XHHistoryHeadTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"historyHeadCell" forIndexPath:indexPath];
-        cell.titleLabel.text=TITLE[indexPath.row];
+        //cell.titleLabel.text=TITLE[indexPath.row];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell setItemObject:self.model];
         return cell;
     }
     if (indexPath.row==4) {
@@ -92,23 +93,23 @@
 }
 -(CGFloat )getCellHeight
 {
-    if ([self.model.imagPic isEqualToString:@""]) {
-        if ([NSString contentSizeWithTitle:self.model.reasonStr withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height<50) {
+    if ([self.model.picUrl isEqualToString:@""]) {
+        if ([NSString contentSizeWithTitle:self.model.content withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height<50) {
             return 50;
         }
         else
         {
-            return [NSString contentSizeWithTitle:self.model.reasonStr withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height-10;
+            return [NSString contentSizeWithTitle:self.model.content withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height-10;
         }
         
     }
     else
     {
-        if ([NSString contentSizeWithTitle:self.model.reasonStr withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height<50) {
+        if ([NSString contentSizeWithTitle:self.model.content withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height<50) {
             return 120;
         }
         {
-            return [NSString contentSizeWithTitle:self.model.reasonStr withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height+70;
+            return [NSString contentSizeWithTitle:self.model.content withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height+70;
         }
         
     }

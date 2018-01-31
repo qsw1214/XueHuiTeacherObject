@@ -11,13 +11,21 @@
 typedef NS_ENUM(NSInteger,XHDayRollCallModelType)
 {
     DayRollCallNOSignType = 0,//!< 未签到
-    DayRollCallSignType = 2,//!< 签到
-    DayRollCallOtherType = 3,//!< 请假
+    DayRollCallSignType = 1,//!< 签到
+    DayRollCallOtherType = 2,//!< 请假
 };
 
 @interface XHDayRollCallModel : NSObject
-@property(nonatomic,copy)NSString *imagPic;
-@property(nonatomic,copy)NSString *reasonStr;
+@property(nonatomic,copy)NSString *headPic;
+@property(nonatomic,copy)NSString *ID;
+@property(nonatomic,copy)NSString *studentName;
+@property(nonatomic,copy)NSString *type;
+
+@property(nonatomic,copy)NSString *picUrl;
+@property(nonatomic,copy)NSString *content;
+@property(nonatomic,copy)NSString *beginTime;
+@property(nonatomic,copy)NSString *endTime;
 @property(nonatomic,assign)BOOL IfSelect;
 @property(nonatomic,assign)XHDayRollCallModelType modelType;
+-(id)initWithDic:(NSDictionary *)dic;
 @end
