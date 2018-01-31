@@ -49,22 +49,22 @@
     {
         [self.labelArray enumerateObjectsUsingBlock:^(UILabel *obj, NSUInteger idx, BOOL *stop)
          {
-             [obj setBackgroundColor:[UIColor colorWithRed:((idx+78)/255.0) green:((idx+235)/255.0) blue:((idx+199)/255.0) alpha:1.0]];
+             [obj setBackgroundColor:[UIColor colorWithRed:((idx*30+78)/255.0) green:((idx*30+235)/255.0) blue:((idx*30+199)/255.0) alpha:1.0]];
          }];
         
         [self.imageViewArray enumerateObjectsUsingBlock:^(UIImageView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop)
          {
-             [obj setBackgroundColor:[UIColor colorWithRed:((idx+198)/255.0) green:((idx+115)/255.0) blue:((idx+109)/255.0) alpha:1.0]];
+             [obj setBackgroundColor:[UIColor colorWithRed:((idx*30+198)/255.0) green:((idx*30+115)/255.0) blue:((idx*30+109)/255.0) alpha:1.0]];
          }];
         
         [self.textViewArray enumerateObjectsUsingBlock:^(BaseTextView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop)
          {
-             [obj setBackgroundColor:[UIColor colorWithRed:((idx+98)/255.0) green:((idx+215)/255.0) blue:((idx+189)/255.0) alpha:1.0]];
+             [obj setBackgroundColor:[UIColor colorWithRed:((idx*30+98)/255.0) green:((idx*30+215)/255.0) blue:((idx*30+189)/255.0) alpha:1.0]];
          }];
         
         [self.textFieldArray enumerateObjectsUsingBlock:^(UITextField * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop)
          {
-             [obj setBackgroundColor:[UIColor colorWithRed:((idx+145)/255.0) green:((idx+217)/255.0) blue:((idx+167)/255.0) alpha:1.0]];
+             [obj setBackgroundColor:[UIColor colorWithRed:((idx*30+145)/255.0) green:((idx*30+217)/255.0) blue:((idx*30+167)/255.0) alpha:1.0]];
          }];
     }
 }

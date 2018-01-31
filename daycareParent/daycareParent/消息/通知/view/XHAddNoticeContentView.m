@@ -48,14 +48,21 @@
     [self.addPhotoContent resetFrame:CGRectMake(10, self.lineVew.bottom+20.0, 90, 90)];
     [self.addPhotoContent setImageEdgeFrame:CGRectMake(0, 0, self.addPhotoContent.width, self.addPhotoContent.height) withNumberType:0 withAllType:NO];
     
+    [self.recipientContent resetFrame:CGRectMake(0, self.addPhotoContent.bottom+20.0,frame.size.width, 60.0)];
+    [self.recipientContent resetLineViewFrame:CGRectMake(0, 0, self.recipientContent.width, 0.5) withNumberType:0 withAllType:NO];
+    [self.recipientContent resetLineViewFrame:CGRectMake(0, self.recipientContent.height-0.5, self.recipientContent.width, 0.5) withNumberType:1 withAllType:NO];
+    [self.recipientContent setImageEdgeFrame:CGRectMake(10, ((self.recipientContent.height-20.0)/2.0), 20.0, 20.0) withNumberType:0 withAllType:NO];
+    [self.recipientContent setImageEdgeFrame:CGRectMake((self.recipientContent.width-30.0), ((self.recipientContent.height-20.0)/2.0), 20.0, 20.0) withNumberType:1 withAllType:NO];
+    [self.recipientContent setTitleEdgeFrame:CGRectMake(35, 0, 85, self.recipientContent.height) withNumberType:0 withAllType:NO];
+    [self.recipientContent setTitleEdgeFrame:CGRectMake(120, 0, (self.recipientContent.width-150), self.recipientContent.height) withNumberType:1 withAllType:NO];
     
     //发布
-    [self.submitContent resetFrame:CGRectMake(10, self.addPhotoContent.bottom+60.0, (self.subjectContent.width-20.0), 50.0)];
+    [self.submitContent resetFrame:CGRectMake(10, self.recipientContent.bottom+60.0, (self.recipientContent.width-20.0), 50.0)];
     [self.submitContent setTitleEdgeFrame:CGRectMake(0, 0, self.submitContent.width, self.submitContent.height) withNumberType:0 withAllType:NO];
     
     
     //重新设置当前滚动视图的可滚动区域
-    [self setContentSize:CGSizeMake(frame.size.width, self.submitContent.bottom+20.0)];
+    [self setContentSize:CGSizeMake(frame.size.width, self.submitContent.bottom+60.0)];
 }
 
 
@@ -65,9 +72,9 @@
 {
     if (subview)
     {
-        [self addSubview:self.classContent];
-        [self addSubview:self.subjectContent];
+
         [self addSubview:self.addPhotoContent];
+        [self addSubview:self.recipientContent];
         [self addSubview:self.inputContent];
         [self addSubview:self.limitLabel];
         [self addSubview:self.lineVew];
@@ -110,15 +117,18 @@
         [_recipientContent setNumberLabel:2];
         [_recipientContent setNumberImageView:2];
         [_recipientContent setNumberLineView:2];
+        [_recipientContent setTextAlignment:NSTextAlignmentRight withNumberType:1 withAllType:NO];
         [_recipientContent setFont:FontLevel3 withNumberType:0 withAllType:NO];
         [_recipientContent setFont:FontLevel3 withNumberType:1 withAllType:NO];
         [_recipientContent setTextColor:[UIColor blackColor] withTpe:0 withAllType:NO];
         [_recipientContent setTextColor:[UIColor grayColor] withTpe:1 withAllType:NO];
         [_recipientContent setTextAlignment:NSTextAlignmentRight withNumberType:1 withAllType:NO];
-        [_recipientContent setImage:@"ico_arrow" withNumberType:0 withAllType:NO];
-        [_recipientContent setText:@"选择班级" withNumberType:0 withAllType:NO];
+        [_recipientContent setImage:@"ico_chooseso" withNumberType:0 withAllType:NO];
+        [_recipientContent setImage:@"ico_arrow" withNumberType:1 withAllType:NO];
+        [_recipientContent setText:@"请选择接收人" withNumberType:0 withAllType:NO];
         [_recipientContent setText:@"请选择" withNumberType:1 withAllType:NO];
         [_recipientContent addTarget:self action:@selector(controlAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_recipientContent setItemColor:NO];
     }
     return _recipientContent;
 }
