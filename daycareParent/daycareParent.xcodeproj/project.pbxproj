@@ -435,6 +435,10 @@
 		8C8337061FDD002100F48A25 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8337051FDD002100F48A25 /* libresolv.tbd */; };
 		8C91E01E1FEA39A00040A205 /* XHCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C91E01D1FEA39A00040A205 /* XHCustomView.m */; };
 		8C922BD91FDE65EB00BA0EAB /* XHForgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C922BD81FDE65EB00BA0EAB /* XHForgetViewController.m */; };
+		8C9D92EA201EC8F600F4A28E /* XHNattendanceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9D92E9201EC8F600F4A28E /* XHNattendanceModel.m */; };
+		8C9D92ED201EEBF200F4A28E /* XHPunchSignTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9D92EC201EEBF200F4A28E /* XHPunchSignTableViewCell.m */; };
+		8C9D92FB201F197100F4A28E /* XHClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9D92FA201F197100F4A28E /* XHClassViewController.m */; };
+		8C9D92FE201F1A8600F4A28E /* XHClassTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9D92FD201F1A8600F4A28E /* XHClassTableViewCell.m */; };
 		8CB5A25B1FD7825D008E97D8 /* XHNameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5A2591FD7825D008E97D8 /* XHNameTableViewCell.m */; };
 		8CB5A25C1FD7825D008E97D8 /* XHNameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CB5A25A1FD7825D008E97D8 /* XHNameTableViewCell.xib */; };
 		8CB5A2601FD78270008E97D8 /* XHAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5A25E1FD78270008E97D8 /* XHAddressTableViewCell.m */; };
@@ -1327,6 +1331,14 @@
 		8C91E01D1FEA39A00040A205 /* XHCustomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHCustomView.m; sourceTree = "<group>"; };
 		8C922BD71FDE65EB00BA0EAB /* XHForgetViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHForgetViewController.h; sourceTree = "<group>"; };
 		8C922BD81FDE65EB00BA0EAB /* XHForgetViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHForgetViewController.m; sourceTree = "<group>"; };
+		8C9D92E8201EC8F600F4A28E /* XHNattendanceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNattendanceModel.h; sourceTree = "<group>"; };
+		8C9D92E9201EC8F600F4A28E /* XHNattendanceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNattendanceModel.m; sourceTree = "<group>"; };
+		8C9D92EB201EEBF200F4A28E /* XHPunchSignTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHPunchSignTableViewCell.h; sourceTree = "<group>"; };
+		8C9D92EC201EEBF200F4A28E /* XHPunchSignTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHPunchSignTableViewCell.m; sourceTree = "<group>"; };
+		8C9D92F9201F197100F4A28E /* XHClassViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHClassViewController.h; sourceTree = "<group>"; };
+		8C9D92FA201F197100F4A28E /* XHClassViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHClassViewController.m; sourceTree = "<group>"; };
+		8C9D92FC201F1A8600F4A28E /* XHClassTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHClassTableViewCell.h; sourceTree = "<group>"; };
+		8C9D92FD201F1A8600F4A28E /* XHClassTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHClassTableViewCell.m; sourceTree = "<group>"; };
 		8CB5A2581FD7825D008E97D8 /* XHNameTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XHNameTableViewCell.h; path = "daycareParent/我的/我的收获地址/view/XHNameTableViewCell.h"; sourceTree = SOURCE_ROOT; };
 		8CB5A2591FD7825D008E97D8 /* XHNameTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XHNameTableViewCell.m; path = "daycareParent/我的/我的收获地址/view/XHNameTableViewCell.m"; sourceTree = SOURCE_ROOT; };
 		8CB5A25A1FD7825D008E97D8 /* XHNameTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = XHNameTableViewCell.xib; path = "daycareParent/我的/我的收获地址/view/XHNameTableViewCell.xib"; sourceTree = SOURCE_ROOT; };
@@ -1640,14 +1652,14 @@
 			path = "平安记录";
 			sourceTree = "<group>";
 		};
-		4B07CC221FD4EB5800B2DBDA /* 家长学堂 */ = {
+		4B07CC221FD4EB5800B2DBDA /* 教师资讯 */ = {
 			isa = PBXGroup;
 			children = (
 				4B07CC231FD4EB5800B2DBDA /* Model */,
 				4B07CC241FD4EB5800B2DBDA /* View */,
 				4B07CC251FD4EB5800B2DBDA /* ViewController */,
 			);
-			path = "家长学堂";
+			path = "教师资讯";
 			sourceTree = "<group>";
 		};
 		4B07CC231FD4EB5800B2DBDA /* Model */ = {
@@ -2420,7 +2432,7 @@
 			children = (
 				8CDDA8B01FDA5CD3000B3BAB /* 通知 */,
 				8CDDA8AC1FDA5CCE000B3BAB /* 聊天 */,
-				4B07CC221FD4EB5800B2DBDA /* 家长学堂 */,
+				4B07CC221FD4EB5800B2DBDA /* 教师资讯 */,
 				4B11AF2F1FCCE892002738F1 /* Main(消息) */,
 			);
 			path = "消息";
@@ -3634,6 +3646,8 @@
 				8CBA35FE2011BBDB00485643 /* XHDayRollCallViewController.m */,
 				8CD8CE0C2015D23E0085DD70 /* XHDayRollCallDetailViewController.h */,
 				8CD8CE0D2015D23E0085DD70 /* XHDayRollCallDetailViewController.m */,
+				8C9D92F9201F197100F4A28E /* XHClassViewController.h */,
+				8C9D92FA201F197100F4A28E /* XHClassViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -3656,6 +3670,8 @@
 				8CD8CE072015A9BF0085DD70 /* XHDayRollCollectionViewCell.m */,
 				8CD8CE122015E0550085DD70 /* XHDayRollReasonTableViewCell.h */,
 				8CD8CE132015E0550085DD70 /* XHDayRollReasonTableViewCell.m */,
+				8C9D92FC201F1A8600F4A28E /* XHClassTableViewCell.h */,
+				8C9D92FD201F1A8600F4A28E /* XHClassTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -3682,6 +3698,8 @@
 		8CBEE21A201884BA007EB93A /* model */ = {
 			isa = PBXGroup;
 			children = (
+				8C9D92E8201EC8F600F4A28E /* XHNattendanceModel.h */,
+				8C9D92E9201EC8F600F4A28E /* XHNattendanceModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -3689,6 +3707,8 @@
 		8CBEE21B201884BA007EB93A /* view */ = {
 			isa = PBXGroup;
 			children = (
+				8C9D92EB201EEBF200F4A28E /* XHPunchSignTableViewCell.h */,
+				8C9D92EC201EEBF200F4A28E /* XHPunchSignTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -4263,6 +4283,7 @@
 				8CB5A2841FD7DF4B008E97D8 /* AreaModel.m in Sources */,
 				8C8081611FCE722000C7945A /* XHListTableViewCell.m in Sources */,
 				4B80F2D91FCBF04F00BC7B52 /* UIView+WebCacheOperation.m in Sources */,
+				8C9D92EA201EC8F600F4A28E /* XHNattendanceModel.m in Sources */,
 				4B3126561FDA57F0000CE894 /* XHHelper.m in Sources */,
 				4B80F2C51FCBF04F00BC7B52 /* SDImageCache.m in Sources */,
 				8CDC90651FE4B86A00040D19 /* XHStudentDetailViewController.m in Sources */,
@@ -4296,11 +4317,13 @@
 				4B80F2221FCBEC2B00BC7B52 /* BaseNavigationView.m in Sources */,
 				4B4A00111FE240BD00B8A8F8 /* XHDynamicsFrame.m in Sources */,
 				4B07CC191FD4DAB800B2DBDA /* XHLeaveRecordModel.m in Sources */,
+				8C9D92ED201EEBF200F4A28E /* XHPunchSignTableViewCell.m in Sources */,
 				8C4DB5D91FEBB55D00B14073 /* XHHomeWorkDetailView.m in Sources */,
 				8CC76480200C8C2A007887C7 /* XHHistoryViewController.m in Sources */,
 				8C007D772010858900DD0635 /* XHHistoryHeadTableViewCell.m in Sources */,
 				4B11AF321FCCE958002738F1 /* XHSmartCampusViewController.m in Sources */,
 				4B11CA011FCE591100FD0D8F /* XHTestView.m in Sources */,
+				8C9D92FE201F1A8600F4A28E /* XHClassTableViewCell.m in Sources */,
 				4B3418741FFDC14C00A5EC56 /* UINavigationController+ZFPlayerRotation.m in Sources */,
 				4B80F3281FCBFD6F00BC7B52 /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */,
 				8C6240881FD8D2B800E6C031 /* XHComplieAddressViewController.m in Sources */,
@@ -4435,6 +4458,7 @@
 				04E5D14D1FD39F3F0021B842 /* XHPriviTableViewCell.m in Sources */,
 				4BA8C4DF1FCFF36C006CBEBC /* XHHomeWorkFrame.m in Sources */,
 				4B2BBAF8201865AA007DAFCC /* XHAddressBoardViewController.m in Sources */,
+				8C9D92FB201F197100F4A28E /* XHClassViewController.m in Sources */,
 				4B4338BA1FDF9C3F0047AC52 /* XHEducationCloudItemCell.m in Sources */,
 				4B80F2C81FCBF04F00BC7B52 /* SDWebImageCodersManager.m in Sources */,
 				4B3126591FDA7D5D000CE894 /* XHAddressBookKey.m in Sources */,

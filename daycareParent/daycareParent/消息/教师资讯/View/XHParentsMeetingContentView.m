@@ -103,7 +103,7 @@
 {
     [self.netWorkConfig setObject:@"20" forKey:@"pageSize"];
     [self.netWorkConfig setObject:[NSString stringWithFormat:@"%zd",_pageNumber] forKey:@"pageNumber"];
-    [self.netWorkConfig postWithUrl:@"zzjt-app-api_smartCampus017" sucess:^(id object, BOOL verifyObject) {
+    [self.netWorkConfig postWithUrl:@"zzjt-app-api_notice008" sucess:^(id object, BOOL verifyObject) {
         if (verifyObject)
         {
             switch (type)

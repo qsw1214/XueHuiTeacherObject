@@ -8,12 +8,21 @@
 
 #import "XHPunchSignViewController.h"
 #import "XHCustomDatePickerView.h"
-@interface XHPunchSignViewController ()<XHCustomDatePickerViewDelegate>
+#import "BaseTableView.h"
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <AMapLocationKit/AMapLocationKit.h>
+#import "XHNattendanceModel.h"
+#import "XHPunchSignTableViewCell.h"
+@interface XHPunchSignViewController ()<XHCustomDatePickerViewDelegate,AMapLocationManagerDelegate,UITableViewDelegate,UITableViewDataSource>
 {
     NSInteger _Tag;
     NSDate *_beginDate;
     NSDate *_endDate;
+    BaseTableView *_tableView;
+    NSMutableDictionary *_dataDic;
+    NSMutableArray *_keys;
 }
+@property(nonatomic,strong)AMapLocationManager *locationManager;
 @property(nonatomic,strong)BaseButtonControl *signBtn;
 @property(nonatomic,strong)BaseButtonControl *beginDateBtn;
 @property(nonatomic,strong)BaseButtonControl *endDateBtn;
@@ -27,18 +36,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setNavtionTitle:@"签到详情"];
-    _endDate=[NSDate date];
-    _beginDate=[NSDate getDayBeforWithDate:_endDate dayBefor:6];
-    UIScrollView *scr=[[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
-    scr.contentSize=CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT);
-    scr.showsVerticalScrollIndicator=NO;
-    [self.view addSubview:scr];
+    _tableView=[[BaseTableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
+    _tableView.delegate=self;
+    _tableView.dataSource=self;
+    [_tableView registerClass:[XHPunchSignTableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.view addSubview:_tableView];
+    UIView *tableHeadView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 172)];
+    _tableView.tableHeaderView=tableHeadView;
     UIImageView *imgV=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 130)];
     imgV.image=[UIImage imageNamed:@"user_qiandao_bg"];
-    [scr addSubview:imgV];
+    [tableHeadView addSubview:imgV];
    _signBtn=[[BaseButtonControl alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-80)/2.0, 10, 80, 100)];
     [_signBtn addTarget:self action:@selector(signBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [scr addSubview:_signBtn];
+    [tableHeadView addSubview:_signBtn];
     [_signBtn setNumberImageView:1];
     [_signBtn setImageEdgeFrame:CGRectMake(0, 0, 80, 80) withNumberType:0 withAllType:NO];
     [_signBtn setImage:@"user_qiandao" withNumberType:0 withAllType:NO];
@@ -49,10 +59,10 @@
     [_signBtn setText:@"打卡签到" withNumberType:0 withAllType:NO];
     UIView *bgView=[[UIView alloc] initWithFrame:CGRectMake(0, 131, SCREEN_WIDTH, 40)];
     bgView.backgroundColor=RGB(240, 240, 240);
-    [scr addSubview:bgView];
+    [tableHeadView addSubview:bgView];
     UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 171, SCREEN_WIDTH, 1)];
     view.backgroundColor=RGB(224, 224, 224);
-    [scr addSubview:view];
+    [tableHeadView addSubview:view];
     XHBaseLabel *label=[[XHBaseLabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-20)/2.0, 10, 20, 20)];
     label.text=@"至";
     label.textAlignment=NSTextAlignmentCenter;
@@ -88,7 +98,194 @@
     [_endDateBtn setTitleEdgeFrame:CGRectMake(5, 10, _endDateBtn.width-20, _endDateBtn.height-20) withNumberType:0 withAllType:NO];
     [_endDateBtn setText:[NSString dateWithDateFormatter:YY_DEFAULT_TIME_FORM Date:_endDate] withNumberType:0 withAllType:NO];
     [_endDateBtn setFont:FontLevel4 withNumberType:0 withAllType:NO];
+    NSDate *lDate=[NSDate getDateWithDateStr:[NSUserDefaults objectItemForKey:[XHUserInfo sharedUserInfo].telphoneNumber] formatter:ALL_DEFAULT_TIME_FORM];
+    if (lDate && [[NSDate date] timeIntervalSinceDate:lDate] <= 3600)
+    {
+        self.signBtn.selected = YES;
+        [self.signBtn setTextColor:RGB(240, 240, 240) withTpe:0 withAllType:NO];
+        [self.signBtn setText:@"已打卡" withNumberType:0 withAllType:NO];
+    }
+     _endDate=[NSDate date];
+    _beginDate=[NSDate getDayBeforWithDate:_endDate dayBefor:6];
+    [self loadData:_endDate beginDate:_beginDate];
 }
+#pragma mark    定位获取区域编码
+- (void)startLocation
+{
+    self.locationManager = [[AMapLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    // 带逆地理信息的一次定位（返回坐标和地址信息）
+    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    //   定位超时时间，最低2s，此处设置为10s
+    self.locationManager.locationTimeout =10;
+    //   逆地理请求超时时间，最低2s，此处设置为10s
+    self.locationManager.reGeocodeTimeout = 10;
+    
+    [XHShowHUD showTextHud:@"获取位置..."];
+    // 带逆地理（返回坐标和地址信息）
+    @WeakObj(self);
+    [_locationManager requestLocationWithReGeocode:YES completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
+        [XHShowHUD hideHud];
+        if (error)
+        {
+            NSLog(@"locError:---%ld===%@",(long)error.code, error.localizedDescription);
+            [XHShowHUD showNOHud:@"获取位置信息失败"];
+        }
+        if (regeocode)
+        {
+            @StrongObj(self);
+            [self sign:location];
+        }
+    }];
+    
+}
+#pragma mark  打卡方法
+- (void)sign:(CLLocation *)location
+{
+    [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
+    [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
+    [self.netWorkConfig setObject:[NSString stringWithFormat:@"%@",@(location.coordinate.latitude)] forKey:@"latitude"];
+    [self.netWorkConfig setObject:[NSString stringWithFormat:@"%@",@(location.coordinate.longitude)] forKey:@"longitude"];
+    [self.netWorkConfig postWithUrl:@"pmschool-teacher-api_/teacher/attendanceSheet/signIn" sucess:^(id object, BOOL verifyObject) {
+        if (verifyObject)
+        {
+            [NSUserDefaults setItemObject:[NSDate getDateStrWithDateFormatter:ALL_DEFAULT_TIME_FORM Date:[NSDate date]] forKey:[XHUserInfo sharedUserInfo].telphoneNumber];
+            self.signBtn.selected = YES;
+            self.signBtn.selected = YES;
+            [self.signBtn setTextColor:RGB(240, 240, 240) withTpe:0 withAllType:NO];
+            [self.signBtn setText:@"已打卡" withNumberType:0 withAllType:NO];
+            [self loadData:[NSDate date] beginDate:[NSDate getDayBeforWithDate:[NSDate date] dayBefor:6]];
+        }
+       
+    } error:^(NSError *error) {
+        NSError *err = error;
+        [XHShowHUD showNOHud:err.domain delay:2.0f];
+    }];
+}
+#pragma mark - loaddata
+- (void)loadData:(NSDate *)endDate beginDate:(NSDate *)beginDate
+{
+    [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"relationId"];
+    [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
+    [self.netWorkConfig setObject:[NSDate getDateStrWithDateFormatter:ALL_DEFAULT_TIME_FORM Date:beginDate] forKey:@"beginTime"];
+    [self.netWorkConfig setObject:[NSDate getDateStrWithDateFormatter:ALL_DEFAULT_TIME_FORM Date:endDate] forKey:@"endTime"];
+    [XHShowHUD showTextHud];
+    [self.netWorkConfig postWithUrl:@"pmschool-teacher-api_/teacher/attendanceSheet/list" sucess:^(id object, BOOL verifyObject) {
+        if (verifyObject) {
+            [XHShowHUD hideHud];
+            [self.beginDateBtn setText:[NSDate getDateStrWithDateFormatter:YY_DEFAULT_TIME_FORM Date:_beginDate] withNumberType:0 withAllType:NO];
+            [self.endDateBtn setText:[NSDate getDateStrWithDateFormatter:YY_DEFAULT_TIME_FORM Date:_endDate] withNumberType:0 withAllType:NO];
+            NSMutableArray *arry=[object objectItemKey:@"object"];
+            for (NSDictionary *dic in arry)
+            {
+                XHNattendanceModel *model=[[XHNattendanceModel alloc] initWithDic:dic];
+                [self.dataArray addObject:model];
+            }
+            [_keys removeAllObjects];
+            [_dataDic removeAllObjects];
+            [self dataGroup:self.dataArray];
+            [_tableView reloadData];
+        }
+        
+    } error:^(NSError *error) {
+        [self loadData:endDate beginDate:beginDate];
+    }];
+   
+}
+#pragma mark -
+#pragma mark tableDelegta
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return [_keys count];
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSMutableArray *array = [_dataDic objectForKey:[_keys objectAtIndex:section]];
+    return array.count;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 40;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 40)];
+    XHBaseLabel *label=[[XHBaseLabel alloc] initWithFrame:CGRectMake(10, 0, tableView.frame.size.width-20, 40)];
+    label.textAlignment=NSTextAlignmentLeft;
+    [view addSubview:label];
+    NSDate *time=[NSDate getDateWithDateStr:[_keys objectAtIndex:section] formatter:YY_DEFAULT_TIME_FORM];
+    label.text=[NSDate formateDateNow:time];
+    return view;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 45;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    XHPunchSignTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+
+    NSDate *key = [_keys objectAtIndex:indexPath.section];
+    NSMutableArray *array = [_dataDic objectForKey:key];
+    XHNattendanceModel *attendance = [array objectAtIndex:indexPath.row];
+    cell.timeLabe.text = [NSDate dateStr:attendance.attendanceTime FromFormatter:ALL_DEFAULT_TIME_FORM ToFormatter:HH_DEFAULT_TIME_FORM];
+    cell.postionLabe.text = attendance.position;
+    if (attendance.attendanceType == XHAttendanceCard) {
+        cell.titleLabe.text = @"考勤机打卡";
+    } else if (attendance.attendanceType == XHAttendanceManual){
+        cell.titleLabe.text = @"手机打卡";
+    } else
+    {
+        if ([attendance.direction integerValue] == 01)
+        {
+            cell.titleLabe.text = @"远程考勤(进校)";
+        } else if ([attendance.direction integerValue] == 02)
+        {
+            cell.titleLabe.text = @"远程考勤(出校)";
+        }
+        else
+        {
+            cell.titleLabe.text = @"未知类型";
+        }
+    }
+    return cell;
+}
+#pragma mark end
+- (NSMutableDictionary *)dataGroup:(NSMutableArray *)dataArray
+{
+    if (_keys == nil)
+    {
+        _keys = [NSMutableArray array];
+    }
+    
+    if (_dataDic == nil)
+    {
+        _dataDic = [NSMutableDictionary dictionary];
+    }
+    for (XHNattendanceModel *attendance in dataArray)
+    {
+        NSString *timeKey=[NSDate dateStr:attendance.attendanceTime FromFormatter:ALL_DEFAULT_TIME_FORM ToFormatter:YY_DEFAULT_TIME_FORM];
+        
+        NSMutableArray *array = [_dataDic objectForKey:timeKey];
+        if (array == nil)
+        {
+            array = [NSMutableArray array];
+            [array addObject:attendance];
+            [_dataDic setObject:array forKey:timeKey];
+            [_keys addObject:timeKey];
+        }
+        else
+        {
+            [array addObject:attendance];
+        }
+        
+    }
+    
+    return _dataDic;
+}
+#pragma end
 #pragma mark  显示日历按钮方法
 -(void)dateBtnMethod:(BaseButtonControl *)btn
 {
@@ -97,7 +294,7 @@
         case 10:
             {
                 [self.view addSubview:self.beginPickerView];
-                   _beginPickerView.datePickerView.maximumDate=[NSDate getDayAfterWithDate:_endDate dayAfter:0];
+                _beginPickerView.datePickerView.maximumDate=[NSDate getDayAfterWithDate:_endDate dayAfter:0];
                 
             }
             break;
@@ -113,7 +310,12 @@
 #pragma mark  签到按钮
 -(void)signBtnClick
 {
-    NSLog(@"签到按钮");
+    if (self.signBtn.selected == YES)
+    {
+        return;
+    }
+    
+    [self startLocation];
 }
 #pragma mark-----------选择日期后回调代理方法----------
 -(void)getDateStr:(NSString *)dateStr
@@ -126,6 +328,7 @@
                 [self.beginDateBtn setText:dateStr withNumberType:0 withAllType:NO];
                 _beginDate=[NSDate getDateWithDateStr:dateStr formatter:YY_DEFAULT_TIME_FORM];
                  _endPickerView.datePickerView.minimumDate=_beginDate;
+                [self loadData:_endDate beginDate:_beginDate];
             }
                 break;
                 
@@ -137,7 +340,7 @@
                 _beginDate=[NSDate getDayBeforWithDate:_endDate dayBefor:6];
                  [self.beginDateBtn setText:[NSString dateWithDateFormatter:YY_DEFAULT_TIME_FORM Date:_beginDate] withNumberType:0 withAllType:NO];
                 _beginPickerView.datePickerView.date=_beginDate;
-                
+                [self loadData:_endDate beginDate:_beginDate];
             }
                 
                 break;
