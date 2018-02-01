@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "XHBackLabel.h"
+@class  XHApproveModel ;
 @interface XHNotifceTableViewCell : UITableViewCell
 @property(nonatomic,strong)UIImageView *headImageView;
 @property(nonatomic,strong)XHBaseLabel *titleLab;
@@ -15,4 +16,5 @@
 @property(nonatomic,strong)XHBackLabel *detailLab;
 @property(nonatomic,strong)UILabel *smallLab;
 @property(nonatomic,strong)XHBaseLabel *myApplyLabel;
+-(void)setItemObject:(XHApproveModel *)model;
 @end

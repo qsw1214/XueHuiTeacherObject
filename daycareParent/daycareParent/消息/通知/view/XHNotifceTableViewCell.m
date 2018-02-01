@@ -7,7 +7,7 @@
 //
 
 #import "XHNotifceTableViewCell.h"
-
+#import "XHApproveModel.h"
 @implementation XHNotifceTableViewCell
 
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -35,6 +35,14 @@
         [self.contentView addSubview:_myApplyLabel];
     }
     return self;
+}
+-(void)setItemObject:(XHApproveModel *)model
+{
+    if ([model.isMe integerValue]==1)//!< 我的申请
+    {
+        
+    }
+    
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

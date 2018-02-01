@@ -16,8 +16,6 @@
     BaseTableView *_tableView;
     NSInteger _tag;
 }
-//@property(nonatomic,strong)XHNewDetailViewController *detailVC;
-
 @end
 
 @implementation XHHistoryViewController
@@ -105,13 +103,12 @@
         }
             break;
     }
-    detail.isRefresh = ^(BOOL ok) {
+    detail.isRefresh = ^(BOOL ok)
+    {
         if (ok) {
-#pragma mark-------------点击按钮前状态改变--------------
             BaseButtonControl *lastBtn=[self.view viewWithTag:10];
             [lastBtn setTextColor:[UIColor blackColor] withTpe:0 withAllType:NO];
             [lastBtn setTextBackGroundColor:[UIColor clearColor] withTpe:1 withAllType:NO];
-#pragma mark-------------现在点击按钮状态改变--------------
             BaseButtonControl *btn=[self.view viewWithTag:11];
             [btn setTextColor:[UIColor orangeColor] withTpe:0 withAllType:NO];
             [btn setTextBackGroundColor:[UIColor orangeColor] withTpe:1 withAllType:NO];
@@ -122,7 +119,7 @@
     };
     [self.navigationController pushViewController:detail animated:YES];
 }
-#pragma mark-------------审批选项--------------
+#pragma mark-------------审批选项列表--------------
 -(void)getApproveBtn
 {
     for (int i=0; i<2; i++) {
@@ -146,11 +143,9 @@
 #pragma mark-------------审批按钮方法--------------
 -(void)btnClick:(BaseButtonControl *)btn
 {
-    #pragma mark-------------点击按钮前状态改变--------------
     BaseButtonControl *lastBtn=[self.view viewWithTag:_tag];
     [lastBtn setTextColor:[UIColor blackColor] withTpe:0 withAllType:NO];
     [lastBtn setTextBackGroundColor:[UIColor clearColor] withTpe:1 withAllType:NO];
-    #pragma mark-------------现在点击按钮状态改变--------------
     [btn setTextColor:[UIColor orangeColor] withTpe:0 withAllType:NO];
     [btn setTextBackGroundColor:[UIColor orangeColor] withTpe:1 withAllType:NO];
     _tag=btn.tag;
