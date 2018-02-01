@@ -170,12 +170,14 @@ typedef NS_ENUM(NSInteger,EducationCloudInformationType)
         self.videoModel = [[BaseMenuModel alloc]init];
         [self.videoModel setItemSize:CGSizeMake(50.0, 40.0)];
         [self.videoModel setTitle:@"视频"];
+        [self.videoModel setLineSize:CGSizeMake(30, 2)];
         [self.videoModel setMarkLineType:BaseMenuTopLineType];
         [self.switchArray addObject:self.videoModel];
         
         self.exerciseModel = [[BaseMenuModel alloc]init];
         [self.exerciseModel setItemSize:CGSizeMake(50.0, 40.0)];
         [self.exerciseModel setTitle:@"试题"];
+        [self.exerciseModel setLineSize:CGSizeMake(30, 2)];
         [self.exerciseModel setMarkLineType:BaseMenuTopLineType];
         [self.switchArray addObject:self.exerciseModel];
         [self setSwitchMenuItemArray:self.switchArray];

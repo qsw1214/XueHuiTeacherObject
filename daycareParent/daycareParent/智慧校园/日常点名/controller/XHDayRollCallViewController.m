@@ -48,7 +48,7 @@
     [self.view addSubview:self.collectionView];
      [self.collectionView showRefresHeaderWithTarget:self withSelector:@selector(refreshHead)];
     [self.collectionView beginRefreshing];
-    [self.collectionView setTipType:TipTitleAndTipImage withTipTitle:nil withTipImage:@"ico-no-data"];
+    [self.collectionView setTipType:TipTitleAndTipImage withTipTitle:@"同学们都去偷懒喽" withTipImage:@"img_bad"];
     
 }
 #pragma mark-------------刷新collectionView头视图--------------
@@ -167,10 +167,14 @@
                 [_collectionView refreshReloadData];
             }];
         }
+        else
+        {
+            [_collectionView refreshReloadData];
+        }
     }];
    
 }
-#pragma mark  刷新出勤率列表视图数据
+#pragma mark  ---------------刷新出勤率列表视图数据---------------
 -(void)refreshClassView:(XHClassListModel *)model propValueDic:(NSDictionary *)propValueDic
 {
     for (int i=0; i<4; i++)
@@ -180,7 +184,7 @@
         switch (i) {
             case 0:
             {
-                [classBtn setTitle:model.clazz forState:UIControlStateNormal];
+                [classBtn setTitle:[NSString stringWithFormat:@"%@>",model.clazz] forState:UIControlStateNormal];
             }
                 break;
                 
@@ -311,7 +315,7 @@
 #pragma mark  刷新数据源
 -(void)getDataArry
 {
-     [self refreshSignView];
+    
     if (_tag==10) {
         [self.dataArray setArray:self.noSignArry];
     }
@@ -321,6 +325,8 @@
     if (_tag==12) {
        [self.dataArray setArray:self.otherArry];
     }
+    [self defaultImagView];
+    [self refreshSignView];
     [_selectArry removeAllObjects];
     _selectNumber=0;
     for (int i=0; i<self.dataArray.count; i++) {
@@ -567,6 +573,17 @@
         _mutableStr=[[NSMutableString alloc] init];
     }
     return _mutableStr;
+}
+-(void)defaultImagView
+{
+    if (_tag==11)
+    {
+        [self.collectionView setTipType:TipTitleAndTipImage withTipTitle:@"同学们都去偷懒喽" withTipImage:@"img_bad"];
+    }
+    else
+    {
+        [self.collectionView setTipType:TipTitleAndTipImage withTipTitle:@"同学们都很勤奋哦" withTipImage:@"img_good"];
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

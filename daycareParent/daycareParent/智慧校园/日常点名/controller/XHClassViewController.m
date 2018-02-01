@@ -92,8 +92,13 @@
         case XHClassListType:
         {
             [[XHUserInfo sharedUserInfo] getClassList:^(BOOL isOK, NSMutableArray *classListArry) {
-                if (isOK) {
+                if (isOK)
+                {
                     [self.dataArray setArray:classListArry];
+                    [_tableView refreshReloadData];
+                }
+                else
+                {
                     [_tableView refreshReloadData];
                 }
             }];
@@ -102,9 +107,14 @@
             
         case XHClassSubjectType:
         {
-            [[XHUserInfo sharedUserInfo] getSubjectList:^(BOOL isOK, NSMutableArray *subjectListArry) {
-                if (isOK) {
+            [[XHUserInfo sharedUserInfo] getSubjectList:^(BOOL isOK, NSMutableArray *subjectListArry){
+                if (isOK)
+                {
                     [self.dataArray setArray:subjectListArry];
+                    [_tableView refreshReloadData];
+                }
+                else
+                {
                     [_tableView refreshReloadData];
                 }
             }];

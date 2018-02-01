@@ -11,6 +11,7 @@
 #import "XHSubjectListModel.h"
 @implementation XHUserInfo
 
+
 static XHUserInfo *userInfo = nil;
 
 /**
@@ -68,18 +69,33 @@ static XHUserInfo *userInfo = nil;
 }
 -(void)getClassList:(ClassListBlock)calssListBock
 {
+    if ([XHUserInfo sharedUserInfo].isClassList)
+    {
+        calssListBock(YES,self.classListArry);
+        return;
+    }
     [self.classListNet setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
-    [self.classListNet postWithUrl:@"pmschool-teacher-api_/teacher/attendanceSheet/classList" sucess:^(id object, BOOL verifyObject) {
+    [self.classListNet postWithUrl:@"pmschool-teacher-api_/teacher/attendanceSheet/classList" sucess:^(id object, BOOL verifyObject)
+    {
         if (verifyObject)
         {
             NSArray *arr=[object objectItemKey:@"object"];
-            [self.classListArry removeAllObjects];
-            for (NSDictionary *dic in arr)
+            if (arr.count!=0)
             {
-                XHClassListModel *model=[[XHClassListModel alloc] initWithDic:dic];
-                [self.classListArry addObject:model];
+                [self.classListArry removeAllObjects];
+                for (NSDictionary *dic in arr)
+                {
+                    XHClassListModel *model=[[XHClassListModel alloc] initWithDic:dic];
+                    [self.classListArry addObject:model];
+                }
+                [XHUserInfo sharedUserInfo].isClassList=YES;
+                calssListBock(YES,self.classListArry);
             }
-            calssListBock(YES,self.classListArry);
+            else
+            {
+                calssListBock(NO,self.classListArry);
+            }
+            
         }
         else
         {
@@ -91,19 +107,32 @@ static XHUserInfo *userInfo = nil;
 }
 -(void)getSubjectList:(SubjectListBlock)subjectListBock
 {
+    if ([XHUserInfo sharedUserInfo].isSubjectsList)
+    {
+        subjectListBock(YES,self.subjectListArry);
+        return;
+    }
     [self.subjectListNet setObject:[XHUserInfo sharedUserInfo].teacherModel.userId forKey:@"teacherId"];
     [self.subjectListNet postWithUrl:@"pmschool-teacher-api_/teacher/schoolwork/getSubjectAll" sucess:^(id object, BOOL verifyObject){
         if (verifyObject)
         {
                 NSArray *arr=[object objectItemKey:@"object"];
+            if (arr.count!=0)
+            {
                 [self.subjectListArry removeAllObjects];
                 for (NSDictionary *dic in arr)
                 {
                     XHSubjectListModel *model=[[XHSubjectListModel alloc] initWithDic:dic];
                     [self.subjectListArry addObject:model];
                 }
-            
+                [XHUserInfo sharedUserInfo].isSubjectsList=YES;
                 subjectListBock(YES,self.subjectListArry);
+            }
+            else
+            {
+                subjectListBock(NO,self.subjectListArry);
+            }
+            
         }
         else
         {

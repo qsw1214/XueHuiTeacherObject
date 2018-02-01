@@ -11,7 +11,7 @@
 #import "XHNewTableViewCell.h"
 #import "XHHistoryHeadTableViewCell.h"
 #import "XHHistoryDetailTableViewCell.h"
-#define TITLE  @[@"请假",@"申请时长",@"开始时间",@"结束时间",@"理由"]
+#define TITLE  @[@"请假",@"开始时间",@"结束时间",@"理由"]
 @interface XHDayRollCallDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UITableView *_tableView;
@@ -38,7 +38,7 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return 4;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -46,7 +46,7 @@
    if (indexPath.row==0) {
         return 60;
     }
-    if (indexPath.row==4) {
+    if (indexPath.row==3) {
        
         return [self getCellHeight];
     }
@@ -61,12 +61,11 @@
 {
     if (indexPath.row==0) {
         XHHistoryHeadTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"historyHeadCell" forIndexPath:indexPath];
-        //cell.titleLabel.text=TITLE[indexPath.row];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell setItemObject:self.model];
         return cell;
     }
-    if (indexPath.row==4) {
+    if (indexPath.row==3) {
         XHDayRollReasonTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"reasonCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.titleLabel.text=TITLE[indexPath.row];
@@ -81,11 +80,14 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         switch (indexPath.row) {
             case 1:
-                cell.selectLabel.hidden=YES;
+            {
+                cell.selectLabel.text=self.model.beginTime;
+            }
                 break;
-                
-            default:
-                cell.selectLabel.hidden=NO;
+            case 2:
+            {
+                cell.selectLabel.text=self.model.endTime;
+            }
                 break;
         }
         return cell;
@@ -93,8 +95,10 @@
 }
 -(CGFloat )getCellHeight
 {
-    if ([self.model.picUrl isEqualToString:@""]) {
-        if ([NSString contentSizeWithTitle:self.model.content withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height<50) {
+    if ([self.model.picUrl isEqualToString:@""])
+    {
+        if ([NSString contentSizeWithTitle:self.model.content withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height<50)
+        {
             return 50;
         }
         else
@@ -105,7 +109,8 @@
     }
     else
     {
-        if ([NSString contentSizeWithTitle:self.model.content withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height<50) {
+        if ([NSString contentSizeWithTitle:self.model.content withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height<50)
+        {
             return 120;
         }
         {
@@ -115,6 +120,7 @@
     }
    
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

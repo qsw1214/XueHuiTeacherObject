@@ -19,14 +19,14 @@
     if (self=[super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         _titleLabel=[[XHBaseLabel alloc] initWithFrame:CGRectMake(20, 0, 35, 50)];
         [self.contentView addSubview:_titleLabel];
-        _titleLabel.backgroundColor=[UIColor orangeColor];
+       // _titleLabel.backgroundColor=[UIColor orangeColor];
         _reasonLabel=[[XHBackLabel alloc] initWithFrame:CGRectMake(60, 0, SCREEN_WIDTH-70, 0)];
         _reasonLabel.numberOfLines=0;
-        _reasonLabel.backgroundColor=[UIColor redColor];
+       // _reasonLabel.backgroundColor=[UIColor redColor];
         [self.contentView addSubview:_reasonLabel];
         _imageV=[[UIImageView alloc] init];
         [_imageV sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:@"addman"]];
-        _imageV.backgroundColor=[UIColor redColor];
+        //_imageV.backgroundColor=[UIColor redColor];
         _imageV.layer.cornerRadius=5;
         [self.contentView addSubview:_imageV];
     }
@@ -38,7 +38,7 @@
     _reasonLabel.text=model.content;
     if (![model.picUrl isEqualToString:@""]) {
         _imageV.frame=CGRectMake(20, _reasonLabel.bottom+10, 50, 50);
-        [_imageV sd_setImageWithURL:[NSURL URLWithString:model.picUrl] placeholderImage:[UIImage imageNamed:@"addman"]];
+        [_imageV sd_setImageWithURL:[NSURL URLWithString:ALGetFileHeadThumbnail(model.picUrl)] placeholderImage:[UIImage imageNamed:@"addman"]];
     }
 }
 -(CGFloat )getCellHeight:(XHDayRollCallModel *)model

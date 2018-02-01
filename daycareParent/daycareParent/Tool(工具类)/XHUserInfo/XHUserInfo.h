@@ -32,7 +32,8 @@ typedef void(^SubjectListBlock)(BOOL isOK,NSMutableArray *subjectListArry);
 @property (nonatomic,copy) NSString *isRoot; //!<isRoot
 @property (nonatomic,copy) NSString *schoolId; //!<schoolId
 @property(nonatomic,copy)XHTeacherInfo *teacherModel;//!< 老师对象
-
+@property(nonatomic,assign)BOOL isClassList;//!< 是否请求过班级列表
+@property(nonatomic,assign)BOOL isSubjectsList;//!< 是否请求过学科列表
 @property (nonatomic,strong) NSMutableArray *classListArry; //!班级列表信息
 @property(nonatomic,strong)XHNetWorkConfig *classListNet;//!班级列表请求
 @property (nonatomic,strong) NSMutableArray *subjectListArry; //!学科列表信息
