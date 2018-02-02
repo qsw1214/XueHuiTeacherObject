@@ -20,6 +20,7 @@
     // Do any additional setup after loading the view.
     XHNewBulidViewController *new = [XHNewBulidViewController new];
     XHHistoryViewController *history = [XHHistoryViewController new];
+    history.modelType=XHHistoryCourseReportType;
     [self setSegmentedControlItems:@[@"新建",@"记录"] WithControllersArry:@[new,history]];
 }
 

@@ -215,9 +215,9 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [[RCIM sharedRCIM] setConnectionStatusDelegate:self];
     XHUserInfo *user = [XHUserInfo sharedUserInfo];
     RCUserInfo *userInfo = [[RCUserInfo alloc] init];
-    userInfo.userId = user.teacherModel.userId;
+    userInfo.userId = user.selfId;
     userInfo.portraitUri = ALGetFileHeadThumbnail(user.headPic);
-    userInfo.name = user.teacherModel.teacherName;
+    userInfo.name = user.nickName;
     [RCIM sharedRCIM].enableMessageAttachUserInfo = YES;
     [RCIM sharedRCIM].currentUserInfo = userInfo;
     [[RCIM sharedRCIM] refreshUserInfoCache:userInfo withUserId:user.selfId];

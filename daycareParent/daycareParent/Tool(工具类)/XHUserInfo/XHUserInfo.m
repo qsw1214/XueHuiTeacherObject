@@ -112,7 +112,7 @@ static XHUserInfo *userInfo = nil;
         subjectListBock(YES,self.subjectListArry);
         return;
     }
-    [self.subjectListNet setObject:[XHUserInfo sharedUserInfo].teacherModel.userId forKey:@"teacherId"];
+    [self.subjectListNet setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
     [self.subjectListNet postWithUrl:@"pmschool-teacher-api_/teacher/schoolwork/getSubjectAll" sucess:^(id object, BOOL verifyObject){
         if (verifyObject)
         {
@@ -142,13 +142,13 @@ static XHUserInfo *userInfo = nil;
         subjectListBock(NO,self.subjectListArry);
     }];
 }
--(XHTeacherInfo *)teacherModel
-{
-    if (_teacherModel==nil) {
-      _teacherModel=[XHTeacherInfo new];
-    }
-    return _teacherModel;
-}
+//-(XHTeacherInfo *)teacherModel
+//{
+//    if (_teacherModel==nil) {
+//      _teacherModel=[XHTeacherInfo new];
+//    }
+//    return _teacherModel;
+//}
 -(NSMutableArray *)childListArry
 {
     if (!_childListArry)

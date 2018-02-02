@@ -19,8 +19,8 @@ typedef void(^SubjectListBlock)(BOOL isOK,NSMutableArray *subjectListArry);
 @property (nonatomic,copy) NSString *headPic;//!< 头像
 @property (nonatomic,copy) NSString *ID;//!< ID
 @property (nonatomic,copy) NSString *loginName;//!< 登录名
-@property (nonatomic,copy) NSString *nickName;//!<  用户昵称
-@property (nonatomic,copy) NSString *selfId;//!< 教师家长表ID
+@property (nonatomic,copy) NSString *nickName;//!< teacherName
+@property (nonatomic,copy) NSString *selfId;//!< teacherId
 @property (nonatomic,copy) NSString *sessionId;//!< sessionId
 @property (nonatomic,copy) NSString *sex;//!< 性别
 @property (nonatomic,copy) NSString *sexName;//!< 性别
@@ -31,7 +31,7 @@ typedef void(^SubjectListBlock)(BOOL isOK,NSMutableArray *subjectListArry);
 @property (nonatomic,copy) NSString *isActive; //!<isActive
 @property (nonatomic,copy) NSString *isRoot; //!<isRoot
 @property (nonatomic,copy) NSString *schoolId; //!<schoolId
-@property(nonatomic,copy)XHTeacherInfo *teacherModel;//!< 老师对象
+//@property(nonatomic,copy)XHTeacherInfo *teacherModel;//!< 老师对象
 @property(nonatomic,assign)BOOL isClassList;//!< 是否请求过班级列表
 @property(nonatomic,assign)BOOL isSubjectsList;//!< 是否请求过学科列表
 @property (nonatomic,strong) NSMutableArray *classListArry; //!班级列表信息

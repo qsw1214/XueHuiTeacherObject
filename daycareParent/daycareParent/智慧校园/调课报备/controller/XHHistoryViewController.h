@@ -8,6 +8,17 @@
 
 #import "BaseViewController.h"
 #pragma mark-------------课程报备---》记录--------------
+
+typedef NS_ENUM(NSInteger,XHHistoryViewModelType)
+{
+    XHHistoryCourseReportType=1,//!<课程报备记录
+
+    XHHistoryAskforLeaveType=2,//!< 请假记录
+
+};
+
 @interface XHHistoryViewController : BaseViewController
+
+@property(nonatomic,assign)XHHistoryViewModelType modelType;
 
 @end

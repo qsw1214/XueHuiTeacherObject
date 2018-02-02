@@ -10,11 +10,13 @@
 #import "BaseTableView.h"
 #import "XHNotifceTableViewCell.h"
 #import "XHNewDetailViewController.h"
+#import "XHApproveModel.h"
 #define TITLE @[@"待审批",@"已审批"]
 @interface XHHistoryViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     BaseTableView *_tableView;
     NSInteger _tag;
+    NSInteger _pageNumber;
 }
 @end
 
@@ -38,50 +40,32 @@
     [self.dataArray addObject:@"1"];
     [_tableView setTipType:TipTitleAndTipImage withTipTitle:nil withTipImage:@"ico-no-data"];
     [_tableView showRefresHeaderWithTarget:self withSelector:@selector(refreshHead)];
+    [_tableView showRefresFooterWithTarget:self withSelector:@selector(refreshFoot)];
     [_tableView beginRefreshing];
     [self.view addSubview:_tableView];
     
 }
 -(void)refreshHead
 {
-    [_tableView refreshReloadData];
+    _pageNumber=1;
+    [self getRefreshType:HeaderRefresh];
+}
+-(void)refreshFoot
+{
+   [self getRefreshType:FooterRefresh];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     [_tableView tableTipViewWithArray:self.dataArray];
-    return 9;
+    NSLog(@"======%@",self.dataArray);
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XHNotifceTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.ContentLab.frame=CGRectMake(80, 35, SCREEN_WIDTH-180, 30);
-    cell.ContentLab.textColor=[UIColor blackColor];
-    cell.myApplyLabel.frame=CGRectMake(SCREEN_WIDTH-90, 40, 80, 20);
-    cell.myApplyLabel.textAlignment=NSTextAlignmentCenter;
-    cell.myApplyLabel.textColor=[UIColor whiteColor];
-    cell.myApplyLabel.backgroundColor=[UIColor orangeColor];
-    cell.myApplyLabel.layer.cornerRadius=10;
-    cell.myApplyLabel.layer.masksToBounds=YES;
-    cell.myApplyLabel.text=@"我的申请";
-    cell.smallLab.frame=CGRectMake(50, 9, 8, 8);
-    cell.smallLab.layer.cornerRadius=4;
-    cell.titleLab.frame=CGRectMake(80, 0, SCREEN_WIDTH-180, 30);
-    cell.titleLab.font = [UIFont fontWithName:@ "Helvetica-Bold"  size:(16.0)];
-    cell.headImageView.image=[UIImage imageNamed:@"addman"];
-    cell.titleLab.text=@"李某某的调课";
-    cell.ContentLab.text=@"等待王某某的审批";
-    cell.detailLab.text=@"2018-01-02";
-    if (indexPath.row==0&&_tag==10) {
-        cell.myApplyLabel.text=@"我的申请";
-        cell.myApplyLabel.hidden=NO;
-    }
-    else
-    {
-          cell.myApplyLabel.hidden=YES;
-    }
-    
+    cell.selectionStyle =UITableViewCellSelectionStyleNone;
+    [cell setItemObject:self.dataArray[indexPath.row]];
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -149,10 +133,44 @@
     [btn setTextColor:[UIColor orangeColor] withTpe:0 withAllType:NO];
     [btn setTextBackGroundColor:[UIColor orangeColor] withTpe:1 withAllType:NO];
     _tag=btn.tag;
-    [_tableView beginRefreshing];
+    [self refreshHead];
+}
+-(void)getRefreshType:(BaseRefreshType)refreshType
+{
+    [self.netWorkConfig setObject:@"1" forKey:@"bizType"];
+    [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
+    [self.netWorkConfig setObject:_tag==10?@"0":@"1" forKey:@"isStatus"];
+    [self.netWorkConfig setObject:@"10" forKey:@"pageSize"];
+    [self.netWorkConfig setObject:[NSString stringWithFormat:@"%zd",_pageNumber] forKey:@"pageNumber"];
+    [self.netWorkConfig postWithUrl:@"zzjt-app-api_bizInfo002" sucess:^(id object, BOOL verifyObject){
+        if (verifyObject)
+        {
+            switch (refreshType)
+            {
+                case HeaderRefresh:
+                {
+                    [self.dataArray removeAllObjects];
+                }
+                    break;
+                case FooterRefresh:
+                    break;
+                    
+            }
+            NSArray *arry=[object objectItemKey:@"object"];
+            for (NSDictionary *dic in arry)
+            {
+                NSDictionary *Dic=[dic objectItemKey:@"propValue"];
+                XHApproveModel *model=[[XHApproveModel alloc] initWithDic:Dic];
+                [self.dataArray addObject:model];
+            }
+        }
+         [_tableView refreshReloadData];
+        
+    } error:^(NSError *error) {
+        [_tableView refreshReloadData];
+    }];
     
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

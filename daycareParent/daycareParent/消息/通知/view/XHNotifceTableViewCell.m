@@ -38,11 +38,50 @@
 }
 -(void)setItemObject:(XHApproveModel *)model
 {
-    if ([model.isMe integerValue]==1)//!< 我的申请
-    {
-        
-    }
+    _ContentLab.frame=CGRectMake(80, 35, SCREEN_WIDTH-180, 30);
+    _ContentLab.textColor=[UIColor blackColor];
+    _myApplyLabel.frame=CGRectMake(SCREEN_WIDTH-90, 40, 80, 20);
+    _myApplyLabel.textAlignment=NSTextAlignmentCenter;
+    _myApplyLabel.textColor=[UIColor whiteColor];
+    _myApplyLabel.backgroundColor=[UIColor orangeColor];
+    _myApplyLabel.layer.cornerRadius=10;
+    _myApplyLabel.layer.masksToBounds=YES;
+    _smallLab.frame=CGRectMake(50, 9, 8, 8);
+    _smallLab.layer.cornerRadius=4;
+    _titleLab.frame=CGRectMake(80, 0, SCREEN_WIDTH-180, 30);
+    _titleLab.font = [UIFont fontWithName:@ "Helvetica-Bold"  size:(16.0)];
+    _headImageView.image=[UIImage imageNamed:@"addman"];
+   
     
+    _detailLab.text=@"2018-01-02";
+    switch (model.isMeModelType) {
+        case XHIsMEType:
+        {
+            _myApplyLabel.text=@"我的申请";
+            _myApplyLabel.hidden=NO;
+        }
+            break;
+            
+        default:
+        {
+            _myApplyLabel.hidden=YES;
+        }
+            break;
+    }
+    switch (model.bizModelType) {
+        case XHBizType:
+        {
+            _titleLab.text=[NSString stringWithFormat:@"%@%@",model.teacherName,@"的调课"] ;
+        }
+            break;
+            
+        default:
+        {
+            _titleLab.text=[NSString stringWithFormat:@"%@%@",model.teacherName,@"的代课"] ;
+        }
+            break;
+    }
+    _ContentLab.text=[NSString stringWithFormat:@"等待%@的审批",model.auditor];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

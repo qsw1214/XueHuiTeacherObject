@@ -287,7 +287,7 @@
         if (_selectNumber!=0)
         {
             [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
-            [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].teacherModel.userId forKey:@"teacherId"];
+            [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
             [self.mutableStr setString:@""];
             for (XHDayRollCallModel *model in self.selectArry) {
                 [self.mutableStr appendFormat:@"%@,",model.ID];

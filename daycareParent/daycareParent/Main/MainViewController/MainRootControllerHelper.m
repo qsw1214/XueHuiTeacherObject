@@ -129,44 +129,20 @@ static MainRootControllerHelper *rootHelper = nil;
                     [window setRootViewController:nav];
                     return ;
                 }
-                XHNetWorkConfig *net=[XHNetWorkConfig new];
-                [net setObject:[XHUserInfo sharedUserInfo].ID forKey:@"id"];
-                [net setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
-                [net postWithUrl:@"pmschool-teacher-api_/teacher/user/get" sucess:^(id object, BOOL verifyObject) {
-                    if (verifyObject)
-                    {
-                        NSDictionary *dic=[object objectItemKey:@"object"];
-                        [XHUserInfo sharedUserInfo].teacherModel.userId=[dic objectItemKey:@"id"];
-                        [XHUserInfo sharedUserInfo].teacherModel.teacherName=[dic objectItemKey:@"teacherName"];
-                        AppDelegate *app=(AppDelegate *)[UIApplication sharedApplication].delegate;
-                        [app loginRongCloud:[XHUserInfo sharedUserInfo].token];
-                        [app setJpushAlias:[XHUserInfo sharedUserInfo].loginName];
-                        if ([[XHUserInfo sharedUserInfo].nickName isEqualToString:@""]) {
-                            //跳转补全信息界面
-                            XHNewUserInfoViewController *newUser = [[XHNewUserInfoViewController alloc]init];
-                            UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:newUser];
-                            [kWindow setRootViewController:nav];
-                        }
-                        else
-                        {
-                            MianTabBarViewController *main=[MianTabBarViewController new];
-                            [kWindow setRootViewController:main];
-                        }
-                    }
-                    else
-                    {
-                        XHLoginViewController *login=[XHLoginViewController new];
-                        UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:login];
-                        
-                        [window setRootViewController:nav];
-                    }
-                    
-                } error:^(NSError *error) {
-                    XHLoginViewController *login=[XHLoginViewController new];
-                    UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:login];
-                    
-                    [window setRootViewController:nav];
-                }];
+                AppDelegate *app=(AppDelegate *)[UIApplication sharedApplication].delegate;
+                [app loginRongCloud:[XHUserInfo sharedUserInfo].token];
+                [app setJpushAlias:[XHUserInfo sharedUserInfo].loginName];
+                if ([[XHUserInfo sharedUserInfo].nickName isEqualToString:@""]) {
+                    //跳转补全信息界面
+                    XHNewUserInfoViewController *newUser = [[XHNewUserInfoViewController alloc]init];
+                    UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:newUser];
+                    [kWindow setRootViewController:nav];
+                }
+                else
+                {
+                    MianTabBarViewController *main=[MianTabBarViewController new];
+                    [kWindow setRootViewController:main];
+                }
                 
             }
             else
