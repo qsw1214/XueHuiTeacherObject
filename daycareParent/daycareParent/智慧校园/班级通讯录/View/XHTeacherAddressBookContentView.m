@@ -62,7 +62,32 @@
 
 -(void)refreshHeaderAction
 {
-    [self getAddressBookWithModel:self.model];
+    [[XHUserInfo sharedUserInfo] getTeachersAddressBook:^(BOOL isOK, NSArray *array)
+     {
+         if (isOK)
+         {
+             [self.dataArray removeAllObjects];
+             
+             [array enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
+              {
+                  XHTeacherAddressBookFrame *frame = [XHTeacherAddressBookFrame alloc];
+                  XHTeacherAddressBookModel *model = [[XHTeacherAddressBookModel alloc]init];
+                  obj = [obj objectItemKey:@"propValue"];
+                  [model setItemObject:obj];
+                  [frame setModel:model];
+                  [self.dataArray addObject:frame];
+              }];
+             
+             if ([self.dataArray count])
+             {
+                 [self.dataArray setArray:[XHSortedArrayComparator sortedArrayUsingComparatorWithTeacherAddressBookKeyArray:self.dataArray]];
+             }
+         }
+         
+         [self.tableView refreshReloadData];
+     }];
+    
+    
 }
 
 
@@ -174,53 +199,6 @@
      }];
     [tableView refreshReloadData];
 }
-
-
-
-
-/**
- 
- @param model 孩子模型
- */
--(void)getAddressBookWithModel:(XHChildListModel *)model
-{
-    if (model)
-    {
-        [self.netWorkConfig setObject:model.clazzId forKey:@"classId"];
-        [self.netWorkConfig postWithUrl:@"zzjt-app-api_smartCampus009" sucess:^(id object, BOOL verifyObject)
-         {
-             if (verifyObject)
-             {
-                 [self.dataArray removeAllObjects];
-                 NSArray *itemArray = [object objectItemKey:@"object"];
-                 [itemArray enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
-                  {
-                      XHTeacherAddressBookFrame *frame = [XHTeacherAddressBookFrame alloc];
-                      XHTeacherAddressBookModel *model = [[XHTeacherAddressBookModel alloc]init];
-                      [model setItemObject:obj];
-                      [frame setModel:model];
-                      [self.dataArray addObject:frame];
-                  }];
-                 
-                 if ([self.dataArray count])
-                 {
-                     [self.dataArray setArray:[XHSortedArrayComparator sortedArrayUsingComparatorWithTeacherAddressBookKeyArray:self.dataArray]];
-                 }
-                 
-                 [self.tableView refreshReloadData];
-             }
-             
-         } error:^(NSError *error)
-         {
-             [self.tableView refreshReloadData];
-         }];
-    }
-    else
-    {
-        [self.tableView refreshReloadData];
-    }
-}
-
 
 #pragma mark - Action Method
 -(void)confirmationControlAction:(BaseButtonControl*)sender

@@ -13,6 +13,11 @@
 @interface NSObject (Category)
 
 
++(BOOL)isArray:(id)object;
+
+
++(BOOL)isDictionary:(id)object;
+
 
 #pragma mark 验证密码是否符合格式
 /**

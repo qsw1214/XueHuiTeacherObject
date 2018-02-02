@@ -9,6 +9,8 @@
 #import "XHAddNoticeViewController.h"
 #import "XHAddNoticeContentView.h"
 #import "XHNoticeListViewController.h"
+#import "XHAddNoticeRecipientViewController.h"
+
 
 
 
@@ -45,7 +47,7 @@
 
 -(void)rightItemAction:(BaseNavigationControlItem *)sender
 {
-    XHNoticeListViewController *noticeListView = [[XHNoticeListViewController alloc]init];
+    XHAddNoticeRecipientViewController *noticeListView = [[XHAddNoticeRecipientViewController alloc]init];
     [self.navigationController pushViewController:noticeListView animated:YES];
 }
 

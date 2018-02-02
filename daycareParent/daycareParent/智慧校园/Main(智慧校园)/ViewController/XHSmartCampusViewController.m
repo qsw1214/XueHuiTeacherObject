@@ -15,7 +15,6 @@
 #import "XHCookBookViewController.h" //!<  食谱
 #import "XHSyllabusViewController.h"  //!< 课程表
 #import "XHAchievementViewController.h" //!< 成绩
-#import "XHAddressBookViewController.h" //!< 班级通讯录
 #import "XHSafeLocationViewController.h" //!< 定位
 #import "XHDynamicsViewController.h" //!< 班级动态
 #import "XHLoginViewController.h"

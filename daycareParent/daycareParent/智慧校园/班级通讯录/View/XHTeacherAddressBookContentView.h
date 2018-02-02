@@ -23,9 +23,6 @@
 
 @interface XHTeacherAddressBookContentView : BaseControl
 
-@property (nonatomic,strong) XHChildListModel *model; //!< 孩子模型
-
-
 
 @property (nonatomic,weak) id <XHTeacherAddressBookContentViewDeletage> deletage;
 

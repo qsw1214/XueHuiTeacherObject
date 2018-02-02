@@ -19,8 +19,6 @@ typedef void (^DidSelectItemBack) (XHTeacherAddressBookFrame *itemObject);
 
 @interface XHTeacherAddressBookViewController : BaseViewController
 
-@property (nonatomic,strong) XHChildListModel *model;
-
 @property (nonatomic,copy) DidSelectItemBack didselectBack;
 
 @end

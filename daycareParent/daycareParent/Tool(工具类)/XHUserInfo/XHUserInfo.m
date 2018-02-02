@@ -67,6 +67,13 @@ static XHUserInfo *userInfo = nil;
             break;
     }
 }
+
+#pragma mark 获取班级列表
+/**
+ 获取班级列表
+ 
+ @param calssListBock 回调block
+ */
 -(void)getClassList:(ClassListBlock)calssListBock
 {
     if ([XHUserInfo sharedUserInfo].isClassList)
@@ -105,6 +112,13 @@ static XHUserInfo *userInfo = nil;
         calssListBock(NO,self.classListArry);
     }];
 }
+
+#pragma mark 获取学科列表
+/**
+ 获取学科列表
+ 
+ @param subjectListBock 回调block
+ */
 -(void)getSubjectList:(SubjectListBlock)subjectListBock
 {
     if ([XHUserInfo sharedUserInfo].isSubjectsList)
@@ -142,13 +156,97 @@ static XHUserInfo *userInfo = nil;
         subjectListBock(NO,self.subjectListArry);
     }];
 }
-//-(XHTeacherInfo *)teacherModel
-//{
-//    if (_teacherModel==nil) {
-//      _teacherModel=[XHTeacherInfo new];
-//    }
-//    return _teacherModel;
-//}
+
+
+#pragma mark 获取教师通讯录列表
+/**
+ 获取教师通讯录列表
+ 
+ @param succeedBlock 回调的通讯录数组succeedBlock
+ */
+-(void)getTeachersAddressBook:(SucceedBlock)succeedBlock
+{
+    if (userInfo.isTeachersAddressBook)
+    {
+        succeedBlock(YES,self.teachersAddressBookArray);
+    }
+    else
+    {
+        XHNetWorkConfig *netWorkConfig = [[XHNetWorkConfig alloc]init];
+        [netWorkConfig setObject:userInfo.schoolId forKey:@"schoolId"];
+        [netWorkConfig postWithUrl:@"zzjt-app-api_notice001" sucess:^(id object, BOOL verifyObject)
+         {
+             if (verifyObject)
+             {
+                 [userInfo setIsTeachersAddressBook:YES];
+                 NSDictionary *objectDictionary = [object objectItemKey:@"object"];
+                 NSArray *itemArray = [objectDictionary objectItemKey:@"list"];
+                 if ([NSObject isArray:itemArray])
+                 {
+                     [self.teachersAddressBookArray setArray:itemArray];
+                 }
+                 
+                 succeedBlock(YES,self.teachersAddressBookArray);
+             }
+             else
+             {
+                 succeedBlock(NO,self.teachersAddressBookArray);
+             }
+         } error:^(NSError *error)
+         {
+             succeedBlock(NO,self.teachersAddressBookArray);
+         }];
+    }
+}
+
+
+
+#pragma mark 获取家长通讯录列表
+/**
+ 获取家长通讯录列表
+ 
+ @param succeedBlock 回调的通讯录数组succeedBlock
+ */
+-(void)getParentsAddressBook:(SucceedBlock)succeedBlock
+{
+    if (userInfo.isparentsAddressBook)
+    {
+        succeedBlock(YES,self.parentsAddressBookArray);
+    }
+    else
+    {
+        XHNetWorkConfig *netWorkConfig = [[XHNetWorkConfig alloc]init];
+        [netWorkConfig setObject:userInfo.selfId forKey:@"teacherId"];
+        [netWorkConfig postWithUrl:@"zzjt-app-api_notice003" sucess:^(id object, BOOL verifyObject)
+         {
+             if (verifyObject)
+             {
+                 [userInfo setIsparentsAddressBook:YES];
+                 NSArray *objectArray = [object objectItemKey:@"object"];
+                 if ([NSObject isArray:objectArray])
+                 {
+                     
+                     succeedBlock(YES,objectArray);
+                 }
+                 else
+                 {
+                     succeedBlock(YES,self.parentsAddressBookArray);
+                 }
+             }
+             else
+             {
+                 succeedBlock(NO,self.parentsAddressBookArray);
+             }
+             
+         } error:^(NSError *error)
+         {
+             succeedBlock(NO,self.parentsAddressBookArray);
+         }];
+    }
+}
+
+
+
 -(NSMutableArray *)childListArry
 {
     if (!_childListArry)
@@ -173,7 +271,25 @@ static XHUserInfo *userInfo = nil;
     }
     return _subjectListArry;
 }
-                  
+
+-(NSMutableArray *)teachersAddressBookArray
+{
+    if (!_teachersAddressBookArray)
+    {
+        _teachersAddressBookArray = [NSMutableArray array];
+    }
+    return _teachersAddressBookArray;
+}
+
+-(NSMutableArray *)parentsAddressBookArray
+{
+    if (!_parentsAddressBookArray)
+    {
+        _parentsAddressBookArray = [NSMutableArray array];
+    }
+    return _parentsAddressBookArray;
+}
+
 -(XHNetWorkConfig *)classListNet
 {
     if (_classListNet==nil) {

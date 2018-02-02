@@ -160,7 +160,7 @@
          {
              [obj setKeyboardType:keyboardType];
          }
-         else if (type)
+         else if (type == idx)
          {
              [obj setKeyboardType:keyboardType];
          }
@@ -177,7 +177,7 @@
          {
              [obj setHidden:hidden];
          }
-         else if (type)
+         else if (type == idx)
          {
              [obj setHidden:hidden];
              *stop = YES;
@@ -194,7 +194,7 @@
          {
              [obj setHidden:hidden];
          }
-         else if (type)
+         else if (type == idx)
          {
              [obj setHidden:hidden];
              *stop = YES;
@@ -210,7 +210,7 @@
          {
              [obj setHidden:hidden];
          }
-         else if (type)
+         else if (type == idx)
          {
              [obj setHidden:hidden];
              *stop = YES;
@@ -228,7 +228,7 @@
          {
              [obj setHidden:hidden];
          }
-         else if (type)
+         else if (type == idx)
          {
              [obj setHidden:hidden];
              *stop = YES;
@@ -245,7 +245,7 @@
          {
              [obj setHidden:hidden];
          }
-         else if (type)
+         else if (type == idx)
          {
              [obj setHidden:hidden];
              *stop = YES;
