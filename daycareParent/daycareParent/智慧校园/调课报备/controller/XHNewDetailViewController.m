@@ -278,13 +278,8 @@
                         selectImage.image=[UIImage imageNamed:@"ico_wrong"];
                     }
                 }
-                if (i==0)
+                else
                 {
-                    UIImageView *selectImage=[cell.contentView viewWithTag:100+i];
-                    UIButton *headBtn=[cell.contentView viewWithTag:200+i];
-                    XHBaseLabel *nameLabel=[cell.contentView viewWithTag:300+i];
-                    XHBaseLabel *dateLabel=[cell.contentView viewWithTag:400+i];
-                    XHBaseLabel *applyLabel=[cell.contentView viewWithTag:500+i];
                     nameLabel.text=model.teacherName;
                     applyLabel.text=@"发起申请";
                     dateLabel.text=[NSDate dateStr:model.createTime FromFormatter:ALL_DEFAULT_TIME_FORM ToFormatter:YY_DEFAULT_TIME_FORM];

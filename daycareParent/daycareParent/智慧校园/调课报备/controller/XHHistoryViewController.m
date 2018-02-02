@@ -37,7 +37,7 @@
     _tableView.rowHeight=70;
     [_tableView registerClass:[XHNotifceTableViewCell class] forCellReuseIdentifier:@"cell"];
     [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-    [_tableView setTipType:TipTitleAndTipImage withTipTitle:nil withTipImage:@"ico-no-data"];
+    [_tableView setTipType:TipTitleAndTipImage withTipTitle:@"暂无审批申请哦" withTipImage:@"img_norecord"];
     [_tableView showRefresHeaderWithTarget:self withSelector:@selector(refreshHead)];
     [_tableView showRefresFooterWithTarget:self withSelector:@selector(refreshFoot)];
     [_tableView beginRefreshing];
@@ -118,6 +118,7 @@
     [btn setTextColor:[UIColor orangeColor] withTpe:0 withAllType:NO];
     [btn setTextBackGroundColor:[UIColor orangeColor] withTpe:1 withAllType:NO];
     _tag=btn.tag;
+    [_tableView setTipType:TipTitleAndTipImage withTipTitle:_tag==10?@"暂无审批申请哦":@"暂无审批记录哦" withTipImage:@"img_norecord"];
     [_tableView beginRefreshing];
 }
 -(void)getRefreshType:(BaseRefreshType)refreshType
