@@ -11,6 +11,32 @@
 
 @implementation NSObject (Category)
 
++(BOOL)isArray:(id)object
+{
+    if ([object isKindOfClass:[NSArray class]])
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
++(BOOL)isDictionary:(id)object
+{
+    if ([object isKindOfClass:[NSDictionary class]])
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
+
+
 // 判断密码
 +(BOOL)verifyPassword:(NSString *)pass
 {

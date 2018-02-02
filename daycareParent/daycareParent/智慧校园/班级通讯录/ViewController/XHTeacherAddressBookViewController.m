@@ -40,14 +40,6 @@
         [self.contentView resetFrame:CGRectMake(0, self.navigationView.bottom, SCREEN_WIDTH, SCREEN_HEIGHT-self.navigationView.height)];
     }
 }
-
--(void)setModel:(XHChildListModel *)model
-{
-    _model = model;
-    [self.contentView setModel:model];
-}
-
-
 #pragma mark - Deletage Method
 #pragma mark XHTeacherAddressBookContentViewDeletage
 -(void)didSelectRowAtIndexItemObject:(XHTeacherAddressBookFrame *)object

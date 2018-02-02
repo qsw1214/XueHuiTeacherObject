@@ -1,21 +1,21 @@
 //
-//  XHAddressBookViewController.m
+//  XHParentAddressBookViewController.m
 //  daycareParent
 //
 //  Created by Git on 2017/12/7.
 //  Copyright © 2017年 XueHui. All rights reserved.
 //
 
-#import "XHAddressBookViewController.h"
+#import "XHParentAddressBookViewController.h"
 #import "XHAddressBookContentView.h"
 #import "XHAddressBookKey.h"
 
-@interface XHAddressBookViewController ()<XHCustomViewDelegate>
+@interface XHParentAddressBookViewController ()<XHCustomViewDelegate>
 @property (nonatomic,strong) XHAddressBookContentView *contentView; //!< 内容视图
 
 @end
 
-@implementation XHAddressBookViewController
+@implementation XHParentAddressBookViewController
 
 - (void)viewDidLoad
 {

@@ -9,7 +9,7 @@
 #import "XHNoticeViewController.h"
 #import "XHNotifceTableViewCell.h"
 #import "XHParentsMeetingViewController.h"
-#import "XHAddressBookViewController.h"
+#import "XHParentAddressBookViewController.h"
 #import "XHIMNoticeModel.h"
 #import "XHNoticeListViewController.h"
 #import "BaseTableView.h"
@@ -115,7 +115,7 @@
         [self.navigationController pushViewController:list animated:YES];
     }
     if (indexPath.row==1) {
-        XHAddressBookViewController *addressBook=[[XHAddressBookViewController alloc] initHiddenWhenPushHidden];
+        XHParentAddressBookViewController *addressBook=[[XHParentAddressBookViewController alloc] initHiddenWhenPushHidden];
         [addressBook setNavtionTitle:@"给家长留言"];
         [self.navigationController pushViewController:addressBook animated:YES];
     }
