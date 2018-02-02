@@ -37,7 +37,6 @@
     _tableView.rowHeight=70;
     [_tableView registerClass:[XHNotifceTableViewCell class] forCellReuseIdentifier:@"cell"];
     [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-    [self.dataArray addObject:@"1"];
     [_tableView setTipType:TipTitleAndTipImage withTipTitle:nil withTipImage:@"ico-no-data"];
     [_tableView showRefresHeaderWithTarget:self withSelector:@selector(refreshHead)];
     [_tableView showRefresFooterWithTarget:self withSelector:@selector(refreshFoot)];
@@ -57,7 +56,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     [_tableView tableTipViewWithArray:self.dataArray];
-    NSLog(@"======%@",self.dataArray);
     return self.dataArray.count;
 }
 
@@ -73,20 +71,7 @@
     XHNewDetailViewController *detail=[XHNewDetailViewController new];
     [detail setNavtionTitle:_tag==10?@"待审批":@"已审批"];
     detail.Tag=_tag;
-    switch (indexPath.row) {
-        case 0:
-        {
-            detail.isSelf=YES;
-        }
-           
-            break;
-            
-        default:
-        {
-            detail.isSelf=NO;
-        }
-            break;
-    }
+    detail.model=self.dataArray[indexPath.row];
     detail.isRefresh = ^(BOOL ok)
     {
         if (ok) {
@@ -133,42 +118,78 @@
     [btn setTextColor:[UIColor orangeColor] withTpe:0 withAllType:NO];
     [btn setTextBackGroundColor:[UIColor orangeColor] withTpe:1 withAllType:NO];
     _tag=btn.tag;
-    [self refreshHead];
+    [_tableView beginRefreshing];
 }
 -(void)getRefreshType:(BaseRefreshType)refreshType
 {
-    [self.netWorkConfig setObject:@"1" forKey:@"bizType"];
-    [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
-    [self.netWorkConfig setObject:_tag==10?@"0":@"1" forKey:@"isStatus"];
-    [self.netWorkConfig setObject:@"10" forKey:@"pageSize"];
-    [self.netWorkConfig setObject:[NSString stringWithFormat:@"%zd",_pageNumber] forKey:@"pageNumber"];
-    [self.netWorkConfig postWithUrl:@"zzjt-app-api_bizInfo002" sucess:^(id object, BOOL verifyObject){
-        if (verifyObject)
+    switch (self.modelType) {
+        case XHHistoryCourseReportType:
+            
         {
-            switch (refreshType)
-            {
-                case HeaderRefresh:
+            [self.netWorkConfig setObject:@"1" forKey:@"bizType"];
+            [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
+            [self.netWorkConfig setObject:_tag==10?@"0":@"1" forKey:@"isStatus"];
+            [self.netWorkConfig setObject:@"10" forKey:@"pageSize"];
+            [self.netWorkConfig setObject:[NSString stringWithFormat:@"%zd",_pageNumber] forKey:@"pageNumber"];
+            [self.netWorkConfig postWithUrl:@"zzjt-app-api_bizInfo002" sucess:^(id object, BOOL verifyObject){
+                if (verifyObject)
                 {
-                    [self.dataArray removeAllObjects];
+                    switch (refreshType)
+                    {
+                        case HeaderRefresh:
+                        {
+                            [self.dataArray removeAllObjects];
+                        }
+                            break;
+                        case FooterRefresh:
+                            break;
+                            
+                    }
+                    NSDictionary *objectDic=[object objectItemKey:@"object"];
+                    NSArray *arry=[objectDic objectItemKey:@"pageResult"];
+                    for (NSDictionary *dic in arry)
+                    {
+                        NSDictionary *Dic=[dic objectItemKey:@"propValue"];
+                        XHApproveModel *model=[[XHApproveModel alloc] initWithDic:Dic];
+                        if (_tag==10)
+                        {
+                            model.modelType=XHNoApproveType;
+                        }
+                        else
+                        {
+                          model.modelType=XHApproveType;
+                        }
+                        [self.dataArray addObject:model];
+                    }
+                    if (arry.count<10)
+                    {
+                        [_tableView noMoreData];
+                    }
+                    else
+                    {
+                        _pageNumber++;
+                        [_tableView refreshReloadData];
+                    }
                 }
-                    break;
-                case FooterRefresh:
-                    break;
-                    
-            }
-            NSArray *arry=[object objectItemKey:@"object"];
-            for (NSDictionary *dic in arry)
-            {
-                NSDictionary *Dic=[dic objectItemKey:@"propValue"];
-                XHApproveModel *model=[[XHApproveModel alloc] initWithDic:Dic];
-                [self.dataArray addObject:model];
-            }
+                else
+                {
+                    [_tableView refreshReloadData];
+                }
+                
+                
+            } error:^(NSError *error) {
+                [_tableView refreshReloadData];
+            }];
         }
-         [_tableView refreshReloadData];
-        
-    } error:^(NSError *error) {
-        [_tableView refreshReloadData];
-    }];
+            break;
+            
+        case XHHistoryAskforLeaveType:
+        {
+            
+        }
+            break;
+    }
+   
     
 }
 - (void)didReceiveMemoryWarning {

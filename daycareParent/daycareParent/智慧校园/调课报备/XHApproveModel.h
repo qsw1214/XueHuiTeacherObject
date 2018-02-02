@@ -37,6 +37,13 @@ typedef NS_ENUM(NSInteger,XHBizModelType)
     XHNoBizType=2,//!< 代课
     
 };
+typedef NS_ENUM(NSInteger,XHApproveModelType)
+{
+    XHNoApproveType=1,//!<待审核
+    
+    XHApproveType=2,//!< 已审核
+    
+};
 @interface XHApproveModel : NSObject
 @property(nonatomic,copy)NSString *isMe;//!< 类型(0:我的审核 1:我的申请)
 @property(nonatomic,assign)XHIsMEModelType isMeModelType;//!< 审核类型 (0:我的审核 1:我的申请)
@@ -50,6 +57,8 @@ typedef NS_ENUM(NSInteger,XHBizModelType)
 @property(nonatomic,copy)NSString *headPic;//!< 头像
 @property(nonatomic,copy)NSString *isRead;//!< 已读 1、未读 0
 @property(nonatomic,assign)XHUnReadModelType  readType;//!< 已读、未读
+
+@property(nonatomic,assign)XHApproveModelType modelType;//!< 选择审核类型
 
 @property(nonatomic,copy)NSString *ID;
 @property(nonatomic,copy)NSString *beginTime;

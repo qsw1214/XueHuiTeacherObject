@@ -15,7 +15,9 @@
 #import "XHApplyTableViewCell.h"
 #import "XHApproverTableViewCell.h"
 #import "XHHistoryApproverDetailTableViewCell.h"
-#define TITLE  @[@"李某某的课程",@"调整类型",@"原任课教师",@"课程名称",@"委任教师",@"委任课程",@"上课时间",@"上课班级",@"请假时长",@"审批人"]
+#import "XHApproveModel.h"
+#import "XHApproveDetailModel.h"
+#define TITLE  @[@"李某某的课程",@"类型",@"原任课教师",@"课程名称",@"委任教师",@"委任课程",@"上课时间",@"上课班级",@"请假时长",@"审批人"]
 @interface XHNewDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     BaseTableView *_tableView;
@@ -42,6 +44,9 @@
      [_tableView registerClass:[XHApproverTableViewCell class] forCellReuseIdentifier:@"approverCell"];
      [_tableView registerClass:[XHHistoryApproverDetailTableViewCell class] forCellReuseIdentifier:@"historyApproverCell"];
     [self.view addSubview:_tableView];
+    [_tableView showRefresHeaderWithTarget:self withSelector:@selector(refreshHead)];
+    [_tableView beginRefreshing];
+    [_tableView setTipType:TipTitleAndTipImage withTipTitle:nil withTipImage:@"ico-no-data"];
     [_tableView addSubview:self.imageV];
     //去掉留白方法
     if (@available(iOS 11.0, *)) {
@@ -49,6 +54,26 @@
     }else {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
+}
+-(void)refreshHead
+{
+    [self.netWorkConfig setObject:self.model.ID forKey:@"id"];
+    [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
+    [self.netWorkConfig postWithUrl:@"zzjt-app-api_bizInfo005" sucess:^(id object, BOOL verifyObject) {
+        if (verifyObject) {
+            if (verifyObject)
+            {
+                NSDictionary *dic=[object objectItemKey:@"object"];
+                NSDictionary *propValueDic=[dic objectItemKey:@"propValue"];
+                XHApproveDetailModel *model=[[XHApproveDetailModel alloc] initWithDic:propValueDic];
+                [self.dataArray addObject:model];
+            }
+            NSLog(@"-%@",self.dataArray[0]);
+            [_tableView refreshReloadData];
+        }
+    } error:^(NSError *error) {
+        [_tableView refreshReloadData];
+    }];
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -67,6 +92,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    [_tableView tableTipViewWithArray:self.dataArray];
     switch (section) {
         case 0:
              return 10;
@@ -83,7 +109,7 @@
 {
    
     if (indexPath.section==1) {
-        if (self.isSelf&&self.Tag==10) {
+        if ([self.model.isMe integerValue]==1&&self.Tag==10) {
             return 80;
         }
         else
@@ -108,10 +134,37 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    XHApproveDetailModel *model=self.dataArray.firstObject;
+    switch ([model.isStatus integerValue]) {
+        case 0:
+            
+        {
+            self.imageV.image=[UIImage imageNamed:@"zhang_daishenpi"];
+        }
+            break;
+            
+        case 1:
+        {
+            self.imageV.image=[UIImage imageNamed:@"zhang_tongyi"];
+        }
+            break;
+            case 2:
+        {
+            self.imageV.image=[UIImage imageNamed:@"zhang_jujue"];
+        }
+            break;
+    }
     if (indexPath.section==0) {
         if (indexPath.row==0) {
             XHHistoryHeadTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"historyHeadCell" forIndexPath:indexPath];
-            cell.titleLabel.text=@"张三的调课";
+            [cell.headBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:ALGetFileHeadThumbnail(model.headPic)] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
+            if ([model.bizType integerValue]==1) {
+                cell.titleLabel.text=[NSString stringWithFormat:@"%@的调课",model.teacherName];
+            }
+            if ([model.bizType integerValue]==2)
+            {
+                cell.titleLabel.text=[NSString stringWithFormat:@"%@的代课",model.teacherName];
+            }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
@@ -119,7 +172,8 @@
             XHHistoryDetailTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"headcell" forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.approveLabel.text=TITLE[indexPath.row];
-            cell.nameLabel.text=@"李四";
+            cell.nameLabel.text=model.auditor;
+            [cell.headBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:ALGetFileHeadThumbnail(model.auditorHeadPic)] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
@@ -130,18 +184,74 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             switch (indexPath.row) {
                 case 1:
-                    cell.selectLabel.hidden=YES;
+                {
+                     cell.selectLabel.hidden=YES;
+                    switch ([model.bizType integerValue]==1) {
+                        case 1:
+                        {
+                            cell.titleLabel.text=[NSString stringWithFormat:@"类型：调课"];
+                        }
+                            break;
+                            
+                        default:
+                        {
+                            cell.titleLabel.text=[NSString stringWithFormat:@"类型：代课"];
+                        }
+                            break;
+                    }
+                }
                     break;
                     
                 default:
+                {
                     cell.selectLabel.hidden=NO;
+                    switch (indexPath.row) {
+                        case 2:
+                        {
+                            cell.selectLabel.text=model.formerTeacherName;
+                        }
+                            break;
+                            
+                        case 3:
+                        {
+                            cell.selectLabel.text=model.formerSubjectName;
+                        }
+                            break;
+                        case 4:
+                        {
+                            cell.selectLabel.text=model.appointedTeacherName;
+                        }
+                            break;
+                        case 5:
+                        {
+                            cell.selectLabel.text=model.appointedSubjectName;
+                        }
+                            break;
+                        case 6:
+                        {
+                            cell.selectLabel.text=model.beginTime;
+                        }
+                            break;
+                        case 7:
+                        {
+                            cell.selectLabel.text=model.clazzName;
+                        }
+                            break;
+                        case 8:
+                        {
+                            cell.selectLabel.text=[NSString stringWithFormat:@"%@节课程",model.subjectNum];
+                        }
+                            break;
+                    }
+                }
                     break;
             }
             return cell;
         }
     }
     else {
-        if (self.Tag==11) {
+        if (self.Tag==11)
+        {
 #pragma mark-------------审批人显示cell--------------
             XHHistoryApproverDetailTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"historyApproverCell" forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -152,17 +262,33 @@
                 XHBaseLabel *dateLabel=[cell.contentView viewWithTag:400+i];
                 XHBaseLabel *applyLabel=[cell.contentView viewWithTag:500+i];
                 if (i==1) {
-                    selectImage.backgroundColor=[UIColor greenColor];
-                    headBtn.backgroundColor=[UIColor redColor];
-                    nameLabel.text=@"李四";
-                    dateLabel.text=@"2018-01-03";
-                    applyLabel.text=@"已同意";
+                    [headBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:ALGetFileHeadThumbnail(model.auditorHeadPic)] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
+                    nameLabel.text=model.auditor;
+                    dateLabel.text=[NSDate dateStr:model.updateTime FromFormatter:ALL_DEFAULT_TIME_FORM ToFormatter:YY_DEFAULT_TIME_FORM];
+                    if ([model.isStatus integerValue]==0) {
+                        applyLabel.text=@"未审批";
+                    }
+                     if ([model.isStatus integerValue]==1) {
+                       applyLabel.text=@"已同意";
+                      selectImage.image=[UIImage imageNamed:@"ico_right"];
+                    }
+                    if ([model.isStatus integerValue]==2) {
+                        applyLabel.text=@"已拒绝";
+                        selectImage.image=[UIImage imageNamed:@"ico_wrong"];
+                    }
                 }
-                else
+                if (i==0)
                 {
-                    nameLabel.text=@"张明";
+                    UIImageView *selectImage=[cell.contentView viewWithTag:100+i];
+                    UIButton *headBtn=[cell.contentView viewWithTag:200+i];
+                    XHBaseLabel *nameLabel=[cell.contentView viewWithTag:300+i];
+                    XHBaseLabel *dateLabel=[cell.contentView viewWithTag:400+i];
+                    XHBaseLabel *applyLabel=[cell.contentView viewWithTag:500+i];
+                    nameLabel.text=model.teacherName;
                     applyLabel.text=@"发起申请";
-                    dateLabel.text=@"2018-01-02";
+                    dateLabel.text=[NSDate dateStr:model.createTime FromFormatter:ALL_DEFAULT_TIME_FORM ToFormatter:YY_DEFAULT_TIME_FORM];
+                     selectImage.image=[UIImage imageNamed:@"ico_right"];
+                    [headBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:ALGetFileHeadThumbnail(model.headPic)] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
                 }
                 
             }
@@ -171,14 +297,15 @@
         }
         else
         {
-            if (self.isSelf)
+            if ([self.model.isMe integerValue]==1)
             {
 #pragma mark--------------发起人显示cell--------------
                 XHApplyTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"applyCell" forIndexPath:indexPath];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.nameLabel.text=@"张明";
+                cell.nameLabel.text=model.formerTeacherName;
                 cell.applyLabel.text=@"发起申请";
-                cell.dateLabel.text=@"2018-01-02";
+                cell.dateLabel.text=[NSDate dateStr:model.createTime FromFormatter:ALL_DEFAULT_TIME_FORM ToFormatter:YY_DEFAULT_TIME_FORM];
+                cell.selectImageV.image=[UIImage imageNamed:@"ico_right"];
                 return cell;
             }
             else
@@ -186,9 +313,10 @@
 #pragma mark-------------审批人显示cell--------------
                 XHApproverTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"approverCell" forIndexPath:indexPath];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.nameLabel.text=@"张明";
+                cell.nameLabel.text=model.formerTeacherName;
                 cell.applyLabel.text=@"发起申请";
-                cell.dateLabel.text=@"2018-01-02";
+                cell.dateLabel.text=[NSDate dateStr:model.createTime FromFormatter:ALL_DEFAULT_TIME_FORM ToFormatter:YY_DEFAULT_TIME_FORM];
+                 cell.selectImageV.image=[UIImage imageNamed:@"ico_right"];
                 for (int i=0; i<2; i++) {
                     XHBaseBtn *btn=[cell.contentView viewWithTag:10+i];
                     [btn addTarget:self action:@selector(selectBtnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -204,12 +332,33 @@
 
 {
     NSLog(@"-----%zd-----%@",btn.tag,btn.tag==10?@"拒绝":@"同意");
-    //跳转到已审列表
-    if (self.isRefresh) {
-       self.isRefresh(YES);
-        [self.navigationController popViewControllerAnimated:YES];
+    XHApproveDetailModel *model=self.dataArray.firstObject;
+    [self.netWorkConfig setObject:model.ID forKey:@"id"];
+    switch (btn.tag) {
+        case 10:
+        {
+            [self.netWorkConfig setObject:[NSString stringWithFormat:@"%zd",2] forKey:@"agree"];
+        }
+            break;
+        case 11:
+        {
+            [self.netWorkConfig setObject:[NSString stringWithFormat:@"%zd",1] forKey:@"agree"];
+        }
+            break;
     }
     
+    [self.netWorkConfig postWithUrl:@"zzjt-app-api_bizInfo004" sucess:^(id object, BOOL verifyObject) {
+        if (verifyObject) {
+            
+            //跳转到已审列表
+            if (self.isRefresh) {
+                self.isRefresh(YES);
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }
+    } error:^(NSError *error) {
+        
+    }];
 }
 -(UIImageView *)imageV
 {
@@ -217,7 +366,7 @@
         _imageV=[[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-80, 30, 60, 60)];
         _imageV.layer.cornerRadius=30;
         _imageV.layer.masksToBounds=YES;
-        _imageV.backgroundColor=[UIColor redColor];
+        //_imageV.backgroundColor=[UIColor redColor];
     }
     return _imageV;
 }

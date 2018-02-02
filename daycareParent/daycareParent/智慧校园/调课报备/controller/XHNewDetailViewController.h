@@ -8,7 +8,9 @@
 
 #import "BaseViewController.h"
 #pragma mark-------------审批详情--------------
+@class XHApproveModel;
 @interface XHNewDetailViewController : BaseViewController
 @property(nonatomic,assign)BOOL isSelf;
 @property(nonatomic,assign)NSInteger Tag;
+@property(nonatomic,strong)XHApproveModel *model;
 @end
