@@ -267,6 +267,7 @@
                     dateLabel.text=[NSDate dateStr:model.updateTime FromFormatter:ALL_DEFAULT_TIME_FORM ToFormatter:YY_DEFAULT_TIME_FORM];
                     if ([model.isStatus integerValue]==0) {
                         applyLabel.text=@"未审批";
+                        selectImage.image=[UIImage imageNamed:@"ico_right"];
                     }
                      if ([model.isStatus integerValue]==1) {
                        applyLabel.text=@"已同意";

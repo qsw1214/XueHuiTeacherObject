@@ -1201,8 +1201,8 @@
 		8C01A2322006E94800E4D768 /* NJKWebViewProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgress.m; sourceTree = "<group>"; };
 		8C01A2332006E94800E4D768 /* NJKWebViewProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NJKWebViewProgressView.h; sourceTree = "<group>"; };
 		8C01A2342006E94800E4D768 /* NJKWebViewProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgressView.m; sourceTree = "<group>"; };
-		8C02627220230F4600BFB98A /* XHApproveModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XHApproveModel.h; path = "daycareParent/智慧校园/调课报备/XHApproveModel.h"; sourceTree = SOURCE_ROOT; };
-		8C02627320230F4600BFB98A /* XHApproveModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XHApproveModel.m; path = "daycareParent/智慧校园/调课报备/XHApproveModel.m"; sourceTree = SOURCE_ROOT; };
+		8C02627220230F4600BFB98A /* XHApproveModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XHApproveModel.h; path = "daycareParent/智慧校园/调课报备/model/XHApproveModel.h"; sourceTree = SOURCE_ROOT; };
+		8C02627320230F4600BFB98A /* XHApproveModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XHApproveModel.m; path = "daycareParent/智慧校园/调课报备/model/XHApproveModel.m"; sourceTree = SOURCE_ROOT; };
 		8C0CCF761FFF16FD0008C0CE /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
 		8C0CCF771FFF16FD0008C0CE /* WebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge.m; sourceTree = "<group>"; };
 		8C0CCF781FFF16FD0008C0CE /* WebViewJavascriptBridge_JS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge_JS.h; sourceTree = "<group>"; };
@@ -1368,8 +1368,8 @@
 		8C91E01D1FEA39A00040A205 /* XHCustomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHCustomView.m; sourceTree = "<group>"; };
 		8C922BD71FDE65EB00BA0EAB /* XHForgetViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHForgetViewController.h; sourceTree = "<group>"; };
 		8C922BD81FDE65EB00BA0EAB /* XHForgetViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHForgetViewController.m; sourceTree = "<group>"; };
-		8C94DBB220243FC50048B9CC /* XHApproveDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XHApproveDetailModel.h; path = "daycareParent/智慧校园/调课报备/XHApproveDetailModel.h"; sourceTree = SOURCE_ROOT; };
-		8C94DBB320243FC50048B9CC /* XHApproveDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XHApproveDetailModel.m; path = "daycareParent/智慧校园/调课报备/XHApproveDetailModel.m"; sourceTree = SOURCE_ROOT; };
+		8C94DBB220243FC50048B9CC /* XHApproveDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XHApproveDetailModel.h; path = "daycareParent/智慧校园/调课报备/model/XHApproveDetailModel.h"; sourceTree = SOURCE_ROOT; };
+		8C94DBB320243FC50048B9CC /* XHApproveDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XHApproveDetailModel.m; path = "daycareParent/智慧校园/调课报备/model/XHApproveDetailModel.m"; sourceTree = SOURCE_ROOT; };
 		8C9D92E8201EC8F600F4A28E /* XHNattendanceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNattendanceModel.h; sourceTree = "<group>"; };
 		8C9D92E9201EC8F600F4A28E /* XHNattendanceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNattendanceModel.m; sourceTree = "<group>"; };
 		8C9D92EB201EEBF200F4A28E /* XHPunchSignTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHPunchSignTableViewCell.h; sourceTree = "<group>"; };
@@ -3256,17 +3256,6 @@
 			path = NJKWebViewProgress;
 			sourceTree = "<group>";
 		};
-		8C02627120230ECC00BFB98A /* model */ = {
-			isa = PBXGroup;
-			children = (
-				8C02627220230F4600BFB98A /* XHApproveModel.h */,
-				8C02627320230F4600BFB98A /* XHApproveModel.m */,
-				8C94DBB220243FC50048B9CC /* XHApproveDetailModel.h */,
-				8C94DBB320243FC50048B9CC /* XHApproveDetailModel.m */,
-			);
-			path = model;
-			sourceTree = "<group>";
-		};
 		8C0CCF751FFF16FD0008C0CE /* WebViewJavascriptBridge */ = {
 			isa = PBXGroup;
 			children = (
@@ -3670,6 +3659,17 @@
 			path = JPushFramework;
 			sourceTree = "<group>";
 		};
+		8C94DBB5202462AC0048B9CC /* model */ = {
+			isa = PBXGroup;
+			children = (
+				8C02627220230F4600BFB98A /* XHApproveModel.h */,
+				8C02627320230F4600BFB98A /* XHApproveModel.m */,
+				8C94DBB220243FC50048B9CC /* XHApproveDetailModel.h */,
+				8C94DBB320243FC50048B9CC /* XHApproveDetailModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		8CB5A2521FD77FCF008E97D8 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -3796,7 +3796,7 @@
 		8CC76474200C8AE3007887C7 /* 调课报备 */ = {
 			isa = PBXGroup;
 			children = (
-				8C02627120230ECC00BFB98A /* model */,
+				8C94DBB5202462AC0048B9CC /* model */,
 				8CC76475200C8AE3007887C7 /* controller */,
 				8CC76477200C8AE3007887C7 /* view */,
 			);
