@@ -7,10 +7,15 @@
 //
 
 #import "XHAddNoticeRecipientGroupViewController.h"
+#import "XHNoticeRecipientContentView.h"
+
 
 @interface XHAddNoticeRecipientGroupViewController ()
 
+@property (nonatomic,strong) XHNoticeRecipientContentView *contentView;
+
 @end
+
 
 @implementation XHAddNoticeRecipientGroupViewController
 
@@ -23,6 +28,29 @@
 {
     [super didReceiveMemoryWarning];
 }
+
+
+-(void)addSubViews:(BOOL)subview
+{
+    if (subview)
+    {
+        [self.view addSubview:self.contentView];
+        [self.contentView resetFrame:CGRectMake(0, self.navigationView.bottom, SCREEN_WIDTH, (SCREEN_HEIGHT-self.navigationView.height))];
+    }
+}
+
+
+
+#pragma mark - Getter / Setter
+-(XHNoticeRecipientContentView *)contentView
+{
+    if (!_contentView)
+    {
+        _contentView = [[XHNoticeRecipientContentView alloc]init];
+    }
+    return _contentView;
+}
+
 
 
 

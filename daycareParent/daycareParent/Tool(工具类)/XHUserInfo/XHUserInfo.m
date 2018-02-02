@@ -67,6 +67,13 @@ static XHUserInfo *userInfo = nil;
             break;
     }
 }
+
+#pragma mark 获取班级列表
+/**
+ 获取班级列表
+ 
+ @param calssListBock 回调block
+ */
 -(void)getClassList:(ClassListBlock)calssListBock
 {
     if ([XHUserInfo sharedUserInfo].isClassList)
@@ -105,6 +112,13 @@ static XHUserInfo *userInfo = nil;
         calssListBock(NO,self.classListArry);
     }];
 }
+
+#pragma mark 获取学科列表
+/**
+ 获取学科列表
+ 
+ @param subjectListBock 回调block
+ */
 -(void)getSubjectList:(SubjectListBlock)subjectListBock
 {
     if ([XHUserInfo sharedUserInfo].isSubjectsList)

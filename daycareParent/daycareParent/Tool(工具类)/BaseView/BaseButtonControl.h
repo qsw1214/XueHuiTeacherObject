@@ -50,6 +50,12 @@ typedef NS_ENUM(NSInteger,BaseControlModelType)
 
 -(instancetype)init;
 
+
+/**
+ 是否演示每个控件的颜色
+
+ @param color YES 是显示 NO 是不显示
+ */
 -(void)setItemColor:(BOOL)color;
 
 

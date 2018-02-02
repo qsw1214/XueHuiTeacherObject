@@ -7,7 +7,6 @@
 //
 
 #import "XHNoticeRecipientContentView.h"
-#import "XHNoticeRecipientTableViewCell.h"
 
 
 @implementation XHNoticeRecipientContentView
@@ -38,8 +37,9 @@
         {
             XHNoticeRecipientFrame *frame = [[XHNoticeRecipientFrame alloc]init];
             XHNoticeRecipientModel *model = [[XHNoticeRecipientModel alloc]init];
+            [model setTitle:@"全选"];
             [model setModelType:XHNoticeRecipientFullSelectionType];
-            [model setSelectType:XHNoticeRecipientNormalityType];
+            [model setSelectType:XHNoticeRecipientSelectedType];
             [frame setModel:model];
             [self.dataArray addObject:frame];
         }
@@ -53,6 +53,7 @@
             [model setModelType:XHNoticeRecipientNormalType];
             [model setSelectType:XHNoticeRecipientSelectedType];
             [frame setModel:model];
+            [self.dataArray addObject:frame];
         }
         
         for (int i = 0; i <  3; i++)
@@ -88,8 +89,9 @@
 
 -(void)resetFrame:(CGRect)frame
 {
+    [self setFrame:frame];
     [self.tableView resetFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-    
+
 }
 
 
@@ -126,8 +128,13 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    if ([self.deletage respondsToSelector:@selector(didSelectRowAtIndexObject:)])
+    {
+        [self.deletage didSelectRowAtIndexObject:[self.dataArray objectAtIndex:indexPath.row]];
+    }
 }
+
+
 
 
 
