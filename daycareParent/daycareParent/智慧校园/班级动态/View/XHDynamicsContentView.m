@@ -133,16 +133,16 @@
 #pragma mark 获取班级动态的网络请求
 -(void)getDynamicsWithGuardianId:(NSString*)guardianId withRefreshType:(BaseRefreshType)type
 {
-    [self.netWorkConfig setObject:guardianId forKey:@"guardianId"];
+    [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
     [self.netWorkConfig setObject:[NSString stringWithFormat:@"%zd",self.pageNumber] forKey:@"pageNumber"];
     [self.netWorkConfig setObject:@"10" forKey:@"pageSize"];
-    [self.netWorkConfig postWithUrl:@"zzjt-app-api_smartCampus010" sucess:^(id object, BOOL verifyObject)
+    [self.netWorkConfig postWithUrl:@"pmschool-teacher-api_/teacher/notice/listNotice" sucess:^(id object, BOOL verifyObject)
      {
          if (verifyObject)
          {
-             NSDictionary *itemObject = [object objectItemKey:@"object"];
-             NSArray *pageResultArray = [itemObject objectItemKey:@"pageResult"];
-             if (pageResultArray)
+             NSArray *itemObject = [object objectItemKey:@"object"];
+             //NSArray *pageResultArray = [itemObject objectItemKey:@"pageResult"];
+             if (itemObject)
              {
                  switch (type)
                  {
@@ -154,21 +154,21 @@
                      case FooterRefresh:
                          break;
                  }
-                 [pageResultArray enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
+                 [itemObject enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
                   {
                       NSInteger inddexTage = [self.dataArray count];
-                      NSDictionary *item = [obj objectItemKey:@"propValue"];
+                      //NSDictionary *item = [obj objectItemKey:@"propValue"];
                       XHDynamicsFrame *frame = [[XHDynamicsFrame alloc]init];
                       XHDynamicsModel *model = [[XHDynamicsModel alloc]init];
                       [model setTage:inddexTage];
-                      [model setItemObject:item];
+                      [model setItemObject:obj];
                       [model.playModel setScrollView:self.tableView];
                       [frame setModel:model];
                       [self.dataArray addObject:frame];
                   }];
                  
                  
-                 if ([pageResultArray count] >= 10)
+                 if ([itemObject count] >= 10)
                  {
                      [self.tableView refreshReloadData];
                      [self setPageNumber:(self.pageNumber+1)];

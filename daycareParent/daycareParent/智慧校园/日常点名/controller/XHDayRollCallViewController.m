@@ -49,6 +49,7 @@
      [self.collectionView showRefresHeaderWithTarget:self withSelector:@selector(refreshHead)];
     [self.collectionView beginRefreshing];
     [self.collectionView setTipType:TipTitleAndTipImage withTipTitle:@"同学们都去偷懒喽" withTipImage:@"img_bad"];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshHead) name:@"noticeName" object:nil];
     
 }
 #pragma mark-------------刷新collectionView头视图--------------
@@ -72,13 +73,19 @@
 #pragma mark-------------选择班级按钮--------------
 -(void)classBtnMethod
 {
-    XHClassViewController *class=[XHClassViewController new];
-    class.classModelType=XHClassListType;
-    class.getClassBock = ^(NSInteger number) {
-        _number=number;
-        [self.collectionView beginRefreshing];
-    };
-    [self.navigationController pushViewController:class animated:YES];
+    [[XHUserInfo sharedUserInfo] getClassList:^(BOOL isOK, NSMutableArray *classListArry) {
+        if (isOK) {
+            [UIAlertController alertClassListWithTitle:@"提示" message:@"选择班级列表" titlesArry:[XHUserInfo sharedUserInfo].classListArry alertControllerStyle:UIAlertControllerStyleActionSheet hiddenCancelButton:NO cancleStyle:UIAlertActionStyleCancel withController:self indexBlock:^(NSInteger index, id object) {
+                _number=index;
+                [self.collectionView beginRefreshing];
+                XHClassListModel *model=object;
+            }];
+        }
+        else
+        {
+          [UIAlertController alertWithTitle:@"提示" message:@"暂无数据" titlesArry:@[@"确定"] alertControllerStyle:UIAlertControllerStyleAlert hiddenCancelButton:YES cancleStyle:UIAlertActionStyleCancel withController:self indexBlock:^(NSInteger index, id object) {}];
+        }
+    }];
 }
 
 #pragma mark-------------未签到列表按钮方法--------------
@@ -109,8 +116,8 @@
     {
         self.collectionView.frame=CGRectMake(0, 184, SCREEN_WIDTH,SCREEN_HEIGHT-184);
     }
-
-    if ([self.dataArray count]&&_tag==10) {
+    if ([self.dataArray count]&&_tag==10&&[NSDate isSameDay:[NSDate getDateWithDateStr:_dateStr formatter:YY_DEFAULT_TIME_FORM] twoDate:[NSDate getDate:[NSDate date] formatter:YY_DEFAULT_TIME_FORM]])
+    {
         [self.view addSubview:self.selectAllView];
     }
     else
@@ -584,6 +591,10 @@
     {
         [self.collectionView setTipType:TipTitleAndTipImage withTipTitle:@"同学们都很勤奋哦" withTipImage:@"img_good"];
     }
+}
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

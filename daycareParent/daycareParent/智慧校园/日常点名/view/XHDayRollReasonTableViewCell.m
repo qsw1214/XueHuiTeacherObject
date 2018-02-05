@@ -7,7 +7,8 @@
 //
 
 #import "XHDayRollReasonTableViewCell.h"
-
+#import "XHDayRollCallModel.h"
+#import "XHApproveDetailModel.h"
 @implementation XHDayRollReasonTableViewCell
 
 - (void)awakeFromNib {
@@ -27,30 +28,73 @@
         _imageV=[[UIImageView alloc] init];
         [_imageV sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:@"addman"]];
         //_imageV.backgroundColor=[UIColor redColor];
-        _imageV.layer.cornerRadius=5;
+        _imageV.layer.cornerRadius=10;
+        _imageV.layer.masksToBounds=YES;
         [self.contentView addSubview:_imageV];
     }
     return self;
 }
--(void)setItemObject:(XHDayRollCallModel *)model
+-(void)setItemObject:(id)object
 {
-    _reasonLabel.frame=CGRectMake(60, 0, SCREEN_WIDTH-70, [self getCellHeight:model]);
-    _reasonLabel.text=model.content;
-    if (![model.picUrl isEqualToString:@""]) {
-        _imageV.frame=CGRectMake(20, _reasonLabel.bottom+10, 50, 50);
-        [_imageV sd_setImageWithURL:[NSURL URLWithString:ALGetFileHeadThumbnail(model.picUrl)] placeholderImage:[UIImage imageNamed:@"addman"]];
+    switch (self.modelType) {
+        case XHDayRollCallDetailType:
+        {
+            XHDayRollCallModel *model=object;
+            _reasonLabel.frame=CGRectMake(60, 0, SCREEN_WIDTH-70, [self getCellHeight:model]);
+            _reasonLabel.text=model.content;
+            if (![model.picUrl isEqualToString:@""]) {
+                _imageV.frame=CGRectMake(20, _reasonLabel.bottom+10, 50, 50);
+                [_imageV sd_setImageWithURL:[NSURL URLWithString:ALGetFileHeadThumbnail(model.picUrl)] placeholderImage:[UIImage imageNamed:@"addman"]];
+            }
+        }
+            break;
+            
+       case XHAskforLeaveDetailType:
+        {
+            XHApproveDetailModel *model=object;
+            _reasonLabel.frame=CGRectMake(60, 0, SCREEN_WIDTH-70, [self getCellHeight:model]);
+            _reasonLabel.text=model.content;
+            if (![model.picUrl isEqualToString:@""]) {
+                _imageV.frame=CGRectMake(20, _reasonLabel.bottom+10, 50, 50);
+                [_imageV sd_setImageWithURL:[NSURL URLWithString:ALGetFileHeadThumbnail(model.picUrl)] placeholderImage:[UIImage imageNamed:@"addman"]];
+            }
+            
+        }
+            break;
     }
+    
 }
--(CGFloat )getCellHeight:(XHDayRollCallModel *)model
+-(CGFloat )getCellHeight:(id)object
 {
 //    if ([model.imagPic isEqualToString:@""]) {
-        if ([NSString contentSizeWithTitle:model.content withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height<50) {
-            return 50;
-        }
-        else
+    switch (self.modelType) {
+        case XHDayRollCallDetailType:
         {
-            return [NSString contentSizeWithTitle:model.content withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height;
+            XHDayRollCallModel *model=object;
+            if ([NSString contentSizeWithTitle:model.content withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height<50) {
+                return 50;
+            }
+            else
+            {
+                return [NSString contentSizeWithTitle:model.content withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height;
+            }
         }
+            break;
+            
+       case XHAskforLeaveDetailType:
+        {
+            XHApproveDetailModel *model=object;
+            if ([NSString contentSizeWithTitle:model.content withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height<50) {
+                return 50;
+            }
+            else
+            {
+                return [NSString contentSizeWithTitle:model.content withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height;
+            }
+        }
+            break;
+    }
+    
         
 //    }
 //    else

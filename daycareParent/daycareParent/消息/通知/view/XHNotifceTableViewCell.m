@@ -52,36 +52,92 @@
     _titleLab.font = [UIFont fontWithName:@ "Helvetica-Bold"  size:(16.0)];
     _headImageView.image=[UIImage imageNamed:@"addman"];
    
+    _detailLab.text=[NSDate dateStr:model.beginTime FromFormatter:ALL_DEFAULT_TIME_FORM ToFormatter:YY_DEFAULT_TIME_FORM];
+    switch (model.readType) {
+        case XHUnReadType:
+        {
+            _smallLab.hidden=NO;
+        }
+            break;
+            
+        case XHReadType:
+        {
+            _smallLab.hidden=YES;
+        }
+            break;
+    }
+    switch (model.modelType) {
+        case XHNoApproveType:
+        {
+            switch (model.isMeModelType) {
+                case XHIsMEType:
+                {
+                    _myApplyLabel.text=@"我的申请";
+                    _myApplyLabel.hidden=NO;
+                }
+                    break;
+                    
+                default:
+                {
+                    _myApplyLabel.hidden=YES;
+                }
+                    break;
+            }
+            _ContentLab.text=[NSString stringWithFormat:@"等待%@的审批",model.auditor];
+        }
+            break;
+            
+        case XHApproveType:
+        {
+             _myApplyLabel.hidden=YES;
+            switch (model.isStatusType) {
+                case XHIsStatusType:
+                {
+                    _ContentLab.text=[NSString stringWithFormat:@"审批完成（同意）"];
+                }
+                    break;
+                    
+                case XHNoStatusType:
+                {
+                    _ContentLab.text=[NSString stringWithFormat:@"审批完成（拒绝）"];
+                }
+                    break;
+                case XHStatusType:
+                {
+                    _ContentLab.text=[NSString stringWithFormat:@"未审批"];
+                }
+                    break;
+            }
+        }
+            break;
+    }
+    switch (model.historyModelType) {
+        case XHCourseReportType:
+        {
+            switch (model.bizModelType) {
+                case XHBizType:
+                {
+                    _titleLab.text=[NSString stringWithFormat:@"%@的调课",model.teacherName] ;
+                }
+                    break;
+                    
+                default:
+                {
+                    _titleLab.text=[NSString stringWithFormat:@"%@的代课",model.teacherName] ;
+                }
+                    break;
+            }
+        }
+            break;
+            
+       case XHAskforLeaveType:
+        {
+            _titleLab.text=[NSString stringWithFormat:@"%@的请假",model.teacherName];
+        }
+            break;
+    }
     
-    _detailLab.text=@"2018-01-02";
-    switch (model.isMeModelType) {
-        case XHIsMEType:
-        {
-            _myApplyLabel.text=@"我的申请";
-            _myApplyLabel.hidden=NO;
-        }
-            break;
-            
-        default:
-        {
-            _myApplyLabel.hidden=YES;
-        }
-            break;
-    }
-    switch (model.bizModelType) {
-        case XHBizType:
-        {
-            _titleLab.text=[NSString stringWithFormat:@"%@%@",model.teacherName,@"的调课"] ;
-        }
-            break;
-            
-        default:
-        {
-            _titleLab.text=[NSString stringWithFormat:@"%@%@",model.teacherName,@"的代课"] ;
-        }
-            break;
-    }
-    _ContentLab.text=[NSString stringWithFormat:@"等待%@的审批",model.auditor];
+    
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

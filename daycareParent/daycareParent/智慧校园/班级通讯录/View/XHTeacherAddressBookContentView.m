@@ -71,7 +71,6 @@
 
              [array enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
               {
-                  obj = [obj objectItemKey:@"propValue"];
                   XHTeacherAddressBookFrame *frame = [XHTeacherAddressBookFrame alloc];
                   XHTeacherAddressBookModel *model = [[XHTeacherAddressBookModel alloc]init];
                   [model setItemObject:obj];

@@ -57,6 +57,8 @@
      */
     NSLocale *locale = [[NSLocale alloc]initWithLocaleIdentifier:@"zh-Hans"];
     _datePickerView.locale = locale;
+    //最小间隔分钟值   @minuteInterval （适用于 UIDatePickerModeTime、UIDatePickerModeCountDownTimer、UIDatePickerModeDateAndTime）
+    _datePickerView.minuteInterval = 5;
 }
 
 -(void)btnClick
@@ -84,7 +86,12 @@
                     
                 case XHCustomDatePickerViewModelAllDayType:
                 {
-                    [_delegate getDateStr:[NSString dateWithDateFormatter:@"yyy-MM-dd" Date:[NSDate date]]];
+                    [_delegate getDateStr:[NSString dateWithDateFormatter:YY_DEFAULT_TIME_FORM Date:[NSDate date]]];
+                }
+                    break;
+                    case XHCustomDatePickerViewModelDayType:
+                {
+                    [_delegate getDateStr:[NSString dateWithDateFormatter:ALL_TIME_DEFAULT_TIME_FORM Date:_datePickerView.date]];
                 }
                     break;
             }
@@ -105,7 +112,13 @@
             
        case XHCustomDatePickerViewModelAllDayType:
         {
-              _dateStr=[NSString dateWithDateFormatter:@"yyy-MM-dd" Date:datePicker.date];
+              _dateStr=[NSString dateWithDateFormatter:YY_DEFAULT_TIME_FORM Date:datePicker.date];
+        }
+            break;
+            
+            case XHCustomDatePickerViewModelDayType:
+        {
+             _dateStr=[NSString dateWithDateFormatter:ALL_TIME_DEFAULT_TIME_FORM Date:datePicker.date];
         }
             break;
     }
@@ -137,6 +150,7 @@
 {
     [self removeFromSuperview];
 }
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

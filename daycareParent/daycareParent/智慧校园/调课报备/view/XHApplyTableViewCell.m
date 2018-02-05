@@ -18,7 +18,7 @@
 {
     if (self=[super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         _selectImageV=[[UIImageView alloc] initWithFrame:CGRectMake(5, 30, 20, 20)];
-        _selectImageV.backgroundColor=[UIColor redColor];
+        //_selectImageV.backgroundColor=[UIColor redColor];
         _selectImageV.layer.cornerRadius=10;
         _selectImageV.layer.masksToBounds=YES;
         [self.contentView addSubview:_selectImageV];

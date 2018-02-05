@@ -12,11 +12,26 @@
 #import "XHNewTextFieldTypeTableViewCell.h"
 #import "XHNewHeardTableViewCell.h"
 #import "XHNewChageTypeTableViewCell.h"
+#import "XHClassListModel.h"
+#import "XHSubjectListModel.h"
+#import "XHDatePickerControl.h"
+#import "XHTeacherAddressBookViewController.h"
 #define TITLE  @[@"原任课教师",@"课程名称",@"上课班级",@"调整类型",@"委任教师",@"委任课程",@"上课时间",@"请假时长",@"审批人"]
-@interface XHNewBulidViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface XHNewBulidViewController ()<UITableViewDelegate,UITableViewDataSource,XHDatePickerControlDeletage>
 {
     BaseTableView *_tableView;
     NSInteger _tag;
+    NSString * _bizType ;  //!< 业务类型(1:调课 2:代课)
+    NSString *_formerTeacherId ;   //!< 原任课教师Id
+    NSString *_formerSubjectId ;//!< 课程Id
+    NSString *_clazzName ; //!< 班级名字
+    NSString *_appointedTeacherId ;   //!< 委任教师Id
+    NSString *_appointedSubjectId;//!<委任课程Id
+    NSString *_beginTime;//!< 上课时间 格式：yyyy-MM-dd HH:mm
+    NSString *_subjectNum ;//!< 几节课
+    NSString *_actorId;   //!<申请人ID（教师Id）
+    NSString *_shr;//!< 审核人ID（限制一位审核人）
+
 }
 @end
 
@@ -25,8 +40,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    [self navtionHidden:YES];
-//    self.view.backgroundColor=[UIColor orangeColor];
     _tableView=[[BaseTableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
     _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
     _tableView.delegate=self;
@@ -61,6 +74,7 @@
             XHNewChageTypeTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"chageTypeCell" forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.titleLabel.text=TITLE[indexPath.row];
+             _bizType=@"1";
             [cell.melodyBtn addTarget:self action:@selector(selectBtnClick:) forControlEvents:UIControlEventTouchUpInside];
             [cell.otherBtn addTarget:self action:@selector(selectBtnClick:) forControlEvents:UIControlEventTouchUpInside];
             return cell;
@@ -77,6 +91,7 @@
             cell.textFeild.hidden=NO;
             cell.selectLabel.text=@"节课程";
             cell.textFeild.keyboardType=UIKeyboardTypeNumberPad;
+            [cell.textFeild addTarget:self action:@selector(textChage:) forControlEvents:UIControlEventEditingChanged];
             if (indexPath.row==2) {
                 cell.selectLabel.text=@"请输入";
                 cell.textFeild.hidden=YES;
@@ -90,7 +105,6 @@
             XHNewHeardTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"headcell" forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.approveLabel.text=TITLE[indexPath.row];
-            cell.nameLabel.text=@"张三";
             [cell.sureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [cell.headBtn addTarget:self action:@selector(headBtnClick) forControlEvents:UIControlEventTouchUpInside];
             [cell.sureBtn addTarget:self action:@selector(sureBtnClick) forControlEvents:UIControlEventTouchUpInside];
@@ -117,29 +131,91 @@
 {
    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
+            case 0:
+             case 4:
+        {
+            XHTeacherAddressBookViewController *teacherAddressBook=[XHTeacherAddressBookViewController new];
+            [self.navigationController pushViewController:teacherAddressBook animated:YES];
+            teacherAddressBook.didselectBack = ^(XHTeacherAddressBookFrame *itemObject)
+            {
+                XHNewTextFieldTypeTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+                cell.selectLabel.text=itemObject.model.teacherName;
+                switch (indexPath.row) {
+                    case 0:
+                    {
+                        _formerTeacherId=itemObject.model.ID;
+                    }
+                        break;
+                        
+                    case 4:
+                    {
+                        _appointedTeacherId=itemObject.model.ID;
+                    }
+                        break;
+                }
+            };
+        }
+            break;
+            case 1:
+            case 5:
+        {
+            [[XHUserInfo sharedUserInfo] getSubjectList:^(BOOL isOK, NSMutableArray *subjectListArry) {
+                if (isOK) {
+                    [UIAlertController alertSubjectListWithTitle:@"提示" message:@"选择科目列表" titlesArry: [XHUserInfo sharedUserInfo].subjectListArry alertControllerStyle:UIAlertControllerStyleActionSheet hiddenCancelButton:NO cancleStyle:UIAlertActionStyleCancel withController:self indexBlock:^(NSInteger index, id object) {
+                        XHSubjectListModel *model=object;
+                        XHNewTextFieldTypeTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+                        cell.selectLabel.text=model.subjectName;
+                        switch (indexPath.row) {
+                            case 1:
+                                
+                            {
+                                _formerSubjectId=model.ID;
+                            }
+                                break;
+                                
+                            case 5:
+                            {
+                                _appointedSubjectId=model.ID;
+                            }
+                                break;
+                        }
+                    }];
+                }
+                else
+                {
+                    [UIAlertController alertWithTitle:@"提示" message:@"暂无数据" titlesArry:@[@"确定"] alertControllerStyle:UIAlertControllerStyleAlert hiddenCancelButton:YES cancleStyle:UIAlertActionStyleCancel withController:self indexBlock:^(NSInteger index, id object) {}];
+                }
+            }];
+           
+        }
+            break;
         case 2:
         {
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入上课班级" preferredStyle:UIAlertControllerStyleAlert];
             [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-                
+
             }];
             [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 if (alertController.textFields.firstObject.text.length==0) {
                     [XHShowHUD showNOHud:@"班级不能为空"];
                     return ;
                 }
-              XHNewTextFieldTypeTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+               XHNewTextFieldTypeTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
                 cell.selectLabel.text=alertController.textFields.firstObject.text;
-               
+                _clazzName=alertController.textFields.firstObject.text;
             }]];
             [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                
+
             }]];
             [self presentViewController:alertController animated:YES completion:nil];
+            
         }
             break;
-            
-        default:
+        
+            case 6:
+        {
+             [[XHDatePickerControl sharedObject] showWithDeletage:self];
+        }
             break;
     }
 }
@@ -154,6 +230,7 @@
         {
             [cell.melodyBtn setImage:@"ico_yes" withNumberType:0 withAllType:NO];
             [cell.otherBtn setImage:@"ico_no" withNumberType:0 withAllType:NO];
+            _bizType=@"1";
         }
             break;
 
@@ -161,19 +238,140 @@
             {
                 [cell.melodyBtn setImage:@"ico_no" withNumberType:0 withAllType:NO];
                 [cell.otherBtn setImage:@"ico_yes" withNumberType:0 withAllType:NO];
+                _bizType=@"2";
             }
             break;
     }
 }
+#pragma mark  选择时间选择器代理方法
+-(void)datePickerClickObject:(NSString*)date
+{
+    NSIndexPath *  indexPath = [NSIndexPath indexPathForRow:6 inSection:0];
+    //找到对应的cell
+    XHNewTableViewCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
+    cell.selectLabel.text=date;
+    _beginTime=date;
+}
+-(void)textChage:(UITextField *)text
+{
+    _subjectNum=text.text;
+}
 #pragma mark-------------审批人按钮--------------
 -(void)headBtnClick
 {
-    NSLog(@"审批人按钮");
+    XHTeacherAddressBookViewController *teacherAddressBook=[XHTeacherAddressBookViewController new];
+    [self.navigationController pushViewController:teacherAddressBook animated:YES];
+    teacherAddressBook.didselectBack = ^(XHTeacherAddressBookFrame *itemObject)
+    {
+        NSIndexPath *  indexPath = [NSIndexPath indexPathForRow:8 inSection:0];
+        //找到对应的cell
+        XHNewHeardTableViewCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
+        [cell.headBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:itemObject.model.headerUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
+        cell.nameLabel.text=itemObject.model.teacherName;
+        _shr=itemObject.model.ID;
+    };
 }
 #pragma mark-------------提交按钮--------------
 -(void)sureBtnClick
 {
-    NSLog(@"提交按钮");
+    if ([[NSString safeString:_formerTeacherId] isEqualToString:@""]) {
+        [XHShowHUD showNOHud:@"请选择原任老师"];
+        return;
+    }
+    if ([[NSString safeString:_formerSubjectId]  isEqualToString:@""]) {
+        [XHShowHUD showNOHud:@"请选择课程名称"];
+        return;
+    }
+    if ([[NSString safeString:_clazzName] isEqualToString:@""]) {
+        [XHShowHUD showNOHud:@"请选择班级"];
+        return;
+    }
+    if ([[NSString safeString:_appointedTeacherId]  isEqualToString:@""]) {
+        [XHShowHUD showNOHud:@"请选择委任老师"];
+        return;
+    }
+    if ([[NSString safeString:_appointedSubjectId]  isEqualToString:@""]) {
+        [XHShowHUD showNOHud:@"请委任课程"];
+        return;
+    }
+    
+    if ([[NSString safeString:_beginTime] isEqualToString:@""]) {
+        [XHShowHUD showNOHud:@"请选择上课时间"];
+        return;
+    }
+    if ([[NSString safeString:_subjectNum]  isEqualToString:@""]) {
+        [XHShowHUD showNOHud:@"请选择节数"];
+        return;
+    }
+    if ([[NSString safeString:_shr]  isEqualToString:@""]) {
+        [XHShowHUD showNOHud:@"请选择审核人"];
+        return;
+    }
+    [self.netWorkConfig setObject:_bizType forKey:@"bizType"];
+    [self.netWorkConfig setObject:_formerTeacherId forKey:@"formerTeacherId"];
+    [self.netWorkConfig setObject:_formerSubjectId forKey:@"formerSubjectId"];
+     [self.netWorkConfig setObject:_clazzName forKey:@"clazzName"];
+     [self.netWorkConfig setObject:_appointedTeacherId forKey:@"appointedTeacherId"];
+    [self.netWorkConfig setObject:_appointedSubjectId forKey:@"appointedSubjectId"];
+    [self.netWorkConfig setObject:_beginTime forKey:@"beginTime"];
+    [self.netWorkConfig setObject:_subjectNum forKey:@"subjectNum"];
+    [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"actorId"];
+    [self.netWorkConfig setObject:_shr forKey:@"shr"];
+    [self.netWorkConfig postWithUrl:@"zzjt-app-api_bizInfo001" sucess:^(id object, BOOL verifyObject) {
+        if (verifyObject)
+        {
+        //数据还原
+            [self resetData];
+        }
+    } error:^(NSError *error) {
+        
+    }];
+}
+#pragma mark  数据还原
+-(void)resetData
+{
+    _formerTeacherId =@"";
+    _formerSubjectId =@"";
+    _clazzName =@"";
+    _appointedTeacherId =@"";
+   _appointedSubjectId=@"";
+    _beginTime=@"";
+   _subjectNum =@"";
+    _actorId=@"";
+    _shr=@"";
+    for (int i=0; i<9; i++) {
+        if (i==2||i==7)
+        {
+            NSIndexPath *  indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            //找到对应的cell
+            XHNewTextFieldTypeTableViewCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
+            if (i==2) {
+               cell.selectLabel.text=@"请选择";
+            }
+            if (i==7)
+            {
+                cell.textFeild.text=@"";
+            }
+            
+        }
+        else if (i==8)
+        {
+            NSIndexPath *  indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            //找到对应的cell
+            XHNewHeardTableViewCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
+            [cell.headBtn sd_setBackgroundImageWithURL:nil forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
+            cell.nameLabel.text=@"";
+        }
+        else
+        {
+            NSIndexPath *  indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            //找到对应的cell
+            XHNewTableViewCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
+            cell.selectLabel.text=@"请选择";
+        }
+       
+    }
+   
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

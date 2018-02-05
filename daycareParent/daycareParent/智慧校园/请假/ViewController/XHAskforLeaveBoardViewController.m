@@ -27,6 +27,7 @@
     {
         XHAskforLeaveViewController *askforLeave = [[XHAskforLeaveViewController alloc]init];
         XHHistoryViewController *history = [[XHHistoryViewController alloc]init];
+        history.modelType=XHHistoryAskforLeaveType;
         [self setSegmentedControlItems:@[@"新建",@"记录"] WithControllersArry:@[askforLeave,history]];
     }
     return self;
@@ -39,6 +40,7 @@
     {
         XHAskforLeaveViewController *askforLeave = [XHAskforLeaveViewController new];
         XHHistoryViewController *history = [XHHistoryViewController new];
+        history.modelType=XHHistoryAskforLeaveType;
         [self setSegmentedControlItems:@[@"新建",@"记录"] WithControllersArry:@[askforLeave,history]];
     }
     return self;

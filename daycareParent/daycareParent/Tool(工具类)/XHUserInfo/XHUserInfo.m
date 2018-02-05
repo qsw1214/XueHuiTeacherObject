@@ -81,11 +81,13 @@ static XHUserInfo *userInfo = nil;
         calssListBock(YES,self.classListArry);
         return;
     }
+    [XHShowHUD showTextHud];
     [self.classListNet setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
     [self.classListNet postWithUrl:@"pmschool-teacher-api_/teacher/attendanceSheet/classList" sucess:^(id object, BOOL verifyObject)
     {
         if (verifyObject)
         {
+            [XHShowHUD hideHud];
             NSArray *arr=[object objectItemKey:@"object"];
             if (arr.count!=0)
             {
@@ -126,11 +128,13 @@ static XHUserInfo *userInfo = nil;
         subjectListBock(YES,self.subjectListArry);
         return;
     }
+    [XHShowHUD showTextHud];
     [self.subjectListNet setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
     [self.subjectListNet postWithUrl:@"pmschool-teacher-api_/teacher/schoolwork/getSubjectAll" sucess:^(id object, BOOL verifyObject){
         if (verifyObject)
         {
-                NSArray *arr=[object objectItemKey:@"object"];
+             [XHShowHUD hideHud];
+            NSArray *arr=[object objectItemKey:@"object"];
             if (arr.count!=0)
             {
                 [self.subjectListArry removeAllObjects];
@@ -174,13 +178,14 @@ static XHUserInfo *userInfo = nil;
     {
         XHNetWorkConfig *netWorkConfig = [[XHNetWorkConfig alloc]init];
         [netWorkConfig setObject:userInfo.schoolId forKey:@"schoolId"];
-        [netWorkConfig postWithUrl:@"zzjt-app-api_notice001" sucess:^(id object, BOOL verifyObject)
+        [netWorkConfig setObject:userInfo.sessionId forKey:@"sessionId"];
+        [netWorkConfig postWithUrl:@"pmschool-teacher-api_/teacher/contract/listTeacher" sucess:^(id object, BOOL verifyObject)
          {
              if (verifyObject)
              {
                  [userInfo setIsTeachersAddressBook:YES];
-                 NSDictionary *objectDictionary = [object objectItemKey:@"object"];
-                 NSArray *itemArray = [objectDictionary objectItemKey:@"list"];
+                 NSArray *itemArray = [object objectItemKey:@"object"];
+                 //NSArray *itemArray = [objectDictionary objectItemKey:@"list"];
                  if ([NSObject isArray:itemArray])
                  {
                      [self.teachersAddressBookArray setArray:itemArray];

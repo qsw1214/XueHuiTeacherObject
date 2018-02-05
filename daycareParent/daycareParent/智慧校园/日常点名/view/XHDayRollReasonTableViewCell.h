@@ -7,10 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "XHDayRollCallModel.h"
+
+typedef NS_ENUM(NSInteger ,XHReasonModelType)
+{
+    XHDayRollCallDetailType=0,//!< 课程报备请假详情
+
+    XHAskforLeaveDetailType=1,//!< 请假列表详情
+
+};
+
 @interface XHDayRollReasonTableViewCell : UITableViewCell
 @property(nonatomic,strong)XHBaseLabel *titleLabel;
 @property(nonatomic,strong)XHBackLabel *reasonLabel;
 @property(nonatomic,strong)UIImageView *imageV;
--(void)setItemObject:(XHDayRollCallModel *)model;
+@property(nonatomic,assign)XHReasonModelType modelType;
+-(void)setItemObject:(id)object;
 @end

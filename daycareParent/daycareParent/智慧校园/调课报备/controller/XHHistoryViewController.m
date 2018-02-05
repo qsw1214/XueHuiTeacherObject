@@ -11,6 +11,7 @@
 #import "XHNotifceTableViewCell.h"
 #import "XHNewDetailViewController.h"
 #import "XHApproveModel.h"
+#import "XHAskforLeaveDetailViewController.h"
 #define TITLE @[@"待审批",@"已审批"]
 @interface XHHistoryViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -37,8 +38,7 @@
     _tableView.rowHeight=70;
     [_tableView registerClass:[XHNotifceTableViewCell class] forCellReuseIdentifier:@"cell"];
     [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-    [self.dataArray addObject:@"1"];
-    [_tableView setTipType:TipTitleAndTipImage withTipTitle:nil withTipImage:@"ico-no-data"];
+    [_tableView setTipType:TipTitleAndTipImage withTipTitle:@"暂无审批申请哦" withTipImage:@"img_norecord"];
     [_tableView showRefresHeaderWithTarget:self withSelector:@selector(refreshHead)];
     [_tableView showRefresFooterWithTarget:self withSelector:@selector(refreshFoot)];
     [_tableView beginRefreshing];
@@ -57,7 +57,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     [_tableView tableTipViewWithArray:self.dataArray];
-    NSLog(@"======%@",self.dataArray);
     return self.dataArray.count;
 }
 
@@ -70,38 +69,42 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    XHNewDetailViewController *detail=[XHNewDetailViewController new];
-    [detail setNavtionTitle:_tag==10?@"待审批":@"已审批"];
-    detail.Tag=_tag;
-    switch (indexPath.row) {
-        case 0:
+    switch (self.modelType) {
+        case XHHistoryCourseReportType:
         {
-            detail.isSelf=YES;
+            XHNewDetailViewController *detail=[XHNewDetailViewController new];
+            [detail setNavtionTitle:_tag==10?@"待审批":@"已审批"];
+            detail.Tag=_tag;
+            detail.model=self.dataArray[indexPath.row];
+            detail.isRefresh = ^(BOOL ok)
+            {
+                if (ok) {
+                    
+                    [_tableView beginRefreshing];
+                }
+            };
+            [self.navigationController pushViewController:detail animated:YES];
         }
-           
             break;
             
-        default:
+        case XHHistoryAskforLeaveType:
         {
-            detail.isSelf=NO;
+            XHAskforLeaveDetailViewController *detail=[XHAskforLeaveDetailViewController new];
+            [detail setNavtionTitle:_tag==10?@"待审批":@"已审批"];
+            detail.Tag=_tag;
+            detail.model=self.dataArray[indexPath.row];
+            detail.isRefresh = ^(BOOL ok)
+            {
+                if (ok) {
+                    
+                    [_tableView beginRefreshing];
+                }
+            };
+            [self.navigationController pushViewController:detail animated:YES];
         }
             break;
     }
-    detail.isRefresh = ^(BOOL ok)
-    {
-        if (ok) {
-            BaseButtonControl *lastBtn=[self.view viewWithTag:10];
-            [lastBtn setTextColor:[UIColor blackColor] withTpe:0 withAllType:NO];
-            [lastBtn setTextBackGroundColor:[UIColor clearColor] withTpe:1 withAllType:NO];
-            BaseButtonControl *btn=[self.view viewWithTag:11];
-            [btn setTextColor:[UIColor orangeColor] withTpe:0 withAllType:NO];
-            [btn setTextBackGroundColor:[UIColor orangeColor] withTpe:1 withAllType:NO];
-            _tag=11;
-            [_tableView beginRefreshing];
-            //[_tableView refreshReloadData];
-        }
-    };
-    [self.navigationController pushViewController:detail animated:YES];
+    
 }
 #pragma mark-------------审批选项列表--------------
 -(void)getApproveBtn
@@ -133,42 +136,133 @@
     [btn setTextColor:[UIColor orangeColor] withTpe:0 withAllType:NO];
     [btn setTextBackGroundColor:[UIColor orangeColor] withTpe:1 withAllType:NO];
     _tag=btn.tag;
-    [self refreshHead];
+    [_tableView setTipType:TipTitleAndTipImage withTipTitle:_tag==10?@"暂无审批申请哦":@"暂无审批记录哦" withTipImage:@"img_norecord"];
+    [_tableView beginRefreshing];
 }
 -(void)getRefreshType:(BaseRefreshType)refreshType
 {
-    [self.netWorkConfig setObject:@"1" forKey:@"bizType"];
-    [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
-    [self.netWorkConfig setObject:_tag==10?@"0":@"1" forKey:@"isStatus"];
-    [self.netWorkConfig setObject:@"10" forKey:@"pageSize"];
-    [self.netWorkConfig setObject:[NSString stringWithFormat:@"%zd",_pageNumber] forKey:@"pageNumber"];
-    [self.netWorkConfig postWithUrl:@"zzjt-app-api_bizInfo002" sucess:^(id object, BOOL verifyObject){
-        if (verifyObject)
+    switch (self.modelType) {
+        case XHHistoryCourseReportType:
         {
-            switch (refreshType)
-            {
-                case HeaderRefresh:
+            [self.netWorkConfig setObject:@"1" forKey:@"bizType"];
+            [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
+            [self.netWorkConfig setObject:_tag==10?@"0":@"1" forKey:@"isStatus"];
+            [self.netWorkConfig setObject:@"10" forKey:@"pageSize"];
+            [self.netWorkConfig setObject:[NSString stringWithFormat:@"%zd",_pageNumber] forKey:@"pageNumber"];
+            [self.netWorkConfig postWithUrl:@"zzjt-app-api_bizInfo002" sucess:^(id object, BOOL verifyObject){
+                if (verifyObject)
                 {
-                    [self.dataArray removeAllObjects];
+                    switch (refreshType)
+                    {
+                        case HeaderRefresh:
+                        {
+                            [self.dataArray removeAllObjects];
+                        }
+                            break;
+                        case FooterRefresh:
+                            break;
+                            
+                    }
+                    NSDictionary *objectDic=[object objectItemKey:@"object"];
+                    NSArray *arry=[objectDic objectItemKey:@"pageResult"];
+                    for (NSDictionary *dic in arry)
+                    {
+                        NSDictionary *Dic=[dic objectItemKey:@"propValue"];
+                        XHApproveModel *model=[[XHApproveModel alloc] initWithDic:Dic];
+                        model.historyModelType=XHCourseReportType;
+                        if (_tag==10)
+                        {
+                            model.modelType=XHNoApproveType;
+                        }
+                        else
+                        {
+                          model.modelType=XHApproveType;
+                        }
+                        [self.dataArray addObject:model];
+                    }
+                    if (arry.count<10)
+                    {
+                        [_tableView noMoreData];
+                    }
+                    else
+                    {
+                        _pageNumber++;
+                        [_tableView refreshReloadData];
+                    }
                 }
-                    break;
-                case FooterRefresh:
-                    break;
-                    
-            }
-            NSArray *arry=[object objectItemKey:@"object"];
-            for (NSDictionary *dic in arry)
-            {
-                NSDictionary *Dic=[dic objectItemKey:@"propValue"];
-                XHApproveModel *model=[[XHApproveModel alloc] initWithDic:Dic];
-                [self.dataArray addObject:model];
-            }
+                else
+                {
+                    [_tableView refreshReloadData];
+                }
+                
+                
+            } error:^(NSError *error) {
+                [_tableView refreshReloadData];
+            }];
         }
-         [_tableView refreshReloadData];
-        
-    } error:^(NSError *error) {
-        [_tableView refreshReloadData];
-    }];
+            break;
+            
+        case XHHistoryAskforLeaveType:
+        {
+            [self.netWorkConfig setObject:@"0" forKey:@"bizType"];
+            [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
+            [self.netWorkConfig setObject:_tag==10?@"0":@"1" forKey:@"isStatus"];
+            [self.netWorkConfig setObject:@"10" forKey:@"pageSize"];
+            [self.netWorkConfig setObject:[NSString stringWithFormat:@"%zd",_pageNumber] forKey:@"pageNumber"];
+            [self.netWorkConfig postWithUrl:@"zzjt-app-api_bizInfo002" sucess:^(id object, BOOL verifyObject){
+                if (verifyObject)
+                {
+                    switch (refreshType)
+                    {
+                        case HeaderRefresh:
+                        {
+                            [self.dataArray removeAllObjects];
+                        }
+                            break;
+                        case FooterRefresh:
+                            break;
+                            
+                    }
+                    NSDictionary *objectDic=[object objectItemKey:@"object"];
+                    NSArray *arry=[objectDic objectItemKey:@"pageResult"];
+                    for (NSDictionary *dic in arry)
+                    {
+                        NSDictionary *Dic=[dic objectItemKey:@"propValue"];
+                        XHApproveModel *model=[[XHApproveModel alloc] initWithDic:Dic];
+                        model.historyModelType=XHAskforLeaveType;
+                        if (_tag==10)
+                        {
+                            model.modelType=XHNoApproveType;
+                        }
+                        else
+                        {
+                            model.modelType=XHApproveType;
+                        }
+                        [self.dataArray addObject:model];
+                    }
+                    if (arry.count<10)
+                    {
+                        [_tableView noMoreData];
+                    }
+                    else
+                    {
+                        _pageNumber++;
+                        [_tableView refreshReloadData];
+                    }
+                }
+                else
+                {
+                    [_tableView refreshReloadData];
+                }
+                
+                
+            } error:^(NSError *error) {
+                [_tableView refreshReloadData];
+            }];
+        }
+            break;
+    }
+   
     
 }
 - (void)didReceiveMemoryWarning {
