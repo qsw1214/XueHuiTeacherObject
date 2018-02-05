@@ -9,7 +9,6 @@
 #import "XHApproveDetailModel.h"
 
 @implementation XHApproveDetailModel
-
 -(id)initWithDic:(NSDictionary *)dic
 {
     if (self=[super init]) {
@@ -27,10 +26,14 @@
         _ID=[dic objectItemKey:@"id"];
         _teacherName=[dic objectItemKey:@"teacherName"];
         _updateTime=[dic objectItemKey:@"updateTime"];
+        _endTime=[dic objectItemKey:@"endTime"];
         _isAuditor=[dic objectItemKey:@"isAuditor"];
         _isStatus=[dic objectItemKey:@"isStatus"];
         _isStudent=[dic objectItemKey:@"isStudent"];
         _subjectNum=[dic objectItemKey:@"subjectNum"];
+        _bizDays=[dic objectItemKey:@"bizDays"];
+        _content=[dic objectItemKey:@"content"];
+        _picUrl=[dic objectItemKey:@"picUrl"];
     }
     return self;
 }

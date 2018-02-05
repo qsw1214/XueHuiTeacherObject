@@ -7,6 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+
+
+typedef NS_ENUM(NSInteger,XHHistoryModelType)
+{
+    XHCourseReportType=1,//!<课程报备记录
+    
+    XHAskforLeaveType=2,//!< 请假记录
+    
+};
+
 typedef NS_ENUM(NSInteger,XHUnReadModelType)
 {
     XHUnReadType=1,//!<未读
@@ -59,6 +69,8 @@ typedef NS_ENUM(NSInteger,XHApproveModelType)
 @property(nonatomic,assign)XHUnReadModelType  readType;//!< 已读、未读
 
 @property(nonatomic,assign)XHApproveModelType modelType;//!< 选择审核类型
+
+@property(nonatomic,assign)XHHistoryModelType historyModelType;//!< 课程报备记录或者请假列表记录
 
 @property(nonatomic,copy)NSString *ID;
 @property(nonatomic,copy)NSString *beginTime;

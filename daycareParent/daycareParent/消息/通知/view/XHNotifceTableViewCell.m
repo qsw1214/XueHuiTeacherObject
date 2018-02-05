@@ -111,20 +111,32 @@
         }
             break;
     }
-    
-    switch (model.bizModelType) {
-        case XHBizType:
+    switch (model.historyModelType) {
+        case XHCourseReportType:
         {
-            _titleLab.text=[NSString stringWithFormat:@"%@%@",model.teacherName,@"的调课"] ;
+            switch (model.bizModelType) {
+                case XHBizType:
+                {
+                    _titleLab.text=[NSString stringWithFormat:@"%@的调课",model.teacherName] ;
+                }
+                    break;
+                    
+                default:
+                {
+                    _titleLab.text=[NSString stringWithFormat:@"%@的代课",model.teacherName] ;
+                }
+                    break;
+            }
         }
             break;
-
-        default:
+            
+       case XHAskforLeaveType:
         {
-            _titleLab.text=[NSString stringWithFormat:@"%@%@",model.teacherName,@"的代课"] ;
+            _titleLab.text=[NSString stringWithFormat:@"%@的请假",model.teacherName];
         }
             break;
     }
+    
     
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

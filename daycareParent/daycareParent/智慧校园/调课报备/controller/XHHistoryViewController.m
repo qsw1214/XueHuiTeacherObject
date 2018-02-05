@@ -11,6 +11,7 @@
 #import "XHNotifceTableViewCell.h"
 #import "XHNewDetailViewController.h"
 #import "XHApproveModel.h"
+#import "XHAskforLeaveDetailViewController.h"
 #define TITLE @[@"待审批",@"已审批"]
 @interface XHHistoryViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -68,18 +69,42 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    XHNewDetailViewController *detail=[XHNewDetailViewController new];
-    [detail setNavtionTitle:_tag==10?@"待审批":@"已审批"];
-    detail.Tag=_tag;
-    detail.model=self.dataArray[indexPath.row];
-    detail.isRefresh = ^(BOOL ok)
-    {
-        if (ok) {
-            
-            [_tableView beginRefreshing];
+    switch (self.modelType) {
+        case XHHistoryCourseReportType:
+        {
+            XHNewDetailViewController *detail=[XHNewDetailViewController new];
+            [detail setNavtionTitle:_tag==10?@"待审批":@"已审批"];
+            detail.Tag=_tag;
+            detail.model=self.dataArray[indexPath.row];
+            detail.isRefresh = ^(BOOL ok)
+            {
+                if (ok) {
+                    
+                    [_tableView beginRefreshing];
+                }
+            };
+            [self.navigationController pushViewController:detail animated:YES];
         }
-    };
-    [self.navigationController pushViewController:detail animated:YES];
+            break;
+            
+        case XHHistoryAskforLeaveType:
+        {
+            XHAskforLeaveDetailViewController *detail=[XHAskforLeaveDetailViewController new];
+            [detail setNavtionTitle:_tag==10?@"待审批":@"已审批"];
+            detail.Tag=_tag;
+            detail.model=self.dataArray[indexPath.row];
+            detail.isRefresh = ^(BOOL ok)
+            {
+                if (ok) {
+                    
+                    [_tableView beginRefreshing];
+                }
+            };
+            [self.navigationController pushViewController:detail animated:YES];
+        }
+            break;
+    }
+    
 }
 #pragma mark-------------审批选项列表--------------
 -(void)getApproveBtn
@@ -118,7 +143,6 @@
 {
     switch (self.modelType) {
         case XHHistoryCourseReportType:
-            
         {
             [self.netWorkConfig setObject:@"1" forKey:@"bizType"];
             [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
@@ -145,6 +169,7 @@
                     {
                         NSDictionary *Dic=[dic objectItemKey:@"propValue"];
                         XHApproveModel *model=[[XHApproveModel alloc] initWithDic:Dic];
+                        model.historyModelType=XHCourseReportType;
                         if (_tag==10)
                         {
                             model.modelType=XHNoApproveType;
@@ -179,7 +204,61 @@
             
         case XHHistoryAskforLeaveType:
         {
-            
+            [self.netWorkConfig setObject:@"0" forKey:@"bizType"];
+            [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
+            [self.netWorkConfig setObject:_tag==10?@"0":@"1" forKey:@"isStatus"];
+            [self.netWorkConfig setObject:@"10" forKey:@"pageSize"];
+            [self.netWorkConfig setObject:[NSString stringWithFormat:@"%zd",_pageNumber] forKey:@"pageNumber"];
+            [self.netWorkConfig postWithUrl:@"zzjt-app-api_bizInfo002" sucess:^(id object, BOOL verifyObject){
+                if (verifyObject)
+                {
+                    switch (refreshType)
+                    {
+                        case HeaderRefresh:
+                        {
+                            [self.dataArray removeAllObjects];
+                        }
+                            break;
+                        case FooterRefresh:
+                            break;
+                            
+                    }
+                    NSDictionary *objectDic=[object objectItemKey:@"object"];
+                    NSArray *arry=[objectDic objectItemKey:@"pageResult"];
+                    for (NSDictionary *dic in arry)
+                    {
+                        NSDictionary *Dic=[dic objectItemKey:@"propValue"];
+                        XHApproveModel *model=[[XHApproveModel alloc] initWithDic:Dic];
+                        model.historyModelType=XHAskforLeaveType;
+                        if (_tag==10)
+                        {
+                            model.modelType=XHNoApproveType;
+                        }
+                        else
+                        {
+                            model.modelType=XHApproveType;
+                        }
+                        [self.dataArray addObject:model];
+                    }
+                    if (arry.count<10)
+                    {
+                        [_tableView noMoreData];
+                    }
+                    else
+                    {
+                        _pageNumber++;
+                        [_tableView refreshReloadData];
+                    }
+                }
+                else
+                {
+                    [_tableView refreshReloadData];
+                }
+                
+                
+            } error:^(NSError *error) {
+                [_tableView refreshReloadData];
+            }];
         }
             break;
     }
