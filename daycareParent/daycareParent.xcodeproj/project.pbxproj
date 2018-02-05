@@ -495,6 +495,7 @@
 		8CCD7E621FD145E200F7F54E /* XHVideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CCD7E601FD145E200F7F54E /* XHVideoTableViewCell.xib */; };
 		8CCD7E6A1FD156BB00F7F54E /* XHBindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CCD7E681FD156BB00F7F54E /* XHBindViewController.m */; };
 		8CCD7E6B1FD156BB00F7F54E /* XHBindViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CCD7E691FD156BB00F7F54E /* XHBindViewController.xib */; };
+		8CCE160F2027E10D00F87E03 /* UIAlertController+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CCE160E2027E10D00F87E03 /* UIAlertController+Category.m */; };
 		8CD8CE082015A9BF0085DD70 /* XHDayRollCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8CE072015A9BF0085DD70 /* XHDayRollCollectionViewCell.m */; };
 		8CD8CE0B2015AC4D0085DD70 /* XHDayRollCallModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8CE0A2015AC4D0085DD70 /* XHDayRollCallModel.m */; };
 		8CD8CE0E2015D23E0085DD70 /* XHDayRollCallDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8CE0D2015D23E0085DD70 /* XHDayRollCallDetailViewController.m */; };
@@ -1450,6 +1451,8 @@
 		8CCD7E671FD156BB00F7F54E /* XHBindViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHBindViewController.h; sourceTree = "<group>"; };
 		8CCD7E681FD156BB00F7F54E /* XHBindViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHBindViewController.m; sourceTree = "<group>"; };
 		8CCD7E691FD156BB00F7F54E /* XHBindViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XHBindViewController.xib; sourceTree = "<group>"; };
+		8CCE160D2027E10D00F87E03 /* UIAlertController+Category.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Category.h"; sourceTree = "<group>"; };
+		8CCE160E2027E10D00F87E03 /* UIAlertController+Category.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Category.m"; sourceTree = "<group>"; };
 		8CD8CE062015A9BF0085DD70 /* XHDayRollCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHDayRollCollectionViewCell.h; sourceTree = "<group>"; };
 		8CD8CE072015A9BF0085DD70 /* XHDayRollCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHDayRollCollectionViewCell.m; sourceTree = "<group>"; };
 		8CD8CE092015AC4D0085DD70 /* XHDayRollCallModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHDayRollCallModel.h; sourceTree = "<group>"; };
@@ -2437,6 +2440,8 @@
 				8C5BDC9C2019BE9A00CD4790 /* NSDate+dateTool.m */,
 				4B8718EE20243ABE0023A54C /* NSArray+Category.h */,
 				4B8718EF20243ABE0023A54C /* NSArray+Category.m */,
+				8CCE160D2027E10D00F87E03 /* UIAlertController+Category.h */,
+				8CCE160E2027E10D00F87E03 /* UIAlertController+Category.m */,
 			);
 			path = "Category(分类)";
 			sourceTree = "<group>";
@@ -4237,6 +4242,7 @@
 				4B632AB81FE0F49D00B90B94 /* XHTeacherAddressBookKey.m in Sources */,
 				4B4A00141FE240FD00B8A8F8 /* XHDynamicsCellContentView.m in Sources */,
 				4B80F2251FCBEC2B00BC7B52 /* MianTabBarViewController.m in Sources */,
+				8CCE160F2027E10D00F87E03 /* UIAlertController+Category.m in Sources */,
 				4B3418751FFDC14C00A5EC56 /* UITabBarController+ZFPlayerRotation.m in Sources */,
 				4B4338B71FDF9C1C0047AC52 /* XHEducationCloudItemCollectionView.m in Sources */,
 				4B577FAD1FF5EFA30023ACBC /* XHNotifceTableViewCell.m in Sources */,

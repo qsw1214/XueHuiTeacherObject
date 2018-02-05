@@ -12,6 +12,7 @@ typedef NS_ENUM(NSInteger,XHCustomDatePickerViewModelType)
 {
     XHCustomDatePickerViewModelAllDayType = 0,   //!< 年月日
     XHCustomDatePickerViewModelMouthAndDayType=1, //!< 月日
+    XHCustomDatePickerViewModelDayType=2,//!< 年 月日 时 分 秒
 };
 
 @protocol XHCustomDatePickerViewDelegate <NSObject>

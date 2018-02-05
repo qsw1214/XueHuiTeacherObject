@@ -75,6 +75,15 @@
  @return 时间差
  */
 +(NSDateComponents *)howLongFromeDateStr:(NSString *)fromeDateStr toDateStr:(NSString *)toDateStr formatter:(NSString *)formatterStr;
+
+/**
+ 是否为同一天
+
+ @param firstDate 第一date
+ @param twoDate 第二date
+ @return 是否同一天
+ */
++ (BOOL)isSameDay:(NSDate *)firstDate  twoDate:(NSDate *)twoDate;
 /**
  比较某时距离现在多长时间
  @param date 时间格式

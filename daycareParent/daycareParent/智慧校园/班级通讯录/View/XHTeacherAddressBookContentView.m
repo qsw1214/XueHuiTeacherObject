@@ -72,7 +72,7 @@
               {
                   XHTeacherAddressBookFrame *frame = [XHTeacherAddressBookFrame alloc];
                   XHTeacherAddressBookModel *model = [[XHTeacherAddressBookModel alloc]init];
-                  obj = [obj objectItemKey:@"propValue"];
+                  //obj = [obj objectItemKey:@"propValue"];
                   [model setItemObject:obj];
                   [frame setModel:model];
                   [self.dataArray addObject:frame];

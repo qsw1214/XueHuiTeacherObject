@@ -73,6 +73,15 @@
     NSLog(@"两个时间相差%ld年%ld月%ld日%ld小时%ld分钟%ld秒", cmps.year, cmps.month, cmps.day, cmps.hour, cmps.minute, cmps.second);
     return cmps;
 }
+#pragma mark   判断是否是同一天
++ (BOOL)isSameDay:(NSDate *)firstDate  twoDate:(NSDate *)twoDate
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    unsigned unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+    NSDateComponents *comp1 = [calendar components:unitFlag fromDate:firstDate];
+    NSDateComponents *comp2 = [calendar components:unitFlag fromDate:twoDate];
+    return (([comp1 day] == [comp2 day]) && ([comp1 month] == [comp2 month]) && ([comp1 year] == [comp2 year]));
+}
 #pragma mark  某时距离现在多长时间
 + (NSString *)formateDateNow:(NSDate *)date
 {

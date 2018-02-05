@@ -75,15 +75,8 @@
     detail.isRefresh = ^(BOOL ok)
     {
         if (ok) {
-            BaseButtonControl *lastBtn=[self.view viewWithTag:10];
-            [lastBtn setTextColor:[UIColor blackColor] withTpe:0 withAllType:NO];
-            [lastBtn setTextBackGroundColor:[UIColor clearColor] withTpe:1 withAllType:NO];
-            BaseButtonControl *btn=[self.view viewWithTag:11];
-            [btn setTextColor:[UIColor orangeColor] withTpe:0 withAllType:NO];
-            [btn setTextBackGroundColor:[UIColor orangeColor] withTpe:1 withAllType:NO];
-            _tag=11;
+            
             [_tableView beginRefreshing];
-            //[_tableView refreshReloadData];
         }
     };
     [self.navigationController pushViewController:detail animated:YES];

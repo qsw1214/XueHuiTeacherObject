@@ -60,17 +60,17 @@
     [self.netWorkConfig setObject:self.model.ID forKey:@"id"];
     [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
     [self.netWorkConfig postWithUrl:@"zzjt-app-api_bizInfo005" sucess:^(id object, BOOL verifyObject) {
-        if (verifyObject) {
             if (verifyObject)
             {
+                if (self.isRefresh) {
+                  self.isRefresh(YES);
+                }
                 NSDictionary *dic=[object objectItemKey:@"object"];
                 NSDictionary *propValueDic=[dic objectItemKey:@"propValue"];
                 XHApproveDetailModel *model=[[XHApproveDetailModel alloc] initWithDic:propValueDic];
                 [self.dataArray addObject:model];
             }
-            NSLog(@"-%@",self.dataArray[0]);
             [_tableView refreshReloadData];
-        }
     } error:^(NSError *error) {
         [_tableView refreshReloadData];
     }];
