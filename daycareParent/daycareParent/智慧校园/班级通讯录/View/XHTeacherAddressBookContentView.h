@@ -11,6 +11,12 @@
 #import "XHTeacherAddressBookCell.h"
 
 
+/**
+ 在请假中使用
+ 因为请假、调课和通讯录中用到老师通讯录，界面和操作逻辑不一致，所以教师通讯录开发两种视图
+ */
+
+
 
 @protocol XHTeacherAddressBookContentViewDeletage <NSObject>
 

@@ -8,6 +8,7 @@
 
 #import "XHTeacherAddressBookContentView.h"
 #import "XHSortedArrayComparator.h"
+#import "XHAddressBookHelper.h"
 
 
 
@@ -67,27 +68,27 @@
          if (isOK)
          {
              [self.dataArray removeAllObjects];
-             
+
              [array enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
               {
+                  obj = [obj objectItemKey:@"propValue"];
                   XHTeacherAddressBookFrame *frame = [XHTeacherAddressBookFrame alloc];
                   XHTeacherAddressBookModel *model = [[XHTeacherAddressBookModel alloc]init];
-                  obj = [obj objectItemKey:@"propValue"];
                   [model setItemObject:obj];
                   [frame setModel:model];
                   [self.dataArray addObject:frame];
               }];
-             
+
              if ([self.dataArray count])
              {
                  [self.dataArray setArray:[XHSortedArrayComparator sortedArrayUsingComparatorWithTeacherAddressBookKeyArray:self.dataArray]];
              }
          }
-         
+
          [self.tableView refreshReloadData];
      }];
-    
-    
+
+
 }
 
 

@@ -164,8 +164,7 @@
 -(void)refreshReload
 {
     [self reloadData];
-    [self.header endRefreshing];
-    [self.footer endRefreshing];
+    [self refreshReloadData];
 }
 -(void)noMoreData
 {

@@ -34,10 +34,22 @@
     [self setHeaderUrl:ALGetFileHeadThumbnail([object objectItemKey:@"headPic"])];
     [self setHeadPic:[object objectItemKey:@"headPic"]];
     [self setPhone:[object objectItemKey:@"telphoneNumber"]];
-    [self setUserID:[object objectItemKey:@"teacherId"]];
+    [self setUserID:[object objectItemKey:@"id"]];
     [self.courseArray setArray:[self getArry:[object objectItemKey:@"clazzList"]]];
-    [self setModelType:XHAddressBookModelNormalType];
+    [self setSelectType:XHAddressBookModelNormalType];
 }
+
+-(void)setParentsItemObject:(NSDictionary *)object
+{
+    [self setTeacherName:[object objectItemKey:@"studentName"]];
+    [self setHeaderUrl:ALGetFileHeadThumbnail([object objectItemKey:@"headPic"])];
+    [self setHeadPic:[object objectItemKey:@"headPic"]];
+    [self setPhone:[object objectItemKey:@"telphoneNumber"]];
+    [self setUserID:[object objectItemKey:@"studentId"]];
+    [self setObjectID:[object objectItemKey:@"studentBaseId"]];
+    [self setSelectType:XHAddressBookModelNormalType];
+}
+
 
 
 

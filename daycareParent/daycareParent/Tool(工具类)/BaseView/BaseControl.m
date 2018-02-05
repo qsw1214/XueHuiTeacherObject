@@ -46,7 +46,7 @@
     [self setHidden:NO];
 }
 
--(void)setItemArray:(NSMutableArray*)array
+-(void)setItemArray:(NSArray*)array
 {
     
 }

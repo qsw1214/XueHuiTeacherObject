@@ -59,36 +59,44 @@
 #pragma mark 下拉刷新的方法
 -(void)refreshHeaderAction
 {
+    
+    [[XHUserInfo sharedUserInfo] getParentsAddressBook:^(BOOL isOK, NSArray *array)
+     {
+         if (isOK)
+         {
+             [array enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
+              {
+                  NSString *gradeName = [obj objectItemKey:@"gradeName"]; //!< 年级
+                  NSString *clazzName = [obj objectItemKey:@"clazzName"]; //!< 班级
+                  
+                  XHAddressBookSection *section = [[XHAddressBookSection alloc]init];
+                  [section setTage:idx];
+                  [section setSectionTitle:[NSString stringWithFormat:@"%@年级%@班",gradeName,clazzName]];
+                  NSArray *studnetArray = [obj objectItemKey:@"studnetList"];
+                  [NSArray enumerateObjectsWithArray:studnetArray usingBlock:^(NSDictionary *itemObj, NSUInteger idx, BOOL *stop)
+                  {
+                      NSDictionary *object = [itemObj objectItemKey:@"propValue"];
+                      XHAddressBookFrame *frame = [[XHAddressBookFrame alloc]init];
+                      XHAddressBookModel *model = [[XHAddressBookModel alloc]init];
+                      [model setTage:idx];
+                      [model setParentsItemObject:object];
+                      [model setModelType:XHAddressBookParentType];
+                      [model setSelectType:XHAddressBookModelNormalType];
+                      [frame setModel:model];
+                      [section.itemArray addObject:frame];
+                      
+                  }];
+                  [section setArray:section.itemArray];
+                  [section setMarkType:XHAddressBookSectionNormalType];
+                  [self.dataArray addObject:section];
+               
+              }];
+         }
+         
+         
+         [self.tableView refreshReloadData];
+     }];
     [self.dataArray removeAllObjects];
-    
-    for (int i = 0;i < 10; i++)
-    {
-        XHAddressBookSection *section = [[XHAddressBookSection alloc]init];
-        [section setTage:i];
-        [section setSectionTitle:[NSString stringWithFormat:@"%d年级%d班",(i+1),(i+1)]];
-        for (int j = 0;j < 5; j++)
-        {
-            XHAddressBookFrame *frame = [[XHAddressBookFrame alloc]init];
-            XHAddressBookModel *model = [[XHAddressBookModel alloc]init];
-            [model setTage:j];
-            [model setHeaderUrl:@""];
-            [model setTeacherName:@"姚立志"];
-            [model setPhone:@"15515667760"];
-            [model setUserID:@"yaolizhi15515667760"];
-            [model.courseArray addObject:@"英语"];
-            [model.courseArray addObject:@"语文"];
-            [model.courseArray addObject:@"数学"];
-            [model setModelType:XHAddressBookParentType];
-            [model setSelectType:XHAddressBookModelNormalType];
-            [frame setModel:model];
-            [section.itemArray addObject:frame];
-        }
-        [section setArray:section.itemArray];
-        [section setMarkType:XHAddressBookSectionNormalType];
-        [self.dataArray addObject:section];
-    }
-    
-    [self.tableView refreshReloadData];
 }
 
 

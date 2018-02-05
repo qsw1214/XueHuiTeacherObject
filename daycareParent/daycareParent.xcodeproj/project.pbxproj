@@ -97,11 +97,8 @@
 		4B4338B41FDF5C8E0047AC52 /* XHUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4338B31FDF5C8E0047AC52 /* XHUserInfo.m */; };
 		4B4338B71FDF9C1C0047AC52 /* XHEducationCloudItemCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4338B61FDF9C1C0047AC52 /* XHEducationCloudItemCollectionView.m */; };
 		4B4338BA1FDF9C3F0047AC52 /* XHEducationCloudItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4338B91FDF9C3F0047AC52 /* XHEducationCloudItemCell.m */; };
-		4B4972C12021887F00EE1161 /* XHAddNoticeRecipientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4972C02021887F00EE1161 /* XHAddNoticeRecipientViewController.m */; };
-		4B4972C42021979B00EE1161 /* XHAddNoticeRecipientGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4972C32021979B00EE1161 /* XHAddNoticeRecipientGroupViewController.m */; };
 		4B4972C72021996300EE1161 /* XHNoticeRecipientModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4972C62021996300EE1161 /* XHNoticeRecipientModel.m */; };
 		4B4972CA2021998600EE1161 /* XHNoticeRecipientFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4972C92021998600EE1161 /* XHNoticeRecipientFrame.m */; };
-		4B4972CD20219FFD00EE1161 /* XHNoticeRecipientContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4972CC20219FFD00EE1161 /* XHNoticeRecipientContentView.m */; };
 		4B4972D02021A06B00EE1161 /* XHNoticeRecipientTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4972CF2021A06B00EE1161 /* XHNoticeRecipientTableViewCell.m */; };
 		4B49763A1FECFCB400338D37 /* XHDynamicsPreviewControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4976391FECFCB400338D37 /* XHDynamicsPreviewControl.m */; };
 		4B49763D1FECFDE600338D37 /* XHDynamicsPreviewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B49763C1FECFDE600338D37 /* XHDynamicsPreviewCollectionViewCell.m */; };
@@ -121,6 +118,13 @@
 		4B4D7FF5201AF5A1001D0BB0 /* XHAskforLeaveBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4D7FF4201AF5A1001D0BB0 /* XHAskforLeaveBoardViewController.m */; };
 		4B4D7FF8201B2533001D0BB0 /* XHAddNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4D7FF7201B2533001D0BB0 /* XHAddNoticeViewController.m */; };
 		4B4D7FFB201B27AF001D0BB0 /* XHAddNoticeContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4D7FFA201B27AF001D0BB0 /* XHAddNoticeContentView.m */; };
+		4B4DD0152027EEF600ACFFA8 /* XHNoticeRecipientGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4DD0142027EEF600ACFFA8 /* XHNoticeRecipientGroupTableViewCell.m */; };
+		4B4DD01A2027EFB600ACFFA8 /* XHNoticeRecipientGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4DD0172027EFB600ACFFA8 /* XHNoticeRecipientGroupModel.m */; };
+		4B4DD01B2027EFB600ACFFA8 /* XHNoticeRecipientGroupFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4DD0192027EFB600ACFFA8 /* XHNoticeRecipientGroupFrame.m */; };
+		4B4DD0212028097A00ACFFA8 /* XHAddNoticeRecipientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4DD01D2028097A00ACFFA8 /* XHAddNoticeRecipientViewController.m */; };
+		4B4DD02E202855D300ACFFA8 /* XHAddNoticeRecipientGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4DD02C202855D300ACFFA8 /* XHAddNoticeRecipientGroupViewController.m */; };
+		4B4DD031202856A200ACFFA8 /* XHNoticeUniteContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4DD030202856A200ACFFA8 /* XHNoticeUniteContentView.m */; };
+		4B4DD0342028587500ACFFA8 /* XHNoticeUniteItemContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4DD0332028587500ACFFA8 /* XHNoticeUniteItemContentView.m */; };
 		4B523BC41FD12D43006DD565 /* XHHomeWorkDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B523BC31FD12D43006DD565 /* XHHomeWorkDetailsViewController.m */; };
 		4B523BC71FD14782006DD565 /* XHHomeWorkCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B523BC61FD14782006DD565 /* XHHomeWorkCollectionView.m */; };
 		4B523BCA1FD14A27006DD565 /* XHHomeWorkContentViwCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B523BC91FD14A27006DD565 /* XHHomeWorkContentViwCell.m */; };
@@ -703,16 +707,10 @@
 		4B4338B61FDF9C1C0047AC52 /* XHEducationCloudItemCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHEducationCloudItemCollectionView.m; sourceTree = "<group>"; };
 		4B4338B81FDF9C3F0047AC52 /* XHEducationCloudItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHEducationCloudItemCell.h; sourceTree = "<group>"; };
 		4B4338B91FDF9C3F0047AC52 /* XHEducationCloudItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHEducationCloudItemCell.m; sourceTree = "<group>"; };
-		4B4972BF2021887F00EE1161 /* XHAddNoticeRecipientViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHAddNoticeRecipientViewController.h; sourceTree = "<group>"; };
-		4B4972C02021887F00EE1161 /* XHAddNoticeRecipientViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHAddNoticeRecipientViewController.m; sourceTree = "<group>"; };
-		4B4972C22021979B00EE1161 /* XHAddNoticeRecipientGroupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHAddNoticeRecipientGroupViewController.h; sourceTree = "<group>"; };
-		4B4972C32021979B00EE1161 /* XHAddNoticeRecipientGroupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHAddNoticeRecipientGroupViewController.m; sourceTree = "<group>"; };
 		4B4972C52021996300EE1161 /* XHNoticeRecipientModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XHNoticeRecipientModel.h; path = "daycareParent/消息/通知/model/XHNoticeRecipientModel.h"; sourceTree = SOURCE_ROOT; };
 		4B4972C62021996300EE1161 /* XHNoticeRecipientModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XHNoticeRecipientModel.m; path = "daycareParent/消息/通知/model/XHNoticeRecipientModel.m"; sourceTree = SOURCE_ROOT; };
 		4B4972C82021998600EE1161 /* XHNoticeRecipientFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNoticeRecipientFrame.h; sourceTree = "<group>"; };
 		4B4972C92021998600EE1161 /* XHNoticeRecipientFrame.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNoticeRecipientFrame.m; sourceTree = "<group>"; };
-		4B4972CB20219FFD00EE1161 /* XHNoticeRecipientContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XHNoticeRecipientContentView.h; path = "daycareParent/消息/通知/view/XHNoticeRecipientContentView.h"; sourceTree = SOURCE_ROOT; };
-		4B4972CC20219FFD00EE1161 /* XHNoticeRecipientContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XHNoticeRecipientContentView.m; path = "daycareParent/消息/通知/view/XHNoticeRecipientContentView.m"; sourceTree = SOURCE_ROOT; };
 		4B4972CE2021A06B00EE1161 /* XHNoticeRecipientTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNoticeRecipientTableViewCell.h; sourceTree = "<group>"; };
 		4B4972CF2021A06B00EE1161 /* XHNoticeRecipientTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNoticeRecipientTableViewCell.m; sourceTree = "<group>"; };
 		4B4976381FECFCB400338D37 /* XHDynamicsPreviewControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHDynamicsPreviewControl.h; sourceTree = "<group>"; };
@@ -751,6 +749,20 @@
 		4B4D7FF7201B2533001D0BB0 /* XHAddNoticeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHAddNoticeViewController.m; sourceTree = "<group>"; };
 		4B4D7FF9201B27AF001D0BB0 /* XHAddNoticeContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHAddNoticeContentView.h; sourceTree = "<group>"; };
 		4B4D7FFA201B27AF001D0BB0 /* XHAddNoticeContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHAddNoticeContentView.m; sourceTree = "<group>"; };
+		4B4DD0132027EEF600ACFFA8 /* XHNoticeRecipientGroupTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNoticeRecipientGroupTableViewCell.h; sourceTree = "<group>"; };
+		4B4DD0142027EEF600ACFFA8 /* XHNoticeRecipientGroupTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNoticeRecipientGroupTableViewCell.m; sourceTree = "<group>"; };
+		4B4DD0162027EFB600ACFFA8 /* XHNoticeRecipientGroupModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XHNoticeRecipientGroupModel.h; path = "daycareParent/消息/通知/model/XHNoticeRecipientGroupModel.h"; sourceTree = SOURCE_ROOT; };
+		4B4DD0172027EFB600ACFFA8 /* XHNoticeRecipientGroupModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XHNoticeRecipientGroupModel.m; path = "daycareParent/消息/通知/model/XHNoticeRecipientGroupModel.m"; sourceTree = SOURCE_ROOT; };
+		4B4DD0182027EFB600ACFFA8 /* XHNoticeRecipientGroupFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XHNoticeRecipientGroupFrame.h; path = "daycareParent/消息/通知/model/XHNoticeRecipientGroupFrame.h"; sourceTree = SOURCE_ROOT; };
+		4B4DD0192027EFB600ACFFA8 /* XHNoticeRecipientGroupFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XHNoticeRecipientGroupFrame.m; path = "daycareParent/消息/通知/model/XHNoticeRecipientGroupFrame.m"; sourceTree = SOURCE_ROOT; };
+		4B4DD01D2028097A00ACFFA8 /* XHAddNoticeRecipientViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHAddNoticeRecipientViewController.m; sourceTree = "<group>"; };
+		4B4DD01E2028097A00ACFFA8 /* XHAddNoticeRecipientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHAddNoticeRecipientViewController.h; sourceTree = "<group>"; };
+		4B4DD02C202855D300ACFFA8 /* XHAddNoticeRecipientGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHAddNoticeRecipientGroupViewController.m; sourceTree = "<group>"; };
+		4B4DD02D202855D300ACFFA8 /* XHAddNoticeRecipientGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHAddNoticeRecipientGroupViewController.h; sourceTree = "<group>"; };
+		4B4DD02F202856A200ACFFA8 /* XHNoticeUniteContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XHNoticeUniteContentView.h; path = "daycareParent/消息/通知/view/XHNoticeUniteContentView.h"; sourceTree = SOURCE_ROOT; };
+		4B4DD030202856A200ACFFA8 /* XHNoticeUniteContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XHNoticeUniteContentView.m; path = "daycareParent/消息/通知/view/XHNoticeUniteContentView.m"; sourceTree = SOURCE_ROOT; };
+		4B4DD0322028587500ACFFA8 /* XHNoticeUniteItemContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNoticeUniteItemContentView.h; sourceTree = "<group>"; };
+		4B4DD0332028587500ACFFA8 /* XHNoticeUniteItemContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNoticeUniteItemContentView.m; sourceTree = "<group>"; };
 		4B523BC21FD12D43006DD565 /* XHHomeWorkDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHHomeWorkDetailsViewController.h; sourceTree = "<group>"; };
 		4B523BC31FD12D43006DD565 /* XHHomeWorkDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHHomeWorkDetailsViewController.m; sourceTree = "<group>"; };
 		4B523BC51FD14782006DD565 /* XHHomeWorkCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHHomeWorkCollectionView.h; sourceTree = "<group>"; };
@@ -2235,10 +2247,14 @@
 				4B577F901FF5C4F50023ACBC /* XHNoticeTableViewCell.m */,
 				4B4D7FF9201B27AF001D0BB0 /* XHAddNoticeContentView.h */,
 				4B4D7FFA201B27AF001D0BB0 /* XHAddNoticeContentView.m */,
-				4B4972CB20219FFD00EE1161 /* XHNoticeRecipientContentView.h */,
-				4B4972CC20219FFD00EE1161 /* XHNoticeRecipientContentView.m */,
+				4B4DD02F202856A200ACFFA8 /* XHNoticeUniteContentView.h */,
+				4B4DD030202856A200ACFFA8 /* XHNoticeUniteContentView.m */,
+				4B4DD0322028587500ACFFA8 /* XHNoticeUniteItemContentView.h */,
+				4B4DD0332028587500ACFFA8 /* XHNoticeUniteItemContentView.m */,
 				4B4972CE2021A06B00EE1161 /* XHNoticeRecipientTableViewCell.h */,
 				4B4972CF2021A06B00EE1161 /* XHNoticeRecipientTableViewCell.m */,
+				4B4DD0132027EEF600ACFFA8 /* XHNoticeRecipientGroupTableViewCell.h */,
+				4B4DD0142027EEF600ACFFA8 /* XHNoticeRecipientGroupTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2246,12 +2262,12 @@
 		4B577F911FF5C4F50023ACBC /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				4B4DD02D202855D300ACFFA8 /* XHAddNoticeRecipientGroupViewController.h */,
+				4B4DD02C202855D300ACFFA8 /* XHAddNoticeRecipientGroupViewController.m */,
+				4B4DD01E2028097A00ACFFA8 /* XHAddNoticeRecipientViewController.h */,
+				4B4DD01D2028097A00ACFFA8 /* XHAddNoticeRecipientViewController.m */,
 				4B4D7FF6201B2533001D0BB0 /* XHAddNoticeViewController.h */,
 				4B4D7FF7201B2533001D0BB0 /* XHAddNoticeViewController.m */,
-				4B4972BF2021887F00EE1161 /* XHAddNoticeRecipientViewController.h */,
-				4B4972C02021887F00EE1161 /* XHAddNoticeRecipientViewController.m */,
-				4B4972C22021979B00EE1161 /* XHAddNoticeRecipientGroupViewController.h */,
-				4B4972C32021979B00EE1161 /* XHAddNoticeRecipientGroupViewController.m */,
 				4B577FA81FF5EF770023ACBC /* XHNoticeViewController.h */,
 				4B577FA91FF5EF770023ACBC /* XHNoticeViewController.m */,
 				4B577F921FF5C4F50023ACBC /* XHNoticeListViewController.h */,
@@ -2273,6 +2289,10 @@
 				4B4972C62021996300EE1161 /* XHNoticeRecipientModel.m */,
 				4B4972C82021998600EE1161 /* XHNoticeRecipientFrame.h */,
 				4B4972C92021998600EE1161 /* XHNoticeRecipientFrame.m */,
+				4B4DD0162027EFB600ACFFA8 /* XHNoticeRecipientGroupModel.h */,
+				4B4DD0172027EFB600ACFFA8 /* XHNoticeRecipientGroupModel.m */,
+				4B4DD0182027EFB600ACFFA8 /* XHNoticeRecipientGroupFrame.h */,
+				4B4DD0192027EFB600ACFFA8 /* XHNoticeRecipientGroupFrame.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4330,7 +4350,7 @@
 				4B80F31C1FCBFD6F00BC7B52 /* MTLModel+NSCoding.m in Sources */,
 				4B5A3B001FCEB0A000504229 /* XHRegisterTableViewCell.m in Sources */,
 				4B4972D02021A06B00EE1161 /* XHNoticeRecipientTableViewCell.m in Sources */,
-				4B4972CD20219FFD00EE1161 /* XHNoticeRecipientContentView.m in Sources */,
+				4B4DD01A2027EFB600ACFFA8 /* XHNoticeRecipientGroupModel.m in Sources */,
 				4B49763D1FECFDE600338D37 /* XHDynamicsPreviewCollectionViewCell.m in Sources */,
 				4BB792D21FD7936A00E0ED72 /* XHAchievementModel.m in Sources */,
 				4B3126331FD93CC6000CE894 /* TAPageControl.m in Sources */,
@@ -4374,7 +4394,6 @@
 				4B80F31B1FCBFD6F00BC7B52 /* MTLJSONAdapter.m in Sources */,
 				04FB52811FD96D720070C019 /* XHStudyModel.m in Sources */,
 				4B1066A71FD7D1FA004A7CB7 /* XHAchievementCellContentView.m in Sources */,
-				4B4972C42021979B00EE1161 /* XHAddNoticeRecipientGroupViewController.m in Sources */,
 				8CC76484200C9993007887C7 /* XHNewTableViewCell.m in Sources */,
 				4BB9BEA31FDE4C54004F5622 /* XHEducationCloudSwitchMenuView.m in Sources */,
 				4B3043D51FEE566C004017C7 /* BaseScrollView.m in Sources */,
@@ -4393,6 +4412,7 @@
 				4B07CC191FD4DAB800B2DBDA /* XHLeaveRecordModel.m in Sources */,
 				8C9D92ED201EEBF200F4A28E /* XHPunchSignTableViewCell.m in Sources */,
 				8C4DB5D91FEBB55D00B14073 /* XHHomeWorkDetailView.m in Sources */,
+				4B4DD031202856A200ACFFA8 /* XHNoticeUniteContentView.m in Sources */,
 				8CC76480200C8C2A007887C7 /* XHHistoryViewController.m in Sources */,
 				8C007D772010858900DD0635 /* XHHistoryHeadTableViewCell.m in Sources */,
 				4B11AF321FCCE958002738F1 /* XHSmartCampusViewController.m in Sources */,
@@ -4443,7 +4463,6 @@
 				8CDC906C1FE4CF6500040D19 /* XHFamilyListModel.m in Sources */,
 				8C0CCF801FFF16FE0008C0CE /* WebViewJavascriptBridgeBase.m in Sources */,
 				4B577FA31FF5C4F60023ACBC /* XHNoticeListViewController.m in Sources */,
-				4B4972C12021887F00EE1161 /* XHAddNoticeRecipientViewController.m in Sources */,
 				4B577FA21FF5C4F60023ACBC /* XHNoticeTableViewCell.m in Sources */,
 				4B632AA91FE0C5A000B90B94 /* XHTeacherAddressBookViewController.m in Sources */,
 				4BB9BE9A1FDE4B40004F5622 /* XHEducationCloudContentView.m in Sources */,
@@ -4466,6 +4485,7 @@
 				4B80F28D1FCBF04800BC7B52 /* UIScrollView+MJRefresh.m in Sources */,
 				4B80F2CE1FCBF04F00BC7B52 /* SDWebImageManager.m in Sources */,
 				8C7E980E1FECDB510096288E /* XHLocationModel.m in Sources */,
+				4B4DD02E202855D300ACFFA8 /* XHAddNoticeRecipientGroupViewController.m in Sources */,
 				8C01A2362006E94800E4D768 /* NJKWebViewProgressView.m in Sources */,
 				4BA8C4E51FD0002D006CBEBC /* XHHomeWorkTableViewCell.m in Sources */,
 				4B3418F61FFF14F100A5EC56 /* XHVideoControl.m in Sources */,
@@ -4495,7 +4515,9 @@
 				4B577FDF1FF63FB30023ACBC /* MASViewAttribute.m in Sources */,
 				4B632AB21FE0F44E00B90B94 /* XHTeacherAddressBookFrame.m in Sources */,
 				4B3126621FDA92A4000CE894 /* XHAddressBookLecturesCell.m in Sources */,
+				4B4DD0212028097A00ACFFA8 /* XHAddNoticeRecipientViewController.m in Sources */,
 				4BB792C31FD7923100E0ED72 /* XHSyllabusModel.m in Sources */,
+				4B4DD01B2027EFB600ACFFA8 /* XHNoticeRecipientGroupFrame.m in Sources */,
 				4B80F2D01FCBF04F00BC7B52 /* SDWebImageWebPCoder.m in Sources */,
 				4B80F3211FCBFD6F00BC7B52 /* NSArray+MTLManipulationAdditions.m in Sources */,
 				4B07CC281FD4EBB800B2DBDA /* XHParentsMeetingViewController.m in Sources */,
@@ -4509,6 +4531,7 @@
 				4B80F2EC1FCBF08800BC7B52 /* AFURLResponseSerialization.m in Sources */,
 				8C7E98341FECF1660096288E /* SGQRCodeScanManager.m in Sources */,
 				4B577FE11FF63FB30023ACBC /* NSArray+MASAdditions.m in Sources */,
+				4B4DD0152027EEF600ACFFA8 /* XHNoticeRecipientGroupTableViewCell.m in Sources */,
 				8CB5A2641FD796FF008E97D8 /* XHAddressModel.m in Sources */,
 				4B80F2ED1FCBF08800BC7B52 /* AFURLSessionManager.m in Sources */,
 				4BA8C4C51FCFD0AF006CBEBC /* XHRegisterViewController.m in Sources */,
@@ -4569,6 +4592,7 @@
 				4B80F2D41FCBF04F00BC7B52 /* UIImage+MultiFormat.m in Sources */,
 				4BD33DDA1FCD555500BC52B6 /* XHSmartCampusContentView.m in Sources */,
 				4B80F2EA1FCBF08800BC7B52 /* AFSecurityPolicy.m in Sources */,
+				4B4DD0342028587500ACFFA8 /* XHNoticeUniteItemContentView.m in Sources */,
 				8C67F82B1FD6479C007DFD53 /* XHDelegateView.m in Sources */,
 				4B80F2261FCBEC2B00BC7B52 /* TabBarItem.m in Sources */,
 				8C3E55B61FD5216F0013002A /* XHPayTableViewCell.m in Sources */,

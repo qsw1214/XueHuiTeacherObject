@@ -10,9 +10,18 @@
 #import "XHNoticeRecipientFrame.h"
 
 
+@protocol XHNoticeRecipientTableViewCellDeletage <NSObject>
+
+-(void)markControlAction:(id)object;
+
+@end
+
+
 
 @interface XHNoticeRecipientTableViewCell : BaseTableViewCell
 
+
+-(instancetype)initWithDeletage:(<XHNoticeRecipientTableViewCellDeletage>)deletage;
 
 
 

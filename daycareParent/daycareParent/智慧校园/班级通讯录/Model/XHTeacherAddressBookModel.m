@@ -23,8 +23,8 @@
     [self setHeaderUrl:ALGetFileHeadThumbnail([object objectItemKey:@"headPic"])];
     [self setPhone:[object objectItemKey:@"telphoneNumber"]];
     [self setObjectID:[object objectItemKey:@"id"]];
-    [self setMarkType:XHTeacherAddressBookMarkNormalType];
     [self setID:[object objectItemKey:@"id"]];
+    [self setMarkType:XHTeacherAddressBookMarkNormalType];
 }
 
 @end

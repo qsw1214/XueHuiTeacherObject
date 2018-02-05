@@ -12,7 +12,9 @@
 
 typedef void(^ClassListBlock)(BOOL isOK,NSMutableArray *classListArry);
 typedef void(^SubjectListBlock)(BOOL isOK,NSMutableArray *subjectListArry);
-typedef void(^SucceedBlock)(BOOL isOK,NSArray *array);
+typedef void (^AddressBookSucceedBlock) (BOOL isOK,NSArray *array);
+
+
 
 
 @interface XHUserInfo : NSObject
@@ -98,7 +100,7 @@ typedef void(^SucceedBlock)(BOOL isOK,NSArray *array);
 
  @param block 回调的通讯录数组block
  */
--(void)getTeachersAddressBook:(SucceedBlock)block;
+-(void)getTeachersAddressBook:(AddressBookSucceedBlock)block;
 
 
 
@@ -108,6 +110,6 @@ typedef void(^SucceedBlock)(BOOL isOK,NSArray *array);
  
  @param block 回调的通讯录数组block
  */
--(void)getParentsAddressBook:(SucceedBlock)block;
+-(void)getParentsAddressBook:(AddressBookSucceedBlock)block;
 
 @end

@@ -22,7 +22,7 @@
 
 -(instancetype)init;
 -(void)resetFrame:(CGRect)frame;
--(void)setItemArray:(NSMutableArray*)array;
+-(void)setItemArray:(NSArray*)array;
 -(void)setItemFrame:(id)frame;
 
 

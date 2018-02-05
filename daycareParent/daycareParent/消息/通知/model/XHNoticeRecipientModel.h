@@ -10,14 +10,26 @@ typedef NS_ENUM(NSInteger,XHNoticeRecipientModelType)
 {
     XHNoticeRecipientFullSelectionType = 1, //!< 全选类型
     XHNoticeRecipientNormalType = 2, //!< 普通类型
-    XHNoticeRecipientStudentType = 3, //!< 学生类型
-    XHNoticeRecipientTeacherType = 4, //!< 老师类型
 };
 
 typedef NS_ENUM(NSInteger,XHNoticeRecipientSelectType)
 {
     XHNoticeRecipientNormalityType = 1, //!< 普通类型
     XHNoticeRecipientSelectedType = 2, //!< 选中类型
+};
+
+
+typedef NS_ENUM(NSInteger,XHNoticeRecipientEnterType)
+{
+    XHNoticeRecipientCanEnteType = 1, //!< 可以进入
+    XHNoticeRecipientNotccessibleType = 2, //!< 不可进入
+};
+
+
+typedef NS_ENUM(NSInteger,XHNoticeRecipientAllSelectType)
+{
+    XHNoticeRecipientUserAllSelectedType = 1, //!< 是否是用户主动选择全选
+    XHNoticeRecipientOptionAllSelectedType = 2, //!< 程序选择了全选
 };
 
 
@@ -35,6 +47,12 @@ typedef NS_ENUM(NSInteger,XHNoticeRecipientSelectType)
 
 @property (nonatomic,assign) XHNoticeRecipientModelType modelType; //!< 数据内容类型
 @property (nonatomic,assign) XHNoticeRecipientSelectType selectType; //!< 选择类型
+@property (nonatomic,assign) XHNoticeRecipientEnterType enterType;  //!< 是否能正常进入，如果为的情况下，不允许点击
+@property (nonatomic,assign) XHNoticeRecipientAllSelectType allSelectType; //!< 是否是用户选择全部选择
+
+
+
+
 
 
 

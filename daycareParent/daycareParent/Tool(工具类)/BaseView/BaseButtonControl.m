@@ -66,6 +66,8 @@
          {
              [obj setBackgroundColor:[UIColor colorWithRed:((idx*30+145)/255.0) green:((idx*30+217)/255.0) blue:((idx*30+167)/255.0) alpha:1.0]];
          }];
+        
+        [self setBackgroundColor:[UIColor orangeColor]];
     }
 }
 

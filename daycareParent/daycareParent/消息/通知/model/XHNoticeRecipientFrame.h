@@ -8,11 +8,13 @@
 
 #import "BaseFrame.h"
 #import "XHNoticeRecipientModel.h"
-
+#import "XHNoticeRecipientGroupFrame.h"
 
 @interface XHNoticeRecipientFrame : BaseFrame
 
 @property (nonatomic,strong) XHNoticeRecipientModel *model; //!< 数据模型
+@property (nonatomic,strong) NSMutableArray <XHNoticeRecipientGroupFrame*> *groupArray;
+
 
 
 

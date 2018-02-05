@@ -6,27 +6,18 @@
 //  Copyright © 2018年 XueHui. All rights reserved.
 //
 
-#import "XHNoticeRecipientFrame.h"
+#import "XHNoticeRecipientGroupFrame.h"
 
-@implementation XHNoticeRecipientFrame
+@implementation XHNoticeRecipientGroupFrame
 
 
--(void)setModel:(XHNoticeRecipientModel *)model
+-(void)setModel:(XHNoticeRecipientGroupModel *)model
 {
     _model = model;
     
     [self setItemFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60.0)];
     
     [self setCellHeight:self.itemFrame.size.height];
-}
-
--(NSMutableArray<XHNoticeRecipientGroupFrame *> *)groupArray
-{
-    if (!_groupArray)
-    {
-        _groupArray = [NSMutableArray array];
-    }
-    return _groupArray;
 }
 
 @end

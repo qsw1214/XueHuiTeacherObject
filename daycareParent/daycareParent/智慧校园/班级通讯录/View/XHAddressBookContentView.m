@@ -8,6 +8,8 @@
 
 #import "XHAddressBookContentView.h"
 #import "XHSortedArrayComparator.h"
+#import "XHAddressBookHelper.h"
+
 
 
 
@@ -160,97 +162,35 @@
     [tableView refreshReloadData];
 }
 
-
--(void)getModel:(id *)model
-{
-    [self getAddressBookWithModel:model];
-}
-
-
-
-
-#pragma mark - NetWork  Method 网络请求
 #pragma mark 表刷新头部视图
 -(void)refreshHeaderAction
 {
-//    [self getAddressBookWithModel:nil];
-    
-    NSMutableArray *addressArray = [NSMutableArray array];
-    for (int i = 0; i < 30; i++)
-    {
-        XHAddressBookFrame *frame = [XHAddressBookFrame alloc];
-        XHAddressBookModel *model = [[XHAddressBookModel alloc]init];
-        [model setTeacherName:[NSString stringWithFormat:@"%d姚立志",(i+1)]];
-        [model setHeaderUrl:ALGetFileHeadThumbnail(@"原头像")];
-        [model setHeadPic:@"原头像"];
-        [model setPhone:@"15515667760"];
-        [model setUserID:@"15515667760"];
-        [model.courseArray addObject:@"英语"];
-        [model.courseArray addObject:@"数学"];
-        [model.courseArray addObject:@"语文"];
-        [model.courseArray addObject:@"化学"];
-        [model setModelType:XHAddressBookTeacherType];
-        [model setSelectType:XHAddressBookModelNormalType];
-        
-        [frame setModel:model];
-        [addressArray addObject:frame];
-    }
-    
-    [self.dataArray setArray:addressArray];
-    
-    
-    
-    if ([self.dataArray count])
-    {
-        [self.dataArray setArray:[XHSortedArrayComparator sortedArrayUsingComparatorWithKeyArray:self.dataArray]];
-    }
-    [self.tableView refreshReloadData];
-    
-    
-    
-    
-    
-    
-}
-
-#pragma mark 获取教师通讯录接口
--(void)getAddressBookWithModel:(id *)model
-{
-    if (model)
-    {
-        [self.netWorkConfig setObject:@"" forKey:@"classId"];
-        [self.netWorkConfig postWithUrl:@"zzjt-app-api_smartCampus009" sucess:^(id object, BOOL verifyObject)
-        {
-            if (verifyObject)
-            {
-                [self.dataArray removeAllObjects];
-                NSArray *itemArray = [object objectItemKey:@"object"];
-                [itemArray enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
-                 {
-                     XHAddressBookFrame *frame = [XHAddressBookFrame alloc];
-                     XHAddressBookModel *model = [[XHAddressBookModel alloc]init];
-                     [model setModelType:XHAddressBookTeacherType];
-                     [model setItemObject:obj];
-                     [frame setModel:model];
-                     [self.dataArray addObject:frame];
-                 }];
-                
-                if ([self.dataArray count])
-                {
-                    [self.dataArray setArray:[XHSortedArrayComparator sortedArrayUsingComparatorWithKeyArray:self.dataArray]];
-                }
-                [self.tableView refreshReloadData];
-            }
-            
-        } error:^(NSError *error)
-        {
-            [self.tableView refreshReloadData];
-        }];
-    }
-    else
-    {
-        [self.tableView refreshReloadData];
-    }
+    [[XHUserInfo sharedUserInfo] getTeachersAddressBook:^(BOOL isOK, NSArray *array)
+     {
+         if (isOK)
+         {
+             NSMutableArray *tempArray = [NSMutableArray array];
+             [array enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
+              {
+                  obj = [obj objectItemKey:@"propValue"];
+                  XHAddressBookFrame *frame = [XHAddressBookFrame alloc];
+                  XHAddressBookModel *model = [[XHAddressBookModel alloc]init];
+                  [model setModelType:XHAddressBookTeacherType];
+                  [model setItemObject:obj];
+                  [frame setModel:model];
+                  [tempArray addObject:frame];
+              }];
+             [self.dataArray setArray:tempArray];
+             
+             if ([self.dataArray count])
+             {
+                 [self.dataArray setArray:[XHSortedArrayComparator sortedArrayUsingComparatorWithKeyArray:self.dataArray]];
+             }
+             
+         }
+         
+         [self.tableView refreshReloadData];
+     }];
 }
 
 

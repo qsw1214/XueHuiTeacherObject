@@ -8,12 +8,12 @@
 
 #import "XHAddNoticeRecipientViewController.h"
 #import "XHAddNoticeRecipientGroupViewController.h"
-#import "XHNoticeRecipientContentView.h"
+#import "XHNoticeUniteContentView.h"
 
 
-@interface XHAddNoticeRecipientViewController () <XHNoticeRecipientDeletage>
+@interface XHAddNoticeRecipientViewController () <XHNoticeUniteDeletage>
 
-@property (nonatomic,strong) XHNoticeRecipientContentView *contentView;
+@property (nonatomic,strong) XHNoticeUniteContentView *contentView;
 
 
 
@@ -48,17 +48,27 @@
 #pragma mark XHNoticeRecipientDeletage
 -(void)didSelectRowAtIndexObject:(XHNoticeRecipientFrame*)object
 {
-    XHAddNoticeRecipientGroupViewController *recipient = [[XHAddNoticeRecipientGroupViewController alloc]init];
-    [self.navigationController pushViewController:recipient animated:YES];
+    switch (object.model.modelType)
+    {
+        case XHNoticeRecipientNormalType:
+        {
+            XHAddNoticeRecipientGroupViewController *recipient = [[XHAddNoticeRecipientGroupViewController alloc]init];
+            [recipient setItemObject:object];
+            [self.navigationController pushViewController:recipient animated:YES];
+        }
+        case XHNoticeRecipientFullSelectionType:
+            break;
+    }
+    
 }
 
 
 #pragma mark - Getter / Setter
--(XHNoticeRecipientContentView *)contentView
+-(XHNoticeUniteContentView *)contentView
 {
     if (!_contentView)
     {
-        _contentView = [[XHNoticeRecipientContentView alloc]init];
+        _contentView = [[XHNoticeUniteContentView alloc]init];
         [_contentView setDeletage:self];
     }
     return _contentView;

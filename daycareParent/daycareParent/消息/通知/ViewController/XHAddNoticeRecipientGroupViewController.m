@@ -7,12 +7,13 @@
 //
 
 #import "XHAddNoticeRecipientGroupViewController.h"
-#import "XHNoticeRecipientContentView.h"
+#import "XHNoticeUniteItemContentView.h"
 
 
 @interface XHAddNoticeRecipientGroupViewController ()
 
-@property (nonatomic,strong) XHNoticeRecipientContentView *contentView;
+@property (nonatomic,strong) XHNoticeUniteItemContentView *contentView;
+@property (nonatomic,strong) NSMutableArray <XHNoticeRecipientGroupFrame*> *groupArray;
 
 @end
 
@@ -40,16 +41,35 @@
 }
 
 
+-(void)setItemObject:(XHNoticeRecipientFrame*)object;
+{
+    XHNoticeRecipientGroupFrame *groupFrame = [[XHNoticeRecipientGroupFrame alloc]init];
+    XHNoticeRecipientGroupModel *groupModel = [[XHNoticeRecipientGroupModel alloc]init];
+    [groupModel setTitle:@"全选"];
+    [groupModel setSelect:0];
+    [groupModel setTotal:[object.groupArray count]];
+    [groupModel setModelType:XHNoticeRecipientGroupFullSelectionType];
+    [groupFrame setModel:groupModel];
+    [self.dataArray addObject:groupFrame];
+    [self.dataArray addObjectsFromArray:object.groupArray];
+    [self.contentView setItemArray:self.dataArray];
+}
+
+
 
 #pragma mark - Getter / Setter
--(XHNoticeRecipientContentView *)contentView
+-(XHNoticeUniteItemContentView *)contentView
 {
     if (!_contentView)
     {
-        _contentView = [[XHNoticeRecipientContentView alloc]init];
+        _contentView = [[XHNoticeUniteItemContentView alloc]init];
     }
     return _contentView;
 }
+
+
+
+
 
 
 

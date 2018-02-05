@@ -39,4 +39,7 @@ typedef NS_ENUM(NSInteger,XHAddressBookModelType)
 @property (nonatomic,assign) XHAddressBookModelType modelType;
 @property (nonatomic,assign) XHAddressBookModelSelectType selectType;
 
+
+-(void)setParentsItemObject:(NSDictionary *)object;
+
 @end

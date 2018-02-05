@@ -164,7 +164,7 @@ static XHUserInfo *userInfo = nil;
  
  @param succeedBlock 回调的通讯录数组succeedBlock
  */
--(void)getTeachersAddressBook:(SucceedBlock)succeedBlock
+-(void)getTeachersAddressBook:(AddressBookSucceedBlock)succeedBlock
 {
     if (userInfo.isTeachersAddressBook)
     {
@@ -207,11 +207,11 @@ static XHUserInfo *userInfo = nil;
  
  @param succeedBlock 回调的通讯录数组succeedBlock
  */
--(void)getParentsAddressBook:(SucceedBlock)succeedBlock
+-(void)getParentsAddressBook:(AddressBookSucceedBlock)succeedBlock
 {
     if (userInfo.isparentsAddressBook)
     {
-        succeedBlock(YES,self.parentsAddressBookArray);
+       succeedBlock(YES,userInfo.parentsAddressBookArray);
     }
     else
     {
@@ -226,21 +226,20 @@ static XHUserInfo *userInfo = nil;
                  if ([NSObject isArray:objectArray])
                  {
                      
-                     succeedBlock(YES,objectArray);
+                     [userInfo.parentsAddressBookArray setArray:objectArray];
                  }
-                 else
-                 {
-                     succeedBlock(YES,self.parentsAddressBookArray);
-                 }
+                
+                 
+                 succeedBlock(YES,userInfo.parentsAddressBookArray);
              }
              else
              {
-                 succeedBlock(NO,self.parentsAddressBookArray);
+                succeedBlock(YES,userInfo.parentsAddressBookArray);
              }
              
          } error:^(NSError *error)
          {
-             succeedBlock(NO,self.parentsAddressBookArray);
+             succeedBlock(YES,userInfo.parentsAddressBookArray);
          }];
     }
 }

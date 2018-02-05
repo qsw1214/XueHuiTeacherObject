@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef void(^SucceedBlock)(BOOL isOK,NSArray *array);
-
+typedef void(^SucceedBlockl)(BOOL isOK,NSArray *array);
 @interface XHAddressBookHelper : NSObject
 
 @property(nonatomic,assign) BOOL isTeachersAddressBook;//!< 是否请求过教师通讯录列表
@@ -45,7 +45,7 @@ typedef void(^SucceedBlock)(BOOL isOK,NSArray *array);
  
  @param block 回调的通讯录数组block
  */
--(void)getParentsAddressBook:(SucceedBlock)block;
+-(void)getParentsAddressBook:(SucceedBlockl)block;
 
 
 @end

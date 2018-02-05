@@ -38,9 +38,13 @@ static XHAddressBookHelper *addressBook = nil;
  */
 -(void)getTeachersAddressBook:(SucceedBlock)succeedBlock
 {
+   
     if (addressBook.isTeachersAddressBook)
     {
-        succeedBlock(YES,self.teachersAddressBookArray);
+        MAIN(^{
+            succeedBlock(YES,addressBook.teachersAddressBookArray);
+        });
+        
     }
     else
     {
@@ -55,18 +59,21 @@ static XHAddressBookHelper *addressBook = nil;
                  NSArray *itemArray = [objectDictionary objectItemKey:@"list"];
                  if ([NSObject isArray:itemArray])
                  {
-                     [self.teachersAddressBookArray setArray:itemArray];
+                     [addressBook.teachersAddressBookArray setArray:itemArray];
                  }
                  
-                 succeedBlock(YES,self.teachersAddressBookArray);
+                 MAIN(^{
+                     
+                     succeedBlock(YES,addressBook.teachersAddressBookArray);
+                 });
              }
              else
              {
-                 succeedBlock(NO,self.teachersAddressBookArray);
+                 succeedBlock(NO,addressBook.teachersAddressBookArray);
              }
          } error:^(NSError *error)
          {
-             succeedBlock(NO,self.teachersAddressBookArray);
+             succeedBlock(NO,addressBook.teachersAddressBookArray);
          }];
     }
 }
@@ -79,7 +86,7 @@ static XHAddressBookHelper *addressBook = nil;
  
  @param succeedBlock 回调的通讯录数组succeedBlock
  */
--(void)getParentsAddressBook:(SucceedBlock)succeedBlock
+-(void)getParentsAddressBook:(SucceedBlockl)succeedBlock
 {
     if (addressBook.isparentsAddressBook)
     {

@@ -41,20 +41,7 @@
 -(void)addSubViews:(BOOL)subview
 {
     if (subview)
-    {
-        
-        [[XHUserInfo sharedUserInfo] getTeachersAddressBook:^(BOOL isOK, NSArray *array)
-         {
-             NSLog(@"%@",array);
-
-         }];
-        
-        [[XHUserInfo sharedUserInfo] getParentsAddressBook:^(BOOL isOK, NSArray *array)
-        {
-            
-        }];
-        
-        
+    {        
         //添加菜单控件
         [self.view addSubview:self.menuControl];
         [self.menuControl resetFrame:CGRectMake(0, self.navigationView.bottom, SCREEN_WIDTH, 60.0)];

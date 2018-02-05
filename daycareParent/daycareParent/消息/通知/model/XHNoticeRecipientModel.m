@@ -10,4 +10,17 @@
 
 @implementation XHNoticeRecipientModel
 
+-(void)setTotal:(NSInteger)total
+{
+    _total = total;
+    if (total)
+    {
+        [self setEnterType:XHNoticeRecipientCanEnteType];
+    }
+    else
+    {
+        [self setEnterType:XHNoticeRecipientNotccessibleType];
+    }
+}
+
 @end
