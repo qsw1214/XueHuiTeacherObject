@@ -49,6 +49,7 @@
      [self.collectionView showRefresHeaderWithTarget:self withSelector:@selector(refreshHead)];
     [self.collectionView beginRefreshing];
     [self.collectionView setTipType:TipTitleAndTipImage withTipTitle:@"同学们都去偷懒喽" withTipImage:@"img_bad"];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshHead) name:@"noticeName" object:nil];
     
 }
 #pragma mark-------------刷新collectionView头视图--------------
@@ -590,6 +591,10 @@
     {
         [self.collectionView setTipType:TipTitleAndTipImage withTipTitle:@"同学们都很勤奋哦" withTipImage:@"img_good"];
     }
+}
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

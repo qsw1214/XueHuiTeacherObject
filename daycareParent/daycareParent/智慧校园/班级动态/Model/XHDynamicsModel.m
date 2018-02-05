@@ -15,8 +15,8 @@
 -(void)setItemObject:(NSDictionary *)object
 {
     NSString *content = [object objectItemKey:@"content"];
-    NSString *headPic = [object objectItemKey:@"headPic"];
-    NSString *teacherName = [object objectItemKey:@"teacherName"];
+    NSString *headPic = [[object objectItemKey:@"teacher"] objectItemKey:@"headPic"];
+    NSString *teacherName = [[object objectItemKey:@"teacher"] objectItemKey:@"teacherName"];
     NSString *createTime = [object objectItemKey:@"createTime"];
     NSString *vedioFirstPicUrl = [object objectItemKey:@"vedioFirstPicUrl"]; //!< 视频预览图片地址
     NSString *vedioUrl = [object objectItemKey:@"vedioUrl"]; //!< 视频播放Url地址
