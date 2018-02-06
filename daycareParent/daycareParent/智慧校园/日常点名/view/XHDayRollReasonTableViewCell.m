@@ -25,8 +25,7 @@
         _reasonLabel.numberOfLines=0;
        // _reasonLabel.backgroundColor=[UIColor redColor];
         [self.contentView addSubview:_reasonLabel];
-        _imageV=[[UIImageView alloc] init];
-        [_imageV sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:@"addman"]];
+        _imageV=[[BaseButtonControl alloc] init];
         //_imageV.backgroundColor=[UIColor redColor];
         _imageV.layer.cornerRadius=10;
         _imageV.layer.masksToBounds=YES;
@@ -44,7 +43,9 @@
             _reasonLabel.text=model.content;
             if (![model.picUrl isEqualToString:@""]) {
                 _imageV.frame=CGRectMake(20, _reasonLabel.bottom+10, 50, 50);
-                [_imageV sd_setImageWithURL:[NSURL URLWithString:ALGetFileHeadThumbnail(model.picUrl)] placeholderImage:[UIImage imageNamed:@"addman"]];
+                [_imageV setNumberImageView:1];
+                [_imageV setImageEdgeFrame:CGRectMake(0, 0, 50, 50) withNumberType:0 withAllType:NO];
+                [_imageV sd_setImageWithURL:ALGetFileHeadThumbnail(model.picUrl) withNumberType:0 withAllType:NO];
             }
         }
             break;
@@ -56,7 +57,9 @@
             _reasonLabel.text=model.content;
             if (![model.picUrl isEqualToString:@""]) {
                 _imageV.frame=CGRectMake(20, _reasonLabel.bottom+10, 50, 50);
-                [_imageV sd_setImageWithURL:[NSURL URLWithString:ALGetFileHeadThumbnail(model.picUrl)] placeholderImage:[UIImage imageNamed:@"addman"]];
+                [_imageV setNumberImageView:1];
+                [_imageV setImageEdgeFrame:CGRectMake(0, 0, 50, 50) withNumberType:0 withAllType:NO];
+                 [_imageV sd_setImageWithURL:ALGetFileHeadThumbnail(model.picUrl) withNumberType:0 withAllType:NO];
             }
             
         }
@@ -64,9 +67,9 @@
     }
     
 }
+
 -(CGFloat )getCellHeight:(id)object
 {
-//    if ([model.imagPic isEqualToString:@""]) {
     switch (self.modelType) {
         case XHDayRollCallDetailType:
         {
@@ -94,13 +97,6 @@
         }
             break;
     }
-    
-        
-//    }
-//    else
-//    {
-//        return [NSString contentSizeWithTitle:model.reasonStr withFontOfSize:FontLevel2 withWidth:SCREEN_WIDTH-70].height-20+50;
-//    }
     
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

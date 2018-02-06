@@ -156,7 +156,6 @@
                  [itemObject enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
                   {
                       NSInteger inddexTage = [self.dataArray count];
-                      //NSDictionary *item = [obj objectItemKey:@"propValue"];
                       XHDynamicsFrame *frame = [[XHDynamicsFrame alloc]init];
                       XHDynamicsModel *model = [[XHDynamicsModel alloc]init];
                       [model setTage:inddexTage];

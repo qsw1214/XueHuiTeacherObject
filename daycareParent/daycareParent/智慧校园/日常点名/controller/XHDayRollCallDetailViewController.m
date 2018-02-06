@@ -11,6 +11,7 @@
 #import "XHNewTableViewCell.h"
 #import "XHHistoryHeadTableViewCell.h"
 #import "XHHistoryDetailTableViewCell.h"
+#import "XHDynamicsPreviewControl.h"
 #define TITLE  @[@"请假",@"开始时间",@"结束时间",@"理由"]
 @interface XHDayRollCallDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -71,6 +72,7 @@
         cell.titleLabel.text=TITLE[indexPath.row];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell setItemObject:self.model];
+        [cell.imageV addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
     else
@@ -120,7 +122,17 @@
     }
    
 }
-
+#pragma mark  显示预览图片
+-(void)btnClick
+{
+    XHDayRollCallModel *model=self.dataArray.firstObject;
+    if ([model.picArry count])
+    {
+        XHDynamicsPreviewControl *dynamicsPreview = [[XHDynamicsPreviewControl alloc]init];
+        [dynamicsPreview show];
+        [dynamicsPreview setItemArray:model.picArry];
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

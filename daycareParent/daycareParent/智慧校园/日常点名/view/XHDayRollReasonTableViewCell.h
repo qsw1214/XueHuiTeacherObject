@@ -19,7 +19,7 @@ typedef NS_ENUM(NSInteger ,XHReasonModelType)
 @interface XHDayRollReasonTableViewCell : UITableViewCell
 @property(nonatomic,strong)XHBaseLabel *titleLabel;
 @property(nonatomic,strong)XHBackLabel *reasonLabel;
-@property(nonatomic,strong)UIImageView *imageV;
+@property(nonatomic,strong)BaseButtonControl *imageV;
 @property(nonatomic,assign)XHReasonModelType modelType;
 -(void)setItemObject:(id)object;
 @end

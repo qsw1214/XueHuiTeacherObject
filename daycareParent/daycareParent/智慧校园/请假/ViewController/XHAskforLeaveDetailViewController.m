@@ -18,6 +18,7 @@
 #import "XHDayRollReasonTableViewCell.h"
 #import "XHApproveModel.h"
 #import "XHApproveDetailModel.h"
+#import "XHDynamicsPreviewControl.h"
 #define TITLE  @[@"李某某的请假",@"申请时长",@"开始时间",@"结束时间",@"理由",@"审批人"]
 
 @interface XHAskforLeaveDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -182,6 +183,7 @@
             cell.titleLabel.text=TITLE[indexPath.row];
             cell.modelType=XHAskforLeaveDetailType;
             [cell setItemObject:model];
+             [cell.imageV addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
             return cell;
         }
         if (indexPath.row==5) {
@@ -293,6 +295,17 @@
         }
     }
     
+}
+#pragma mark  显示预览图片
+-(void)btnClick
+{
+    XHApproveDetailModel *model=self.dataArray.firstObject;
+    if ([model.picArry count])
+    {
+        XHDynamicsPreviewControl *dynamicsPreview = [[XHDynamicsPreviewControl alloc]init];
+        [dynamicsPreview show];
+        [dynamicsPreview setItemArray:model.picArry];
+    }
 }
 -(void)selectBtnClick:(XHBaseBtn *)btn
 

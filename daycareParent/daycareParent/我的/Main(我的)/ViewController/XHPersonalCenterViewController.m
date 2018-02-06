@@ -36,11 +36,11 @@
     NSArray *contentArry;
     UIButton *_h_btn;
     UILabel *_nameLabel;
-//    UILabel* _conditionLabel;
     UILabel *_sigerLabel;
     float fileSize;
 }
 @property(nonatomic,strong)UIView *h_view;
+
 @end
 
 @implementation XHPersonalCenterViewController
@@ -54,7 +54,6 @@
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.sectionHeaderHeight=0;
-    //_tableView.bounces=NO;
     [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     _tableView.showsVerticalScrollIndicator=NO;
      [_tableView registerClass:[XHChildTableViewCell class] forCellReuseIdentifier:@"childcell"];
@@ -64,7 +63,6 @@
     _tableView.tableHeaderView=self.h_view;
     [_tableView showRefresHeaderWithTarget:self withSelector:@selector(refreshHead)];
     [_tableView beginRefreshing];
-     //[self.view addSubview:self.h_view];
     //去掉留白方法
     if (@available(iOS 11.0, *)) {
         _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -242,109 +240,7 @@
     }
     [_tableView refreshReload];
 }
-//-(NSMutableAttributedString *)chageTextColor:(NSString *)text fontColor:(UIColor *)fontColor
-//{
-//    NSString *labelStr = text; //初始化string为传入label.text的值
-//    NSCharacterSet *nonDigits = [[NSCharacterSet decimalDigitCharacterSet]invertedSet];//创建一个字符串过滤参数,decimalDigitCharacterSet为过滤小数,过滤某个关键词,只需改变 decimalDigitCharacterSet类型  在将此方法增加一个 NSString参数即可
-//    NSInteger remainSeconde = [[labelStr stringByTrimmingCharactersInSet:nonDigits]intValue];//获取过滤出来的数值
-//    NSString *stringRange = [NSString stringWithFormat:@"%ld",(long)remainSeconde];//将过滤出来的Integer的值转换成String
-//    NSRange range = [labelStr rangeOfString:stringRange];//获取过滤出来的数值的位置
-//    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:text];//创建一个带属性的string
-//    [attrStr addAttribute:NSForegroundColorAttributeName value:fontColor range:range];//给带属性的string添加属性,attrubute:添加的属性类型（颜色\文字大小\字体等等）,value:改变成的属性参数,range:更改的位置
-//    [attrStr addAttribute:NSForegroundColorAttributeName value:fontColor range:NSMakeRange(0,5)];
-//    return attrStr;
-//}
-//-(XHNetWorkConfig *)getVIPNet
-//{
-//
-//    if (_getVIPNet==nil) {
-//        _getVIPNet=[[XHNetWorkConfig alloc] init];
-//    }
-//    [_getVIPNet setObject:[XHUserInfo sharedUserInfo].ID forKey:@"userId"];
-//    [_getVIPNet postWithUrl:@"zzjt-app-api_vipInfo004" sucess:^(id object, BOOL verifyObject) {
-//        if (verifyObject) {
-//            id  dic=[object objectItemKey:@"object"];
-//            if (![dic isEqual:@""]) {
-//                XHVIPModel *model=[[XHVIPModel alloc] initWithDic:[dic objectItemKey:@"propValue"]];
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    if ([model.expireType intValue]==0) {
-//                        _conditionLabel.attributedText = [self chageTextColor:@"开通VIP" fontColor:KAITONG_VIPCOLOR];
-//                        _vipbImageView.image=[UIImage imageNamed:@"ico_novip"];
-//                    }
-//                    if ([model.expireType intValue]==2) {
-//                        _conditionLabel.attributedText = [self chageTextColor:@"续费VIP会员已过期" fontColor:KAITONG_VIPCOLOR];
-//                        _vipbImageView.image=[UIImage imageNamed:@"ico_novip"];
-//                    }
-//                    if ([model.expireType intValue]==1) {
-//                        if ([model.level intValue]==1) {
-//                            _conditionLabel.attributedText = [self chageTextColor:[NSString stringWithFormat:@"白金VIP剩余%@天",model.day] fontColor:BAIJIN_VIPCOLOR];
-//                            _vipbImageView.image=[UIImage imageNamed:@"ico_platinumvip"];
-//                        }
-//                        else
-//                        {
-//                            _conditionLabel.attributedText = [self chageTextColor:[NSString stringWithFormat:@"黄金VIP剩余%@天",model.day] fontColor:HUANGJIN_VIPCOLOR];
-//                            _vipbImageView.image=[UIImage imageNamed:@"ico_vip"];
-//                        }
-//                    }
-//                });
-//            }
-//
-//        }
-//    } error:^(NSError *error) {
-//
-//    }];
-//    return _getVIPNet;
-//}
-//-(XHNetWorkConfig *)getChildListNet
-//{
-//    if (_getChildListNet==nil) {
-//        _getChildListNet=[[XHNetWorkConfig alloc] init];
-//    }
-//    [_getChildListNet setObject:[XHUserInfo sharedUserInfo].guardianModel.guardianId forKey:@"guardianId"];
-//    [_getChildListNet postWithUrl:@"zzjt-app-api_smartCampus011" sucess:^(id object, BOOL verifyObject) {
-//        if (verifyObject) {
-//            [_ChildArry removeAllObjects];
-//            for (NSDictionary *dic in [object objectItemKey:@"object"]) {
-//                XHChildListModel *model=[[XHChildListModel alloc] initWithDic:dic];
-//                [_ChildArry addObject:model];
-//            }
-//            [[XHUserInfo sharedUserInfo].childListArry setArray:_ChildArry];
-//            [_ChildArry addObject:@""];
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [_tableView refreshReload];
-//            });
-//
-//        }
-//
-//    } error:^(NSError *error) {
-//        [_tableView refreshReload];
-//    }];
-//    return _getChildListNet;
-//}
-//
-//-(void)refreshUserInfo
-//{
-//    if (![[XHUserInfo sharedUserInfo].guardianModel.familyId isEqualToString:@""]) {
-//
-//        return ;
-//    }
-//    XHLoginModel *model=[NSUserDefaults getLoginModel];
-//    XHNetWorkConfig *net=[XHNetWorkConfig new];
-//    [net setObject:model.loginName forKey:@"loginName"];
-//    [net setObject:model.pwd forKey:@"pwd"];
-//    [net setObject:@"3" forKey:@"type"];
-//    [XHShowHUD showTextHud];
-//    [net postWithUrl:@"zzjt-app-api_login" sucess:^(id object, BOOL verifyObject) {
-//        if (verifyObject)
-//        {
-//            XHGuardianInfo *guardianModel=[[XHGuardianInfo alloc] initWithDic:[[[object objectItemKey:@"object"] objectItemKey:@"propValue"] objectItemKey:@"guardian"]];
-//            [XHUserInfo sharedUserInfo].guardianModel=guardianModel;
-//        }
-//
-//    } error:^(NSError *error) {
-//
-//    }];
-//}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

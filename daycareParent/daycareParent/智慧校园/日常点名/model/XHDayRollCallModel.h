@@ -27,5 +27,6 @@ typedef NS_ENUM(NSInteger,XHDayRollCallModelType)
 @property(nonatomic,copy)NSString *endTime;
 @property(nonatomic,assign)BOOL IfSelect;
 @property(nonatomic,assign)XHDayRollCallModelType modelType;
+@property(nonatomic ,strong)NSMutableArray*picArry;//!<图片数组
 -(id)initWithDic:(NSDictionary *)dic;
 @end
