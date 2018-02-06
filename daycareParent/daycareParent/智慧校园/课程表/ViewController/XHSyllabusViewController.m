@@ -8,7 +8,7 @@
 
 #import "XHSyllabusViewController.h"
 #import "XHSyllabusContentView.h"
-#import "XHChildListModel.h"
+#import "XHClassListModel.h"
 @interface XHSyllabusViewController ()<XHCustomViewDelegate>
 
 @property (nonatomic,strong) XHSyllabusContentView *contentView; //!< 内容视图
@@ -28,23 +28,15 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    if ([XHUserInfo sharedUserInfo].childListArry.count>1)
-    {
-        XHChildListModel *childModel=[XHUserInfo sharedUserInfo].childListArry[0];
-        [self setItemContentType:NavigationIconAndTitle withItemType:NavigationItemRightype withIconName:@"ico-dorpdown" withTitle:[childModel studentName]];
-        [self.contentView getModel:childModel];
-    }
-    else if ([XHUserInfo sharedUserInfo].childListArry.count==1)
-    {
-        XHChildListModel *childModel=[XHUserInfo sharedUserInfo].childListArry[0];
-        [self.contentView getModel:childModel];
-    }
-    else
-    {
+    
+    [[XHUserInfo sharedUserInfo] getClassList:^(BOOL isOK, NSMutableArray *classListArry) {
+        if (isOK)
+        {
+            XHClassListModel *model=classListArry.firstObject;
+            [self.contentView getClassListModel:model];
+        }
         [self.contentView.tableView beginRefreshing];
-    }
-    
-    
+    }];
 }
 
 -(void)addSubViews:(BOOL)subview

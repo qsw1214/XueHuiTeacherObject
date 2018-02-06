@@ -73,7 +73,7 @@
     {
         case XHAchievementTitleType:
         {
-            [self setBackgroundColor:RGB(198.0, 253, 242)];
+            [self setBackgroundColor:RGB(255, 239, 213)];
         }
             break;
         case XHAchievementContentType:

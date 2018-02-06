@@ -27,19 +27,11 @@
     [self.view addSubview:self.contentView];
     [self.contentView resetFrame:CGRectMake(0, self.navigationView.bottom, SCREEN_WIDTH, SCREEN_HEIGHT-self.navigationView.height)];
     [self.contentView setItemArray:self.dataArray];
-    [self setChildListArry:[XHUserInfo sharedUserInfo].childListArry];
+   
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    if ([XHUserInfo sharedUserInfo].childListArry.count) {
-         XHChildListModel *childModel=[XHUserInfo sharedUserInfo].childListArry[0];
-        [self.contentView getModel:childModel];
-    }
-    else
-    {
-        [self.contentView.tableView beginRefreshing];
-    }
-    
+    [self.contentView.tableView beginRefreshing];
 }
 - (void)didReceiveMemoryWarning
 {

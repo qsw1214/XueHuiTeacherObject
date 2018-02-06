@@ -179,13 +179,13 @@ static XHUserInfo *userInfo = nil;
         XHNetWorkConfig *netWorkConfig = [[XHNetWorkConfig alloc]init];
         [netWorkConfig setObject:userInfo.schoolId forKey:@"schoolId"];
         [netWorkConfig setObject:userInfo.sessionId forKey:@"sessionId"];
-        [netWorkConfig postWithUrl:@"pmschool-teacher-api_/teacher/contract/listTeacher" sucess:^(id object, BOOL verifyObject)
+        [netWorkConfig postWithUrl:@"zzjt-app-api_notice001" sucess:^(id object, BOOL verifyObject)
          {
              if (verifyObject)
              {
                  [userInfo setIsTeachersAddressBook:YES];
-                 NSArray *itemArray = [object objectItemKey:@"object"];
-                 //NSArray *itemArray = [objectDictionary objectItemKey:@"list"];
+                 NSDictionary *objectDictionary = [object objectItemKey:@"object"];
+                 NSArray *itemArray = [objectDictionary objectItemKey:@"list"];
                  if ([NSObject isArray:itemArray])
                  {
                      [self.teachersAddressBookArray setArray:itemArray];

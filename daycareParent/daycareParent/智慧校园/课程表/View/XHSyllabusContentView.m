@@ -59,7 +59,10 @@
     [self getSyllabusWithMode:self.childModel];
 }
 
-
+-(void)getClassTitle:(XHClassListModel *)classListModel
+{
+    
+}
 
 
 

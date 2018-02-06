@@ -38,7 +38,7 @@
 }
 -(void)refreshHead
 {
-    [self getAchievementWithModel:self.childModel];
+    [self refreshModel];
 }
 
 -(void)resetFrame:(CGRect)frame
@@ -51,12 +51,33 @@
 {
     self.dataArray=array;
 }
--(void)getModel:(XHChildListModel *)model
-{
-    self.childModel=model;
-    [self getAchievementWithModel:model];
-}
 
+-(void)refreshModel
+{
+    [self.dataArray removeAllObjects];
+    NSArray *titleArr=@[@"科目",@"语文",@"数学",@"英语",@"历史",@"政治",@"地理",@"思修"];
+    for (int i=0; i<titleArr.count; i++) {
+        XHAchievementFrame *frame = [[XHAchievementFrame alloc]init];
+        XHAchievementModel *model = [[XHAchievementModel alloc]init];
+        [model setSubject:titleArr[i]];
+        if (i == 0)
+        {
+            [model setBatch:@"考试类型"];
+            [model setScore:@"成绩"];
+            [model setContentType:XHAchievementTitleType];
+        }
+        else
+        {
+            [model setBatch:@"期中考试"];
+            [model setScore:@"78"];
+            [model setContentType:XHAchievementContentType];
+        }
+        
+        [frame setModel:model];
+        [self.dataArray addObject:frame];
+    }
+    [self.tableView refreshReloadData];
+}
 
 -(void)getAchievementWithModel:(XHChildListModel *)model
 {
