@@ -18,7 +18,7 @@
 -(void)setSubject:(NSString*)subject;
 -(void)setBatch:(NSString*)batch;
 -(void)setScore:(NSString*)score;
-
+-(void)setEnd:(NSString*)end;
 
 
 @end

@@ -38,7 +38,7 @@
 }
 -(void)refreshHead
 {
-    [self refreshModel];
+    [self refreshModel:self.classListModel withIndex:0];
 }
 
 -(void)resetFrame:(CGRect)frame
@@ -51,34 +51,172 @@
 {
     self.dataArray=array;
 }
-
--(void)refreshModel
+-(void)getModel:(XHClassListModel *)model withIndex:(NSInteger)index
 {
-    [self.dataArray removeAllObjects];
-    NSArray *titleArr=@[@"科目",@"语文",@"数学",@"英语",@"历史",@"政治",@"地理",@"思修"];
-    for (int i=0; i<titleArr.count; i++) {
-        XHAchievementFrame *frame = [[XHAchievementFrame alloc]init];
-        XHAchievementModel *model = [[XHAchievementModel alloc]init];
-        [model setSubject:titleArr[i]];
-        if (i == 0)
+    self.classListModel=model;
+    
+    [self refreshModel:self.classListModel withIndex:index];
+}
+-(void)refreshModel:(XHClassListModel *)model withIndex:(NSInteger)index
+{
+    if (model)
+    {
+        if (index%2==0)
         {
-            [model setBatch:@"考试类型"];
-            [model setScore:@"成绩"];
-            [model setContentType:XHAchievementTitleType];
+            [self.dataArray removeAllObjects];
+            NSArray *titleArr=@[@"科目",@"语文",@"数学",@"英语",@"历史",@"政治",@"地理",@"思修"];
+            for (int i=0; i<titleArr.count; i++) {
+                XHAchievementFrame *frame = [[XHAchievementFrame alloc]init];
+                XHAchievementModel *model = [[XHAchievementModel alloc]init];
+                [model setSubject:titleArr[i]];
+                if (i == 0)
+                {
+                    [model setBatch:@"开学成绩"];
+                    [model setScore:@"期中成绩"];
+                    [model setEnd:@"期末成绩"];
+                    [model setContentType:XHAchievementTitleType];
+                }
+                else
+                {
+                    if (i==2)
+                    {
+                     [model setBatch:@"92"];
+                      [model setScore:@"90"];
+                      [model setEnd:@"93"];
+                    }
+                   else if (i==3)
+                    {
+                        [model setBatch:@"90"];
+                        [model setScore:@"93"];
+                        [model setEnd:@"96"];
+                    }
+                  else  if (i==5)
+                    {
+                        [model setBatch:@"97"];
+                        [model setScore:@"93"];
+                        [model setEnd:@"90"];
+                    }
+                   else if (i==7)
+                    {
+                        [model setBatch:@"90"];
+                        [model setScore:@"98"];
+                        [model setEnd:@"99"];
+                    }
+                    else
+                    {
+                        [model setBatch:@"91"];
+                         [model setScore:@"95"];
+                        [model setEnd:@"94"];
+                    }
+                    [model setContentType:XHAchievementContentType];
+                }
+                
+                [frame setModel:model];
+                [self.dataArray addObject:frame];}
+        }
+        else if (index%3==0)
+        {
+            [self.dataArray removeAllObjects];
+            NSArray *titleArr=@[@"科目",@"语文",@"数学",@"英语",@"历史",@"政治",@"地理",@"思修"];
+            for (int i=0; i<titleArr.count; i++) {
+                XHAchievementFrame *frame = [[XHAchievementFrame alloc]init];
+                XHAchievementModel *model = [[XHAchievementModel alloc]init];
+                [model setSubject:titleArr[i]];
+                if (i == 0)
+                {
+                    [model setBatch:@"开学成绩"];
+                    [model setScore:@"期中成绩"];
+                    [model setEnd:@"期末成绩"];
+                    [model setContentType:XHAchievementTitleType];
+                }
+                else
+                {
+                    if (i==2) {
+                        [model setBatch:@"99"];
+                        [model setScore:@"92"];
+                        [model setEnd:@"96"];
+                    }
+                   else if (i==3) {
+                       [model setBatch:@"90"];
+                        [model setScore:@"94"];
+                       [model setEnd:@"92"];
+                    }
+                   else if (i==5) {
+                       [model setBatch:@"96"];
+                        [model setScore:@"97"];
+                       [model setEnd:@"93"];
+                    }
+                   else if (i==7) {
+                       [model setBatch:@"90"];
+                        [model setScore:@"90"];
+                       [model setEnd:@"96"];
+                    }
+                    else
+                    {
+                        [model setBatch:@"92"];
+                        [model setScore:@"93"];
+                        [model setEnd:@"99"];
+                    }
+                    [model setContentType:XHAchievementContentType];
+                }
+                
+                [frame setModel:model];
+                [self.dataArray addObject:frame];}
         }
         else
         {
-            [model setBatch:@"期中考试"];
-            [model setScore:@"78"];
-            [model setContentType:XHAchievementContentType];
+            [self.dataArray removeAllObjects];
+            NSArray *titleArr=@[@"科目",@"语文",@"数学",@"英语",@"历史",@"政治",@"地理",@"思修"];
+            for (int i=0; i<titleArr.count; i++) {
+                XHAchievementFrame *frame = [[XHAchievementFrame alloc]init];
+                XHAchievementModel *model = [[XHAchievementModel alloc]init];
+                [model setSubject:titleArr[i]];
+                if (i == 0)
+                {
+                    [model setBatch:@"开学成绩"];
+                    [model setScore:@"期中成绩"];
+                    [model setEnd:@"期末成绩"];
+                    [model setContentType:XHAchievementTitleType];
+                }
+                
+                else
+                {
+                    if (i==2) {
+                        [model setBatch:@"97"];
+                        [model setScore:@"91"];
+                        [model setEnd:@"93"];
+                    }
+                   else if (i==3) {
+                       [model setBatch:@"98"];
+                        [model setScore:@"94"];
+                       [model setEnd:@"98"];
+                    }
+                   else if (i==5) {
+                       [model setBatch:@"92"];
+                        [model setScore:@"91"];
+                       [model setEnd:@"96"];
+                    }
+                   else if (i==7) {
+                       [model setBatch:@"99"];
+                        [model setScore:@"90"];
+                       [model setEnd:@"98"];
+                    }
+                    else
+                    {
+                        [model setBatch:@"97"];
+                        [model setScore:@"95"];
+                        [model setEnd:@"96"];
+                    }
+                    [model setContentType:XHAchievementContentType];
+                }
+                
+                [frame setModel:model];
+                [self.dataArray addObject:frame];}
         }
-        
-        [frame setModel:model];
-        [self.dataArray addObject:frame];
     }
     [self.tableView refreshReloadData];
 }
-
+/*
 -(void)getAchievementWithModel:(XHChildListModel *)model
 {
     if (model)
@@ -123,7 +261,7 @@
     }
   
 }
-
+*/
 
 #pragma mark - Deletage Method
 

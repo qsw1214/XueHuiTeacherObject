@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "XHChildListModel.h"
+#import "XHClassListModel.h"
 
 @protocol XHCustomViewDelegate <NSObject>
 
-- (void)getChildModel:(XHChildListModel *)childModel;
+- (void)getClassListModel:(XHClassListModel *)classListModel withIndex:(NSInteger)index;
 
 @end
 
@@ -19,6 +19,6 @@
 @property(nonatomic,strong)NSMutableArray *dataArr;
 @property(nonatomic,assign)id <XHCustomViewDelegate> delegate;
 @property(nonatomic,assign)BOOL isExist;
-
+-(CGFloat)getWidth;
 //-(id)initWithArry:(NSMutableArray *)arry;
 @end

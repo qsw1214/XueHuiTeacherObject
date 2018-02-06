@@ -31,7 +31,15 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self.contentView.tableView beginRefreshing];
+    [[XHUserInfo sharedUserInfo] getClassList:^(BOOL isOK, NSMutableArray *classListArry) {
+        if (isOK)
+        {
+            [self setClassListArry:classListArry];
+            XHClassListModel *model=classListArry.firstObject;
+            [self.contentView getModel:model withIndex:0];
+        }
+        [self.contentView.tableView beginRefreshing];
+    }];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -47,23 +55,24 @@
     }
     return _contentView;
 }
--(void)getChildModel:(XHChildListModel *)childModel {
+-(void)getClassListModel:(XHClassListModel *)classListModel withIndex:(NSInteger)index
+{
     
-     [self setRightItemTitle:[childModel studentName]];
-    [self.contentView getModel:childModel];
+     [self setRightItemTitle:[classListModel clazz]];
+    [self.contentView getModel:classListModel withIndex:index];
 }
 #pragma mark 右侧按钮相应的方法
 -(void)rightItemAction:(BaseNavigationControlItem*)sender
 {
-    if (self.childListView.isExist==NO) {
-        self.childListView.delegate=self;
-        [self.view addSubview:self.childListView];
-        self.childListView.isExist=YES;
+    if (self.classListView.isExist==NO) {
+        self.classListView.delegate=self;
+        [self.view addSubview:self.classListView];
+        self.classListView.isExist=YES;
     }
     else
     {
-        [self.childListView removeFromSuperview];
-        self.childListView.isExist=NO;
+        [self.classListView removeFromSuperview];
+        self.classListView.isExist=NO;
     }
 }
 

@@ -8,11 +8,8 @@
 
 #import "BaseControl.h"
 #import "XHXHAchievementCell.h"
-#import "XHChildListModel.h"
 @interface XHAchievementContentView : BaseControl
 
-@property(nonatomic,strong)XHChildListModel *childModel;
--(void)getModel:(XHChildListModel *)model;
-
-
+@property(nonatomic,strong)XHClassListModel *classListModel;
+-(void)getModel:(XHClassListModel *)model withIndex:(NSInteger)index;
 @end

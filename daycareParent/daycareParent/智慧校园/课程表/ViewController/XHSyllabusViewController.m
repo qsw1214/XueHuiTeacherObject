@@ -8,7 +8,7 @@
 
 #import "XHSyllabusViewController.h"
 #import "XHSyllabusContentView.h"
-#import "XHClassListModel.h"
+#import "XHChildListModel.h"
 @interface XHSyllabusViewController ()<XHCustomViewDelegate>
 
 @property (nonatomic,strong) XHSyllabusContentView *contentView; //!< 内容视图
@@ -28,12 +28,12 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    
     [[XHUserInfo sharedUserInfo] getClassList:^(BOOL isOK, NSMutableArray *classListArry) {
         if (isOK)
         {
+            [self setClassListArry:classListArry];
             XHClassListModel *model=classListArry.firstObject;
-            [self.contentView getClassListModel:model];
+            [self.contentView getModel:model];
         }
         [self.contentView.tableView beginRefreshing];
     }];
@@ -45,7 +45,6 @@
     {
         [self.view addSubview:self.contentView];
         [self.contentView resetFrame:CGRectMake(0, self.navigationView.bottom, SCREEN_WIDTH, SCREEN_HEIGHT-self.navigationView.height)];
-        [self setChildListArry:[XHUserInfo sharedUserInfo].childListArry];
     }
 }
 
@@ -60,25 +59,26 @@
     return _contentView;
 }
 
--(void)getChildModel:(XHChildListModel *)childModel
+-(void)getClassListModel:(XHClassListModel *)classListModel withIndex:(NSInteger)index
 {
-     [self setRightItemTitle:[childModel studentName]];
+     [self setRightItemTitle:classListModel.clazz];
     
-    [self.contentView getModel:childModel];
+    [self.contentView getModel:classListModel];
     
 }
 #pragma mark 右侧按钮相应的方法
 -(void)rightItemAction:(BaseNavigationControlItem*)sender
 {
-    if (self.childListView.isExist==NO) {
-         self.childListView.delegate=self;
-        [self.view addSubview:self.childListView];
-        self.childListView.isExist=YES;
+    
+    if (self.classListView.isExist==NO) {
+         self.classListView.delegate=self;
+        [self.view addSubview:self.classListView];
+        self.classListView.isExist=YES;
     }
     else
     {
-        [self.childListView removeFromSuperview];
-        self.childListView.isExist=NO;
+        [self.classListView removeFromSuperview];
+        self.classListView.isExist=NO;
     }
 }
 

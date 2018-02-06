@@ -225,42 +225,42 @@
  根据孩子列表数据数组，是否显示向下箭头
  @param array 孩子列表数组
  */
--(void)setChildListArry:(NSArray*)array
+-(void)setClassListArry:(NSArray*)array
 {
     if ([array count] > 1)
     {
-        XHChildListModel *model = [array firstObject];
-        [self setItemContentType:NavigationIconAndTitle withItemType:NavigationItemRightype withIconName:@"ico-dorpdown" withTitle:[model studentName]];
+        XHClassListModel *model = [array firstObject];
+        [self setItemContentType:NavigationIconAndTitle withItemType:NavigationItemRightype withIconName:@"ico-dorpdown" withTitle:model.clazz];
     }
     
 }
 
 /**
- 获取孩子列表弹出视图
+ 获取班级列表弹出视图
 
- @return 获取孩子列表弹出视图
+ @return 获取班级列表弹出视图
  */
--(XHCustomView *)childListView
+-(XHCustomView *)classListView
 {
-    if (_childListView==nil) {
-        _childListView=[[XHCustomView alloc] init];
-        NSArray *arry=[XHUserInfo sharedUserInfo].childListArry;
+    if (_classListView==nil) {
+        _classListView=[[XHCustomView alloc] init];
+        NSArray *arry=[XHUserInfo sharedUserInfo].classListArry;
         if (arry.count<5) {
-            _childListView.frame=CGRectMake(SCREEN_WIDTH-90, 64, 80, 30*arry.count);
+            _classListView.frame=CGRectMake(SCREEN_WIDTH-[_classListView getWidth]-10, 64, [_classListView getWidth], 30*arry.count);
         }
         else
         {
-            _childListView.frame=CGRectMake(SCREEN_WIDTH-90, 64, 80, 30*5);
+            _classListView.frame=CGRectMake(SCREEN_WIDTH-[_classListView getWidth]-10, 64, [_classListView getWidth], 30*5);
         }
     }
-    return _childListView;
+    return _classListView;
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:YES];
-    if (_childListView.isExist==YES) {
-        _childListView.isExist=NO;
-        [_childListView removeFromSuperview];
+    if (_classListView.isExist==YES) {
+        _classListView.isExist=NO;
+        [_classListView removeFromSuperview];
     }
 }
 #pragma mark-------------显示日历视图--------------

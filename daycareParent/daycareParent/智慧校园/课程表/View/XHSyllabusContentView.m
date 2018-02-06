@@ -56,15 +56,8 @@
 }
 -(void)refreshHead
 {
-    [self getSyllabusWithMode:self.childModel];
+    [self getSyllabusWithMode:self.classListModel];
 }
-
--(void)getClassTitle:(XHClassListModel *)classListModel
-{
-    
-}
-
-
 
 -(void)resetFrame:(CGRect)frame
 {
@@ -95,12 +88,12 @@
 }
 
 
--(void)getModel:(XHChildListModel *)model
+-(void)getModel:(XHClassListModel *)model
 {
     _selectIndex=[self getWeekDay];
     [self.menuControl setItemArray:self.menuArray];
     [self.menuControl didSelectAtIndexItem:[self getWeekDay]];
-    self.childModel=model;
+    self.classListModel=model;
     [self getSyllabusWithMode:model];
 }
 
@@ -162,12 +155,13 @@
 
 
 #pragma mark 获取成绩
--(void)getSyllabusWithMode:(XHChildListModel*)model
+-(void)getSyllabusWithMode:(XHClassListModel*)model
 {
     if (model)
     {
-        [self.netWorkConfig setObject:self.childModel.clazzId forKey:@"classId"];
-        [self.netWorkConfig postWithUrl:@"zzjt-app-api_smartCampus006" sucess:^(id object, BOOL verifyObject)
+        [self.netWorkConfig setObject:self.classListModel.clazzId forKey:@"clazzId"];
+         [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
+        [self.netWorkConfig postWithUrl:@"pmschool-teacher-api_/teacher/schedule/list" sucess:^(id object, BOOL verifyObject)
         {
             if (verifyObject)
             {
