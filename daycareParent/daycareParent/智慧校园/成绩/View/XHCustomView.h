@@ -19,5 +19,6 @@
 @property(nonatomic,strong)NSMutableArray *dataArr;
 @property(nonatomic,assign)id <XHCustomViewDelegate> delegate;
 @property(nonatomic,assign)BOOL isExist;
+-(CGFloat)getWidth;
 //-(id)initWithArry:(NSMutableArray *)arry;
 @end

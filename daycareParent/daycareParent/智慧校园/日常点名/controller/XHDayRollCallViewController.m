@@ -78,7 +78,6 @@
             [UIAlertController alertClassListWithTitle:@"提示" message:@"选择班级列表" titlesArry:[XHUserInfo sharedUserInfo].classListArry alertControllerStyle:UIAlertControllerStyleActionSheet hiddenCancelButton:NO cancleStyle:UIAlertActionStyleCancel withController:self indexBlock:^(NSInteger index, id object) {
                 _number=index;
                 [self.collectionView beginRefreshing];
-                XHClassListModel *model=object;
             }];
         }
         else
