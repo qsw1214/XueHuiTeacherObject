@@ -141,7 +141,6 @@
          if (verifyObject)
          {
              NSArray *itemObject = [object objectItemKey:@"object"];
-             //NSArray *pageResultArray = [itemObject objectItemKey:@"pageResult"];
              if (itemObject)
              {
                  switch (type)

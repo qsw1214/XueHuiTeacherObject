@@ -15,6 +15,7 @@
 @interface XHAskforLeaveAddPhotoControl : BaseControl
 @property (nonatomic,assign) BOOL isAddImage;
 @property (nonatomic,strong) UIImage *image;
+@property (nonatomic,strong) UIImage *recipeImage;
 
 
 

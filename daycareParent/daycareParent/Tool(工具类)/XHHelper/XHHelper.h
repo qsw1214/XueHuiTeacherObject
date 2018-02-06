@@ -20,6 +20,15 @@
 + (instancetype)sharedHelper;
 
 
+#pragma mark 发布食谱
+/**
+ 发布食谱
+ 
+ @param booking 发布食谱
+ */
++(NSString*)BookingSituation:(NSString*)booking;
+
+
 #pragma mark 拨打电话
 /**
  拨打电话

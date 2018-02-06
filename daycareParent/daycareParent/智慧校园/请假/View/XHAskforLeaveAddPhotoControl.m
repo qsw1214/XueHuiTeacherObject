@@ -53,7 +53,21 @@
         [self setIsAddImage:NO];
         [self.imageView setImage:[UIImage imageNamed:@"addpic"]];
     }
-    
+}
+
+-(void)setRecipeImage:(UIImage *)recipeImage
+{
+    _recipeImage = recipeImage;
+    if (recipeImage)
+    {
+        [self setIsAddImage:YES];
+        [self.imageView setImage:recipeImage];
+    }
+    else
+    {
+        [self setIsAddImage:NO];
+        [self.imageView setImage:[UIImage imageNamed:@"img_recipecover"]];
+    }
 }
 
 

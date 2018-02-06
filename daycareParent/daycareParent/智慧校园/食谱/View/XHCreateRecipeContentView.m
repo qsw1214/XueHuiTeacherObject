@@ -7,13 +7,17 @@
 //
 
 #import "XHCreateRecipeContentView.h"
+#import "CameraManageViewController.h"
+#import "XHAskforLeaveAddPhotoControl.h"
 #import "BaseTextFieldControl.h"
+#import "XHDatePickerControl.h"
 
 
-@interface XHCreateRecipeContentView ()
+
+@interface XHCreateRecipeContentView () <XHDatePickerControlDeletage>
 
 @property (nonatomic,strong) BaseButtonControl *kindContent; //!< 类别
-@property (nonatomic,strong) BaseButtonControl *addPhotoContent; //!< 类别
+@property (nonatomic,strong) XHAskforLeaveAddPhotoControl *addPhotoContent; //!< 类别
 @property (nonatomic,strong) BaseTextView *inputContent; //!< 输入类型
 @property (nonatomic,strong) BaseButtonControl *dateContent; //!< 日期
 @property (nonatomic,strong) BaseButtonControl *submitContent; //!< 发布
@@ -53,7 +57,6 @@
     [self.kindContent resetLineViewFrame:CGRectMake(0, self.kindContent.height-0.5, self.kindContent.width, 0.5) withNumberType:0 withAllType:NO];
     //添加图片
     [self.addPhotoContent resetFrame:CGRectMake(10, self.kindContent.bottom+10.0,(frame.size.width-30.0)*(2.0/5.0) , 90)];
-    [self.addPhotoContent setImageEdgeFrame:CGRectMake(0, 0, self.addPhotoContent.width, self.addPhotoContent.height) withNumberType:0 withAllType:NO];
     //添加食谱描述
     [self.inputContent resetFrame:CGRectMake(self.addPhotoContent.right+10.0,self.addPhotoContent.top, (frame.size.width-30.0)*(3.0/5.0), self.addPhotoContent.height)];
     //添加日期
@@ -71,9 +74,154 @@
     
     //重新设置当前滚动视图的可滚动区域
     [self setContentSize:CGSizeMake(frame.size.width, self.submitContent.bottom+20.0)];
+    
 }
 
 
+
+-(void)contentAction:(BaseButtonControl*)sender
+{
+    switch (sender.tag)
+    {
+#pragma mark case 1 选择类型
+        case 1:
+        {
+    
+            NSArray *itemArray = @[@"早餐",@"上午加餐",@"午餐",@"下午加餐",@"晚餐"];
+            
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+            
+            for (NSString *title in itemArray)
+            {
+                [alert addAction:[UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+                    
+                    [self.kindContent setText:action.title withNumberType:1 withAllType:NO];
+                    
+                }]];
+            }
+            
+            
+            [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action){}]];
+            
+            
+            [[XHHelper sharedHelper].currentViewController presentViewController:alert animated:YES completion:^{}];
+            
+        }
+            break;
+#pragma mark case 2 选择图片
+        case 2:
+        {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"选择相机" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                CameraManageViewController *manager=[[CameraManageViewController alloc] initWithCameraManageWithType:SourceTypeCamera setDeletate:self];
+                [[XHHelper sharedHelper].currentViewController presentViewController:manager animated:YES completion:nil];
+                
+            }]];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"选择相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+            {
+                CameraManageViewController *manager=[[CameraManageViewController alloc] initWithCameraManageWithType:SourceTypeHeadPortraitSavedPhotosAlbum setDeletate:self];
+                [[XHHelper sharedHelper].currentViewController presentViewController:manager animated:YES completion:nil];
+            }]];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
+            {
+                
+            }]];
+            [[XHHelper sharedHelper].currentViewController presentViewController:alertController animated:YES completion:nil];
+        }
+            break;
+#pragma mark case 3 选择时间
+        case 3:
+        {
+            [[XHDatePickerControl sharedObject] showWithDeletage:self];
+        }
+            break;
+#pragma mark case 4 提交
+        case 4:
+        {
+            
+            NSString *kind = [self.kindContent labelTitlewithNumberType:1];
+            NSString *time = [self.dateContent labelTitlewithNumberType:1];
+            if ([kind isEqualToString:@"请选择"])
+            {
+                [XHShowHUD showTextHud:@"请选择类型"];
+            }
+            else if (!self.addPhotoContent.isAddImage)
+            {
+                [XHShowHUD showTextHud:@"请选择封面图片"];
+            }
+            else if ([self.inputContent.text isEqualToString:@""])
+            {
+                [XHShowHUD showTextHud:@"内容不能为空"];
+            }
+            else  if ([time isEqualToString:@"请选择"])
+            {
+                [XHShowHUD showTextHud:@"请选择时间"];
+            }
+            else
+            {
+                
+                NSString *fileName = [XHHelper createGuid];
+                [XHHelper uploadImage:self.addPhotoContent.recipeImage name:fileName uploadCallback:^(BOOL success, NSError *error)
+                 {
+                     
+                     if (success)
+                     {
+                         
+                     }
+                     
+                     
+                     
+                     
+                     
+                } withProgressCallback:^(float progress) {}];
+                
+                
+                XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
+                [config setObject:fileName forKey:@"picUrl"];
+                [config setObject:time forKey:@"publishTime"];
+                [config setObject:@"早餐" forKey:@"demo"];
+                [config setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"school_id"];
+                [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"publish_user_id"];
+                [config setObject:[XHHelper BookingSituation:kind] forKey:@"type"];
+                [config postWithUrl:@"zzjt-app-api_cookBook001" sucess:^(id object, BOOL verifyObject)
+                 {
+                     
+                     
+                     
+                 } error:^(NSError *error) {}];
+                
+                
+                
+                
+                
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        }
+            break;
+    }
+}
+
+
+
+#pragma mark - Deletage Method
+#pragma mark XHDatePickerControlDeletage
+-(void)datePickerClickObject:(NSString*)date
+{
+    [self.dateContent setText:date withNumberType:1 withAllType:NO];
+}
+
+-(void)imagePickerControllerdidFinishPickingMediaWithImage:(nonnull UIImage*)image
+{
+    [self.addPhotoContent setRecipeImage:image];
+}
 
 
 -(void)addSubViews:(BOOL)subview
@@ -105,18 +253,22 @@
         [_kindContent setImage:@"ico_arrow" withNumberType:0 withAllType:NO];
         [_kindContent setText:@"类别" withNumberType:0 withAllType:NO];
         [_kindContent setText:@"请选择" withNumberType:1 withAllType:NO];
+        [_kindContent addTarget:self action:@selector(contentAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_kindContent setTag:1];
+  
     }
     return _kindContent;
 }
 
--(BaseButtonControl *)addPhotoContent
+#pragma mark 添加图片
+-(XHAskforLeaveAddPhotoControl *)addPhotoContent
 {
-    if (!_addPhotoContent)
+    if (_addPhotoContent == nil)
     {
-        _addPhotoContent = [[BaseButtonControl alloc]init];
-        [_addPhotoContent setNumberImageView:1];
-        [_addPhotoContent setImage:@"img_recipecover" withNumberType:0 withAllType:NO];
-        [_addPhotoContent setIconImageViewBackGroundColor:RGB(238, 238, 238) withNumberType:0 withAllType:NO];
+        _addPhotoContent = [[XHAskforLeaveAddPhotoControl alloc]init];
+        [_addPhotoContent addTarget:self action:@selector(contentAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_addPhotoContent setTag:2];
+        [_addPhotoContent setRecipeImage:nil];
     }
     return _addPhotoContent;
 }
@@ -152,6 +304,8 @@
         [_dateContent setText:@"时间" withNumberType:0 withAllType:NO];
         [_dateContent setText:@"2018-01-19" withNumberType:1 withAllType:NO];
         [_dateContent setTextAlignment:NSTextAlignmentRight withNumberType:1 withAllType:NO];
+        [_dateContent addTarget:self action:@selector(contentAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_dateContent setTag:3];
     }
     return _dateContent;
 }
@@ -169,6 +323,8 @@
         [_submitContent setFont:FontLevel3 withNumberType:0 withAllType:NO];
         [_submitContent setTextColor:[UIColor whiteColor] withTpe:0 withAllType:NO];
         [_submitContent setLayerCornerRadius:5.0];
+        [_submitContent addTarget:self action:@selector(contentAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_submitContent setTag:4];
     }
     return _submitContent;
 }

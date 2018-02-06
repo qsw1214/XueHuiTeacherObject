@@ -36,6 +36,37 @@ static XHHelper *helper = nil;
     return helper;
 }
 
+#pragma mark 发布食谱
+/**
+ 发布食谱
+ 
+ @param booking 发布食谱
+ */
++(NSString*)BookingSituation:(NSString*)booking
+{
+    if ([booking isEqualToString:@"早餐"])
+    {
+        return @"1";
+    }
+    else if ([booking isEqualToString:@"上午加餐"])
+    {
+        return @"2";
+    }
+    else if ([booking isEqualToString:@"午餐"])
+    {
+        return @"3";
+    }
+    else if ([booking isEqualToString:@"下午加餐"])
+    {
+        return @"4";
+    }
+    else if ([booking isEqualToString:@"晚餐"])
+    {
+        return @"5";
+    }
+    return @"1";
+}
+
 
 
 #pragma mark 拨打电话
