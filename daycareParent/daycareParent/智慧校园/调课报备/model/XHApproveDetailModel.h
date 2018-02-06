@@ -31,5 +31,7 @@
 @property(nonatomic,copy)NSString *bizDays;//!< 请假天数
 @property(nonatomic,copy)NSString *content;//!< 请假内容
 @property(nonatomic,copy)NSString *picUrl;//!< 请假图片
+@property(nonatomic ,strong)NSMutableArray*picArry;//!<图片数组
+
 -(id)initWithDic:(NSDictionary *)dic;
 @end

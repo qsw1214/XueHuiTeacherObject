@@ -202,7 +202,7 @@
         //添加家长联系人
         [self.dataArray addObjectsFromArray:self.parentsArray];
 
-        [self.tableView refreshReload];
+        [self.tableView refreshReloadData];
         [self setUnify:0];
     }
 }

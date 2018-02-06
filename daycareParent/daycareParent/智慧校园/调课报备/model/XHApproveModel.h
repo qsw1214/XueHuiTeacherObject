@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "XHPreviewModel.h"
 
 typedef NS_ENUM(NSInteger,XHHistoryModelType)
 {
@@ -71,6 +72,8 @@ typedef NS_ENUM(NSInteger,XHApproveModelType)
 @property(nonatomic,assign)XHApproveModelType modelType;//!< 选择审核类型
 
 @property(nonatomic,assign)XHHistoryModelType historyModelType;//!< 课程报备记录或者请假列表记录
+
+@property (nonatomic,strong) NSMutableArray <XHPreviewModel*> *imageUrlArray; //!< 图片数组
 
 @property(nonatomic,copy)NSString *ID;
 @property(nonatomic,copy)NSString *beginTime;
