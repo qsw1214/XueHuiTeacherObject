@@ -40,12 +40,11 @@
      }];
     
     [self setWorkContent:[object objectItemKey:@"content"]];
-    [self setUserName:[object objectItemKey:@"studentName"]];
     [self setReleaseDate:[NSString dateStr:[object objectItemKey:@"createTime"]]];
-    [self setWorkContent:[object objectItemKey:@"content"]];
-    [self setUnreadType:[object objectItemKey:@"isRead"]];
+    [self setUnreadType:@"1"];  //!< 因为是本人发布的作业，所以都是已读状态
     [self setGradeName:[object objectItemKey:@"gradeName"]];
     [self setClazzName:[object objectItemKey:@"clazzName"]];
+    [self setUserName:[NSString stringWithFormat:@"%@%@",self.gradeName,self.clazzName]];
     [self setHomeWorkType:HomeWorkType];
     [self setItemArray:self.imageUrlArray];
 }

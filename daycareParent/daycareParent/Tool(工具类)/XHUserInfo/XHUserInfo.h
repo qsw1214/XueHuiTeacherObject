@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "XHGuardianInfo.h"
 #import "XHTeacherInfo.h"
+#import "XHClassListModel.h"
+#import "XHSubjectListModel.h"
 
 typedef void(^ClassListBlock)(BOOL isOK,NSMutableArray *classListArry);
 typedef void(^SubjectListBlock)(BOOL isOK,NSMutableArray *subjectListArry);

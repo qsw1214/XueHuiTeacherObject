@@ -7,16 +7,26 @@
 //
 
 #import "XHAssignmentHomeWorkContentView.h"
+#import "XHAssignmentHomeWorkCollectionView.h"
+#import "CameraManageViewController.h"
+#import "WPhotoViewController.h"
+#import "XHPreviewModel.h"
+
+
+
+
 
 @interface XHAssignmentHomeWorkContentView () <BaseTextViewDeletage>
 
 @property (nonatomic,strong) BaseButtonControl *classContent; //!< 班级
 @property (nonatomic,strong) BaseButtonControl *subjectContent; //!< 科目
 @property (nonatomic,strong) BaseButtonControl *addPhotoContent; //!< 类别
+@property (nonatomic,strong) XHAssignmentHomeWorkCollectionView *collectionView;
 @property (nonatomic,strong) BaseTextView *inputContent; //!< 输入类型
 @property (nonatomic,strong) BaseButtonControl *submitContent; //!< 发布
 @property (nonatomic,strong) UIView *lineVew; //!< 分割线视图
 @property (nonatomic,strong) UILabel *limitLabel; //!< 限制字数标签
+@property (nonatomic,strong) NSMutableArray *imageNameArray; //!< 图片名称数组
 
 
 
@@ -59,11 +69,17 @@
     //添加图片
     [self.addPhotoContent resetFrame:CGRectMake(10, self.lineVew.bottom+20.0, 90, 90)];
     [self.addPhotoContent setImageEdgeFrame:CGRectMake(0, 0, self.addPhotoContent.width, self.addPhotoContent.height) withNumberType:0 withAllType:NO];
+    //添加滚动视图
+    [self.collectionView resetFrame:CGRectMake(self.addPhotoContent.right+5.0, self.addPhotoContent.top-15.0, frame.size.width-(self.addPhotoContent.right+15.0), 120.0)];
     
     
     //发布
     [self.submitContent resetFrame:CGRectMake(10, self.addPhotoContent.bottom+60.0, (self.subjectContent.width-20.0), 50.0)];
     [self.submitContent setTitleEdgeFrame:CGRectMake(0, 0, self.submitContent.width, self.submitContent.height) withNumberType:0 withAllType:NO];
+    
+    
+    
+    
     
     
     //重新设置当前滚动视图的可滚动区域
@@ -80,10 +96,15 @@
         [self addSubview:self.classContent];
         [self addSubview:self.subjectContent];
         [self addSubview:self.addPhotoContent];
+        [self addSubview:self.collectionView];
         [self addSubview:self.inputContent];
         [self addSubview:self.limitLabel];
         [self addSubview:self.lineVew];
         [self addSubview:self.submitContent];
+        
+        
+        
+        
     }
 }
 
@@ -94,6 +115,168 @@
 -(void)controlAction:(BaseButtonControl*)sender
 {
     [self.inputContent resignFirstResponder];
+    
+    switch (sender.tag)
+    {
+#pragma mark case 1 选择班级
+        case 1:
+        {
+            
+            
+            
+            [[XHUserInfo sharedUserInfo] getClassList:^(BOOL isOK, NSMutableArray *classListArry) {
+                if (isOK)
+                {
+                    [UIAlertController alertClassListWithTitle:@"提示" message:@"选择班级列表" titlesArry:classListArry alertControllerStyle:UIAlertControllerStyleActionSheet hiddenCancelButton:NO cancleStyle:UIAlertActionStyleCancel withController:[
+                                                                                                                                                                                                                                        XHHelper sharedHelper].currentViewController indexBlock:^(NSInteger index, XHClassListModel *object)
+                    {
+                        
+                        [self.classContent setClassListModel:object];
+                        [self.classContent setText:object.gradeAndClassName withNumberType:1 withAllType:NO];
+                        
+                        
+                    }];
+                }
+                else
+                {
+                    [UIAlertController alertWithTitle:@"提示" message:@"暂无数据" titlesArry:@[@"确定"] alertControllerStyle:UIAlertControllerStyleAlert hiddenCancelButton:YES cancleStyle:UIAlertActionStyleCancel withController:[
+                                                                                                                                                                                                                             XHHelper sharedHelper].currentViewController indexBlock:^(NSInteger index, id object) {}];
+                }
+            }];
+        }
+            break;
+#pragma mark case 2 选择科目
+        case 2:
+        {
+            [[XHUserInfo sharedUserInfo] getSubjectList:^(BOOL isOK, NSMutableArray *subjectListArry) {
+                if (isOK) {
+                    [UIAlertController alertSubjectListWithTitle:@"提示" message:@"选择科目列表" titlesArry:subjectListArry alertControllerStyle:UIAlertControllerStyleActionSheet hiddenCancelButton:NO cancleStyle:UIAlertActionStyleCancel withController:[
+                                                                                                                                                                                                                                                                                   XHHelper sharedHelper].currentViewController indexBlock:^(NSInteger index, XHSubjectListModel *object)
+                    {
+                        [self.subjectContent setSubjectListModel:object];
+                        [self.subjectContent setText:object.subjectName withNumberType:1 withAllType:NO];
+                        
+                    }];
+                }
+                else
+                {
+                    [UIAlertController alertWithTitle:@"提示" message:@"暂无数据" titlesArry:@[@"确定"] alertControllerStyle:UIAlertControllerStyleAlert hiddenCancelButton:YES cancleStyle:UIAlertActionStyleCancel withController:[
+                                                                                                                                                                                                                             XHHelper sharedHelper].currentViewController indexBlock:^(NSInteger index, id object) {}];
+                }
+            }];
+        }
+            break;
+#pragma mark case 3 选择相册
+        case 3:
+        {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"选择相机" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
+            {
+                CameraManageViewController *manager=[[CameraManageViewController alloc] initWithCameraManageWithType:SourceTypeCamera setDeletate:self];
+                [[XHHelper sharedHelper].currentViewController.navigationController presentViewController:manager animated:YES completion:nil];
+                
+            }]];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"选择相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+            {
+                WPhotoViewController *wphoto = [[WPhotoViewController alloc] init];
+                [wphoto setSelectPhotoOfMax:(6-[self.dataArray count])];
+                wphoto.selectPhotosBack = ^(NSMutableArray *photosArray)
+                {
+                    [photosArray enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
+                     {
+                         XHPreviewModel *imageModel = [[XHPreviewModel alloc]init];
+                         [imageModel setPreviewImage:[obj objectForKey:@"image"]];
+                         [imageModel setItemSize:CGSizeMake(100, 100)];
+                         [imageModel setType:XHPreviewImagesType];
+                         [imageModel setTage:idx];
+                         [imageModel setIndexTage:idx];
+                         [self.dataArray addObject:imageModel];
+                     }];
+                    
+                    
+                    [self.collectionView setItemArray:self.dataArray];
+                };
+                [[XHHelper sharedHelper].currentViewController.navigationController presentViewController:wphoto animated:YES completion:nil];
+            }]];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
+            {
+                
+            }]];
+            [[XHHelper sharedHelper].currentViewController presentViewController:alertController animated:YES completion:nil];
+            
+        }
+            break;
+#pragma mark 发布作业
+        case 4:
+        {
+            if (!self.classContent.classListModel)
+            {
+                [XHShowHUD showNOHud:@"请选择班级"];
+            }
+            else if (!self.subjectContent.subjectListModel)
+            {
+                [XHShowHUD showNOHud:@"请选择学科"];
+            }
+            else if ([self.inputContent.text isEqualToString:@""])
+            {
+                NSLog(@"%@",self.inputContent.text);
+                [XHShowHUD showNOHud:@"内容不能为空"];
+            }
+            else
+            {
+                
+                if ([self.dataArray count])
+                {
+                    [NSArray enumerateObjectsWithArray:self.dataArray usingBlock:^(UIImage *obj, NSUInteger idx, BOOL *stop)
+                    {
+                        [XHHelper uploadImage:obj name:[XHHelper createGuid] uploadCallback:^(BOOL success, NSError *error)
+                     {
+                         if (success)
+                         {
+                             
+                             
+                         }
+                     } withProgressCallback:^(float progress)
+                     {
+                     }];
+                    }];
+                }
+                else
+                {
+                    [XHShowHUD showTextHud];
+                    XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
+                    [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
+                    [config setObject:self.subjectContent.subjectListModel.ID forKey:@"subjectId"];
+                    [config setObject:self.inputContent.text forKey:@"content"];
+                    [config setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
+                    [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
+                    [config postWithUrl:@"zzjt-app-api_schoolWork001" sucess:^(id object, BOOL verifyObject)
+                     
+                     {
+                         [XHShowHUD hideHud];
+                         if (verifyObject)
+                         {
+                             [XHShowHUD showOKHud:@"发布成功"];
+                         }
+                         else
+                         {
+                             [XHShowHUD showNOHud:@"发布失败!"];
+                         }
+                         
+                     } error:^(NSError *error)
+                    {
+                        [XHShowHUD hideHud];
+                        [XHShowHUD showNOHud:@"网络异常!"];
+                     }];
+                }
+                
+                
+                
+                
+            }
+        }
+            break;
+    }
 }
 
 #pragma mark - Deletage Method
@@ -131,6 +314,7 @@
         [_classContent setText:@"选择班级" withNumberType:0 withAllType:NO];
         [_classContent setText:@"请选择" withNumberType:1 withAllType:NO];
         [_classContent addTarget:self action:@selector(controlAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_classContent setTag:1];
     }
     return _classContent;
 }
@@ -153,6 +337,7 @@
         [_subjectContent setText:@"选择科目" withNumberType:0 withAllType:NO];
         [_subjectContent setText:@"请选择" withNumberType:1 withAllType:NO];
         [_subjectContent addTarget:self action:@selector(controlAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_subjectContent setTag:2];
     }
     return _subjectContent;
 }
@@ -168,6 +353,7 @@
         [_addPhotoContent setImage:@"addhomework" withNumberType:0 withAllType:NO];
         [_addPhotoContent setIconImageViewBackGroundColor:RGB(238, 238, 238) withNumberType:0 withAllType:NO];
         [_addPhotoContent addTarget:self action:@selector(controlAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_addPhotoContent setTag:3];
     }
     return _addPhotoContent;
 }
@@ -198,6 +384,7 @@
         [_submitContent setTextColor:[UIColor whiteColor] withTpe:0 withAllType:NO];
         [_submitContent setLayerCornerRadius:5.0];
         [_submitContent addTarget:self action:@selector(controlAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_submitContent setTag:4];
     }
     return _submitContent;
 }
@@ -227,4 +414,25 @@
     }
     return _lineVew;
 }
+
+-(XHAssignmentHomeWorkCollectionView *)collectionView
+{
+    if (!_collectionView)
+    {
+        _collectionView = [[XHAssignmentHomeWorkCollectionView alloc]init];
+    }
+    return _collectionView;
+}
+
+
+
+-(NSMutableArray *)imageNameArray
+{
+    if (!_imageNameArray)
+    {
+        _imageNameArray = [NSMutableArray array];
+    }
+    return _imageNameArray;
+}
+
 @end

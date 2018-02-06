@@ -7,8 +7,7 @@
 //
 
 #import "XHUserInfo.h"
-#import "XHClassListModel.h"
-#import "XHSubjectListModel.h"
+
 @implementation XHUserInfo
 
 

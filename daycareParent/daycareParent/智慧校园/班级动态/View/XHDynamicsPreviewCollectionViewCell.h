@@ -12,6 +12,7 @@
 
 @interface XHDynamicsPreviewCollectionViewCell : UICollectionViewCell
 
+
 -(void)setItemObject:(id)object;
 
 
