@@ -109,21 +109,24 @@
 #pragma mark - NetWork Method
 -(void)getServerItemObjectWith:(BaseRefreshType)type
 {
-    [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].guardianModel.guardianId forKey:@"guardianId"];
-    [self.netWorkConfig postWithUrl:@"zzjt-app-api_smartCampus004" sucess:^(id object, BOOL verifyObject)
+    [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
+    [self.netWorkConfig postWithUrl:@"zzjt-app-api_schoolWork002" sucess:^(id object, BOOL verifyObject)
      {
          if (verifyObject)
          {
              [self.dataArray removeAllObjects];
-             NSArray *arr = [object objectItemKey:@"object"];
-             for (NSDictionary *dic in arr)
-             {
-                 XHHomeWorkFrame *frame = [[XHHomeWorkFrame alloc]init];
-                 XHHomeWorkModel *model = [[XHHomeWorkModel alloc]init];
-                 [model setItemObject:dic];
-                 [frame setModel:model];
-                 [self.dataArray addObject:frame];
-             }
+             NSArray *array = [object objectItemKey:@"object"];
+             
+             [array enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
+              {
+                  NSDictionary *propValue = [obj objectItemKey:@"propValue"];
+                  XHHomeWorkFrame *frame = [[XHHomeWorkFrame alloc]init];
+                  XHHomeWorkModel *model = [[XHHomeWorkModel alloc]init];
+                  [model setItemObject:propValue];
+                  [frame setModel:model];
+                  [self.dataArray addObject:frame];
+                  
+              }];
              
              [self.tableView refreshReloadData];
          }

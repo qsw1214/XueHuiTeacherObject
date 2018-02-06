@@ -86,9 +86,37 @@
 
 -(void)setItemObject:(XHPreviewModel*)object
 {
-    [self.previewImageView sd_setImageWithURL:[NSURL URLWithString:ALGetFileImageOriginal(object.previewPic)]];
+    switch (object.type)
+    {
+        case XHPreviewOriginallyUrlType:
+        {
+            [self.previewImageView sd_setImageWithURL:[NSURL URLWithString:ALGetFileImageOriginal(object.previewPic)]];
+        }
+            break;
+        case XHPreviewAllUrlType:
+        {
+            [self.previewImageView sd_setImageWithURL:[NSURL URLWithString:object.previewUrl]];
+        }
+            break;
+        case XHPreviewImagesType:
+        {
+            [self.previewImageView setImage:object.previewImage];
+        }
+            break;
+    }
+    
 }
 
+
+-(void)setImageObject:(XHPreviewModel*)object
+{
+    
+}
+
+-(void)setAllUrlObject:(XHPreviewModel*)object
+{
+    [self.previewImageView sd_setImageWithURL:[NSURL URLWithString:object.previewPic]];
+}
 
 
 -(void)setItemColor:(BOOL)color

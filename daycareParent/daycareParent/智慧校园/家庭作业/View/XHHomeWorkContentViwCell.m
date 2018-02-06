@@ -49,7 +49,6 @@
     if (_imageView == nil)
     {
         _imageView = [[UIImageView alloc]init];
-        //[_imageView setBackgroundColor:[UIColor redColor]];
         [_imageView setContentMode:UIViewContentModeScaleAspectFit];
         [_imageView.layer setMasksToBounds:YES];
     }

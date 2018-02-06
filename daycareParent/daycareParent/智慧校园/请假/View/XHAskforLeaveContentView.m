@@ -124,7 +124,9 @@
 #pragma mark case 7 提交
         case 7:
         {
-            [self uploadImageWithImage:self.addPhotoControl.image withImageName:[XHHelper createGuid] WithContent:self.reasonTextView.text withBeginTime:self.startTimeControl.describe withEndTime:self.endTimeControl.describe withActorId:[XHUserInfo sharedUserInfo].guardianModel.guardianId withStudentBaseId:@"" withShr:self.chargeTeacherControl.teacherAddressBook.model.ID withCsr:@""];
+            [self uploadImageWithImage:self.addPhotoControl.image withImageName:[XHHelper createGuid] WithContent:self.reasonTextView.text withBeginTime:self.startTimeControl.describe withEndTime:self.endTimeControl.describe
+                           withDayTime:[self.daysleaveControl textFieldTitlewithNumberType:0]
+                           withActorId:[XHUserInfo sharedUserInfo].selfId  withShr:self.chargeTeacherControl.teacherAddressBook.model.ID withCsr:@""];
             
         }
             break;
@@ -236,56 +238,21 @@
 
 
 
-
 #pragma mark - NetWoth Method
 -(void)uploadImageWithImage:(UIImage*)image  //!< 图片
               withImageName:(NSString*)imageName  //!< 图片名称
                 WithContent:(NSString*)content  //!< 请假内容
               withBeginTime:(NSString*)beginTime  //!< 开始时间
                 withEndTime:(NSString*)endTime  //!< 结束时间
+                withDayTime:(NSString*)dayTime  //!< 请假时长
                 withActorId:(NSString*)actorId   //!< 申请人ID（家长Id）
-          withStudentBaseId:(NSString*)studentBaseId //!< 学生ID
                     withShr:(NSString*)shr //!< 班主任ID
                     withCsr:(NSString*)csr //!< 相关人ID（多位以逗号拼接）
 {
-    if (image)
-    {
-        [XHHelper uploadImage:image name:imageName uploadCallback:^(BOOL success, NSError *error)
-         {
-             if (success)
-             {
-                 [self submitAskforLeaveWithContent:content withBeginTime:beginTime withEndTime:endTime withPicUrl:imageName withActorId:actorId withStudentBaseId:studentBaseId withShr:shr withCsr:csr];
-             }
-        
-             
-         } withProgressCallback:^(float progress)
-         {
-         }];
-    }
-    else
-    {
-         [self submitAskforLeaveWithContent:content withBeginTime:beginTime withEndTime:endTime withPicUrl:@"" withActorId:actorId withStudentBaseId:studentBaseId withShr:shr withCsr:csr];
-    }
-}
-
-
-
--(void)submitAskforLeaveWithContent:(NSString*)content  //!< 请假内容
-                      withBeginTime:(NSString*)beginTime  //!< 开始时间
-                        withEndTime:(NSString*)endTime  //!< 结束时间
-                         withPicUrl:(NSString*)picUrl  //!< 图片url地址
-                        withActorId:(NSString*)actorId   //!< 申请人ID（家长Id）
-                  withStudentBaseId:(NSString*)studentBaseId //!< 学生ID
-                            withShr:(NSString*)shr //!< 班主任ID
-                            withCsr:(NSString*)csr //!< 相关人ID（多位以逗号拼接）
-{
+    
     if ([[NSString safeString:content] isEqualToString:@""])
     {
         [XHShowHUD showNOHud:@"内容不能为空"];
-    }
-    else if ([[NSString safeString:studentBaseId] isEqualToString:@""])
-    {
-        [XHShowHUD showNOHud:@"请选择孩子"];
     }
     else if ([[NSString safeString:beginTime] isEqualToString:@"请选择"])
     {
@@ -307,33 +274,71 @@
     {
         [XHShowHUD showNOHud:@"请选择审批人"];
     }
+    else if ([dayTime floatValue] <= 0)
+    {
+        [XHShowHUD showNOHud:@"请填请假天数"];
+    }
+    else if (image)
+    {
+        [XHShowHUD showTextHud:@"正在上传图片..."];
+        [XHHelper uploadImage:image name:imageName uploadCallback:^(BOOL success, NSError *error)
+         {
+             [XHShowHUD hideHud];
+             if (success)
+             {
+                 [self submitAskforLeaveWithContent:content withBeginTime:beginTime withEndTime:endTime withDayTime:dayTime withPicUrl:imageName withActorId:actorId withShr:shr withCsr:csr];
+             }
+        
+        
+             
+         } withProgressCallback:^(float progress)
+         {
+    
+         }];
+    }
     else
     {
-        if (![[NSString safeString:picUrl] isEqualToString:@""])
-        {
-            [self.netWorkConfig setObject:picUrl forKey:@"picUrl"];
-        }
-        if (![[NSString safeString:csr] isEqualToString:@""])
-        {
-            [self.netWorkConfig setObject:csr forKey:@"csr"];
-        }
-        [self.netWorkConfig setObject:content forKey:@"content"];
-        [self.netWorkConfig setObject:beginTime forKey:@"beginTime"];
-        [self.netWorkConfig setObject:endTime forKey:@"endTime"];
-        [self.netWorkConfig setObject:actorId forKey:@"actorId"];
-        [self.netWorkConfig setObject:studentBaseId forKey:@"studentBaseId"];
-        [self.netWorkConfig setObject:shr forKey:@"shr"];
-        [XHShowHUD showTextHud];
-        [self.netWorkConfig postWithUrl:@"zzjt-app-api_smartCampus008" sucess:^(id object, BOOL verifyObject)
-         {
-             if (verifyObject)
-             {
-                 
-                 
-                 
-             }
-         } error:^(NSError *error){}];
+        [self submitAskforLeaveWithContent:content withBeginTime:beginTime withEndTime:endTime withDayTime:dayTime withPicUrl:@"" withActorId:actorId withShr:shr withCsr:csr];
     }
+}
+
+
+
+-(void)submitAskforLeaveWithContent:(NSString*)content  //!< 请假内容
+                      withBeginTime:(NSString*)beginTime  //!< 开始时间
+                        withEndTime:(NSString*)endTime  //!< 结束时间
+                        withDayTime:(NSString*)dayTime  //!< 请假时长
+                         withPicUrl:(NSString*)picUrl  //!< 图片url地址
+                        withActorId:(NSString*)actorId   //!< 申请人ID（家长Id）
+                            withShr:(NSString*)shr //!< 班主任ID
+                            withCsr:(NSString*)csr //!< 相关人ID（多位以逗号拼接）
+{
+    [XHShowHUD showTextHud];
+    if (![[NSString safeString:picUrl] isEqualToString:@""])
+    {
+        [self.netWorkConfig setObject:picUrl forKey:@"picUrl"];
+    }
+    if (![[NSString safeString:csr] isEqualToString:@""])
+    {
+        [self.netWorkConfig setObject:csr forKey:@"csr"];
+    }
+    [self.netWorkConfig setObject:@"0" forKey:@"bizType"];
+    [self.netWorkConfig setObject:content forKey:@"content"];
+    [self.netWorkConfig setObject:beginTime forKey:@"beginTime"];
+    [self.netWorkConfig setObject:endTime forKey:@"endTime"];
+    [self.netWorkConfig setObject:actorId forKey:@"actorId"];
+    [self.netWorkConfig setObject:dayTime forKey:@"bizDays"];
+    [self.netWorkConfig setObject:shr forKey:@"shr"];
+    [XHShowHUD showTextHud];
+    [self.netWorkConfig postWithUrl:@"zzjt-app-api_bizInfo001" sucess:^(id object, BOOL verifyObject)
+     {
+         if (verifyObject)
+         {
+             
+             
+             
+         }
+     } error:^(NSError *error){}];
 }
 
 

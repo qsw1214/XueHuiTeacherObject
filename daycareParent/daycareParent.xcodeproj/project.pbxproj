@@ -327,6 +327,16 @@
 		4BBC434B1FD1086000555846 /* XHHomeWorkCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBC434A1FD1086000555846 /* XHHomeWorkCellContentView.m */; };
 		4BBC434E1FD11A1D00555846 /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBC434D1FD11A1D00555846 /* BaseView.m */; };
 		4BC0BAB81FF20F6300875093 /* MainPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC0BAB71FF20F6300875093 /* MainPreviewViewController.m */; };
+		4BCEB72120294FF200ED2829 /* XHAssignmentHomeWorkCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BCEB72020294FF200ED2829 /* XHAssignmentHomeWorkCollectionView.m */; };
+		4BCEB7242029503900ED2829 /* XHAssignmentHomeWorkCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BCEB7232029503900ED2829 /* XHAssignmentHomeWorkCollectionViewCell.m */; };
+		4BCEB7352029750000ED2829 /* myPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BCEB727202974FF00ED2829 /* myPhotoCell.m */; };
+		4BCEB7362029750000ED2829 /* NavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BCEB729202974FF00ED2829 /* NavView.m */; };
+		4BCEB7372029750000ED2829 /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BCEB72B202974FF00ED2829 /* UIImage+fixOrientation.m */; };
+		4BCEB7382029750000ED2829 /* WPFunctionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BCEB72D202974FF00ED2829 /* WPFunctionView.m */; };
+		4BCEB7392029750000ED2829 /* wphoto_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BCEB72F202974FF00ED2829 /* wphoto_back@2x.png */; };
+		4BCEB73A2029750000ED2829 /* wphoto_select_no@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BCEB730202974FF00ED2829 /* wphoto_select_no@2x.png */; };
+		4BCEB73B2029750000ED2829 /* wphoto_select_yes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BCEB731202974FF00ED2829 /* wphoto_select_yes@2x.png */; };
+		4BCEB73C2029750000ED2829 /* WPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BCEB733202974FF00ED2829 /* WPhotoViewController.m */; };
 		4BD33DDA1FCD555500BC52B6 /* XHSmartCampusContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD33DD91FCD555500BC52B6 /* XHSmartCampusContentView.m */; };
 		4BD33DDD1FCD56B900BC52B6 /* XHAdvertisementControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD33DDC1FCD56B900BC52B6 /* XHAdvertisementControl.m */; };
 		4BD33DE01FCD57DA00BC52B6 /* XHFunctionMenuControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD33DDF1FCD57DA00BC52B6 /* XHFunctionMenuControl.m */; };
@@ -1176,6 +1186,24 @@
 		4BBC434D1FD11A1D00555846 /* BaseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseView.m; sourceTree = "<group>"; };
 		4BC0BAB61FF20F6300875093 /* MainPreviewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainPreviewViewController.h; sourceTree = "<group>"; };
 		4BC0BAB71FF20F6300875093 /* MainPreviewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainPreviewViewController.m; sourceTree = "<group>"; };
+		4BCEB71F20294FF200ED2829 /* XHAssignmentHomeWorkCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHAssignmentHomeWorkCollectionView.h; sourceTree = "<group>"; };
+		4BCEB72020294FF200ED2829 /* XHAssignmentHomeWorkCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHAssignmentHomeWorkCollectionView.m; sourceTree = "<group>"; };
+		4BCEB7222029503900ED2829 /* XHAssignmentHomeWorkCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHAssignmentHomeWorkCollectionViewCell.h; sourceTree = "<group>"; };
+		4BCEB7232029503900ED2829 /* XHAssignmentHomeWorkCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHAssignmentHomeWorkCollectionViewCell.m; sourceTree = "<group>"; };
+		4BCEB726202974FF00ED2829 /* myPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myPhotoCell.h; sourceTree = "<group>"; };
+		4BCEB727202974FF00ED2829 /* myPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myPhotoCell.m; sourceTree = "<group>"; };
+		4BCEB728202974FF00ED2829 /* NavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavView.h; sourceTree = "<group>"; };
+		4BCEB729202974FF00ED2829 /* NavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavView.m; sourceTree = "<group>"; };
+		4BCEB72A202974FF00ED2829 /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
+		4BCEB72B202974FF00ED2829 /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
+		4BCEB72C202974FF00ED2829 /* WPFunctionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPFunctionView.h; sourceTree = "<group>"; };
+		4BCEB72D202974FF00ED2829 /* WPFunctionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPFunctionView.m; sourceTree = "<group>"; };
+		4BCEB72F202974FF00ED2829 /* wphoto_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wphoto_back@2x.png"; sourceTree = "<group>"; };
+		4BCEB730202974FF00ED2829 /* wphoto_select_no@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wphoto_select_no@2x.png"; sourceTree = "<group>"; };
+		4BCEB731202974FF00ED2829 /* wphoto_select_yes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wphoto_select_yes@2x.png"; sourceTree = "<group>"; };
+		4BCEB732202974FF00ED2829 /* WPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPhotoViewController.h; sourceTree = "<group>"; };
+		4BCEB733202974FF00ED2829 /* WPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPhotoViewController.m; sourceTree = "<group>"; };
+		4BCEB734202974FF00ED2829 /* WPMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPMacros.h; sourceTree = "<group>"; };
 		4BD33DD81FCD555500BC52B6 /* XHSmartCampusContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHSmartCampusContentView.h; sourceTree = "<group>"; };
 		4BD33DD91FCD555500BC52B6 /* XHSmartCampusContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHSmartCampusContentView.m; sourceTree = "<group>"; };
 		4BD33DDB1FCD56B900BC52B6 /* XHAdvertisementControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHAdvertisementControl.h; sourceTree = "<group>"; };
@@ -2527,6 +2555,7 @@
 		4B80F2021FCBE43E00BC7B52 /* ThirdLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				4BCEB725202974FF00ED2829 /* WPhoto */,
 				8C01A2302006E94800E4D768 /* NJKWebViewProgress */,
 				8C0CCF751FFF16FD0008C0CE /* WebViewJavascriptBridge */,
 				4B34184F1FFDC14C00A5EC56 /* ZFPlayer */,
@@ -3045,6 +3074,10 @@
 				4BBC434A1FD1086000555846 /* XHHomeWorkCellContentView.m */,
 				4B68C9ED2011B2350078FEDB /* XHAssignmentHomeWorkContentView.h */,
 				4B68C9EE2011B2350078FEDB /* XHAssignmentHomeWorkContentView.m */,
+				4BCEB71F20294FF200ED2829 /* XHAssignmentHomeWorkCollectionView.h */,
+				4BCEB72020294FF200ED2829 /* XHAssignmentHomeWorkCollectionView.m */,
+				4BCEB7222029503900ED2829 /* XHAssignmentHomeWorkCollectionViewCell.h */,
+				4BCEB7232029503900ED2829 /* XHAssignmentHomeWorkCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3179,6 +3212,35 @@
 				4BBC43441FD0F01D00555846 /* XHCGRect.m */,
 			);
 			path = XHCGRect;
+			sourceTree = "<group>";
+		};
+		4BCEB725202974FF00ED2829 /* WPhoto */ = {
+			isa = PBXGroup;
+			children = (
+				4BCEB726202974FF00ED2829 /* myPhotoCell.h */,
+				4BCEB727202974FF00ED2829 /* myPhotoCell.m */,
+				4BCEB728202974FF00ED2829 /* NavView.h */,
+				4BCEB729202974FF00ED2829 /* NavView.m */,
+				4BCEB72A202974FF00ED2829 /* UIImage+fixOrientation.h */,
+				4BCEB72B202974FF00ED2829 /* UIImage+fixOrientation.m */,
+				4BCEB72C202974FF00ED2829 /* WPFunctionView.h */,
+				4BCEB72D202974FF00ED2829 /* WPFunctionView.m */,
+				4BCEB72E202974FF00ED2829 /* WPhotoImage */,
+				4BCEB732202974FF00ED2829 /* WPhotoViewController.h */,
+				4BCEB733202974FF00ED2829 /* WPhotoViewController.m */,
+				4BCEB734202974FF00ED2829 /* WPMacros.h */,
+			);
+			path = WPhoto;
+			sourceTree = "<group>";
+		};
+		4BCEB72E202974FF00ED2829 /* WPhotoImage */ = {
+			isa = PBXGroup;
+			children = (
+				4BCEB72F202974FF00ED2829 /* wphoto_back@2x.png */,
+				4BCEB730202974FF00ED2829 /* wphoto_select_no@2x.png */,
+				4BCEB731202974FF00ED2829 /* wphoto_select_yes@2x.png */,
+			);
+			path = WPhotoImage;
 			sourceTree = "<group>";
 		};
 		4BFB973F1FCCF469003EEC8C /* ViewController */ = {
@@ -4119,7 +4181,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = XH;
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = XueHui;
 				TargetAttributes = {
 					4B80F1D21FCBE3F700BC7B52 = {
@@ -4157,6 +4219,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BCEB7392029750000ED2829 /* wphoto_back@2x.png in Resources */,
 				4B80F28A1FCBF04800BC7B52 /* MJRefresh.bundle in Resources */,
 				8C67F8301FD666BA007DFD53 /* XHSelectTableViewCell.xib in Resources */,
 				4BFB975D1FCCF8CD003EEC8C /* Images.xcassets in Resources */,
@@ -4167,6 +4230,7 @@
 				8CCD7E2D1FD11ECA00F7F54E /* XHTelephoneTableViewCell.xib in Resources */,
 				8C7EF53C1FE0BBFD00C029F2 /* 37x-Checkmark@2x.png in Resources */,
 				8C67F8351FD68570007DFD53 /* XHSelectFileTableViewCell.xib in Resources */,
+				4BCEB73B2029750000ED2829 /* wphoto_select_yes@2x.png in Resources */,
 				8CB5A25C1FD7825D008E97D8 /* XHNameTableViewCell.xib in Resources */,
 				8C7E98101FECE8C80096288E /* AMap.bundle in Resources */,
 				8C7AE72F1FE795ED00BE7A02 /* AlipaySDK.bundle in Resources */,
@@ -4182,6 +4246,7 @@
 				8CC7648F200CAA69007887C7 /* XHNewHeardTableViewCell.xib in Resources */,
 				8C8336EE1FDCD6A000F48A25 /* RCConfig.plist in Resources */,
 				8C7AE73F1FE795ED00BE7A02 /* Pingpp.bundle in Resources */,
+				4BCEB73A2029750000ED2829 /* wphoto_select_no@2x.png in Resources */,
 				8C6240891FD8D2B800E6C031 /* XHComplieAddressViewController.xib in Resources */,
 				8C007D7420107EDF00DD0635 /* XHHistoryDetailTableViewCell.xib in Resources */,
 				4B3800FE20075DF3004E74AC /* pageControlDot@3x.png in Resources */,
@@ -4246,6 +4311,7 @@
 				4B3126191FD90AAA000CE894 /* XHDatePickerControl.m in Sources */,
 				4B68C9EC20119D460078FEDB /* XHAssignmentHomeWorkViewController.m in Sources */,
 				4B31265C1FDA8F9C000CE894 /* XHAddressBookLecturesControl.m in Sources */,
+				4BCEB7382029750000ED2829 /* WPFunctionView.m in Sources */,
 				4B80F3191FCBFD6F00BC7B52 /* EXTScope.m in Sources */,
 				8C6240A21FD915BB00E6C031 /* XHDiscuntViewController.m in Sources */,
 				8C019F701FF4C373005EBC2C /* JKDBHelper.m in Sources */,
@@ -4281,6 +4347,7 @@
 				8CCE161520283B1900F87E03 /* XHAskforLeaveDetailViewController.m in Sources */,
 				8C3E55C11FD549B60013002A /* XHStudyRecordViewController.m in Sources */,
 				8CD8CE142015E0550085DD70 /* XHDayRollReasonTableViewCell.m in Sources */,
+				4BCEB7362029750000ED2829 /* NavView.m in Sources */,
 				8C42CFCE1FF5D86D00CEDBDA /* XHNewUserInfoViewController.m in Sources */,
 				4B4A00171FE2411200B8A8F8 /* XHDynamicsCell.m in Sources */,
 				4B80F31F1FCBFD6F00BC7B52 /* MTLTransformerErrorHandling.m in Sources */,
@@ -4296,6 +4363,7 @@
 				4B80F2231FCBEC2B00BC7B52 /* BaseViewController.m in Sources */,
 				4B3418781FFDC14C00A5EC56 /* UIWindow+CurrentViewController.m in Sources */,
 				4BB792B01FD7783700E0ED72 /* XHAskforLeaveContentView.m in Sources */,
+				4BCEB7372029750000ED2829 /* UIImage+fixOrientation.m in Sources */,
 				4BB792CD1FD7930D00E0ED72 /* XHAchievementViewController.m in Sources */,
 				8CF3417F200F3ECF0055D6BD /* XHNewDetailViewController.m in Sources */,
 				4B3126401FDA1F26000CE894 /* XHAddressBookContentView.m in Sources */,
@@ -4314,6 +4382,7 @@
 				4B11AF381FCCEA25002738F1 /* XHEducationCloudViewController.m in Sources */,
 				4BC0BAB81FF20F6300875093 /* MainPreviewViewController.m in Sources */,
 				4B3126461FDA1F75000CE894 /* XHAddressBookCellContentView.m in Sources */,
+				4BCEB7242029503900ED2829 /* XHAssignmentHomeWorkCollectionViewCell.m in Sources */,
 				4B523BCA1FD14A27006DD565 /* XHHomeWorkContentViwCell.m in Sources */,
 				4B34187E1FFDC14C00A5EC56 /* ZFPlayerView.m in Sources */,
 				8C8336F31FDCE3B100F48A25 /* XHRCConversationViewController.m in Sources */,
@@ -4494,6 +4563,7 @@
 				8C4C208A202021040051642B /* XHTeacherInfo.m in Sources */,
 				4B80F2811FCBF04800BC7B52 /* MJRefreshAutoStateFooter.m in Sources */,
 				4B8E66241FD6463C0006D641 /* XHCookBookFrame.m in Sources */,
+				4BCEB7352029750000ED2829 /* myPhotoCell.m in Sources */,
 				4B31264C1FDA1FF5000CE894 /* XHAddressBookFrame.m in Sources */,
 				4B80F22B1FCBF00E00BC7B52 /* XHNetWorkConfig.m in Sources */,
 				4B80F2411FCBF01B00BC7B52 /* BaseDynamicLabel.m in Sources */,
@@ -4508,6 +4578,7 @@
 				4BA8C4E51FD0002D006CBEBC /* XHHomeWorkTableViewCell.m in Sources */,
 				4B3418F61FFF14F100A5EC56 /* XHVideoControl.m in Sources */,
 				8CC7648E200CAA69007887C7 /* XHNewHeardTableViewCell.m in Sources */,
+				4BCEB72120294FF200ED2829 /* XHAssignmentHomeWorkCollectionView.m in Sources */,
 				4B9110781FD7B9E600841505 /* XHSyllabusCell.m in Sources */,
 				4BB792E01FD798B000E0ED72 /* BaseMenuModel.m in Sources */,
 				4B80F2211FCBEC2B00BC7B52 /* BaseNavigationControlItem.m in Sources */,
@@ -4564,6 +4635,7 @@
 				8C5EB0BA1FCFE604002ED0D7 /* XHSetViewController.m in Sources */,
 				4BB9BEA91FDE561E004F5622 /* XHEducationCloudModel.m in Sources */,
 				4B4A001D1FE243C900B8A8F8 /* XHDynamicsCollectionViewCell.m in Sources */,
+				4BCEB73C2029750000ED2829 /* WPhotoViewController.m in Sources */,
 				8C80816D1FCE991B00C7945A /* XHUserTableViewCell.m in Sources */,
 				4B523BC71FD14782006DD565 /* XHHomeWorkCollectionView.m in Sources */,
 				4B07CC501FD5360D00B2DBDA /* XHParentsMeetingFrame.m in Sources */,
@@ -4659,6 +4731,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -4714,6 +4787,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
