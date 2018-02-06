@@ -8,7 +8,6 @@
 
 #import "XHSmartCampusViewController.h"
 #import "XHSmartCampusContentView.h"
-#import "XHSafeRegisterViewController.h" //!< 安全签到
 #import "XHHomeWorkViewController.h" //!< 家庭作业
 #import "XHAskforLeaveBoardViewController.h" //!< 请假
 #import "XHEducationCloudViewController.h" //!< 浩学云（教育云）

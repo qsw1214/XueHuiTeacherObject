@@ -10,7 +10,7 @@
 #import "BaseNavigationView.h"
 #import "XHChildListModel.h"
 #import "XHNetWorkConfig.h"
-#import "XHCustomView.h"//!< 孩子列表自定义视图
+#import "XHCustomView.h"//!< 班级列表自定义视图
 #import "XHCustomDatePickerView.h"
 
 
@@ -24,7 +24,7 @@
 @property (nonatomic,strong) BaseNavigationView  *navigationView;
 @property (nonatomic,strong) NSMutableArray *dataArray; //!< 数组
 @property (nonatomic,strong) XHNetWorkConfig *netWorkConfig;
-@property(nonatomic,strong)XHCustomView *childListView;
+@property(nonatomic,strong)XHCustomView *classListView;
 @property(nonatomic,strong)XHCustomDatePickerView *datePickerView;//!< 日期选择器
 
 @property(nonatomic,copy)void(^isRefresh)(BOOL);
@@ -83,10 +83,10 @@
 
 
 /**
-根据孩子列表数据数组，是否显示向下箭头
- @param array 孩子列表数组
+根据班级列表数据数组，是否显示向下箭头
+ @param array 班级列表数组
  */
--(void)setChildListArry:(NSArray*)array;
+-(void)setClassListArry:(NSArray*)array;
 
 
 @end

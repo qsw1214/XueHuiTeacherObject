@@ -20,9 +20,9 @@ typedef NS_ENUM(NSInteger , XHAchievementModelContentType)
 @interface XHAchievementModel : BaseModel
 
 @property (nonatomic,strong) NSString *subject; //!< 科目
-@property (nonatomic,strong) NSString *batch; //!< 批次
-@property (nonatomic,strong) NSString *score; //!< 分数
-
+@property (nonatomic,strong) NSString *batch; //!< 开学成绩
+@property (nonatomic,strong) NSString *score; //!< 其中成绩
+@property (nonatomic,strong) NSString *end; //!< 期末成绩
 @property (nonatomic,assign) XHAchievementModelContentType contentType;
 
 

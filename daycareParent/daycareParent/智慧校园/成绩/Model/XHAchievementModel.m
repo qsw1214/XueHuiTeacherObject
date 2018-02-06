@@ -16,6 +16,7 @@
     [self setSubject:[object objectItemKey:@"subjectName"]];
     [self setBatch:[object objectItemKey:@"batchName"]];
     [self setScore:[NSString stringWithFormat:@"%.1f",tempScore]];
+    [self setEnd:[NSString stringWithFormat:@"%.1f",tempScore]];
 }
 
 @end

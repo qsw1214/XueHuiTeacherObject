@@ -11,8 +11,9 @@
 @interface XHAchievementCellContentView ()
 
 @property (nonatomic,strong) UILabel *subjectLabel; //!< 科目
-@property (nonatomic,strong) UILabel *batchLabel; //!< 批次
-@property (nonatomic,strong) UILabel *scoreLabel; //!< 分数
+@property (nonatomic,strong) UILabel *batchLabel; //!< 开学成绩
+@property (nonatomic,strong) UILabel *scoreLabel; //!< 其中成绩
+@property (nonatomic,strong) UILabel *endLabel; //!< 其末成绩
 
 
 @end
@@ -30,7 +31,7 @@
         [self addSubview:self.subjectLabel];
         [self addSubview:self.batchLabel];
         [self addSubview:self.scoreLabel];
-        
+        [self addSubview:self.endLabel];
     }
     return self;
 }
@@ -40,6 +41,7 @@
     [self.subjectLabel setTextColor:color];
     [self.batchLabel setTextColor:color];
     [self.scoreLabel setTextColor:color];
+    [self.endLabel setTextColor:color];
 }
 
 -(void)setFont:(UIFont*)font
@@ -47,6 +49,7 @@
     [self.subjectLabel setFont:font];
     [self.batchLabel setFont:font];
     [self.scoreLabel setFont:font];
+    [self.endLabel setFont:font];
 }
 -(void)setSubject:(NSString*)subject
 {
@@ -62,7 +65,10 @@
     [self.scoreLabel setText:score];
 }
 
-
+-(void)setEnd:(NSString *)end
+{
+     [self.endLabel setText:end];
+}
 
 
 -(void)setItemFrame:(XHAchievementFrame*)frame
@@ -87,7 +93,7 @@
     [self.subjectLabel setText:frame.model.subject];
     [self.batchLabel setText:frame.model.batch];
     [self.scoreLabel setText:frame.model.score];
-    
+    [self.endLabel setText:frame.model.end];
 }
 
 -(void)resetFrame:(CGRect)frame
@@ -96,8 +102,9 @@
     
     
     [self.subjectLabel setFrame:CGRectMake(0, 0, frame.size.width/4.0, frame.size.height)];
-    [self.batchLabel setFrame:CGRectMake(self.subjectLabel.right, 0, self.subjectLabel.width*2, self.subjectLabel.height)];
+    [self.batchLabel setFrame:CGRectMake(self.subjectLabel.right, 0, self.subjectLabel.width, self.subjectLabel.height)];
     [self.scoreLabel setFrame:CGRectMake(self.batchLabel.right, self.subjectLabel.top, self.subjectLabel.width, self.subjectLabel.height)];
+    [self.endLabel setFrame:CGRectMake(self.scoreLabel.right, self.subjectLabel.top, self.subjectLabel.width, self.subjectLabel.height)];
 }
 
 
@@ -143,5 +150,16 @@
     return _scoreLabel;
 }
 
-
+-(UILabel *)endLabel
+{
+    if (_endLabel == nil)
+    {
+        _endLabel = [[UILabel alloc]init];
+        [_endLabel setTextAlignment:NSTextAlignmentCenter];
+        [_endLabel setNumberOfLines:0];
+        [_endLabel setLayerBorderWidth:0.5];
+        [_endLabel setBorderColor:LineViewColor];
+    }
+    return _endLabel;
+}
 @end
