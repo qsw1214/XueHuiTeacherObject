@@ -83,7 +83,7 @@
             case SourceTypeSavedPhotosAlbum:
             {
                 //相机类型
-                [self setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+                [self setSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
             }
                 break;
             case SourceTypeHeadPortraitSavedPhotosAlbum:

@@ -36,7 +36,7 @@
     self = [super init];
     if (self)
     {
-        [self setBackgroundColor:RGB(247.0, 247.0, 247.0)];
+        [self setBackgroundColor:RGB(230.0, 230.0, 230.0)];
         [self setItemColor:NO];
         [self.layer setMasksToBounds:YES];
         [self showRefresHeaderWithTarget:self withSelector:@selector(refreshHeaderAction)];
