@@ -22,7 +22,7 @@
 #pragma mark 创建nav
 -(void)createNavViewTitle:(NSString *)title {
     UIView *nav = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SelfView_W, navView_H)];
-    nav.backgroundColor = WPhoto_TopView_Color;
+    nav.backgroundColor = MainColor;
     [self addSubview:nav];
     
     UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 20, 80, navView_H-20)];

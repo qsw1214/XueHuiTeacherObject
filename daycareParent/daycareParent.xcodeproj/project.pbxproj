@@ -3187,7 +3187,6 @@
 			path = XHCGRect;
 			sourceTree = "<group>";
 		};
-
 		4BCEB725202974FF00ED2829 /* WPhoto */ = {
 			isa = PBXGroup;
 			children = (
@@ -3215,41 +3214,6 @@
 				4BCEB731202974FF00ED2829 /* wphoto_select_yes@2x.png */,
 			);
 			path = WPhotoImage;
-			sourceTree = "<group>";
-		};
-		4BFB973F1FCCF469003EEC8C /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				4B5A3AEF1FCEA9D000504229 /* XHSafeRegisterViewController.h */,
-				4B5A3AF01FCEA9D000504229 /* XHSafeRegisterViewController.m */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		4BFB97401FCCF469003EEC8C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				4B5A3AF21FCEAA0300504229 /* XHRegisterModel.h */,
-				4B5A3AF31FCEAA0300504229 /* XHRegisterModel.m */,
-				4B5A3AF51FCEAA0C00504229 /* XHRegisterFrame.h */,
-				4B5A3AF61FCEAA0C00504229 /* XHRegisterFrame.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		4BFB97411FCCF469003EEC8C /* View */ = {
-			isa = PBXGroup;
-			children = (
-				4B5A3AF81FCEAE8800504229 /* XHRegisterContentView.h */,
-				4B523BD01FD15068006DD565 /* XHRegisterContentView.m */,
-				4B5A3AFE1FCEB0A000504229 /* XHRegisterTableViewCell.h */,
-				4B5A3AFF1FCEB0A000504229 /* XHRegisterTableViewCell.m */,
-				4BA8C4CD1FCFEFB4006CBEBC /* XHRegisterItemControl.h */,
-				4BA8C4CE1FCFEFB4006CBEBC /* XHRegisterItemControl.m */,
-				8C91E01C1FEA39A00040A205 /* XHCustomView.h */,
-				8C91E01D1FEA39A00040A205 /* XHCustomView.m */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		4BFB97501FCCF670003EEC8C /* VIP升级 */ = {
@@ -4867,7 +4831,7 @@
 					"$(PROJECT_DIR)/daycareParent/Tool(工具类)/ping++/One",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jt.xhm-test";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jt.xhm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4939,7 +4903,7 @@
 					"$(PROJECT_DIR)/daycareParent/Tool(工具类)/ping++/One",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jt.xhm-test";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jt.xhm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

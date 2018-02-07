@@ -12,8 +12,8 @@
 
 @interface NavView : UIView
 
-@property (nonatomic, copy) void(^navViewBack)();
-@property (nonatomic, copy) void(^quitChooseBack)();
+@property (nonatomic, copy) void (^navViewBack) (void);
+@property (nonatomic, copy) void (^quitChooseBack) (void);
 
 // 创建nav
 -(void)createNavViewTitle:(NSString *)title;
