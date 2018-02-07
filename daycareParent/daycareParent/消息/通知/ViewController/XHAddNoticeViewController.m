@@ -47,8 +47,7 @@
 
 -(void)rightItemAction:(BaseNavigationControlItem *)sender
 {
-    XHAddNoticeRecipientViewController *noticeListView = [[XHAddNoticeRecipientViewController alloc]init];
-    [self.navigationController pushViewController:noticeListView animated:YES];
+    
 }
 
 

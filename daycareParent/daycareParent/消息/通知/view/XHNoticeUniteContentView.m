@@ -9,10 +9,13 @@
 #import "XHNoticeUniteContentView.h"
 #import "XHNoticeRecipientGroupFrame.h"
 #import "XHAddressBookHelper.h"
+#import "XHNoticeAllUniteContentView.h"
+
 
 
 @interface XHNoticeUniteContentView () <UITableViewDelegate,UITableViewDataSource>
 
+@property (nonatomic,strong) XHNoticeAllUniteContentView *allSelectControl;
 @property (nonatomic,strong) BaseButtonControl *confirmationControl;
 
 @property (nonatomic,strong) NSMutableArray *teachersArray;  //!< 教师数据源数组
@@ -47,9 +50,12 @@
 {
     if (subview)
     {
+        [self.allSelectControl resetFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60.0)];
+        [self.allSelectControl addAllSelectTarget:self action:@selector(allSelectControl:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.tableView];
         [self.tableView setDelegate:self];
         [self.tableView setDataSource:self];
+        [self.tableView setTableHeaderView:self.allSelectControl];
         [self.tableView showRefresHeaderWithTarget:self withSelector:@selector(refreshHeaderAction)];
         [self addSubview:self.confirmationControl];
     }
@@ -108,7 +114,6 @@
                   XHNoticeRecipientFrame *frame = [[XHNoticeRecipientFrame alloc]init];
                   XHNoticeRecipientModel *model = [[XHNoticeRecipientModel alloc]init];
                   [model setTitle:[NSString stringWithFormat:@"%@%@",gradeName,clazzName]];
-                  [model setModelType:XHNoticeRecipientNormalType];     //!< 数据模型的类型
                   [model setSelectType:XHNoticeRecipientNormalityType]; //!< 正常的选中类型
                   [frame setModel:model];
                   
@@ -164,24 +169,12 @@
 
     if (self.unify == 2)
     {
-        //!< 添加首页
-        XHNoticeRecipientFrame *fullSelectionFrame = [[XHNoticeRecipientFrame alloc]init];
-        XHNoticeRecipientModel *fullSelectionModel = [[XHNoticeRecipientModel alloc]init];
-        [fullSelectionModel setTitle:@"全选"];
-        [fullSelectionModel setModelType:XHNoticeRecipientFullSelectionType];
-        [fullSelectionModel setSelectType:XHNoticeRecipientNormalityType];
-        [fullSelectionFrame setModel:fullSelectionModel];
-        [self.dataArray addObject:fullSelectionFrame];
-
-
-
         //!< 添加教师组
         XHNoticeRecipientFrame *teacherFrame = [[XHNoticeRecipientFrame alloc]init];
         XHNoticeRecipientModel *teacherModel = [[XHNoticeRecipientModel alloc]init];
         [teacherModel setTitle:@"教师组"];
         [teacherModel setTotal:[self.teachersArray count]];
         [teacherModel setSelect:0];
-        [teacherModel setModelType:XHNoticeRecipientNormalType];
         [teacherModel setSelectType:XHNoticeRecipientNormalityType];
         [teacherFrame setModel:teacherModel];
         if ([self.teachersArray count])
@@ -223,7 +216,7 @@
     XHNoticeRecipientTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell ==  nil)
     {
-        cell = [[XHNoticeRecipientTableViewCell alloc]init];
+        cell = [[XHNoticeRecipientTableViewCell alloc]initWithDeletage:self];
     }
     [cell setItemFrame:[self.dataArray objectAtIndex:indexPath.row]];
     return cell;
@@ -246,6 +239,12 @@
 }
 
 
+
+#pragma mark XHNoticeRecipientTableViewCellDeletage
+-(void)markControlAction:(BaseButtonControl*)object
+{
+    
+}
 
 
 
@@ -288,6 +287,29 @@
     return _confirmationControl;
 }
 
+
+-(XHNoticeAllUniteContentView *)allSelectControl
+{
+    if (!_allSelectControl)
+    {
+        _allSelectControl = [[XHNoticeAllUniteContentView alloc]init];
+        [_allSelectControl setBackgroundColor:[UIColor whiteColor]];
+        [_confirmationControl setTag:2];
+    }
+    return _allSelectControl;
+}
+
+-(void)confirmationControlAction:(BaseButtonControl*)sender
+{
+    
+}
+
+
+
+-(void)allSelectControl:(XHNoticeAllUniteContentView*)sender
+{
+    
+}
 
 
 

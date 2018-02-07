@@ -21,7 +21,12 @@
 @interface XHNoticeRecipientTableViewCell : BaseTableViewCell
 
 
--(instancetype)initWithDeletage:(<XHNoticeRecipientTableViewCellDeletage>)deletage;
+@property (nonatomic,assign) NSInteger indexRow;
+
+-(instancetype)initWithDeletage:(id<XHNoticeRecipientTableViewCellDeletage>)deletage;
+
+
+
 
 
 

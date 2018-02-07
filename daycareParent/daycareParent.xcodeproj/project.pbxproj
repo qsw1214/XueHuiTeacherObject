@@ -18,6 +18,7 @@
 		04E5D14D1FD39F3F0021B842 /* XHPriviTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E5D14B1FD39F3F0021B842 /* XHPriviTableViewCell.m */; };
 		04E5D14E1FD39F3F0021B842 /* XHPriviTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E5D14C1FD39F3F0021B842 /* XHPriviTableViewCell.xib */; };
 		04FB52811FD96D720070C019 /* XHStudyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB52801FD96D720070C019 /* XHStudyModel.m */; };
+		4B03F69A202AC09300017838 /* XHNoticeAllUniteContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B03F699202AC09300017838 /* XHNoticeAllUniteContentView.m */; };
 		4B07CC191FD4DAB800B2DBDA /* XHLeaveRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B07CC181FD4DAB800B2DBDA /* XHLeaveRecordModel.m */; };
 		4B07CC1C1FD4DAC800B2DBDA /* XHLeaveRecordFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B07CC1B1FD4DAC800B2DBDA /* XHLeaveRecordFrame.m */; };
 		4B07CC1D1FD4E48500B2DBDA /* XHLeaveRecordContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B523BDD1FD1584A006DD565 /* XHLeaveRecordContentView.m */; };
@@ -563,6 +564,8 @@
 		04E5D14C1FD39F3F0021B842 /* XHPriviTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XHPriviTableViewCell.xib; sourceTree = "<group>"; };
 		04FB527F1FD96D720070C019 /* XHStudyModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XHStudyModel.h; path = "daycareParent/我的/学习记录/model/XHStudyModel.h"; sourceTree = SOURCE_ROOT; };
 		04FB52801FD96D720070C019 /* XHStudyModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XHStudyModel.m; path = "daycareParent/我的/学习记录/model/XHStudyModel.m"; sourceTree = SOURCE_ROOT; };
+		4B03F698202AC09300017838 /* XHNoticeAllUniteContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XHNoticeAllUniteContentView.h; path = "daycareParent/消息/通知/view/XHNoticeAllUniteContentView.h"; sourceTree = SOURCE_ROOT; };
+		4B03F699202AC09300017838 /* XHNoticeAllUniteContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XHNoticeAllUniteContentView.m; path = "daycareParent/消息/通知/view/XHNoticeAllUniteContentView.m"; sourceTree = SOURCE_ROOT; };
 		4B07CC171FD4DAB800B2DBDA /* XHLeaveRecordModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHLeaveRecordModel.h; sourceTree = "<group>"; };
 		4B07CC181FD4DAB800B2DBDA /* XHLeaveRecordModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHLeaveRecordModel.m; sourceTree = "<group>"; };
 		4B07CC1A1FD4DAC800B2DBDA /* XHLeaveRecordFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHLeaveRecordFrame.h; sourceTree = "<group>"; };
@@ -2219,6 +2222,8 @@
 				4B577F901FF5C4F50023ACBC /* XHNoticeTableViewCell.m */,
 				4B4D7FF9201B27AF001D0BB0 /* XHAddNoticeContentView.h */,
 				4B4D7FFA201B27AF001D0BB0 /* XHAddNoticeContentView.m */,
+				4B03F698202AC09300017838 /* XHNoticeAllUniteContentView.h */,
+				4B03F699202AC09300017838 /* XHNoticeAllUniteContentView.m */,
 				4B4DD02F202856A200ACFFA8 /* XHNoticeUniteContentView.h */,
 				4B4DD030202856A200ACFFA8 /* XHNoticeUniteContentView.m */,
 				4B4DD0322028587500ACFFA8 /* XHNoticeUniteItemContentView.h */,
@@ -4229,6 +4234,7 @@
 				8C5EB0C31FCFF22C002ED0D7 /* XHPassWordTableViewCell.m in Sources */,
 				4B80F2C91FCBF04F00BC7B52 /* SDWebImageCompat.m in Sources */,
 				8CBA35F8201189F500485643 /* XHHistoryApproverDetailTableViewCell.m in Sources */,
+				4B03F69A202AC09300017838 /* XHNoticeAllUniteContentView.m in Sources */,
 				4B80F2CC1FCBF04F00BC7B52 /* SDWebImageGIFCoder.m in Sources */,
 				8C67F82F1FD666BA007DFD53 /* XHSelectTableViewCell.m in Sources */,
 				8CCE161520283B1900F87E03 /* XHAskforLeaveDetailViewController.m in Sources */,

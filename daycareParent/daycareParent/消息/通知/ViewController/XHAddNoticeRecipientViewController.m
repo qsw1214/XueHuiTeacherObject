@@ -48,17 +48,9 @@
 #pragma mark XHNoticeRecipientDeletage
 -(void)didSelectRowAtIndexObject:(XHNoticeRecipientFrame*)object
 {
-    switch (object.model.modelType)
-    {
-        case XHNoticeRecipientNormalType:
-        {
-            XHAddNoticeRecipientGroupViewController *recipient = [[XHAddNoticeRecipientGroupViewController alloc]init];
-            [recipient setItemObject:object];
-            [self.navigationController pushViewController:recipient animated:YES];
-        }
-        case XHNoticeRecipientFullSelectionType:
-            break;
-    }
+    XHAddNoticeRecipientGroupViewController *recipient = [[XHAddNoticeRecipientGroupViewController alloc]init];
+    [recipient setItemObject:object];
+    [self.navigationController pushViewController:recipient animated:YES];
     
 }
 
