@@ -36,7 +36,7 @@
     self = [super init];
     if (self)
     {
-        [self setBackgroundColor:[UIColor whiteColor]];
+        [self setBackgroundColor:RGB(247, 247, 247)];
     }
     return self;
 }
