@@ -58,7 +58,7 @@
 }
 -(void)rightItemAction:(BaseNavigationControlItem *)sender
 {
-    [UIAlertController alertWithTitle:@"提示" message:@"请选择类型" titlesArry:@[@"发送图片",@"发送视频"] alertControllerStyle:UIAlertControllerStyleActionSheet hiddenCancelButton:NO cancleStyle:UIAlertActionStyleCancel withController:self indexBlock:^(NSInteger index, id object) {
+    [UIAlertController actionSheetWithmessage:@"请选择类型" titlesArry:@[@"发送图片",@"发送视频"] controller:self indexBlock:^(NSInteger index, id object) {
         XHNewDynamicsViewController *new=[XHNewDynamicsViewController new];
         new.index=index;
         [self.navigationController pushViewController:new animated:YES];

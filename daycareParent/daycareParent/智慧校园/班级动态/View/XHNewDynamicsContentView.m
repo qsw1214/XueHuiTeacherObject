@@ -24,7 +24,8 @@
 @property (nonatomic,strong) UIView *lineVew; //!< 分割线视图
 @property (nonatomic,strong) UILabel *limitLabel; //!< 限制字数标签
 @property (nonatomic,strong) NSMutableArray *imageNameArray; //!< 图片名称数组
- @property (nonatomic,strong) UIImagePickerController *videoPicker;
+@property (nonatomic,strong) UIImagePickerController *videoPicker;
+@property (nonatomic,strong) NSData *videoData;//!< 视频data
 
 
 @end
@@ -126,8 +127,8 @@
                 }
                 else
                 {
-                    [UIAlertController alertWithTitle:@"提示" message:@"暂无数据" titlesArry:@[@"确定"] alertControllerStyle:UIAlertControllerStyleAlert hiddenCancelButton:YES cancleStyle:UIAlertActionStyleCancel withController:[
-                                                                                                                                                                                                                             XHHelper sharedHelper].currentViewController indexBlock:^(NSInteger index, id object) {}];
+//                    [UIAlertController alertWithTitle:@"提示" message:@"暂无数据" titlesArry:@[@"确定"] alertControllerStyle:UIAlertControllerStyleAlert hiddenCancelButton:YES cancleStyle:UIAlertActionStyleCancel withController:[
+//                                                                                                                                                                                                                             XHHelper sharedHelper].currentViewController indexBlock:^(NSInteger index, id object) {}];
                 }
             }];
         }
@@ -143,7 +144,7 @@
                     [alertController addAction:[UIAlertAction actionWithTitle:@"选择相机" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
                                                 {
                                                     CameraManageViewController *manager=[[CameraManageViewController alloc] initWithCameraManageWithType:SourceTypeCamera setDeletate:self];
-                                                    [[XHHelper sharedHelper].currentViewController.navigationController presentViewController:manager animated:YES completion:nil];
+                                                    [[XHHelper sharedHelper].currentViewController presentViewController:manager animated:YES completion:nil];
                                                     
                                                 }]];
                     [alertController addAction:[UIAlertAction actionWithTitle:@"选择相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
@@ -166,7 +167,7 @@
                                                         
                                                         [self.collectionView setItemArray:self.dataArray];
                                                     };
-                                                    [[XHHelper sharedHelper].currentViewController.navigationController presentViewController:wphoto animated:YES completion:nil];
+                                                    [[XHHelper sharedHelper].currentViewController presentViewController:wphoto animated:YES completion:nil];
                                                 }]];
                     [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
                                                 {
@@ -179,7 +180,7 @@
                 case XHNewDynamicsVideoContentModelType:
                 {
                   
-                    [UIAlertController alertWithTitle:@"提示" message:@"选择类型" titlesArry:@[@"录制视频",@"从相册中选择"] alertControllerStyle:UIAlertControllerStyleActionSheet hiddenCancelButton:NO cancleStyle:UIAlertActionStyleCancel withController:[XHHelper sharedHelper].currentViewController indexBlock:^(NSInteger index, id object) {
+                    [UIAlertController actionSheetWithmessage:@"选择类型" titlesArry:@[@"录制视频",@"从相册中选择"] controller:[XHHelper sharedHelper].currentViewController indexBlock:^(NSInteger index, id object) {
                         switch (index) {
                             case 0:
                             {
@@ -192,7 +193,7 @@
                             case 1:
                             {
                                 VideoManagerViewController *video=[[VideoManagerViewController alloc] initWithVideoManageWithType:VideoSourceTypeSavedPhotosAlbum setDeletate:self];
-                                [[XHHelper sharedHelper].currentViewController.navigationController presentViewController:video animated:YES completion:nil];
+                                [[XHHelper sharedHelper].currentViewController presentViewController:video animated:YES completion:nil];
                             }
                                 break;
                         }
@@ -232,7 +233,7 @@
                                       if (success)
                                       {
                                           MAIN(^{
-                                              
+                                              [XHShowHUD hideHud];
                                               [self.imageNameArray addObject:imageName];
                                               if ([self.imageNameArray count] == [self.dataArray count])
                                               {
@@ -249,38 +250,36 @@
 //                                                  [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
 //                                                  [config setObject:[tArray componentsJoinedByString:@","] forKey:@"teacherId"];
 //                                                  [config setObject:[gArray componentsJoinedByString:@","] forKey:@"guardianId"];
-//                                                  [config setObject:videoUrlString forKey:@"vedioUrl"];
-//                                                  [config setObject:shootPicName forKey:@"vedioFirstPicUrl"];
                                                   [config postWithUrl:@"pmschool-teacher-api_/teacher/notice/add" sucess:^(id object, BOOL verifyObject)
                                                    
                                                    {
                                                        if (verifyObject)
                                                        {
-                                                           
+                                                           [[XHHelper sharedHelper].currentViewController.navigationController popViewControllerAnimated:YES];
                                                        }
                                                    } error:^(NSError *error){}];
                                               }
                                           });
-                                          
                                       }
-                                  } withProgressCallback:^(float progress)
-                                  {
-                                  }];
+                                      [XHShowHUD showNOHud:@"上传图片失败"];
+                                  } withProgressCallback:^(float progress){}];
                              }];
                         }
                         else
                         {
-                            [XHShowHUD showTextHud];
+                            //不上传图片
                             XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
-                            [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
+                            //                                                  [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
+                            //                                                  [config setObject:[tArray componentsJoinedByString:@","] forKey:@"teacherId"];
+                            //                                                  [config setObject:[gArray componentsJoinedByString:@","] forKey:@"guardianId"];
                             [config setObject:self.inputContent.text forKey:@"content"];
                             [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
-                            [config postWithUrl:@"zzjt-app-api_schoolWork001" sucess:^(id object, BOOL verifyObject)
-                             
+                            [config setObject:@"2" forKey:@"type"];
+                            [config postWithUrl:@"pmschool-teacher-api_/teacher/notice/add" sucess:^(id object, BOOL verifyObject)
                              {
                                  if (verifyObject)
                                  {
-                                     
+                                     [[XHHelper sharedHelper].currentViewController.navigationController popViewControllerAnimated:YES];
                                  }
                              } error:^(NSError *error){}];
                         }
@@ -291,43 +290,67 @@
                         
                     case XHNewDynamicsVideoContentModelType:
                     {
-                        [NSArray enumerateObjectsWithArray:self.dataArray usingBlock:^(XHPreviewModel *obj, NSUInteger idx, BOOL *stop)
-                         {
-                             NSString *imageName = [XHHelper createGuid];
-                             [XHHelper uploadImage:obj.previewImage name:imageName uploadCallback:^(BOOL success, NSError *error)
-                              {
-                                  if (success)
+                        if ([self.dataArray count])
+                        {
+                            [XHShowHUD showTextHud];
+                            [NSArray enumerateObjectsWithArray:self.dataArray usingBlock:^(XHPreviewModel *obj, NSUInteger idx, BOOL *stop)
+                             {
+                                 NSString *imageName = [NSString stringWithFormat:@"%@.png",[XHHelper createGuid]];
+                                 [XHHelper uploadImage:obj.previewImage name:imageName uploadCallback:^(BOOL success, NSError *error)
                                   {
-                                      MAIN(^{
+                                      if (success)
+                                      {
+                                          MAIN((^{
+                                               [XHShowHUD hideHud];
+                                              [self.imageNameArray addObject:imageName];
+                                              if ([self.imageNameArray count] == [self.dataArray count])
+                                              {
+                                                  [XHShowHUD showProgressHUD:@"上传视频..."];
+                                                  NSString *fileName = [NSString stringWithFormat:@"%@.mp4",[XHHelper createGuid]];
+                                                  [XHHelper uploadVideo:self.videoData name:fileName uploadCallback:^(BOOL success, NSError *error) {
+                                                      if (success)
+                                                      {
+                                                          [XHShowHUD showOKHud:@"视频上传成功"];
+                                                          XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
+                                                          [config setObject:self.inputContent.text forKey:@"content"];
+                                                          [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
+                                                          [config setObject:@"2" forKey:@"type"];
+                                                          //                                                  [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
+                                                          //                                                  [config setObject:[tArray componentsJoinedByString:@","] forKey:@"teacherId"];
+                                                          //                                                  [config setObject:[gArray componentsJoinedByString:@","] forKey:@"guardianId"];
+                                        [config setObject:fileName forKey:@"vedioUrl"];
+                                        [config setObject:imageName forKey:@"vedioFirstPicUrl"];
+                                                          [config postWithUrl:@"pmschool-teacher-api_/teacher/notice/add" sucess:^(id object, BOOL verifyObject)
+                                                           
+                                                           {
+                                                               if (verifyObject)
+                                                               {
+                                                                   [[XHHelper sharedHelper].currentViewController.navigationController popViewControllerAnimated:YES];
+                                                               }
+                                                           } error:^(NSError *error){}];
+                                                      }
+                                                      [XHShowHUD showOKHud:@"视频上传 失败"];
+                                                  } withProgressCallback:^(float progress){}];
+                                                  
+                                              }
+                                          }));
                                           
-                                          [self.imageNameArray addObject:imageName];
-                                          if ([self.imageNameArray count] == [self.dataArray count])
-                                          {
-                                              XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
-                                              [config setObject:self.inputContent.text forKey:@"content"];
-                                              [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
-                                              [config setObject:@"2" forKey:@"type"];
-                                              //                                                  [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
-                                              //                                                  [config setObject:[tArray componentsJoinedByString:@","] forKey:@"teacherId"];
-                                              //                                                  [config setObject:[gArray componentsJoinedByString:@","] forKey:@"guardianId"];
-                                              //                                                  [config setObject:videoUrlString forKey:@"vedioUrl"];
-                                              //                                                  [config setObject:shootPicName forKey:@"vedioFirstPicUrl"];
-                                              [config postWithUrl:@"pmschool-teacher-api_/teacher/notice/add" sucess:^(id object, BOOL verifyObject)
-                                               
-                                               {
-                                                   if (verifyObject)
-                                                   {
-                                                       
-                                                   }
-                                               } error:^(NSError *error){}];
-                                          }
-                                      });
-                                      
-                                  }
-                              } withProgressCallback:^(float progress)
-                              {
-                              }];
-                         }];
+                                      }
+                                      [XHShowHUD showNOHud:@"上传图片失败"];
+                                  } withProgressCallback:^(float progress){}];
+                             }];
+                        }
+                        else
+                        {
+                            //不上传视频
+                            
+                            
+                            
+                            
+                            
+                            
+                        }
+                       
                     }
                         break;
                 }
@@ -380,6 +403,7 @@
 -(void)videoPickerControllerdidFinishPickingMediaWithImage:(UIImage *)image videoData:(NSData *)videoData
 {
     [self.dataArray removeAllObjects];
+    self.videoData=videoData;
     XHPreviewModel *imageModel = [[XHPreviewModel alloc]init];
     [imageModel setPreviewImage:image];
     [imageModel setItemSize:CGSizeMake(100, 100)];
@@ -393,6 +417,7 @@
 -(void)videoStatrToMp4Finished:(NSData *)data image:(UIImage *)image
 {
     [self.dataArray removeAllObjects];
+     self.videoData=data;
     XHPreviewModel *imageModel = [[XHPreviewModel alloc]init];
     [imageModel setPreviewImage:image];
     [imageModel setItemSize:CGSizeMake(100, 100)];

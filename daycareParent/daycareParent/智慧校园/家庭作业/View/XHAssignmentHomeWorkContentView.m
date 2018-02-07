@@ -136,8 +136,7 @@
                 }
                 else
                 {
-                    [UIAlertController alertWithTitle:@"提示" message:@"暂无数据" titlesArry:@[@"确定"] alertControllerStyle:UIAlertControllerStyleAlert hiddenCancelButton:YES cancleStyle:UIAlertActionStyleCancel withController:[
-                                                                                                                                                                                                                             XHHelper sharedHelper].currentViewController indexBlock:^(NSInteger index, id object) {}];
+//                    [UIAlertController alertWithTitle:@"提示" message:@"暂无数据" titlesArry:@[@"确定"] alertControllerStyle:UIAlertControllerStyleAlert hiddenCancelButton:YES cancleStyle:UIAlertActionStyleCancel withController:[XHHelper sharedHelper].currentViewController indexBlock:^(NSInteger index, id object) {}];
                 }
             }];
         }
@@ -145,22 +144,11 @@
 #pragma mark case 2 选择科目
         case 2:
         {
-            [[XHUserInfo sharedUserInfo] getSubjectList:^(BOOL isOK, NSMutableArray *subjectListArry) {
-                if (isOK) {
-                    [UIAlertController alertSubjectListWithTitle:@"提示" message:@"选择科目列表" titlesArry:subjectListArry alertControllerStyle:UIAlertControllerStyleActionSheet hiddenCancelButton:NO cancleStyle:UIAlertActionStyleCancel withController:[
-                                                                                                                                                                                                                                                                                   XHHelper sharedHelper].currentViewController indexBlock:^(NSInteger index, XHSubjectListModel *object)
-                    {
-                        [self.subjectContent setSubjectListModel:object];
-                        [self.subjectContent setText:object.subjectName withNumberType:1 withAllType:NO];
-                        
-                    }];
-                }
-                else
-                {
-                    [UIAlertController alertWithTitle:@"提示" message:@"暂无数据" titlesArry:@[@"确定"] alertControllerStyle:UIAlertControllerStyleAlert hiddenCancelButton:YES cancleStyle:UIAlertActionStyleCancel withController:[
-                                                                                                                                                                                                                             XHHelper sharedHelper].currentViewController indexBlock:^(NSInteger index, id object) {}];
-                }
+            [UIAlertController alertSubjectListWithController:[XHHelper sharedHelper].currentViewController indexBlock:^(NSInteger index, XHSubjectListModel *object) {
+                [self.subjectContent setSubjectListModel:object];
+                [self.subjectContent setText:object.subjectName withNumberType:1 withAllType:NO];
             }];
+            
         }
             break;
 #pragma mark case 3 选择相册

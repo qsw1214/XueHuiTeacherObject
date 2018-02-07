@@ -159,34 +159,27 @@
             case 1:
             case 5:
         {
-            [[XHUserInfo sharedUserInfo] getSubjectList:^(BOOL isOK, NSMutableArray *subjectListArry) {
-                if (isOK) {
-                    [UIAlertController alertSubjectListWithTitle:@"提示" message:@"选择科目列表" titlesArry: [XHUserInfo sharedUserInfo].subjectListArry alertControllerStyle:UIAlertControllerStyleActionSheet hiddenCancelButton:NO cancleStyle:UIAlertActionStyleCancel withController:self indexBlock:^(NSInteger index, id object) {
-                        XHSubjectListModel *model=object;
-                        XHNewTextFieldTypeTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-                        cell.selectLabel.text=model.subjectName;
-                        switch (indexPath.row) {
-                            case 1:
-                                
-                            {
-                                _formerSubjectId=model.ID;
-                            }
-                                break;
-                                
-                            case 5:
-                            {
-                                _appointedSubjectId=model.ID;
-                            }
-                                break;
-                        }
-                    }];
-                }
-                else
-                {
-                    [UIAlertController alertWithTitle:@"提示" message:@"暂无数据" titlesArry:@[@"确定"] alertControllerStyle:UIAlertControllerStyleAlert hiddenCancelButton:YES cancleStyle:UIAlertActionStyleCancel withController:self indexBlock:^(NSInteger index, id object) {}];
+           
+            [UIAlertController alertSubjectListWithController:self indexBlock:^(NSInteger index, id object) {
+                XHSubjectListModel *model=object;
+                XHNewTextFieldTypeTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+                cell.selectLabel.text=model.subjectName;
+                switch (indexPath.row) {
+                    case 1:
+                        
+                    {
+                        _formerSubjectId=model.ID;
+                    }
+                        break;
+                        
+                    case 5:
+                    {
+                        _appointedSubjectId=model.ID;
+                    }
+                        break;
                 }
             }];
-           
+            
         }
             break;
         case 2:

@@ -82,7 +82,7 @@
         }
         else
         {
-          [UIAlertController alertWithTitle:@"提示" message:@"暂无数据" titlesArry:@[@"确定"] alertControllerStyle:UIAlertControllerStyleAlert hiddenCancelButton:YES cancleStyle:UIAlertActionStyleCancel withController:self indexBlock:^(NSInteger index, id object) {}];
+//          [UIAlertController alertWithTitle:@"提示" message:@"暂无数据" titlesArry:@[@"确定"] alertControllerStyle:UIAlertControllerStyleAlert hiddenCancelButton:YES cancleStyle:UIAlertActionStyleCancel withController:self indexBlock:^(NSInteger index, id object) {}];
         }
     }];
 }

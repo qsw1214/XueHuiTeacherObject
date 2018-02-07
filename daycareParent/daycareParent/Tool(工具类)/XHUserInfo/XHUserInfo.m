@@ -99,6 +99,7 @@ static XHUserInfo *userInfo = nil;
             }
             else
             {
+                [XHShowHUD showNOHud:@"暂无数据"];
                 calssListBock(NO,self.classListArry);
             }
             
@@ -145,6 +146,7 @@ static XHUserInfo *userInfo = nil;
             }
             else
             {
+                [XHShowHUD showNOHud:@"暂无数据"];
                 subjectListBock(NO,self.subjectListArry);
             }
             

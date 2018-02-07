@@ -52,7 +52,7 @@
 + (void)uploadImage:(UIImage *)image name:(NSString *)name uploadCallback:(void (^)(BOOL success, NSError *error))uploadCallback withProgressCallback:(void (^)(float progress))progressCallback;
 + (NSString *)ageFarment:(NSDate *)date;
 
-+ (void)uploadVideo:(NSData *)videoData name:(NSString *)name uploadCallback:(void (^)(BOOL, NSError *))uploadCallback withProgressCallback:(void (^)(float))progressCallback;
++ (void)uploadVideo:(NSData *)videoData name:(NSString *)name uploadCallback:(void (^)(BOOL success, NSError * error))uploadCallback withProgressCallback:(void (^)(float progress))progressCallback;
 /**
  *创建UUID
  */
