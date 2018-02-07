@@ -109,6 +109,33 @@
 }
 
 #pragma mark - Getter / Setter
+-(BaseButtonControl *)addPhotoContent
+{
+    if (!_addPhotoContent)
+    {
+        _addPhotoContent = [[BaseButtonControl alloc]init];
+        [_addPhotoContent setNumberImageView:1];
+        [_addPhotoContent setImage:@"addhomework" withNumberType:0 withAllType:NO];
+        [_addPhotoContent setIconImageViewBackGroundColor:RGB(238, 238, 238) withNumberType:0 withAllType:NO];
+        [_addPhotoContent addTarget:self action:@selector(controlAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_addPhotoContent setTag:1];
+    }
+    return _addPhotoContent;
+}
+
+-(BaseTextView *)inputContent
+{
+    if (!_inputContent)
+    {
+        _inputContent = [[BaseTextView alloc]init];
+        [_inputContent setPlaceholder:@"请输入作业内容"];
+        [_inputContent setTextDeletage:self];
+        [_inputContent setPlaceholderColor:RGB(169.0, 169.0, 169.0)];
+    }
+    return _inputContent;
+}
+
+
 -(BaseButtonControl *)recipientContent
 {
     if (!_recipientContent)
@@ -129,35 +156,12 @@
         [_recipientContent setText:@"请选择" withNumberType:1 withAllType:NO];
         [_recipientContent addTarget:self action:@selector(controlAction:) forControlEvents:UIControlEventTouchUpInside];
         [_recipientContent setItemColor:NO];
+        [_recipientContent setTag:1];
     }
     return _recipientContent;
 }
 
 
--(BaseButtonControl *)addPhotoContent
-{
-    if (!_addPhotoContent)
-    {
-        _addPhotoContent = [[BaseButtonControl alloc]init];
-        [_addPhotoContent setNumberImageView:1];
-        [_addPhotoContent setImage:@"addhomework" withNumberType:0 withAllType:NO];
-        [_addPhotoContent setIconImageViewBackGroundColor:RGB(238, 238, 238) withNumberType:0 withAllType:NO];
-        [_addPhotoContent addTarget:self action:@selector(controlAction:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _addPhotoContent;
-}
-
--(BaseTextView *)inputContent
-{
-    if (!_inputContent)
-    {
-        _inputContent = [[BaseTextView alloc]init];
-        [_inputContent setPlaceholder:@"请输入作业内容"];
-        [_inputContent setTextDeletage:self];
-        [_inputContent setPlaceholderColor:RGB(169.0, 169.0, 169.0)];
-    }
-    return _inputContent;
-}
 
 
 -(BaseButtonControl *)submitContent
