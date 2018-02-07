@@ -121,9 +121,6 @@
 #pragma mark case 1 选择班级
         case 1:
         {
-            
-            
-            
             [[XHUserInfo sharedUserInfo] getClassList:^(BOOL isOK, NSMutableArray *classListArry) {
                 if (isOK)
                 {
@@ -219,7 +216,6 @@
             }
             else if ([self.inputContent.text isEqualToString:@""])
             {
-                NSLog(@"%@",self.inputContent.text);
                 [XHShowHUD showNOHud:@"内容不能为空"];
             }
             else
@@ -227,13 +223,41 @@
                 
                 if ([self.dataArray count])
                 {
-                    [NSArray enumerateObjectsWithArray:self.dataArray usingBlock:^(UIImage *obj, NSUInteger idx, BOOL *stop)
+                    [XHShowHUD showTextHud];
+                    [NSArray enumerateObjectsWithArray:self.dataArray usingBlock:^(XHPreviewModel *obj, NSUInteger idx, BOOL *stop)
                     {
-                        [XHHelper uploadImage:obj name:[XHHelper createGuid] uploadCallback:^(BOOL success, NSError *error)
+                        NSString *imageName = [XHHelper createGuid];
+                        [XHHelper uploadImage:obj.previewImage name:imageName uploadCallback:^(BOOL success, NSError *error)
                      {
                          if (success)
                          {
-                             
+                             MAIN(^{
+                                 
+                                 [self.imageNameArray addObject:imageName];
+                                 if ([self.imageNameArray count] == [self.dataArray count])
+                                 {
+                                     XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
+                                     [config setObject:[self.imageNameArray objectAtIndex:0] forKey:@"picUrl1"];
+                                     [config setObject:[self.imageNameArray objectAtIndex:1] forKey:@"picUrl2"];
+                                     [config setObject:[self.imageNameArray objectAtIndex:2] forKey:@"picUrl3"];
+                                     [config setObject:[self.imageNameArray objectAtIndex:3] forKey:@"picUrl4"];
+                                     [config setObject:[self.imageNameArray objectAtIndex:4] forKey:@"picUrl5"];
+                                     [config setObject:[self.imageNameArray objectAtIndex:5] forKey:@"picUrl6"];
+                                     [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
+                                     [config setObject:self.subjectContent.subjectListModel.ID forKey:@"subjectId"];
+                                     [config setObject:self.inputContent.text forKey:@"content"];
+                                     [config setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
+                                     [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
+                                     [config postWithUrl:@"zzjt-app-api_schoolWork001" sucess:^(id object, BOOL verifyObject)
+                                      
+                                      {
+                                          if (verifyObject)
+                                          {
+                                              
+                                          }
+                                      } error:^(NSError *error){}];
+                                 }
+                             });
                              
                          }
                      } withProgressCallback:^(float progress)
@@ -253,21 +277,11 @@
                     [config postWithUrl:@"zzjt-app-api_schoolWork001" sucess:^(id object, BOOL verifyObject)
                      
                      {
-                         [XHShowHUD hideHud];
                          if (verifyObject)
                          {
-                             [XHShowHUD showOKHud:@"发布成功"];
+                             
                          }
-                         else
-                         {
-                             [XHShowHUD showNOHud:@"发布失败!"];
-                         }
-                         
-                     } error:^(NSError *error)
-                    {
-                        [XHShowHUD hideHud];
-                        [XHShowHUD showNOHud:@"网络异常!"];
-                     }];
+                     } error:^(NSError *error){}];
                 }
                 
                 
@@ -293,6 +307,26 @@
         textView.text = [textView.text substringToIndex:200];
         [self.limitLabel setText:@"200/200"];
         
+    }
+}
+
+#pragma mark CameraManageDeletage
+-(void)imagePickerControllerdidFinishPickingMediaWithImage:(nonnull UIImage*)image
+{
+    if ([self.dataArray count] >= 6)
+    {
+        [XHShowHUD showNOHud:@"图片已达到上限(6张)"];
+    }
+    else
+    {
+        XHPreviewModel *imageModel = [[XHPreviewModel alloc]init];
+        [imageModel setPreviewImage:image];
+        [imageModel setItemSize:CGSizeMake(100, 100)];
+        [imageModel setType:XHPreviewImagesType];
+        [imageModel setTage:0];
+        [imageModel setIndexTage:0];
+        [self.dataArray addObject:imageModel];
+        [self.collectionView setItemArray:self.dataArray];
     }
 }
 

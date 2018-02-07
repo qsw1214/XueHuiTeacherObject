@@ -106,7 +106,7 @@
         case HomeWorkDetailsType:
         {
             [self.headerControl resetFrame:CGRectMake(10.0, 10.0, 60.0, 60.0)];
-            [self.userNameLael setFrame:CGRectMake(self.headerControl.right+10.0, self.headerControl.top, 60.0, 30.0)];
+            [self.userNameLael setFrame:CGRectMake(self.headerControl.right+10.0, self.headerControl.top, 120.0, 30.0)];
             [self.subjectLabel setFrame:CGRectMake(self.userNameLael.right+5.0, self.userNameLael.top+5, itemFrame.subjectSize.width, (self.userNameLael.height-10.0))];
             [self.subjectLabel setLayerCornerRadius:(self.subjectLabel.height/2.0)];
             [self.subjectLabel setBackgroundColor:itemFrame.model.subjectColor];
