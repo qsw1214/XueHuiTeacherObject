@@ -12,7 +12,7 @@
 @implementation UIAlertController (Category)
 +(UIAlertController *)alertWithTitle:(NSString *)title message:(NSString *)message titlesArry:(NSArray *)titleArry alertControllerStyle:(UIAlertControllerStyle)alertControllerStyle hiddenCancelButton:(BOOL)hiddenCancelButton cancleStyle:(UIAlertActionStyle)cancleStyle withController:(UIViewController *)controller indexBlock:(indexBlock)indexBlock
 {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:alertControllerStyle];
    
     for (int i=0; i<titleArry.count; i++)
     {

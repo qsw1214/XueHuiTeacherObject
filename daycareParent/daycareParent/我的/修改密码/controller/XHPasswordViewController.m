@@ -71,7 +71,8 @@
             [XHShowHUD showOKHud:@"修改成功!"];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:AutoLogin];
             XHLoginViewController *login=[XHLoginViewController new];
-            [self.navigationController pushViewController:login animated:YES];
+            UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:login];
+            [kWindow setRootViewController:nav];
         }
     } error:^(NSError *error) {
        

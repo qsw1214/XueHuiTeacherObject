@@ -32,6 +32,5 @@
 #import "XHBackLabel.h"
 #import "XHNetWorkConfig.h"
 #import "XHUserInfo.h"
-#import "XHGuardianInfo.h"
 #import "XHHelper.h"
 #endif /* Header_h */

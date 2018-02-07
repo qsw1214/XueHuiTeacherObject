@@ -13,8 +13,6 @@
 #import "XHSetTableViewCell.h"
 #import "XHUserViewController.h"
 #import "XHSetViewController.h"
-#import "XHBindViewController.h"
-#import "XHStudentInfoViewController.h"
 #import "XHVIPViewController.h"
 #import "XHStudyRecordViewController.h"
 #import "XHMyAddressViewController.h"

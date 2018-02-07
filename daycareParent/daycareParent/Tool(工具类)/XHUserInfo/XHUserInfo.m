@@ -49,8 +49,6 @@ static XHUserInfo *userInfo = nil;
     _isActive=[dic objectItemKey:@"isActive"];
     _isRoot=[dic objectItemKey:@"isRoot"];
     _schoolId=[dic objectItemKey:@"relationCode"];
-    _primaryFamilyId=[[object objectItemKey:@"propValue"] objectItemKey:@"primaryFamilyId"];
-    _guardianModel=[[XHGuardianInfo alloc] initWithDic:[[object objectItemKey:@"propValue"] objectItemKey:@"guardian"]];
     switch ([self.sex integerValue])
     {
         case 0:
@@ -248,16 +246,6 @@ static XHUserInfo *userInfo = nil;
     }
 }
 
-
-
--(NSMutableArray *)childListArry
-{
-    if (!_childListArry)
-    {
-        _childListArry = [NSMutableArray array];
-    }
-    return _childListArry;
-}
 -(NSMutableArray *)classListArry
 {
     if (!_classListArry)

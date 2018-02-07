@@ -120,12 +120,12 @@
 -(void)refreshHeaderAction
 {
     [self setPageNumber:1];
-    [self getDynamicsWithGuardianId:[XHUserInfo sharedUserInfo].guardianModel.guardianId withRefreshType:HeaderRefresh];
+    [self getDynamicsWithGuardianId:[XHUserInfo sharedUserInfo].selfId withRefreshType:HeaderRefresh];
 }
 
 -(void)refreshFooterAction
 {
-    [self getDynamicsWithGuardianId:[XHUserInfo sharedUserInfo].guardianModel.guardianId withRefreshType:FooterRefresh];
+    [self getDynamicsWithGuardianId:[XHUserInfo sharedUserInfo].selfId withRefreshType:FooterRefresh];
 }
 
 

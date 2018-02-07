@@ -8,8 +8,7 @@
 
 #import "XHDynamicsViewController.h"
 #import "XHDynamicsContentView.h"
-
-
+#import "XHNewDynamicsViewController.h"
 
 //!< 开始教师端开发标记测试
 
@@ -27,7 +26,7 @@
 {
     [super viewDidLoad];
     [self setNavtionTitle:@"班级动态"];
-
+    [self setItemContentType:NavigationTitleType withItemType:NavigationItemRightype withIconName:nil withTitle:@"新增"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,7 +56,14 @@
     }
     return _contentView;
 }
-
+-(void)rightItemAction:(BaseNavigationControlItem *)sender
+{
+    [UIAlertController alertWithTitle:@"提示" message:@"请选择类型" titlesArry:@[@"发送图片",@"发送视频"] alertControllerStyle:UIAlertControllerStyleActionSheet hiddenCancelButton:NO cancleStyle:UIAlertActionStyleCancel withController:self indexBlock:^(NSInteger index, id object) {
+        XHNewDynamicsViewController *new=[XHNewDynamicsViewController new];
+        new.index=index;
+        [self.navigationController pushViewController:new animated:YES];
+    }];
+}
 
 
 @end

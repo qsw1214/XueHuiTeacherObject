@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 typedef void(^indexBlock)(NSInteger index,id object);
+
+
+typedef NS_ENUM(NSInteger,XHSubjectAndClassModelType)
+{
+    XHSubjectListModelType=1,//!< 科目列表
+
+    XHClassListModelType=2,//!< 班级列表
+
+}
+;
+
 @interface UIAlertController (Category)
 
 /**

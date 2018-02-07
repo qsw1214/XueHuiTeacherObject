@@ -25,7 +25,6 @@
 {
     [super viewDidLoad];
     [self setNavtionTitle:@"请假"];
-    [self setItemContentType:NavigationTitleType withItemType:NavigationItemRightype withIconName:nil withTitle:@"请假记录"];
    
 }
 
@@ -43,28 +42,6 @@
         [self.view addSubview:self.contentView];
         [self.contentView resetFrame:CGRectMake(0, self. navigationView.bottom, SCREEN_WIDTH, SCREEN_HEIGHT-self.navigationView.height)];
     }
-}
-
-
-#pragma mark - Action Method
--(void)rightItemAction:(BaseNavigationControlItem *)sender
-{
-    [[XHUserInfo sharedUserInfo].childListArry enumerateObjectsUsingBlock:^(XHChildListModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop)
-     {
-         
-         switch (obj.markType)
-         {
-             case ChildListSelectType:
-             {
-                 XHLeaveRecordViewController *leaveRecord = [[XHLeaveRecordViewController alloc]init];
-                 [leaveRecord setModel:obj];
-                 [self.navigationController pushViewController:leaveRecord animated:YES];
-             }
-                 break;
-             case ChildListNormalType:
-                 break;
-         }
-     }];
 }
 
 
