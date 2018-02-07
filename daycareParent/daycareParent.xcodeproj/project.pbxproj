@@ -359,7 +359,16 @@
 		8C2311671FE22C330013F476 /* XHVIPModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2311661FE22C330013F476 /* XHVIPModel.m */; };
 		8C33144D202A993B00F504A9 /* XHNewDynamicsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C33144C202A993B00F504A9 /* XHNewDynamicsViewController.m */; };
 		8C331450202AA15300F504A9 /* XHNewDynamicsContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C33144F202AA15300F504A9 /* XHNewDynamicsContentView.m */; };
-		8C331457202AAF3800F504A9 /* VideoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C331456202AAF3800F504A9 /* VideoManager.m */; };
+		8C331457202AAF3800F504A9 /* VideoManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C331456202AAF3800F504A9 /* VideoManagerViewController.m */; };
+		8C331465202AC83200F504A9 /* changeCamer.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C331459202AC83100F504A9 /* changeCamer.png */; };
+		8C331466202AC83200F504A9 /* flashOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C33145A202AC83100F504A9 /* flashOff.png */; };
+		8C331467202AC83200F504A9 /* flashOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C33145B202AC83100F504A9 /* flashOn.png */; };
+		8C331468202AC83200F504A9 /* focusImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C33145C202AC83100F504A9 /* focusImg.png */; };
+		8C331469202AC83200F504A9 /* PlayVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C33145E202AC83100F504A9 /* PlayVideoViewController.m */; };
+		8C33146A202AC83200F504A9 /* shootFinish.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C33145F202AC83100F504A9 /* shootFinish.png */; };
+		8C33146B202AC83200F504A9 /* ShootVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C331461202AC83100F504A9 /* ShootVideoViewController.m */; };
+		8C33146C202AC83200F504A9 /* UIView+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C331463202AC83100F504A9 /* UIView+Tools.m */; };
+		8C33146D202AC83200F504A9 /* videoPlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C331464202AC83100F504A9 /* videoPlay.png */; };
 		8C37D3401FE8A8EF00F157D1 /* XHIMNoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C37D33F1FE8A8EF00F157D1 /* XHIMNoticeModel.m */; };
 		8C3E55AD1FD51A330013002A /* XHCustomPayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3E55AC1FD51A330013002A /* XHCustomPayView.m */; };
 		8C3E55B11FD5215F0013002A /* XHTPayTitleableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3E55AF1FD5215F0013002A /* XHTPayTitleableViewCell.m */; };
@@ -1232,8 +1241,20 @@
 		8C33144C202A993B00F504A9 /* XHNewDynamicsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNewDynamicsViewController.m; sourceTree = "<group>"; };
 		8C33144E202AA15300F504A9 /* XHNewDynamicsContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNewDynamicsContentView.h; sourceTree = "<group>"; };
 		8C33144F202AA15300F504A9 /* XHNewDynamicsContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNewDynamicsContentView.m; sourceTree = "<group>"; };
-		8C331455202AAF3800F504A9 /* VideoManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoManager.h; sourceTree = "<group>"; };
-		8C331456202AAF3800F504A9 /* VideoManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoManager.m; sourceTree = "<group>"; };
+		8C331455202AAF3800F504A9 /* VideoManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoManagerViewController.h; sourceTree = "<group>"; };
+		8C331456202AAF3800F504A9 /* VideoManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoManagerViewController.m; sourceTree = "<group>"; };
+		8C331459202AC83100F504A9 /* changeCamer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = changeCamer.png; sourceTree = "<group>"; };
+		8C33145A202AC83100F504A9 /* flashOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flashOff.png; sourceTree = "<group>"; };
+		8C33145B202AC83100F504A9 /* flashOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flashOn.png; sourceTree = "<group>"; };
+		8C33145C202AC83100F504A9 /* focusImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = focusImg.png; sourceTree = "<group>"; };
+		8C33145D202AC83100F504A9 /* PlayVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayVideoViewController.h; sourceTree = "<group>"; };
+		8C33145E202AC83100F504A9 /* PlayVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayVideoViewController.m; sourceTree = "<group>"; };
+		8C33145F202AC83100F504A9 /* shootFinish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shootFinish.png; sourceTree = "<group>"; };
+		8C331460202AC83100F504A9 /* ShootVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShootVideoViewController.h; sourceTree = "<group>"; };
+		8C331461202AC83100F504A9 /* ShootVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShootVideoViewController.m; sourceTree = "<group>"; };
+		8C331462202AC83100F504A9 /* UIView+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Tools.h"; sourceTree = "<group>"; };
+		8C331463202AC83100F504A9 /* UIView+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Tools.m"; sourceTree = "<group>"; };
+		8C331464202AC83100F504A9 /* videoPlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = videoPlay.png; sourceTree = "<group>"; };
 		8C37D33E1FE8A8EF00F157D1 /* XHIMNoticeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHIMNoticeModel.h; sourceTree = "<group>"; };
 		8C37D33F1FE8A8EF00F157D1 /* XHIMNoticeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHIMNoticeModel.m; sourceTree = "<group>"; };
 		8C3E55AB1FD51A330013002A /* XHCustomPayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHCustomPayView.h; sourceTree = "<group>"; };
@@ -2432,6 +2453,7 @@
 		4B80F2001FCBE43E00BC7B52 /* Tool(工具类) */ = {
 			isa = PBXGroup;
 			children = (
+				8C331458202AC83100F504A9 /* VideoHelper */,
 				8C331451202AAEAE00F504A9 /* VdeoManager */,
 				4B8718F52024577B0023A54C /* XHAddressBookHelper */,
 				8C7AE70C1FE795ED00BE7A02 /* ping++ */,
@@ -3243,10 +3265,29 @@
 		8C331451202AAEAE00F504A9 /* VdeoManager */ = {
 			isa = PBXGroup;
 			children = (
-				8C331455202AAF3800F504A9 /* VideoManager.h */,
-				8C331456202AAF3800F504A9 /* VideoManager.m */,
+				8C331455202AAF3800F504A9 /* VideoManagerViewController.h */,
+				8C331456202AAF3800F504A9 /* VideoManagerViewController.m */,
 			);
 			path = VdeoManager;
+			sourceTree = "<group>";
+		};
+		8C331458202AC83100F504A9 /* VideoHelper */ = {
+			isa = PBXGroup;
+			children = (
+				8C331459202AC83100F504A9 /* changeCamer.png */,
+				8C33145A202AC83100F504A9 /* flashOff.png */,
+				8C33145B202AC83100F504A9 /* flashOn.png */,
+				8C33145C202AC83100F504A9 /* focusImg.png */,
+				8C33145D202AC83100F504A9 /* PlayVideoViewController.h */,
+				8C33145E202AC83100F504A9 /* PlayVideoViewController.m */,
+				8C33145F202AC83100F504A9 /* shootFinish.png */,
+				8C331460202AC83100F504A9 /* ShootVideoViewController.h */,
+				8C331461202AC83100F504A9 /* ShootVideoViewController.m */,
+				8C331462202AC83100F504A9 /* UIView+Tools.h */,
+				8C331463202AC83100F504A9 /* UIView+Tools.m */,
+				8C331464202AC83100F504A9 /* videoPlay.png */,
+			);
+			path = VideoHelper;
 			sourceTree = "<group>";
 		};
 		8C3E55BB1FD5494B0013002A /* 学习记录 */ = {
@@ -4076,17 +4117,21 @@
 				8CB5A25C1FD7825D008E97D8 /* XHNameTableViewCell.xib in Resources */,
 				8C7E98101FECE8C80096288E /* AMap.bundle in Resources */,
 				8C7AE72F1FE795ED00BE7A02 /* AlipaySDK.bundle in Resources */,
+				8C331465202AC83200F504A9 /* changeCamer.png in Resources */,
 				8C7EF53A1FE0BBFD00C029F2 /* 37x-Wrong@2x.png in Resources */,
 				8C7EF5391FE0BBFD00C029F2 /* 37x-Wrong.png in Resources */,
 				4B80F1E01FCBE3F700BC7B52 /* Assets.xcassets in Resources */,
 				8CCD7E281FD0F3B000F7F54E /* XHChagePhoneTableViewCell.xib in Resources */,
 				8C3E55B71FD5216F0013002A /* XHPayTableViewCell.xib in Resources */,
+				8C331467202AC83200F504A9 /* flashOn.png in Resources */,
 				4B3800FB20075DF3004E74AC /* pageControlCurrentDot@3x.png in Resources */,
+				8C33146D202AC83200F504A9 /* videoPlay.png in Resources */,
 				8CB5A26E1FD7BB8F008E97D8 /* XHAddAdressViewController.xib in Resources */,
 				8CC7648F200CAA69007887C7 /* XHNewHeardTableViewCell.xib in Resources */,
 				8C8336EE1FDCD6A000F48A25 /* RCConfig.plist in Resources */,
 				8C7AE73F1FE795ED00BE7A02 /* Pingpp.bundle in Resources */,
 				4BCEB73A2029750000ED2829 /* wphoto_select_no@2x.png in Resources */,
+				8C331468202AC83200F504A9 /* focusImg.png in Resources */,
 				8C6240891FD8D2B800E6C031 /* XHComplieAddressViewController.xib in Resources */,
 				8C007D7420107EDF00DD0635 /* XHHistoryDetailTableViewCell.xib in Resources */,
 				4B3800FE20075DF3004E74AC /* pageControlDot@3x.png in Resources */,
@@ -4098,6 +4143,7 @@
 				8CB5A27D1FD7DF35008E97D8 /* area.plist in Resources */,
 				8CC7648A200CA0BE007887C7 /* XHNewTextFieldTypeTableViewCell.xib in Resources */,
 				4B3800FD20075DF3004E74AC /* pageControlCurrentDot@2x.png in Resources */,
+				8C33146A202AC83200F504A9 /* shootFinish.png in Resources */,
 				8CB5A27C1FD7DF35008E97D8 /* city.plist in Resources */,
 				4B80F31A1FCBFD6F00BC7B52 /* Info.plist in Resources */,
 				8C8336F01FDCD6A000F48A25 /* release_notes_ios.txt in Resources */,
@@ -4112,6 +4158,7 @@
 				4B34187B1FFDC14C00A5EC56 /* ZFPlayer.bundle in Resources */,
 				4B577FE51FF63FB30023ACBC /* README.md in Resources */,
 				8C5EB0BF1FCFEF6C002ED0D7 /* XHPasswordViewController.xib in Resources */,
+				8C331466202AC83200F504A9 /* flashOff.png in Resources */,
 				8CCD7E201FD0EE0D00F7F54E /* XHChagePhoneViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4135,6 +4182,7 @@
 				8CBA36462011D7B200485643 /* XHCustomDatePickerView.m in Sources */,
 				4B3418761FFDC14C00A5EC56 /* UIView+CustomControlView.m in Sources */,
 				4B577FE31FF63FB30023ACBC /* View+MASAdditions.m in Sources */,
+				8C331469202AC83200F504A9 /* PlayVideoViewController.m in Sources */,
 				8CB5A2681FD79DEF008E97D8 /* XHMyAddressViewController.m in Sources */,
 				8C8081731FCEABE600C7945A /* XHBaseBtn.m in Sources */,
 				4B577FDB1FF63FB30023ACBC /* MASCompositeConstraint.m in Sources */,
@@ -4196,6 +4244,7 @@
 				4B577FA41FF5C4F60023ACBC /* XHNoticeDetailViewController.m in Sources */,
 				4B80F2461FCBF01B00BC7B52 /* BaseTextView.m in Sources */,
 				4B80F3181FCBFD6F00BC7B52 /* EXTRuntimeExtensions.m in Sources */,
+				8C33146B202AC83200F504A9 /* ShootVideoViewController.m in Sources */,
 				4B80F2D21FCBF04F00BC7B52 /* UIImage+ForceDecode.m in Sources */,
 				4B577FDD1FF63FB30023ACBC /* MASConstraintMaker.m in Sources */,
 				8C2311671FE22C330013F476 /* XHVIPModel.m in Sources */,
@@ -4407,6 +4456,7 @@
 				4B3418F61FFF14F100A5EC56 /* XHVideoControl.m in Sources */,
 				8CC7648E200CAA69007887C7 /* XHNewHeardTableViewCell.m in Sources */,
 				4BCEB72120294FF200ED2829 /* XHAssignmentHomeWorkCollectionView.m in Sources */,
+				8C33146C202AC83200F504A9 /* UIView+Tools.m in Sources */,
 				4B9110781FD7B9E600841505 /* XHSyllabusCell.m in Sources */,
 				8C331450202AA15300F504A9 /* XHNewDynamicsContentView.m in Sources */,
 				4BB792E01FD798B000E0ED72 /* BaseMenuModel.m in Sources */,
@@ -4457,7 +4507,7 @@
 				4B4D7FE920198A79001D0BB0 /* XHParentAddressBookSectionBar.m in Sources */,
 				4B4D7FF8201B2533001D0BB0 /* XHAddNoticeViewController.m in Sources */,
 				4BB792C61FD7923C00E0ED72 /* XHSyllabusFrame.m in Sources */,
-				8C331457202AAF3800F504A9 /* VideoManager.m in Sources */,
+				8C331457202AAF3800F504A9 /* VideoManagerViewController.m in Sources */,
 				8C79740A1FE772A700AF6F6A /* NYXImagesHelper.m in Sources */,
 				8C0CCF7E1FFF16FE0008C0CE /* WebViewJavascriptBridge.m in Sources */,
 				4B523BD81FD1579B006DD565 /* XHAskforLeaveViewController.m in Sources */,

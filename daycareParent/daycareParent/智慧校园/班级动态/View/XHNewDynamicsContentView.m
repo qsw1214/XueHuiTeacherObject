@@ -11,10 +11,10 @@
 #import "CameraManageViewController.h"
 #import "WPhotoViewController.h"
 #import "XHPreviewModel.h"
+#import "VideoManagerViewController.h"
+#import "ShootVideoViewController.h"
 
-
-
-@interface XHNewDynamicsContentView () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,BaseTextViewDeletage>
+@interface XHNewDynamicsContentView () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,BaseTextViewDeletage,ShootVideoViewControllerDelegate,VideoManagerViewControllerDeletage>
 
 @property (nonatomic,strong) BaseButtonControl *classContent; //!< 接收人
 @property (nonatomic,strong) BaseButtonControl *addPhotoContent; //!< 类别
@@ -183,13 +183,16 @@
                         switch (index) {
                             case 0:
                             {
-                                
+                                ShootVideoViewController *shoot = [[ShootVideoViewController alloc] init];
+                                shoot.delegate = self;
+                                [[XHHelper sharedHelper].currentViewController presentViewController:shoot animated:YES completion:nil];
                             }
                                 break;
                                 
                             case 1:
                             {
-                                
+                                VideoManagerViewController *video=[[VideoManagerViewController alloc] initWithVideoManageWithType:VideoSourceTypeSavedPhotosAlbum setDeletate:self];
+                                [[XHHelper sharedHelper].currentViewController.navigationController presentViewController:video animated:YES completion:nil];
                             }
                                 break;
                         }
@@ -240,11 +243,15 @@
                                                   [config setObject:[self.imageNameArray objectAtIndex:3] forKey:@"picUrl4"];
                                                   [config setObject:[self.imageNameArray objectAtIndex:4] forKey:@"picUrl5"];
                                                   [config setObject:[self.imageNameArray objectAtIndex:5] forKey:@"picUrl6"];
-                                                  [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
                                                   [config setObject:self.inputContent.text forKey:@"content"];
-                                                  [config setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
-                                                  [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
-                                                  [config postWithUrl:@"zzjt-app-api_schoolWork001" sucess:^(id object, BOOL verifyObject)
+                                                  [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
+                                                  [config setObject:@"2" forKey:@"type"];
+//                                                  [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
+//                                                  [config setObject:[tArray componentsJoinedByString:@","] forKey:@"teacherId"];
+//                                                  [config setObject:[gArray componentsJoinedByString:@","] forKey:@"guardianId"];
+//                                                  [config setObject:videoUrlString forKey:@"vedioUrl"];
+//                                                  [config setObject:shootPicName forKey:@"vedioFirstPicUrl"];
+                                                  [config postWithUrl:@"pmschool-teacher-api_/teacher/notice/add" sucess:^(id object, BOOL verifyObject)
                                                    
                                                    {
                                                        if (verifyObject)
@@ -267,8 +274,7 @@
                             XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
                             [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
                             [config setObject:self.inputContent.text forKey:@"content"];
-                            [config setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
-                            [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
+                            [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
                             [config postWithUrl:@"zzjt-app-api_schoolWork001" sucess:^(id object, BOOL verifyObject)
                              
                              {
@@ -285,7 +291,43 @@
                         
                     case XHNewDynamicsVideoContentModelType:
                     {
-                        
+                        [NSArray enumerateObjectsWithArray:self.dataArray usingBlock:^(XHPreviewModel *obj, NSUInteger idx, BOOL *stop)
+                         {
+                             NSString *imageName = [XHHelper createGuid];
+                             [XHHelper uploadImage:obj.previewImage name:imageName uploadCallback:^(BOOL success, NSError *error)
+                              {
+                                  if (success)
+                                  {
+                                      MAIN(^{
+                                          
+                                          [self.imageNameArray addObject:imageName];
+                                          if ([self.imageNameArray count] == [self.dataArray count])
+                                          {
+                                              XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
+                                              [config setObject:self.inputContent.text forKey:@"content"];
+                                              [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
+                                              [config setObject:@"2" forKey:@"type"];
+                                              //                                                  [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
+                                              //                                                  [config setObject:[tArray componentsJoinedByString:@","] forKey:@"teacherId"];
+                                              //                                                  [config setObject:[gArray componentsJoinedByString:@","] forKey:@"guardianId"];
+                                              //                                                  [config setObject:videoUrlString forKey:@"vedioUrl"];
+                                              //                                                  [config setObject:shootPicName forKey:@"vedioFirstPicUrl"];
+                                              [config postWithUrl:@"pmschool-teacher-api_/teacher/notice/add" sucess:^(id object, BOOL verifyObject)
+                                               
+                                               {
+                                                   if (verifyObject)
+                                                   {
+                                                       
+                                                   }
+                                               } error:^(NSError *error){}];
+                                          }
+                                      });
+                                      
+                                  }
+                              } withProgressCallback:^(float progress)
+                              {
+                              }];
+                         }];
                     }
                         break;
                 }
@@ -333,6 +375,32 @@
         [self.dataArray addObject:imageModel];
         [self.collectionView setItemArray:self.dataArray];
     }
+}
+#pragma mark VideoManageDeletage
+-(void)videoPickerControllerdidFinishPickingMediaWithImage:(UIImage *)image videoData:(NSData *)videoData
+{
+    [self.dataArray removeAllObjects];
+    XHPreviewModel *imageModel = [[XHPreviewModel alloc]init];
+    [imageModel setPreviewImage:image];
+    [imageModel setItemSize:CGSizeMake(100, 100)];
+    [imageModel setType:XHPreviewImagesType];
+    [imageModel setTage:0];
+    [imageModel setIndexTage:0];
+    [self.dataArray addObject:imageModel];
+    [self.collectionView setItemArray:self.dataArray];
+}
+#pragma mark ShootVideoDeletage
+-(void)videoStatrToMp4Finished:(NSData *)data image:(UIImage *)image
+{
+    [self.dataArray removeAllObjects];
+    XHPreviewModel *imageModel = [[XHPreviewModel alloc]init];
+    [imageModel setPreviewImage:image];
+    [imageModel setItemSize:CGSizeMake(100, 100)];
+    [imageModel setType:XHPreviewImagesType];
+    [imageModel setTage:0];
+    [imageModel setIndexTage:0];
+    [self.dataArray addObject:imageModel];
+    [self.collectionView setItemArray:self.dataArray];
 }
 - (void)chooseVideoFromLib
 {

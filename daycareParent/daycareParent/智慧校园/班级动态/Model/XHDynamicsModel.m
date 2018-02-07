@@ -21,7 +21,7 @@
     NSString *vedioFirstPicUrl = [object objectItemKey:@"vedioFirstPicUrl"]; //!< 视频预览图片地址
     NSString *vedioUrl = [object objectItemKey:@"vedioUrl"]; //!< 视频播放Url地址
     NSString *schoolName = [object objectItemKey:@"schoolName"]; //!< 学会教育
-    NSString *noticeActorId = [object objectItemKey:@"noticeActorId"];
+    NSString *noticeActorId = [object objectItemKey:@"id"];
     
     [self setDate:createTime];
     [self setContent:content];

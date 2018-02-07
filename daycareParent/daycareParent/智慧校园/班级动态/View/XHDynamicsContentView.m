@@ -34,7 +34,6 @@
         [self.tableView beginRefreshing];
         [self.tableView setDelegate:self];
         [self.tableView setDataSource:self];
-        [self addSubViews:YES];
     }
     return self;
 }
@@ -43,68 +42,6 @@
 -(void)dealloc
 {
     [[XHVideoControl sharedVideo] dismiss];
-}
-
-
-
--(void)addSubViews:(BOOL)subview
-{
-    if (!subview)
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            XHDynamicsFrame *frame = [[XHDynamicsFrame alloc]init];
-            XHDynamicsModel *model = [[XHDynamicsModel alloc]init];
-            [model setTeacherName:@"姚立志"];
-            [model setHeaderUrl:@"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3944680232,2054173354&fm=27&gp=0.jpg"];
-            [model setWorkUnit:@"学汇教育"];
-            [model setDate:@"2017-10-20"];
-            [model setContent:@"这是一段新的内容，请大家记住，这是一段新的内容，请大家记住，这是一段新的内容，请大家记住，这是一段新的内容，请大家记住，这是一段新的内容，请大家记住，这是一段新的内容，请大家记住，这是一段新的内容，请大家记住，这是一段新的内容，请大家记住"];
-            [model setVideoUrl:@"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3944680232,2054173354&fm=27&gp=0.jpg"];
-            [model setVideoPreviewUrl:@"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3944680232,2054173354&fm=27&gp=0.jpg"];
-            [frame setModel:model];
-            [self.dataArray addObject:frame];
-        }
-        
-        for (int i = 0; i < 10; i++)
-        {
-            NSArray *arr = @[@"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3944680232,2054173354&fm=27&gp=0.jpg",@"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3944680232,2054173354&fm=27&gp=0.jpg",@"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3944680232,2054173354&fm=27&gp=0.jpg",@"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3944680232,2054173354&fm=27&gp=0.jpg",@"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3944680232,2054173354&fm=27&gp=0.jpg",@"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3944680232,2054173354&fm=27&gp=0.jpg",];
-            
-            NSMutableArray *tempArray = [NSMutableArray array];
-            for (NSString *url in arr)
-            {
-                XHPreviewModel *model = [[XHPreviewModel alloc]init];
-                [model setPreviewUrl:url];
-                [tempArray addObject:model];
-            }
-            
-            XHDynamicsFrame *frame = [[XHDynamicsFrame alloc]init];
-            XHDynamicsModel *model = [[XHDynamicsModel alloc]init];
-            [model setTeacherName:@"姚立志"];
-            [model setHeaderUrl:@"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3944680232,2054173354&fm=27&gp=0.jpg"];
-            [model setWorkUnit:@"学汇教育"];
-            [model setDate:@"2017-10-20"];
-            [model setContent:@"这是一段新的内容，请大家记住，这是一段新的内容，请大家记住，这是一段新的内容，请大家记住，这是一段新的内容，请大家记住，这是一段新的内容，请大家记住，这是一段新的内容，请大家记住，这是一段新的内容，请大家记住，这是一段新的内容，请大家记住"];
-            [model setItemArray:tempArray];
-            [frame setModel:model];
-            [self.dataArray addObject:frame];
-        }
-        
-        for (int i = 0; i < 10; i++)
-        {
-            XHDynamicsFrame *frame = [[XHDynamicsFrame alloc]init];
-            XHDynamicsModel *model = [[XHDynamicsModel alloc]init];
-            [model setTeacherName:@"姚立志"];
-            [model setHeaderUrl:@"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3944680232,2054173354&fm=27&gp=0.jpg"];
-            [model setWorkUnit:@"学汇教育"];
-            [model setDate:@"2017-10-20"];
-            [model setContent:@"这是一段新的内容，请大家记住，这是一段新的内容，请大家记住，这是一段新的内容，请大家记住，这是一段新的内容，请大家记住，这是一段新的内容，请大家记住，这是一段新的内容，请大家记住，这是一段新的内容，请大家记住，这是一段新的内容，请大家记住"];
-            [frame setModel:model];
-            [self.dataArray addObject:frame];
-        }
-        
-        [self.tableView reloadData];
-    }
 }
 
 -(void)resetFrame:(CGRect)frame
@@ -195,8 +132,9 @@
 {
     XHDynamicsFrame *frame = [self.dataArray objectAtIndex:indexPath.row];
     //先回执已读状态
-    [self.netWorkConfig setObject:noticeActorId forKey:@"noticeActorId"];
-    [self.netWorkConfig postWithUrl:@"zzjt-app-api_smartCampus016" sucess:^(id object, BOOL verifyObject)
+    [self.netWorkConfig setObject:noticeActorId forKey:@"id"];
+    [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
+    [self.netWorkConfig postWithUrl:@"pmschool-teacher-api_/teacher/notice/update" sucess:^(id object, BOOL verifyObject)
      {
          if (verifyObject)
          {

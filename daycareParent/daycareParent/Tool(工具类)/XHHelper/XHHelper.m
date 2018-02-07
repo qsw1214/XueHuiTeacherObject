@@ -140,6 +140,49 @@ static XHHelper *helper = nil;
     
 }
 
++ (void)uploadVideo:(NSData *)videoData name:(NSString *)name uploadCallback:(void (^)(BOOL, NSError *))uploadCallback withProgressCallback:(void (^)(float))progressCallback
+{
+    
+    NSString *endpoint = @"vedio.ixuehui.cn";
+    id<OSSCredentialProvider> credential = [[OSSPlainTextAKSKPairCredentialProvider alloc] initWithPlainTextAccessKey:@"LTAIkxSxT02rGsIf" secretKey:@"Uh9QqhIbVNqs9Zk9TTdBdjEM74nvtC"];
+    OSSClient *client = [[OSSClient alloc] initWithEndpoint:endpoint credentialProvider:credential];
+    
+    OSSPutObjectRequest * put = [OSSPutObjectRequest new];
+    
+    // 必填字段
+    put.bucketName = @"ixuehui";
+    //    put.objectKey = [NSString stringWithFormat:@"test/%@",name];   //测试环境
+    put.objectKey = [NSString stringWithFormat:@"vedio/%@",name];   //正式环境
+    //    NSData *uploadData = videoData;
+    put.uploadingData = videoData;
+    
+    //可选字段，可不设置
+    put.uploadProgress = ^(int64_t bytesSent, int64_t totalByteSent, int64_t totalBytesExpectedToSend) {
+        // 当前上传段长度、当前已经上传总长度、一共需要上传的总长度
+        float jindu = totalByteSent/totalBytesExpectedToSend;
+        progressCallback(jindu);
+        if (progressCallback)
+        {
+            progressCallback(totalByteSent/totalBytesExpectedToSend);
+        }
+    };
+    OSSTask * putTask = [client putObject:put];
+    
+    [putTask continueWithBlock:^id(OSSTask *task) {
+        BOOL isSuccess = YES;
+        if (!task.error) {
+            isSuccess = YES;
+        } else {
+            isSuccess = NO;
+        }
+        if (uploadCallback)
+        {
+            uploadCallback(isSuccess,task.error);
+        }
+        return nil;
+    }];
+    
+}
 
 
 + (NSString *)ageFarment:(NSDate *)date
