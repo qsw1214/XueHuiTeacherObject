@@ -81,6 +81,7 @@
 
 -(void)contentAction:(BaseButtonControl*)sender
 {
+    [self.inputContent resignFirstResponder];
     switch (sender.tag)
     {
 #pragma mark case 1 选择类型
@@ -88,8 +89,7 @@
         {
     
             NSArray *itemArray = @[@"早餐",@"上午加餐",@"午餐",@"下午加餐",@"晚餐"];
-            
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
             
             for (NSString *title in itemArray)
             {
@@ -143,46 +143,56 @@
             NSString *time = [self.dateContent labelTitlewithNumberType:1];
             if ([kind isEqualToString:@"请选择"])
             {
-                [XHShowHUD showTextHud:@"请选择类型"];
+                [XHShowHUD showNOHud:@"请选择类型"];
             }
             else if (!self.addPhotoContent.isAddImage)
             {
-                [XHShowHUD showTextHud:@"请选择封面图片"];
+                [XHShowHUD showNOHud:@"请选择封面图片"];
             }
             else if ([self.inputContent.text isEqualToString:@""])
             {
-                [XHShowHUD showTextHud:@"内容不能为空"];
+                [XHShowHUD showNOHud:@"内容不能为空"];
             }
             else  if ([time isEqualToString:@"请选择"])
             {
-                [XHShowHUD showTextHud:@"请选择时间"];
+                [XHShowHUD showNOHud:@"请选择时间"];
             }
             else
             {
+                [XHShowHUD showTextHud];
                 NSString *fileName = [XHHelper createGuid];
                 [XHHelper uploadImage:self.addPhotoContent.recipeImage name:fileName uploadCallback:^(BOOL success, NSError *error)
                  {
-                     
                      if (success)
                      {
-                         
+                         MAIN(^{
+                             XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
+                             [config setObject:fileName forKey:@"picUrl"];
+                             [config setObject:time forKey:@"publishTime"];
+                             [config setObject:[NSString safeString:self.inputContent.text] forKey:@"demo"];
+                             [config setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"school_id"];
+                             [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"publish_user_id"];
+                             [config setObject:[XHHelper BookingSituation:kind] forKey:@"type"];
+                             [config postWithUrl:@"zzjt-app-api_cookBook001" sucess:^(id object, BOOL verifyObject)
+                              {
+                                  [XHShowHUD hideHud];
+                                  [[XHHelper sharedHelper].currentViewController.navigationController popViewControllerAnimated:YES];
+                                  
+                              } error:^(NSError *error) {
+                                  [XHShowHUD hideHud];
+                              }];
+                         });
+                        
                      }
+                     else
+                     {
+                         [XHShowHUD showNOHud:@"提交失败，请重试！"];
+                     }
+                     
                 } withProgressCallback:^(float progress) {}];
                 
                 
-                XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
-                [config setObject:fileName forKey:@"picUrl"];
-                [config setObject:time forKey:@"publishTime"];
-                [config setObject:[NSString safeString:self.inputContent.text] forKey:@"demo"];
-                [config setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"school_id"];
-                [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"publish_user_id"];
-                [config setObject:[XHHelper BookingSituation:kind] forKey:@"type"];
-                [config postWithUrl:@"zzjt-app-api_cookBook001" sucess:^(id object, BOOL verifyObject)
-                 {
-                     
-                     [[XHHelper sharedHelper].currentViewController.navigationController popViewControllerAnimated:YES];
-                     
-                 } error:^(NSError *error) {}];
+                
             }
         }
             break;
@@ -284,7 +294,7 @@
         [_dateContent setTextColor:[UIColor grayColor] withTpe:1 withAllType:NO];
         [_dateContent setImage:@"ico_arrow" withNumberType:0 withAllType:NO];
         [_dateContent setText:@"时间" withNumberType:0 withAllType:NO];
-        [_dateContent setText:@"2018-01-19" withNumberType:1 withAllType:NO];
+        [_dateContent setText:@"请选择" withNumberType:1 withAllType:NO];
         [_dateContent setTextAlignment:NSTextAlignmentRight withNumberType:1 withAllType:NO];
         [_dateContent addTarget:self action:@selector(contentAction:) forControlEvents:UIControlEventTouchUpInside];
         [_dateContent setTag:3];
