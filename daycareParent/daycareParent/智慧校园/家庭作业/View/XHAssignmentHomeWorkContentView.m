@@ -283,10 +283,6 @@
                          }
                      } error:^(NSError *error){}];
                 }
-                
-                
-                
-                
             }
         }
             break;
