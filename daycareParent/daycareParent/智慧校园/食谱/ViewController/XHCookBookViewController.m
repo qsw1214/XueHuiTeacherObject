@@ -36,11 +36,8 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    if ([[XHUserInfo sharedUserInfo].childListArry count])
-    {
-        XHChildListModel *childModel = [[XHUserInfo sharedUserInfo].childListArry firstObject];
-        [self getCookBookWithSchoolId:childModel.schoolId];
-    }
+    [super viewWillAppear:animated];
+   [self getCookBookWithSchoolId:[XHUserInfo sharedUserInfo].schoolId];
     
 }
 
@@ -77,13 +74,6 @@
 
 
 
-#pragma mark XHCustomViewDelegate (选择孩子列表)
--(void)getChildModel:(XHChildListModel *)childModel
-{
-    [self setRightItemTitle:[childModel studentName]];
-    [self getCookBookWithSchoolId:childModel.schoolId];
-}
-
 
 
 #pragma mark - NetWork Method (请求网络内容)
@@ -91,7 +81,7 @@
 {
     [XHShowHUD showTextHud];
     [self.netWorkConfig setObject:schoolId forKey:@"schoolId"];
-    [self.netWorkConfig postWithUrl:@"zzjt-app-api_smartCampus005" sucess:^(id object, BOOL verifyObject)
+    [self.netWorkConfig postWithUrl:@"zzjt-app-api_cookBook003" sucess:^(id object, BOOL verifyObject)
      {
          if (verifyObject)
          {

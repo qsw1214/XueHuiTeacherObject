@@ -66,6 +66,7 @@
     {
         _previewImageView = [[UIImageView alloc]init];
         [_previewImageView setContentMode:UIViewContentModeScaleAspectFit];
+        [_previewImageView setBackgroundColor:RGBAlpha(0, 0, 0, 0.2)];
     }
     return _previewImageView;
 }

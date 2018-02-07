@@ -159,7 +159,6 @@
             }
             else
             {
-                
                 NSString *fileName = [XHHelper createGuid];
                 [XHHelper uploadImage:self.addPhotoContent.recipeImage name:fileName uploadCallback:^(BOOL success, NSError *error)
                  {
@@ -168,42 +167,23 @@
                      {
                          
                      }
-                     
-                     
-                     
-                     
-                     
                 } withProgressCallback:^(float progress) {}];
                 
                 
                 XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
                 [config setObject:fileName forKey:@"picUrl"];
                 [config setObject:time forKey:@"publishTime"];
-                [config setObject:@"早餐" forKey:@"demo"];
+                [config setObject:[NSString safeString:self.inputContent.text] forKey:@"demo"];
                 [config setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"school_id"];
                 [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"publish_user_id"];
                 [config setObject:[XHHelper BookingSituation:kind] forKey:@"type"];
                 [config postWithUrl:@"zzjt-app-api_cookBook001" sucess:^(id object, BOOL verifyObject)
                  {
                      
-                     
+                     [[XHHelper sharedHelper].currentViewController.navigationController popViewControllerAnimated:YES];
                      
                  } error:^(NSError *error) {}];
-                
-                
-                
-                
-                
             }
-            
-            
-            
-            
-            
-            
-            
-            
-            
         }
             break;
     }
@@ -215,6 +195,8 @@
 #pragma mark XHDatePickerControlDeletage
 -(void)datePickerClickObject:(NSString*)date
 {
+    NSArray *dateArray = [date componentsSeparatedByString:@" "];
+    date = [dateArray firstObject];
     [self.dateContent setText:date withNumberType:1 withAllType:NO];
 }
 
