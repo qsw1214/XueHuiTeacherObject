@@ -7,7 +7,8 @@
 //
 
 #import "BaseViewController.h"
-
+#pragma mark 家庭作业->发布动态
 @interface XHNewDynamicsViewController : BaseViewController
 
+@property(nonatomic,assign)NSInteger index;
 @end

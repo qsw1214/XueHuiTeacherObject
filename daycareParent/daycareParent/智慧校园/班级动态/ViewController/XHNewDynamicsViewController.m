@@ -7,9 +7,10 @@
 //
 
 #import "XHNewDynamicsViewController.h"
-
+#import "XHNewDynamicsContentView.h"
 @interface XHNewDynamicsViewController ()
 
+@property (nonatomic,strong) XHNewDynamicsContentView *contentView;
 @end
 
 @implementation XHNewDynamicsViewController
@@ -17,6 +18,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self setNavtionTitle:@"新增"];
+}
+-(void)addSubViews:(BOOL)subview
+{
+    if (subview)
+    {
+        [self.view addSubview:self.contentView];
+        [self.contentView resetFrame:CGRectMake(0, self.navigationView.bottom, SCREEN_WIDTH, SCREEN_HEIGHT-self.navigationView.height)];
+        switch (self.index) {
+            case 0:
+            {
+                self.contentView.modelType=XHNewDynamicsImgContentModelType;
+            }
+                break;
+                
+            case 1:
+            {
+                self.contentView.modelType=XHNewDynamicsVideoContentModelType;
+            }
+                break;
+        }
+    }
+}
+
+#pragma mark - Getter / Setter
+-(XHNewDynamicsContentView *)contentView
+{
+    if (!_contentView)
+    {
+        _contentView = [[XHNewDynamicsContentView alloc]init];
+    }
+    return _contentView;
 }
 
 - (void)didReceiveMemoryWarning {

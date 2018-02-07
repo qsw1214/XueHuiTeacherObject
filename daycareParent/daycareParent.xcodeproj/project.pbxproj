@@ -358,6 +358,8 @@
 		8C2311641FE216A00013F476 /* XHChildListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2311631FE216A00013F476 /* XHChildListModel.m */; };
 		8C2311671FE22C330013F476 /* XHVIPModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2311661FE22C330013F476 /* XHVIPModel.m */; };
 		8C33144D202A993B00F504A9 /* XHNewDynamicsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C33144C202A993B00F504A9 /* XHNewDynamicsViewController.m */; };
+		8C331450202AA15300F504A9 /* XHNewDynamicsContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C33144F202AA15300F504A9 /* XHNewDynamicsContentView.m */; };
+		8C331457202AAF3800F504A9 /* VideoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C331456202AAF3800F504A9 /* VideoManager.m */; };
 		8C37D3401FE8A8EF00F157D1 /* XHIMNoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C37D33F1FE8A8EF00F157D1 /* XHIMNoticeModel.m */; };
 		8C3E55AD1FD51A330013002A /* XHCustomPayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3E55AC1FD51A330013002A /* XHCustomPayView.m */; };
 		8C3E55B11FD5215F0013002A /* XHTPayTitleableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3E55AF1FD5215F0013002A /* XHTPayTitleableViewCell.m */; };
@@ -1228,6 +1230,10 @@
 		8C2311661FE22C330013F476 /* XHVIPModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHVIPModel.m; sourceTree = "<group>"; };
 		8C33144B202A993B00F504A9 /* XHNewDynamicsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNewDynamicsViewController.h; sourceTree = "<group>"; };
 		8C33144C202A993B00F504A9 /* XHNewDynamicsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNewDynamicsViewController.m; sourceTree = "<group>"; };
+		8C33144E202AA15300F504A9 /* XHNewDynamicsContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNewDynamicsContentView.h; sourceTree = "<group>"; };
+		8C33144F202AA15300F504A9 /* XHNewDynamicsContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNewDynamicsContentView.m; sourceTree = "<group>"; };
+		8C331455202AAF3800F504A9 /* VideoManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoManager.h; sourceTree = "<group>"; };
+		8C331456202AAF3800F504A9 /* VideoManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoManager.m; sourceTree = "<group>"; };
 		8C37D33E1FE8A8EF00F157D1 /* XHIMNoticeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHIMNoticeModel.h; sourceTree = "<group>"; };
 		8C37D33F1FE8A8EF00F157D1 /* XHIMNoticeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHIMNoticeModel.m; sourceTree = "<group>"; };
 		8C3E55AB1FD51A330013002A /* XHCustomPayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHCustomPayView.h; sourceTree = "<group>"; };
@@ -2095,6 +2101,8 @@
 				4B3418F51FFF14F100A5EC56 /* XHVideoControl.m */,
 				4BEBC8D220045EDA00FD6915 /* XHDynamicsHeaderControl.h */,
 				4BEBC8D320045EDA00FD6915 /* XHDynamicsHeaderControl.m */,
+				8C33144E202AA15300F504A9 /* XHNewDynamicsContentView.h */,
+				8C33144F202AA15300F504A9 /* XHNewDynamicsContentView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2424,6 +2432,7 @@
 		4B80F2001FCBE43E00BC7B52 /* Tool(工具类) */ = {
 			isa = PBXGroup;
 			children = (
+				8C331451202AAEAE00F504A9 /* VdeoManager */,
 				4B8718F52024577B0023A54C /* XHAddressBookHelper */,
 				8C7AE70C1FE795ED00BE7A02 /* ping++ */,
 				8CDC90601FE4B1DB00040D19 /* AliyunOSSiOS.framework */,
@@ -3229,6 +3238,15 @@
 				8C0CCF7D1FFF16FD0008C0CE /* WKWebViewJavascriptBridge.m */,
 			);
 			path = WebViewJavascriptBridge;
+			sourceTree = "<group>";
+		};
+		8C331451202AAEAE00F504A9 /* VdeoManager */ = {
+			isa = PBXGroup;
+			children = (
+				8C331455202AAF3800F504A9 /* VideoManager.h */,
+				8C331456202AAF3800F504A9 /* VideoManager.m */,
+			);
+			path = VdeoManager;
 			sourceTree = "<group>";
 		};
 		8C3E55BB1FD5494B0013002A /* 学习记录 */ = {
@@ -4390,6 +4408,7 @@
 				8CC7648E200CAA69007887C7 /* XHNewHeardTableViewCell.m in Sources */,
 				4BCEB72120294FF200ED2829 /* XHAssignmentHomeWorkCollectionView.m in Sources */,
 				4B9110781FD7B9E600841505 /* XHSyllabusCell.m in Sources */,
+				8C331450202AA15300F504A9 /* XHNewDynamicsContentView.m in Sources */,
 				4BB792E01FD798B000E0ED72 /* BaseMenuModel.m in Sources */,
 				4B80F2211FCBEC2B00BC7B52 /* BaseNavigationControlItem.m in Sources */,
 				4B07CC2E1FD4ED7500B2DBDA /* XHParentsMeetingCell.m in Sources */,
@@ -4438,6 +4457,7 @@
 				4B4D7FE920198A79001D0BB0 /* XHParentAddressBookSectionBar.m in Sources */,
 				4B4D7FF8201B2533001D0BB0 /* XHAddNoticeViewController.m in Sources */,
 				4BB792C61FD7923C00E0ED72 /* XHSyllabusFrame.m in Sources */,
+				8C331457202AAF3800F504A9 /* VideoManager.m in Sources */,
 				8C79740A1FE772A700AF6F6A /* NYXImagesHelper.m in Sources */,
 				8C0CCF7E1FFF16FE0008C0CE /* WebViewJavascriptBridge.m in Sources */,
 				4B523BD81FD1579B006DD565 /* XHAskforLeaveViewController.m in Sources */,
@@ -4706,7 +4726,7 @@
 					"$(PROJECT_DIR)/daycareParent/Tool(工具类)/ping++/One",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jt.xhm;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jt.xhm-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4778,7 +4798,7 @@
 					"$(PROJECT_DIR)/daycareParent/Tool(工具类)/ping++/One",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jt.xhm;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jt.xhm-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

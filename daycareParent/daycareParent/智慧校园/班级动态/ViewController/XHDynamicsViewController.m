@@ -8,8 +8,7 @@
 
 #import "XHDynamicsViewController.h"
 #import "XHDynamicsContentView.h"
-
-
+#import "XHNewDynamicsViewController.h"
 
 //!< 开始教师端开发标记测试
 
@@ -60,7 +59,9 @@
 -(void)rightItemAction:(BaseNavigationControlItem *)sender
 {
     [UIAlertController alertWithTitle:@"提示" message:@"请选择类型" titlesArry:@[@"发送图片",@"发送视频"] alertControllerStyle:UIAlertControllerStyleActionSheet hiddenCancelButton:NO cancleStyle:UIAlertActionStyleCancel withController:self indexBlock:^(NSInteger index, id object) {
-
+        XHNewDynamicsViewController *new=[XHNewDynamicsViewController new];
+        new.index=index;
+        [self.navigationController pushViewController:new animated:YES];
     }];
 }
 
