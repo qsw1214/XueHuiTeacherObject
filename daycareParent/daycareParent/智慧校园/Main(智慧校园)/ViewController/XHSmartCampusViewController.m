@@ -180,17 +180,17 @@
     }
     return _contentView;
 }
--(BOOL)refreshChild
-{
-    if (![XHUserInfo sharedUserInfo].childListArry.count) {
-        [XHShowHUD showNOHud:@"请先绑定孩子！"];
-        return NO;
-    }
-    else
-    {
-        return YES;
-    }
-}
+//-(BOOL)refreshChild
+//{
+//    if (![XHUserInfo sharedUserInfo].childListArry.count) {
+//        [XHShowHUD showNOHud:@"请先绑定孩子！"];
+//        return NO;
+//    }
+//    else
+//    {
+//        return YES;
+//    }
+//}
 -(void)updateVersion
 {
     XHNetWorkConfig *Net=[[XHNetWorkConfig alloc] init];

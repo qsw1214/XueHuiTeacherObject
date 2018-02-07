@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "XHGuardianInfo.h"
-#import "XHTeacherInfo.h"
 #import "XHClassListModel.h"
 #import "XHSubjectListModel.h"
 
@@ -50,12 +48,6 @@ typedef void (^AddressBookSucceedBlock) (BOOL isOK,NSArray *array);
 
 @property (nonatomic,strong) NSMutableArray *teachersAddressBookArray; //!< 教师通讯录
 @property (nonatomic,strong) NSMutableArray *parentsAddressBookArray;  //!< 家长通讯录
-
-
-
-@property (nonatomic,copy) NSString *primaryFamilyId; //!<主监护人家庭ID
-@property (nonatomic,strong) XHGuardianInfo *guardianModel; //!<主监护人信息
-@property (nonatomic,strong) NSMutableArray <XHChildListModel*> *childListArry; //!<孩子列表信息
 
 
 /**
