@@ -64,6 +64,7 @@
      {
          if (isOK)
          {
+             NSMutableArray *sectionArray = [NSMutableArray array];
              [array enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
               {
                   NSString *gradeName = [obj objectItemKey:@"gradeName"]; //!< 年级
@@ -88,15 +89,13 @@
                   }];
                   [section setArray:section.itemArray];
                   [section setMarkType:XHAddressBookSectionNormalType];
-                  [self.dataArray addObject:section];
+                  [sectionArray addObject:section];
                
               }];
+             [self.dataArray setArray:sectionArray];
          }
-         
-         
          [self.tableView refreshReloadData];
      }];
-    [self.dataArray removeAllObjects];
 }
 
 
