@@ -79,15 +79,23 @@
     //数组排序：
     NSArray *resultArray = [originalArray sortedArrayUsingComparator:finderSort];
     NSInteger width=[resultArray.lastObject integerValue];
-    if (width<130) {
-        NSLog(@"========================%f",[resultArray.lastObject floatValue]);
-        return [resultArray.lastObject floatValue];
+    if (width<130)
+    {
+        if (width<50)
+        {
+            return 50.0;
+        }
+        else
+        {
+           return [resultArray.lastObject floatValue];
+        }
+        
     }
     else
     {
         return 130.0;
     }
-    
+     
 }
 -(CGFloat)getCustomWidth:(NSString *)str
 {

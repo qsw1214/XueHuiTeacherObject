@@ -39,22 +39,30 @@
     [controller presentViewController:alertController animated:YES completion:nil];
     return alertController;
 }
-+(UIAlertController *)alertClassListWithTitle:(NSString *)title message:(NSString *)message titlesArry:(NSArray *)titleArry alertControllerStyle:(UIAlertControllerStyle)alertControllerStyle hiddenCancelButton:(BOOL)hiddenCancelButton cancleStyle:(UIAlertActionStyle)cancleStyle withController:(UIViewController *)controller indexBlock:(indexBlock)indexBlock
++(void)alertClassListWith:(UIViewController *)controller indexBlock:(indexBlock)indexBlock
 {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    for (int i=0; i<titleArry.count; i++)
-    {
-        XHClassListModel *model=titleArry[i];
-        [alertController addAction:[UIAlertAction actionWithTitle:[NSString stringWithFormat:@"%@%@",model.grade,model.clazz] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            indexBlock(i,model);
-        }]];
-    }
-    if (!hiddenCancelButton) {
-        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:cancleStyle handler:^(UIAlertAction * _Nonnull action) {}]];
-    }
     
-    [controller presentViewController:alertController animated:YES completion:nil];
-    return alertController;
+    [[XHUserInfo sharedUserInfo] getClassList:^(BOOL isOK, NSMutableArray *classListArry) {
+        if (isOK)
+        {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"选择班级列表" preferredStyle:UIAlertControllerStyleAlert];
+            for (int i=0; i<classListArry.count; i++)
+            {
+                XHClassListModel *model=classListArry[i];
+                [alertController addAction:[UIAlertAction actionWithTitle:model.gradeAndClassName style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    indexBlock(i,model);
+                }]];
+            }
+            [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}]];
+            [controller presentViewController:alertController animated:YES completion:nil];
+        }
+        else
+        {
+            [UIAlertController alertWithmessage:@"暂无数据" titlesArry:@[@"确定"] controller:controller indexBlock:^(NSInteger index, id object) {}];
+        }
+    }];
+    
+    
 }
 +(void)alertSubjectListWithController:(UIViewController *)controller indexBlock:(indexBlock)indexBlock
 {
@@ -74,8 +82,7 @@
         }
         else
         {
-            [UIAlertController alertWithmessage:@"暂无数据" titlesArry:@[@"确定"] controller:controller indexBlock:^(NSInteger index, id object) {
-            }];
+            [UIAlertController alertWithmessage:@"暂无数据" titlesArry:@[@"确定"] controller:controller indexBlock:^(NSInteger index, id object) {}];
         }
     }];
     

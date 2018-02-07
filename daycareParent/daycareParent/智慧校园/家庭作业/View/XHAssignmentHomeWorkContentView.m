@@ -121,23 +121,9 @@
 #pragma mark case 1 选择班级
         case 1:
         {
-            [[XHUserInfo sharedUserInfo] getClassList:^(BOOL isOK, NSMutableArray *classListArry) {
-                if (isOK)
-                {
-                    [UIAlertController alertClassListWithTitle:@"提示" message:@"选择班级列表" titlesArry:classListArry alertControllerStyle:UIAlertControllerStyleActionSheet hiddenCancelButton:NO cancleStyle:UIAlertActionStyleCancel withController:[
-                                                                                                                                                                                                                                        XHHelper sharedHelper].currentViewController indexBlock:^(NSInteger index, XHClassListModel *object)
-                    {
-                        
-                        [self.classContent setClassListModel:object];
-                        [self.classContent setText:object.gradeAndClassName withNumberType:1 withAllType:NO];
-                        
-                        
-                    }];
-                }
-                else
-                {
-//                    [UIAlertController alertWithTitle:@"提示" message:@"暂无数据" titlesArry:@[@"确定"] alertControllerStyle:UIAlertControllerStyleAlert hiddenCancelButton:YES cancleStyle:UIAlertActionStyleCancel withController:[XHHelper sharedHelper].currentViewController indexBlock:^(NSInteger index, id object) {}];
-                }
+            [UIAlertController alertClassListWith:[XHHelper sharedHelper].currentViewController indexBlock:^(NSInteger index, XHClassListModel *object) {
+                [self.classContent setClassListModel:object];
+                [self.classContent setText:object.gradeAndClassName withNumberType:1 withAllType:NO];
             }];
         }
             break;

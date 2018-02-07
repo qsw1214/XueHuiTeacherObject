@@ -73,17 +73,9 @@
 #pragma mark-------------选择班级按钮--------------
 -(void)classBtnMethod
 {
-    [[XHUserInfo sharedUserInfo] getClassList:^(BOOL isOK, NSMutableArray *classListArry) {
-        if (isOK) {
-            [UIAlertController alertClassListWithTitle:@"提示" message:@"选择班级列表" titlesArry:[XHUserInfo sharedUserInfo].classListArry alertControllerStyle:UIAlertControllerStyleActionSheet hiddenCancelButton:NO cancleStyle:UIAlertActionStyleCancel withController:self indexBlock:^(NSInteger index, id object) {
-                _number=index;
-                [self.collectionView beginRefreshing];
-            }];
-        }
-        else
-        {
-//          [UIAlertController alertWithTitle:@"提示" message:@"暂无数据" titlesArry:@[@"确定"] alertControllerStyle:UIAlertControllerStyleAlert hiddenCancelButton:YES cancleStyle:UIAlertActionStyleCancel withController:self indexBlock:^(NSInteger index, id object) {}];
-        }
+    [UIAlertController alertClassListWith:self indexBlock:^(NSInteger index, id object) {
+        _number=index;
+        [self.collectionView beginRefreshing];
     }];
 }
 
