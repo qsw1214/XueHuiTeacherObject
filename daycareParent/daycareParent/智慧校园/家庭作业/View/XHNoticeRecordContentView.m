@@ -144,21 +144,36 @@
                          {
                              [self setPageNumber:(self.pageNumber+1)];
                          }
+                         else
+                         {
+                             [self.tableView noMoreData];
+                         }
+                         
+                        
+                     }
+                     else
+                     {
+                         [self.tableView refreshReloadData];
                      }
                  }
                      break;
              }
              
-             [NSArray enumerateObjectsWithArray:array usingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
-             {
-                 XHHomeWorkFrame *frame = [[XHHomeWorkFrame alloc]init];
-                 XHHomeWorkModel *model = [[XHHomeWorkModel alloc]init];
-                 [model setNoticeItemObject:obj];
-                 [frame setModel:model];
-                 [self.dataArray addObject:frame];
-             }];
-            
              
+             [NSArray enumerateObjectsWithArray:array usingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
+              {
+                  XHHomeWorkFrame *frame = [[XHHomeWorkFrame alloc]init];
+                  XHHomeWorkModel *model = [[XHHomeWorkModel alloc]init];
+                  [model setNoticeItemObject:obj];
+                  [frame setModel:model];
+                  [self.dataArray addObject:frame];
+              }];
+             
+             
+             [self.tableView refreshReloadData];
+         }
+         else
+         {
              [self.tableView refreshReloadData];
          }
      } error:^(NSError *error)

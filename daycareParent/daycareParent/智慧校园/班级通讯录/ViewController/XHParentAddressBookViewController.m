@@ -7,11 +7,11 @@
 //
 
 #import "XHParentAddressBookViewController.h"
-#import "XHAddressBookContentView.h"
+#import "XHParentAddressBookContentView.h"
 #import "XHAddressBookKey.h"
 
-@interface XHParentAddressBookViewController ()<XHCustomViewDelegate>
-@property (nonatomic,strong) XHAddressBookContentView *contentView; //!< 内容视图
+@interface XHParentAddressBookViewController () <XHCustomViewDelegate>
+@property (nonatomic,strong) XHParentAddressBookContentView *parentAddressBookContentView;
 
 @end
 
@@ -20,7 +20,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.contentView.tableView beginRefreshing];
+    [self.parentAddressBookContentView.tableView beginRefreshing];
 }
 
 - (void)didReceiveMemoryWarning
@@ -32,8 +32,8 @@
 {
     if (subview)
     {
-        [self.view addSubview:self.contentView];
-        [self.contentView resetFrame:CGRectMake(0, self.navigationView.bottom, SCREEN_WIDTH, (SCREEN_HEIGHT-self.navigationView.height))];
+        [self.view addSubview:self.parentAddressBookContentView];
+        [self.parentAddressBookContentView resetFrame:CGRectMake(0, self.navigationView.bottom, SCREEN_WIDTH, (SCREEN_HEIGHT-self.navigationView.height))];
     }
 }
 
@@ -51,12 +51,13 @@
 }
 
 #pragma mark - Getter / Setter
--(XHAddressBookContentView *)contentView
+-(XHParentAddressBookContentView *)parentAddressBookContentView
 {
-    if (_contentView == nil)
+    if (!_parentAddressBookContentView)
     {
-        _contentView = [[XHAddressBookContentView alloc]init];
+        _parentAddressBookContentView = [[XHParentAddressBookContentView alloc]init];
+        [_parentAddressBookContentView setBackgroundColor:[UIColor blueColor]];
     }
-    return _contentView;
+    return _parentAddressBookContentView;
 }
 @end

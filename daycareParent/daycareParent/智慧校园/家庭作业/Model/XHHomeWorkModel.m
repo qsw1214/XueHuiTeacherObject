@@ -24,7 +24,7 @@
     for ( int i = 1; i<= 6; i++)
     {
         XHPreviewModel *imageModel = [[XHPreviewModel alloc]init];
-        NSString *picStr=[NSString stringWithFormat:@"picUrl%zd",i];
+        NSString *picStr=[NSString stringWithFormat:@"picUrl3%zd",i];
         [imageModel setPreviewUrl:ALGetFileHeadThumbnail([object objectItemKey:picStr])];
          [imageModel setPreviewPic:[object objectItemKey:picStr]];
         [imageModel setTage:i];
@@ -63,14 +63,15 @@
     {
         XHPreviewModel *imageModel = [[XHPreviewModel alloc]init];
         NSString *picStr=[NSString stringWithFormat:@"picUrl%zd",i];
-        [imageModel setPreviewUrl:ALGetFileImageThumbnail(picStr)];
+        [imageModel setPreviewUrl:ALGetFileImageThumbnail([object objectItemKey:picStr])];
+        [imageModel setPreviewPic:[object objectItemKey:picStr]];
         [imageModel setTage:i];
         [imageModelArray addObject:imageModel];
     }
 
     [imageModelArray enumerateObjectsUsingBlock:^(XHPreviewModel * _Nonnull obj, NSUInteger idx, BOOL *stop)
      {
-         if (![obj.previewUrl isEqualToString:@""])
+         if (![obj.previewPic isEqualToString:@""])
          {
              [self.imageUrlArray addObject:obj];
          }

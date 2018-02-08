@@ -59,7 +59,6 @@
 		4B3126341FD93CC6000CE894 /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B31262B1FD93CC6000CE894 /* SDCollectionViewCell.m */; };
 		4B3126351FD93CC6000CE894 /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B31262D1FD93CC6000CE894 /* SDCycleScrollView.m */; };
 		4B3126361FD93CC6000CE894 /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B31262F1FD93CC6000CE894 /* UIView+SDExtension.m */; };
-		4B31263D1FD93D78000CE894 /* XHParentAddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B31263C1FD93D78000CE894 /* XHParentAddressBookViewController.m */; };
 		4B3126401FDA1F26000CE894 /* XHAddressBookContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B31263F1FDA1F26000CE894 /* XHAddressBookContentView.m */; };
 		4B3126431FDA1F4B000CE894 /* XHAddressBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3126421FDA1F4B000CE894 /* XHAddressBookCell.m */; };
 		4B3126461FDA1F75000CE894 /* XHAddressBookCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3126451FDA1F75000CE894 /* XHAddressBookCellContentView.m */; };
@@ -180,6 +179,7 @@
 		4B72ADE3202C5F3300A120E5 /* XHNoticeRecordContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B72ADE2202C5F3300A120E5 /* XHNoticeRecordContentView.m */; };
 		4B72ADE6202C617100A120E5 /* XHNoticeRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B72ADE5202C617100A120E5 /* XHNoticeRecordViewController.m */; };
 		4B72ADE9202C675500A120E5 /* XHNoticeRecordDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B72ADE8202C675500A120E5 /* XHNoticeRecordDetailsViewController.m */; };
+		4B72ADEC202C71DC00A120E5 /* XHParentAddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B72ADEB202C71DC00A120E5 /* XHParentAddressBookViewController.m */; };
 		4B80F1E01FCBE3F700BC7B52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B80F1DF1FCBE3F700BC7B52 /* Assets.xcassets */; };
 		4B80F1E61FCBE3F700BC7B52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B80F1E51FCBE3F700BC7B52 /* main.m */; };
 		4B80F2081FCBE4E400BC7B52 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B80F2041FCBE4E400BC7B52 /* AppDelegate.m */; };
@@ -649,8 +649,6 @@
 		4B31262D1FD93CC6000CE894 /* SDCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCycleScrollView.m; sourceTree = "<group>"; };
 		4B31262E1FD93CC6000CE894 /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
 		4B31262F1FD93CC6000CE894 /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
-		4B31263B1FD93D78000CE894 /* XHParentAddressBookViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHParentAddressBookViewController.h; sourceTree = "<group>"; };
-		4B31263C1FD93D78000CE894 /* XHParentAddressBookViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHParentAddressBookViewController.m; sourceTree = "<group>"; };
 		4B31263E1FDA1F26000CE894 /* XHAddressBookContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHAddressBookContentView.h; sourceTree = "<group>"; };
 		4B31263F1FDA1F26000CE894 /* XHAddressBookContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHAddressBookContentView.m; sourceTree = "<group>"; };
 		4B3126411FDA1F4B000CE894 /* XHAddressBookCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHAddressBookCell.h; sourceTree = "<group>"; };
@@ -886,6 +884,8 @@
 		4B72ADE5202C617100A120E5 /* XHNoticeRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNoticeRecordViewController.m; sourceTree = "<group>"; };
 		4B72ADE7202C675500A120E5 /* XHNoticeRecordDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNoticeRecordDetailsViewController.h; sourceTree = "<group>"; };
 		4B72ADE8202C675500A120E5 /* XHNoticeRecordDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNoticeRecordDetailsViewController.m; sourceTree = "<group>"; };
+		4B72ADEA202C71DC00A120E5 /* XHParentAddressBookViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHParentAddressBookViewController.h; sourceTree = "<group>"; };
+		4B72ADEB202C71DC00A120E5 /* XHParentAddressBookViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHParentAddressBookViewController.m; sourceTree = "<group>"; };
 		4B80F1D31FCBE3F700BC7B52 /* daycareParent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = daycareParent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B80F1DF1FCBE3F700BC7B52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4B80F1E41FCBE3F700BC7B52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -2022,12 +2022,12 @@
 		4B31263A1FD93D3F000CE894 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				4B31263B1FD93D78000CE894 /* XHParentAddressBookViewController.h */,
-				4B31263C1FD93D78000CE894 /* XHParentAddressBookViewController.m */,
 				4B2BBAF6201865AA007DAFCC /* XHAddressBoardViewController.h */,
 				4B2BBAF7201865AA007DAFCC /* XHAddressBoardViewController.m */,
 				4B632AA71FE0C5A000B90B94 /* XHTeacherAddressBookViewController.h */,
 				4B632AA81FE0C5A000B90B94 /* XHTeacherAddressBookViewController.m */,
+				4B72ADEA202C71DC00A120E5 /* XHParentAddressBookViewController.h */,
+				4B72ADEB202C71DC00A120E5 /* XHParentAddressBookViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -4236,6 +4236,7 @@
 				8CCD7E611FD145E200F7F54E /* XHVideoTableViewCell.m in Sources */,
 				8C0CCF811FFF16FE0008C0CE /* WKWebViewJavascriptBridge.m in Sources */,
 				4B3418711FFDC14C00A5EC56 /* ASValueTrackingSlider.m in Sources */,
+				4B72ADEC202C71DC00A120E5 /* XHParentAddressBookViewController.m in Sources */,
 				4B1066A11FD7D182004A7CB7 /* XHAchievementContentView.m in Sources */,
 				4B3126311FD93CC6000CE894 /* TAAnimatedDotView.m in Sources */,
 				8C019F741FF4C3DB005EBC2C /* XHMessageUserInfo.m in Sources */,
@@ -4450,7 +4451,6 @@
 				4BB792B61FD77D7600E0ED72 /* XHAskforLeaveChargeTeacherControl.m in Sources */,
 				4B4D7FF5201AF5A1001D0BB0 /* XHAskforLeaveBoardViewController.m in Sources */,
 				4B80F2C41FCBF04F00BC7B52 /* NSImage+WebCache.m in Sources */,
-				4B31263D1FD93D78000CE894 /* XHParentAddressBookViewController.m in Sources */,
 				8CB5A26D1FD7BB8F008E97D8 /* XHAddAdressViewController.m in Sources */,
 				8C3E55B11FD5215F0013002A /* XHTPayTitleableViewCell.m in Sources */,
 				8C80815F1FCE722000C7945A /* XHChildTableViewCell.m in Sources */,
