@@ -14,7 +14,7 @@
 
 
 
-@interface XHAddNoticeViewController ()
+@interface XHAddNoticeViewController () <XHAddNoticeContentViewDeletage>
 
 @property (nonatomic,strong) XHAddNoticeContentView *contentView;
 
@@ -45,9 +45,12 @@
 }
 
 
--(void)rightItemAction:(BaseNavigationControlItem *)sender
+#pragma mark - Deletage Method
+#pragma mark XHAddNoticeContentViewDeletage
+-(void)addNoticeContentAction:(BaseButtonControl*)sender
 {
-    
+    XHAddNoticeRecipientViewController *linkMan = [[XHAddNoticeRecipientViewController alloc]init];
+    [self.navigationController pushViewController:linkMan animated:YES];
 }
 
 
@@ -58,6 +61,7 @@
     if (!_contentView)
     {
         _contentView = [[XHAddNoticeContentView alloc]init];
+        [_contentView setAddDeletage:self];
     }
     return _contentView;
 }

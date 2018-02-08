@@ -11,7 +11,7 @@
 @interface XHNoticeAllUniteContentView ()
 
 
-@property (nonatomic,strong) BaseButtonControl *allSelectControl; //!< 全部选择
+@property (nonatomic,strong) UIImageView *allSelectControl; //!< 全部选择
 @property (nonatomic,strong) UILabel *titleLabel;  //!< 标题
 @property (nonatomic,strong) UILabel *describeLabel;  //<!描述
 
@@ -43,16 +43,18 @@
     }
 }
 
--(void)addAllSelectTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents
+
+-(void)setDescribe:(NSString *)describe
 {
-    [self.allSelectControl addTarget:target action:action forControlEvents:controlEvents];
+    _describe = describe;
+    
+    [self.describeLabel setText:describe];
 }
 
 -(void)resetFrame:(CGRect)frame
 {
     [self setFrame:frame];
-    [self.allSelectControl resetFrame:CGRectMake(0, 0,40.0, frame.size.height)];
-    [self.allSelectControl setImageEdgeFrame:CGRectMake(10,(self.allSelectControl.height-20.0)/2.0 , 20.0, 20.0) withNumberType:0 withAllType:NO];
+    [self.allSelectControl setFrame:CGRectMake(10,(frame.size.height-20.0)/2.0 , 20.0, 20.0)];
     [self.titleLabel setFrame:CGRectMake(40.0, 0, (frame.size.width-50.0)/2.0, frame.size.height)];
     [self.describeLabel setFrame:CGRectMake(self.titleLabel.right, 0, self.titleLabel.width, self.titleLabel.height)];
     
@@ -60,17 +62,38 @@
 }
 
 
+-(void)setIsAction:(BOOL)isAction
+{
+    _isAction = isAction;
+    if (isAction)
+    {
+        [self.allSelectControl setImage:[UIImage imageNamed:@"ico_allselect"]];
+    }
+    else
+    {
+        [self.allSelectControl setImage:[UIImage imageNamed:@"ico_allnoselect"]];
+    }
+    
+}
+
+
 #pragma mark - Getter / Setter
--(BaseButtonControl *)allSelectControl
+-(UIImageView *)allSelectControl
 {
     if (!_allSelectControl)
     {
-        _allSelectControl = [[BaseButtonControl alloc]init];
-        [_allSelectControl setNumberImageView:1];
-        [_allSelectControl setImage:@"ico_allnoselect" withNumberType:0 withAllType:NO];
+        _allSelectControl = [[UIImageView alloc]init];
+        [_allSelectControl setImage:[UIImage imageNamed:@"ico_allnoselect"]];
+        [_allSelectControl setContentMode:UIViewContentModeScaleAspectFit];
     }
     return _allSelectControl;
 }
+
+
+
+
+
+
 -(UILabel *)titleLabel
 {
     if (!_titleLabel)

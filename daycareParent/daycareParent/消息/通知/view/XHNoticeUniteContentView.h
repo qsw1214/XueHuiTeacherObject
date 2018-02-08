@@ -22,5 +22,7 @@
 
 @property (nonatomic,weak) id <XHNoticeUniteDeletage> deletage;
 
+-(void)reload;
+
 
 @end

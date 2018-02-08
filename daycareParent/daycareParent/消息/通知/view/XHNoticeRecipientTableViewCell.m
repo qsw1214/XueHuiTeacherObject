@@ -103,8 +103,8 @@
         [_contentControl setFont:FontLevel2 withNumberType:0 withAllType:NO];
         [_contentControl setFont:FontLevel2 withNumberType:1 withAllType:NO];
         [_contentControl setBackgroundColor:[UIColor whiteColor]];
-        [_contentControl setItemColor:YES];
         [_contentControl setUserInteractionEnabled:NO];
+        [_contentControl setItemColor:NO];
     }
     return _contentControl;
 }
@@ -117,8 +117,8 @@
         _markControl = [[BaseButtonControl alloc]init];
         [_markControl setNumberImageView:1];
         [_markControl setImage:@"ico_allnoselect" withNumberType:0 withAllType:NO];
-        [_markControl setItemColor:YES];
         [_markControl addTarget:self action:@selector(markControlAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_markControl setItemColor:NO];
     }
     return _markControl;
 }

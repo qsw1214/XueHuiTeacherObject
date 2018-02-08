@@ -9,6 +9,9 @@
 #pragma mark 智慧校园->通知公告->通知联系人群组（教师和家长每个分项组）
 
 
+
+typedef void (^successBlok)(BOOL success);
+
 #import "BaseViewController.h"
 #import "XHNoticeRecipientFrame.h"
 
@@ -16,6 +19,7 @@
 @interface XHAddNoticeRecipientGroupViewController : BaseViewController
 
 -(void)setItemObject:(XHNoticeRecipientFrame*)object;
+@property (nonatomic,copy) successBlok successBlok;
 
 
 @end

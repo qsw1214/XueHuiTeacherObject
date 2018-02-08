@@ -7,6 +7,7 @@
 //
 
 #import "XHAddNoticeContentView.h"
+#import "XHAddNoticeRecipientViewController.h"
 
 
 @interface XHAddNoticeContentView () <BaseTextViewDeletage>
@@ -89,6 +90,33 @@
 -(void)controlAction:(BaseButtonControl*)sender
 {
     [self.inputContent resignFirstResponder];
+    
+    switch (sender.tag)
+    {
+#pragma mark case 1: 添加图片
+        case 1:
+        {
+            
+        }
+            break;
+            break;
+#pragma mark case 3: 发布
+        case 3:
+        {
+            
+        }
+            break;
+    }
+}
+
+
+-(void)linkControlAction:(BaseButtonControl*)sender
+{
+    if ([self.addDeletage respondsToSelector:@selector(addNoticeContentAction:)])
+    {
+        [self.addDeletage addNoticeContentAction:sender];
+    }
+    
 }
 
 #pragma mark - Deletage Method
@@ -154,9 +182,9 @@
         [_recipientContent setImage:@"ico_arrow" withNumberType:1 withAllType:NO];
         [_recipientContent setText:@"请选择接收人" withNumberType:0 withAllType:NO];
         [_recipientContent setText:@"请选择" withNumberType:1 withAllType:NO];
-        [_recipientContent addTarget:self action:@selector(controlAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_recipientContent addTarget:self action:@selector(linkControlAction:) forControlEvents:UIControlEventTouchUpInside];
         [_recipientContent setItemColor:NO];
-        [_recipientContent setTag:1];
+        [_recipientContent setTag:2];
     }
     return _recipientContent;
 }
@@ -177,6 +205,7 @@
         [_submitContent setTextColor:[UIColor whiteColor] withTpe:0 withAllType:NO];
         [_submitContent setLayerCornerRadius:5.0];
         [_submitContent addTarget:self action:@selector(controlAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_submitContent setTag:3];
     }
     return _submitContent;
 }

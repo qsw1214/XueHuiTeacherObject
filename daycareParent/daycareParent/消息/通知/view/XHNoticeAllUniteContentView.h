@@ -14,6 +14,10 @@
 @interface XHNoticeAllUniteContentView : BaseControl
 
 
--(void)addAllSelectTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents;
+@property (nonatomic,copy) NSString *describe;
+
+@property (nonatomic,assign) BOOL isAction; //!< 是否选中
+
+
 
 @end

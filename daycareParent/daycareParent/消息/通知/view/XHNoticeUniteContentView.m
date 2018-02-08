@@ -16,7 +16,8 @@
 @interface XHNoticeUniteContentView () <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) XHNoticeAllUniteContentView *allSelectControl;
-@property (nonatomic,strong) BaseButtonControl *confirmationControl;
+@property (nonatomic,assign) NSInteger selectIndex;
+
 
 @property (nonatomic,strong) NSMutableArray *teachersArray;  //!< 教师数据源数组
 @property (nonatomic,strong) NSMutableArray *parentsArray;   //!< 家长数据源数组
@@ -35,6 +36,7 @@
     {
         [self addSubViews:YES];
         [self setUnify:0];
+        [self setSelectIndex:0];
     }
     return self;
 }
@@ -51,25 +53,28 @@
     if (subview)
     {
         [self.allSelectControl resetFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60.0)];
-        [self.allSelectControl addAllSelectTarget:self action:@selector(allSelectControl:) forControlEvents:UIControlEventTouchUpInside];
+        [self.allSelectControl addTarget:self action:@selector(allSelectControl:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.tableView];
         [self.tableView setDelegate:self];
         [self.tableView setDataSource:self];
         [self.tableView setTableHeaderView:self.allSelectControl];
         [self.tableView showRefresHeaderWithTarget:self withSelector:@selector(refreshHeaderAction)];
-        [self addSubview:self.confirmationControl];
+        [self.tableView beginRefreshing];
     }
 }
 
+
+-(void)reload
+{
+    [self.tableView refreshReload];
+}
 
 
 
 -(void)resetFrame:(CGRect)frame
 {
     [self setFrame:frame];
-    [self.tableView resetFrame:CGRectMake(0, 0, frame.size.width, frame.size.height-50.0)];
-    [self.confirmationControl resetFrame:CGRectMake(0, self.tableView.bottom, self.tableView.width, 50.0)];
-    [self.confirmationControl setTitleEdgeFrame:CGRectMake(0, 0, self.confirmationControl.width, self.confirmationControl.height) withNumberType:0 withAllType:NO];
+    [self.tableView resetFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
     
 }
 
@@ -201,6 +206,60 @@
 
 
 
+
+
+
+-(void)allSelectControl:(XHNoticeAllUniteContentView*)sender
+{
+    if (sender.isAction)
+    {
+        [NSArray enumerateObjectsWithArray:self.dataArray usingBlock:^(XHNoticeRecipientFrame *obj, NSUInteger idx, BOOL *stop)
+         {
+             [obj.model setSelectType:XHNoticeRecipientNormalityType];
+         }];
+    }
+    else
+    {
+        [NSArray enumerateObjectsWithArray:self.dataArray usingBlock:^(XHNoticeRecipientFrame *obj, NSUInteger idx, BOOL *stop)
+         {
+             [obj.model setSelectType:XHNoticeRecipientSelectedType];
+         }];
+    }
+    [self cyclicTraversal:self.dataArray];
+}
+
+#pragma mark 用于循环遍历已选中的人数
+-(void)cyclicTraversal:(NSArray*)array
+{
+    [self setSelectIndex:0];
+    [NSArray enumerateObjectsWithArray:array usingBlock:^(XHNoticeRecipientFrame *obj, NSUInteger idx, BOOL *stop)
+     {
+         switch (obj.model.selectType)
+         {
+             case XHNoticeRecipientNormalityType:
+                 break;
+             case XHNoticeRecipientSelectedType:
+             {
+                 [self setSelectIndex:(self.selectIndex+1)];
+             }
+                 break;
+         }
+     }];
+    NSInteger count = [array count];
+    if (self.selectIndex == [array count])
+    {
+        [self.allSelectControl setIsAction:YES];
+    }
+    else
+    {
+        [self.allSelectControl setIsAction:NO];
+    }
+    
+    [self.allSelectControl setDescribe:[NSString stringWithFormat:@"%zd/%zd",self.selectIndex,count]];
+    [self.tableView refreshReload];
+}
+
+
 #pragma mark - Deletage Method
 - (NSInteger)tableView:(BaseTableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -219,6 +278,7 @@
         cell = [[XHNoticeRecipientTableViewCell alloc]initWithDeletage:self];
     }
     [cell setItemFrame:[self.dataArray objectAtIndex:indexPath.row]];
+    [cell setIndexRow:indexPath.row];
     return cell;
 }
 
@@ -243,7 +303,28 @@
 #pragma mark XHNoticeRecipientTableViewCellDeletage
 -(void)markControlAction:(BaseButtonControl*)object
 {
+    [NSArray enumerateObjectsWithArray:self.dataArray usingBlock:^(XHNoticeRecipientFrame *obj, NSUInteger idx, BOOL *stop)
+    {
+        if (idx ==  object.tag)
+        {
+            switch (obj.model.selectType)
+            {
+                case XHNoticeRecipientSelectedType:
+                {
+                    [obj.model setSelectType:XHNoticeRecipientNormalityType];
+                }
+                    break;
+                case XHNoticeRecipientNormalityType:
+                {
+                    [obj.model setSelectType:XHNoticeRecipientSelectedType];
+                }
+                    break;
+            }
+        }
+        
+    }];
     
+    [self cyclicTraversal:self.dataArray];
 }
 
 
@@ -270,46 +351,17 @@
 
 
 
-
-
--(BaseButtonControl *)confirmationControl
-{
-    if (!_confirmationControl)
-    {
-        _confirmationControl = [[BaseButtonControl alloc]init];
-        [_confirmationControl setBackgroundColor:MainColor];
-        [_confirmationControl setNumberLabel:1];
-        [_confirmationControl setText:@"确认选择" withNumberType:0 withAllType:NO];
-        [_confirmationControl setTextAlignment:NSTextAlignmentCenter withNumberType:0 withAllType:NO];
-        [_confirmationControl setTextColor:[UIColor whiteColor] withTpe:0 withAllType:NO];
-        [_confirmationControl addTarget:self action:@selector(confirmationControlAction:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _confirmationControl;
-}
-
-
 -(XHNoticeAllUniteContentView *)allSelectControl
 {
     if (!_allSelectControl)
     {
         _allSelectControl = [[XHNoticeAllUniteContentView alloc]init];
         [_allSelectControl setBackgroundColor:[UIColor whiteColor]];
-        [_confirmationControl setTag:2];
     }
     return _allSelectControl;
 }
 
--(void)confirmationControlAction:(BaseButtonControl*)sender
-{
-    
-}
 
-
-
--(void)allSelectControl:(XHNoticeAllUniteContentView*)sender
-{
-    
-}
 
 
 
