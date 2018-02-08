@@ -13,7 +13,7 @@
 
 
 
-@interface XHAddNoticeRecipientViewController () <XHNoticeUniteDeletage>
+@interface XHAddNoticeRecipientViewController () <XHNoticeUniteDeletage,UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) BaseTableView *tableView;
 @property (nonatomic,strong) BaseButtonControl *confirmationControl;
@@ -51,8 +51,8 @@
 {
     [super viewWillAppear:animated];
     
-    [self.tableView refreshReloadData];
-   
+   [self.tableView refreshReloadData];
+    //[self.tableView beginRefreshing];
 }
 
 - (void)didReceiveMemoryWarning
@@ -100,6 +100,7 @@
              [weself.teachersArray removeAllObjects];
              [array enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
               {
+                  obj=[obj objectItemKey:@"propValue"];
                   XHNoticeRecipientGroupFrame *frame = [[XHNoticeRecipientGroupFrame alloc]init];
                   XHNoticeRecipientGroupModel *model = [[XHNoticeRecipientGroupModel alloc]init];
                   [model setTeacherObject:obj];

@@ -4782,7 +4782,7 @@
 					"$(PROJECT_DIR)/daycareParent/Tool(工具类)/ping++/One",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jt.xhm-test";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jt.xhm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4854,7 +4854,7 @@
 					"$(PROJECT_DIR)/daycareParent/Tool(工具类)/ping++/One",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jt.xhm-test";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jt.xhm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
