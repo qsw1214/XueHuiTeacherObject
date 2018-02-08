@@ -14,6 +14,7 @@
 
 
 
+
 @interface XHAddNoticeRecipientViewController () <UITableViewDelegate,UITableViewDataSource,XHNoticeRecipientTableViewCellDeletage>
 
 @property (nonatomic,strong) BaseTableView *tableView;
@@ -73,6 +74,9 @@
         [self.view addSubview:self.confirmationControl];
     }
 }
+
+
+
 
 
 

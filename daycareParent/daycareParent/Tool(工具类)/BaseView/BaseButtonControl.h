@@ -54,6 +54,8 @@ typedef NS_ENUM(NSInteger,BaseControlModelType)
 @property (nonatomic,strong) XHPreviewModel *previewModel;
 @property (nonatomic,strong) XHClassListModel *classListModel;
 @property (nonatomic,strong) XHSubjectListModel *subjectListModel;
+@property (nonatomic,strong) XHNetWorkConfig *networkConfig;
+
 
 
 

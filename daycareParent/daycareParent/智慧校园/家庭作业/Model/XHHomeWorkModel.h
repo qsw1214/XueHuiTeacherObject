@@ -25,9 +25,15 @@ typedef NS_ENUM(NSInteger,HomeWorkModelUnreadType)
 
 typedef NS_ENUM(NSInteger,HomeWorkModelType)
 {
-    HomeWorkType = 1, //!< 家庭作业
-    HomeWorkDetailsType = 2,   //!< 家庭作业详情
+    HomeWorkType = 1, //!< 家庭作业或通知类型
+    HomeWorkDetailsType = 2,   //!< 家庭作业或通知详情
+    HomeWorkNoticeType = 3,  //!< 通知类型
+    HomeWorkNoticeDetailsType = 4,  //!< 通知详情类型
 };
+
+
+
+
 
 
 @interface XHHomeWorkModel : BaseModel
@@ -53,9 +59,10 @@ typedef NS_ENUM(NSInteger,HomeWorkModelType)
 #pragma mark 设置家庭作业对象
 //!< 设置家庭作业对象
 -(void)setItemObject:(NSDictionary *)object;
-//#pragma mark 设置通知对象
-////!< 设置通知对象
-//-(void)setNoticeItemObject:(NSDictionary*)object;
+
+#pragma mark 设置通知对象
+//!< 设置通知对象
+-(void)setNoticeItemObject:(NSDictionary*)object;
 
 
 @end

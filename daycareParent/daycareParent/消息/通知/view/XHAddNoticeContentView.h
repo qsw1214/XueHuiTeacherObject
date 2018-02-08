@@ -28,5 +28,9 @@
 @property (nonatomic,weak) id <XHAddNoticeContentViewDeletage> addDeletage;
 
 
+-(void)setItemArray:(NSMutableArray*)array;
+
+
+
 
 @end

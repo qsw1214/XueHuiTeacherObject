@@ -9,16 +9,15 @@
 #import "BaseControl.h"
 #import "XHHomeWorkTableViewCell.h"
 
+
 @protocol XHHomeWorkDetailViewDeletage <NSObject>
 
-
-@optional
-
 -(void)didSelectAtIndex:(XHHomeWorkFrame*)object;
-
 @end
 
 @interface XHHomeWorkDetailView : BaseControl
 
 -(instancetype)initWithDeletage:(id)deletage;
+
+
 @end

@@ -10,6 +10,10 @@
 #import "XHAddNoticeContentView.h"
 #import "XHNoticeListViewController.h"
 #import "XHAddNoticeRecipientViewController.h"
+#import "CameraManageViewController.h"
+#import "WPhotoViewController.h"
+#import "XHNoticeRecordViewController.h"
+
 
 
 
@@ -17,7 +21,7 @@
 @interface XHAddNoticeViewController () <XHAddNoticeContentViewDeletage>
 
 @property (nonatomic,strong) XHAddNoticeContentView *contentView;
-
+@property (nonatomic,strong) NSMutableArray *imageNameArray;
 
 @end
 
@@ -44,22 +48,126 @@
     }
 }
 
+-(void)rightItemAction:(BaseNavigationControlItem *)sender
+{
+    XHNoticeRecordViewController *noticeRecord = [[XHNoticeRecordViewController alloc]init];
+    [self.navigationController pushViewController:noticeRecord animated:YES];
+}
+
 
 #pragma mark - Deletage Method
 #pragma mark XHAddNoticeContentViewDeletage
 -(void)addNoticeContentAction:(BaseButtonControl*)sender
 {
-    XHAddNoticeRecipientViewController *linkMan = [[XHAddNoticeRecipientViewController alloc]init];
-    linkMan.markSuccessBlock = ^(BOOL sucess,XHNoticeMarkModel *model)
+    switch (sender.tag)
     {
-        if (sucess)
+        case 1:
         {
-            [self.contentView setMarkModel:model];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"选择相机" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
+            {
+                CameraManageViewController *manager=[[CameraManageViewController alloc] initWithCameraManageWithType:SourceTypeCamera setDeletate:self];
+                [[XHHelper sharedHelper].currentViewController.navigationController presentViewController:manager animated:YES completion:nil];
+                
+            }]];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"选择相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+            {
+                WPhotoViewController
+                *wphoto = [[WPhotoViewController alloc] init];
+                [wphoto setSelectPhotoOfMax:(6-[self.dataArray count])];
+                wphoto.selectPhotosBack = ^(NSMutableArray *photosArray)
+                {
+                    [photosArray enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
+                     {
+                         XHPreviewModel *imageModel = [[XHPreviewModel alloc]init];
+                         [imageModel setPreviewImage:[obj objectForKey:@"image"]];
+                         [imageModel setItemSize:CGSizeMake(100, 100)];
+                         [imageModel setType:XHPreviewImagesType];
+                         [imageModel setTage:idx];
+                         [imageModel setIndexTage:idx];
+                         [self.dataArray addObject:imageModel];
+                     }];
+                    
+                    
+                    [self.contentView setItemArray:self.dataArray];
+                };
+                [self.navigationController presentViewController:wphoto animated:YES completion:nil];
+            }]];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action){}]];
+            
+            [self presentViewController:alertController animated:YES completion:^{}];
         }
-        
-    };
-    [self.navigationController pushViewController:linkMan animated:YES];
+            break;
+        case 2:
+        {
+            XHAddNoticeRecipientViewController *linkMan = [[XHAddNoticeRecipientViewController alloc]init];
+            linkMan.markSuccessBlock = ^(BOOL sucess,XHNoticeMarkModel *model)
+            {
+                if (sucess)
+                {
+                    [self.contentView setMarkModel:model];
+                }
+                
+            };
+            [self.navigationController pushViewController:linkMan animated:YES];
+        }
+            break;
+        case 3:
+        {
+            if ([self.dataArray count])
+            {
+                [XHShowHUD showTextHud];
+                
+                [NSArray enumerateObjectsWithArray:self.dataArray usingBlock:^(XHPreviewModel *obj, NSUInteger idx, BOOL *stop)
+                 {
+                     NSString *imageName = [XHHelper createGuid];
+                     [XHHelper uploadImage:obj.previewImage name:imageName uploadCallback:^(BOOL success, NSError *error)
+                      {
+                          if (success)
+                          {
+                              [self.imageNameArray addObject:imageName];
+                              if ([self.imageNameArray count] == [self.dataArray count])
+                              {
+                                  XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
+                                  for (int i=0; i<self.imageNameArray.count; i++)
+                                  {
+                                      [sender.networkConfig setObject:self.imageNameArray[i] forKey:[NSString stringWithFormat:@"picUrl%zd",(i+1)]];
+                                  }
+                                  [config postWithUrl:@"zzjt-app-api_schoolWork001" sucess:^(id object, BOOL verifyObject)
+                                   
+                                   {
+                                       if (verifyObject)
+                                       {
+                                           [self.navigationController popViewControllerAnimated:YES];
+                                       }
+                                       
+                                   } error:^(NSError *error){}];
+                              }
+                              else
+                              {
+                                  [XHShowHUD hideHud];
+                              }
+                          }
+                          
+                      } withProgressCallback:^(float progress){}];
+                 }];
+        }
+        else
+        {
+            [XHShowHUD showTextHud];
+            [sender.networkConfig postWithUrl:@"zzjt-app-api_schoolWork001" sucess:^(id object, BOOL verifyObject)
+             
+             {
+                 if (verifyObject)
+                 {
+                     [self.navigationController popViewControllerAnimated:YES];
+                 }
+             } error:^(NSError *error){}];
+        }
+    }
+    }
 }
+  
 
 
 
@@ -73,5 +181,16 @@
     }
     return _contentView;
 }
+
+
+-(NSMutableArray *)imageNameArray
+{
+    if (!_imageNameArray)
+    {
+        _imageNameArray = [NSMutableArray array];
+    }
+    return _imageNameArray;
+}
+
 
 @end

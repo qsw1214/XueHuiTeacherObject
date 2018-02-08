@@ -81,6 +81,7 @@ static XHNetWorkConfig *net = nil;
     
     if (responseCode)
     {
+       
         [XHShowHUD showNOHud:responseMessage];
         return NO;
     }
@@ -180,7 +181,7 @@ static XHNetWorkConfig *net = nil;
 
     if ([AFNetworkingHelper connectedToNetWork])
     {
-       // [XHShowHUD showTextHud];
+        [XHShowHUD showTextHud];
         
         switch (self.option)
         {
@@ -206,16 +207,24 @@ static XHNetWorkConfig *net = nil;
         
         [self POST:url parameters:self.paramDictionary  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
          {
-            
              NSLog(@"sussess===============%@",responseObject);
              BOOL verifyObject = [self verifyResPonseObject:responseObject];
              responseObject = [self analyzingObject:responseObject];
              sucessBlock(responseObject,verifyObject);
              NSLog(@"object===============%@",responseObject);
+          
+             
+            
+            
+            
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
          {
-             [XHShowHUD showNOHud:@"请求失败，请尝试重试！"];
-             errorBlock(error);
+             MAIN(^{
+                 
+                 [XHShowHUD showNOHud:@"请求失败，请尝试重试！"];
+                 errorBlock(error);
+             });
+            
          }];
     }
     else

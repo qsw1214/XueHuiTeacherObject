@@ -6,9 +6,6 @@
 //  Copyright © 2017年 XueHui. All rights reserved.
 //
 
-
-
-
 #import "BaseControl.h"
 #import "XHHomeWorkTableViewCell.h"
 
@@ -25,6 +22,9 @@
 
 
 -(instancetype)initWithDeletage:(id)deletage;
+
+
+
 
 
 

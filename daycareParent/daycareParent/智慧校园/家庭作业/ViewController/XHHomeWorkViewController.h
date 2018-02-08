@@ -12,7 +12,15 @@
 #import "XHHomeWorkContentView.h"
 
 
+
+
+
 @interface XHHomeWorkViewController : BaseViewController
+
+
+
+@property (nonatomic,assign) HomeWorkModelType type;
+
 
 
 

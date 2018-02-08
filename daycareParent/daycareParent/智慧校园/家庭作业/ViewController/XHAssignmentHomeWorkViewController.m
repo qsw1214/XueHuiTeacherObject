@@ -47,6 +47,7 @@
 -(void)rightItemAction:(BaseNavigationControlItem *)sender
 {
     XHHomeWorkViewController *homeWork = [[XHHomeWorkViewController alloc]init];
+    [homeWork setType:HomeWorkNoticeType];
     [self.navigationController pushViewController:homeWork animated:YES];
 }
 

@@ -177,7 +177,7 @@
             
         }
             break;
-#pragma mark 发布作业
+#pragma mark case 4 发布作业
         case 4:
         {
             if (!self.classContent.classListModel)

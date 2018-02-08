@@ -131,6 +131,50 @@
             [self.collectionView setItemArray:itemFrame.model.imageUrlArray];
         }
             break;
+#pragma mark case HomeWorkNoticeType
+        case HomeWorkNoticeType:
+        {
+            [self.headerControl resetFrame:CGRectMake(10.0, 10.0, 60.0, 60.0)];
+            //设置用户名
+            [self.userNameLael setFrame:CGRectMake(self.headerControl.right+10.0, self.headerControl.top, 120.0, 30.0)];
+            //设置日期
+            [self.dateLabel setFrame:CGRectMake(self.userNameLael.right+5.0, self.userNameLael.top, (itemFrame.itemFrame.size.width-(self.userNameLael.right+15.0)), self.userNameLael.height)];
+            //设置内容视图
+            [self.contentLabel setFrame:CGRectMake(self.userNameLael.left, self.userNameLael.bottom, (itemFrame.itemFrame.size.width-(self.userNameLael.left+10.0)), 30.0)];
+            [self.lineView setFrame:CGRectMake(0, itemFrame.itemFrame.size.height-0.5, itemFrame.itemFrame.size.width, 0.5)];
+            
+            //设置属性
+            [self.contentLabel setNumberOfLines:1];
+            
+            
+            //赋值
+            [self.headerControl sd_setImageWithURL:itemFrame.model.headerUrl withPlaceholder:@"addman" withNumberType:0 withAllType:NO];
+            [self.userNameLael setText:itemFrame.model.userName];
+            [self.dateLabel setText:itemFrame.model.releaseDate];
+            [self.contentLabel setText:itemFrame.model.workContent];
+        }
+            break;
+#pragma mark case HomeWorkNoticeDetailsType
+        case HomeWorkNoticeDetailsType:
+        {
+            [self.headerControl resetFrame:CGRectMake(10.0, 10.0, 60.0, 60.0)];
+            [self.userNameLael setFrame:CGRectMake(self.headerControl.right+10.0, self.headerControl.top, 120.0, 30.0)];
+            [self.contentLabel setFrame:CGRectMake(self.userNameLael.left, self.userNameLael.bottom, itemFrame.contentSize.width, itemFrame.contentSize.height)];
+            [self.collectionView resetFrame:CGRectMake(self.contentLabel.left, self.contentLabel.bottom+5.0, itemFrame.previewSize.width, itemFrame.previewSize.height)];
+            [self.dateLabel setFrame:CGRectMake(self.contentLabel.left, (self.contentLabel.bottom+(itemFrame.previewSize.height > 0 ? itemFrame.previewSize.height+10.0 : 5.0) ), self.contentLabel.width, 20)];
+            
+            //设置属性
+            [self.contentLabel setNumberOfLines:0];
+            
+            [self.headerControl sd_setImageWithURL:itemFrame.model.headerUrl withPlaceholder:@"addman" withNumberType:0 withAllType:NO];
+            [self.userNameLael setText:itemFrame.model.userName];
+            [self.subjectLabel setText:itemFrame.model.subject];
+            [self.dateLabel setText:itemFrame.model.releaseDate];
+            [self.contentLabel setText:itemFrame.model.workContent];
+            [self.gradeControl setText:[NSString stringWithFormat:@"%@%@",itemFrame.model.gradeName,itemFrame.model.clazzName] withNumberType:0 withAllType:NO];
+            [self.collectionView setItemArray:itemFrame.model.imageUrlArray];
+        }
+            break;
     }
     
     

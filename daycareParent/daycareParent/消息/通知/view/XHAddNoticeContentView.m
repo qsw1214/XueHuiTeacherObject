@@ -27,6 +27,7 @@
 
 
 
+
 @end
 
 @implementation XHAddNoticeContentView
@@ -62,7 +63,7 @@
     [self.recipientContent resetLineViewFrame:CGRectMake(0, self.recipientContent.height-0.5, self.recipientContent.width, 0.5) withNumberType:1 withAllType:NO];
     [self.recipientContent setImageEdgeFrame:CGRectMake(10, ((self.recipientContent.height-20.0)/2.0), 20.0, 20.0) withNumberType:0 withAllType:NO];
     [self.recipientContent setImageEdgeFrame:CGRectMake((self.recipientContent.width-30.0), ((self.recipientContent.height-20.0)/2.0), 20.0, 20.0) withNumberType:1 withAllType:NO];
-    [self.recipientContent setTitleEdgeFrame:CGRectMake(35, 0, 85, self.recipientContent.height) withNumberType:0 withAllType:NO];
+    [self.recipientContent setTitleEdgeFrame:CGRectMake(35, 0, 155.0, self.recipientContent.height) withNumberType:0 withAllType:NO];
     [self.recipientContent setTitleEdgeFrame:CGRectMake(120, 0, (self.recipientContent.width-150), self.recipientContent.height) withNumberType:1 withAllType:NO];
     
     //发布
@@ -74,6 +75,11 @@
     [self setContentSize:CGSizeMake(frame.size.width, self.submitContent.bottom+60.0)];
 }
 
+
+-(void)setItemArray:(NSMutableArray*)array
+{
+    [self.collectionView setItemArray:array];
+}
 
 
 
@@ -114,47 +120,44 @@
 #pragma mark case 1: 添加图片
         case 1:
         {
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-            [alertController addAction:[UIAlertAction actionWithTitle:@"选择相机" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
-            {
-                CameraManageViewController *manager=[[CameraManageViewController alloc] initWithCameraManageWithType:SourceTypeCamera setDeletate:self];
-                [[XHHelper sharedHelper].currentViewController.navigationController presentViewController:manager animated:YES completion:nil];
-                
-            }]];
-            [alertController addAction:[UIAlertAction actionWithTitle:@"选择相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
-            {
-                WPhotoViewController
-                *wphoto = [[WPhotoViewController alloc] init];
-                [wphoto setSelectPhotoOfMax:(6-[self.dataArray count])];
-                wphoto.selectPhotosBack = ^(NSMutableArray *photosArray)
-                {
-                    [photosArray enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
-                     {
-                         XHPreviewModel *imageModel = [[XHPreviewModel alloc]init];
-                         [imageModel setPreviewImage:[obj objectForKey:@"image"]];
-                         [imageModel setItemSize:CGSizeMake(100, 100)];
-                         [imageModel setType:XHPreviewImagesType];
-                         [imageModel setTage:idx];
-                         [imageModel setIndexTage:idx];
-                         [self.dataArray addObject:imageModel];
-                     }];
-                    
-                    
-                    [self.collectionView setItemArray:self.dataArray];
-                };
-                [[XHHelper sharedHelper].currentViewController.navigationController presentViewController:wphoto animated:YES completion:nil];
-            }]];
-            [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action){}]];
-            [[XHHelper sharedHelper].currentViewController presentViewController:alertController animated:YES completion:nil];
             
+            if ([self.addDeletage respondsToSelector:@selector(addNoticeContentAction:)])
+            {
+                [self.addDeletage addNoticeContentAction:sender];
+            }
         }
             break;
             break;
 #pragma mark case 3: 发布
         case 3:
         {
-            
-            
+            if ([self.inputContent.text isEqualToString:@""])
+            {
+                [XHShowHUD showNOHud:@"内容不能为空"];
+            }
+            else if (self.markModel.count)
+            {
+                if ([self.addDeletage respondsToSelector:@selector(addNoticeContentAction:)])
+                {
+                    XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
+                    [config setObject:[NSString safeString:self.markModel.teacherID] forKey:@"tIdList"];
+                    [config setObject:[NSString safeString:self.markModel.teacherPhone] forKey:@"tTelList"];
+                    [config setObject:[NSString safeString:self.markModel.guardianID] forKey:@"gIdList"];
+                    [config setObject:[NSString safeString:self.markModel.guardianNumber] forKey:@"gTelList"];
+                    [config setObject:[NSString safeString:self.inputContent.text] forKey:@"content"];
+                    [config setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
+                    [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacher_id"];
+                    [config setObject:[XHUserInfo sharedUserInfo].telphoneNumber forKey:@"teacher_tel"];
+                    [sender setNetworkConfig:config];
+                    
+                    [self.addDeletage addNoticeContentAction:sender];
+                    
+                }
+            }
+            else
+            {
+                [XHShowHUD showNOHud:@"选择联系人"];
+            }
             
         }
             break;
@@ -318,4 +321,8 @@
     }
     return _collectionView;
 }
+
+
+
+
 @end

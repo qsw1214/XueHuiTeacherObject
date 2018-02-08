@@ -177,6 +177,9 @@
 		4B71A1BA20060B9D00818046 /* XHCookBookImageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71A1B920060B9D00818046 /* XHCookBookImageControl.m */; };
 		4B72ADD9202BEA6300A120E5 /* XHNoticerecipientParentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B72ADD8202BEA6300A120E5 /* XHNoticerecipientParentModel.m */; };
 		4B72ADE0202C295300A120E5 /* XHNoticeMarkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B72ADDE202C293300A120E5 /* XHNoticeMarkModel.m */; };
+		4B72ADE3202C5F3300A120E5 /* XHNoticeRecordContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B72ADE2202C5F3300A120E5 /* XHNoticeRecordContentView.m */; };
+		4B72ADE6202C617100A120E5 /* XHNoticeRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B72ADE5202C617100A120E5 /* XHNoticeRecordViewController.m */; };
+		4B72ADE9202C675500A120E5 /* XHNoticeRecordDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B72ADE8202C675500A120E5 /* XHNoticeRecordDetailsViewController.m */; };
 		4B80F1E01FCBE3F700BC7B52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B80F1DF1FCBE3F700BC7B52 /* Assets.xcassets */; };
 		4B80F1E61FCBE3F700BC7B52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B80F1E51FCBE3F700BC7B52 /* main.m */; };
 		4B80F2081FCBE4E400BC7B52 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B80F2041FCBE4E400BC7B52 /* AppDelegate.m */; };
@@ -877,6 +880,12 @@
 		4B72ADD8202BEA6300A120E5 /* XHNoticerecipientParentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XHNoticerecipientParentModel.m; path = "daycareParent/消息/通知/model/XHNoticerecipientParentModel.m"; sourceTree = SOURCE_ROOT; };
 		4B72ADDD202C293300A120E5 /* XHNoticeMarkModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNoticeMarkModel.h; sourceTree = "<group>"; };
 		4B72ADDE202C293300A120E5 /* XHNoticeMarkModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNoticeMarkModel.m; sourceTree = "<group>"; };
+		4B72ADE1202C5F3300A120E5 /* XHNoticeRecordContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNoticeRecordContentView.h; sourceTree = "<group>"; };
+		4B72ADE2202C5F3300A120E5 /* XHNoticeRecordContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNoticeRecordContentView.m; sourceTree = "<group>"; };
+		4B72ADE4202C617100A120E5 /* XHNoticeRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNoticeRecordViewController.h; sourceTree = "<group>"; };
+		4B72ADE5202C617100A120E5 /* XHNoticeRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNoticeRecordViewController.m; sourceTree = "<group>"; };
+		4B72ADE7202C675500A120E5 /* XHNoticeRecordDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNoticeRecordDetailsViewController.h; sourceTree = "<group>"; };
+		4B72ADE8202C675500A120E5 /* XHNoticeRecordDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNoticeRecordDetailsViewController.m; sourceTree = "<group>"; };
 		4B80F1D31FCBE3F700BC7B52 /* daycareParent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = daycareParent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B80F1DF1FCBE3F700BC7B52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4B80F1E41FCBE3F700BC7B52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -2257,6 +2266,10 @@
 				4B577F931FF5C4F50023ACBC /* XHNoticeListViewController.m */,
 				4B577F941FF5C4F50023ACBC /* XHNoticeDetailViewController.h */,
 				4B577F951FF5C4F50023ACBC /* XHNoticeDetailViewController.m */,
+				4B72ADE4202C617100A120E5 /* XHNoticeRecordViewController.h */,
+				4B72ADE5202C617100A120E5 /* XHNoticeRecordViewController.m */,
+				4B72ADE7202C675500A120E5 /* XHNoticeRecordDetailsViewController.h */,
+				4B72ADE8202C675500A120E5 /* XHNoticeRecordDetailsViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -3007,6 +3020,8 @@
 		4BA8C4D41FCFF2D4006CBEBC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4B72ADE1202C5F3300A120E5 /* XHNoticeRecordContentView.h */,
+				4B72ADE2202C5F3300A120E5 /* XHNoticeRecordContentView.m */,
 				4BA8C4E01FCFF788006CBEBC /* XHHomeWorkContentView.h */,
 				4BA8C4E11FCFF788006CBEBC /* XHHomeWorkContentView.m */,
 				8C4DB5D71FEBB55D00B14073 /* XHHomeWorkDetailView.h */,
@@ -4230,6 +4245,7 @@
 				8CBA35F520117ABC00485643 /* XHApproverTableViewCell.m in Sources */,
 				4B8D4B6F201978990043E0F4 /* XHParentAddressBookContentView.m in Sources */,
 				4B80F2E91FCBF08800BC7B52 /* AFNetworkReachabilityManager.m in Sources */,
+				4B72ADE3202C5F3300A120E5 /* XHNoticeRecordContentView.m in Sources */,
 				4BB9BEA01FDE4C23004F5622 /* XHEducationCloudMenuView.m in Sources */,
 				8C019F711FF4C373005EBC2C /* JKDBModel.m in Sources */,
 				4B632ABF1FE1176F00B90B94 /* XHSafeLocationViewController.m in Sources */,
@@ -4355,6 +4371,7 @@
 				4B80F3241FCBFD6F00BC7B52 /* NSDictionary+MTLMappingAdditions.m in Sources */,
 				4B80F2861FCBF04800BC7B52 /* MJRefreshNormalHeader.m in Sources */,
 				4B80F2081FCBE4E400BC7B52 /* AppDelegate.m in Sources */,
+				4B72ADE6202C617100A120E5 /* XHNoticeRecordViewController.m in Sources */,
 				4B3126321FD93CC6000CE894 /* TADotView.m in Sources */,
 				4B80F2821FCBF04800BC7B52 /* MJRefreshBackGifFooter.m in Sources */,
 				4B68C9E6201174F60078FEDB /* XHCreateRecipeViewController.m in Sources */,
@@ -4575,6 +4592,7 @@
 				8C3E55AD1FD51A330013002A /* XHCustomPayView.m in Sources */,
 				4B80F2891FCBF04800BC7B52 /* MJRefreshAnimateHeader.m in Sources */,
 				4B80F2D41FCBF04F00BC7B52 /* UIImage+MultiFormat.m in Sources */,
+				4B72ADE9202C675500A120E5 /* XHNoticeRecordDetailsViewController.m in Sources */,
 				4BD33DDA1FCD555500BC52B6 /* XHSmartCampusContentView.m in Sources */,
 				4B80F2EA1FCBF08800BC7B52 /* AFSecurityPolicy.m in Sources */,
 				4B4DD0342028587500ACFFA8 /* XHNoticeUniteItemContentView.m in Sources */,

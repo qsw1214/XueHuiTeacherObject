@@ -50,44 +50,41 @@
 }
 
 
-//#pragma mark 设置通知对象
-////!< 设置通知对象
-//-(void)setNoticeItemObject:(NSDictionary*)object
-//{
-//    [self setHeaderUrl:ALGetFileHeadThumbnail([object objectItemKey:@"headPic"])];
-//    [self setSubject:[object objectItemKey:@"subjectName"]];
-//    [self setPushInfoId:[object objectItemKey:@"pushInfoId"]];
-//
-//    NSMutableArray <XHPreviewModel*> *imageModelArray = [NSMutableArray array];
-//    for ( int i = 1; i<= 6; i++)
-//    {
-//        XHPreviewModel *imageModel = [[XHPreviewModel alloc]init];
-//        NSString *picStr=[NSString stringWithFormat:@"picUrl%zd",i];
-//        [imageModel setPreviewUrl:ALGetFileImageThumbnail(picStr)];
-//        [imageModel setTage:i];
-//        [imageModelArray addObject:imageModel];
-//    }
-//
-//    [imageModelArray enumerateObjectsUsingBlock:^(XHPreviewModel * _Nonnull obj, NSUInteger idx, BOOL *stop)
-//     {
-//         if (![obj.previewUrl isEqualToString:@""])
-//         {
-//             [self.imageUrlArray addObject:obj];
-//         }
-//     }];
-//
-//
-//    [self setUserName:[object objectItemKey:@"teacherName"]];
-//    [self setReleaseDate:[NSString dateStr:[object objectItemKey:@"createTime"]]];
-//    [self setWorkContent:[object objectItemKey:@"content"]];
-//    [self setUnreadType:[object objectItemKey:@"isStatus"]];
-//    [self setVedioUrl:[object objectItemKey:@"vedioUrl"]];
-//    [self setVedioFirstPicUrl:[object objectItemKey:@"vedioFirstPicUrl"]];
-//    [self setGradeName:[object objectItemKey:@"gradeName"]];
-//    [self setClazzName:[object objectItemKey:@"clazzName"]];
-//    [self setHomeWorkType:HomeWorkType];
-//    [self setItemArray:self.imageUrlArray];
-//}
+#pragma mark 设置通知对象
+//!< 设置通知对象
+-(void)setNoticeItemObject:(NSDictionary*)object
+{
+    NSDictionary *teacher = [object objectItemKey:@"propValue"];
+    NSString *teacherName = [teacher objectItemKey:@"teacherName"];
+    [self setHeaderUrl:ALGetFileHeadThumbnail([object objectItemKey:@"headPic"])];
+
+    NSMutableArray <XHPreviewModel*> *imageModelArray = [NSMutableArray array];
+    for ( int i = 1; i<= 6; i++)
+    {
+        XHPreviewModel *imageModel = [[XHPreviewModel alloc]init];
+        NSString *picStr=[NSString stringWithFormat:@"picUrl%zd",i];
+        [imageModel setPreviewUrl:ALGetFileImageThumbnail(picStr)];
+        [imageModel setTage:i];
+        [imageModelArray addObject:imageModel];
+    }
+
+    [imageModelArray enumerateObjectsUsingBlock:^(XHPreviewModel * _Nonnull obj, NSUInteger idx, BOOL *stop)
+     {
+         if (![obj.previewUrl isEqualToString:@""])
+         {
+             [self.imageUrlArray addObject:obj];
+         }
+     }];
+
+
+    [self setUserName:teacherName];
+    [self setReleaseDate:[NSString dateStr:[object objectItemKey:@"createTime"]]];
+    [self setWorkContent:[object objectItemKey:@"content"]];
+    [self setVedioUrl:[object objectItemKey:@"vedioUrl"]];
+    [self setVedioFirstPicUrl:[object objectItemKey:@"vedioFirstPicUrl"]];
+    [self setHomeWorkType:HomeWorkNoticeType];
+    [self setItemArray:self.imageUrlArray];
+}
 
 
 

@@ -1,37 +1,29 @@
 //
-//  XHHomeWorkViewController.m
+//  XHNoticeRecordViewController.m
 //  daycareParent
 //
-//  Created by Git on 2017/11/30.
-//  Copyright © 2017年 XueHui. All rights reserved.
+//  Created by Git on 2018/2/8.
+//  Copyright © 2018年 XueHui. All rights reserved.
 //
 
-#import "XHHomeWorkViewController.h"
-#import "XHHomeWorkDetailsViewController.h" //!< 家庭作业详情
+#import "XHNoticeRecordViewController.h"
+#import "XHNoticeRecordDetailsViewController.h"
 
 
-@interface XHHomeWorkViewController () <XHHomeWorkContentViewDeletage>
 
-@property (nonatomic,strong) XHHomeWorkContentView *contentView;
 
-@end
-
-@implementation XHHomeWorkViewController
+@implementation XHNoticeRecordViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setNavtionTitle:@"家庭作业"];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
 }
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
+
 
 -(void)addSubViews:(BOOL)subview
 {
@@ -48,10 +40,9 @@
 #pragma mark  XHHomeWorkContentViewDeletage
 -(void)didSelectAtIndex:(XHHomeWorkFrame *)frame
 {
-    XHHomeWorkDetailsViewController *homeWorkDetails = [[XHHomeWorkDetailsViewController alloc]init];
+    XHNoticeRecordDetailsViewController *homeWorkDetails = [[XHNoticeRecordDetailsViewController alloc]init];
     [homeWorkDetails setItemObjet:frame];
     [self.navigationController pushViewController:homeWorkDetails animated:YES];
-    
     homeWorkDetails.refeshBlock = ^(BOOL isRefesh)
     {
         if (isRefesh)
@@ -62,11 +53,11 @@
 }
 
 #pragma mark - Getter / Setter
--(XHHomeWorkContentView *)contentView
+-(XHNoticeRecordContentView*)contentView
 {
-    if (_contentView == nil)
+    if (!_contentView)
     {
-        _contentView = [[XHHomeWorkContentView alloc]initWithDeletage:self];
+        _contentView = [[XHNoticeRecordContentView alloc]initWithDeletage:self];
     }
     return _contentView;
 }
