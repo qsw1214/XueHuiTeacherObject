@@ -114,6 +114,7 @@
         self.signBtn.selected = YES;
         [self.signBtn setTextColor:RGB(240, 240, 240) withTpe:0 withAllType:NO];
         [self.signBtn setText:@"已打卡" withNumberType:0 withAllType:NO];
+       
     }
     _endDate=[NSDate date];
     _beginDate=[NSDate getDayBeforWithDate:_endDate dayBefor:6];
@@ -182,7 +183,7 @@
     [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"relationId"];
     [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
     [self.netWorkConfig setObject:[NSDate getDateStrWithDateFormatter:ALL_DEFAULT_TIME_FORM Date:beginDate] forKey:@"beginTime"];
-    [self.netWorkConfig setObject:[NSDate getDateStrWithDateFormatter:ALL_DEFAULT_TIME_FORM Date:endDate] forKey:@"endTime"];
+    [self.netWorkConfig setObject:[NSDate getDateStrWithDateFormatter:ALL_DEFAULT_TIME_FORM Date:[NSDate getDayAfterWithDate:endDate dayAfter:1]] forKey:@"endTime"];
     [self.netWorkConfig postWithUrl:@"pmschool-teacher-api_/teacher/attendanceSheet/list" sucess:^(id object, BOOL verifyObject) {
         if (verifyObject) {
             [self.dataArray removeAllObjects];
@@ -330,6 +331,7 @@
 {
     if (self.signBtn.selected == YES)
     {
+      [XHShowHUD showNOHud:@"一小时后才能打卡"];
         return;
     }
     

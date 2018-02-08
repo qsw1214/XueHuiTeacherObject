@@ -45,7 +45,8 @@
     _tableView.delegate=self;
     _tableView.dataSource=self;
     [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-    [_tableView registerNib:[UINib nibWithNibName:@"XHNewTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
+    //[_tableView registerNib:[UINib nibWithNibName:@"XHNewTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
+     [_tableView registerClass:[XHNewTableViewCell class] forCellReuseIdentifier:@"cell"];
     [_tableView registerNib:[UINib nibWithNibName:@"XHNewTextFieldTypeTableViewCell" bundle:nil] forCellReuseIdentifier:@"textcell"];
       [_tableView registerNib:[UINib nibWithNibName:@"XHNewHeardTableViewCell" bundle:nil] forCellReuseIdentifier:@"headcell"];
     [_tableView registerClass:[XHNewChageTypeTableViewCell class] forCellReuseIdentifier:@"chageTypeCell"];
@@ -111,11 +112,12 @@
             
         {
             XHNewTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+            cell.selectLabel.text=@"请选择";
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.titleLabel.text=TITLE[indexPath.row];
             if (indexPath.row==2) {
                 cell.selectLabel.text=@"请输入";
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+               cell.accessoryType = UITableViewCellAccessoryNone;
             }
             return cell;
         }
@@ -157,9 +159,7 @@
             case 1:
             case 5:
         {
-            [self.segementVC setResignFirstResponder:YES];
             [UIAlertController alertSubjectListWithController:self indexBlock:^(NSInteger index, id object) {
-                [self.segementVC setResignFirstResponder:NO];
                 XHSubjectListModel *model=object;
                 XHNewTextFieldTypeTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
                 cell.selectLabel.text=model.subjectName;
