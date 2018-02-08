@@ -50,6 +50,14 @@
 -(void)addNoticeContentAction:(BaseButtonControl*)sender
 {
     XHAddNoticeRecipientViewController *linkMan = [[XHAddNoticeRecipientViewController alloc]init];
+    linkMan.markSuccessBlock = ^(BOOL sucess,XHNoticeMarkModel *model)
+    {
+        if (sucess)
+        {
+            [self.contentView setMarkModel:model];
+        }
+        
+    };
     [self.navigationController pushViewController:linkMan animated:YES];
 }
 

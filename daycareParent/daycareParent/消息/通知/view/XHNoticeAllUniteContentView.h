@@ -14,8 +14,8 @@
 @interface XHNoticeAllUniteContentView : BaseControl
 
 @property (nonatomic,strong) UILabel *titleLabel;  //!< 标题
-@property (nonatomic,strong) UILabel *describeLabel;  //<!描述
-
+@property (nonatomic,strong) UILabel *describeLabel;  //!<描述
+@property (nonatomic,strong) UIView *lineView;  //!< 分割线
 @property (nonatomic,copy) NSString *describe;
 
 @property (nonatomic,assign) BOOL isAction; //!< 是否选中

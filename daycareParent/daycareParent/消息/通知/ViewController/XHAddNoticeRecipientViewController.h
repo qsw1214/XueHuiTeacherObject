@@ -11,7 +11,16 @@
 
 
 #import "BaseViewController.h"
+#import "XHNoticeMarkModel.h"
+
+
+
+typedef void (^MarkSuccessBlock) (BOOL sucess,XHNoticeMarkModel *model);
 
 @interface XHAddNoticeRecipientViewController : BaseViewController
+
+
+@property (nonatomic,copy) MarkSuccessBlock markSuccessBlock;
+
 
 @end

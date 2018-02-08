@@ -10,9 +10,9 @@
 
 typedef NS_ENUM(NSInteger,XHNetWorkOption)
 {
-    XHNetWorkOptionService = 0, //!< service Url  默认选项
+    XHNetWorkOptionService = 0,   //!< service Url  默认选项
     XHNetWorkOptionH5ixueHui = 1, //!< 浩学云专用Url
-    XHNetWorkOptionLocation = 2, //!< 绑定卡
+    XHNetWorkOptionLocation = 2,  //!< 绑定卡
 };
 
 

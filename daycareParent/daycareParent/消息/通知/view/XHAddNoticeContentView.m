@@ -8,6 +8,11 @@
 
 #import "XHAddNoticeContentView.h"
 #import "XHAddNoticeRecipientViewController.h"
+#import "CameraManageViewController.h"
+#import "WPhotoViewController.h"
+#import "XHAssignmentHomeWorkCollectionView.h"
+
+
 
 
 @interface XHAddNoticeContentView () <BaseTextViewDeletage>
@@ -18,6 +23,7 @@
 @property (nonatomic,strong) BaseButtonControl *submitContent; //!< 发布
 @property (nonatomic,strong) UIView *lineVew; //!< 分割线视图
 @property (nonatomic,strong) UILabel *limitLabel; //!< 限制字数标签
+@property (nonatomic,strong) XHAssignmentHomeWorkCollectionView *collectionView;
 
 
 
@@ -48,6 +54,8 @@
     //添加图片
     [self.addPhotoContent resetFrame:CGRectMake(10, self.lineVew.bottom+20.0, 90, 90)];
     [self.addPhotoContent setImageEdgeFrame:CGRectMake(0, 0, self.addPhotoContent.width, self.addPhotoContent.height) withNumberType:0 withAllType:NO];
+    //添加滚动视图
+    [self.collectionView resetFrame:CGRectMake(self.addPhotoContent.right+5.0, self.addPhotoContent.top-15.0, frame.size.width-(self.addPhotoContent.right+15.0), 120.0)];
     
     [self.recipientContent resetFrame:CGRectMake(0, self.addPhotoContent.bottom+20.0,frame.size.width, 60.0)];
     [self.recipientContent resetLineViewFrame:CGRectMake(0, 0, self.recipientContent.width, 0.5) withNumberType:0 withAllType:NO];
@@ -75,6 +83,7 @@
     {
 
         [self addSubview:self.addPhotoContent];
+        [self addSubview:self.collectionView];
         [self addSubview:self.recipientContent];
         [self addSubview:self.inputContent];
         [self addSubview:self.limitLabel];
@@ -83,6 +92,15 @@
     }
 }
 
+
+-(void)setMarkModel:(XHNoticeMarkModel *)markModel
+{
+    _markModel = markModel;
+    
+    
+    [self.recipientContent setText:[NSString stringWithFormat:@"已选择%zd",markModel.count] withNumberType:1 withAllType:NO];
+    
+}
 
 
 
@@ -96,6 +114,38 @@
 #pragma mark case 1: 添加图片
         case 1:
         {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"选择相机" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
+            {
+                CameraManageViewController *manager=[[CameraManageViewController alloc] initWithCameraManageWithType:SourceTypeCamera setDeletate:self];
+                [[XHHelper sharedHelper].currentViewController.navigationController presentViewController:manager animated:YES completion:nil];
+                
+            }]];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"选择相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+            {
+                WPhotoViewController
+                *wphoto = [[WPhotoViewController alloc] init];
+                [wphoto setSelectPhotoOfMax:(6-[self.dataArray count])];
+                wphoto.selectPhotosBack = ^(NSMutableArray *photosArray)
+                {
+                    [photosArray enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
+                     {
+                         XHPreviewModel *imageModel = [[XHPreviewModel alloc]init];
+                         [imageModel setPreviewImage:[obj objectForKey:@"image"]];
+                         [imageModel setItemSize:CGSizeMake(100, 100)];
+                         [imageModel setType:XHPreviewImagesType];
+                         [imageModel setTage:idx];
+                         [imageModel setIndexTage:idx];
+                         [self.dataArray addObject:imageModel];
+                     }];
+                    
+                    
+                    [self.collectionView setItemArray:self.dataArray];
+                };
+                [[XHHelper sharedHelper].currentViewController.navigationController presentViewController:wphoto animated:YES completion:nil];
+            }]];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action){}]];
+            [[XHHelper sharedHelper].currentViewController presentViewController:alertController animated:YES completion:nil];
             
         }
             break;
@@ -103,6 +153,8 @@
 #pragma mark case 3: 发布
         case 3:
         {
+            
+            
             
         }
             break;
@@ -135,6 +187,27 @@
         
     }
 }
+
+#pragma mark CameraManageDeletage
+-(void)imagePickerControllerdidFinishPickingMediaWithImage:(nonnull UIImage*)image
+{
+    if ([self.dataArray count] >= 6)
+    {
+        [XHShowHUD showNOHud:@"图片已达到上限(6张)"];
+    }
+    else
+    {
+        XHPreviewModel *imageModel = [[XHPreviewModel alloc]init];
+        [imageModel setPreviewImage:image];
+        [imageModel setItemSize:CGSizeMake(100, 100)];
+        [imageModel setType:XHPreviewImagesType];
+        [imageModel setTage:0];
+        [imageModel setIndexTage:0];
+        [self.dataArray addObject:imageModel];
+        [self.collectionView setItemArray:self.dataArray];
+    }
+}
+
 
 #pragma mark - Getter / Setter
 -(BaseButtonControl *)addPhotoContent
@@ -234,5 +307,15 @@
         [_lineVew setBackgroundColor:LineViewColor];
     }
     return _lineVew;
+}
+
+
+-(XHAssignmentHomeWorkCollectionView *)collectionView
+{
+    if (!_collectionView)
+    {
+        _collectionView = [[XHAssignmentHomeWorkCollectionView alloc]init];
+    }
+    return _collectionView;
 }
 @end

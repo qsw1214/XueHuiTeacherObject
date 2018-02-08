@@ -37,11 +37,15 @@ typedef NS_ENUM(NSInteger,XHNoticeRecipientGroupOptionSelectType)
 
 
 
-@property (nonatomic,copy)   NSString *title; //!< 标题
-@property (nonatomic,copy)   NSString *describe;
+@property (nonatomic,copy) NSString *modelID; //!< 当前数据模型id
+@property (nonatomic,copy) NSString *title; //!< 标题
+@property (nonatomic,copy) NSString *describe;
+@property (nonatomic,copy) NSString *telphoneNumber; //!< 手机号
 @property (nonatomic,assign) NSInteger total; //!< 总共
 @property (nonatomic,assign) NSInteger select; //!< 选择
 @property (nonatomic,assign) NSInteger guardian; //!< 监护人
+
+
 
 
 @property (nonatomic,strong) NSMutableArray <XHNoticerecipientParentModel*> *parentArray;

@@ -39,6 +39,7 @@
         [self addSubview:self.allSelectControl];
         [self addSubview:self.titleLabel];
         [self addSubview:self.describeLabel];
+        [self addSubview:self.lineView];
     }
 }
 
@@ -56,6 +57,7 @@
     [self.allSelectControl setFrame:CGRectMake(10,(frame.size.height-20.0)/2.0 , 20.0, 20.0)];
     [self.titleLabel setFrame:CGRectMake(40.0, 0, (frame.size.width-50.0)/2.0, frame.size.height)];
     [self.describeLabel setFrame:CGRectMake(self.titleLabel.right, 0, self.titleLabel.width, self.titleLabel.height)];
+    [self.lineView setFrame:CGRectMake(40.0, frame.size.height-0.5, (frame.size.width-40.0), 0.5)];
     
     
 }
@@ -114,6 +116,16 @@
         [_describeLabel setTextAlignment:NSTextAlignmentRight];
     }
     return _describeLabel;
+}
+
+-(UIView *)lineView
+{
+    if (!_lineView)
+    {
+        _lineView = [[UIView alloc]init];
+        [_lineView setBackgroundColor:LineViewColor];
+    }
+    return _lineView;
 }
 
 

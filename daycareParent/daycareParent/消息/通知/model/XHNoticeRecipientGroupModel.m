@@ -14,7 +14,8 @@
 -(void)setTeacherObject:(NSDictionary*)object
 {
     [self setTitle:[object objectItemKey:@"teacherName"]]; //!< 老师名称
-    [self setObjectID:[object objectItemKey:@"id"]];  //!< 老师的id
+    [self setModelID:[object objectItemKey:@"id"]];  //!< 老师的id
+    [self setTelphoneNumber:[object objectItemKey:@"telphoneNumber"]]; //!< 手机号
 }
 
 

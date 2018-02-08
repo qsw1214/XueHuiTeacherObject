@@ -45,8 +45,9 @@
     if (subview)
     {
         [self.view addSubview:self.tableView];
-        
-        [self.tableView resetFrame:CGRectMake(0, self.navigationView.bottom, SCREEN_WIDTH, (SCREEN_HEIGHT-self.navigationView.height-50.0))];
+        [self.allSelectControl resetFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60.0)];
+        [self.allSelectControl addTarget:self action:@selector(allSelectControl:) forControlEvents:UIControlEventTouchUpInside];
+        [self.tableView resetFrame:CGRectMake(0, self.allSelectControl.bottom, SCREEN_WIDTH, (SCREEN_HEIGHT-self.navigationView.height-50.0))];
         [self.tableView setTableHeaderView:self.allSelectControl];
         [self.tableView showRefresHeaderWithTarget:self withSelector:@selector(refreshHeaderAction)];
         [self.tableView beginRefreshing];
@@ -55,8 +56,7 @@
         
         [self.confirmationControl resetFrame:CGRectMake(0, self.tableView.bottom, self.tableView.width, 50.0)];
         [self.confirmationControl setTitleEdgeFrame:CGRectMake(0, 0, self.confirmationControl.width, self.confirmationControl.height) withNumberType:0 withAllType:NO];
-        [self.allSelectControl resetFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60.0)];
-        [self.allSelectControl addTarget:self action:@selector(allSelectControl:) forControlEvents:UIControlEventTouchUpInside];
+       
          [self.view addSubview:self.confirmationControl];
     }
 }
@@ -147,6 +147,18 @@
     [self setSelectIndex:0];
     [NSArray enumerateObjectsWithArray:array usingBlock:^(XHNoticeRecipientGroupFrame *obj, NSUInteger idx, BOOL *stop)
      {
+         
+         switch (obj.model.optionSelectType)
+         {
+             case XHNoticeRecipientGroupOptionNormalityType:
+                 break;
+             case XHNoticeRecipientGroupOptionSelectedType:
+             {
+                 [obj.model setSelectType:XHNoticeRecipientGroupSelectedType];
+             }
+                 break;
+         }
+         
          switch (obj.model.selectType)
          {
              case XHNoticeRecipientGroupNormalityType:
@@ -157,6 +169,9 @@
              }
                  break;
          }
+         
+         
+       
      }];
     
     NSInteger count = [array count];

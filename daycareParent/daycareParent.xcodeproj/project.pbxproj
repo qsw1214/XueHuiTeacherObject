@@ -176,6 +176,7 @@
 		4B68C9EF2011B2350078FEDB /* XHAssignmentHomeWorkContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B68C9EE2011B2350078FEDB /* XHAssignmentHomeWorkContentView.m */; };
 		4B71A1BA20060B9D00818046 /* XHCookBookImageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71A1B920060B9D00818046 /* XHCookBookImageControl.m */; };
 		4B72ADD9202BEA6300A120E5 /* XHNoticerecipientParentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B72ADD8202BEA6300A120E5 /* XHNoticerecipientParentModel.m */; };
+		4B72ADE0202C295300A120E5 /* XHNoticeMarkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B72ADDE202C293300A120E5 /* XHNoticeMarkModel.m */; };
 		4B80F1E01FCBE3F700BC7B52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B80F1DF1FCBE3F700BC7B52 /* Assets.xcassets */; };
 		4B80F1E61FCBE3F700BC7B52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B80F1E51FCBE3F700BC7B52 /* main.m */; };
 		4B80F2081FCBE4E400BC7B52 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B80F2041FCBE4E400BC7B52 /* AppDelegate.m */; };
@@ -874,6 +875,8 @@
 		4B71A1B920060B9D00818046 /* XHCookBookImageControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHCookBookImageControl.m; sourceTree = "<group>"; };
 		4B72ADD7202BEA6300A120E5 /* XHNoticerecipientParentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XHNoticerecipientParentModel.h; path = "daycareParent/消息/通知/model/XHNoticerecipientParentModel.h"; sourceTree = SOURCE_ROOT; };
 		4B72ADD8202BEA6300A120E5 /* XHNoticerecipientParentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XHNoticerecipientParentModel.m; path = "daycareParent/消息/通知/model/XHNoticerecipientParentModel.m"; sourceTree = SOURCE_ROOT; };
+		4B72ADDD202C293300A120E5 /* XHNoticeMarkModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNoticeMarkModel.h; sourceTree = "<group>"; };
+		4B72ADDE202C293300A120E5 /* XHNoticeMarkModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNoticeMarkModel.m; sourceTree = "<group>"; };
 		4B80F1D31FCBE3F700BC7B52 /* daycareParent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = daycareParent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B80F1DF1FCBE3F700BC7B52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4B80F1E41FCBE3F700BC7B52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -2275,6 +2278,8 @@
 				4B4DD0172027EFB600ACFFA8 /* XHNoticeRecipientGroupModel.m */,
 				4B4DD0182027EFB600ACFFA8 /* XHNoticeRecipientGroupFrame.h */,
 				4B4DD0192027EFB600ACFFA8 /* XHNoticeRecipientGroupFrame.m */,
+				4B72ADDD202C293300A120E5 /* XHNoticeMarkModel.h */,
+				4B72ADDE202C293300A120E5 /* XHNoticeMarkModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4180,6 +4185,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B72ADE0202C295300A120E5 /* XHNoticeMarkModel.m in Sources */,
 				4BB9BEB01FDE6409004F5622 /* XHEducationCloudMenuCell.m in Sources */,
 				4B3126161FD90A6E000CE894 /* XHDatePickerView.m in Sources */,
 				4BB792E41FD7B3B400E0ED72 /* BaseMenuControl.m in Sources */,

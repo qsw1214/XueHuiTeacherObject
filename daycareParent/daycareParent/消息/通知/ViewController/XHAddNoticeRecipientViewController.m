@@ -34,15 +34,6 @@
 @implementation XHAddNoticeRecipientViewController
 
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self)
-    {
-        
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -66,10 +57,10 @@
     {
         [self setUnify:0];
         [self setSelectIndex:0];
-        
-        [self.view addSubview:self.tableView];
-        [self.tableView resetFrame:CGRectMake(0, self.navigationView.bottom, SCREEN_WIDTH, (SCREEN_HEIGHT-self.navigationView.height-50.0))];
         [self.allSelectControl resetFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
+        [self.view addSubview:self.tableView];
+        [self.tableView resetFrame:CGRectMake(0, (self.allSelectControl.bottom), SCREEN_WIDTH, (SCREEN_HEIGHT-self.navigationView.height-50.0))];
+        
         [self.tableView setDelegate:self];
         [self.tableView setDataSource:self];
         [self.tableView setTableHeaderView:self.allSelectControl];
@@ -128,6 +119,7 @@
                   XHNoticeRecipientModel *model = [[XHNoticeRecipientModel alloc]init];
                   [model setTitle:[NSString stringWithFormat:@"%@%@",gradeName,clazzName]];
                   [model setSelectType:XHNoticeRecipientNormalityType]; //!< 正常的选中类型
+                  [model setModelType:XHNoticeRecipientStudentType];
                   [frame setModel:model];
                   
                   
@@ -178,7 +170,71 @@
 #pragma mark 确定按钮触发的事件
 -(void)confirmationControlAction:(BaseButtonControl*)sender
 {
+    XHNoticeMarkModel *model = [[XHNoticeMarkModel alloc]init];
     
+    [NSArray enumerateObjectsWithArray:self.dataArray usingBlock:^(XHNoticeRecipientFrame *obj, NSUInteger idx, BOOL *stop)
+    {
+        switch (obj.model.selectType)
+        {
+            case XHNoticeRecipientSelectedType:
+            {
+                switch (obj.model.modelType)
+                {
+                    case XHNoticeRecipientTeacherType:
+                    {
+                        [NSArray enumerateObjectsWithArray:obj.groupArray usingBlock:^(XHNoticeRecipientGroupFrame *obj, NSUInteger idx, BOOL *stop)
+                         {
+                             switch (obj.model.optionSelectType)
+                             {
+                                 case XHNoticeRecipientGroupOptionSelectedType:
+                                 {
+                                     [model setCount:(model.count+1)];
+                                     [model setTeacherID:[NSString stringWithFormat:@"%@,%@",[NSString safeString:model.teacherID],[NSString safeString:obj.model.modelID]]];
+                                     [model setTeacherPhone:[NSString stringWithFormat:@"%@,%@",[NSString safeString:model.teacherPhone],[NSString safeString:obj.model.telphoneNumber]]];
+                                 }
+                                     break;
+                                 case XHNoticeRecipientGroupOptionNormalityType:
+                                     break;
+                             }
+                         }];
+                    }
+                        break;
+                    case XHNoticeRecipientStudentType:
+                    {
+                        
+                        [NSArray enumerateObjectsWithArray:obj.groupArray usingBlock:^(XHNoticeRecipientGroupFrame *obj, NSUInteger idx, BOOL *stop)
+                         {
+                             switch (obj.model.optionSelectType)
+                             {
+                                 case XHNoticeRecipientGroupOptionSelectedType:
+                                 {
+                                     
+                                     [model setCount:(model.count+1)];
+                                     [NSArray enumerateObjectsWithArray:obj.model.parentArray usingBlock:^(XHNoticerecipientParentModel *obj, NSUInteger idx, BOOL *stop)
+                                      {
+                                          [model setGuardianID:[NSString stringWithFormat:@"%@,%@",[NSString safeString:model.guardianID],[NSString safeString:obj.parentID]]];
+                                          [model setGuardianNumber:[NSString stringWithFormat:@"%@,%@",[NSString safeString:model.guardianNumber],[NSString safeString:obj.telphoneNumber]]];
+                                      }];
+                                 }
+                                     break;
+                                 case XHNoticeRecipientGroupOptionNormalityType:
+                                     break;
+                             }
+                         }];
+                        
+                    }
+                        break;
+                }
+            }
+                break;
+            case XHNoticeRecipientNormalityType:
+                break;
+        }
+    }];
+    
+    self.markSuccessBlock(YES,model);
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

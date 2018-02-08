@@ -18,11 +18,15 @@
 @end
 
 #import "BaseScrollView.h"
+#import "XHNoticeMarkModel.h"
 
 @interface XHAddNoticeContentView : BaseScrollView
 
+@property (nonatomic,strong) XHNoticeMarkModel *markModel;
+
 
 @property (nonatomic,weak) id <XHAddNoticeContentViewDeletage> addDeletage;
+
 
 
 @end

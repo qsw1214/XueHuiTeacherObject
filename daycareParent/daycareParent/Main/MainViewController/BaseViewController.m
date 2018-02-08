@@ -38,8 +38,8 @@
     {
         [[XHHelper sharedHelper] setCurrentViewController:self];
         
-        [self addSubViews:YES];
         
+         [self addSubViews:YES];
     }
     return self;
 }
@@ -57,6 +57,7 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self setItemContentItemHiddenWithType:NavigationRightType withHidden:YES];
     [self setItemContentType:NavigationIconAndTitle withItemType:NavigationItemLeftType withIconName:@"ico_return" withTitle:@"返回"];
+   
 
 }
 
