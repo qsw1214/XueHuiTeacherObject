@@ -14,6 +14,8 @@
 -(void)setModel:(XHNoticeRecipientGroupModel *)model
 {
     _model = model;
+    //!< 设置监护人个数
+    [_model setGuardian:[model.parentArray count]];
     
     [self setItemFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60.0)];
     

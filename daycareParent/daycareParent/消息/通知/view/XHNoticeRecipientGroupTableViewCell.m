@@ -45,62 +45,35 @@
     [self.contentControl resetLineViewFrame:CGRectMake(40.0, (self.contentControl.height-0.5), (frame.itemFrame.size.width-40.0), 0.5) withNumberType:0 withAllType:NO];
     
     
-    //根据不同的类型设置不同Frame
+    //!< 设置Frame
+    [self.contentControl setTitleEdgeFrame:CGRectMake(50.0, 0, ((self.contentControl.width-60.0)/2.0), self.contentControl.height) withNumberType:0 withAllType:NO];
+    [self.contentControl setTitleEdgeFrame:CGRectMake((self.contentControl.width-(((self.contentControl.width-60.0)/2.0)+10.0)), 0, ((self.contentControl.width-60.0)/2.0), self.contentControl.height) withNumberType:1 withAllType:NO];
+    
+    //!< 设置属性
+    [self.contentControl setTextColor:RGB(3, 3, 3) withTpe:0 withAllType:NO];
+    [self.contentControl setTextColor:RGB(107, 107, 107) withTpe:1 withAllType:NO];
+    
+    [self.contentControl setTitleHidden:NO withNumberType:0 withAllType:NO];
+    [self.contentControl setTitleHidden:NO withNumberType:1 withAllType:NO];
+    [self.contentControl setImageHidden:YES withNumberType:1 withAllType:NO];
+    
+    //!< 设置标题
+    [self.contentControl setText:frame.model.title withNumberType:0 withAllType:NO];
+   
+    
+    
     switch (frame.model.modelType)
     {
-#pragma mark case XHNoticeRecipientFullSelectionType
-        case XHNoticeRecipientGroupFullSelectionType:
-        {
-            //!< 设置Frame
-            [self.contentControl setTitleEdgeFrame:CGRectMake(40.0, 0, ((self.contentControl.width-50.0)/2.0), self.contentControl.height) withNumberType:0 withAllType:NO];
-            
-            [self.contentControl setTitleEdgeFrame:CGRectMake((self.contentControl.width-(((self.contentControl.width-50.0)/2.0)+10.0)), 0, ((self.contentControl.width-50.0)/2.0), self.contentControl.height) withNumberType:1 withAllType:NO];
-            
-            //!< 设置字体颜色
-            [self.contentControl setTextColor:RGB(3, 3, 3) withTpe:0 withAllType:NO];
-            [self.contentControl setTextColor:RGB(3, 3, 3) withTpe:1 withAllType:NO];
-            
-            //!< 设置属性
-            [self.contentControl setTitleHidden:NO withNumberType:0 withAllType:NO];
-            [self.contentControl setTitleHidden:NO withNumberType:1 withAllType:NO];
-            [self.contentControl setImageHidden:YES withNumberType:1 withAllType:NO];
-            
-            
-            //!< 设置内容
-            [self.contentControl setText:frame.model.title withNumberType:0 withAllType:NO];
-            [self.contentControl setText:frame.model.title withNumberType:1 withAllType:NO];
-        }
-            break;
-#pragma mark case XHNoticeRecipientGroupStudentType
         case XHNoticeRecipientGroupStudentType:
         {
-            //!< 设置Frame
-            [self.contentControl setTitleEdgeFrame:CGRectMake(50.0, 0, ((self.contentControl.width-60.0)/2.0), self.contentControl.height) withNumberType:0 withAllType:NO];
-            [self.contentControl setTitleEdgeFrame:CGRectMake((self.contentControl.width-(((self.contentControl.width-60.0)/2.0)+10.0)), 0, ((self.contentControl.width-60.0)/2.0), self.contentControl.height) withNumberType:1 withAllType:NO];
-            
-            //!< 设置属性
-            [self.contentControl setTextColor:RGB(3, 3, 3) withTpe:0 withAllType:NO];
-            [self.contentControl setTextColor:RGB(107, 107, 107) withTpe:1 withAllType:NO];
-            
-            [self.contentControl setTitleHidden:NO withNumberType:0 withAllType:NO];
+            [self.contentControl setText:[NSString stringWithFormat:@"(%zd个监护人)",frame.model.guardian] withNumberType:1 withAllType:NO];
             [self.contentControl setTitleHidden:NO withNumberType:1 withAllType:NO];
-            
-            //!< 设置标题
-            [self.contentControl setText:frame.model.title withNumberType:0 withAllType:NO];
-            [self.contentControl setText:[NSString stringWithFormat:@"%zd/%zd",frame.model.select,frame.model.total] withNumberType:1 withAllType:NO];
         }
             break;
-#pragma mark case XHNoticeRecipientGroupTeacherType
         case XHNoticeRecipientGroupTeacherType:
         {
-            [self.contentControl setTitleEdgeFrame:CGRectMake(50.0, 0, ((self.contentControl.width-60.0)/2.0), self.contentControl.height) withNumberType:0 withAllType:NO];
-            [self.contentControl setTitleEdgeFrame:CGRectMake((self.contentControl.width-(((self.contentControl.width-60.0)/2.0)+10.0)), 0, ((self.contentControl.width-60.0)/2.0), self.contentControl.height) withNumberType:1 withAllType:NO];
-            
-            
-            [self.contentControl setTextColor:RGB(3, 3, 3) withTpe:0 withAllType:NO];
-            [self.contentControl setTextColor:RGB(3, 3, 3) withTpe:1 withAllType:NO];
+            [self.contentControl setText:@"" withNumberType:1 withAllType:NO];
             [self.contentControl setTitleHidden:YES withNumberType:1 withAllType:NO];
-            [self.contentControl setText:frame.model.title withNumberType:0 withAllType:NO];
         }
             break;
     }

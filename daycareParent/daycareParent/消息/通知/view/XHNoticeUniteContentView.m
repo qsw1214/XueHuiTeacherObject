@@ -94,7 +94,6 @@
                   XHNoticeRecipientGroupFrame *frame = [[XHNoticeRecipientGroupFrame alloc]init];
                   XHNoticeRecipientGroupModel *model = [[XHNoticeRecipientGroupModel alloc]init];
                   [model setTeacherObject:obj];
-                  [model setModelType:XHNoticeRecipientGroupTeacherType];
                   [model setSelectType:XHNoticeRecipientGroupNormalityType];
                   [frame setModel:model];
                   [weself.teachersArray addObject:frame];
@@ -138,8 +137,6 @@
                             XHNoticeRecipientGroupFrame *groupFrame = [[XHNoticeRecipientGroupFrame alloc]init];
                             XHNoticeRecipientGroupModel *groupModel = [[XHNoticeRecipientGroupModel alloc]init];
                             [groupModel setParentsObject:parents];
-                            
-                            [groupModel setModelType:XHNoticeRecipientGroupStudentType];
                             [groupModel setSelectType:XHNoticeRecipientGroupNormalityType];
                             [groupFrame setModel:groupModel];
                             [frame.groupArray addObject:groupFrame];

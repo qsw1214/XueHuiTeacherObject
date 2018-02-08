@@ -22,8 +22,18 @@
 
 -(void)setParentsObject:(NSDictionary*)object
 {
-    [self setTitle:[object objectItemKey:@"guardianName"]]; //!< 老师名称
-    [self setObjectID:[object objectItemKey:@"id"]];  //!< 老师的id
+    [self setTitle:[object objectItemKey:@"studentName"]]; //!< 学生名称
+    [self setObjectID:[object objectItemKey:@"studentId"]];  //!< 学生id
+}
+
+
+-(NSMutableArray<XHNoticerecipientParentModel *> *)parentArray
+{
+    if (!_parentArray)
+    {
+        _parentArray = [NSMutableArray array];
+    }
+    return _parentArray;
 }
 
 @end
