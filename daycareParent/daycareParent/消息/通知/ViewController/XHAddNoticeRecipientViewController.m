@@ -10,15 +10,17 @@
 #import "XHAddNoticeRecipientGroupViewController.h"
 #import "XHNoticeAllUniteContentView.h"
 #import "XHNoticeUniteContentView.h"
+#import "XHNoticerecipientParentModel.h"
 
 
 
-@interface XHAddNoticeRecipientViewController () <XHNoticeUniteDeletage,UITableViewDelegate,UITableViewDataSource>
+@interface XHAddNoticeRecipientViewController () <UITableViewDelegate,UITableViewDataSource,XHNoticeRecipientTableViewCellDeletage>
 
 @property (nonatomic,strong) BaseTableView *tableView;
 @property (nonatomic,strong) BaseButtonControl *confirmationControl;
 @property (nonatomic,strong) XHNoticeUniteContentView *contentView;
 @property (nonatomic,strong) XHNoticeAllUniteContentView *allSelectControl;
+@property (nonatomic,assign) NSInteger itemCount;
 @property (nonatomic,assign) NSInteger selectIndex;
 @property (nonatomic,strong) NSMutableArray *teachersArray;  //!< 教师数据源数组
 @property (nonatomic,strong) NSMutableArray *parentsArray;   //!< 家长数据源数组
@@ -50,9 +52,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-   [self.tableView refreshReloadData];
-    //[self.tableView beginRefreshing];
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,12 +91,11 @@
 #pragma mark - Action Method
 -(void)refreshHeaderAction
 {
-    __weak typeof (self) weself = self;
     [[XHUserInfo sharedUserInfo] getTeachersAddressBook:^(BOOL isOK, NSArray *array)
      {
          if (isOK)
          {
-             [weself.teachersArray removeAllObjects];
+             [self.teachersArray removeAllObjects];
              [array enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
               {
                   obj=[obj objectItemKey:@"propValue"];
@@ -107,11 +105,11 @@
                   [model setModelType:XHNoticeRecipientGroupTeacherType];
                   [model setSelectType:XHNoticeRecipientGroupNormalityType];
                   [frame setModel:model];
-                  [weself.teachersArray addObject:frame];
+                  [self.teachersArray addObject:frame];
               }];
              
              
-             [weself unifyAction:1];
+             [self unifyAction:1];
              
          }
      }];
@@ -120,7 +118,7 @@
      {
          if (isOK)
          {
-             [weself.parentsArray removeAllObjects];
+             [self.parentsArray removeAllObjects];
              [array enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
               {
                   
@@ -137,6 +135,14 @@
                   [NSArray enumerateObjectsWithArray:studnetArray usingBlock:^(NSDictionary *itemObj, NSUInteger idx, BOOL *stop)
                    {
                        NSDictionary *object = [itemObj objectItemKey:@"propValue"];
+                       
+                       XHNoticeRecipientGroupFrame *groupFrame = [[XHNoticeRecipientGroupFrame alloc]init];
+                       XHNoticeRecipientGroupModel *groupModel = [[XHNoticeRecipientGroupModel alloc]init];
+                       [groupModel setModelType:XHNoticeRecipientGroupStudentType];
+                       [groupModel setParentsObject:object];
+                       [groupModel setSelectType:XHNoticeRecipientGroupNormalityType];
+                  
+
                        NSArray *guardianListArray = [object objectItemKey:@"guardianList"]; //!< 获取家属列表
                        [guardianListArray enumerateObjectsUsingBlock:^(NSDictionary *parentsObj, NSUInteger idx, BOOL *stop)
                         {
@@ -145,27 +151,25 @@
                              没有的话，就不显示该孩子的任何信息
                              */
                             NSDictionary *parents = [parentsObj objectItemKey:@"propValue"];
-                            XHNoticeRecipientGroupFrame *groupFrame = [[XHNoticeRecipientGroupFrame alloc]init];
-                            XHNoticeRecipientGroupModel *groupModel = [[XHNoticeRecipientGroupModel alloc]init];
-                            [groupModel setParentsObject:parents];
-                            
-                            [groupModel setModelType:XHNoticeRecipientGroupStudentType];
-                            [groupModel setSelectType:XHNoticeRecipientGroupNormalityType];
-                            [groupFrame setModel:groupModel];
-                            [frame.groupArray addObject:groupFrame];
+                            XHNoticerecipientParentModel *parentModel = [[XHNoticerecipientParentModel alloc]init];
+                            [parentModel setItemObject:parents];
+                            [groupModel.parentArray addObject:parentModel];
                         }];
+            
+                       [groupFrame setModel:groupModel];
+                       [frame.groupArray addObject:groupFrame];
                    }];
                   
                   
                   
                   [model setSelect:0];
                   [model setTotal:[frame.groupArray count]];
-                  [weself.parentsArray addObject:frame];
+                  [self.parentsArray addObject:frame];
                   
               }];
          }
          
-         [weself unifyAction:1];
+         [self unifyAction:1];
      }];
     
 }
@@ -199,17 +203,21 @@
         [teacherModel setTitle:@"教师组"];
         [teacherModel setTotal:[self.teachersArray count]];
         [teacherModel setSelect:0];
+        [teacherModel setModelType:XHNoticeRecipientTeacherType];
         [teacherModel setSelectType:XHNoticeRecipientNormalityType];
+        [teacherModel setModelType:XHNoticeRecipientTeacherType];
         [teacherFrame setModel:teacherModel];
         if ([self.teachersArray count])
         {
-            
+            [teacherModel setEnterType:XHNoticeRecipientCanEnteType];
         }
         else
         {
-            [teacherFrame.groupArray setArray:self.teachersArray];
+            [teacherModel setEnterType:XHNoticeRecipientNotccessibleType];
         }
         
+        [teacherFrame.groupArray setArray:self.teachersArray];
+       
         [self.dataArray addObject:teacherFrame];
         
         
@@ -235,6 +243,16 @@
         [NSArray enumerateObjectsWithArray:self.dataArray usingBlock:^(XHNoticeRecipientFrame *obj, NSUInteger idx, BOOL *stop)
          {
              [obj.model setSelectType:XHNoticeRecipientNormalityType];
+             
+             [self setItemCount:0];
+             [NSArray enumerateObjectsWithArray:obj.groupArray usingBlock:^(XHNoticeRecipientGroupFrame *groupObj, NSUInteger idx, BOOL * _Nonnull stop)
+              {
+                  [groupObj.model setSelectType:XHNoticeRecipientGroupNormalityType];
+                  [groupObj.model setOptionSelectType:XHNoticeRecipientGroupOptionNormalityType];
+              }];
+             
+             [obj.model setSelect:0];
+             
          }];
     }
     else
@@ -242,7 +260,24 @@
         [NSArray enumerateObjectsWithArray:self.dataArray usingBlock:^(XHNoticeRecipientFrame *obj, NSUInteger idx, BOOL *stop)
          {
              [obj.model setSelectType:XHNoticeRecipientSelectedType];
+             
+             
+             [self setItemCount:0];
+             [NSArray enumerateObjectsWithArray:obj.groupArray usingBlock:^(XHNoticeRecipientGroupFrame *groupObj, NSUInteger idx, BOOL * _Nonnull stop)
+              {
+                  [self setItemCount:(self.itemCount+1)];
+                  [obj.model setSelectType:XHNoticeRecipientSelectedType];
+                  [groupObj.model setOptionSelectType:XHNoticeRecipientGroupOptionSelectedType];
+              }];
+             
+             [obj.model setSelect:self.itemCount];
          }];
+        
+        
+        
+      
+        
+        
     }
     [self cyclicTraversal:self.dataArray];
 }
@@ -253,6 +288,24 @@
     [self setSelectIndex:0];
     [NSArray enumerateObjectsWithArray:array usingBlock:^(XHNoticeRecipientFrame *obj, NSUInteger idx, BOOL *stop)
      {
+         [self setItemCount:0];
+         [NSArray enumerateObjectsWithArray:obj.groupArray usingBlock:^(XHNoticeRecipientGroupFrame *groupObj, NSUInteger idx, BOOL * _Nonnull stop)
+          {
+              switch (groupObj.model.optionSelectType)
+              {
+                  case XHNoticeRecipientGroupOptionNormalityType:
+                      break;
+                  case XHNoticeRecipientGroupOptionSelectedType:
+                  {
+                      [self setItemCount:(self.itemCount+1)];
+                      [obj.model setSelectType:XHNoticeRecipientSelectedType];
+                  }
+                      break;
+              }
+          }];
+         [obj.model setSelect:self.itemCount];
+         
+         
          switch (obj.model.selectType)
          {
              case XHNoticeRecipientNormalityType:
@@ -265,7 +318,7 @@
          }
      }];
     NSInteger count = [array count];
-    if (self.selectIndex == [array count])
+    if (self.selectIndex == count)
     {
         [self.allSelectControl setIsAction:YES];
     }
@@ -274,8 +327,8 @@
         [self.allSelectControl setIsAction:NO];
     }
     
-    [self.allSelectControl setDescribe:[NSString stringWithFormat:@"%zd/%zd",self.selectIndex,count]];
-    [self.tableView refreshReload];
+    
+    [self.tableView refreshReloadData];
 }
 
 
@@ -313,19 +366,20 @@
 {
     XHAddNoticeRecipientGroupViewController *grou = [[XHAddNoticeRecipientGroupViewController alloc]init];
     grou.successBlok = ^(BOOL success)
-                         {
-                             if (YES)
-                             {
-                                 [self.tableView refreshReloadData];
-                             }
-                         };
+    {
+        if (YES)
+        {
+            [self cyclicTraversal:self.dataArray];
+        }
+    };
+    
     [grou setItemObject:[self.dataArray objectAtIndex:indexPath.row]];
     [self.navigationController pushViewController:grou animated:YES];
 }
 
 
 
-#pragma mark XHNoticeRecipientTableViewCellDeletage
+#pragma mark XHNoticeRecipientTableViewCellDeletage (每个单元格之前的选择)
 -(void)markControlAction:(BaseButtonControl*)object
 {
     [NSArray enumerateObjectsWithArray:self.dataArray usingBlock:^(XHNoticeRecipientFrame *obj, NSUInteger idx, BOOL *stop)
@@ -337,11 +391,27 @@
                  case XHNoticeRecipientSelectedType:
                  {
                      [obj.model setSelectType:XHNoticeRecipientNormalityType];
+                     [obj.model setSelect:0];
+                     
+                     [NSArray enumerateObjectsWithArray:obj.groupArray usingBlock:^(XHNoticeRecipientGroupFrame *obj, NSUInteger idx, BOOL *stop)
+                     {
+                         [obj.model setOptionSelectType:XHNoticeRecipientGroupOptionNormalityType];
+                         [obj.model setSelectType:XHNoticeRecipientGroupNormalityType];
+                         
+                         
+                     }];
                  }
                      break;
                  case XHNoticeRecipientNormalityType:
                  {
                      [obj.model setSelectType:XHNoticeRecipientSelectedType];
+                     [obj.model setSelect:obj.model.total];
+                     
+                     [NSArray enumerateObjectsWithArray:obj.groupArray usingBlock:^(XHNoticeRecipientGroupFrame *obj, NSUInteger idx, BOOL *stop)
+                      {
+                          [obj.model setOptionSelectType:XHNoticeRecipientGroupOptionSelectedType];
+                          [obj.model setSelectType:XHNoticeRecipientGroupSelectedType];
+                      }];
                  }
                      break;
              }
@@ -352,15 +422,12 @@
     [self cyclicTraversal:self.dataArray];
 }
 
-
-
 #pragma mark - Getter / Setter
 -(BaseTableView *)tableView
 {
     if (!_tableView)
     {
         _tableView = [[BaseTableView alloc]init];
-        
     }
     return _tableView;
 }
@@ -391,6 +458,8 @@
     {
         _allSelectControl = [[XHNoticeAllUniteContentView alloc]init];
         [_allSelectControl setBackgroundColor:[UIColor whiteColor]];
+        [_allSelectControl.describeLabel setHidden:YES];
+        [_allSelectControl addTarget:self action:@selector(allSelectControl:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _allSelectControl;
 }

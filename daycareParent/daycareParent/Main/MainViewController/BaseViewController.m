@@ -25,6 +25,7 @@
     {
         [self setHidesBottomBarWhenPushed:YES];
         [[XHHelper sharedHelper] setCurrentViewController:self];
+        [self addSubViews:YES];
     }
    return self;
 }
@@ -36,6 +37,9 @@
     if (self)
     {
         [[XHHelper sharedHelper] setCurrentViewController:self];
+        
+        [self addSubViews:YES];
+        
     }
     return self;
 }
@@ -44,16 +48,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.view setBackgroundColor:RGB(235.0, 235.0, 235.0)];
     self.extendedLayoutIncludesOpaqueBars = YES;
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
-    [self.view setBackgroundColor:RGB(235.0, 235.0, 235.0)];
     [self.navigationController.navigationBar setHidden:YES];
     [self.view addSubview:self.navigationView];
     [self setNavtionColor:MainColor];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self setItemContentItemHiddenWithType:NavigationRightType withHidden:YES];
     [self setItemContentType:NavigationIconAndTitle withItemType:NavigationItemLeftType withIconName:@"ico_return" withTitle:@"返回"];
-    [self addSubViews:YES];
 
 }
 
@@ -206,7 +209,7 @@
 
 -(void)addSubViews:(BOOL)subview
 {
-    
+   
 }
 
 

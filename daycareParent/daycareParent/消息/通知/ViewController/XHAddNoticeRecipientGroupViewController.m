@@ -12,7 +12,9 @@
 
 
 
-@interface XHAddNoticeRecipientGroupViewController ()
+@interface XHAddNoticeRecipientGroupViewController () <UITableViewDelegate,UITableViewDataSource>
+
+@property (nonatomic,strong) XHNoticeRecipientFrame *transFrame;
 
 @property (nonatomic,strong) BaseTableView *tableView;
 
@@ -46,6 +48,8 @@
         
         [self.tableView resetFrame:CGRectMake(0, self.navigationView.bottom, SCREEN_WIDTH, (SCREEN_HEIGHT-self.navigationView.height-50.0))];
         [self.tableView setTableHeaderView:self.allSelectControl];
+        [self.tableView showRefresHeaderWithTarget:self withSelector:@selector(refreshHeaderAction)];
+        [self.tableView beginRefreshing];
         [self.tableView setDelegate:self];
         [self.tableView setDataSource:self];
         
@@ -54,26 +58,42 @@
         [self.allSelectControl resetFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60.0)];
         [self.allSelectControl addTarget:self action:@selector(allSelectControl:) forControlEvents:UIControlEventTouchUpInside];
          [self.view addSubview:self.confirmationControl];
-        
-        
     }
 }
 
 
 -(void)setItemObject:(XHNoticeRecipientFrame*)object;
 {
-    XHNoticeRecipientFrame *frameObject = [[XHNoticeRecipientFrame alloc]init];
-    [frameObject setModel:object.model];
-    [frameObject setGroupArray:object.groupArray];
-    [self.dataArray setArray:frameObject.groupArray];
-    [self.tableView refreshReloadData];
+    [self setTransFrame:object];
+    [self.dataArray setArray:object.groupArray];
+    [self.tableView beginRefreshing];
 }
 
 
+#pragma mark 确认选择
 -(void)confirmationControlAction:(BaseButtonControl*)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [NSArray enumerateObjectsWithArray:self.dataArray usingBlock:^(XHNoticeRecipientGroupFrame *obj, NSUInteger idx, BOOL *stop)
+     {
+         switch (obj.model.selectType)
+         {
+             case XHNoticeRecipientGroupNormalityType:
+             {
+                 [obj.model setSelectType:XHNoticeRecipientGroupNormalityType];
+                 [obj.model setOptionSelectType:XHNoticeRecipientGroupOptionNormalityType];
+             }
+                 break;
+             case XHNoticeRecipientGroupSelectedType:
+             {
+                 [obj.model setSelectType:XHNoticeRecipientGroupSelectedType];
+                 [obj.model setOptionSelectType:XHNoticeRecipientGroupOptionSelectedType];
+             }
+                 break;
+         }
+     }];
+    
     self.successBlok(YES);
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -115,6 +135,10 @@
     }
 }
 
+-(void)refreshHeaderAction
+{
+      [self cyclicTraversal:self.dataArray];
+}
 
 
 #pragma mark 用于循环遍历已选中的人数
@@ -147,7 +171,7 @@
     
     [self.allSelectControl setDescribe:[NSString stringWithFormat:@"%zd/%zd",self.selectIndex,count]];
     
-    [self.tableView refreshReload];
+    [self.tableView refreshReloadData];
 }
 
 #pragma mark - Deletage Method
@@ -203,6 +227,8 @@
     
     [self cyclicTraversal:self.dataArray];
 }
+
+
 
 
 

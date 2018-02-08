@@ -154,9 +154,11 @@
 -(void)refreshReloadData
 {
     [self reloadData];
-    [self.dataSourceArray count] >0 ? [self.tipView setHidden:YES] :[self.tipView setHidden:NO];
+    [self.dataSourceArray count] > 0 ? [self.tipView setHidden:YES] :[self.tipView setHidden:NO];
     [self.header endRefreshing];
     [self.footer endRefreshing];
+    
+    
 }
 /**
  重新刷新数据,数据为空不显示提醒图片

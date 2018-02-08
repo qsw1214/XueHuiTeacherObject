@@ -12,8 +12,7 @@
 
 
 @property (nonatomic,strong) UIImageView *allSelectControl; //!< 全部选择
-@property (nonatomic,strong) UILabel *titleLabel;  //!< 标题
-@property (nonatomic,strong) UILabel *describeLabel;  //<!描述
+
 
 
 
@@ -112,7 +111,6 @@
     {
         _describeLabel = [[UILabel alloc]init];
         [_describeLabel setFont:FontLevel2];
-        [_describeLabel setText:@"全选"];
         [_describeLabel setTextAlignment:NSTextAlignmentRight];
     }
     return _describeLabel;
