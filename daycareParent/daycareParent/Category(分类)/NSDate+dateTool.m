@@ -14,9 +14,16 @@
 +(NSDate *)getDateWithDateStr:(NSString *)dateStr formatter:(NSString *)formatter
 {
     NSDateFormatter *setDateFormatter = [[NSDateFormatter alloc] init];
+    [setDateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Shanghai"]];
+    
     [setDateFormatter setDateFormat:formatter];
     NSDate *date= [setDateFormatter dateFromString:dateStr];
-    return date;
+    NSTimeZone *zone = [NSTimeZone systemTimeZone];
+    
+    NSInteger interval = [zone secondsFromGMTForDate: date];
+    
+    NSDate *localeDate = [date  dateByAddingTimeInterval: interval];
+    return localeDate;
 }
 #pragma mark  时间date转字符串
 +(NSString *)getDateStrWithDateFormatter:(NSString *)dateFormatter Date:(NSDate *)date

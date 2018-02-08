@@ -17,95 +17,39 @@
 #import "Pingpp.h"
 #import "NJKWebViewProgress.h"
 #import "NJKWebViewProgressView.h"
-@interface XHEducationCloudWebViewController () <WKUIDelegate,WKNavigationDelegate,UIWebViewDelegate,AMapLocationManagerDelegate,NJKWebViewProgressDelegate>
-{
-    NJKWebViewProgressView *_progressView;
-    NJKWebViewProgress *_progressProxy;
-}
-@property (nonatomic, strong) AMapLocationManager *locationManager;
-@property (nonatomic, strong) NSData *charge;
-@property (nonatomic, copy) WVJBResponseCallback callBackResult;
+@interface XHEducationCloudWebViewController () <UIWebViewDelegate,WKUIDelegate,UINavigationBarDelegate>
 @property (nonatomic,strong) UIWebView *webView;
-@property WebViewJavascriptBridge* bridge;
+@property (nonatomic,strong) UIProgressView *progressView;
 @end
 
 @implementation XHEducationCloudWebViewController
 
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
-     [self clearWebCache];
-    _progressProxy = [[NJKWebViewProgress alloc] init];
-    _webView.delegate = _progressProxy;
-    _progressProxy.webViewProxyDelegate = self;
-    _progressProxy.progressDelegate = self;
-    _progressView = [[NJKWebViewProgressView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 2)];
-    _progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    //[self clearWebCache];
+    [self.view addSubview:self.webView];
+    [self.view addSubview:self.progressView];
+    self.progressView.progress=0.1;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
 }
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-    [self.view addSubview:_progressView];
+    [super viewDidAppear:animated];
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:1.0];
+    self.progressView.progress=0.7;
+    [UIView commitAnimations];
 }
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [_progressView removeFromSuperview];
-}
-
--(void)dealloc
-{
-    NSLog(@"观察者销毁了");
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-   
-}
-
-
--(void)addSubViews:(BOOL)subview
-{
-    if (subview)
-    {
-        [self.view addSubview:self.webView];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callBackResult:) name:@"callBack" object:nil];
-        
-    }
-}
-
-//-(void)setEducationCloudObject:(XHEducationCloudFrame*)objet;
-//{
-//    switch (objet.model.modelType)
-//    {
-//        case XHEducationCloudCellVideoTpe:
-//        {
-//            //NSString *webUrl=[objet.model.redirectUrl encoding];
-//            [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:objet.model.redirectUrl]]];
-//            [self registBridge:_webView];
-//        }
-//            break;
-//        case XHEducationCloudCellExaminationQuestionsTpe:
-//        {
-//             NSString *webUrl=[objet.model.redirectUrl encoding];
-//            [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:webUrl]]];
-//            [self registBridge:_webView];
-//        }
-//            break;
-//        default:
-//            break;
-//    }
-//    
-//}
-
 
 -(void)setWebViewUrl:(NSString*)url
 {
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
-    [self registBridge:_webView];
 }
 
 
@@ -115,116 +59,20 @@
     if (!_webView)
     {
         _webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, self.navigationView.bottom, SCREEN_WIDTH, SCREEN_HEIGHT-self.navigationView.height)];
-        [_webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
-        [_webView sizeToFit];
-        _webView.scalesPageToFit=YES;
+        _webView.scalesPageToFit = YES;
+        _webView.delegate=self;
+        
     }
     return _webView;
 }
-
-#pragma mark - NJKWebViewProgressDelegate
--(void)webViewProgress:(NJKWebViewProgress *)webViewProgress updateProgress:(float)progress
+-(UIProgressView *)progressView
 {
-    [_progressView setProgress:progress animated:YES];
-}
-
--(void)registBridge:(UIWebView *)webView
-{
-    if (_bridge)
-    {
-        return;
-        
+    if (_progressView==nil) {
+        _progressView=[[UIProgressView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 100)];
+        _progressView.progressViewStyle=UIProgressViewStyleBar;
+        _progressView.tintColor=RGB(22, 126, 251);
     }
-    
-    [WebViewJavascriptBridge enableLogging];
-    
-    _bridge = [WebViewJavascriptBridge bridgeForWebView:webView];
-    [_bridge setWebViewDelegate:self];
-    
-    //注册定位，等待JS调取
-    [_bridge registerHandler:@"usLocation" handler:^(id data, WVJBResponseCallback responseCallback) {
-        [self startLocation:responseCallback];
-    }];
-    //注册ping++，购买商品调起支付
-    [_bridge registerHandler:@"getPay" handler:^(id data, WVJBResponseCallback responseCallback) {
-        _charge = data;
-        //        _callBackResult = nil;
-        _callBackResult = responseCallback;
-        [self regiseterPay:responseCallback];
-    }];
-    
-}
-- (void)startLocation:(WVJBResponseCallback)responseCallback
-{
-    self.locationManager = [[AMapLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    //    [AMapServices sharedServices].apiKey = @"2c7804fec1be502acdb64d97a7afa387";
-    // 带逆地理信息的一次定位（返回坐标和地址信息）
-    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
-    //   定位超时时间，最低2s，此处设置为2s
-    self.locationManager.locationTimeout =2;
-    //   逆地理请求超时时间，最低2s，此处设置为2s
-    self.locationManager.reGeocodeTimeout = 2;
-    
-    // 带逆地理（返回坐标和地址信息）
-    [_locationManager requestLocationWithReGeocode:YES completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
-        if (error)
-        {
-            UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"警告" message:@"获取位置信息失败,请检查你的定位服务是否打开!" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
-            [alertView show];
-            return;
-        }
-        if (regeocode)
-        {
-            NSString *address = [NSString stringWithFormat:@"%@%@%@%@",regeocode.province,regeocode.city,regeocode.district,regeocode.POIName];
-            NSDictionary *dict =@{@"lng":@(location.coordinate.longitude),@"lat":@(location.coordinate.latitude),@"address":address};
-            responseCallback(dict);
-        }
-    }];
-    
-}
-//调起ping++支付
-- (void)regiseterPay:(WVJBResponseCallback)responseCallback
-{
-    
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:_charge options:NSJSONWritingPrettyPrinted error:nil];
-    NSString* data = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    [Pingpp createPayment:data
-           viewController:self
-             appURLScheme:@"wxedbbf780e30b9bb5"
-           withCompletion:^(NSString *result, PingppError *error)
-     {
-         if (error == nil) {
-             NSLog(@"PingppError is nil");
-         } else {
-             NSLog(@"PingppError: code=%lu msg=%@", (unsigned  long)error.code, [error getMsg]);
-         }
-         responseCallback(result);
-     }];
-}
-- (void)callBackResult:(NSNotification *)result
-{
-    NSString *objects = [result object];
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:objects,@"result", nil];
-    if (_callBackResult == nil) {
-        // [XHShowHUD showNOHud:@"应用信息异常"];
-        return;
-    }
-    _callBackResult(dic);
-    if ([objects isEqualToString:@"success"]) {
-        [XHShowHUD showNOHud:@"支付成功"];
-        [self.webView goBack];
-        return;
-    }
-    if ([objects isEqualToString:@"cancel"]) {
-        [XHShowHUD showNOHud:@"支付取消"];
-        return;
-    }
-    else  {
-        [XHShowHUD showNOHud:@"支付失败"];
-        return;
-    }
-    
+    return _progressView;
 }
 
 -(void)letfItemAction:(BaseNavigationControlItem *)sender
@@ -237,6 +85,20 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
+-(void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:2.0];
+    self.progressView.progress=1.0;
+    [UIView commitAnimations];
+    [self performSelector:@selector(aaaa) withObject:nil afterDelay:0.5];
+    
+}
+-(void)aaaa
+{
+    [self.progressView removeFromSuperview];
+}
+
 - (void)clearWebCache {
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 9.0) {
         
@@ -284,13 +146,5 @@
         
         [[NSFileManager defaultManager] removeItemAtPath:cookiesFolderPath error:&errors];
     }
-}
--(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
-    [XHShowHUD showNOHud:@"加载失败！"];
-}
--(void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
-{
-     [XHShowHUD showNOHud:@"加载失败！"];
 }
 @end
