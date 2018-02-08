@@ -14,7 +14,7 @@
 
 
 
-@interface XHCreateRecipeContentView () <XHDatePickerControlDeletage>
+@interface XHCreateRecipeContentView () <XHCustomDatePickerViewDelegate>
 
 @property (nonatomic,strong) BaseButtonControl *kindContent; //!< 类别
 @property (nonatomic,strong) XHAskforLeaveAddPhotoControl *addPhotoContent; //!< 类别
@@ -132,7 +132,10 @@
 #pragma mark case 3 选择时间
         case 3:
         {
-            [[XHDatePickerControl sharedObject] showWithDeletage:self];
+            self.datePickerView.delegate=self;
+            self.datePickerView.modelyTpe=XHCustomDatePickerViewModelAllDayType;
+            [[XHHelper sharedHelper].currentViewController.view addSubview:self.datePickerView];
+
         }
             break;
 #pragma mark case 4 提交
@@ -203,13 +206,10 @@
 
 #pragma mark - Deletage Method
 #pragma mark XHDatePickerControlDeletage
--(void)datePickerClickObject:(NSString*)date
+-(void)getDateStr:(NSString *)dateStr
 {
-    NSArray *dateArray = [date componentsSeparatedByString:@" "];
-    date = [dateArray firstObject];
-    [self.dateContent setText:date withNumberType:1 withAllType:NO];
+    [self.dateContent setText:dateStr withNumberType:1 withAllType:NO];
 }
-
 -(void)imagePickerControllerdidFinishPickingMediaWithImage:(nonnull UIImage*)image
 {
     [self.addPhotoContent setRecipeImage:image];

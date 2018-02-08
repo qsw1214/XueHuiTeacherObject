@@ -58,7 +58,7 @@
 -(void)getClassListModel:(XHClassListModel *)classListModel withIndex:(NSInteger)index
 {
     
-     [self setRightItemTitle:[classListModel clazz]];
+     [self setRightItemTitle:[classListModel gradeAndClassName]];
     [self.contentView getModel:classListModel withIndex:index];
 }
 #pragma mark 右侧按钮相应的方法

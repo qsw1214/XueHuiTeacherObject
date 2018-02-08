@@ -15,7 +15,7 @@
 @property (nonatomic,strong) MJRefreshNormalHeader *animateHeader; //!< 头部
 @property (nonatomic,strong) MJRefreshAutoNormalFooter *animateFooter; //!< 脚部
 
-
+@property(nonatomic,strong)XHCustomDatePickerView *datePickerView;//!< 日期选择器
 
 -(void)resetFrame:(CGRect)frame;
 -(void)setItemColor:(BOOL)color;

@@ -230,7 +230,7 @@
     if ([array count] > 1)
     {
         XHClassListModel *model = [array firstObject];
-        [self setItemContentType:NavigationIconAndTitle withItemType:NavigationItemRightype withIconName:@"ico-dorpdown" withTitle:model.clazz];
+        [self setItemContentType:NavigationIconAndTitle withItemType:NavigationItemRightype withIconName:@"ico-dorpdown" withTitle:model.gradeAndClassName];
     }
     
 }

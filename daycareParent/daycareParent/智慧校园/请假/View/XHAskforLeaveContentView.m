@@ -334,9 +334,7 @@
      {
          if (verifyObject)
          {
-             
-             
-             
+            [[XHHelper sharedHelper].currentViewController.navigationController popViewControllerAnimated:YES];
          }
      } error:^(NSError *error){}];
 }

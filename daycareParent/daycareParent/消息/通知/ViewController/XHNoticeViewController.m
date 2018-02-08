@@ -135,7 +135,7 @@
 }
 -(void)refresh
 {
-    [self.net setObject:[XHUserInfo sharedUserInfo].ID forKey:@"teacherId"];
+    [self.net setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
     [self.net postWithUrl:@"zzjt-app-api_notice007" sucess:^(id object, BOOL verifyObject) {
         if (verifyObject) {
             NSDictionary *dic=[object objectItemKey:@"object"];

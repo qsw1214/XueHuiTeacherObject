@@ -81,7 +81,6 @@
         }
             
             break;
-        case 2:
         case 7:
         {
             XHNewTextFieldTypeTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"textcell" forIndexPath:indexPath];
@@ -92,11 +91,6 @@
             cell.selectLabel.text=@"节课程";
             cell.textFeild.keyboardType=UIKeyboardTypeNumberPad;
             [cell.textFeild addTarget:self action:@selector(textChage:) forControlEvents:UIControlEventEditingChanged];
-            if (indexPath.row==2) {
-                cell.selectLabel.text=@"请输入";
-                cell.textFeild.hidden=YES;
-                cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-            }
             return cell;
         }
             break;
@@ -119,6 +113,10 @@
             XHNewTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.titleLabel.text=TITLE[indexPath.row];
+            if (indexPath.row==2) {
+                cell.selectLabel.text=@"请输入";
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
             return cell;
         }
            
@@ -159,8 +157,9 @@
             case 1:
             case 5:
         {
-           
+            [self.segementVC setResignFirstResponder:YES];
             [UIAlertController alertSubjectListWithController:self indexBlock:^(NSInteger index, id object) {
+                [self.segementVC setResignFirstResponder:NO];
                 XHSubjectListModel *model=object;
                 XHNewTextFieldTypeTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
                 cell.selectLabel.text=model.subjectName;
@@ -193,7 +192,7 @@
                     [XHShowHUD showNOHud:@"班级不能为空"];
                     return ;
                 }
-               XHNewTextFieldTypeTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+               XHNewTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
                 cell.selectLabel.text=alertController.textFields.firstObject.text;
                 _clazzName=alertController.textFields.firstObject.text;
             }]];
@@ -313,8 +312,9 @@
     [self.netWorkConfig postWithUrl:@"zzjt-app-api_bizInfo001" sucess:^(id object, BOOL verifyObject) {
         if (verifyObject)
         {
-        //数据还原
-            [self resetData];
+//        //数据还原
+//            [self resetData];
+            [self.navigationController popViewControllerAnimated:YES];
         }
     } error:^(NSError *error) {
         

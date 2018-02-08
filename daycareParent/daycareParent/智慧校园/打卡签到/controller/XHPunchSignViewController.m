@@ -185,6 +185,7 @@
     [self.netWorkConfig setObject:[NSDate getDateStrWithDateFormatter:ALL_DEFAULT_TIME_FORM Date:endDate] forKey:@"endTime"];
     [self.netWorkConfig postWithUrl:@"pmschool-teacher-api_/teacher/attendanceSheet/list" sucess:^(id object, BOOL verifyObject) {
         if (verifyObject) {
+            [self.dataArray removeAllObjects];
             [self.beginDateBtn setText:[NSDate getDateStrWithDateFormatter:YY_DEFAULT_TIME_FORM Date:_beginDate] withNumberType:0 withAllType:NO];
             [self.endDateBtn setText:[NSDate getDateStrWithDateFormatter:YY_DEFAULT_TIME_FORM Date:_endDate] withNumberType:0 withAllType:NO];
             NSMutableArray *arry=[object objectItemKey:@"object"];

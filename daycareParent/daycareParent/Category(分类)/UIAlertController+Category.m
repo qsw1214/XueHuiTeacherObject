@@ -53,7 +53,7 @@
                     indexBlock(i,model);
                 }]];
             }
-            [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}]];
+//            [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}]];
             [controller presentViewController:alertController animated:YES completion:nil];
         }
         else
@@ -77,12 +77,14 @@
                     indexBlock(i,model);
                 }]];
             }
-        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}]];
+//        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//
+//        }]];
             [controller presentViewController:alertController animated:YES completion:nil];
         }
         else
         {
-            [UIAlertController alertWithmessage:@"暂无数据" titlesArry:@[@"确定"] controller:controller indexBlock:^(NSInteger index, id object) {}];
+          [UIAlertController alertWithmessage:@"暂无数据" titlesArry:@[@"确定"] controller:controller indexBlock:^(NSInteger index, id object) {}];
         }
     }];
     

@@ -121,7 +121,7 @@
 {
         [self.netWorkConfig setObject:@"20" forKey:@"pageSize"];
         [self.netWorkConfig setObject:[NSString stringWithFormat:@"%zd",_pageNumber] forKey:@"pageNumber"];
-        [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].ID forKey:@"teacherId"];
+        [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
         [self.netWorkConfig postWithUrl:@"zzjt-app-api_notice006" sucess:^(id object, BOOL verifyObject)
          {
             if (verifyObject)
@@ -142,10 +142,10 @@
                 {
                     [itemObjectArray enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
                      {
-                         NSDictionary *itemObject = [obj objectItemKey:@"propValue"];
+                        // NSDictionary *itemObject = [obj objectItemKey:@"propValue"];
                          XHNoticeFrame *frame = [[XHNoticeFrame alloc]init];
                          XHNoticeModel *model = [[XHNoticeModel alloc]init];
-                         [model setItemObject:itemObject];
+                         [model setItemObject:obj];
                          [model.playModel setScrollView:self.tableView];
                          [frame setModel:model];
                          [self.dataArray addObject:frame];

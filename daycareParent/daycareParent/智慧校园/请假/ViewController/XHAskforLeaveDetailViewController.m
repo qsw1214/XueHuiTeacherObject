@@ -167,13 +167,7 @@
         if (indexPath.row==0) {
             XHHistoryHeadTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"historyHeadCell" forIndexPath:indexPath];
             [cell.headBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:ALGetFileHeadThumbnail(model.headPic)] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
-            if ([model.bizType integerValue]==1) {
-                cell.titleLabel.text=[NSString stringWithFormat:@"%@的调课",model.teacherName];
-            }
-            if ([model.bizType integerValue]==2)
-            {
-                cell.titleLabel.text=[NSString stringWithFormat:@"%@的代课",model.teacherName];
-            }
+            cell.titleLabel.text=[NSString stringWithFormat:@"%@的请假",model.teacherName];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
@@ -270,10 +264,11 @@
 #pragma mark--------------发起人显示cell--------------
                 XHApplyTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"applyCell" forIndexPath:indexPath];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.nameLabel.text=model.formerTeacherName;
+                cell.nameLabel.text=model.teacherName;
                 cell.applyLabel.text=@"发起申请";
                 cell.dateLabel.text=[NSDate dateStr:model.createTime FromFormatter:ALL_DEFAULT_TIME_FORM ToFormatter:YY_DEFAULT_TIME_FORM];
                 cell.selectImageV.image=[UIImage imageNamed:@"ico_right"];
+               [cell.headBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:ALGetFileHeadThumbnail(model.headPic)] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
                 return cell;
             }
             else
@@ -281,10 +276,11 @@
 #pragma mark-------------审批人显示cell--------------
                 XHApproverTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"approverCell" forIndexPath:indexPath];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.nameLabel.text=model.formerTeacherName;
+                cell.nameLabel.text=model.teacherName;
                 cell.applyLabel.text=@"发起申请";
                 cell.dateLabel.text=[NSDate dateStr:model.createTime FromFormatter:ALL_DEFAULT_TIME_FORM ToFormatter:YY_DEFAULT_TIME_FORM];
                 cell.selectImageV.image=[UIImage imageNamed:@"ico_right"];
+                [cell.headBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:ALGetFileHeadThumbnail(model.headPic)] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
                 for (int i=0; i<2; i++) {
                     XHBaseBtn *btn=[cell.contentView viewWithTag:10+i];
                     [btn addTarget:self action:@selector(selectBtnClick:) forControlEvents:UIControlEventTouchUpInside];

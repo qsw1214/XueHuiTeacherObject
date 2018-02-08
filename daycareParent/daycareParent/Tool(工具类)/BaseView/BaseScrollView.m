@@ -93,4 +93,17 @@
     }
     return _dataArray;
 }
+#pragma mark-------------显示日历视图--------------
+-(XHCustomDatePickerView *)datePickerView
+{
+    if (_datePickerView==nil) {
+        _datePickerView=[[XHCustomDatePickerView alloc] initWithFrame:WindowScreen];
+    }
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.5];
+    _datePickerView.view.frame=CGRectMake(0, SCREEN_HEIGHT-220, SCREEN_WIDTH, 220);
+    [UIView commitAnimations];
+    return _datePickerView;
+    
+}
 @end
