@@ -205,33 +205,32 @@
                      {
                          if (success)
                          {
-                             MAIN(^{
+                             MAIN((^{
                                  
                                  [self.imageNameArray addObject:imageName];
                                  if ([self.imageNameArray count] == [self.dataArray count])
                                  {
                                      XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
-                                     [config setObject:[self.imageNameArray objectAtIndex:0] forKey:@"picUrl1"];
-                                     [config setObject:[self.imageNameArray objectAtIndex:1] forKey:@"picUrl2"];
-                                     [config setObject:[self.imageNameArray objectAtIndex:2] forKey:@"picUrl3"];
-                                     [config setObject:[self.imageNameArray objectAtIndex:3] forKey:@"picUrl4"];
-                                     [config setObject:[self.imageNameArray objectAtIndex:4] forKey:@"picUrl5"];
-                                     [config setObject:[self.imageNameArray objectAtIndex:5] forKey:@"picUrl6"];
-                                     [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
-                                     [config setObject:self.subjectContent.subjectListModel.ID forKey:@"subjectId"];
-                                     [config setObject:self.inputContent.text forKey:@"content"];
-                                     [config setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
-                                     [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
-                                     [config postWithUrl:@"zzjt-app-api_schoolWork001" sucess:^(id object, BOOL verifyObject)
-                                      
-                                      {
-                                          if (verifyObject)
-                                          {
-                                              
-                                          }
-                                      } error:^(NSError *error){}];
-                                 }
-                             });
+                                     for (int i=0; i<self.imageNameArray.count; i++)
+                                     {
+                                       [config setObject:self.imageNameArray[i] forKey:[NSString stringWithFormat:@"picUrl%zd",i+1]];
+                                     }
+                                     
+                                      [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
+                                      [config setObject:self.subjectContent.subjectListModel.ID forKey:@"subjectId"];
+                                      [config setObject:self.inputContent.text forKey:@"content"];
+                                      [config setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
+                                      [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
+                                      [config postWithUrl:@"zzjt-app-api_schoolWork001" sucess:^(id object, BOOL verifyObject)
+                                       
+                                       {
+                                           if (verifyObject)
+                                           {
+                                               [[XHHelper sharedHelper].currentViewController.navigationController popViewControllerAnimated:YES];
+                                           }
+                                       } error:^(NSError *error){}];
+                                      }
+                                      }));
                              
                          }
                      } withProgressCallback:^(float progress)

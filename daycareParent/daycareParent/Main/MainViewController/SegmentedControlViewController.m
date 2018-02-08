@@ -257,6 +257,20 @@
     }
 
 }
+
+-(void)setResignFirstResponder:(BOOL)setFirstResponder
+{
+    if (setFirstResponder) {
+        self.navigationView.userInteractionEnabled=NO;
+        self.segmentedControl.userInteractionEnabled=NO ;
+    }
+    else
+    {
+        self.navigationView.userInteractionEnabled=YES;
+        self.segmentedControl.userInteractionEnabled=YES ;
+    }
+    
+}
 /*
 #pragma mark - Navigation
 

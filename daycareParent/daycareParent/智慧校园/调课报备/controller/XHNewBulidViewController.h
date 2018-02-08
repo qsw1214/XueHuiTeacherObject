@@ -8,7 +8,8 @@
 
 #import "BaseViewController.h"
 #pragma mark-------------课程报备--》新建详情--------------
+#import "SegmentedControlViewController.h"
 
 @interface XHNewBulidViewController : BaseViewController
-
+@property(nonatomic,strong)SegmentedControlViewController *segementVC;
 @end

@@ -53,4 +53,6 @@
 #pragma mark 隐藏导航左右按钮
 -(void)navtionItemHidden:(BaseNavigationControlItemType)item;
 
+#pragma mark  弹出提示框失去第一响应
+-(void)setResignFirstResponder:(BOOL)setFirstResponder;
 @end

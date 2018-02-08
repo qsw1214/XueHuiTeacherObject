@@ -192,8 +192,7 @@ typedef NS_ENUM(NSInteger,EducationCloudInformationType)
 {
     [self.header endRefreshing];
     [self getAdvertisementWithAction:@"haoxue-video-api_NC001"];
-    [self getInformationWithType:EducationCloudVideoType];
-    [self getInformationWithType:EducationCloudExerciseType];
+    [self getInformation:@"haoxue-video-api_NC002"];
 }
 
 #pragma mark 获取广告
@@ -222,6 +221,42 @@ typedef NS_ENUM(NSInteger,EducationCloudInformationType)
 
 
 #pragma mark 获取消息类型
+
+-(void)getInformation:(NSString*)actionUrl
+{
+     XHNetWorkConfig *informationNetWorkConfig = [[XHNetWorkConfig alloc]init];
+    [informationNetWorkConfig postWithUrl:actionUrl sucess:^(id object, BOOL verifyObject) {
+        if (verifyObject) {
+            [self.videoModel.dataArray removeAllObjects];
+            [self.exerciseModel.dataArray removeAllObjects];
+            NSArray *itemArray = [object objectForKey:@"object"];
+            for (NSDictionary *obj in itemArray) {
+                XHEducationCloudFrame *frame = [[XHEducationCloudFrame alloc]init];
+                XHEducationCloudModel *model = [[XHEducationCloudModel alloc]init];
+                [model setItemObject:obj];
+                [frame setModel:model];
+                switch (model.modelType)
+                {
+                    case XHEducationCloudCellVideoTpe:
+                    {
+                        [self.videoModel.dataArray addObject:frame];
+                        
+                    }
+                        break;
+                        
+                    case XHEducationCloudCellExaminationQuestionsTpe:
+                    {
+                        [self.exerciseModel.dataArray addObject:frame];
+                    }
+                        break;
+                }
+            }
+            [self setSwitchMenuItemArray:self.switchArray];
+        }
+    } error:^(NSError *error) {}];
+    
+}
+/*
 -(void)getInformationWithType:(EducationCloudInformationType)type
 {
     switch (type)
@@ -283,7 +318,7 @@ typedef NS_ENUM(NSInteger,EducationCloudInformationType)
 }
 
 
-
+*/
 
 #pragma mark - Action Method  更多响应方法
 -(void)moreControlAction:(BaseButtonControl*)sender
@@ -349,16 +384,16 @@ typedef NS_ENUM(NSInteger,EducationCloudInformationType)
     {
         case 0:
         {
-            NSString *webUrl = [NSString stringWithFormat:@"http://h5.mall.ixuehui.cn?tel=%@&haoxueType=1",[XHUserInfo sharedUserInfo].loginName];
+            NSString *webUrl = @"http://h5.mall.ixuehui.cn?type=tea&haoxueType=1";
             XHEducationCloudWebViewController *webView = [[XHEducationCloudWebViewController alloc]initHiddenWhenPushHidden];
             [webView setWebViewUrl:webUrl];
-            [webView setNavtionTitle:@"辅教用品"];
+            [webView setNavtionTitle:@"教辅用品"];
             [self.viewController.navigationController pushViewController:webView animated:YES];
         }
             break;
         case 1:
         {
-            NSString *webUrl = [NSString stringWithFormat:@"http://h5.mall.ixuehui.cn?tel=%@&haoxueType=2",[XHUserInfo sharedUserInfo].loginName];
+            NSString *webUrl = @"http://h5.mall.ixuehui.cn?type=tea&haoxueType=1";
             XHEducationCloudWebViewController *webView = [[XHEducationCloudWebViewController alloc]initHiddenWhenPushHidden];
             [webView setWebViewUrl:webUrl];
             [webView setNavtionTitle:@"兴趣辅导"];

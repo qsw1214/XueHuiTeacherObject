@@ -61,7 +61,7 @@
 
 -(void)getClassListModel:(XHClassListModel *)classListModel withIndex:(NSInteger)index
 {
-     [self setRightItemTitle:classListModel.clazz];
+     [self setRightItemTitle:classListModel.gradeAndClassName];
     
     [self.contentView getModel:classListModel];
     

@@ -16,9 +16,7 @@
 //!< 设置通知对象
 -(void)setItemObject:(NSDictionary *)object
 {
-    [self setHeaderUrl:ALGetFileHeadThumbnail([object objectItemKey:@"headPic"])];
-    [self setNoticeActorId:[object objectItemKey:@"noticeActorId"]];
-    
+    [self setHeaderUrl:ALGetFileHeadThumbnail([[object objectItemKey:@"propValue"] objectItemKey:@"headPic"])];
     NSMutableArray <XHPreviewModel*> *imageModelArray = [NSMutableArray array];
     for ( int i = 1; i<= 6; i++)
     {
@@ -37,15 +35,14 @@
              [self.imageUrlArray addObject:obj];
          }
      }];
-    
-    
+
     [self setSchoolName:[object objectItemKey:@"schoolName"]];
     [self setClassName:[object objectItemKey:@"className"]];
-    [self setNoticeActorId:[object objectItemKey:@"noticeActorId"]];
-    [self setUserName:[object objectItemKey:@"teacherName"]];
+    [self setNoticeActorId:[[object objectItemKey:@"propValue"] objectItemKey:@"notice_actorid"]];
+    [self setUserName:[[object objectItemKey:@"propValue"] objectItemKey:@"teacherName"]];
     [self setReleaseDate:[NSString dateStr:[object objectItemKey:@"createTime"]]];
     [self setContent:[object objectItemKey:@"content"]];
-    [self setUnreadType:[object objectItemKey:@"isStatus"]];
+    [self setUnreadType:[[object objectItemKey:@"propValue"] objectItemKey:@"isStatus"]];
     [self setVedioUrl:[object objectItemKey:@"vedioUrl"]];
     [self setVedioFirstPicUrl:ALGetFileImageThumbnail([object objectItemKey:@"vedioFirstPicUrl"])]; 
     [self setItemArray:self.imageUrlArray];

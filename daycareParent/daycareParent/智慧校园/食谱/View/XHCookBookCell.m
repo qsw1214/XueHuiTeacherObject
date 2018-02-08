@@ -67,7 +67,7 @@
                 case CookBookSelectType:
                 {
                     [self.markView setHidden:NO];
-                    [self.titleLabel setTextColor:RGB(91, 208, 184)];
+                    [self.titleLabel setTextColor:MainColor];
                     [self.titleLabel setBackgroundColor:[UIColor whiteColor]];
                 }
                     break;
@@ -170,7 +170,7 @@
     if (_markView == nil)
     {
         _markView = [[UIView alloc]init];
-        [_markView setBackgroundColor:RGB(91, 208, 184)];
+        [_markView setBackgroundColor:MainColor];
         [_markView setHidden:YES];
     }
     return _markView;

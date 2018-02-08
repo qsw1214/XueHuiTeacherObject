@@ -51,7 +51,7 @@
     _titleLab.frame=CGRectMake(80, 0, SCREEN_WIDTH-180, 30);
     _titleLab.font = [UIFont fontWithName:@ "Helvetica-Bold"  size:(16.0)];
     _headImageView.image=[UIImage imageNamed:@"addman"];
-   
+    [_headImageView sd_setImageWithURL:[NSURL URLWithString:ALGetFileHeadThumbnail(model.headPic)] placeholderImage:[UIImage imageNamed:@"addman"]];
     _detailLab.text=[NSDate dateStr:model.beginTime FromFormatter:ALL_DEFAULT_TIME_FORM ToFormatter:YY_DEFAULT_TIME_FORM];
     switch (model.readType) {
         case XHUnReadType:

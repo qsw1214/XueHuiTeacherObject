@@ -280,11 +280,18 @@
                 }
                 else
                 {
-                    nameLabel.text=model.teacherName;
+                    nameLabel.text=model.formerTeacherName;
                     applyLabel.text=@"发起申请";
                     dateLabel.text=[NSDate dateStr:model.createTime FromFormatter:ALL_DEFAULT_TIME_FORM ToFormatter:YY_DEFAULT_TIME_FORM];
                      selectImage.image=[UIImage imageNamed:@"ico_right"];
-                    [headBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:ALGetFileHeadThumbnail(model.headPic)] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
+                    if ([model.formerTeacherName isEqualToString:model.teacherName])
+                    {
+                        [headBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:ALGetFileHeadThumbnail(model.headPic)] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
+                    }
+                    else
+                    {
+                        [headBtn sd_setBackgroundImageWithURL:nil forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
+                    }
                 }
                 
             }
@@ -302,6 +309,15 @@
                 cell.applyLabel.text=@"发起申请";
                 cell.dateLabel.text=[NSDate dateStr:model.createTime FromFormatter:ALL_DEFAULT_TIME_FORM ToFormatter:YY_DEFAULT_TIME_FORM];
                 cell.selectImageV.image=[UIImage imageNamed:@"ico_right"];
+                if ([model.formerTeacherName isEqualToString:model.teacherName])
+                {
+                     [cell.headBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:ALGetFileHeadThumbnail(model.headPic)] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
+                }
+                else
+                {
+                     [cell.headBtn sd_setBackgroundImageWithURL:nil forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
+                }
+               
                 return cell;
             }
             else
@@ -313,6 +329,14 @@
                 cell.applyLabel.text=@"发起申请";
                 cell.dateLabel.text=[NSDate dateStr:model.createTime FromFormatter:ALL_DEFAULT_TIME_FORM ToFormatter:YY_DEFAULT_TIME_FORM];
                  cell.selectImageV.image=[UIImage imageNamed:@"ico_right"];
+                if ([model.formerTeacherName isEqualToString:model.teacherName])
+                {
+                    [cell.headBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:ALGetFileHeadThumbnail(model.headPic)] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
+                }
+                else
+                {
+                    [cell.headBtn sd_setBackgroundImageWithURL:nil forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
+                }
                 for (int i=0; i<2; i++) {
                     XHBaseBtn *btn=[cell.contentView viewWithTag:10+i];
                     [btn addTarget:self action:@selector(selectBtnClick:) forControlEvents:UIControlEventTouchUpInside];
