@@ -20,25 +20,30 @@
     // Do any additional setup after loading the view.
     [self setNavtionTitle:@"新增"];
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    switch (self.index) {
+        case 0:
+        {
+            self.contentView.modelType=XHNewDynamicsImgContentModelType;
+        }
+            break;
+            
+        case 1:
+        {
+            self.contentView.modelType=XHNewDynamicsVideoContentModelType;
+        }
+            break;
+    }
+}
 -(void)addSubViews:(BOOL)subview
 {
     if (subview)
     {
         [self.view addSubview:self.contentView];
         [self.contentView resetFrame:CGRectMake(0, self.navigationView.bottom, SCREEN_WIDTH, SCREEN_HEIGHT-self.navigationView.height)];
-        switch (self.index) {
-            case 0:
-            {
-                self.contentView.modelType=XHNewDynamicsImgContentModelType;
-            }
-                break;
-                
-            case 1:
-            {
-                self.contentView.modelType=XHNewDynamicsVideoContentModelType;
-            }
-                break;
-        }
+        self.contentView.currentVC=self;
     }
 }
 

@@ -11,7 +11,7 @@
 #import "XHPreviewModel.h"
 #import "XHClassListModel.h"
 #import "XHSubjectListModel.h"
-
+#import "XHNoticeMarkModel.h"
 
 
 
@@ -55,7 +55,7 @@ typedef NS_ENUM(NSInteger,BaseControlModelType)
 @property (nonatomic,strong) XHClassListModel *classListModel;
 @property (nonatomic,strong) XHSubjectListModel *subjectListModel;
 @property (nonatomic,strong) XHNetWorkConfig *networkConfig;
-
+@property(nonatomic,strong)  XHNoticeMarkModel*noticeMarkModel;
 
 
 

@@ -109,7 +109,8 @@
     [_endDateBtn setText:[NSString dateWithDateFormatter:YY_DEFAULT_TIME_FORM Date:_endDate] withNumberType:0 withAllType:NO];
     [_endDateBtn setFont:FontLevel4 withNumberType:0 withAllType:NO];
     NSDate *lDate=[NSDate getDateWithDateStr:[NSUserDefaults objectItemForKey:[XHUserInfo sharedUserInfo].telphoneNumber] formatter:ALL_DEFAULT_TIME_FORM];
-    if (lDate && [[NSDate date] timeIntervalSinceDate:lDate] <= 3600)
+
+    if (lDate && [[NSDate howLongFromeDateStr:[NSUserDefaults objectItemForKey:[XHUserInfo sharedUserInfo].telphoneNumber]  toDateStr:[NSDate getDateStrWithDateFormatter:ALL_DEFAULT_TIME_FORM Date:[NSDate date]] formatter:ALL_DEFAULT_TIME_FORM] hour]<=0)
     {
         self.signBtn.selected = YES;
         [self.signBtn setTextColor:RGB(240, 240, 240) withTpe:0 withAllType:NO];

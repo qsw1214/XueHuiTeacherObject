@@ -59,7 +59,7 @@
 -(void)rightItemAction:(BaseNavigationControlItem *)sender
 {
     [UIAlertController actionSheetWithmessage:@"请选择类型" titlesArry:@[@"发送图片",@"发送视频"] controller:self indexBlock:^(NSInteger index, id object) {
-        XHNewDynamicsViewController *new=[XHNewDynamicsViewController new];
+        XHNewDynamicsViewController *new=[[XHNewDynamicsViewController alloc] init];
         new.index=index;
         [self.navigationController pushViewController:new animated:YES];
     }];

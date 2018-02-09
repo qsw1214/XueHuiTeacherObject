@@ -100,4 +100,5 @@
  @return 时间date
  */
 +(NSDate *)getDate:(NSDate *)date formatter:(NSString *)formatter;
++(long) compareCurrentTime:(NSDate*) compareDate;
 @end

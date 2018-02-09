@@ -19,4 +19,5 @@ typedef NS_ENUM(NSInteger,XHNewDynamicsContentModelType)
 @interface XHNewDynamicsContentView : BaseScrollView
 
 @property(nonatomic,assign)XHNewDynamicsContentModelType modelType;
+@property(nonatomic,strong)UIViewController *currentVC;
 @end

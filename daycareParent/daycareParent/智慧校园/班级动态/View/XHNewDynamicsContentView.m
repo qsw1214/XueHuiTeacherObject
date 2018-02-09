@@ -13,7 +13,7 @@
 #import "XHPreviewModel.h"
 #import "VideoManagerViewController.h"
 #import "ShootVideoViewController.h"
-
+#import "XHAddNoticeRecipientViewController.h"
 @interface XHNewDynamicsContentView () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,BaseTextViewDeletage,ShootVideoViewControllerDelegate,VideoManagerViewControllerDeletage>
 
 @property (nonatomic,strong) BaseButtonControl *classContent; //!< 接收人
@@ -109,14 +109,17 @@
     
     switch (sender.tag)
     {
-#pragma mark case 1 选择班级
+#pragma mark case 1 选择接收人
         case 1:
         {
-            [UIAlertController alertClassListWith:[XHHelper sharedHelper].currentViewController indexBlock:^(NSInteger index, XHClassListModel *object) {
-                [self.classContent setClassListModel:object];
-                [self.classContent setText:object.gradeAndClassName withNumberType:1 withAllType:NO];
-
-            }];
+            XHAddNoticeRecipientViewController *add=[[XHAddNoticeRecipientViewController alloc] init];
+            [self.currentVC.navigationController pushViewController:add animated:YES];
+            add.markSuccessBlock = ^(BOOL sucess, XHNoticeMarkModel *model) {
+                if (sucess) {
+                    [self.classContent setText:[NSString stringWithFormat:@"已选择%zd人",model.count] withNumberType:1 withAllType:NO];
+                    self.classContent.noticeMarkModel=model;
+                }
+            };
         }
             break;
 #pragma mark case 3 选择相册
@@ -130,7 +133,7 @@
                     [alertController addAction:[UIAlertAction actionWithTitle:@"选择相机" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
                                                 {
                                                     CameraManageViewController *manager=[[CameraManageViewController alloc] initWithCameraManageWithType:SourceTypeCamera setDeletate:self];
-                                                    [[XHHelper sharedHelper].currentViewController presentViewController:manager animated:YES completion:nil];
+                                                    [self.currentVC presentViewController:manager animated:YES completion:nil];
                                                     
                                                 }]];
                     [alertController addAction:[UIAlertAction actionWithTitle:@"选择相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
@@ -153,7 +156,7 @@
                                                         
                                                         [self.collectionView setItemArray:self.dataArray];
                                                     };
-                                                    [[XHHelper sharedHelper].currentViewController presentViewController:wphoto animated:YES completion:nil];
+                                                    [self.currentVC presentViewController:wphoto animated:YES completion:nil];
                                                 }]];
                     [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
                                                 {
@@ -172,14 +175,14 @@
                             {
                                 ShootVideoViewController *shoot = [[ShootVideoViewController alloc] init];
                                 shoot.delegate = self;
-                                [[XHHelper sharedHelper].currentViewController presentViewController:shoot animated:YES completion:nil];
+                                [self.currentVC presentViewController:shoot animated:YES completion:nil];
                             }
                                 break;
                                 
                             case 1:
                             {
                                 VideoManagerViewController *video=[[VideoManagerViewController alloc] initWithVideoManageWithType:VideoSourceTypeSavedPhotosAlbum setDeletate:self];
-                                [[XHHelper sharedHelper].currentViewController presentViewController:video animated:YES completion:nil];
+                                [self.currentVC presentViewController:video animated:YES completion:nil];
                             }
                                 break;
                         }
@@ -195,7 +198,7 @@
 #pragma mark 发布作业
         case 4:
         {
-            if (!self.classContent.classListModel)
+            if (!self.classContent.noticeMarkModel)
             {
                 [XHShowHUD showNOHud:@"请选择接收人"];
             }
@@ -218,34 +221,34 @@
                                   {
                                       if (success)
                                       {
-                                          MAIN(^{
+                                          MAIN((^{
                                               [XHShowHUD hideHud];
                                               [self.imageNameArray addObject:imageName];
                                               if ([self.imageNameArray count] == [self.dataArray count])
                                               {
                                                   XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
-                                                  [config setObject:[self.imageNameArray objectAtIndex:0] forKey:@"picUrl1"];
-                                                  [config setObject:[self.imageNameArray objectAtIndex:1] forKey:@"picUrl2"];
-                                                  [config setObject:[self.imageNameArray objectAtIndex:2] forKey:@"picUrl3"];
-                                                  [config setObject:[self.imageNameArray objectAtIndex:3] forKey:@"picUrl4"];
-                                                  [config setObject:[self.imageNameArray objectAtIndex:4] forKey:@"picUrl5"];
-                                                  [config setObject:[self.imageNameArray objectAtIndex:5] forKey:@"picUrl6"];
+                                                  
+                                                  for (int i=0; i<self.imageNameArray.count; i++)
+                                                  {
+                                                      [config setObject:self.imageNameArray[i] forKey:[NSString stringWithFormat:@"picUrl%zd",i+1]];
+                                                  }
                                                   [config setObject:self.inputContent.text forKey:@"content"];
                                                   [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
-                                                  [config setObject:@"2" forKey:@"type"];
-//                                                  [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
-//                                                  [config setObject:[tArray componentsJoinedByString:@","] forKey:@"teacherId"];
-//                                                  [config setObject:[gArray componentsJoinedByString:@","] forKey:@"guardianId"];
+                                                  [config setObject:[XHUserInfo sharedUserInfo].sessionId forKey:@"sessionId"];
+                                                  [config setObject:@"2" forKey:@"noticeType"];
+                                                  
+                                                  [config setObject:self.classContent.noticeMarkModel.teacherID forKey:@"teacherId"];
+                                                  [config setObject:self.classContent.noticeMarkModel.guardianID forKey:@"guardianId"];
                                                   [config postWithUrl:@"pmschool-teacher-api_/teacher/notice/add" sucess:^(id object, BOOL verifyObject)
                                                    
                                                    {
                                                        if (verifyObject)
                                                        {
-                                                           [[XHHelper sharedHelper].currentViewController.navigationController popViewControllerAnimated:YES];
+                                                           [self.currentVC.navigationController popViewControllerAnimated:YES];
                                                        }
                                                    } error:^(NSError *error){}];
                                               }
-                                          });
+                                          }));
                                       }
                                       [XHShowHUD showNOHud:@"上传图片失败"];
                                   } withProgressCallback:^(float progress){}];
@@ -255,17 +258,17 @@
                         {
                             //不上传图片
                             XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
-                            //                                                  [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
-                            //                                                  [config setObject:[tArray componentsJoinedByString:@","] forKey:@"teacherId"];
-                            //                                                  [config setObject:[gArray componentsJoinedByString:@","] forKey:@"guardianId"];
+                            [config setObject:self.classContent.noticeMarkModel.teacherID forKey:@"teacherId"];
+                            [config setObject:self.classContent.noticeMarkModel.guardianID forKey:@"guardianId"];
                             [config setObject:self.inputContent.text forKey:@"content"];
                             [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
-                            [config setObject:@"2" forKey:@"type"];
+                            [config setObject:[XHUserInfo sharedUserInfo].sessionId forKey:@"sessionId"];
+                            [config setObject:@"2" forKey:@"noticeType"];
                             [config postWithUrl:@"pmschool-teacher-api_/teacher/notice/add" sucess:^(id object, BOOL verifyObject)
                              {
                                  if (verifyObject)
                                  {
-                                     [[XHHelper sharedHelper].currentViewController.navigationController popViewControllerAnimated:YES];
+                                     [self.currentVC.navigationController popViewControllerAnimated:YES];
                                  }
                              } error:^(NSError *error){}];
                         }
@@ -300,10 +303,10 @@
                                                           XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
                                                           [config setObject:self.inputContent.text forKey:@"content"];
                                                           [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
-                                                          [config setObject:@"2" forKey:@"type"];
-                                                          //                                                  [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
-                                                          //                                                  [config setObject:[tArray componentsJoinedByString:@","] forKey:@"teacherId"];
-                                                          //                                                  [config setObject:[gArray componentsJoinedByString:@","] forKey:@"guardianId"];
+                                                          [config setObject:[XHUserInfo sharedUserInfo].sessionId forKey:@"sessionId"];
+                                                          [config setObject:@"2" forKey:@"noticeType"];
+                                                            [config setObject:self.classContent.noticeMarkModel.teacherID forKey:@"teacherId"];
+                                                                [config setObject:self.classContent.noticeMarkModel.guardianID forKey:@"guardianId"];
                                         [config setObject:fileName forKey:@"vedioUrl"];
                                         [config setObject:imageName forKey:@"vedioFirstPicUrl"];
                                                           [config postWithUrl:@"pmschool-teacher-api_/teacher/notice/add" sucess:^(id object, BOOL verifyObject)
@@ -311,7 +314,7 @@
                                                            {
                                                                if (verifyObject)
                                                                {
-                                                                   [[XHHelper sharedHelper].currentViewController.navigationController popViewControllerAnimated:YES];
+                                                                   [self.currentVC.navigationController popViewControllerAnimated:YES];
                                                                }
                                                            } error:^(NSError *error){}];
                                                       }
@@ -331,7 +334,20 @@
                             //不上传视频
                             
                             
-                            
+                            XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
+                            [config setObject:self.classContent.noticeMarkModel.teacherID forKey:@"teacherId"];
+                            [config setObject:self.classContent.noticeMarkModel.guardianID forKey:@"guardianId"];
+                            [config setObject:self.inputContent.text forKey:@"content"];
+                            [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
+                            [config setObject:[XHUserInfo sharedUserInfo].sessionId forKey:@"sessionId"];
+                            [config setObject:@"2" forKey:@"noticeType"];
+                            [config postWithUrl:@"pmschool-teacher-api_/teacher/notice/add" sucess:^(id object, BOOL verifyObject)
+                             {
+                                 if (verifyObject)
+                                 {
+                                     [self.currentVC.navigationController popViewControllerAnimated:YES];
+                                 }
+                             } error:^(NSError *error){}];
                             
                             
                             
