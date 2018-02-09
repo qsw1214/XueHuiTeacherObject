@@ -34,6 +34,12 @@
     [super didReceiveMemoryWarning];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[XHHelper sharedHelper] setCurrentViewController:self];
+}
+
 -(void)addSubViews:(BOOL)subview
 {
     if (subview)
