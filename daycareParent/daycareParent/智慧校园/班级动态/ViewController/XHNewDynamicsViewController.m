@@ -103,7 +103,7 @@
                          [self.dataArray addObject:imageModel];
                      }];
                     
-                    
+                    [self.contentView setModelType:XHNewDynamicsImgContentModelType];
                     [self.contentView setItemArray:self.dataArray];
                 };
                 [self presentViewController:wphoto animated:YES completion:nil];
@@ -162,13 +162,14 @@
         [imageModel setIndexTage:0];
         [self.dataArray addObject:imageModel];
         [self.contentView setItemArray:self.dataArray];
+        [self.contentView setModelType:XHNewDynamicsImgContentModelType];
     }
 }
 #pragma mark VideoManageDeletage
 -(void)videoPickerControllerdidFinishPickingMediaWithImage:(UIImage *)image videoData:(NSData *)videoData
 {
     [self.dataArray removeAllObjects];
-//    self.videoData=videoData;
+    self.contentView.videoData=videoData;
     XHPreviewModel *imageModel = [[XHPreviewModel alloc]init];
     [imageModel setPreviewImage:image];
     [imageModel setItemSize:CGSizeMake(100, 100)];
@@ -177,6 +178,24 @@
     [imageModel setIndexTage:0];
     [self.dataArray addObject:imageModel];
     [self.contentView setItemArray:self.dataArray];
+    [self.contentView setModelType:XHNewDynamicsVideoContentModelType];
+}
+
+
+#pragma mark ShootVideoDeletage
+-(void)videoStatrToMp4Finished:(NSData *)data image:(UIImage *)image
+{
+    [self.dataArray removeAllObjects];
+    self.contentView.videoData=data;
+    XHPreviewModel *imageModel = [[XHPreviewModel alloc]init];
+    [imageModel setPreviewImage:image];
+    [imageModel setItemSize:CGSizeMake(100, 100)];
+    [imageModel setType:XHPreviewImagesType];
+    [imageModel setTage:0];
+    [imageModel setIndexTage:0];
+    [self.dataArray addObject:imageModel];
+    [self.contentView setItemArray:self.dataArray];
+    [self.contentView setModelType:XHNewDynamicsVideoContentModelType];
 }
 
 

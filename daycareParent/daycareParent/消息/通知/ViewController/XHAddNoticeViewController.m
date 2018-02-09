@@ -142,11 +142,28 @@
                                        
                                    } error:^(NSError *error){}];
                               }
-                              else
+                          }
+                          else
+                          {
+                              [self.dataArray removeObject:imageName];
+                              if ([self.imageNameArray count] == [self.dataArray count])
                               {
-                                  [XHShowHUD hideHud];
+                                  for (int i = 0; i<self.imageNameArray.count; i++)
+                                  {
+                                      [sender.networkConfig setObject:self.imageNameArray[i] forKey:[NSString stringWithFormat:@"picUrl%zd",(i+1)]];
+                                  }
+                                  [sender.networkConfig postWithUrl:@"zzjt-app-api_notice004" sucess:^(id object, BOOL verifyObject)
+                                   
+                                   {
+                                       if (verifyObject)
+                                       {
+                                           [self.navigationController popViewControllerAnimated:YES];
+                                       }
+                                       
+                                   } error:^(NSError *error){}];
                               }
                           }
+                          
                           
                       } withProgressCallback:^(float progress){}];
                  }];

@@ -300,7 +300,6 @@
     [XHHelper uploadImage:image name:fileName uploadCallback:^(BOOL success, NSError *error) {
         if (success == YES)
         {
-            [XHShowHUD hideHud];
             [self.netWorkConfig setObject:fileName forKey:@"headPic"];
             [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].ID forKey:@"id"];
             [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];

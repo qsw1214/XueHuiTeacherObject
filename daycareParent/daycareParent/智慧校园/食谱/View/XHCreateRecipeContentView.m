@@ -168,24 +168,21 @@
                  {
                      if (success)
                      {
-                         MAIN(^{
-                             XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
-                             [config setObject:fileName forKey:@"picUrl"];
-                             [config setObject:time forKey:@"publishTime"];
-                             [config setObject:[NSString safeString:self.inputContent.text] forKey:@"demo"];
-                             [config setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"school_id"];
-                             [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"publish_user_id"];
-                             [config setObject:[XHHelper BookingSituation:kind] forKey:@"type"];
-                             [config postWithUrl:@"zzjt-app-api_cookBook001" sucess:^(id object, BOOL verifyObject)
-                              {
-                                  [XHShowHUD hideHud];
-                                  [[XHHelper sharedHelper].currentViewController.navigationController popViewControllerAnimated:YES];
-                                  
-                              } error:^(NSError *error) {
-                                  [XHShowHUD hideHud];
-                              }];
-                         });
-                        
+                         XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
+                         [config setObject:fileName forKey:@"picUrl"];
+                         [config setObject:time forKey:@"publishTime"];
+                         [config setObject:[NSString safeString:self.inputContent.text] forKey:@"demo"];
+                         [config setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"school_id"];
+                         [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"publish_user_id"];
+                         [config setObject:[XHHelper BookingSituation:kind] forKey:@"type"];
+                         [config postWithUrl:@"zzjt-app-api_cookBook001" sucess:^(id object, BOOL verifyObject)
+                          {
+                              [XHShowHUD hideHud];
+                              [[XHHelper sharedHelper].currentViewController.navigationController popViewControllerAnimated:YES];
+                              
+                          } error:^(NSError *error) {
+                              [XHShowHUD hideHud];
+                          }];
                      }
                      else
                      {

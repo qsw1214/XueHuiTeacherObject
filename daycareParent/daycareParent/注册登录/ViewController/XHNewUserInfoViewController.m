@@ -202,10 +202,10 @@
 {
     MBProgressHUD *hud = [XHShowHUD showProgressHUD:@"更新头像..."];
     NSString *fileName = [XHHelper createGuid];
-    [XHHelper uploadImage:image name:fileName uploadCallback:^(BOOL success, NSError *error) {
-        if (success == YES)
+    [XHHelper uploadImage:image name:fileName uploadCallback:^(BOOL success, NSError *error)
+    {
+        if (success)
         {
-            [XHShowHUD hideHud];
             [self.netWorkConfig setObject:fileName forKey:@"headPic"];
             [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].ID forKey:@"id"];
             [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];

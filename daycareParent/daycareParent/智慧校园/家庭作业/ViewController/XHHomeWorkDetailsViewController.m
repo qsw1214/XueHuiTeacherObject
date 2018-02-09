@@ -43,23 +43,6 @@
 
 -(void)setItemObjet:(XHHomeWorkFrame*)object
 {
-    //先回执已读状态
-    [self.netWorkConfig setObject:object.model.pushInfoId forKey:@"pushInfoId"];
-    [self.netWorkConfig postWithUrl:@"zzjt-app-api_smartCampus012" sucess:^(id object, BOOL verifyObject)
-    {
-        if (verifyObject)
-        {
-            [XHShowHUD hideHud];
-            if (self.refeshBlock)
-            {
-                self.refeshBlock(verifyObject);
-            }
-            
-        }
-    } error:^(NSError *error){}];
-    
-    
-    
     XHHomeWorkFrame *frame = [[XHHomeWorkFrame alloc]init];
     XHHomeWorkModel *model = [[XHHomeWorkModel alloc]init];
     [model setHeaderUrl:object.model.headerUrl];
