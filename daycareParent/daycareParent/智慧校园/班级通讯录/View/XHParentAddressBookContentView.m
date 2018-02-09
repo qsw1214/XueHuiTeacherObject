@@ -77,14 +77,27 @@
                   [NSArray enumerateObjectsWithArray:studnetArray usingBlock:^(NSDictionary *itemObj, NSUInteger idx, BOOL *stop)
                   {
                       NSDictionary *object = [itemObj objectItemKey:@"propValue"];
-                      XHAddressBookFrame *frame = [[XHAddressBookFrame alloc]init];
-                      XHAddressBookModel *model = [[XHAddressBookModel alloc]init];
-                      [model setTage:idx];
-                      [model setParentsItemObject:object];
-                      [model setModelType:XHAddressBookParentType];
-                      [model setSelectType:XHAddressBookModelNormalType];
-                      [frame setModel:model];
-                      [section.itemArray addObject:frame];
+                      NSString *studentName = [object objectItemKey:@"studentName"];
+                      NSArray *guardianList = [object objectItemKey:@"guardianList"];
+                      [NSArray enumerateObjectsWithArray:guardianList usingBlock:^(NSDictionary *guardianobj, NSUInteger idx, BOOL *stop)
+                      {
+                          XHAddressBookFrame *frame = [[XHAddressBookFrame alloc]init];
+                          XHAddressBookModel *model = [[XHAddressBookModel alloc]init];
+                          NSDictionary *propValue = [guardianobj objectItemKey:@"propValue"];
+                          NSString *guardianName = [propValue objectItemKey:@"guardianName"];
+                          
+                          [model setTeacherName:[NSString stringWithFormat:@"%@(%@家长)",guardianName,studentName]];
+                          [model setTage:idx];
+                          [model setParentsItemObject:propValue];
+                          [model setModelType:XHAddressBookParentType];
+                          [model setSelectType:XHAddressBookModelNormalType];
+                          [frame setModel:model];
+                          [section.itemArray addObject:frame];
+                          
+                      }];
+                      
+                      
+                   
                       
                   }];
                   [section setArray:section.itemArray];

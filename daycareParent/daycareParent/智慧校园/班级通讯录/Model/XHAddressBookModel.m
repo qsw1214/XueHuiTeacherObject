@@ -41,11 +41,11 @@
 
 -(void)setParentsItemObject:(NSDictionary *)object
 {
-    [self setTeacherName:[object objectItemKey:@"studentName"]];
+    
     [self setHeaderUrl:ALGetFileHeadThumbnail([object objectItemKey:@"headPic"])];
     [self setHeadPic:[object objectItemKey:@"headPic"]];
     [self setPhone:[object objectItemKey:@"telphoneNumber"]];
-    [self setUserID:[object objectItemKey:@"studentId"]];
+    [self setUserID:[object objectItemKey:@"id"]];
     [self setObjectID:[object objectItemKey:@"studentBaseId"]];
     [self setSelectType:XHAddressBookModelNormalType];
 }
