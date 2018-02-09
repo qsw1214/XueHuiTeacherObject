@@ -128,12 +128,11 @@
                               [self.imageNameArray addObject:imageName];
                               if ([self.imageNameArray count] == [self.dataArray count])
                               {
-                                  XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
-                                  for (int i=0; i<self.imageNameArray.count; i++)
+                                  for (int i = 0; i<self.imageNameArray.count; i++)
                                   {
                                       [sender.networkConfig setObject:self.imageNameArray[i] forKey:[NSString stringWithFormat:@"picUrl%zd",(i+1)]];
                                   }
-                                  [config postWithUrl:@"zzjt-app-api_schoolWork001" sucess:^(id object, BOOL verifyObject)
+                                  [sender.networkConfig postWithUrl:@"zzjt-app-api_notice004" sucess:^(id object, BOOL verifyObject)
                                    
                                    {
                                        if (verifyObject)
@@ -155,7 +154,7 @@
         else
         {
             [XHShowHUD showTextHud];
-            [sender.networkConfig postWithUrl:@"zzjt-app-api_schoolWork001" sucess:^(id object, BOOL verifyObject)
+            [sender.networkConfig postWithUrl:@"zzjt-app-api_notice004" sucess:^(id object, BOOL verifyObject)
              
              {
                  if (verifyObject)

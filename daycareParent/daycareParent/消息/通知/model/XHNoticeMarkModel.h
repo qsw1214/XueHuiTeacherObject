@@ -11,6 +11,11 @@
 @interface XHNoticeMarkModel : NSObject
 
 
+@property (nonatomic,strong) NSMutableArray *teacherArray;
+@property (nonatomic,strong) NSMutableArray *teacherPhoneArray;
+@property (nonatomic,strong) NSMutableArray *guardianIDArray;
+@property (nonatomic,strong) NSMutableArray *guardianNumberArray;
+
 @property (nonatomic,strong) NSString *teacherID;  //!< 老师ids
 @property (nonatomic,strong) NSString *teacherPhone;  //!< 老师手机号
 @property (nonatomic,strong) NSString *guardianID;  //!< 监护人

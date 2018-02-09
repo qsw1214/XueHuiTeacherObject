@@ -81,6 +81,11 @@
 
 
 
+-(void)setItemArray:(NSMutableArray*)array
+{
+    [self.collectionView setItemArray:array];
+}
+
 -(void)addSubViews:(BOOL)subview
 {
     if (subview)
@@ -125,74 +130,12 @@
 #pragma mark case 3 选择相册
         case 3:
         {
-            switch (self.modelType) {
-                    #pragma mark  发送图片
-                case XHNewDynamicsImgContentModelType:
-                {
-                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-                    [alertController addAction:[UIAlertAction actionWithTitle:@"选择相机" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
-                                                {
-                                                    CameraManageViewController *manager=[[CameraManageViewController alloc] initWithCameraManageWithType:SourceTypeCamera setDeletate:self];
-                                                    [self.currentVC presentViewController:manager animated:YES completion:nil];
-                                                    
-                                                }]];
-                    [alertController addAction:[UIAlertAction actionWithTitle:@"选择相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
-                                                {
-                                                    WPhotoViewController *wphoto = [[WPhotoViewController alloc] init];
-                                                    [wphoto setSelectPhotoOfMax:(6-[self.dataArray count])];
-                                                    wphoto.selectPhotosBack = ^(NSMutableArray *photosArray)
-                                                    {
-                                                        [photosArray enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
-                                                         {
-                                                             XHPreviewModel *imageModel = [[XHPreviewModel alloc]init];
-                                                             [imageModel setPreviewImage:[obj objectForKey:@"image"]];
-                                                             [imageModel setItemSize:CGSizeMake(100, 100)];
-                                                             [imageModel setType:XHPreviewImagesType];
-                                                             [imageModel setTage:idx];
-                                                             [imageModel setIndexTage:idx];
-                                                             [self.dataArray addObject:imageModel];
-                                                         }];
-                                                        
-                                                        
-                                                        [self.collectionView setItemArray:self.dataArray];
-                                                    };
-                                                    [self.currentVC presentViewController:wphoto animated:YES completion:nil];
-                                                }]];
-                    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
-                                                {
-                                                    
-                                                }]];
-                    [[XHHelper sharedHelper].currentViewController presentViewController:alertController animated:YES completion:nil];
-                }
-                    break;
-                    #pragma mark  发送视频
-                case XHNewDynamicsVideoContentModelType:
-                {
-                  
-                    [UIAlertController actionSheetWithmessage:@"选择类型" titlesArry:@[@"录制视频",@"从相册中选择"] controller:[XHHelper sharedHelper].currentViewController indexBlock:^(NSInteger index, id object) {
-                        switch (index) {
-                            case 0:
-                            {
-                                ShootVideoViewController *shoot = [[ShootVideoViewController alloc] init];
-                                shoot.delegate = self;
-                                [self.currentVC presentViewController:shoot animated:YES completion:nil];
-                            }
-                                break;
-                                
-                            case 1:
-                            {
-                                VideoManagerViewController *video=[[VideoManagerViewController alloc] initWithVideoManageWithType:VideoSourceTypeSavedPhotosAlbum setDeletate:self];
-                                [self.currentVC presentViewController:video animated:YES completion:nil];
-                            }
-                                break;
-                        }
-                    }];
-                    
-                }
-                    break;
+            
+            if ([self.dynamicsDynamicsDeletage respondsToSelector:@selector(newDynamicsAction:)])
+            {
+                [self.dynamicsDynamicsDeletage newDynamicsAction:sender];
             }
-            
-            
+
         }
             break;
 #pragma mark 发布作业
@@ -382,39 +325,9 @@
     }
 }
 
-#pragma mark CameraManageDeletage
--(void)imagePickerControllerdidFinishPickingMediaWithImage:(nonnull UIImage*)image
-{
-    if ([self.dataArray count] >= 6)
-    {
-        [XHShowHUD showNOHud:@"图片已达到上限(6张)"];
-    }
-    else
-    {
-        XHPreviewModel *imageModel = [[XHPreviewModel alloc]init];
-        [imageModel setPreviewImage:image];
-        [imageModel setItemSize:CGSizeMake(100, 100)];
-        [imageModel setType:XHPreviewImagesType];
-        [imageModel setTage:0];
-        [imageModel setIndexTage:0];
-        [self.dataArray addObject:imageModel];
-        [self.collectionView setItemArray:self.dataArray];
-    }
-}
-#pragma mark VideoManageDeletage
--(void)videoPickerControllerdidFinishPickingMediaWithImage:(UIImage *)image videoData:(NSData *)videoData
-{
-    [self.dataArray removeAllObjects];
-    self.videoData=videoData;
-    XHPreviewModel *imageModel = [[XHPreviewModel alloc]init];
-    [imageModel setPreviewImage:image];
-    [imageModel setItemSize:CGSizeMake(100, 100)];
-    [imageModel setType:XHPreviewImagesType];
-    [imageModel setTage:0];
-    [imageModel setIndexTage:0];
-    [self.dataArray addObject:imageModel];
-    [self.collectionView setItemArray:self.dataArray];
-}
+
+
+
 #pragma mark ShootVideoDeletage
 -(void)videoStatrToMp4Finished:(NSData *)data image:(UIImage *)image
 {
