@@ -54,7 +54,7 @@
 {
     if ([self.guardianNumberArray count])
     {
-        _guardianNumber = [self.teacherPhoneArray componentsJoinedByString:@","];
+        _guardianNumber = [self.guardianNumberArray componentsJoinedByString:@","];
     }
     else
     {
