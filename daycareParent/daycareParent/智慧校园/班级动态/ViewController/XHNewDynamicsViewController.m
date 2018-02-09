@@ -109,7 +109,7 @@
                 [self presentViewController:wphoto animated:YES completion:nil];
             }]];
             [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action){}]];
-            [[XHHelper sharedHelper].currentViewController presentViewController:alertController animated:YES completion:nil];
+            [self presentViewController:alertController animated:YES completion:nil];
         }
             break;
 #pragma mark  发送视频
@@ -161,14 +161,16 @@
         [imageModel setTage:0];
         [imageModel setIndexTage:0];
         [self.dataArray addObject:imageModel];
+        [self.contentView setModelType:XHNewDynamicsImgContentModelType];
         [self.contentView setItemArray:self.dataArray];
     }
 }
 #pragma mark VideoManageDeletage
--(void)videoPickerControllerdidFinishPickingMediaWithImage:(UIImage *)image videoData:(NSData *)videoData
+
+- (void)videoStatrToMp4Finished:(NSData *)data image:(UIImage *)image
 {
     [self.dataArray removeAllObjects];
-//    self.videoData=videoData;
+    self.contentView.videoData=data;
     XHPreviewModel *imageModel = [[XHPreviewModel alloc]init];
     [imageModel setPreviewImage:image];
     [imageModel setItemSize:CGSizeMake(100, 100)];
@@ -176,6 +178,24 @@
     [imageModel setTage:0];
     [imageModel setIndexTage:0];
     [self.dataArray addObject:imageModel];
+    [self.contentView setModelType:XHNewDynamicsVideoContentModelType];
+    [self.contentView setItemArray:self.dataArray];
+}
+
+-(void)videoPickerControllerdidFinishPickingMediaWithImage:(UIImage *)image videoData:(NSData *)videoData
+{
+    [self.dataArray removeAllObjects];
+    self.contentView.videoData=videoData;
+    XHPreviewModel *imageModel = [[XHPreviewModel alloc]init];
+    [imageModel setPreviewImage:image];
+    [imageModel setItemSize:CGSizeMake(100, 100)];
+    [imageModel setType:XHPreviewImagesType];
+    [imageModel setTage:0];
+    [imageModel setIndexTage:0];
+
+    [self.dataArray addObject:imageModel];
+    [self.contentView setVideoData:videoData];
+    [self.contentView setModelType:XHNewDynamicsVideoContentModelType];
     [self.contentView setItemArray:self.dataArray];
 }
 

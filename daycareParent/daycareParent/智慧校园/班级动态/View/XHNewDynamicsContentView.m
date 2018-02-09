@@ -25,7 +25,7 @@
 @property (nonatomic,strong) UILabel *limitLabel; //!< 限制字数标签
 @property (nonatomic,strong) NSMutableArray *imageNameArray; //!< 图片名称数组
 @property (nonatomic,strong) UIImagePickerController *videoPicker;
-@property (nonatomic,strong) NSData *videoData;//!< 视频data
+
 
 
 @end
@@ -83,6 +83,7 @@
 
 -(void)setItemArray:(NSMutableArray*)array
 {
+    [self.dataArray setArray:array];
     [self.collectionView setItemArray:array];
 }
 
@@ -164,34 +165,31 @@
                                   {
                                       if (success)
                                       {
-                                          MAIN((^{
-                                              [XHShowHUD hideHud];
-                                              [self.imageNameArray addObject:imageName];
-                                              if ([self.imageNameArray count] == [self.dataArray count])
+                                          [self.imageNameArray addObject:imageName];
+                                          if ([self.imageNameArray count] == [self.dataArray count])
+                                          {
+                                              XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
+                                              
+                                              for (int i=0; i<self.imageNameArray.count; i++)
                                               {
-                                                  XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
-                                                  
-                                                  for (int i=0; i<self.imageNameArray.count; i++)
-                                                  {
-                                                      [config setObject:self.imageNameArray[i] forKey:[NSString stringWithFormat:@"picUrl%zd",i+1]];
-                                                  }
-                                                  [config setObject:self.inputContent.text forKey:@"content"];
-                                                  [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
-                                                  [config setObject:[XHUserInfo sharedUserInfo].sessionId forKey:@"sessionId"];
-                                                  [config setObject:@"2" forKey:@"noticeType"];
-                                                  
-                                                  [config setObject:self.classContent.noticeMarkModel.teacherID forKey:@"teacherId"];
-                                                  [config setObject:self.classContent.noticeMarkModel.guardianID forKey:@"guardianId"];
-                                                  [config postWithUrl:@"pmschool-teacher-api_/teacher/notice/add" sucess:^(id object, BOOL verifyObject)
-                                                   
-                                                   {
-                                                       if (verifyObject)
-                                                       {
-                                                           [self.currentVC.navigationController popViewControllerAnimated:YES];
-                                                       }
-                                                   } error:^(NSError *error){}];
+                                                  [config setObject:self.imageNameArray[i] forKey:[NSString stringWithFormat:@"picUrl%zd",i+1]];
                                               }
-                                          }));
+                                              [config setObject:self.inputContent.text forKey:@"content"];
+                                              [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
+                                              [config setObject:[XHUserInfo sharedUserInfo].sessionId forKey:@"sessionId"];
+                                              [config setObject:@"2" forKey:@"noticeType"];
+                                              
+                                              [config setObject:self.classContent.noticeMarkModel.teacherID forKey:@"teacherId"];
+                                              [config setObject:self.classContent.noticeMarkModel.guardianID forKey:@"guardianId"];
+                                              [config postWithUrl:@"pmschool-teacher-api_/teacher/notice/add" sucess:^(id object, BOOL verifyObject)
+                                               
+                                               {
+                                                   if (verifyObject)
+                                                   {
+                                                       [self.currentVC.navigationController popViewControllerAnimated:YES];
+                                                   }
+                                               } error:^(NSError *error){}];
+                                          }
                                       }
                                       [XHShowHUD showNOHud:@"上传图片失败"];
                                   } withProgressCallback:^(float progress){}];

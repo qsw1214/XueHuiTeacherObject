@@ -27,10 +27,9 @@ typedef NS_ENUM(NSInteger,XHNewDynamicsContentModelType)
 
 @property (nonatomic,weak) id <XHNewDynamicsContentViewDeletage> dynamicsDynamicsDeletage;
 
-
 @property(nonatomic,assign)XHNewDynamicsContentModelType modelType;
 @property(nonatomic,strong)UIViewController *currentVC;
-
+@property (nonatomic,strong) NSData *videoData;//!< 视频data
 -(void)setItemArray:(NSMutableArray*)array;
 
 @end
