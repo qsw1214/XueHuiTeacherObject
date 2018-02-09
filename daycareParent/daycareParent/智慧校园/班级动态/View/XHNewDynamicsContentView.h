@@ -8,6 +8,12 @@
 
 #import "BaseScrollView.h"
 
+@protocol XHNewDynamicsContentViewDeletage <NSObject>
+
+-(void)newDynamicsAction:(BaseButtonControl*)sender;
+
+@end
+
 typedef NS_ENUM(NSInteger,XHNewDynamicsContentModelType)
 {
     XHNewDynamicsImgContentModelType=1,//!<  发送图片
@@ -18,6 +24,13 @@ typedef NS_ENUM(NSInteger,XHNewDynamicsContentModelType)
 
 @interface XHNewDynamicsContentView : BaseScrollView
 
+
+@property (nonatomic,weak) id <XHNewDynamicsContentViewDeletage> dynamicsDynamicsDeletage;
+
+
 @property(nonatomic,assign)XHNewDynamicsContentModelType modelType;
 @property(nonatomic,strong)UIViewController *currentVC;
+
+-(void)setItemArray:(NSMutableArray*)array;
+
 @end
