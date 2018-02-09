@@ -193,8 +193,8 @@
                                  case XHNoticeRecipientGroupOptionSelectedType:
                                  {
                                      [model setCount:(model.count+1)];
-                                     [model setTeacherID:[NSString stringWithFormat:@"%@,%@",[NSString safeString:model.teacherID],[NSString safeString:obj.model.modelID]]];
-                                     [model setTeacherPhone:[NSString stringWithFormat:@"%@,%@",[NSString safeString:model.teacherPhone],[NSString safeString:obj.model.telphoneNumber]]];
+                                     [model.teacherArray addObject:obj.model.modelID];
+                                     [model.teacherPhoneArray addObject:obj.model.telphoneNumber];
                                  }
                                      break;
                                  case XHNoticeRecipientGroupOptionNormalityType:
@@ -216,8 +216,8 @@
                                      [model setCount:(model.count+1)];
                                      [NSArray enumerateObjectsWithArray:obj.model.parentArray usingBlock:^(XHNoticerecipientParentModel *obj, NSUInteger idx, BOOL *stop)
                                       {
-                                          [model setGuardianID:[NSString stringWithFormat:@"%@,%@",[NSString safeString:model.guardianID],[NSString safeString:obj.parentID]]];
-                                          [model setGuardianNumber:[NSString stringWithFormat:@"%@,%@",[NSString safeString:model.guardianNumber],[NSString safeString:obj.telphoneNumber]]];
+                                          [model.guardianIDArray addObject:obj.parentID];
+                                          [model.guardianNumberArray addObject:obj.telphoneNumber];
                                       }];
                                  }
                                      break;
