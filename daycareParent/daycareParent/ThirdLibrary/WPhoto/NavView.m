@@ -41,13 +41,6 @@
     [nav addSubview:btn];
     btn.center = CGPointMake(25, titleLab.center.y);
     
-    UIButton *rightItem = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightItem.frame= CGRectMake(SelfView_W-90, 0, 80, 25);
-    rightItem.center = CGPointMake(SelfView_W-50, titleLab.center.y);
-    [rightItem addTarget:self action:@selector(quitChoose)forControlEvents:UIControlEventTouchUpInside];
-    rightItem.titleLabel.font = [UIFont systemFontOfSize:16];
-    [rightItem setTitle:WPhoto_Right_Text forState:UIControlStateNormal];
-    [nav addSubview:rightItem];
 }
 
 -(void)btnClickBack

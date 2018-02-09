@@ -191,25 +191,7 @@
     }
 }
 
-#pragma mark CameraManageDeletage
--(void)imagePickerControllerdidFinishPickingMediaWithImage:(nonnull UIImage*)image
-{
-    if ([self.dataArray count] >= 6)
-    {
-        [XHShowHUD showNOHud:@"图片已达到上限(6张)"];
-    }
-    else
-    {
-        XHPreviewModel *imageModel = [[XHPreviewModel alloc]init];
-        [imageModel setPreviewImage:image];
-        [imageModel setItemSize:CGSizeMake(100, 100)];
-        [imageModel setType:XHPreviewImagesType];
-        [imageModel setTage:0];
-        [imageModel setIndexTage:0];
-        [self.dataArray addObject:imageModel];
-        [self.collectionView setItemArray:self.dataArray];
-    }
-}
+
 
 
 #pragma mark - Getter / Setter

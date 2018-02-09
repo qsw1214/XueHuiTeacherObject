@@ -17,6 +17,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setNavtionTitle:@"通知记录"];
 }
 
 - (void)didReceiveMemoryWarning

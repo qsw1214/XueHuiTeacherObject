@@ -67,7 +67,7 @@
             [alertController addAction:[UIAlertAction actionWithTitle:@"选择相机" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
             {
                 CameraManageViewController *manager=[[CameraManageViewController alloc] initWithCameraManageWithType:SourceTypeCamera setDeletate:self];
-                [[XHHelper sharedHelper].currentViewController.navigationController presentViewController:manager animated:YES completion:nil];
+                [self.navigationController presentViewController:manager animated:YES completion:nil];
                 
             }]];
             [alertController addAction:[UIAlertAction actionWithTitle:@"选择相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
@@ -167,7 +167,25 @@
     }
 }
   
-
+#pragma mark CameraManageDeletage
+-(void)imagePickerControllerdidFinishPickingMediaWithImage:(nonnull UIImage*)image
+{
+    if ([self.dataArray count] >= 6)
+    {
+        [XHShowHUD showNOHud:@"图片已达到上限(6张)"];
+    }
+    else
+    {
+        XHPreviewModel *imageModel = [[XHPreviewModel alloc]init];
+        [imageModel setPreviewImage:image];
+        [imageModel setItemSize:CGSizeMake(100, 100)];
+        [imageModel setType:XHPreviewImagesType];
+        [imageModel setTage:0];
+        [imageModel setIndexTage:0];
+        [self.dataArray addObject:imageModel];
+        [self.contentView setItemArray:self.dataArray];
+    }
+}
 
 
 #pragma mark - Getter / Setter

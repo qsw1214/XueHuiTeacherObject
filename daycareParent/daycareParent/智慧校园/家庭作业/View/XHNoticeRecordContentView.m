@@ -137,25 +137,6 @@
                  }
                      break;
                  case FooterRefresh:
-                 {
-                     if ([NSObject isArray:array])
-                     {
-                         if ([array count] >= 20)
-                         {
-                             [self setPageNumber:(self.pageNumber+1)];
-                         }
-                         else
-                         {
-                             [self.tableView noMoreData];
-                         }
-                         
-                        
-                     }
-                     else
-                     {
-                         [self.tableView refreshReloadData];
-                     }
-                 }
                      break;
              }
              
@@ -171,6 +152,22 @@
              
              
              [self.tableView refreshReloadData];
+             
+             if ([NSObject isArray:array])
+             {
+                 if ([array count] >= 20)
+                 {
+                     [self setPageNumber:(self.pageNumber+1)];
+                 }
+                 else
+                 {
+                     [self.tableView noMoreData];
+                 }
+             }
+             else
+             {
+                 [self.tableView refreshReloadData];
+             }
          }
          else
          {

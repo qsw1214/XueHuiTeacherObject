@@ -56,7 +56,7 @@
 {
     NSDictionary *teacher = [object objectItemKey:@"propValue"];
     NSString *teacherName = [teacher objectItemKey:@"teacherName"];
-    [self setHeaderUrl:ALGetFileHeadThumbnail([object objectItemKey:@"headPic"])];
+    [self setHeaderUrl:ALGetFileHeadThumbnail([teacher objectItemKey:@"headPic"])];
 
     NSMutableArray <XHPreviewModel*> *imageModelArray = [NSMutableArray array];
     for ( int i = 1; i<= 6; i++)
