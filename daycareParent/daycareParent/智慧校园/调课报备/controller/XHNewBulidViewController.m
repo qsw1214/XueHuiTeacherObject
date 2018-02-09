@@ -183,23 +183,30 @@
             break;
         case 2:
         {
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入上课班级" preferredStyle:UIAlertControllerStyleAlert];
-            [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-
+            [UIAlertController addtextFeildWithController:self indexBlock:^(NSInteger index, id object) {
+                
+                    XHNewTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+                    cell.selectLabel.text=object;
+                    _clazzName=object;
+                
             }];
-            [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                if (alertController.textFields.firstObject.text.length==0) {
-                    [XHShowHUD showNOHud:@"班级不能为空"];
-                    return ;
-                }
-               XHNewTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-                cell.selectLabel.text=alertController.textFields.firstObject.text;
-                _clazzName=alertController.textFields.firstObject.text;
-            }]];
-            [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-
-            }]];
-            [self presentViewController:alertController animated:YES completion:nil];
+//            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入上课班级" preferredStyle:UIAlertControllerStyleAlert];
+//            [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+//
+//            }];
+//            [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//                if (alertController.textFields.firstObject.text.length==0) {
+//                    [XHShowHUD showNOHud:@"班级不能为空"];
+//                    return ;
+//                }
+//               XHNewTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//                cell.selectLabel.text=alertController.textFields.firstObject.text;
+//                _clazzName=alertController.textFields.firstObject.text;
+//            }]];
+//            [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//
+//            }]];
+//            [self presentViewController:alertController animated:YES completion:nil];
             
         }
             break;

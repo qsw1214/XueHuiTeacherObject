@@ -515,6 +515,7 @@
 		8CCD7E621FD145E200F7F54E /* XHVideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CCD7E601FD145E200F7F54E /* XHVideoTableViewCell.xib */; };
 		8CCE160F2027E10D00F87E03 /* UIAlertController+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CCE160E2027E10D00F87E03 /* UIAlertController+Category.m */; };
 		8CCE161520283B1900F87E03 /* XHAskforLeaveDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CCE161420283B1900F87E03 /* XHAskforLeaveDetailViewController.m */; };
+		8CD401CC202D34C300226E87 /* XHBackgrounduserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD401CB202D34C300226E87 /* XHBackgrounduserInfo.m */; };
 		8CD8CE082015A9BF0085DD70 /* XHDayRollCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8CE072015A9BF0085DD70 /* XHDayRollCollectionViewCell.m */; };
 		8CD8CE0B2015AC4D0085DD70 /* XHDayRollCallModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8CE0A2015AC4D0085DD70 /* XHDayRollCallModel.m */; };
 		8CD8CE0E2015D23E0085DD70 /* XHDayRollCallDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8CE0D2015D23E0085DD70 /* XHDayRollCallDetailViewController.m */; };
@@ -1500,6 +1501,8 @@
 		8CCE160E2027E10D00F87E03 /* UIAlertController+Category.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Category.m"; sourceTree = "<group>"; };
 		8CCE161320283B1900F87E03 /* XHAskforLeaveDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHAskforLeaveDetailViewController.h; sourceTree = "<group>"; };
 		8CCE161420283B1900F87E03 /* XHAskforLeaveDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHAskforLeaveDetailViewController.m; sourceTree = "<group>"; };
+		8CD401CA202D34C300226E87 /* XHBackgrounduserInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHBackgrounduserInfo.h; sourceTree = "<group>"; };
+		8CD401CB202D34C300226E87 /* XHBackgrounduserInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHBackgrounduserInfo.m; sourceTree = "<group>"; };
 		8CD8CE062015A9BF0085DD70 /* XHDayRollCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHDayRollCollectionViewCell.h; sourceTree = "<group>"; };
 		8CD8CE072015A9BF0085DD70 /* XHDayRollCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHDayRollCollectionViewCell.m; sourceTree = "<group>"; };
 		8CD8CE092015AC4D0085DD70 /* XHDayRollCallModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHDayRollCallModel.h; sourceTree = "<group>"; };
@@ -2092,6 +2095,8 @@
 			children = (
 				4B4338B21FDF5C8E0047AC52 /* XHUserInfo.h */,
 				4B4338B31FDF5C8E0047AC52 /* XHUserInfo.m */,
+				8CD401CA202D34C300226E87 /* XHBackgrounduserInfo.h */,
+				8CD401CB202D34C300226E87 /* XHBackgrounduserInfo.m */,
 			);
 			path = XHUserInfo;
 			sourceTree = "<group>";
@@ -4586,6 +4591,7 @@
 				4B3418771FFDC14C00A5EC56 /* UIViewController+ZFPlayerRotation.m in Sources */,
 				4B07CC451FD5106800B2DBDA /* GooeyCircle.m in Sources */,
 				4B8718F020243ABE0023A54C /* NSArray+Category.m in Sources */,
+				8CD401CC202D34C300226E87 /* XHBackgrounduserInfo.m in Sources */,
 				8C80816A1FCE919D00C7945A /* XHUserViewController.m in Sources */,
 				4BB9BE9D1FDE4BD5004F5622 /* XHEducationCloudScrollPreview.m in Sources */,
 				8C7E98351FECF1660096288E /* SGQRCodeScanningView.m in Sources */,
