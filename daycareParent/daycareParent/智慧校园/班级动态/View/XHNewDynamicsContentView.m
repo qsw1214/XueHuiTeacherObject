@@ -154,6 +154,7 @@
                 switch (self.modelType) {
                     case XHNewDynamicsImgContentModelType:
                     {
+                        NSString *content = [NSString safeString:self.inputContent.text];
                         if ([self.dataArray count])
                         {
                             [XHShowHUD showTextHud];
@@ -164,37 +165,32 @@
                                   {
                                       if (success)
                                       {
-                                          dispatch_async(dispatch_get_main_queue(),^{
+                                          [self.imageNameArray addObject:imageName];
+                                          if ([self.imageNameArray count] == [self.dataArray count])
+                                          {
+                                              XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
                                               
-                                              
-                                              [self.imageNameArray addObject:imageName];
-                                              if ([self.imageNameArray count] == [self.dataArray count])
+                                              for (int i=0; i<self.imageNameArray.count; i++)
                                               {
-                                                  XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
-                                                  
-                                                  for (int i=0; i<self.imageNameArray.count; i++)
-                                                  {
-                                                      [config setObject:self.imageNameArray[i] forKey:[NSString stringWithFormat:@"picUrl%zd",i+1]];
-                                                  }
-                                                  [config setObject:self.inputContent.text forKey:@"content"];
-                                                  [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
-                                                  [config setObject:[XHUserInfo sharedUserInfo].sessionId forKey:@"sessionId"];
-                                                  [config setObject:@"2" forKey:@"noticeType"];
-                                                  
-                                                  [config setObject:self.classContent.noticeMarkModel.teacherID forKey:@"teacherId"];
-                                                  [config setObject:self.classContent.noticeMarkModel.guardianID forKey:@"guardianId"];
-                                                  [config postWithUrl:@"pmschool-teacher-api_/teacher/notice/add" sucess:^(id object, BOOL verifyObject)
-                                                   
-                                                   {
-                                                       if (verifyObject)
-                                                       {
-                                                           [self.currentVC.navigationController popViewControllerAnimated:YES];
-                                                       }
-                                                   } error:^(NSError *error){}];
+                                                  [config setObject:self.imageNameArray[i] forKey:[NSString stringWithFormat:@"picUrl%zd",i+1]];
                                               }
+                                              [config setObject:content forKey:@"content"];
+                                              [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
+                                              [config setObject:[XHUserInfo sharedUserInfo].sessionId forKey:@"sessionId"];
+                                              [config setObject:@"2" forKey:@"noticeType"];
                                               
-                                          });
-                                         
+                                              [config setObject:self.classContent.noticeMarkModel.teacherID forKey:@"teacherId"];
+                                              [config setObject:self.classContent.noticeMarkModel.guardianID forKey:@"guardianId"];
+                                              [config postWithUrl:@"pmschool-teacher-api_/teacher/notice/add" sucess:^(id object, BOOL verifyObject)
+                                               
+                                               {
+                                                   if (verifyObject)
+                                                   {
+                                                       [self.currentVC.navigationController popViewControllerAnimated:YES];
+                                                   }
+                                               } error:^(NSError *error){}];
+                                          }
+                                          
                                       }
                                       else
                                       {
@@ -207,7 +203,7 @@
                                               {
                                                   [config setObject:self.imageNameArray[i] forKey:[NSString stringWithFormat:@"picUrl%zd",i+1]];
                                               }
-                                              [config setObject:self.inputContent.text forKey:@"content"];
+                                              [config setObject:content forKey:@"content"];
                                               [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
                                               [config setObject:[XHUserInfo sharedUserInfo].sessionId forKey:@"sessionId"];
                                               [config setObject:@"2" forKey:@"noticeType"];
@@ -234,7 +230,7 @@
                             XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
                             [config setObject:self.classContent.noticeMarkModel.teacherID forKey:@"teacherId"];
                             [config setObject:self.classContent.noticeMarkModel.guardianID forKey:@"guardianId"];
-                            [config setObject:self.inputContent.text forKey:@"content"];
+                            [config setObject:content forKey:@"content"];
                             [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
                             [config setObject:[XHUserInfo sharedUserInfo].sessionId forKey:@"sessionId"];
                             [config setObject:@"2" forKey:@"noticeType"];
