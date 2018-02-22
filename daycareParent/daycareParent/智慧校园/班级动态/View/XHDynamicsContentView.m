@@ -34,6 +34,7 @@
         [self.tableView beginRefreshing];
         [self.tableView setDelegate:self];
         [self.tableView setDataSource:self];
+         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshHeaderAction) name:@"noticeName" object:nil];
     }
     return self;
 }
@@ -42,6 +43,7 @@
 -(void)dealloc
 {
     [[XHVideoControl sharedVideo] dismiss];
+     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)resetFrame:(CGRect)frame
