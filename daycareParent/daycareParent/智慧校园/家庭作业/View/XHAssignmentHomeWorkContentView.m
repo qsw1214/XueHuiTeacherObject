@@ -195,6 +195,8 @@
             else
             {
                 
+                NSString *content = [NSString safeString:self.inputContent.text];
+                
                 if ([self.dataArray count])
                 {
                     [XHShowHUD showTextHud];
@@ -217,7 +219,7 @@
                                  
                                  [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
                                  [config setObject:self.subjectContent.subjectListModel.ID forKey:@"subjectId"];
-                                 [config setObject:self.inputContent.text forKey:@"content"];
+                                 [config setObject:content forKey:@"content"];
                                  [config setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
                                  [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
                                  [config postWithUrl:@"zzjt-app-api_schoolWork001" sucess:^(id object, BOOL verifyObject)
@@ -244,7 +246,7 @@
                                  
                                  [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
                                  [config setObject:self.subjectContent.subjectListModel.ID forKey:@"subjectId"];
-                                 [config setObject:self.inputContent.text forKey:@"content"];
+                                 [config setObject:content forKey:@"content"];
                                  [config setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
                                  [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
                                  [config postWithUrl:@"zzjt-app-api_schoolWork001" sucess:^(id object, BOOL verifyObject)
@@ -257,9 +259,7 @@
                                   } error:^(NSError *error){}];
                              }
                          }
-                     } withProgressCallback:^(float progress)
-                     {
-                     }];
+                     } withProgressCallback:^(float progress){}];
                     }];
                 }
                 else
@@ -268,7 +268,7 @@
                     XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
                     [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
                     [config setObject:self.subjectContent.subjectListModel.ID forKey:@"subjectId"];
-                    [config setObject:self.inputContent.text forKey:@"content"];
+                    [config setObject:content forKey:@"content"];
                     [config setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
                     [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
                     [config postWithUrl:@"zzjt-app-api_schoolWork001" sucess:^(id object, BOOL verifyObject)

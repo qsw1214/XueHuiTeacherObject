@@ -162,6 +162,7 @@
             }
             else
             {
+                NSString *content = [NSString safeString:self.inputContent.text];
                 [XHShowHUD showTextHud];
                 NSString *fileName = [XHHelper createGuid];
                 [XHHelper uploadImage:self.addPhotoContent.recipeImage name:fileName uploadCallback:^(BOOL success, NSError *error)
@@ -171,7 +172,7 @@
                          XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
                          [config setObject:fileName forKey:@"picUrl"];
                          [config setObject:time forKey:@"publishTime"];
-                         [config setObject:[NSString safeString:self.inputContent.text] forKey:@"demo"];
+                         [config setObject:content forKey:@"demo"];
                          [config setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"school_id"];
                          [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"publish_user_id"];
                          [config setObject:[XHHelper BookingSituation:kind] forKey:@"type"];

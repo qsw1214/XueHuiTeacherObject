@@ -24,7 +24,6 @@
     if (self)
     {
         [self setHidesBottomBarWhenPushed:YES];
-        [[XHHelper sharedHelper] setCurrentViewController:self];
         [self addSubViews:YES];
     }
    return self;
@@ -37,9 +36,7 @@
     if (self)
     {
         [[XHHelper sharedHelper] setCurrentViewController:self];
-        
-        
-         [self addSubViews:YES];
+        [self addSubViews:YES];
     }
     return self;
 }
@@ -70,7 +67,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    [[XHHelper sharedHelper] setCurrentViewController:self];
     [self.navigationController.navigationBar setHidden:YES];
 }
 
