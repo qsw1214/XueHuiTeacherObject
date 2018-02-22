@@ -126,17 +126,11 @@
     }
     
 }
--(XHNetWorkConfig *)net
-{
-    if (_net==nil) {
-        _net=[[XHNetWorkConfig alloc] init];
-    }
-    return _net;
-}
+
 -(void)refresh
 {
-    [self.net setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
-    [self.net postWithUrl:@"zzjt-app-api_notice007" sucess:^(id object, BOOL verifyObject) {
+    [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
+    [self.netWorkConfig postWithUrl:@"zzjt-app-api_notice007" sucess:^(id object, BOOL verifyObject) {
         if (verifyObject) {
             NSDictionary *dic=[object objectItemKey:@"object"];
             _informationModel=[[XHIMNoticeModel alloc] initWithDic:[dic objectItemKey:@"informationText"]];

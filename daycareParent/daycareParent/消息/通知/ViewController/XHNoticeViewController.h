@@ -10,6 +10,4 @@
 
 @interface XHNoticeViewController : BaseViewController
 
-@property(nonatomic,strong)XHNetWorkConfig *net;
-
 @end

@@ -46,12 +46,12 @@
         }
         else
         {
-             indexBlock(0,alertController.textFields.firstObject.text);
+         indexBlock(0,alertController.textFields.firstObject.text);
         }
         [[XHBackgrounduserInfo shared] getAdd:NO];
     }]];
     [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                      [[XHBackgrounduserInfo shared] getAdd:NO];
+        [[XHBackgrounduserInfo shared] getAdd:NO];
     }]];
     [controller presentViewController:alertController animated:YES completion:nil];
 
@@ -89,7 +89,7 @@
                 }]];
             }
            [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-               
+                [[XHBackgrounduserInfo shared] getAdd:NO];
            }]];
             [controller presentViewController:alertController animated:YES completion:nil];
 
@@ -130,7 +130,7 @@
         {
            
           [UIAlertController alertWithmessage:@"暂无数据" titlesArry:@[@"确定"] controller:controller indexBlock:^(NSInteger index, id object) {
-        
+            [[XHBackgrounduserInfo shared] getAdd:NO];
           }];
         }
     }];
