@@ -46,8 +46,6 @@
     [_tableView setTipType:TipTitleAndTipImage withTipTitle:nil withTipImage:@"ico-no-data"];
     [_tableView showRefresHeaderWithTarget:self withSelector:@selector(refreshHead)];
     [_tableView beginRefreshing];
-    
-    
 }
 #pragma mark  表头视图
 -(void)headView
@@ -239,7 +237,7 @@
 {
     
     XHPunchSignTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-
+ [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     NSDate *key = [_keys objectAtIndex:indexPath.section];
     NSMutableArray *array = [_dataDic objectForKey:key];
     XHNattendanceModel *attendance = [array objectAtIndex:indexPath.row];

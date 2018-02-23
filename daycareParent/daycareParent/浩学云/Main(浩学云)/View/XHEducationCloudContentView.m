@@ -393,7 +393,7 @@ typedef NS_ENUM(NSInteger,EducationCloudInformationType)
             break;
         case 1:
         {
-            NSString *webUrl = @"http://h5.mall.ixuehui.cn?type=tea&haoxueType=1";
+            NSString *webUrl = @"http://h5.mall.ixuehui.cn?type=tea&haoxueType=2";
             XHEducationCloudWebViewController *webView = [[XHEducationCloudWebViewController alloc]initHiddenWhenPushHidden];
             [webView setWebViewUrl:webUrl];
             [webView setNavtionTitle:@"兴趣辅导"];

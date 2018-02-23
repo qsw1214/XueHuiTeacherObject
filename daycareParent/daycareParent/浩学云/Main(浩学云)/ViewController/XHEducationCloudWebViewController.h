@@ -10,7 +10,5 @@
 #import "XHEducationCloudFrame.h"
 
 @interface XHEducationCloudWebViewController : BaseViewController
-
-//-(void)setEducationCloudObject:(XHEducationCloudFrame*)objet;
 -(void)setWebViewUrl:(NSString*)url;
 @end

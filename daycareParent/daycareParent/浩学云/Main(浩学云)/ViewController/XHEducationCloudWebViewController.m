@@ -14,9 +14,6 @@
 #import <WebKit/WebKit.h>
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
-#import "Pingpp.h"
-#import "NJKWebViewProgress.h"
-#import "NJKWebViewProgressView.h"
 @interface XHEducationCloudWebViewController () <UIWebViewDelegate,WKUIDelegate,UINavigationBarDelegate>
 @property (nonatomic,strong) UIWebView *webView;
 @property (nonatomic,strong) UIProgressView *progressView;
@@ -28,7 +25,7 @@
 {
     
     [super viewDidLoad];
-    //[self clearWebCache];
+    [self clearWebCache];
     [self.view addSubview:self.webView];
     [self.view addSubview:self.progressView];
     self.progressView.progress=0.1;
@@ -88,7 +85,7 @@
 -(void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:2.0];
+    [UIView setAnimationDuration:1.0];
     self.progressView.progress=1.0;
     [UIView commitAnimations];
     [self performSelector:@selector(aaaa) withObject:nil afterDelay:0.5];
