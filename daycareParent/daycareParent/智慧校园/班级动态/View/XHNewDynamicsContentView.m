@@ -82,7 +82,7 @@
 
 -(void)setItemArray:(NSMutableArray*)array
 {
-    [self.dataArray setArray:array];
+    [self setDataArray:array];
     [self.collectionView setItemArray:array];
 }
 

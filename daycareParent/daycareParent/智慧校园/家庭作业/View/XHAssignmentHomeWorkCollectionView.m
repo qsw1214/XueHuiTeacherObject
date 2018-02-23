@@ -56,7 +56,7 @@
 //!< 数组指针传递，里面删除之后外面也同时删除
 -(void)setItemArray:(NSMutableArray*)array
 {
-    [self.dataArray setArray:array];
+    [self setDataArray:array];
     [self reloadData];
 }
 
