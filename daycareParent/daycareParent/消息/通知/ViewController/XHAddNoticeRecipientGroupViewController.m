@@ -64,6 +64,19 @@
 
 -(void)setItemObject:(XHNoticeRecipientFrame*)object;
 {
+    switch (object.model.modelType)
+    {
+        case XHNoticeRecipientTeacherType:
+        {
+            [self setNavtionTitle:@"教师"];
+        }
+            break;
+        case XHNoticeRecipientStudentType:
+        {
+            [self setNavtionTitle:object.model.title];
+        }
+            break;
+    }
     [self setTransFrame:object];
     [self.dataArray setArray:object.groupArray];
     [self.tableView beginRefreshing];

@@ -39,6 +39,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setNavtionTitle:@"选择群组"];
 }
 
 -(void)viewWillAppear:(BOOL)animated
