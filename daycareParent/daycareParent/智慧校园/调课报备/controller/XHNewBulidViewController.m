@@ -130,6 +130,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     switch (indexPath.row) {
             case 0:
              case 4:
@@ -190,24 +191,7 @@
                     _clazzName=object;
                 
             }];
-//            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入上课班级" preferredStyle:UIAlertControllerStyleAlert];
-//            [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-//
-//            }];
-//            [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//                if (alertController.textFields.firstObject.text.length==0) {
-//                    [XHShowHUD showNOHud:@"班级不能为空"];
-//                    return ;
-//                }
-//               XHNewTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//                cell.selectLabel.text=alertController.textFields.firstObject.text;
-//                _clazzName=alertController.textFields.firstObject.text;
-//            }]];
-//            [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-//
-//            }]];
-//            [self presentViewController:alertController animated:YES completion:nil];
-            
+
         }
             break;
         
@@ -372,6 +356,12 @@
        
     }
    
+}
+
+// 老
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

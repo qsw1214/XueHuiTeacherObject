@@ -16,7 +16,6 @@
 #import "JPUSHService.h"
 #import "MianTabBarViewController.h"
 #import "XHLoginViewController.h"
-//#import "Pingpp.h"
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
 #import "XHLoginViewController.h"
@@ -35,28 +34,7 @@
 @end
 
 @implementation AppDelegate
-/*
-// iOS 8 及以下请用这个   ping++支付回调
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation
-{
-  
-    [Pingpp handleOpenURL:url withCompletion:^(NSString *result, PingppError *error) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"callBack" object:result];
-    }];
-    return YES;
-}
 
-
-
-// iOS 9 以上请用这个
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options {
-    
-    [Pingpp handleOpenURL:url withCompletion:^(NSString *result, PingppError *error) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"callBack" object:result];//web端调用支付时，收到的支付回调
-    }];
-    return YES;
-}
-*/
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     //Required
@@ -351,9 +329,14 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         [self.window makeKeyAndVisible];
     }
 }
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    [self.window endEditing:YES];
+// 一键关闭键盘
+
+-(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    
+    [super touchesBegan:touches withEvent:event];
+    
+      [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    
 }
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

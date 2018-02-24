@@ -63,6 +63,7 @@
     [personalCenter navtionItemHidden:NavigationItemLeftType];
     //创建tabBarItem
     TabBarItem *personalCenterTabBarItem = [[TabBarItem alloc]initWithTitle:@"我的" imageName:@"ico_wohui" selectedImageName:@"ico_wose"];
+    
     [personalCenter setTabBarItem:personalCenterTabBarItem];
     UINavigationController *personalCenterNavigation = [[UINavigationController alloc] initWithRootViewController:personalCenter];
     [self addChildViewController:personalCenterNavigation];
