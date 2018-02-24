@@ -204,62 +204,63 @@
                     {
                         NSString *imageName = [XHHelper createGuid];
                         [XHHelper uploadImage:obj.previewImage name:imageName uploadCallback:^(BOOL success, NSError *error)
-                     {
-                         if (success)
-                         {
-                             
-                             [self.imageNameArray addObject:imageName];
-                             if ([self.imageNameArray count] == [self.dataArray count])
-                             {
-                                 XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
-                                 for (int i=0; i<self.imageNameArray.count; i++)
-                                 {
-                                     [config setObject:self.imageNameArray[i] forKey:[NSString stringWithFormat:@"picUrl%zd",i+1]];
-                                 }
-                                 
-                                 [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
-                                 [config setObject:self.subjectContent.subjectListModel.ID forKey:@"subjectId"];
-                                 [config setObject:content forKey:@"content"];
-                                 [config setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
-                                 [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
-                                 [config postWithUrl:@"zzjt-app-api_schoolWork001" sucess:^(id object, BOOL verifyObject)
-                                  
-                                  {
-                                      if (verifyObject)
-                                      {
-                                          [[XHHelper sharedHelper].currentViewController.navigationController popViewControllerAnimated:YES];
-                                      }
-                                  } error:^(NSError *error){}];
-                             }
-                         }
-                         else
-                         {
-                             
-                             [self.dataArray removeObject:imageName];
-                             if ([self.imageNameArray count] == [self.dataArray count])
-                             {
-                                 XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
-                                 for (int i=0; i<self.imageNameArray.count; i++)
-                                 {
-                                     [config setObject:self.imageNameArray[i] forKey:[NSString stringWithFormat:@"picUrl%zd",i+1]];
-                                 }
-                                 
-                                 [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
-                                 [config setObject:self.subjectContent.subjectListModel.ID forKey:@"subjectId"];
-                                 [config setObject:content forKey:@"content"];
-                                 [config setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
-                                 [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
-                                 [config postWithUrl:@"zzjt-app-api_schoolWork001" sucess:^(id object, BOOL verifyObject)
-                                  
-                                  {
-                                      if (verifyObject)
-                                      {
-                                          [[XHHelper sharedHelper].currentViewController.navigationController popViewControllerAnimated:YES];
-                                      }
-                                  } error:^(NSError *error){}];
-                             }
-                         }
-                     } withProgressCallback:^(float progress){}];
+                        {
+                            if (success)
+                            {
+                                
+                                [self.imageNameArray addObject:imageName];
+                                if ([self.imageNameArray count] == [self.dataArray count])
+                                {
+                                    XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
+                                    for (int i=0; i<self.imageNameArray.count; i++)
+                                    {
+                                        [config setObject:self.imageNameArray[i] forKey:[NSString stringWithFormat:@"picUrl%zd",i+1]];
+                                    }
+                                    
+                                    [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
+                                    [config setObject:self.subjectContent.subjectListModel.ID forKey:@"subjectId"];
+                                    [config setObject:content forKey:@"content"];
+                                    [config setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
+                                    [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
+                                    [config postWithUrl:@"zzjt-app-api_schoolWork001" sucess:^(id object, BOOL verifyObject)
+                                     
+                                     {
+                                         if (verifyObject)
+                                         {
+                                             [[XHHelper sharedHelper].currentViewController.navigationController popViewControllerAnimated:YES];
+                                         }
+                                     } error:^(NSError *error){}];
+                                }
+                            }
+                            else
+                            {
+                                
+                                [self.dataArray removeObject:imageName];
+                                if ([self.imageNameArray count] == [self.dataArray count])
+                                {
+                                    XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
+                                    for (int i=0; i<self.imageNameArray.count; i++)
+                                    {
+                                        [config setObject:self.imageNameArray[i] forKey:[NSString stringWithFormat:@"picUrl%zd",i+1]];
+                                    }
+                                    
+                                    [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
+                                    [config setObject:self.subjectContent.subjectListModel.ID forKey:@"subjectId"];
+                                    [config setObject:content forKey:@"content"];
+                                    [config setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
+                                    [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
+                                    [config postWithUrl:@"zzjt-app-api_schoolWork001" sucess:^(id object, BOOL verifyObject)
+                                     
+                                     {
+                                         if (verifyObject)
+                                         {
+                                             [[XHHelper sharedHelper].currentViewController.navigationController popViewControllerAnimated:YES];
+                                         }
+                                     } error:^(NSError *error){}];
+                                }
+                            }
+                            
+                        } withProgressCallback:^(float progress){}];
                     }];
                 }
                 else

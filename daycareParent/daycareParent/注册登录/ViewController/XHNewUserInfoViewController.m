@@ -225,11 +225,13 @@
             } error:^(NSError *error) {
                 
             }];
-            
-            return;
+        }
+        else
+        {
+            [XHShowHUD showNOHud:@"头像上传失败!"];
         }
         
-        [XHShowHUD showNOHud:@"头像上传失败!"];
+        
     } withProgressCallback:^(float progress) {
         hud.progress = progress;
     }];
