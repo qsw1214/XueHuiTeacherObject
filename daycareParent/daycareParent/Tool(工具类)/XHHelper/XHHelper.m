@@ -96,6 +96,14 @@ static XHHelper *helper = nil;
 
 
 
+/**
+ 简单上传
+
+ @param image 图片资源
+ @param name 图片名称
+ @param uploadCallback 上传状态回调
+ @param progressCallback 上传进度回调
+ */
 + (void)uploadImage:(UIImage *)image name:(NSString *)name uploadCallback:(void (^)(BOOL success, NSError *error))uploadCallback withProgressCallback:(void (^)(float progress))progressCallback
 {
     image = [image scaleToSize:xOriginImageSize usingMode:NYXResizeModeAspectFit];
@@ -139,6 +147,11 @@ static XHHelper *helper = nil;
     }];
     
 }
+
+
+
+
+
 
 + (void)uploadVideo:(NSData *)videoData name:(NSString *)name uploadCallback:(void (^)(BOOL success, NSError * error))uploadCallback withProgressCallback:(void (^)(float progress))progressCallback
 {

@@ -33,4 +33,5 @@
 #import "XHNetWorkConfig.h"
 #import "XHUserInfo.h"
 #import "XHHelper.h"
+#import "OSSImageUploader.h"
 #endif /* Header_h */

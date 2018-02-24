@@ -217,11 +217,8 @@ static XHNetWorkConfig *net = nil;
             
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
          {
-             MAIN(^{
-                 
-                 [XHShowHUD showNOHud:@"请求失败，请尝试重试！"];
-                 errorBlock(error);
-             });
+             [XHShowHUD showNOHud:@"请求失败，请尝试重试！"];
+             errorBlock(error);
             
          }];
     }

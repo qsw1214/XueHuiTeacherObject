@@ -18,10 +18,10 @@
 
 
 
+
 @interface XHAddNoticeViewController () <XHAddNoticeContentViewDeletage>
 
 @property (nonatomic,strong) XHAddNoticeContentView *contentView;
-@property (nonatomic,strong) NSMutableArray *imageNameArray;
 
 @end
 
@@ -117,54 +117,36 @@
             if ([self.dataArray count])
             {
                 [XHShowHUD showTextHud];
-                
+                NSMutableArray *tempImageArray = [NSMutableArray array];
                 [NSArray enumerateObjectsWithArray:self.dataArray usingBlock:^(XHPreviewModel *obj, NSUInteger idx, BOOL *stop)
-                 {
-                     NSString *imageName = [XHHelper createGuid];
-                     [XHHelper uploadImage:obj.previewImage name:imageName uploadCallback:^(BOOL success, NSError *error)
-                      {
-                          if (success)
-                          {
-                              [self.imageNameArray addObject:imageName];
-                              if ([self.imageNameArray count] == [self.dataArray count])
-                              {
-                                  for (int i = 0; i<self.imageNameArray.count; i++)
-                                  {
-                                      [sender.networkConfig setObject:self.imageNameArray[i] forKey:[NSString stringWithFormat:@"picUrl%zd",(i+1)]];
-                                  }
-                                  [sender.networkConfig postWithUrl:@"zzjt-app-api_notice004" sucess:^(id object, BOOL verifyObject)
-                                   
-                                   {
-                                       if (verifyObject)
-                                       {
-                                           [self.navigationController popViewControllerAnimated:YES];
-                                       }
-                                       
-                                   } error:^(NSError *error){}];
-                              }
-                          }
-                          else
-                          {
-                              [self.dataArray removeObject:imageName];
-                              if ([self.imageNameArray count] == [self.dataArray count])
-                              {
-                                  for (int i = 0; i<self.imageNameArray.count; i++)
-                                  {
-                                      [sender.networkConfig setObject:self.imageNameArray[i] forKey:[NSString stringWithFormat:@"picUrl%zd",(i+1)]];
-                                  }
-                                  [sender.networkConfig postWithUrl:@"zzjt-app-api_notice004" sucess:^(id object, BOOL verifyObject)
-                                   
-                                   {
-                                       if (verifyObject)
-                                       {
-                                           [self.navigationController popViewControllerAnimated:YES];
-                                       }
-                                       
-                                   } error:^(NSError *error){}];
-                              }
-                          }
-                      } withProgressCallback:^(float progress){}];
-                 }];
+                {
+                    [tempImageArray addObject:obj.previewImage];
+                }];
+                [OSSImageUploader asyncUploadImages:tempImageArray complete:^(NSArray<NSString *> *names, UploadImageState state)
+                {
+                    [XHShowHUD hideHud];
+                    if (state)
+                    {
+                        for (int i = 0; i< [names count]; i++)
+                        {
+                            NSString *imageName = [NSString safeString:[names objectAtIndex:i]];
+                            [sender.networkConfig setObject:imageName forKey:[NSString stringWithFormat:@"picUrl%zd",(i+1)]];
+                        }
+                        [sender.networkConfig postWithUrl:@"zzjt-app-api_notice004" sucess:^(id object, BOOL verifyObject)
+                         
+                         {
+                             if (verifyObject)
+                             {
+                                 [self.navigationController popViewControllerAnimated:YES];
+                             }
+                             
+                         } error:^(NSError *error){}];
+                    }
+                    else
+                    {
+                        [XHShowHUD showNOHud:@"发布失败，请重试"];
+                    }
+                }];
         }
         else
         {
@@ -215,14 +197,6 @@
 }
 
 
--(NSMutableArray *)imageNameArray
-{
-    if (!_imageNameArray)
-    {
-        _imageNameArray = [NSMutableArray array];
-    }
-    return _imageNameArray;
-}
 
 
 @end

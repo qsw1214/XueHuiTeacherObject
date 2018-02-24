@@ -26,9 +26,6 @@
 @property (nonatomic,strong) BaseButtonControl *submitContent; //!< 发布
 @property (nonatomic,strong) UIView *lineVew; //!< 分割线视图
 @property (nonatomic,strong) UILabel *limitLabel; //!< 限制字数标签
-@property (nonatomic,strong) NSMutableArray *imageNameArray; //!< 图片名称数组
-
-
 
 @end
 
@@ -200,68 +197,43 @@
                 if ([self.dataArray count])
                 {
                     [XHShowHUD showTextHud];
+                    NSMutableArray *tempArray = [NSMutableArray array];
                     [NSArray enumerateObjectsWithArray:self.dataArray usingBlock:^(XHPreviewModel *obj, NSUInteger idx, BOOL *stop)
-                    {
-                        NSString *imageName = [XHHelper createGuid];
-                        [XHHelper uploadImage:obj.previewImage name:imageName uploadCallback:^(BOOL success, NSError *error)
-                        {
-                            if (success)
-                            {
-                                
-                                [self.imageNameArray addObject:imageName];
-                                if ([self.imageNameArray count] == [self.dataArray count])
-                                {
-                                    XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
-                                    for (int i=0; i<self.imageNameArray.count; i++)
-                                    {
-                                        [config setObject:self.imageNameArray[i] forKey:[NSString stringWithFormat:@"picUrl%zd",i+1]];
-                                    }
-                                    
-                                    [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
-                                    [config setObject:self.subjectContent.subjectListModel.ID forKey:@"subjectId"];
-                                    [config setObject:content forKey:@"content"];
-                                    [config setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
-                                    [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
-                                    [config postWithUrl:@"zzjt-app-api_schoolWork001" sucess:^(id object, BOOL verifyObject)
-                                     
-                                     {
-                                         if (verifyObject)
-                                         {
-                                             [[XHHelper sharedHelper].currentViewController.navigationController popViewControllerAnimated:YES];
-                                         }
-                                     } error:^(NSError *error){}];
-                                }
-                            }
-                            else
-                            {
-                                
-                                [self.dataArray removeObject:imageName];
-                                if ([self.imageNameArray count] == [self.dataArray count])
-                                {
-                                    XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
-                                    for (int i=0; i<self.imageNameArray.count; i++)
-                                    {
-                                        [config setObject:self.imageNameArray[i] forKey:[NSString stringWithFormat:@"picUrl%zd",i+1]];
-                                    }
-                                    
-                                    [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
-                                    [config setObject:self.subjectContent.subjectListModel.ID forKey:@"subjectId"];
-                                    [config setObject:content forKey:@"content"];
-                                    [config setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
-                                    [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
-                                    [config postWithUrl:@"zzjt-app-api_schoolWork001" sucess:^(id object, BOOL verifyObject)
-                                     
-                                     {
-                                         if (verifyObject)
-                                         {
-                                             [[XHHelper sharedHelper].currentViewController.navigationController popViewControllerAnimated:YES];
-                                         }
-                                     } error:^(NSError *error){}];
-                                }
-                            }
-                            
-                        } withProgressCallback:^(float progress){}];
-                    }];
+                     {
+                         [tempArray addObject:obj.previewImage];
+                     }];
+                    
+                    [OSSImageUploader asyncUploadImages:tempArray complete:^(NSArray<NSString *> *names, UploadImageState state)
+                     {
+                         [XHShowHUD hideHud];
+                         if (state)
+                         {
+                             XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
+                             for (int i=0; i< [names count]; i++)
+                             {
+                                 [config setObject:names[i] forKey:[NSString stringWithFormat:@"picUrl%zd",i+1]];
+                             }
+                             
+                             [config setObject:self.classContent.classListModel.clazzId forKey:@"classId"];
+                             [config setObject:self.subjectContent.subjectListModel.ID forKey:@"subjectId"];
+                             [config setObject:content forKey:@"content"];
+                             [config setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
+                             [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
+                             [config postWithUrl:@"zzjt-app-api_schoolWork001" sucess:^(id object, BOOL verifyObject)
+                              
+                              {
+                                  if (verifyObject)
+                                  {
+                                      [[XHHelper sharedHelper].currentViewController.navigationController popViewControllerAnimated:YES];
+                                  }
+                              } error:^(NSError *error){}];
+                         }
+                         else
+                         {
+                             [XHShowHUD showNOHud:@"发布失败，请重试!"];
+                         }
+                         
+                     }];
                 }
                 else
                 {
@@ -454,14 +426,6 @@
 
 
 
--(NSMutableArray *)imageNameArray
-{
-    if (!_imageNameArray)
-    {
-        _imageNameArray = [NSMutableArray array];
-    }
-    return _imageNameArray;
-}
 
 
 
