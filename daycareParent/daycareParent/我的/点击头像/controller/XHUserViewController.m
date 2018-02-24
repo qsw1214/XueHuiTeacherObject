@@ -317,15 +317,14 @@
                     });
                     
                 }
-            } error:^(NSError *error) {
-                
-            }];
-            
-            return;
+            } error:^(NSError *error) {}];
         }
-        
-        [XHShowHUD showNOHud:@"头像上传失败!"];
-    } withProgressCallback:^(float progress) {
+        else
+        {
+            [XHShowHUD showNOHud:@"头像上传失败!"];
+        }
+    } withProgressCallback:^(float progress)
+    {
         hud.progress = progress;
     }];
 }

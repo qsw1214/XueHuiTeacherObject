@@ -163,8 +163,6 @@
                                    } error:^(NSError *error){}];
                               }
                           }
-                          
-                          
                       } withProgressCallback:^(float progress){}];
                  }];
         }

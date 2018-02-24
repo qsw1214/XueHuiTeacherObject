@@ -243,10 +243,12 @@
  */
 -(XHCustomView *)classListView
 {
-    if (_classListView==nil) {
+    if (_classListView==nil)
+    {
         _classListView=[[XHCustomView alloc] init];
         NSArray *arry=[XHUserInfo sharedUserInfo].classListArry;
-        if (arry.count<5) {
+        if (arry.count < 5)
+        {
             _classListView.frame=CGRectMake(SCREEN_WIDTH-[_classListView getWidth]-10, 64, [_classListView getWidth], 30*arry.count);
         }
         else
@@ -259,7 +261,8 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:YES];
-    if (_classListView.isExist==YES) {
+    if (_classListView.isExist==YES)
+    {
         _classListView.isExist=NO;
         [_classListView removeFromSuperview];
     }
@@ -267,7 +270,8 @@
 #pragma mark-------------显示日历视图--------------
 -(XHCustomDatePickerView *)datePickerView
 {
-    if (_datePickerView==nil) {
+    if (_datePickerView==nil)
+    {
         _datePickerView=[[XHCustomDatePickerView alloc] initWithFrame:WindowScreen];
     }
     [UIView beginAnimations:nil context:nil];

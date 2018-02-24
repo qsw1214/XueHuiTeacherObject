@@ -220,7 +220,6 @@
                                                } error:^(NSError *error){}];
                                           }
                                       }
-                                      [XHShowHUD showNOHud:@"上传图片失败"];
                                   } withProgressCallback:^(float progress){}];
                              }];
                         }
@@ -249,6 +248,7 @@
                         
                     case XHNewDynamicsVideoContentModelType:
                     {
+                        NSString *content = [NSString safeString:self.inputContent.text];
                         if ([self.dataArray count])
                         {
                             [XHShowHUD showTextHud];
@@ -269,7 +269,7 @@
                                                   {
                                                       [XHShowHUD showOKHud:@"视频上传成功"];
                                                       XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
-                                                      [config setObject:self.inputContent.text forKey:@"content"];
+                                                      [config setObject:content forKey:@"content"];
                                                       [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
                                                       [config setObject:[XHUserInfo sharedUserInfo].sessionId forKey:@"sessionId"];
                                                       [config setObject:@"2" forKey:@"noticeType"];
@@ -303,7 +303,7 @@
                                                   {
                                                       [XHShowHUD showOKHud:@"视频上传成功"];
                                                       XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
-                                                      [config setObject:self.inputContent.text forKey:@"content"];
+                                                      [config setObject:content forKey:@"content"];
                                                       [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
                                                       [config setObject:[XHUserInfo sharedUserInfo].sessionId forKey:@"sessionId"];
                                                       [config setObject:@"2" forKey:@"noticeType"];
@@ -336,7 +336,7 @@
                             XHNetWorkConfig *config = [[XHNetWorkConfig alloc]init];
                             [config setObject:self.classContent.noticeMarkModel.teacherID forKey:@"teacherId"];
                             [config setObject:self.classContent.noticeMarkModel.guardianID forKey:@"guardianId"];
-                            [config setObject:self.inputContent.text forKey:@"content"];
+                            [config setObject:content forKey:@"content"];
                             [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
                             [config setObject:[XHUserInfo sharedUserInfo].sessionId forKey:@"sessionId"];
                             [config setObject:@"2" forKey:@"noticeType"];
