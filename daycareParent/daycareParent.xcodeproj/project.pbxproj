@@ -353,8 +353,6 @@
 		8C019F701FF4C373005EBC2C /* JKDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C019F6D1FF4C372005EBC2C /* JKDBHelper.m */; };
 		8C019F711FF4C373005EBC2C /* JKDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C019F6F1FF4C372005EBC2C /* JKDBModel.m */; };
 		8C019F741FF4C3DB005EBC2C /* XHMessageUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C019F731FF4C3DB005EBC2C /* XHMessageUserInfo.m */; };
-		8C01A2352006E94800E4D768 /* NJKWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C01A2322006E94800E4D768 /* NJKWebViewProgress.m */; };
-		8C01A2362006E94800E4D768 /* NJKWebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C01A2342006E94800E4D768 /* NJKWebViewProgressView.m */; };
 		8C02627420230F4600BFB98A /* XHApproveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C02627320230F4600BFB98A /* XHApproveModel.m */; };
 		8C0CCF7E1FFF16FE0008C0CE /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0CCF771FFF16FD0008C0CE /* WebViewJavascriptBridge.m */; };
 		8C0CCF7F1FFF16FE0008C0CE /* WebViewJavascriptBridge_JS.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0CCF791FFF16FD0008C0CE /* WebViewJavascriptBridge_JS.m */; };
@@ -1237,10 +1235,6 @@
 		8C019F6F1FF4C372005EBC2C /* JKDBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKDBModel.m; sourceTree = "<group>"; };
 		8C019F721FF4C3DB005EBC2C /* XHMessageUserInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHMessageUserInfo.h; sourceTree = "<group>"; };
 		8C019F731FF4C3DB005EBC2C /* XHMessageUserInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHMessageUserInfo.m; sourceTree = "<group>"; };
-		8C01A2312006E94800E4D768 /* NJKWebViewProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NJKWebViewProgress.h; sourceTree = "<group>"; };
-		8C01A2322006E94800E4D768 /* NJKWebViewProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgress.m; sourceTree = "<group>"; };
-		8C01A2332006E94800E4D768 /* NJKWebViewProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NJKWebViewProgressView.h; sourceTree = "<group>"; };
-		8C01A2342006E94800E4D768 /* NJKWebViewProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgressView.m; sourceTree = "<group>"; };
 		8C02627220230F4600BFB98A /* XHApproveModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XHApproveModel.h; path = "daycareParent/智慧校园/调课报备/model/XHApproveModel.h"; sourceTree = SOURCE_ROOT; };
 		8C02627320230F4600BFB98A /* XHApproveModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XHApproveModel.m; path = "daycareParent/智慧校园/调课报备/model/XHApproveModel.m"; sourceTree = SOURCE_ROOT; };
 		8C0CCF761FFF16FD0008C0CE /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
@@ -2522,7 +2516,6 @@
 			isa = PBXGroup;
 			children = (
 				4BCEB725202974FF00ED2829 /* WPhoto */,
-				8C01A2302006E94800E4D768 /* NJKWebViewProgress */,
 				8C0CCF751FFF16FD0008C0CE /* WebViewJavascriptBridge */,
 				4B34184F1FFDC14C00A5EC56 /* ZFPlayer */,
 				4B577FBD1FF63FB20023ACBC /* Masonry */,
@@ -3269,17 +3262,6 @@
 				8C019F6F1FF4C372005EBC2C /* JKDBModel.m */,
 			);
 			path = DBModel;
-			sourceTree = "<group>";
-		};
-		8C01A2302006E94800E4D768 /* NJKWebViewProgress */ = {
-			isa = PBXGroup;
-			children = (
-				8C01A2312006E94800E4D768 /* NJKWebViewProgress.h */,
-				8C01A2322006E94800E4D768 /* NJKWebViewProgress.m */,
-				8C01A2332006E94800E4D768 /* NJKWebViewProgressView.h */,
-				8C01A2342006E94800E4D768 /* NJKWebViewProgressView.m */,
-			);
-			path = NJKWebViewProgress;
 			sourceTree = "<group>";
 		};
 		8C0CCF751FFF16FD0008C0CE /* WebViewJavascriptBridge */ = {
@@ -4314,7 +4296,6 @@
 				4B523BCA1FD14A27006DD565 /* XHHomeWorkContentViwCell.m in Sources */,
 				4B34187E1FFDC14C00A5EC56 /* ZFPlayerView.m in Sources */,
 				8C8336F31FDCE3B100F48A25 /* XHRCConversationViewController.m in Sources */,
-				8C01A2352006E94800E4D768 /* NJKWebViewProgress.m in Sources */,
 				4B07CC1C1FD4DAC800B2DBDA /* XHLeaveRecordFrame.m in Sources */,
 				4B4A000E1FE240AF00B8A8F8 /* XHDynamicsModel.m in Sources */,
 				4B80F2241FCBEC2B00BC7B52 /* MainRootControllerHelper.m in Sources */,
@@ -4491,7 +4472,6 @@
 				4B80F2CE1FCBF04F00BC7B52 /* SDWebImageManager.m in Sources */,
 				8C7E980E1FECDB510096288E /* XHLocationModel.m in Sources */,
 				4B4DD02E202855D300ACFFA8 /* XHAddNoticeRecipientGroupViewController.m in Sources */,
-				8C01A2362006E94800E4D768 /* NJKWebViewProgressView.m in Sources */,
 				4BA8C4E51FD0002D006CBEBC /* XHHomeWorkTableViewCell.m in Sources */,
 				4B3418F61FFF14F100A5EC56 /* XHVideoControl.m in Sources */,
 				8CC7648E200CAA69007887C7 /* XHNewHeardTableViewCell.m in Sources */,

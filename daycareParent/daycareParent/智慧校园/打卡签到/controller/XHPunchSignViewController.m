@@ -21,6 +21,7 @@
     BaseTableView *_tableView;
     NSMutableDictionary *_dataDic;
     NSMutableArray *_keys;
+    NSTimer *_timer;
 }
 @property(nonatomic,strong)AMapLocationManager *locationManager;
 @property(nonatomic,strong)BaseButtonControl *signBtn;
@@ -45,8 +46,6 @@
     [_tableView setTipType:TipTitleAndTipImage withTipTitle:nil withTipImage:@"ico-no-data"];
     [_tableView showRefresHeaderWithTarget:self withSelector:@selector(refreshHead)];
     [_tableView beginRefreshing];
-    
-    
 }
 #pragma mark  表头视图
 -(void)headView
@@ -76,17 +75,14 @@
     XHBaseLabel *label=[[XHBaseLabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-20)/2.0, 10, 20, 20)];
     label.text=@"至";
     label.textAlignment=NSTextAlignmentCenter;
-    //label.backgroundColor=[UIColor redColor];
     label.font=FontLevel3;
     [bgView addSubview:label];
     _beginDateBtn=[[BaseButtonControl alloc] initWithFrame:CGRectMake(30, 0, SCREEN_WIDTH/2.0-50, 40)];
     _beginDateBtn.tag=10;
     [_beginDateBtn addTarget:self action:@selector(dateBtnMethod:) forControlEvents:UIControlEventTouchUpInside];
     [bgView addSubview:_beginDateBtn];
-    //beginDate.backgroundColor=[UIColor orangeColor];
     [_beginDateBtn setNumberImageView:1];
     [_beginDateBtn setImageEdgeFrame:CGRectMake(0, 10, _beginDateBtn.width, _beginDateBtn.height-20) withNumberType:0 withAllType:NO];
-    //[beginDate setIconImageViewBackGroundColor:[UIColor redColor] withNumberType:0 withAllType:NO];
     [_beginDateBtn setImageContentMode:UIViewContentModeScaleToFill withNumberType:0 withAllType:NO];
     [_beginDateBtn setImage:@"time-select" withNumberType:0 withAllType:NO];
     [_beginDateBtn setNumberLabel:1];
@@ -98,31 +94,22 @@
     _endDateBtn.tag=11;
     [_endDateBtn addTarget:self action:@selector(dateBtnMethod:) forControlEvents:UIControlEventTouchUpInside];
     [bgView addSubview:_endDateBtn];
-    // endDate.backgroundColor=[UIColor orangeColor];
     [_endDateBtn setNumberImageView:1];
     [_endDateBtn setImageEdgeFrame:CGRectMake(0, 10, _endDateBtn.width, _endDateBtn.height-20) withNumberType:0 withAllType:NO];
-    //[beginDate setIconImageViewBackGroundColor:[UIColor redColor] withNumberType:0 withAllType:NO];
     [_endDateBtn setImageContentMode:UIViewContentModeScaleToFill withNumberType:0 withAllType:NO];
     [_endDateBtn setImage:@"time-select" withNumberType:0 withAllType:NO];
     [_endDateBtn setNumberLabel:1];
     [_endDateBtn setTitleEdgeFrame:CGRectMake(5, 10, _endDateBtn.width-20, _endDateBtn.height-20) withNumberType:0 withAllType:NO];
     [_endDateBtn setText:[NSString dateWithDateFormatter:YY_DEFAULT_TIME_FORM Date:_endDate] withNumberType:0 withAllType:NO];
     [_endDateBtn setFont:FontLevel4 withNumberType:0 withAllType:NO];
-    NSDate *lDate=[NSDate getDateWithDateStr:[NSUserDefaults objectItemForKey:[XHUserInfo sharedUserInfo].telphoneNumber] formatter:ALL_DEFAULT_TIME_FORM];
-
-    if (lDate && [[NSDate howLongFromeDateStr:[NSUserDefaults objectItemForKey:[XHUserInfo sharedUserInfo].telphoneNumber]  toDateStr:[NSDate getDateStrWithDateFormatter:ALL_DEFAULT_TIME_FORM Date:[NSDate date]] formatter:ALL_DEFAULT_TIME_FORM] hour]<=0)
-    {
-        self.signBtn.selected = YES;
-        [self.signBtn setTextColor:RGB(240, 240, 240) withTpe:0 withAllType:NO];
-        [self.signBtn setText:@"已打卡" withNumberType:0 withAllType:NO];
-       
-    }
+    [self refreshSignView];
     _endDate=[NSDate date];
     _beginDate=[NSDate getDayBeforWithDate:_endDate dayBefor:6];
     
 }
 -(void)refreshHead
 {
+    [self refreshSignView];
     [self loadData:_endDate beginDate:_beginDate];
 }
 #pragma mark    定位获取区域编码
@@ -167,9 +154,13 @@
         {
             [NSUserDefaults setItemObject:[NSDate getDateStrWithDateFormatter:ALL_DEFAULT_TIME_FORM Date:[NSDate date]] forKey:[XHUserInfo sharedUserInfo].telphoneNumber];
             self.signBtn.selected = YES;
-            self.signBtn.selected = YES;
+            [self.signBtn setImage:@"user_qiandao_disabled" withNumberType:0 withAllType:NO];
             [self.signBtn setTextColor:RGB(240, 240, 240) withTpe:0 withAllType:NO];
             [self.signBtn setText:@"已打卡" withNumberType:0 withAllType:NO];
+            if (_timer==nil)
+            {
+                 _timer= [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(refreshSignView) userInfo:nil repeats:YES];
+            }
             [self loadData:[NSDate date] beginDate:[NSDate getDayBeforWithDate:[NSDate date] dayBefor:6]];
         }
        
@@ -246,7 +237,7 @@
 {
     
     XHPunchSignTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-
+ [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     NSDate *key = [_keys objectAtIndex:indexPath.section];
     NSMutableArray *array = [_dataDic objectForKey:key];
     XHNattendanceModel *attendance = [array objectAtIndex:indexPath.row];
@@ -401,6 +392,42 @@
     [UIView commitAnimations];
     return _endPickerView;
     
+}
+-(void)refreshSignView
+{
+    NSDate *lDate=[NSDate getDateWithDateStr:[NSUserDefaults objectItemForKey:[XHUserInfo sharedUserInfo].telphoneNumber] formatter:ALL_DEFAULT_TIME_FORM];
+    if (lDate && [[NSDate howLongFromeDateStr:[NSUserDefaults objectItemForKey:[XHUserInfo sharedUserInfo].telphoneNumber]  toDateStr:[NSDate getDateStrWithDateFormatter:ALL_DEFAULT_TIME_FORM Date:[NSDate date]] formatter:ALL_DEFAULT_TIME_FORM] hour]<=0)
+    {
+        self.signBtn.selected = YES;
+        [self.signBtn setImage:@"user_qiandao_disabled" withNumberType:0 withAllType:NO];
+        [self.signBtn setTextColor:RGB(240, 240, 240) withTpe:0 withAllType:NO];
+        [self.signBtn setText:@"已打卡" withNumberType:0 withAllType:NO];
+        if (_timer==nil)
+        {
+            _timer= [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(refreshSignView) userInfo:nil repeats:YES];
+        }
+        
+    }
+    else
+    {
+        [_timer invalidate];
+        _timer=nil;
+        self.signBtn.selected = NO;
+        [self.signBtn setImage:@"user_qiandao" withNumberType:0 withAllType:NO];
+        [self.signBtn setTextColor:[UIColor orangeColor] withTpe:0 withAllType:NO];
+        [self.signBtn setText:@"打卡签到" withNumberType:0 withAllType:NO];
+    }
+}
+-(void)dealloc
+{
+    [_timer invalidate];
+    _timer=nil;
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [_timer invalidate];
+    _timer=nil;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
