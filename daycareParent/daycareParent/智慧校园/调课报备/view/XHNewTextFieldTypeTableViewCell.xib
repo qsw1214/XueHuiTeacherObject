@@ -19,14 +19,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="48.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1tK-K5-Vg2" customClass="XHBaseLabel">
-                        <rect key="frame" x="21" y="11" width="118" height="27"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1tK-K5-Vg2" customClass="XHBaseLabel">
+                        <rect key="frame" x="16" y="11" width="138" height="27"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ize-vs-uxs" customClass="XHBaseLabel">
-                        <rect key="frame" x="224" y="11" width="52" height="27"/>
+                        <rect key="frame" x="239" y="11" width="52" height="27"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="52" id="c0e-vS-gx9"/>
                         </constraints>
@@ -35,7 +35,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入节数" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nth-tm-ddc">
-                        <rect key="frame" x="144" y="5" width="75" height="38.5"/>
+                        <rect key="frame" x="159" y="5" width="75" height="38.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="75" id="2j8-Hd-8ob"/>
                         </constraints>
@@ -50,10 +50,10 @@
                     <constraint firstItem="Nth-tm-ddc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="FoS-AK-jnI"/>
                     <constraint firstItem="1tK-K5-Vg2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="M0g-e2-q5i"/>
                     <constraint firstAttribute="bottomMargin" secondItem="1tK-K5-Vg2" secondAttribute="bottom" id="Qgd-7d-fav"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="Ize-vs-uxs" secondAttribute="trailing" constant="28" id="RAZ-FZ-bS9"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Ize-vs-uxs" secondAttribute="trailing" constant="13" id="RAZ-FZ-bS9"/>
                     <constraint firstItem="Nth-tm-ddc" firstAttribute="leading" secondItem="1tK-K5-Vg2" secondAttribute="trailing" constant="5" id="RTJ-Wz-juc"/>
                     <constraint firstItem="Ize-vs-uxs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="TKJ-tL-Sjp"/>
-                    <constraint firstItem="1tK-K5-Vg2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="Vd5-6t-EXG"/>
+                    <constraint firstItem="1tK-K5-Vg2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Vd5-6t-EXG"/>
                     <constraint firstItem="Ize-vs-uxs" firstAttribute="leading" secondItem="Nth-tm-ddc" secondAttribute="trailing" constant="5" id="hR4-Mi-riY"/>
                     <constraint firstAttribute="bottomMargin" secondItem="Ize-vs-uxs" secondAttribute="bottom" id="rny-cL-Pz1"/>
                     <constraint firstItem="Ize-vs-uxs" firstAttribute="leading" secondItem="Nth-tm-ddc" secondAttribute="trailing" constant="5" id="zPK-6P-O02"/>

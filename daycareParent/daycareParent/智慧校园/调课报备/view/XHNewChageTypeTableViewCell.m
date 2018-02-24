@@ -17,7 +17,7 @@
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self=[super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        _titleLabel=[[XHBaseLabel alloc] initWithFrame:CGRectMake(20, 0, 70, self.contentView.bounds.size.height)];
+        _titleLabel=[[XHBaseLabel alloc] initWithFrame:CGRectMake(10, 0, 70, self.contentView.bounds.size.height)];
         [self.contentView addSubview:_titleLabel];
         _selectLabel=[[XHBaseLabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-90, 0, 52, self.contentView.bounds.size.height)];
         [self.contentView addSubview:_selectLabel];

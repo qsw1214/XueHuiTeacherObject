@@ -133,7 +133,7 @@
         case 3:
         {
             self.datePickerView.delegate=self;
-            self.datePickerView.modelyTpe=XHCustomDatePickerViewModelAllDayType;
+            self.datePickerView.datePickerView.maximumDate=nil; self.datePickerView.modelyTpe=XHCustomDatePickerViewModelAllDayType;
             [[XHHelper sharedHelper].currentViewController.view addSubview:self.datePickerView];
 
         }

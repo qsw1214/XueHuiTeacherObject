@@ -214,7 +214,7 @@
     if (!_inputContent)
     {
         _inputContent = [[BaseTextView alloc]init];
-        [_inputContent setPlaceholder:@"请输入作业内容"];
+        [_inputContent setPlaceholder:@"请输入公告内容"];
         [_inputContent setTextDeletage:self];
         [_inputContent setPlaceholderColor:RGB(169.0, 169.0, 169.0)];
     }

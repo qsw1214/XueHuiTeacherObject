@@ -14,12 +14,10 @@
 #import "XHCookBookViewController.h" //!<  食谱
 #import "XHSyllabusViewController.h"  //!< 课程表
 #import "XHAchievementViewController.h" //!< 成绩
-#import "XHSafeLocationViewController.h" //!< 定位
 #import "XHDynamicsViewController.h" //!< 班级动态
 #import "XHLoginViewController.h"
 #import "AppDelegate.h"
 #import <AVFoundation/AVFoundation.h>
-#import "XHBindCardViewController.h"//!<扫一扫绑定卡
 #import "XHAssignmentHomeWorkViewController.h"  //!< 发布作业
 #import "XHAddNoticeViewController.h" //!< 通知公告
 #import "XHDayRollCallViewController.h"//!< 日常点名
