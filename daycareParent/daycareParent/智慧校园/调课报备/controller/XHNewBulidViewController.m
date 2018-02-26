@@ -22,7 +22,6 @@
     BaseTableView *_tableView;
     NSInteger _tag;
     NSString * _bizType ;  //!< 业务类型(1:调课 2:代课)
-    NSString *_formerTeacherId ;   //!< 原任课教师Id
     NSString *_formerSubjectId ;//!< 课程Id
     NSString *_clazzName ; //!< 班级名字
     NSString *_appointedTeacherId ;   //!< 委任教师Id
@@ -115,9 +114,20 @@
             cell.selectLabel.text=@"请选择";
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.titleLabel.text=TITLE[indexPath.row];
-            if (indexPath.row==2) {
-                cell.selectLabel.text=@"请输入";
-               cell.accessoryType = UITableViewCellAccessoryNone;
+            switch (indexPath.row) {
+                case 0:
+                {
+                    cell.selectLabel.text=[XHUserInfo sharedUserInfo].nickName;
+                    cell.accessoryType = UITableViewCellAccessoryNone;
+                }
+                    break;
+                    
+                case 2:
+                {
+                    cell.selectLabel.text=@"请输入";
+                    cell.accessoryType = UITableViewCellAccessoryNone;
+                }
+                    break;
             }
             return cell;
         }
@@ -132,7 +142,6 @@
    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     switch (indexPath.row) {
-            case 0:
              case 4:
         {
             XHTeacherAddressBookViewController *teacherAddressBook=[XHTeacherAddressBookViewController new];
@@ -142,12 +151,6 @@
                 XHNewTextFieldTypeTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
                 cell.selectLabel.text=itemObject.model.teacherName;
                 switch (indexPath.row) {
-                    case 0:
-                    {
-                        _formerTeacherId=itemObject.model.ID;
-                    }
-                        break;
-                        
                     case 4:
                     {
                         _appointedTeacherId=itemObject.model.ID;
@@ -185,11 +188,9 @@
         case 2:
         {
             [UIAlertController addtextFeildWithController:self indexBlock:^(NSInteger index, id object) {
-                
                     XHNewTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
                     cell.selectLabel.text=object;
                     _clazzName=object;
-                
             }];
 
         }
@@ -257,10 +258,6 @@
 #pragma mark-------------提交按钮--------------
 -(void)sureBtnClick
 {
-    if ([[NSString safeString:_formerTeacherId] isEqualToString:@""]) {
-        [XHShowHUD showNOHud:@"请选择原任老师"];
-        return;
-    }
     if ([[NSString safeString:_formerSubjectId]  isEqualToString:@""]) {
         [XHShowHUD showNOHud:@"请选择课程名称"];
         return;
@@ -291,7 +288,7 @@
         return;
     }
     [self.netWorkConfig setObject:_bizType forKey:@"bizType"];
-    [self.netWorkConfig setObject:_formerTeacherId forKey:@"formerTeacherId"];
+    [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"formerTeacherId"];
     [self.netWorkConfig setObject:_formerSubjectId forKey:@"formerSubjectId"];
      [self.netWorkConfig setObject:_clazzName forKey:@"clazzName"];
      [self.netWorkConfig setObject:_appointedTeacherId forKey:@"appointedTeacherId"];
@@ -303,62 +300,10 @@
     [self.netWorkConfig postWithUrl:@"zzjt-app-api_bizInfo001" sucess:^(id object, BOOL verifyObject) {
         if (verifyObject)
         {
-//        //数据还原
-//            [self resetData];
             [self.navigationController popViewControllerAnimated:YES];
         }
-    } error:^(NSError *error) {
-        
-    }];
+    } error:^(NSError *error) {}];
 }
-#pragma mark  数据还原
--(void)resetData
-{
-    _formerTeacherId =@"";
-    _formerSubjectId =@"";
-    _clazzName =@"";
-    _appointedTeacherId =@"";
-   _appointedSubjectId=@"";
-    _beginTime=@"";
-   _subjectNum =@"";
-    _actorId=@"";
-    _shr=@"";
-    for (int i=0; i<9; i++) {
-        if (i==2||i==7)
-        {
-            NSIndexPath *  indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-            //找到对应的cell
-            XHNewTextFieldTypeTableViewCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
-            if (i==2) {
-               cell.selectLabel.text=@"请选择";
-            }
-            if (i==7)
-            {
-                cell.textFeild.text=@"";
-            }
-            
-        }
-        else if (i==8)
-        {
-            NSIndexPath *  indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-            //找到对应的cell
-            XHNewHeardTableViewCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
-            [cell.headBtn sd_setBackgroundImageWithURL:nil forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
-            cell.nameLabel.text=@"";
-        }
-        else
-        {
-            NSIndexPath *  indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-            //找到对应的cell
-            XHNewTableViewCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
-            cell.selectLabel.text=@"请选择";
-        }
-       
-    }
-   
-}
-
-// 老
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
