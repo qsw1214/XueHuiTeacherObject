@@ -16,7 +16,7 @@ typedef NS_ENUM(NSInteger,EducationCloudInformationType)
 
 
 #define EducationCloudImageName @[@"ico_jiaofu",@"ico_xingqu",@"ico_shiti",@"ico_shipin",@"ico_xuexi",@"ico_shequ"]
-#define EducationCloudTitle @[@"辅教用品",@"兴趣辅导",@"试题练习",@"教学视频",@"在线学习",@"兴趣社区"]
+#define EducationCloudTitle @[@"教辅用品",@"兴趣辅导",@"试题练习",@"教学视频",@"在线学习",@"兴趣社区"]
 
 #import "XHEducationCloudContentView.h"
 #import "XHEducationCloudMenuView.h"

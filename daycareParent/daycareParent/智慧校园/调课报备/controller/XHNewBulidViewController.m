@@ -22,15 +22,21 @@
     BaseTableView *_tableView;
     NSInteger _tag;
     NSString * _bizType ;  //!< 业务类型(1:调课 2:代课)
-    NSString *_formerSubjectId ;//!< 课程Id
+     NSString *_formerSubject ;//!< 原任课程
+    NSString *_formerSubjectId ;//!< 原任课程Id
     NSString *_clazzName ; //!< 班级名字
+    NSString *_formerTeacher ; //!< 原任教师
+    NSString *_formerTeacherId;//!<原任老师Id
+    NSString *_appointedTeacher ;   //!< 委任教师
     NSString *_appointedTeacherId ;   //!< 委任教师Id
+     NSString *_appointedSubject;//!<委任课程
     NSString *_appointedSubjectId;//!<委任课程Id
     NSString *_beginTime;//!< 上课时间 格式：yyyy-MM-dd HH:mm
     NSString *_subjectNum ;//!< 几节课
     NSString *_actorId;   //!<申请人ID（教师Id）
     NSString *_shr;//!< 审核人ID（限制一位审核人）
-
+    NSString *_shrName;//!< 审核人（限制一位审核人）
+    NSString *_shrHeadPic;//!< 审核人头像（限制一位审核人）
 }
 @end
 
@@ -39,6 +45,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+     _bizType=@"1";
     _tableView=[[BaseTableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
     _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
     _tableView.delegate=self;
@@ -50,7 +57,34 @@
       [_tableView registerNib:[UINib nibWithNibName:@"XHNewHeardTableViewCell" bundle:nil] forCellReuseIdentifier:@"headcell"];
     [_tableView registerClass:[XHNewChageTypeTableViewCell class] forCellReuseIdentifier:@"chageTypeCell"];
     [self.view addSubview:_tableView];
-   
+    [XHShowHUD showTextHud];
+    [[XHUserInfo sharedUserInfo] getTeachersAddressBook:^(BOOL isOK, NSArray *array)
+     {
+         if (isOK)
+         {
+             [XHShowHUD hideHud];
+             [array enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
+              {
+                  obj=[obj objectItemKey:@"propValue"];
+                  XHTeacherAddressBookFrame *frame = [XHTeacherAddressBookFrame alloc];
+                  XHTeacherAddressBookModel *model = [[XHTeacherAddressBookModel alloc]init];
+                  [model setItemObject:obj];
+                  [frame setModel:model];
+                  if ([[XHUserInfo sharedUserInfo].selfId isEqualToString:model.ID])
+                  {
+                      _formerTeacher=model.teacherName;
+                      _formerTeacherId=model.ID;
+                  }
+                  [_tableView reloadData];
+              }];
+             
+         }
+         
+     }];
+}
+-(void)refreshHead
+{
+    [_tableView refreshReload];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -74,7 +108,6 @@
             XHNewChageTypeTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"chageTypeCell" forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.titleLabel.text=TITLE[indexPath.row];
-             _bizType=@"1";
             [cell.melodyBtn addTarget:self action:@selector(selectBtnClick:) forControlEvents:UIControlEventTouchUpInside];
             [cell.otherBtn addTarget:self action:@selector(selectBtnClick:) forControlEvents:UIControlEventTouchUpInside];
             return cell;
@@ -89,6 +122,7 @@
             cell.titleLabel.text=TITLE[indexPath.row];
             cell.textFeild.hidden=NO;
             cell.selectLabel.text=@"节课程";
+            cell.textFeild.text=[NSString safeString:_subjectNum];
             cell.textFeild.keyboardType=UIKeyboardTypeNumberPad;
             [cell.textFeild addTarget:self action:@selector(textChage:) forControlEvents:UIControlEventEditingChanged];
             return cell;
@@ -102,6 +136,8 @@
             [cell.sureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [cell.headBtn addTarget:self action:@selector(headBtnClick) forControlEvents:UIControlEventTouchUpInside];
             [cell.sureBtn addTarget:self action:@selector(sureBtnClick) forControlEvents:UIControlEventTouchUpInside];
+            [cell.headBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:[NSString safeString:_shrHeadPic]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
+            cell.nameLabel.text=[NSString safeString:_shrName];
             return cell;
         }
             
@@ -117,17 +153,37 @@
             switch (indexPath.row) {
                 case 0:
                 {
-                    cell.selectLabel.text=[XHUserInfo sharedUserInfo].nickName;
+                    cell.selectLabel.text=[NSString safeString:_formerTeacher];
                     cell.accessoryType = UITableViewCellAccessoryNone;
                 }
                     break;
-                    
+                case 1:
+                {
+                    cell.selectLabel.text=[[NSString safeString:_formerSubject] isEqualToString:@""]?@"请选择":_formerSubject;
+                }
+                    break;
                 case 2:
                 {
-                    cell.selectLabel.text=@"请输入";
+                    cell.selectLabel.text=[[NSString safeString:_clazzName] isEqualToString:@""]?@"请输入":_clazzName;
                     cell.accessoryType = UITableViewCellAccessoryNone;
                 }
                     break;
+                    case 4:
+                {
+                    cell.selectLabel.text=[[NSString safeString:_appointedTeacher] isEqualToString:@""]?@"请选择":_appointedTeacher;
+                }
+                    break;
+                case 5:
+                {
+                    cell.selectLabel.text=[[NSString safeString:_appointedSubject] isEqualToString:@""]?@"请选择":_appointedSubject;
+                }
+                    break;
+                case 6:
+                {
+                    cell.selectLabel.text=[[NSString safeString:_beginTime] isEqualToString:@""]?@"请选择":_beginTime;
+                }
+                    break;
+                
             }
             return cell;
         }
@@ -154,6 +210,7 @@
                     case 4:
                     {
                         _appointedTeacherId=itemObject.model.ID;
+                     _appointedTeacher=itemObject.model.teacherName;
                     }
                         break;
                 }
@@ -172,12 +229,14 @@
                         
                     {
                         _formerSubjectId=model.ID;
+                        _formerSubject=model.subjectName;
                     }
                         break;
                         
                     case 5:
                     {
                         _appointedSubjectId=model.ID;
+                        _appointedSubject=model.subjectName;
                     }
                         break;
                 }
@@ -253,6 +312,8 @@
         [cell.headBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:itemObject.model.headerUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
         cell.nameLabel.text=itemObject.model.teacherName;
         _shr=itemObject.model.ID;
+        _shrName=itemObject.model.teacherName;
+        _shrHeadPic=itemObject.model.headerUrl;
     };
 }
 #pragma mark-------------提交按钮--------------
