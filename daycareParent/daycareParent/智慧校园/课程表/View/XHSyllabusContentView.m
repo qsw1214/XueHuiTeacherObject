@@ -94,6 +94,7 @@
     [self.menuControl setItemArray:self.menuArray];
     [self.menuControl didSelectAtIndexItem:[self getWeekDay]];
     self.classListModel=model;
+    [self.tableView beginRefreshing];
     [self getSyllabusWithMode:model];
 }
 

@@ -56,7 +56,7 @@ static NSString *const AliYunHost = @"img.ixuehui.cn";
                 put.bucketName = BucketName;
                 NSString *imageName = [XHHelper createGuid];
                 put.objectKey = [NSString stringWithFormat:@"xh/%@",imageName];   //正式环境
-                [callBackNames addObject:imageName];
+                
                 NSData *data = UIImageJPEGRepresentation(image, 0.3);
                 put.uploadingData = data;
                 
@@ -64,6 +64,7 @@ static NSString *const AliYunHost = @"img.ixuehui.cn";
                 [putTask waitUntilFinished]; // 阻塞直到上传完成
                 if (!putTask.error)
                 {
+                    [callBackNames addObject:imageName];
                     NSLog(@"upload object success!");
                 }
                 else

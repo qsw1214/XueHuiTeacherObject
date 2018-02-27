@@ -20,15 +20,21 @@
 -(id)init
 {
     if (self=[super init]) {
+        _bgView=[[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        _bgView.backgroundColor=[UIColor blackColor];
+        _bgView.alpha=0.2;
+        [self addSubview:_bgView];
         NSArray *arry=[XHUserInfo sharedUserInfo].classListArry;
         UIScrollView *scrollView=[[UIScrollView alloc] init];
+        scrollView.backgroundColor=[UIColor whiteColor];
         [self addSubview:scrollView];
+       
         if (arry.count<5) {
-            scrollView.frame=CGRectMake(0, 0, [self getWidth], 30*arry.count);
+            scrollView.frame=CGRectMake(SCREEN_WIDTH-[self getWidth]-10, 64, [self getWidth], 30*arry.count);
         }
         else
         {
-            scrollView.frame=CGRectMake(0, 0, [self getWidth], 30*5);
+            scrollView.frame=CGRectMake(SCREEN_WIDTH-[self getWidth]-10, 64, [self getWidth], 30*5);
         }
         scrollView.contentSize=CGSizeMake([self getWidth], 30*arry.count);
         for (int i=0; i<arry.count; i++) {
@@ -103,5 +109,10 @@
     
     CGSize textSize = [str boundingRectWithSize:CGSizeMake(MAXFLOAT, 30) options:NSStringDrawingTruncatesLastVisibleLine attributes:attributes context:nil].size;;
         return textSize.width+6;
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self removeFromSuperview];
+    self.isExist=NO;
 }
 @end

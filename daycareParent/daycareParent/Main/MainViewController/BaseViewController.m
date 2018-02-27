@@ -246,15 +246,17 @@
     if (_classListView==nil)
     {
         _classListView=[[XHCustomView alloc] init];
-        NSArray *arry=[XHUserInfo sharedUserInfo].classListArry;
-        if (arry.count < 5)
-        {
-            _classListView.frame=CGRectMake(SCREEN_WIDTH-[_classListView getWidth]-10, 64, [_classListView getWidth], 30*arry.count);
-        }
-        else
-        {
-            _classListView.frame=CGRectMake(SCREEN_WIDTH-[_classListView getWidth]-10, 64, [_classListView getWidth], 30*5);
-        }
+        _classListView.backgroundColor=[UIColor clearColor];
+        _classListView.frame=[UIScreen mainScreen].bounds;
+//        NSArray *arry=[XHUserInfo sharedUserInfo].classListArry;
+//        if (arry.count < 5)
+//        {
+//            _classListView.frame=CGRectMake(SCREEN_WIDTH-[_classListView getWidth]-10, 64, [_classListView getWidth], 30*arry.count);
+//        }
+//        else
+//        {
+//            _classListView.frame=CGRectMake(SCREEN_WIDTH-[_classListView getWidth]-10, 64, [_classListView getWidth], 30*5);
+//        }
     }
     return _classListView;
 }

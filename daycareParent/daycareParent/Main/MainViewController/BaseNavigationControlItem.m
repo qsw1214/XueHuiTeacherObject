@@ -191,7 +191,7 @@
     if (_titleLabel == nil)
     {
         _titleLabel = [[UILabel alloc]init];
-        [_titleLabel setAdjustsFontSizeToFitWidth:YES];
+        //[_titleLabel setAdjustsFontSizeToFitWidth:YES];
         [_titleLabel setFont:[UIFont systemFontOfSize:14.0]];
         [_titleLabel setTextColor:[UIColor whiteColor]];
     }
