@@ -12,7 +12,8 @@
 #import "ShootVideoViewController.h"
 #import "WPhotoViewController.h"
 #import "VideoManagerViewController.h"
-
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <Photos/Photos.h>
 
 @interface XHNewDynamicsViewController () <XHNewDynamicsContentViewDeletage,ShootVideoViewControllerDelegate,ShootVideoViewControllerDelegate>
 
@@ -121,16 +122,24 @@
                 {
                     case 0:
                     {
-                        ShootVideoViewController *shoot = [[ShootVideoViewController alloc] init];
-                        shoot.delegate = self;
-                        [self presentViewController:shoot animated:YES completion:nil];
+                        if ([self isSourceTypeCameraAllow])
+                        {
+                            ShootVideoViewController *shoot = [[ShootVideoViewController alloc] init];
+                            shoot.delegate = self;
+                            [self presentViewController:shoot animated:YES completion:nil];
+                        }
+                       
                     }
                         break;
                         
                     case 1:
                     {
-                        VideoManagerViewController *video=[[VideoManagerViewController alloc] initWithVideoManageWithType:VideoSourceTypeSavedPhotosAlbum setDeletate:self];
-                        [self presentViewController:video animated:YES completion:nil];
+                        if ([self isSourceTypePhotosAlbumAllow])
+                        {
+                            VideoManagerViewController *video=[[VideoManagerViewController alloc] initWithVideoManageWithType:VideoSourceTypeSavedPhotosAlbum setDeletate:self];
+                            [self presentViewController:video animated:YES completion:nil];
+                        }
+                       
                     }
                         break;
                 }
@@ -196,6 +205,52 @@
     [self.dataArray addObject:imageModel];
     [self.contentView setItemArray:self.dataArray];
     [self.contentView setModelType:XHNewDynamicsVideoContentModelType];
+}
+#pragma mark --- 相机授权
+-(BOOL)isSourceTypeCameraAllow
+{
+    AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if (status == AVAuthorizationStatusRestricted || status == AVAuthorizationStatusDenied) {
+        
+        UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"请去-> [设置 - 隐私 - 相机 - 学汇教师] 打开访问开关" preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alertC addAction:alertA];
+        [self presentViewController:alertC animated:YES completion:nil];
+        return NO;
+    }
+    return YES;
+    
+}
+#pragma mark --- 相册授权
+-(BOOL)isSourceTypePhotosAlbumAllow
+{
+    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+    switch (status)
+    {
+        case PHAuthorizationStatusAuthorized:
+        case PHAuthorizationStatusNotDetermined:
+        {
+            return YES;
+        }
+            break;
+        case PHAuthorizationStatusRestricted:
+        case PHAuthorizationStatusDenied:
+        {
+            UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"请去-> [设置 - 隐私 - 相册 - 学汇教师] 打开访问开关" preferredStyle:(UIAlertControllerStyleAlert)];
+            UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            
+            [alertC addAction:alertA];
+            [self presentViewController:alertC animated:YES completion:nil];
+            return NO;
+        }
+            break;
+    }
+    return YES;
 }
 
 

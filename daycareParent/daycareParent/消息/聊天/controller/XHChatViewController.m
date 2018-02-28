@@ -64,6 +64,24 @@
  */
 -(void)onSelectedTableRow:(RCConversationModelType)conversationModelType conversationModel:(RCConversationModel *)model atIndexPath:(NSIndexPath *)indexPath
 {
+    [[XHUserInfo sharedUserInfo] getTeachersAddressBook:^(BOOL isOK, NSArray *array)
+     {
+         if (isOK)
+         {
+             [array enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
+              {
+                  obj = [obj objectItemKey:@"propValue"];
+                  if ([[obj objectItemKey:@"id"] isEqualToString:[XHUserInfo sharedUserInfo].selfId])
+                  {
+                      [XHUserInfo sharedUserInfo].teacherName =[obj objectItemKey:@"teacherName"];
+                      [XHUserInfo sharedUserInfo].headPic =[obj objectItemKey:@"headPic"];
+                  }
+                  
+              }];
+         }
+         
+         
+     }];
     AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [app sendRCIMInfo];
     XHRCConversationViewController *conversationVC = [[XHRCConversationViewController alloc]init];
