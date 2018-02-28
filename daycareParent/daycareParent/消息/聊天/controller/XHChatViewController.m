@@ -94,8 +94,11 @@
 }
 - (void)notifyUpdateUnreadMessageCount
 {
-    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [app reloadIMBadge];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        [app reloadIMBadge];
+    });
+  
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -109,10 +112,10 @@
 - (void)didLongPressCellPortrait:(RCConversationModel *)model
 {
     if (model.isTop) {
-        //[self showAlertSheet:@"取消置顶" targetID:model.targetId type:1];
+        [self showAlertSheet:@"取消置顶" targetID:model.targetId type:1];
           [[RCIMClient sharedRCIMClient] setConversationToTop:ConversationType_PRIVATE targetId:model.targetId isTop:NO];
     }else{
-       // [self showAlertSheet:@"置顶" targetID:model.targetId type:0];
+       [self showAlertSheet:@"置顶" targetID:model.targetId type:0];
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [[RCIMClient sharedRCIMClient] setConversationToTop:ConversationType_PRIVATE targetId:model.targetId isTop:YES];
@@ -123,6 +126,24 @@
         [self presentViewController:alertController animated:YES completion:nil];
     }
     
+}
+- (void)showAlertSheet:(NSString *)title targetID:(NSString *)targetID type:(NSInteger)type
+{
+    [UIAlertController alertWithmessage:@"是否置顶？" titlesArry:@[title,@"取消"] controller:self indexBlock:^(NSInteger index, id object) {
+        if (index==0) {
+            if (type == 0) {
+                [[RCIMClient sharedRCIMClient] setConversationToTop:ConversationType_PRIVATE targetId:targetID isTop:YES];
+            }else{
+                [[RCIMClient sharedRCIMClient] setConversationToTop:ConversationType_PRIVATE targetId:targetID isTop:NO];
+            }
+            [XHShowHUD showOKHud:title];
+            [self refreshConversationTableViewIfNeeded];
+        }
+    }];
+}
+- (void)showEmptyConversationView
+{
+    NSLog(@"111111");
 }
 -(UIView *)navigationView
 {

@@ -41,7 +41,7 @@
     [self navtionHidden:YES];
     [self setNavtionTitle:@"智慧校园"];
     [self navtionItemHidden:NavigationItemLeftType];
-    [self updateVersion];
+    //[self updateVersion];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     
    
