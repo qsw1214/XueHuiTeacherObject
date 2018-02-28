@@ -14,6 +14,8 @@
 
 @property (nonatomic, strong) UIButton *finishBtn;
 
+@property (nonatomic,strong) UILabel *tipLabel;
+
 //显示照片
 @property (nonatomic, strong) UICollectionView *ado_collectionView;
 
@@ -42,16 +44,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+  
     [self makeNav];
     
     self.view.backgroundColor = UIColorFromRGB(0xffffff);
     
     [self.view addSubview:[self finishButton]];
+    [self.view addSubview:self.tipLabel];
     
-    [self.view addSubview:[self ado_collectionView]];
     
-    [self getAllPhotos];
+    
+    
+    if ([self isSourceTypePhotosAlbumAllow])
+    {
+        [self.view addSubview:[self ado_collectionView]];
+        [self getAllPhotos];
+        [self.tipLabel setHidden:YES];
+    }
+    else
+    {
+        [self.tipLabel setHidden:NO];
+    }
+    
     
 }
 
@@ -382,4 +396,41 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+-(UILabel *)tipLabel
+{
+    if (!_tipLabel)
+    {
+        _tipLabel = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 100, SCREEN_WIDTH-40.0, SCREEN_HEIGHT-200.0)];
+        [_tipLabel setTextColor:[UIColor grayColor]];
+        [_tipLabel setFont:FontLevel2];
+        [_tipLabel setNumberOfLines:0];
+        [_tipLabel setTextAlignment:NSTextAlignmentCenter];
+        [_tipLabel setText:@"请去-> [设置 - 隐私 - 相册 - 学汇教师] 打开访问开关"];
+    }
+    return _tipLabel;
+}
+
+#pragma mark --- 相册授权
+-(BOOL)isSourceTypePhotosAlbumAllow
+{
+    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+    switch (status)
+    {
+        case PHAuthorizationStatusAuthorized:
+        case PHAuthorizationStatusNotDetermined:
+        {
+            return YES;
+        }
+            break;
+        case PHAuthorizationStatusRestricted:
+        case PHAuthorizationStatusDenied:
+        {
+            
+              return NO;
+        }
+            break;
+    }
+      return YES;
+}
 @end

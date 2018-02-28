@@ -8,7 +8,8 @@
 
 #import "CameraManageViewController.h"
 #import <AliyunOSSiOS/OSSService.h>
-
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <Photos/Photos.h>
 @interface CameraManageViewController () <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
 @end
@@ -33,6 +34,7 @@
         {
             case SourceTypeCamera:
             {
+                [self isSourceTypeCameraAllow];
                 if ([self isSourceTypeCamera])  //判断是否有相机
                 {
                    
@@ -57,6 +59,7 @@
                 break;
             case SourceTypeHeadPortraitCamera:
             {
+                [self isSourceTypeCameraAllow];
                 if ([self isSourceTypeCamera])  //判断是否有相机
                 {
                     
@@ -82,12 +85,14 @@
                 break;
             case SourceTypeSavedPhotosAlbum:
             {
+                 [self isSourceTypePhotosAlbumAllow];
                 //相机类型
                 [self setSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
             }
                 break;
             case SourceTypeHeadPortraitSavedPhotosAlbum:
             {
+                 [self isSourceTypePhotosAlbumAllow];
                 //相机类型
                 [self setSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
                 [self setAllowsEditing:YES];
@@ -152,7 +157,49 @@
 {
     return [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
 }
-
+#pragma mark --- 相机授权
+-(void)isSourceTypeCameraAllow
+{
+    AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if (status == AVAuthorizationStatusRestricted || status == AVAuthorizationStatusDenied) {
+        
+        UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"请去-> [设置 - 隐私 - 相机 - 学汇教师] 打开访问开关" preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alertC addAction:alertA];
+        [[XHHelper sharedHelper].currentViewController presentViewController:alertC animated:YES completion:nil];
+    }
+    
+    
+}
+#pragma mark --- 相册授权
+-(void)isSourceTypePhotosAlbumAllow
+{
+    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+    switch (status)
+    {
+        case PHAuthorizationStatusAuthorized:
+        case PHAuthorizationStatusNotDetermined:
+        {
+            
+        }
+            break;
+        case PHAuthorizationStatusRestricted:
+        case PHAuthorizationStatusDenied:
+        {
+            UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"请去-> [设置 - 隐私 - 相册 - 学汇教师] 打开访问开关" preferredStyle:(UIAlertControllerStyleAlert)];
+            UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            
+            [alertC addAction:alertA];
+            [[XHHelper sharedHelper].currentViewController presentViewController:alertC animated:YES completion:nil];
+        }
+            break;
+    }
+}
 
 #pragma mark 保存图片信息
 -(void)imageWriteToSavedPhotosAlbum:(nonnull UIImage*)image

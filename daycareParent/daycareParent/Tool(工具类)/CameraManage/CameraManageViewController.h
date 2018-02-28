@@ -49,4 +49,5 @@ typedef NS_ENUM(NSInteger,CameraType)
  */
 -(void)imageWriteToSavedPhotosAlbum:(nonnull UIImage*)image;
 
+
 @end
