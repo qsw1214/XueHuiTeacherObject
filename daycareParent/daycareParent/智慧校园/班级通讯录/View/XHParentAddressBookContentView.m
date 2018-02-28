@@ -59,6 +59,28 @@
 #pragma mark 下拉刷新的方法
 -(void)refreshHeaderAction
 {
+    [[XHUserInfo sharedUserInfo] getTeachersAddressBook:^(BOOL isOK, NSArray *array)
+     {
+         if (isOK)
+         {
+             [array enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
+              {
+                  obj = [obj objectItemKey:@"propValue"];
+                   if ([[obj objectItemKey:@"id"] isEqualToString:[XHUserInfo sharedUserInfo].selfId])
+                   {
+                   [[XHUserInfo sharedUserInfo] setTeacherName:[obj objectItemKey:@"teacherName"]];
+                   [[XHUserInfo sharedUserInfo] setUserPic:[obj objectItemKey:@"headPic"]];
+                   }
+                  
+              }];
+         }
+         
+         
+     }];
+    
+    
+    
+    
     
     [[XHUserInfo sharedUserInfo] getParentsAddressBook:^(BOOL isOK, NSArray *array)
      {
@@ -72,7 +94,7 @@
                   
                   XHAddressBookSection *section = [[XHAddressBookSection alloc]init];
                   [section setTage:idx];
-                  [section setSectionTitle:[NSString stringWithFormat:@"%@年级%@班",gradeName,clazzName]];
+                  [section setSectionTitle:[NSString stringWithFormat:@"%@%@",gradeName,clazzName]];
                   NSArray *studnetArray = [obj objectItemKey:@"studnetList"];
                   [NSArray enumerateObjectsWithArray:studnetArray usingBlock:^(NSDictionary *itemObj, NSUInteger idx, BOOL *stop)
                   {

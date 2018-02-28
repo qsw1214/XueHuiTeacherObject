@@ -162,7 +162,7 @@
 {
     if (_rightItem == nil)
     {
-        _rightItem = [[BaseNavigationControlItem alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-130, 20, 130, 44)];
+        _rightItem = [[BaseNavigationControlItem alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-140, 20, 130, 44)];
         
     }
     return _rightItem;
