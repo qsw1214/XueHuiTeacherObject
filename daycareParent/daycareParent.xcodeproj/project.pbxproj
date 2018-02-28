@@ -301,6 +301,9 @@
 		4BB792E01FD798B000E0ED72 /* BaseMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB792DF1FD798B000E0ED72 /* BaseMenuModel.m */; };
 		4BB792E31FD79F4F00E0ED72 /* XHSyllabusContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB792E21FD79F4F00E0ED72 /* XHSyllabusContentView.m */; };
 		4BB792E41FD7B3B400E0ED72 /* BaseMenuControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB792D91FD7963600E0ED72 /* BaseMenuControl.m */; };
+		4BB8E21B2046333C0081FC6D /* XHDropDownMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB8E2182046333C0081FC6D /* XHDropDownMenuCell.m */; };
+		4BB8E21C2046333C0081FC6D /* XHDropDownMenuControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB8E21A2046333C0081FC6D /* XHDropDownMenuControl.m */; };
+		4BB8E21F2046335B0081FC6D /* XHDropDownMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB8E21E2046335B0081FC6D /* XHDropDownMenuModel.m */; };
 		4BB96B9A1FF238FB00F0A73C /* XHEducationCloudWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB96B991FF238FB00F0A73C /* XHEducationCloudWebViewController.m */; };
 		4BB9BE9A1FDE4B40004F5622 /* XHEducationCloudContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB9BE991FDE4B40004F5622 /* XHEducationCloudContentView.m */; };
 		4BB9BE9D1FDE4BD5004F5622 /* XHEducationCloudScrollPreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB9BE9C1FDE4BD5004F5622 /* XHEducationCloudScrollPreview.m */; };
@@ -1066,6 +1069,12 @@
 		4BB792DF1FD798B000E0ED72 /* BaseMenuModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseMenuModel.m; sourceTree = "<group>"; };
 		4BB792E11FD79F4F00E0ED72 /* XHSyllabusContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHSyllabusContentView.h; sourceTree = "<group>"; };
 		4BB792E21FD79F4F00E0ED72 /* XHSyllabusContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHSyllabusContentView.m; sourceTree = "<group>"; };
+		4BB8E2172046333C0081FC6D /* XHDropDownMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHDropDownMenuCell.h; sourceTree = "<group>"; };
+		4BB8E2182046333C0081FC6D /* XHDropDownMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHDropDownMenuCell.m; sourceTree = "<group>"; };
+		4BB8E2192046333C0081FC6D /* XHDropDownMenuControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHDropDownMenuControl.h; sourceTree = "<group>"; };
+		4BB8E21A2046333C0081FC6D /* XHDropDownMenuControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHDropDownMenuControl.m; sourceTree = "<group>"; };
+		4BB8E21D2046335B0081FC6D /* XHDropDownMenuModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHDropDownMenuModel.h; sourceTree = "<group>"; };
+		4BB8E21E2046335B0081FC6D /* XHDropDownMenuModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHDropDownMenuModel.m; sourceTree = "<group>"; };
 		4BB96B981FF238FB00F0A73C /* XHEducationCloudWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHEducationCloudWebViewController.h; sourceTree = "<group>"; };
 		4BB96B991FF238FB00F0A73C /* XHEducationCloudWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHEducationCloudWebViewController.m; sourceTree = "<group>"; };
 		4BB9BE981FDE4B40004F5622 /* XHEducationCloudContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHEducationCloudContentView.h; sourceTree = "<group>"; };
@@ -2188,6 +2197,7 @@
 		4B80F2001FCBE43E00BC7B52 /* Tool(工具类) */ = {
 			isa = PBXGroup;
 			children = (
+				4BB8E2162046333C0081FC6D /* XHDropDownMen */,
 				4BFCFFA02041155600136671 /* OSSImageUploader */,
 				8C331458202AC83100F504A9 /* VideoHelper */,
 				8C331451202AAEAE00F504A9 /* VdeoManager */,
@@ -2879,6 +2889,19 @@
 			path = BaseMenu;
 			sourceTree = "<group>";
 		};
+		4BB8E2162046333C0081FC6D /* XHDropDownMen */ = {
+			isa = PBXGroup;
+			children = (
+				4BB8E2172046333C0081FC6D /* XHDropDownMenuCell.h */,
+				4BB8E2182046333C0081FC6D /* XHDropDownMenuCell.m */,
+				4BB8E2192046333C0081FC6D /* XHDropDownMenuControl.h */,
+				4BB8E21A2046333C0081FC6D /* XHDropDownMenuControl.m */,
+				4BB8E21D2046335B0081FC6D /* XHDropDownMenuModel.h */,
+				4BB8E21E2046335B0081FC6D /* XHDropDownMenuModel.m */,
+			);
+			path = XHDropDownMen;
+			sourceTree = "<group>";
+		};
 		4BBC43421FD0F00900555846 /* XHCGRect */ = {
 			isa = PBXGroup;
 			children = (
@@ -2915,37 +2938,6 @@
 				4BCEB731202974FF00ED2829 /* wphoto_select_yes@2x.png */,
 			);
 			path = WPhotoImage;
-			sourceTree = "<group>";
-		};
-
-		4BFB97501FCCF670003EEC8C /* VIP升级 */ = {
-			isa = PBXGroup;
-			children = (
-				8C7AE7481FE7BD8100BE7A02 /* model */,
-				04E5D12D1FD397E10021B842 /* controller */,
-				04E5D12F1FD397E10021B842 /* view */,
-			);
-			path = "VIP升级";
-			sourceTree = "<group>";
-		};
-		4BFB97541FCCF6BC003EEC8C /* 我的优惠券 */ = {
-			isa = PBXGroup;
-			children = (
-				8CDC906F1FE507E100040D19 /* controller */,
-				8CDC906D1FE507E100040D19 /* model */,
-				8CDC906E1FE507E100040D19 /* view */,
-			);
-			path = "我的优惠券";
-			sourceTree = "<group>";
-		};
-		4BFB97581FCCF6FC003EEC8C /* 我的收获地址 */ = {
-			isa = PBXGroup;
-			children = (
-				8C62407A1FD8C1DF00E6C031 /* controller */,
-				04B740091FD81C62008627CF /* view */,
-				8CB5A2521FD77FCF008E97D8 /* model */,
-			);
-			path = "我的收获地址";
 			sourceTree = "<group>";
 		};
 		4BFCFFA02041155600136671 /* OSSImageUploader */ = {
@@ -3601,6 +3593,7 @@
 				4B1066A11FD7D182004A7CB7 /* XHAchievementContentView.m in Sources */,
 				4B3126311FD93CC6000CE894 /* TAAnimatedDotView.m in Sources */,
 				8C019F741FF4C3DB005EBC2C /* XHMessageUserInfo.m in Sources */,
+				4BB8E21C2046333C0081FC6D /* XHDropDownMenuControl.m in Sources */,
 				4BB792B31FD77AB800E0ED72 /* XHAskforLeaveAddPhotoControl.m in Sources */,
 				4B07CC4D1FD535FD00B2DBDA /* XHParentsMeetingModel.m in Sources */,
 				4B80F2451FCBF01B00BC7B52 /* BaseTextFieldControl.m in Sources */,
@@ -3693,6 +3686,7 @@
 				4B80F3251FCBFD6F00BC7B52 /* NSError+MTLModelException.m in Sources */,
 				4B577FAA1FF5EF770023ACBC /* XHNoticeViewController.m in Sources */,
 				4B550E4D1FF364AD004CF7ED /* XHSortedArrayComparator.m in Sources */,
+				4BB8E21B2046333C0081FC6D /* XHDropDownMenuCell.m in Sources */,
 				4B80F31D1FCBFD6F00BC7B52 /* MTLModel.m in Sources */,
 				4B80F2471FCBF01B00BC7B52 /* BaseTipView.m in Sources */,
 				8C7974021FE76F7A00AF6F6A /* UIImage+DevKit.m in Sources */,
@@ -3871,6 +3865,7 @@
 				4B577FE11FF63FB30023ACBC /* NSArray+MASAdditions.m in Sources */,
 				4B4DD0152027EEF600ACFFA8 /* XHNoticeRecipientGroupTableViewCell.m in Sources */,
 				4B80F2ED1FCBF08800BC7B52 /* AFURLSessionManager.m in Sources */,
+				4BB8E21F2046335B0081FC6D /* XHDropDownMenuModel.m in Sources */,
 				4BA8C4C51FCFD0AF006CBEBC /* XHRegisterViewController.m in Sources */,
 				8CBA35FF2011BBDB00485643 /* XHDayRollCallViewController.m in Sources */,
 				4B80F27E1FCBF04800BC7B52 /* MJRefreshHeader.m in Sources */,
