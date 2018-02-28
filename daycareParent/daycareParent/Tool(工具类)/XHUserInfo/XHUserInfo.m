@@ -182,7 +182,7 @@ static XHUserInfo *userInfo = nil;
          {
              if (verifyObject)
              {
-                 [userInfo setIsTeachersAddressBook:YES];
+                 
                  NSDictionary *objectDictionary = [object objectItemKey:@"object"];
                  NSArray *itemArray = [objectDictionary objectItemKey:@"list"];
                  if ([NSObject isArray:itemArray])
@@ -190,7 +190,18 @@ static XHUserInfo *userInfo = nil;
                      [self.teachersAddressBookArray setArray:itemArray];
                  }
                  
-                 succeedBlock(YES,self.teachersAddressBookArray);
+                 if ([self.teachersAddressBookArray count])
+                 {
+                     [userInfo setIsTeachersAddressBook:YES];
+                     succeedBlock(YES,self.teachersAddressBookArray);
+                 }
+                 else
+                 {
+                     [userInfo setIsTeachersAddressBook:NO];
+                     succeedBlock(NO,self.teachersAddressBookArray);
+                 }
+                 
+                 
              }
              else
              {
@@ -225,16 +236,24 @@ static XHUserInfo *userInfo = nil;
          {
              if (verifyObject)
              {
-                 [userInfo setIsparentsAddressBook:YES];
+                 
                  NSArray *objectArray = [object objectItemKey:@"object"];
                  if ([NSObject isArray:objectArray])
                  {
                      
                      [userInfo.parentsAddressBookArray setArray:objectArray];
                  }
-                
                  
-                 succeedBlock(YES,userInfo.parentsAddressBookArray);
+                 if ([userInfo.parentsAddressBookArray count])
+                 {
+                     [userInfo setIsparentsAddressBook:YES];
+                     succeedBlock(YES,userInfo.parentsAddressBookArray);
+                 }
+                 else
+                 {
+                     [userInfo setIsparentsAddressBook:NO];
+                     succeedBlock(NO,userInfo.parentsAddressBookArray);
+                 }
              }
              else
              {

@@ -73,6 +73,7 @@
 #pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self dismiss];
     if ([self.deletage respondsToSelector:@selector(didSelectItemObjectAtIndexPath:)])
     {
         [self.deletage didSelectItemObjectAtIndexPath:[self.dataArray objectAtIndex:indexPath.row]];
