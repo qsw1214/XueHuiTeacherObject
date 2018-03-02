@@ -56,7 +56,7 @@
 {
     if (subview)
     {
-//        [self.view addSubview:self.contentView];
+        [self.view addSubview:self.contentView];
     }
 }
 
@@ -271,7 +271,7 @@
     [super touchesBegan:touches withEvent:event];
     XHDropDownMenuControl *dorp = [[XHDropDownMenuControl alloc]initWithDeletage:self];
     
-    NSArray *menuArray = @[@"一年级三班",@"二年级四班",@"五年级六班",@"初中班",@"高中三班",@"初中一年级",@"幼儿园大班"];
+    NSArray *menuArray = @[@"一年级三班",@"二年级四班",@"五年级六班",@"初中班",@"高中三班",@"初中一年级",@"幼儿园大班",@"一年级三班",@"二年级四班",@"五年级六班",@"初中班",@"高中三班",@"初中一年级",@"幼儿园大班",@"一年级三班",@"二年级四班",@"五年级六班",@"初中班",@"高中三班",@"初中一年级",@"幼儿园大班",@"一年级三班",@"二年级四班",@"五年级六班",@"初中班",@"高中三班",@"初中一年级",@"幼儿园大班"];
     NSMutableArray *tempMenuArray = [NSMutableArray array];
     for (NSString *title in menuArray)
     {

@@ -12,7 +12,7 @@
 
 typedef void(^ClassListBlock)(BOOL isOK,NSMutableArray *classListArry);
 typedef void(^SubjectListBlock)(BOOL isOK,NSMutableArray *subjectListArry);
-typedef void (^AddressBookSucceedBlock) (BOOL isOK,NSArray *array);
+typedef void (^AddressBookSucceedBlock) (BOOL isOK,NSMutableArray *array);
 
 
 

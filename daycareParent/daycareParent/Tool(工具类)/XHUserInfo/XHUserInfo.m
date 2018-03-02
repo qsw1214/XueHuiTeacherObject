@@ -240,7 +240,6 @@ static XHUserInfo *userInfo = nil;
                  NSArray *objectArray = [object objectItemKey:@"object"];
                  if ([NSObject isArray:objectArray])
                  {
-                     
                      [userInfo.parentsAddressBookArray setArray:objectArray];
                  }
                  
@@ -293,6 +292,7 @@ static XHUserInfo *userInfo = nil;
     return _teachersAddressBookArray;
 }
 
+
 -(NSMutableArray *)parentsAddressBookArray
 {
     if (!_parentsAddressBookArray)
@@ -304,15 +304,17 @@ static XHUserInfo *userInfo = nil;
 
 -(XHNetWorkConfig *)classListNet
 {
-    if (_classListNet==nil) {
+    if (_classListNet==nil)
+    {
         _classListNet=[XHNetWorkConfig new];
     }
     return _classListNet;
 }
 -(XHNetWorkConfig *)subjectListNet
 {
-    if (_subjectListNet==nil) {
-        _subjectListNet=[XHNetWorkConfig new];
+    if (_subjectListNet==nil)
+    {
+        _subjectListNet = [XHNetWorkConfig new];
     }
     return _subjectListNet;
 }

@@ -137,16 +137,12 @@
 
 -(void)show
 {
-    
     [kWindow addSubview:self];
-    [UIView animateWithDuration:0.15 animations:^{
-
-
+    [UIView animateWithDuration:0.25 animations:^{
+        
         [self.dropDownMenuCollectionView setFrame:CGRectMake(SCREEN_WIDTH-140.0, 64, 120, 200)];
-
-    } completion:^(BOOL finished)
-     {
-     }];
+        
+    } completion:^(BOOL finished){}];
 }
 
 
@@ -154,7 +150,7 @@
 
 -(void)dismiss
 {
-    [UIView animateWithDuration:0.15 animations:^{
+    [UIView animateWithDuration:0.20 animations:^{
         
         
         [self.dropDownMenuCollectionView setFrame:CGRectMake(SCREEN_WIDTH-140.0, 64, 120, 0)];
@@ -162,6 +158,7 @@
     } completion:^(BOOL finished)
      {
          [self removeFromSuperview];
+         [self setDropDownMenuCollectionView:nil];
      }];
 }
 
