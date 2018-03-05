@@ -125,8 +125,8 @@
 /**
  *  将得到的devicetoken 传给融云用于离线状态接收push ，您的app后台要上传推送证书
  *
- *  @param application <#application description#>
- *  @param deviceToken <#deviceToken description#>
+ *  @param application application description
+ *  @param deviceToken deviceToken description
  */
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
@@ -194,8 +194,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     XHUserInfo *user = [XHUserInfo sharedUserInfo];
     RCUserInfo *userInfo = [[RCUserInfo alloc] init];
     userInfo.userId = user.selfId;
-    userInfo.portraitUri = ALGetFileHeadThumbnail(user.headPic);
-    userInfo.name = user.nickName;
+    userInfo.portraitUri = ALGetFileHeadThumbnail(user.userPic);
+    userInfo.name = user.teacherName;
     [RCIM sharedRCIM].enableMessageAttachUserInfo = YES;
     [RCIM sharedRCIM].currentUserInfo = userInfo;
     [[RCIM sharedRCIM] refreshUserInfoCache:userInfo withUserId:user.selfId];

@@ -35,7 +35,11 @@
 }
 
 
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.contentView.tableView beginRefreshing];
+}
 
 -(void)addSubViews:(BOOL)subview
 {

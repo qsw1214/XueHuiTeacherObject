@@ -37,6 +37,14 @@
     [self setUserID:[object objectItemKey:@"id"]];
     [self.courseArray setArray:[self getArry:[object objectItemKey:@"clazzList"]]];
     [self setSelectType:XHAddressBookModelNormalType];
+    
+    if ([self.userID isEqualToString:[XHUserInfo sharedUserInfo].selfId])
+    {
+        [[XHUserInfo sharedUserInfo] setTeacherName:self.teacherName];
+        [[XHUserInfo sharedUserInfo] setUserPic:self.headPic];
+    }
+    
+    
 }
 
 -(void)setParentsItemObject:(NSDictionary *)object

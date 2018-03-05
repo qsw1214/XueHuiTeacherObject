@@ -25,10 +25,9 @@
 
 #import "XHPunchSignViewController.h"//!< 打卡签到
 #import "XHAddressBoardViewController.h" //!< 通讯录
-#import "XHDropDownMenuControl.h"
 
 
-@interface XHSmartCampusViewController () <XHFunctionMenuControlDeletage,XHAdvertisementControlDeletage,XHDropDownMenuControlDeletage>
+@interface XHSmartCampusViewController () <XHFunctionMenuControlDeletage,XHAdvertisementControlDeletage>
 
 @property (nonatomic,strong) XHSmartCampusContentView *contentView;
 
@@ -42,7 +41,7 @@
     [self navtionHidden:YES];
     [self setNavtionTitle:@"智慧校园"];
     [self navtionItemHidden:NavigationItemLeftType];
-    [self updateVersion];
+    //[self updateVersion];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     
    
@@ -167,11 +166,6 @@
     
 }
 
-#pragma mark XHDropDownMenuControlDeletage
--(void)didSelectItemObjectAtIndexPath:(XHDropDownMenuModel*)object
-{
-    NSLog(@"%@-%@",object.title,object.objectID);
-}
 
 
 
@@ -186,21 +180,6 @@
     }
     return _contentView;
 }
-
-
-
-//-(BOOL)refreshChild
-//{
-//    if (![XHUserInfo sharedUserInfo].childListArry.count) {
-//        [XHShowHUD showNOHud:@"请先绑定孩子！"];
-//        return NO;
-//    }
-//    else
-//    {
-//        return YES;
-//    }
-//}
-
 
 -(void)updateVersion
 {
@@ -266,23 +245,33 @@
 
 
 
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    [super touchesBegan:touches withEvent:event];
-    XHDropDownMenuControl *dorp = [[XHDropDownMenuControl alloc]initWithDeletage:self];
-    
-    NSArray *menuArray = @[@"一年级三班",@"二年级四班",@"五年级六班",@"初中班",@"高中三班",@"初中一年级",@"幼儿园大班",@"一年级三班",@"二年级四班",@"五年级六班",@"初中班",@"高中三班",@"初中一年级",@"幼儿园大班",@"一年级三班",@"二年级四班",@"五年级六班",@"初中班",@"高中三班",@"初中一年级",@"幼儿园大班",@"一年级三班",@"二年级四班",@"五年级六班",@"初中班",@"高中三班",@"初中一年级",@"幼儿园大班"];
-    NSMutableArray *tempMenuArray = [NSMutableArray array];
-    for (NSString *title in menuArray)
-    {
-        XHDropDownMenuModel *model = [[XHDropDownMenuModel alloc]init];
-        [model setObjectID:@"ABIER48KLS"];
-        [model setTitle:title];
-        [tempMenuArray addObject:model];
-    }
-    
-    
-    [dorp setItemArray:tempMenuArray];
-    [dorp show];
-}
+/**
+ Description
+
+ @param touches touches description
+ @param event event description
+ 
+ 
+ 
+ -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+ {
+ [super touchesBegan:touches withEvent:event];
+ XHDropDownMenuControl *dorp = [[XHDropDownMenuControl alloc]initWithDeletage:self];
+ 
+ NSArray *menuArray = @[@"一年级三班",@"二年级四班",@"五年级六班",@"初中班",@"高中三班",@"初中一年级",@"幼儿园大班",@"一年级三班",@"二年级四班",@"五年级六班",@"初中班",@"高中三班",@"初中一年级",@"幼儿园大班",@"一年级三班",@"二年级四班",@"五年级六班",@"初中班",@"高中三班",@"初中一年级",@"幼儿园大班",@"一年级三班",@"二年级四班",@"五年级六班",@"初中班",@"高中三班",@"初中一年级",@"幼儿园大班"];
+ NSMutableArray *tempMenuArray = [NSMutableArray array];
+ for (NSString *title in menuArray)
+ {
+ XHDropDownMenuModel *model = [[XHDropDownMenuModel alloc]init];
+ [model setObjectID:@"ABIER48KLS"];
+ [model setTitle:title];
+ [tempMenuArray addObject:model];
+ }
+ 
+ 
+ [dorp setItemArray:tempMenuArray];
+ [dorp show];
+ }
+ */
+
 @end

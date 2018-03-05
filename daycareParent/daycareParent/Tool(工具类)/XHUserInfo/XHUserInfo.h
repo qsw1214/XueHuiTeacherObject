@@ -24,7 +24,9 @@ typedef void (^AddressBookSucceedBlock) (BOOL isOK,NSMutableArray *array);
 @property (nonatomic,copy) NSString *headPic;//!< 头像
 @property (nonatomic,copy) NSString *ID;//!< ID
 @property (nonatomic,copy) NSString *loginName;//!< 登录名
-@property (nonatomic,copy) NSString *nickName; //!< teacherName
+@property (nonatomic,copy) NSString *nickName; //!< nickName
+@property (nonatomic,copy) NSString *teacherName; //!< teacherName
+@property (nonatomic,copy) NSString *userPic; //!< userPic
 @property (nonatomic,copy) NSString *selfId;   //!< teacherId
 @property (nonatomic,copy) NSString *sessionId;//!< sessionId
 @property (nonatomic,copy) NSString *sex;//!< 性别
