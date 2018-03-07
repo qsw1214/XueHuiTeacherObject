@@ -164,6 +164,9 @@
          switch (obj.model.optionSelectType)
          {
              case XHNoticeRecipientGroupOptionNormalityType:
+             {
+                 [obj.model setSelectType:XHNoticeRecipientGroupNormalityType];
+             }
                  break;
              case XHNoticeRecipientGroupOptionSelectedType:
              {
@@ -201,6 +204,43 @@
     
     [self.tableView refreshReloadData];
 }
+
+
+
+#pragma mark 用于循环遍历已选中的人数
+-(void)didselectCyclicTraversal:(NSArray*)array
+{
+    [self setSelectIndex:0];
+    [NSArray enumerateObjectsWithArray:array usingBlock:^(XHNoticeRecipientGroupFrame *obj, NSUInteger idx, BOOL *stop)
+     {
+         switch (obj.model.selectType)
+         {
+             case XHNoticeRecipientGroupNormalityType:
+                 break;
+             case XHNoticeRecipientGroupSelectedType:
+             {
+                 [self setSelectIndex:(self.selectIndex+1)];
+             }
+                 break;
+         }
+     }];
+    
+    NSInteger count = [array count];
+    if (self.selectIndex == count)
+    {
+        [self.allSelectControl setIsAction:YES];
+    }
+    else
+    {
+        [self.allSelectControl setIsAction:NO];
+    }
+    
+    [self.allSelectControl setDescribe:[NSString stringWithFormat:@"%zd/%zd",self.selectIndex,count]];
+    
+    [self.tableView refreshReloadData];
+}
+
+
 
 #pragma mark - Deletage Method
 - (NSInteger)tableView:(BaseTableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -253,7 +293,7 @@
          }
      }];
     
-    [self cyclicTraversal:self.dataArray];
+    [self didselectCyclicTraversal:self.dataArray];
 }
 
 
