@@ -207,7 +207,7 @@
 
 
 
-#pragma mark 用于循环遍历已选中的人数
+#pragma mark 用于循环遍历已选中的人数(为了解决外面点击之后，内部不能点击的问题)
 -(void)didselectCyclicTraversal:(NSArray*)array
 {
     [self setSelectIndex:0];
