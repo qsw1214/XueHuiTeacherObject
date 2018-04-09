@@ -9,7 +9,7 @@
 #import "XHSyllabusViewController.h"
 #import "XHSyllabusContentView.h"
 #import "XHChildListModel.h"
-@interface XHSyllabusViewController ()<XHCustomViewDelegate>
+@interface XHSyllabusViewController ()<XHCustomViewDelegate,XHDropDownMenuControlDeletage>
 
 @property (nonatomic,strong) XHSyllabusContentView *contentView; //!< 内容视图
 @end
@@ -70,18 +70,39 @@
 -(void)rightItemAction:(BaseNavigationControlItem*)sender
 {
     
-    if (self.classListView.isExist==NO) {
-         self.classListView.delegate=self;
-        [self.view addSubview:self.classListView];
-        self.classListView.isExist=YES;
-    }
-    else
+    XHDropDownMenuControl *dorp = [[XHDropDownMenuControl alloc]initWithDeletage:self withType:DropRightType];
+    
+    
+    NSMutableArray *tempArray = [NSMutableArray array];
+    for (int i=1; i<=10; i++)
     {
-        [self.classListView removeFromSuperview];
-        self.classListView.isExist=NO;
+        XHDropDownMenuModel *model = [[XHDropDownMenuModel alloc]init];
+        [model setTitle:[NSString stringWithFormat:@"一年级(%d)班",i]];
+        [model setObjectID:@"ADSFOP1903LSW"];
+        [tempArray addObject:model];
     }
+    
+    [dorp setDataArray:tempArray];
+    [dorp show];
+    
+    
+//    if (self.classListView.isExist==NO) {
+//         self.classListView.delegate=self;
+//        [self.view addSubview:self.classListView];
+//        self.classListView.isExist=YES;
+//    }
+//    else
+//    {
+//        [self.classListView removeFromSuperview];
+//        self.classListView.isExist=NO;
+//    }
 }
 
+
+-(void)didSelectItemObjectAtIndexPath:(id)object
+{
+    
+}
 
 
 @end

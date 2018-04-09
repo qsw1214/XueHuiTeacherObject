@@ -34,6 +34,7 @@
     self = [super initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     if (self)
     {
+//        CGFloat Height = [XHHelper sharedHelpe]
         [self setDeletage:deletage];
         [self addSubview:self.dropDownMenuCollectionView];
         switch (type)
@@ -158,7 +159,7 @@
     [kWindow addSubview:self];
     [UIView animateWithDuration:0.25 animations:^{
         
-        [self.dropDownMenuCollectionView setFrame:CGRectMake(SCREEN_WIDTH-140.0, 64, 120, 200)];
+        [self.dropDownMenuCollectionView setHeight:200.0];
         
     } completion:^(BOOL finished){}];
 }
@@ -171,7 +172,7 @@
     [UIView animateWithDuration:0.20 animations:^{
         
         
-        [self.dropDownMenuCollectionView setFrame:CGRectMake(SCREEN_WIDTH-140.0, 64, 120, 0)];
+        [self.dropDownMenuCollectionView setHeight:0.0];
         
     } completion:^(BOOL finished)
      {

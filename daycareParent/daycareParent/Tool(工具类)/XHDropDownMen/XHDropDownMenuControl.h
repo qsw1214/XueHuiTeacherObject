@@ -34,14 +34,14 @@ typedef NS_ENUM(NSInteger ,DropType)
  初始化并设置代理对象
  
  
- XHDropDownMenuControl *dorp = [[XHDropDownMenuControl alloc]initWithDeletage:self withType:DropCenterType];
+ XHDropDownMenuControl *dorp = [[XHDropDownMenuControl alloc]initWithDeletage:self withType:DropRightType];
  
  
  NSMutableArray *tempArray = [NSMutableArray array];
- for (int i=0; i<10; i++)
+ for (int i=1; i<=10; i++)
  {
  XHDropDownMenuModel *model = [[XHDropDownMenuModel alloc]init];
- [model setTitle:@"一年级三班"];
+ [model setTitle:[NSString stringWithFormat:@"一年级(%d)班",i]];
  [model setObjectID:@"ADSFOP1903LSW"];
  [tempArray addObject:model];
  }

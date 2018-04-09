@@ -47,6 +47,7 @@
 #import "UIButton+Category.h"
 #import "UITableView+FDTemplateLayoutCell.h"
 #import "OSSImageUploader.h"
+#import "XHDropDownMenuControl.h"
 #import "XHHeaderControl.h"
 
 #endif /* Header_h */

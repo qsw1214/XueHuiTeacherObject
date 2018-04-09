@@ -11,7 +11,7 @@
 
 
 @property (nonatomic,strong) UILabel *titleLabel; //!< 标题标签
-
+@property (nonatomic,strong) UIView *bottomView; //!< 底部颜色视图
 
 
 @end
@@ -29,10 +29,21 @@
         [self addSubview:self.letfItem];
         [self addSubview:self.rightItem];
         [self addSubview:self.titleLabel];
-        
+        [self addSubview:self.bottomView];
         [self setItemColor:NO];
     }
     return self;
+}
+
+
+-(void)resetFrame:(CGRect)frame
+{
+    [self setFrame:frame];
+    CGFloat height = frame.size.height > 64.0 ? 30.0 : 0.0;
+    [self.letfItem setFrame:CGRectMake(0, (20+height), 80, 44)];
+    [self.titleLabel setFrame:CGRectMake(80, (20+height), SCREEN_WIDTH-(80*2), 44)];
+    [self.rightItem setFrame:CGRectMake(SCREEN_WIDTH-80, (20+height), 80, 44)];
+    [self.bottomView setFrame:CGRectMake(0, ((64.0+height)-0.5), SCREEN_WIDTH, 0.5)];
 }
 
 
@@ -85,6 +96,17 @@
 {
     [self.rightItem setTitle:title];
 }
+
+-(UIView *)bottomView
+{
+    if (_bottomView==nil)
+    {
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, 63, SCREEN_WIDTH, 1)];
+        _bottomView.backgroundColor=LineViewColor;
+    }
+    return _bottomView;
+}
+
 
 
 #pragma mark 设置左右按钮标题颜色
