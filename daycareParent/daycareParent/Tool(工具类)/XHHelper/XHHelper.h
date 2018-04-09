@@ -67,6 +67,13 @@
  */
 +(NSString*)weekdayWithDate:(NSString*)fromDate;
 
+/**
+ 判断是否为iphonex
+ 
+ @return 判断是否为iphonex
+ */
+- (BOOL)isIphoneX;
 
++(NSString*)iphoneType;
 
 @end

@@ -86,7 +86,7 @@
 
 //项目的主题颜色（浅绿色）
 #define MainColor RGBAlpha(239.0, 123.0, 37.0, 1.0)
-
+#define kHeaderColor RGB(127, 233, 199)
 
 #pragma mark  项目中字体大小
 
@@ -158,6 +158,35 @@
 #define   HUANGJIN_VIPCOLOR  [UIColor orangeColor]
 #define   BAIJIN_VIPCOLOR  RGB(216, 145, 0)
 #define  AutoLogin @"autoLogin"
+#define  kNSLog(...) NSLog(@"%@%s",__VA_ARGS__,__func__)
+#define   kFormat(...)  [NSString stringWithFormat:__VA_ARGS__]
+#define   kFont(...)   [UIFont systemFontOfSize:__VA_ARGS__]
+
+
+
+
+/**
+ *  Weaky self
+ */
+#define weakifySelf  \
+__weak __typeof(&*self)weakSelf = self;
+
+#define strongifySelf \
+__strong __typeof(&*weakSelf)self = weakSelf;
+/**
+ *  Color
+ */
+#define kKeyWindow [UIApplication sharedApplication].keyWindow
+#define ColorWithRGBA(r, g, b, a) [UIColor colorWithRed:(r) / 255.0f green:(g) / 255.0f blue:(b) / 255.0f alpha:(a)]
+
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+#define UIColorFromRGBA(rgbValue, a) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
+
+#define UI_SCREEN_WIDTH  ([[UIScreen mainScreen] bounds].size.width)
+#define UI_SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define UI_SCREEN_BOUNDS ([UIScreen mainScreen].bounds)
+
 
 #define  FAMILY_TIES @[@"爸爸",@"妈妈",@"爷爷",@"奶奶",@"外公",@"外婆",@"其他"]
 #define ALGetFileVedio(name) [NSString stringWithFormat:@"http://vedio.ixuehui.cn/vedio/%@",name]
