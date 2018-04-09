@@ -15,7 +15,12 @@
 
 
 
-
+typedef NS_ENUM(NSInteger ,DropType)
+{
+    DropLeftType  = 1,  //!< 居左显示
+    DropCenterType = 2, //!< 居中显示
+    DropRightType  = 3, //!< 居右显示
+};
 
 #import "BaseControl.h"
 #import "XHDropDownMenuCell.h"
@@ -24,30 +29,33 @@
 @interface XHDropDownMenuControl : BaseControl
 
 
-
 /**
+ 
  初始化并设置代理对象
  
  
- XHDropDownMenuControl *dorp = [[XHDropDownMenuControl alloc]initWithDeletage:self];
+ XHDropDownMenuControl *dorp = [[XHDropDownMenuControl alloc]initWithDeletage:self withType:DropCenterType];
  
  
  NSMutableArray *tempArray = [NSMutableArray array];
  for (int i=0; i<10; i++)
  {
-     XHDropDownMenuModel *model = [[XHDropDownMenuModel alloc]init];
-     [model setTitle:@"一年级三班"];
-     [model setObjectID:@"ADSFOP1903LSW"];
-     [tempArray addObject:model];
+ XHDropDownMenuModel *model = [[XHDropDownMenuModel alloc]init];
+ [model setTitle:@"一年级三班"];
+ [model setObjectID:@"ADSFOP1903LSW"];
+ [tempArray addObject:model];
  }
  
  [dorp setDataArray:tempArray];
  [dorp show];
 
  @param deletage 代理对象
+ @param type 气泡弹框类型
  @return 返回该类实例对象
  */
--(instancetype)initWithDeletage:(id<XHDropDownMenuControlDeletage>)deletage;
+-(instancetype)initWithDeletage:(id<XHDropDownMenuControlDeletage>)deletage withType:(DropType)type;
+
+
 
 
 /**

@@ -236,7 +236,6 @@
     }
     
     [self.allSelectControl setDescribe:[NSString stringWithFormat:@"%zd/%zd",self.selectIndex,count]];
-    
     [self.tableView refreshReloadData];
 }
 
