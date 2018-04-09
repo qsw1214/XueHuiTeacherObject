@@ -414,6 +414,7 @@
 		8C1D47C2207B3E23005AA0B4 /* IQToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1D47B2207B3E23005AA0B4 /* IQToolbar.m */; };
 		8C1D47C3207B3E23005AA0B4 /* IQUIView+IQKeyboardToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1D47B4207B3E23005AA0B4 /* IQUIView+IQKeyboardToolbar.m */; };
 		8C1D47C4207B3E23005AA0B4 /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8C1D47B6207B3E23005AA0B4 /* IQKeyboardManager.bundle */; };
+		8C1D47F7207B4A2A005AA0B4 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C1D47F6207B4A2A005AA0B4 /* VideoToolbox.framework */; };
 		8C2246B01FF2262200B7A07F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2246AF1FF2262200B7A07F /* WebKit.framework */; };
 		8C2311641FE216A00013F476 /* XHChildListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2311631FE216A00013F476 /* XHChildListModel.m */; };
 		8C2311671FE22C330013F476 /* XHVIPModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2311661FE22C330013F476 /* XHVIPModel.m */; };
@@ -1336,6 +1337,7 @@
 		8C1D47B3207B3E23005AA0B4 /* IQUIView+IQKeyboardToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUIView+IQKeyboardToolbar.h"; sourceTree = "<group>"; };
 		8C1D47B4207B3E23005AA0B4 /* IQUIView+IQKeyboardToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQUIView+IQKeyboardToolbar.m"; sourceTree = "<group>"; };
 		8C1D47B6207B3E23005AA0B4 /* IQKeyboardManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IQKeyboardManager.bundle; sourceTree = "<group>"; };
+		8C1D47F6207B4A2A005AA0B4 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		8C2246AF1FF2262200B7A07F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		8C2311621FE216A00013F476 /* XHChildListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHChildListModel.h; sourceTree = "<group>"; };
 		8C2311631FE216A00013F476 /* XHChildListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHChildListModel.m; sourceTree = "<group>"; };
@@ -1521,53 +1523,54 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C8337061FDD002100F48A25 /* libresolv.tbd in Frameworks */,
+				8C1D47F7207B4A2A005AA0B4 /* VideoToolbox.framework in Frameworks */,
+				8C7AE7431FE796A400BE7A02 /* CoreMotion.framework in Frameworks */,
+				8CDDA92D1FDA7C0B000B3BAB /* SafariServices.framework in Frameworks */,
+				8CDDA92B1FDA7BF9000B3BAB /* Photos.framework in Frameworks */,
+				8CDDA9291FDA7BE9000B3BAB /* UIKit.framework in Frameworks */,
+				8CDDA9271FDA7BD4000B3BAB /* SystemConfiguration.framework in Frameworks */,
+				8CDDA9251FDA7BC5000B3BAB /* QuartzCore.framework in Frameworks */,
+				8CDDA9231FDA7BB5000B3BAB /* OpenGLES.framework in Frameworks */,
+				8CDDA9211FDA7BA1000B3BAB /* MapKit.framework in Frameworks */,
+				8CDDA91F1FDA7B85000B3BAB /* libz.tbd in Frameworks */,
+				8CDDA91D1FDA7B79000B3BAB /* libxml2.tbd in Frameworks */,
+				8CDDA91B1FDA7B6B000B3BAB /* libstdc++.tbd in Frameworks */,
+				8CDDA9191FDA7B5E000B3BAB /* libsqlite3.tbd in Frameworks */,
+				8CDDA9151FDA7B20000B3BAB /* libc++.tbd in Frameworks */,
+				8CDDA9171FDA7B4F000B3BAB /* libc++abi.tbd in Frameworks */,
+				8CDDA9131FDA7B14000B3BAB /* ImageIO.framework in Frameworks */,
+				8CDDA9111FDA7B05000B3BAB /* CoreVideo.framework in Frameworks */,
+				8CDDA90F1FDA7AF6000B3BAB /* CoreTelephony.framework in Frameworks */,
+				8CDDA90D1FDA7AE6000B3BAB /* CoreMedia.framework in Frameworks */,
+				8CDDA90B1FDA7AD6000B3BAB /* CoreLocation.framework in Frameworks */,
+				8CDDA9091FDA7AC5000B3BAB /* CoreGraphics.framework in Frameworks */,
+				8CDDA9071FDA7AA9000B3BAB /* CoreAudio.framework in Frameworks */,
+				8CDDA9051FDA7A90000B3BAB /* CFNetwork.framework in Frameworks */,
+				8CDDA9031FDA7A7E000B3BAB /* AVFoundation.framework in Frameworks */,
+				8CDDA9021FDA7A75000B3BAB /* AudioToolbox.framework in Frameworks */,
+				8CDDA8FF1FDA7A44000B3BAB /* AssetsLibrary.framework in Frameworks */,
 				4B34184B1FFC840E00A5EC56 /* QuickLook.framework in Frameworks */,
 				8C1AA8F8207B272200DDCBB3 /* RongIMLib.framework in Frameworks */,
 				4B632ACA1FE11DFD00B90B94 /* JavaScriptCore.framework in Frameworks */,
 				8C2246B01FF2262200B7A07F /* WebKit.framework in Frameworks */,
 				8C1D4731207B2C1F005AA0B4 /* AliyunOSSiOS.framework in Frameworks */,
-				8CDDA9031FDA7A7E000B3BAB /* AVFoundation.framework in Frameworks */,
-				8CDDA90B1FDA7AD6000B3BAB /* CoreLocation.framework in Frameworks */,
-				8C7AE7431FE796A400BE7A02 /* CoreMotion.framework in Frameworks */,
-				8CDDA91B1FDA7B6B000B3BAB /* libstdc++.tbd in Frameworks */,
-				8CDDA91F1FDA7B85000B3BAB /* libz.tbd in Frameworks */,
-				8CDDA9151FDA7B20000B3BAB /* libc++.tbd in Frameworks */,
-				8CDDA90F1FDA7AF6000B3BAB /* CoreTelephony.framework in Frameworks */,
-				8CDDA9251FDA7BC5000B3BAB /* QuartzCore.framework in Frameworks */,
 				8C8337001FDCFFCE00F48A25 /* Security.framework in Frameworks */,
-				8CDDA9271FDA7BD4000B3BAB /* SystemConfiguration.framework in Frameworks */,
 				8C7AE7411FE7967B00BE7A02 /* libsqlite3.0.tbd in Frameworks */,
-				8CDDA9051FDA7A90000B3BAB /* CFNetwork.framework in Frameworks */,
-				8C8337061FDD002100F48A25 /* libresolv.tbd in Frameworks */,
 				4B632ACC1FE11E3A00B90B94 /* libstdc++.6.0.9.tbd in Frameworks */,
 				8C8337021FDCFFEF00F48A25 /* AdSupport.framework in Frameworks */,
-				8CDDA9091FDA7AC5000B3BAB /* CoreGraphics.framework in Frameworks */,
 				8C1AA8F4207B272200DDCBB3 /* AgoraRtcEngineKit.framework in Frameworks */,
-				8CDDA9231FDA7BB5000B3BAB /* OpenGLES.framework in Frameworks */,
 				4B632AC51FE11CB700B90B94 /* AMapFoundationKit.framework in Frameworks */,
 				8C1AA8F5207B272200DDCBB3 /* RongCallLib.framework in Frameworks */,
 				4B632AC61FE11CB700B90B94 /* AMapLocationKit.framework in Frameworks */,
 				4B632AC71FE11CB700B90B94 /* AMapSearchKit.framework in Frameworks */,
 				4B632AC81FE11CB800B90B94 /* MAMapKit.framework in Frameworks */,
 				8C8337041FDD000F00F48A25 /* UserNotifications.framework in Frameworks */,
-				8CDDA9291FDA7BE9000B3BAB /* UIKit.framework in Frameworks */,
 				8C8336FE1FDCFFA500F48A25 /* Foundation.framework in Frameworks */,
 				8C8336FC1FDCFF6100F48A25 /* CoreFoundation.framework in Frameworks */,
-				8CDDA92D1FDA7C0B000B3BAB /* SafariServices.framework in Frameworks */,
-				8CDDA92B1FDA7BF9000B3BAB /* Photos.framework in Frameworks */,
-				8CDDA9211FDA7BA1000B3BAB /* MapKit.framework in Frameworks */,
 				8C8336F91FDCFEB300F48A25 /* jcore-ios-1.1.1.a in Frameworks */,
 				8C1AA8F6207B272200DDCBB3 /* libopencore-amrnb.a in Frameworks */,
-				8CDDA9171FDA7B4F000B3BAB /* libc++abi.tbd in Frameworks */,
-				8CDDA9131FDA7B14000B3BAB /* ImageIO.framework in Frameworks */,
-				8CDDA9111FDA7B05000B3BAB /* CoreVideo.framework in Frameworks */,
-				8CDDA90D1FDA7AE6000B3BAB /* CoreMedia.framework in Frameworks */,
 				8C8336FA1FDCFEB300F48A25 /* jpush-ios-3.0.2.a in Frameworks */,
-				8CDDA9071FDA7AA9000B3BAB /* CoreAudio.framework in Frameworks */,
-				8CDDA9021FDA7A75000B3BAB /* AudioToolbox.framework in Frameworks */,
-				8CDDA8FF1FDA7A44000B3BAB /* AssetsLibrary.framework in Frameworks */,
-				8CDDA9191FDA7B5E000B3BAB /* libsqlite3.tbd in Frameworks */,
-				8CDDA91D1FDA7B79000B3BAB /* libxml2.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3653,6 +3656,7 @@
 		8CDDA8FD1FDA7A24000B3BAB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8C1D47F6207B4A2A005AA0B4 /* VideoToolbox.framework */,
 				4B34184A1FFC840E00A5EC56 /* QuickLook.framework */,
 				8C2246AF1FF2262200B7A07F /* WebKit.framework */,
 				8C7AE7421FE7969900BE7A02 /* CoreMotion.framework */,
@@ -4369,7 +4373,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -4419,7 +4423,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -4494,7 +4498,10 @@
 					"$(PROJECT_DIR)/daycareParent/Tool(工具类)/ping++/One",
 					"$(PROJECT_DIR)/daycareParent/ThirdLibrary/Rong_Cloud_iOS_IMLib_CallLib_SDK_v2_8_29_Stable-2/IMLib",
 				);
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-licucore",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jt.xhm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -4570,7 +4577,10 @@
 					"$(PROJECT_DIR)/daycareParent/Tool(工具类)/ping++/One",
 					"$(PROJECT_DIR)/daycareParent/ThirdLibrary/Rong_Cloud_iOS_IMLib_CallLib_SDK_v2_8_29_Stable-2/IMLib",
 				);
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-licucore",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jt.xhm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
