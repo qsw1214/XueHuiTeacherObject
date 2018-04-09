@@ -14,6 +14,5 @@
 -(void)loginRongCloud:(NSString *)token;
 - (void)setJpushAlias:(NSString *)loginName;
 - (void)reloadIMBadge;
-- (void)sendRCIMInfo;
 @end
 

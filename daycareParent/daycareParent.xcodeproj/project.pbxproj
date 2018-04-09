@@ -4494,7 +4494,7 @@
 					"$(PROJECT_DIR)/daycareParent/Tool(工具类)/ping++/One",
 					"$(PROJECT_DIR)/daycareParent/ThirdLibrary/Rong_Cloud_iOS_IMLib_CallLib_SDK_v2_8_29_Stable-2/IMLib",
 				);
-				OTHER_LDFLAGS = "-licucore";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jt.xhm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -4570,7 +4570,7 @@
 					"$(PROJECT_DIR)/daycareParent/Tool(工具类)/ping++/One",
 					"$(PROJECT_DIR)/daycareParent/ThirdLibrary/Rong_Cloud_iOS_IMLib_CallLib_SDK_v2_8_29_Stable-2/IMLib",
 				);
-				OTHER_LDFLAGS = "-licucore";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jt.xhm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
