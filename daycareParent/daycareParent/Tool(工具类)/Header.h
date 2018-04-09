@@ -34,4 +34,5 @@
 #import "XHUserInfo.h"
 #import "XHHelper.h"
 #import "OSSImageUploader.h"
+#import "XHDropDownMenuControl.h"
 #endif /* Header_h */
