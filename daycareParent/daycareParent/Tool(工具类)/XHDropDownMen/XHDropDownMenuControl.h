@@ -17,11 +17,10 @@
 
 typedef NS_ENUM(NSInteger ,DropType)
 {
-    DropLeftType  = 1,
-    DropCenterType = 2,
-    DropRightType  = 3,
+    DropLeftType  = 1,  //!< 居左显示
+    DropCenterType = 2, //!< 居中显示
+    DropRightType  = 3, //!< 居右显示
 };
-
 
 #import "BaseControl.h"
 #import "XHDropDownMenuCell.h"
@@ -35,7 +34,7 @@ typedef NS_ENUM(NSInteger ,DropType)
  初始化并设置代理对象
  
  
- XHDropDownMenuControl *dorp = [[XHDropDownMenuControl alloc]initWithDeletage:self];
+ XHDropDownMenuControl *dorp = [[XHDropDownMenuControl alloc]initWithDeletage:self withType:DropCenterType];
  
  
  NSMutableArray *tempArray = [NSMutableArray array];
