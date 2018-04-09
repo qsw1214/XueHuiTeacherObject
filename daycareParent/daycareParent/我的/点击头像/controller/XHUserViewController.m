@@ -10,7 +10,7 @@
 #import "XHUserTableViewCell.h"
 #import "XHHelper.h"
 #import "CameraManageViewController.h"
-#import <RongIMKit/RongIMKit.h>
+#import <RongIMLib/RongIMLib.h>
 #import "XHLoginViewController.h"
 #import "JPUSHService.h"
 @interface XHUserViewController ()<UITableViewDelegate,UITableViewDataSource,CameraManageDeletage,XHCustomDatePickerViewDelegate>
@@ -261,7 +261,7 @@
         } error:^(NSError *error) {
             [XHShowHUD hideHud];
         }];
-        [[RCIM sharedRCIM]disconnect];
+        [[RCIMClient sharedRCIMClient]disconnect:YES];
         [JPUSHService setTags:nil alias:@"" fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias){
         }];
         [NSUserDefaults removeObjectItemForKey:AutoLogin];

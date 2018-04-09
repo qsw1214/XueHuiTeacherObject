@@ -1,169 +1,274 @@
 //
-//  XHChatViewController.m
-//  daycareParent
+//  TLChatViewController.m
+//  TLMessageView
 //
-//  Created by 钧泰科技 on 2017/12/8.
-//  Copyright © 2017年 XueHui. All rights reserved.
+//  Created by 郭锐 on 16/8/18.
+//  Copyright © 2016年 com.garry.message. All rights reserved.
 //
 
 #import "XHChatViewController.h"
-#import "AppDelegate.h"
-#import "XHRCConversationViewController.h"
+#import "XHTextMessageCell.h"
+#import "XHPhotoMessageCell.h"
+#import "XHVoiceMessageCell.h"
+#import "XHLocationMessageCell.h"
+#import "TLChatInputView.h"
+#import "XHChatManager.h"
+#import <RongIMLib/RongIMLib.h>
+#import "MJRefresh.h"
+#import "XHMessageUserInfo.h"
+#import "Masonry.h"
+#import "XHChatManager.h"
 @interface XHChatViewController ()
-{
-    NSMutableArray *modelArr;
-}
-@property(nonatomic,strong)UIView *navigationView;
+
+<UITableViewDelegate,
+UITableViewDataSource,
+XHChatManagerDelegate>
+
+@property(nonatomic,strong)TLChatInputView *inputView;
+@property(nonatomic,strong)NSMutableArray *messages;
+@property(nonatomic,assign)long number;
 @end
 
 @implementation XHChatViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    [self setDisplayConversationTypes:@[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION)]];
-    //设置需要显示哪些类型的会话
-    [self setDisplayConversationTypes:@[@(ConversationType_PRIVATE),
-                                        @(ConversationType_DISCUSSION),
-                                        @(ConversationType_CHATROOM),
-                                        @(ConversationType_GROUP),
-                                        @(ConversationType_APPSERVICE),
-                                        @(ConversationType_SYSTEM)]];
-    //设置需要将哪些类型的会话在会话列表中聚合显示
-    [self setCollectionConversationType:@[@(ConversationType_DISCUSSION),
-                                          @(ConversationType_GROUP)]];
+    [XHChatManager shareManager].delegate = self;
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.number=0;
+    [self.view addSubview:self.inputView];
+    [self.inputView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).offset(0);
+        make.right.equalTo(self.view.mas_right).offset(0);
+        make.bottom.equalTo(self.view.mas_bottom).offset(0);
+        make.height.mas_offset(@45);
+    }];
     
+    [self.view addSubview:self.chatTableView];
+    [self.chatTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).offset(0);
+        make.right.equalTo(self.view.mas_right).offset(0);
+        make.top.equalTo(self.navigationView.mas_bottom).offset(0);
+        make.bottom.equalTo(self.inputView.mas_top).offset(0);
+    }];
+
+    @WeakObj(self);
+    //发送消息回调
+    self.inputView.sendMsgAction =  ^(RCMessageContent *x){
+        @StrongObj(self);
+        [self sendMessage:x];
+    };
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    // 隐藏时间
+    header.lastUpdatedTimeLabel.hidden = YES;
+    header.stateLabel.hidden=YES;
+    self.chatTableView.header=header;
     
-    //   self.title = @"消息";
-    
-    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
-    image.image = [UIImage imageNamed:@"wuxiaoxi"];
-    [image setContentMode:UIViewContentModeScaleAspectFill];
-    self.emptyConversationView = image;//数据为空时显示的图片
-    self.conversationListTableView.tableFooterView = [UIView new];//不显示多余的cell
-    self.conversationListTableView.backgroundColor=[UIColor lightTextColor];
-    [self setConversationAvatarStyle:RC_USER_AVATAR_CYCLE];//显示为圆形
-    [self setConversationPortraitSize:CGSizeMake(60, 60)];
-    [self.view addSubview:self.navigationView];
-    self.conversationListTableView.frame=CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64);
+    // 马上进入刷新状态
+    [self.chatTableView.header beginRefreshing];
+  
 }
-- (void)viewWillAppear:(BOOL)animated
+-(void)loadNewData
 {
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBar.hidden=YES;
-    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [app reloadIMBadge];
+    NSArray *arry=nil;
+    
+    if (self.number==0)
+    {
+        arry= [[XHChatManager shareManager]getLatestMessages:self.targetID];
+        if (arry)
+        {
+            for (int i=0; i<arry.count; i++)
+            {
+                [self.messages insertObject:arry[i] atIndex:0];
+                RCMessage *message=arry[i];
+                self.number=message.messageId;
+            }
+            [self.chatTableView reloadData];
+            [self.chatTableView.header endRefreshing];
+            [self scrollToBottom];
+        }
+        else
+        {
+            [self.chatTableView reloadData];
+            [self.chatTableView.header endRefreshing];
+        }
+    }
+    else
+    {
+        arry=[[XHChatManager shareManager] getHistoryMessages:self.targetID oldestMessageNumber:self.number];
+        if (arry)
+        {
+            for (int i=0; i<arry.count; i++)
+            {
+                [self.messages insertObject:arry[i] atIndex:0];
+                RCMessage *message=arry[i];
+                self.number=message.messageId;
+            }
+            [self.chatTableView reloadData];
+            [self.chatTableView.header endRefreshing];
+        }
+        else
+        {
+            [self.chatTableView reloadData];
+            [self.chatTableView.header endRefreshing];
+        }
+    }
+    
+    
 }
 
-/**
- *重写RCConversationListViewController的onSelectedTableRow事件
- *
- *  @param conversationModelType 数据模型类型
- *  @param model                 数据模型
- *  @param indexPath             索引
- */
--(void)onSelectedTableRow:(RCConversationModelType)conversationModelType conversationModel:(RCConversationModel *)model atIndexPath:(NSIndexPath *)indexPath
-{
-    [[XHUserInfo sharedUserInfo] getTeachersAddressBook:^(BOOL isOK, NSArray *array)
-     {
-         if (isOK)
-         {
-             [array enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
-              {
-                  obj = [obj objectItemKey:@"propValue"];
-                  if ([[obj objectItemKey:@"id"] isEqualToString:[XHUserInfo sharedUserInfo].selfId])
-                  {
-                      [XHUserInfo sharedUserInfo].teacherName =[obj objectItemKey:@"teacherName"];
-                      [XHUserInfo sharedUserInfo].headPic =[obj objectItemKey:@"headPic"];
-                  }
-                  
-              }];
-         }
-         
-         
-     }];
-    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [app sendRCIMInfo];
-    XHRCConversationViewController *conversationVC = [[XHRCConversationViewController alloc]init];
-    conversationVC.conversationType =model.conversationType;
-    conversationVC.targetId = model.targetId;
-    conversationVC.titleLabel.text = model.conversationTitle;
-     conversationVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:conversationVC animated:YES];
+#pragma - mark tableviewDelegate
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    RCMessage *msg = self.messages[indexPath.row];
+    RCMessage *lastMsg = [self lasetMsgWithIndex:indexPath.row];
     
+    XHMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:[self cellIdentifierWithMsg:msg]];
+#pragma mark- 点击重新发送回调方法
+    weakifySelf;
+    cell.reSendAction = ^(RCMessage *msg){
+        strongifySelf;
+        msg.sentStatus = SentStatus_SENDING;
+        [self retrySendMessage:msg];
+    };
+#pragma mark- 点击头像回调方法
+    cell.clickAvatar = ^(RCMessageDirection msgDirection){
+        
+    };
+#pragma mark- 数据源
+    [cell updateMessage:msg showDate:(msg.sentTime - lastMsg.sentTime > 60 * 5 * 1000)];
+    return cell;
 }
-- (void)notifyUpdateUnreadMessageCount
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    return self.messages.count;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    RCMessage *msg = self.messages[indexPath.row];
+    RCMessage *lastMsg = [self lasetMsgWithIndex:indexPath.row];
+    CGFloat height = [tableView fd_heightForCellWithIdentifier:[self cellIdentifierWithMsg:msg] cacheByIndexPath:indexPath configuration:^(XHMessageCell *cell) {
+        [cell updateMessage:msg showDate:(msg.sentTime - lastMsg.sentTime > 60 * 5 * 1000)];
+    }];
+    return height;
+}
+
+#pragma - mark RCManagerDelegate
+#pragma mark- 收到消息回调方法
+-(void)rcManagerReceiveMsg:(RCMessage *)msg
+{
+    msg.sentStatus = SentStatus_RECEIVED;
     dispatch_async(dispatch_get_main_queue(), ^{
-        AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        [app reloadIMBadge];
+        [self insertMessage:msg];
+        [[XHChatManager shareManager] refreshCashRCUserInfo:msg.content.senderUserInfo];
+        [[XHChatManager shareManager] clearMessagesUnread:self.targetID];
+        [self.chatTableView reloadData];
     });
-  
+}
+
+#pragma - mark 发送消息
+-(void)sendMessage:(id)message
+{
+    
+    RCMessage *msg = [[RCMessage alloc] initWithType:ConversationType_PRIVATE targetId:self.targetID direction:MessageDirection_SEND messageId:0 content:message];
+    
+    msg.sentStatus = SentStatus_SENDING;
+    msg.receivedStatus = ReceivedStatus_READ;
+    
+    RCUserInfo *info=[[XHChatManager shareManager] sendUserInfo];
+    msg.content.senderUserInfo=info;
+    
+    [self insertMessage:msg];
+    [self retrySendMessage:msg];
+}
+#pragma mark- 插入数据库
+- (void)insertMessage:(RCMessage *)message
+{
+    if (!message.content) {
+        return;
+    }
+    [self.messages addObject:message];
+    
+    [self.chatTableView insertRowsAtIndexPaths:@[[self lastMessageIndexPath]] withRowAnimation:UITableViewRowAnimationFade];
+    
+    [self.chatTableView scrollToRowAtIndexPath:[self lastMessageIndexPath] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+#pragma mark- 重新发送消息，消息发送状态回调方法
+- (void)retrySendMessage:(RCMessage *)message
+{
+    [[XHChatManager shareManager] sendMessage:message successBlock:^(RCMessage *x){
+        x.sentStatus = SentStatus_SENT;
+        [self updateCellStatusWithMsg:x];
+    } failedBlock:^(RCMessage *x){
+        x.sentStatus = SentStatus_FAILED;
+        [self updateCellStatusWithMsg:x];
+    }];
+}
+#pragma mark- 刷新cell
+-(void)updateCellStatusWithMsg:(RCMessage *)msg
+{
+    NSInteger index = [self.messages indexOfObject:msg];
+    XHMessageCell *cell = [self.chatTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    [cell setMsgStatus:msg.sentStatus];
+}
+-(void)scrollToBottom
+{
+    if (self.messages.count)
+    {
+        [self.chatTableView scrollToRowAtIndexPath:[self lastMessageIndexPath] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+}
+
+-(NSIndexPath *)lastMessageIndexPath
+{
+    return [NSIndexPath indexPathForItem:self.messages.count - 1 inSection:0];
+}
+#pragma mark- 最后一次发送的message
+-(RCMessage *)lasetMsgWithIndex:(NSInteger)index
+{
+    return index > 0 ? self.messages[index - 1] : nil;
+}
+-(NSString *)cellIdentifierWithMsg:(RCMessage *)msg{
+    NSDictionary *dic = @{@"RCTextMessage":@"textcell",
+                          @"RCVoiceMessage":@"voicecell",
+                          @"RCImageMessage":@"photocell",
+                          @"RCLocationMessage":@"locationcell"};
+    return  dic[NSStringFromClass([msg.content class])];
+}
+#pragma - mark getter
+-(NSMutableArray *)messages
+{
+    if (!_messages) {
+        _messages = [NSMutableArray array];
+    }
+    return _messages;
+}
+
+-(UITableView *)chatTableView
+{
+    if (!_chatTableView) {
+        _chatTableView = [[UITableView alloc] init];
+        _chatTableView.delegate = self;
+        _chatTableView.dataSource = self;
+        _chatTableView.backgroundColor = UIColorFromRGB(0xebebeb);
+        _chatTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _chatTableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
+        _chatTableView.separatorColor = UIColorFromRGB(0xeeeeee);
+        [_chatTableView registerClass:[XHTextMessageCell class] forCellReuseIdentifier:@"textcell"];
+        [_chatTableView registerClass:[XHPhotoMessageCell class] forCellReuseIdentifier:@"photocell"];
+        [_chatTableView registerClass:[XHVoiceMessageCell class] forCellReuseIdentifier:@"voicecell"];
+        [_chatTableView registerClass:[XHLocationMessageCell class] forCellReuseIdentifier:@"locationcell"];
+    }
+    return _chatTableView;
+}
+-(TLChatInputView *)inputView
+{
+    if (!_inputView) {
+        _inputView = [[TLChatInputView alloc] initWithChatVc:self];
+    }
+    return _inputView;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource
-{
-    modelArr = [NSMutableArray arrayWithArray:dataSource];
-    return modelArr;
-}
-- (void)didLongPressCellPortrait:(RCConversationModel *)model
-{
-    if (model.isTop) {
-        [self showAlertSheet:@"取消置顶" targetID:model.targetId type:1];
-          [[RCIMClient sharedRCIMClient] setConversationToTop:ConversationType_PRIVATE targetId:model.targetId isTop:NO];
-    }else{
-       [self showAlertSheet:@"置顶" targetID:model.targetId type:0];
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [[RCIMClient sharedRCIMClient] setConversationToTop:ConversationType_PRIVATE targetId:model.targetId isTop:YES];
-        }]];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-        }]];
-        [self presentViewController:alertController animated:YES completion:nil];
-    }
-    
-}
-- (void)showAlertSheet:(NSString *)title targetID:(NSString *)targetID type:(NSInteger)type
-{
-    [UIAlertController alertWithmessage:@"是否置顶？" titlesArry:@[title,@"取消"] controller:self indexBlock:^(NSInteger index, id object) {
-        if (index==0) {
-            if (type == 0) {
-                [[RCIMClient sharedRCIMClient] setConversationToTop:ConversationType_PRIVATE targetId:targetID isTop:YES];
-            }else{
-                [[RCIMClient sharedRCIMClient] setConversationToTop:ConversationType_PRIVATE targetId:targetID isTop:NO];
-            }
-            [XHShowHUD showOKHud:title];
-            [self refreshConversationTableViewIfNeeded];
-        }
-    }];
-}
-- (void)showEmptyConversationView
-{
-    NSLog(@"111111");
-}
--(UIView *)navigationView
-{
-    if (_navigationView == nil)
-    {
-        _navigationView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64.0)];
-        self.navigationView.backgroundColor=MainColor;
-    }
-    return _navigationView;
-}
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end

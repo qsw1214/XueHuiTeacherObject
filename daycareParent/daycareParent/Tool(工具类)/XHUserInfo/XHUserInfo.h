@@ -51,6 +51,7 @@ typedef void (^AddressBookSucceedBlock) (BOOL isOK,NSMutableArray *array);
 @property (nonatomic,strong) NSMutableArray *teachersAddressBookArray; //!< 教师通讯录
 @property (nonatomic,strong) NSMutableArray *parentsAddressBookArray;  //!< 家长通讯录
 
+@property(nonatomic,assign)NSInteger sum;//!< 未读消息
 
 /**
  单例初始化方法

@@ -13,7 +13,6 @@
 #import "XHEducationCloudViewController.h"
 #import "XHPersonalCenterViewController.h"
 #import "TabBarItem.h"
-#import <RongIMKit/RongIMKit.h>
 #import <RongIMLib/RongIMLib.h>
 @interface MianTabBarViewController ()
 
