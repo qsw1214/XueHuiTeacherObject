@@ -198,7 +198,16 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         });
     }
 }
-
+#pragma mark--弹出视图代理
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==0) {
+        XHLoginViewController *login=[[XHLoginViewController alloc] init];
+        UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:login];
+        [self.window setRootViewController:nav];
+        [self.window makeKeyAndVisible];
+    }
+}
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
     // Required,For systems with less than or equal to iOS6

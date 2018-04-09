@@ -186,6 +186,8 @@ static XHUserInfo *userInfo = nil;
                  
                  NSDictionary *objectDictionary = [object objectItemKey:@"object"];
                  NSArray *itemArray = [objectDictionary objectItemKey:@"list"];
+                 
+                 
                  if ([NSObject isArray:itemArray])
                  {
                      [self.teachersAddressBookArray setArray:itemArray];
@@ -239,6 +241,7 @@ static XHUserInfo *userInfo = nil;
              {
                  
                  NSArray *objectArray = [object objectItemKey:@"object"];
+                 
                  if ([NSObject isArray:objectArray])
                  {
                      [userInfo.parentsAddressBookArray setArray:objectArray];
