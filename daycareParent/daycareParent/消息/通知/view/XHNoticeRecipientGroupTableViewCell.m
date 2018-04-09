@@ -78,6 +78,7 @@
             break;
     }
     
+    
     //!< 设置选择状态
     switch (frame.model.selectType)
     {

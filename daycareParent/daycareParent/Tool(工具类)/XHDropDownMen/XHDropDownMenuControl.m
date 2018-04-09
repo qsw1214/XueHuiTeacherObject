@@ -29,14 +29,32 @@
 @implementation XHDropDownMenuControl
 
 
--(instancetype)initWithDeletage:(id<XHDropDownMenuControlDeletage>)deletage
+-(instancetype)initWithDeletage:(id<XHDropDownMenuControlDeletage>)deletage withType:(DropType)type
 {
     self = [super initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     if (self)
     {
         [self setDeletage:deletage];
         [self addSubview:self.dropDownMenuCollectionView];
-        [self.dropDownMenuCollectionView setFrame:CGRectMake(SCREEN_WIDTH-140.0, 64, 120, 0)];
+        switch (type)
+        {
+            case DropLeftType:
+            {
+                [self.dropDownMenuCollectionView setFrame:CGRectMake(40.0, 64, 120, 0)];
+            }
+                break;
+            case DropCenterType:
+            {
+                [self.dropDownMenuCollectionView setFrame:CGRectMake((SCREEN_WIDTH-120)/2.0, 64, 120, 0)];
+            }
+                break;
+            case DropRightType:
+            {
+                [self.dropDownMenuCollectionView setFrame:CGRectMake(SCREEN_WIDTH-140.0, 64, 120, 0)];
+            }
+                break;
+        }
+        
         [self setBackgroundColor:RGBAlpha(0, 0, 0, 0.2)];
         [self addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
     }
