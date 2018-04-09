@@ -116,25 +116,41 @@
             loginModel.pwd=pwd.text;
             loginModel.type=[@"2" integerValue];
             [[XHUserInfo sharedUserInfo] setItemObject:[object objectItemKey:@"object"]];
+            
             if ([[XHUserInfo sharedUserInfo].selfId isEqualToString:@""]) {
                 [XHShowHUD showNOHud:@"登录失败！"];
                 return ;
             }
-            [NSUserDefaults  saveLocalObject:loginModel forKey:AutoLogin];
-            AppDelegate *app=(AppDelegate *)[UIApplication sharedApplication].delegate;
-            [app loginRongCloud:[XHUserInfo sharedUserInfo].token];
-            [app setJpushAlias:[XHUserInfo sharedUserInfo].loginName];
-            if ([[XHUserInfo sharedUserInfo].nickName isEqualToString:@""]) {
-                //跳转补全信息界面
-                XHNewUserInfoViewController *newUser = [[XHNewUserInfoViewController alloc]init];
-                UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:newUser];
-                [kWindow setRootViewController:nav];
-            }
-            else
-            {
-                MianTabBarViewController *main=[MianTabBarViewController new];
-                [kWindow setRootViewController:main];
-            }
+            [[XHUserInfo sharedUserInfo] getTeachersAddressBook:^(BOOL isOK, NSArray *array)
+             {
+                 if (isOK)
+                 {
+                     [array enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
+                      {
+                          obj = [obj objectItemKey:@"propValue"];
+                          if ([[obj objectItemKey:@"id"] isEqualToString:[XHUserInfo sharedUserInfo].selfId])
+                          {
+                              [XHUserInfo sharedUserInfo].teacherName =[obj objectItemKey:@"teacherName"];//通讯录名字
+                              [XHUserInfo sharedUserInfo].userPic =[obj objectItemKey:@"headPic"];//通讯录头像
+                              [XHUserInfo sharedUserInfo].userId=[obj objectItemKey:@"id"];//通讯录ID
+                          }
+                          
+                      }];
+                     [NSUserDefaults  saveLocalObject:loginModel forKey:AutoLogin];
+                     AppDelegate *app=(AppDelegate *)[UIApplication sharedApplication].delegate;
+                     [app loginRongCloud:[XHUserInfo sharedUserInfo].token];
+                     [app setJpushAlias:[XHUserInfo sharedUserInfo].loginName];
+                     MianTabBarViewController *main=[MianTabBarViewController new];
+                     [kWindow setRootViewController:main];
+                 }
+                 else
+                 {
+                     [XHShowHUD showNOHud:@"登录失败！"];
+                     return ;
+                 }
+                 
+             }];
+            
         }
         
     } error:^(NSError *error) {

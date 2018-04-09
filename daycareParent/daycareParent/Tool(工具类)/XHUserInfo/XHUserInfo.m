@@ -63,24 +63,7 @@ static XHUserInfo *userInfo = nil;
         }
             break;
     }
-    [self getTeachersAddressBook:^(BOOL isOK, NSArray *array)
-     {
-         if (isOK)
-         {
-             [array enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
-              {
-                  obj = [obj objectItemKey:@"propValue"];
-                  if ([[obj objectItemKey:@"id"] isEqualToString:_selfId])
-                  {
-                      _teacherName =[obj objectItemKey:@"teacherName"];
-                      _headPic =[obj objectItemKey:@"headPic"];
-                  }
-                  
-              }];
-         }
-         
-         
-     }];
+    
 }
 
 #pragma mark 获取班级列表

@@ -173,6 +173,7 @@
     
     XHMessageUserInfo *info=[[XHChatManager shareManager] getUserInfoTargetId:model.targetId];
     [chat setNavtionTitle:info.name];
+    
     [self.navigationController pushViewController:chat animated:YES];
      [[XHChatManager shareManager] clearMessagesUnread:model.targetId];
     [[XHChatManager shareManager] sendUserInfo];

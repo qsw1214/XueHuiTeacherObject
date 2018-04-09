@@ -37,17 +37,17 @@
 {
     XHUserInfo *user=[XHUserInfo sharedUserInfo];
     RCUserInfo *userInfo = [[RCUserInfo alloc] init];
-   // userInfo.userId = user.guardianModel.guardianId;
-   // userInfo.portraitUri = ALGetFileHeadThumbnail(user.guardianModel.headPic);
+    userInfo.userId = user.userId;
+    userInfo.portraitUri = ALGetFileHeadThumbnail(user.userPic);
+    userInfo.name = user.teacherName;
     
-    //userInfo.name = user.guardianModel.guardianName;
     [RCIMClient sharedRCIMClient].currentUserInfo = userInfo;
     return userInfo;
 }
 #pragma mark- 初始化融云
 - (void) initEnv{
     
-    [[RCIMClient sharedRCIMClient] init:RONGCLOUD_IM_APPKEY];
+    [[RCIMClient sharedRCIMClient] initWithAppKey:RONGCLOUD_IM_APPKEY];
     
 }
 #pragma mark- 断开与融云服务器的连接，并不再接收远程推送
