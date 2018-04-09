@@ -51,7 +51,7 @@
     [self.navigationController.navigationBar setHidden:YES];
     [self.view addSubview:self.navigationView];
     [self.navigationView setNavtionTitleColor:RGB(44.0, 44.0, 44.0)];
-//    [self.navigationView resetFrame:CGRectMake(0, 0, SCREEN_WIDTH, [[XHHelper sharedHelper] isIphoneX]  ? 64+30 :64)];
+    [self.navigationView resetFrame:CGRectMake(0, 0, SCREEN_WIDTH, [[XHHelper sharedHelper] isIphoneX]  ? 64+30 :64)];
     [self setNavtionColor:MainColor];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self setItemContentItemHiddenWithType:NavigationRightType withHidden:YES];

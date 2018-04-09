@@ -16,6 +16,8 @@
 @property (nonatomic,strong) BaseNavigationControlItem *letfItem;
 @property (nonatomic,strong) BaseNavigationControlItem *rightItem;
 
+-(void)resetFrame:(CGRect)frame;
+
 
 #pragma mark 设置按钮的样式
 -(void)setItemContentType:(BaseNavigationControlItemContentType)contentType withItemType:(BaseNavigationControlItemType)itemType withIconName:(NSString*)iconName withTitle:(NSString*)title;
