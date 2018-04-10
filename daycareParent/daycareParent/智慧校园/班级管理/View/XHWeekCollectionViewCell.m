@@ -49,7 +49,21 @@
         {
             [self.titleLabel setFrame:CGRectMake(0, 0, object.itemSize.width, object.itemSize.height-0.5)];
             [self.describeLanel setFrame:CGRectMake(0, (object.itemSize.height-0.5), object.itemSize.width, 0.5)];
-            [self.describeLanel setBackgroundColor:LineViewColor];
+            
+            
+            switch (object.model.selectType)
+            {
+                case XHWeekNormalType:
+                {
+                    [self.describeLanel setBackgroundColor:[UIColor clearColor]];
+                }
+                    break;
+                case XHWeekSelectType:
+                {
+                    [self.describeLanel setBackgroundColor:LineViewColor];
+                }
+                    break;
+            }
             
         }
             break;

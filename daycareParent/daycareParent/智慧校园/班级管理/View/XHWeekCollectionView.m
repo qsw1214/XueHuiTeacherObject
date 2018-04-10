@@ -26,6 +26,7 @@
             XHWeekFrame *frame = [[XHWeekFrame alloc]init];
             XHWeekModel *model = [[XHWeekModel alloc]init];
             [model setType:XHWeekTipType];
+            [model setSelectType:XHWeekNormalType];
             [model setTitle:[NSString stringWithFormat:@"周(%d)",i]];
             for (int i = 0; i<10; i++)
             {
@@ -54,6 +55,18 @@
 - (void)resetFrame:(CGRect)frame
 {
     [self setFrame:frame];
+    [NSArray enumerateObjectsWithArray:self.dataArray usingBlock:^(XHWeekFrame *obj, NSUInteger idx, BOOL *stop)
+    {
+        if (idx)
+        {
+            [obj.model setSelectType:XHWeekNormalType];
+        }
+        else
+        {
+            [obj.model setSelectType:XHWeekSelectType];
+        }
+        
+    }];
     [self reloadData];
 }
 
@@ -80,6 +93,21 @@
 #pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    [NSArray enumerateObjectsWithArray:self.dataArray usingBlock:^(XHWeekFrame *obj, NSUInteger idx, BOOL *stop)
+     {
+         if (idx == indexPath.row)
+         {
+             [obj.model setSelectType:XHWeekSelectType];
+         }
+         else
+         {
+             [obj.model setSelectType:XHWeekNormalType];
+         }
+     }];
+    [collectionView reloadData];
+    
+    
     if ([self.weekDeletage respondsToSelector:@selector(didSelectItemObjectAtIndexPath:)])
     {
         [self.weekDeletage didSelectItemObjectAtIndexPath:[self.dataArray objectAtIndex:indexPath.row]];
