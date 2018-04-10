@@ -174,7 +174,7 @@
                                     
                                     for (int i=0; i < [names count]; i++)
                                     {
-                                        [config setObject:names[i] forKey:[NSString stringWithFormat:@"picUrl%zd",i+1]];
+                                        [config setObject:names[i] forKey:[NSString stringWithFormat:@"picUrl%d",(i+1)]];
                                     }
                                     [config setObject:content forKey:@"content"];
                                     [config setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];

@@ -15,6 +15,12 @@
 		046BB205207C455700209C9B /* UIViewController+DCURLRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 046BB1FD207C455700209C9B /* UIViewController+DCURLRouter.m */; };
 		046BB206207C455700209C9B /* DCURLRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 046BB1FF207C455700209C9B /* DCURLRouter.m */; };
 		046BB207207C455700209C9B /* DCURLNavgation.m in Sources */ = {isa = PBXBuildFile; fileRef = 046BB203207C455700209C9B /* DCURLNavgation.m */; };
+		046BB20A207C465900209C9B /* XHClassManageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046BB209207C465900209C9B /* XHClassManageContentView.m */; };
+		046BB20D207C4B3200209C9B /* XHWeekCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046BB20C207C4B3200209C9B /* XHWeekCollectionView.m */; };
+		046BB210207C4B3F00209C9B /* XHSyllabusCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046BB20F207C4B3F00209C9B /* XHSyllabusCollectionView.m */; };
+		046BB213207C5E4600209C9B /* XHWeekModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 046BB212207C5E4600209C9B /* XHWeekModel.m */; };
+		046BB216207C5E5C00209C9B /* XHWeekFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 046BB215207C5E5C00209C9B /* XHWeekFrame.m */; };
+		046BB219207C5F9F00209C9B /* XHWeekCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046BB218207C5F9F00209C9B /* XHWeekCollectionViewCell.m */; };
 		4B07CC191FD4DAB800B2DBDA /* XHLeaveRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B07CC181FD4DAB800B2DBDA /* XHLeaveRecordModel.m */; };
 		4B07CC1C1FD4DAC800B2DBDA /* XHLeaveRecordFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B07CC1B1FD4DAC800B2DBDA /* XHLeaveRecordFrame.m */; };
 		4B07CC1D1FD4E48500B2DBDA /* XHLeaveRecordContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B523BDD1FD1584A006DD565 /* XHLeaveRecordContentView.m */; };
@@ -551,6 +557,18 @@
 		046BB201207C455700209C9B /* UIViewController+DCURLRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+DCURLRouter.h"; sourceTree = "<group>"; };
 		046BB202207C455700209C9B /* DCURLRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCURLRouter.h; sourceTree = "<group>"; };
 		046BB203207C455700209C9B /* DCURLNavgation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCURLNavgation.m; sourceTree = "<group>"; };
+		046BB208207C465900209C9B /* XHClassManageContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHClassManageContentView.h; sourceTree = "<group>"; };
+		046BB209207C465900209C9B /* XHClassManageContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHClassManageContentView.m; sourceTree = "<group>"; };
+		046BB20B207C4B3200209C9B /* XHWeekCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHWeekCollectionView.h; sourceTree = "<group>"; };
+		046BB20C207C4B3200209C9B /* XHWeekCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHWeekCollectionView.m; sourceTree = "<group>"; };
+		046BB20E207C4B3F00209C9B /* XHSyllabusCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHSyllabusCollectionView.h; sourceTree = "<group>"; };
+		046BB20F207C4B3F00209C9B /* XHSyllabusCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHSyllabusCollectionView.m; sourceTree = "<group>"; };
+		046BB211207C5E4600209C9B /* XHWeekModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHWeekModel.h; sourceTree = "<group>"; };
+		046BB212207C5E4600209C9B /* XHWeekModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHWeekModel.m; sourceTree = "<group>"; };
+		046BB214207C5E5C00209C9B /* XHWeekFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHWeekFrame.h; sourceTree = "<group>"; };
+		046BB215207C5E5C00209C9B /* XHWeekFrame.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHWeekFrame.m; sourceTree = "<group>"; };
+		046BB217207C5F9F00209C9B /* XHWeekCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHWeekCollectionViewCell.h; sourceTree = "<group>"; };
+		046BB218207C5F9F00209C9B /* XHWeekCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHWeekCollectionViewCell.m; sourceTree = "<group>"; };
 		4B07CC171FD4DAB800B2DBDA /* XHLeaveRecordModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHLeaveRecordModel.h; sourceTree = "<group>"; };
 		4B07CC181FD4DAB800B2DBDA /* XHLeaveRecordModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHLeaveRecordModel.m; sourceTree = "<group>"; };
 		4B07CC1A1FD4DAC800B2DBDA /* XHLeaveRecordFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHLeaveRecordFrame.h; sourceTree = "<group>"; };
@@ -1602,6 +1620,10 @@
 		0446B4D7207B651A00A1BF1E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				046BB211207C5E4600209C9B /* XHWeekModel.h */,
+				046BB212207C5E4600209C9B /* XHWeekModel.m */,
+				046BB214207C5E5C00209C9B /* XHWeekFrame.h */,
+				046BB215207C5E5C00209C9B /* XHWeekFrame.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1609,6 +1631,14 @@
 		0446B4D8207B651A00A1BF1E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				046BB208207C465900209C9B /* XHClassManageContentView.h */,
+				046BB209207C465900209C9B /* XHClassManageContentView.m */,
+				046BB20B207C4B3200209C9B /* XHWeekCollectionView.h */,
+				046BB20C207C4B3200209C9B /* XHWeekCollectionView.m */,
+				046BB20E207C4B3F00209C9B /* XHSyllabusCollectionView.h */,
+				046BB20F207C4B3F00209C9B /* XHSyllabusCollectionView.m */,
+				046BB217207C5F9F00209C9B /* XHWeekCollectionViewCell.h */,
+				046BB218207C5F9F00209C9B /* XHWeekCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3975,6 +4005,7 @@
 				4B68C9EC20119D460078FEDB /* XHAssignmentHomeWorkViewController.m in Sources */,
 				4B31265C1FDA8F9C000CE894 /* XHAddressBookLecturesControl.m in Sources */,
 				4BCEB7382029750000ED2829 /* WPFunctionView.m in Sources */,
+				046BB20D207C4B3200209C9B /* XHWeekCollectionView.m in Sources */,
 				4B80F3191FCBFD6F00BC7B52 /* EXTScope.m in Sources */,
 				8C019F701FF4C373005EBC2C /* JKDBHelper.m in Sources */,
 				8C1AA865207B13FA00DDCBB3 /* NSDate+Utils.m in Sources */,
@@ -4035,6 +4066,7 @@
 				8C2311671FE22C330013F476 /* XHVIPModel.m in Sources */,
 				4B80F2231FCBEC2B00BC7B52 /* BaseViewController.m in Sources */,
 				8CDC193B202957F40063E21F /* XHCustomView.m in Sources */,
+				046BB216207C5E5C00209C9B /* XHWeekFrame.m in Sources */,
 				4B3418781FFDC14C00A5EC56 /* UIWindow+CurrentViewController.m in Sources */,
 				4BB792B01FD7783700E0ED72 /* XHAskforLeaveContentView.m in Sources */,
 				4BCEB7372029750000ED2829 /* UIImage+fixOrientation.m in Sources */,
@@ -4148,6 +4180,7 @@
 				8C4C208D202039000051642B /* XHSubjectListModel.m in Sources */,
 				8C1AA81D207B13D200DDCBB3 /* XHNoticeUniteContentView.m in Sources */,
 				8C1AA86B207B13FA00DDCBB3 /* XHRecordVoice.m in Sources */,
+				046BB210207C4B3F00209C9B /* XHSyllabusCollectionView.m in Sources */,
 				4B80F2D61FCBF04F00BC7B52 /* UIImageView+HighlightedWebCache.m in Sources */,
 				4B8E66151FD63FDD0006D641 /* XHCookBookViewController.m in Sources */,
 				4B80F23F1FCBF01B00BC7B52 /* BaseButtonControl.m in Sources */,
@@ -4212,6 +4245,7 @@
 				4B3126301FD93CC6000CE894 /* TAAbstractDotView.m in Sources */,
 				4B31264F1FDA20CD000CE894 /* XHAddressBookToolBar.m in Sources */,
 				4BB792B61FD77D7600E0ED72 /* XHAskforLeaveChargeTeacherControl.m in Sources */,
+				046BB20A207C465900209C9B /* XHClassManageContentView.m in Sources */,
 				4B4D7FF5201AF5A1001D0BB0 /* XHAskforLeaveBoardViewController.m in Sources */,
 				8C1AA875207B13FA00DDCBB3 /* XHPhotoMessageCell.m in Sources */,
 				4B80F2C41FCBF04F00BC7B52 /* NSImage+WebCache.m in Sources */,
@@ -4271,6 +4305,7 @@
 				4BA8C4CC1FCFEAA6006CBEBC /* CameraManageViewController.m in Sources */,
 				4B80F2CF1FCBF04F00BC7B52 /* SDWebImagePrefetcher.m in Sources */,
 				4B577FE41FF63FB30023ACBC /* ViewController+MASAdditions.m in Sources */,
+				046BB219207C5F9F00209C9B /* XHWeekCollectionViewCell.m in Sources */,
 				8C1AA862207B13FA00DDCBB3 /* XHLocationViewController.m in Sources */,
 				4B80F2401FCBF01B00BC7B52 /* BaseCollectionView.m in Sources */,
 				4B577FDF1FF63FB30023ACBC /* MASViewAttribute.m in Sources */,
@@ -4376,6 +4411,7 @@
 				4B80F2121FCBE81600BC7B52 /* NSObject+Category.m in Sources */,
 				8CF3417C200EF3AC0055D6BD /* XHNewChageTypeTableViewCell.m in Sources */,
 				4BB9BEAC1FDE5629004F5622 /* XHEducationCloudFrame.m in Sources */,
+				046BB213207C5E4600209C9B /* XHWeekModel.m in Sources */,
 				4B11C9FE1FCE3A7900FD0D8F /* XHFunctionMenuFrame.m in Sources */,
 				4B80F27D1FCBF04800BC7B52 /* MJRefreshFooter.m in Sources */,
 				8C1AA876207B13FA00DDCBB3 /* XHPhotoThumbCell.m in Sources */,

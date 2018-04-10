@@ -12,6 +12,7 @@
 @interface BaseFrame : NSObject
 
 @property (nonatomic,assign) CGRect itemFrame;   //!< 单元格的Frame
+@property (nonatomic,assign) CGSize itemSize;   //!< 单元格的size
 @property (nonatomic,assign) CGFloat cellHeight; //!< 行高
 
 

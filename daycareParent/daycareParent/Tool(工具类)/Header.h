@@ -28,6 +28,7 @@
 #import "NSUserDefaults+UserInfo.h"
 #import "BaseViewController.h"
 #import "BaseButtonControl.h"
+#import "BaseCollectionView.h"
 #import "XHBaseBtn.h"
 #import "XHBaseLabel.h"
 #import "XHBackLabel.h"
