@@ -57,6 +57,12 @@
     
 }
 
+-(void)setItemColor:(BOOL)color
+{
+    
+}
+
+
 #pragma mark - GEtter / Setter
 -(NSMutableArray *)dataArray
 {

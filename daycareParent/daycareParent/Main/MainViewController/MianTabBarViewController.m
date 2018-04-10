@@ -12,7 +12,8 @@
 #import "XHEducationCloudViewController.h"
 #import "XHEducationCloudViewController.h"
 #import "XHPersonalCenterViewController.h"
-#import "XHClassManageViewController.h"
+#import "XHClassManageViewController.h" //!< 班级管理
+#import "XHIntelligentOfficeViewController.h" //!< 智能办公
 #import "TabBarItem.h"
 #import <RongIMLib/RongIMLib.h>
 @interface MianTabBarViewController ()
@@ -43,7 +44,7 @@
     UINavigationController *smartCampusNavigation = [[UINavigationController alloc] initWithRootViewController:smartCampus];
     [self addChildViewController:smartCampusNavigation];
 
-    XHIMNoticeViewController *imNotice = [[XHIMNoticeViewController alloc] init];
+    XHIntelligentOfficeViewController *imNotice = [[XHIntelligentOfficeViewController alloc] init];
    // [imNotice navtionItemHidden:NavigationItemLeftType];
     //创建tabBarItem
     TabBarItem *imNoticeTabBarItem = [[TabBarItem alloc]initWithTitle:@"消息" imageName:@"ico_xiaoxihui" selectedImageName:@"ico_xiaoxise"];

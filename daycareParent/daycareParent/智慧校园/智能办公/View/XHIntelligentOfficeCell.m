@@ -43,21 +43,26 @@
 
 -(void)setItemFrame:(XHIntelligentOfficeFrame*)frame
 {
+    [self setItemHidden:YES];
     switch (frame.model.type)
     {
         case XHIntelligentOfficeHeaderType:
         {
+            [self.headerControl setHidden:NO];
+            [self.headerControl setItemFrame:frame];
             
         }
             break;
         case XHIntelligentOfficeApprovalType:
         {
-            
+            [self.approvalControl setHidden:NO];
+            [self.approvalControl setItemFrame:frame];
         }
             break;
         case XHIntelligentOfficeContentType:
         {
-            
+            [self.contentControl setHidden:NO];
+            [self.contentControl setItemFrame:frame];
         }
             break;
     }
@@ -99,6 +104,14 @@
     return _contentControl;
 }
 
+
+
+-(void)setItemHidden:(BOOL)hidden
+{
+    [self.headerControl setHidden:hidden];
+    [self.approvalControl setHidden:hidden];
+    [self.contentControl setHidden:hidden];
+}
 
 
 

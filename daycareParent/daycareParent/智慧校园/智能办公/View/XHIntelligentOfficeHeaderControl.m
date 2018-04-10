@@ -7,10 +7,17 @@
 //
 
 #import "XHIntelligentOfficeHeaderControl.h"
+#import "XHIntelligentOfficeFrame.h"
 
 @implementation XHIntelligentOfficeHeaderControl
 
 
+
+
+-(void)setItemFrame:(XHIntelligentOfficeFrame*)frame
+{
+    [self setFrame:frame.itemFrame];
+}
 
 
 

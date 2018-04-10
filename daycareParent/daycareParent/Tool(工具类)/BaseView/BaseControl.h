@@ -24,7 +24,7 @@
 -(void)resetFrame:(CGRect)frame;
 -(void)setItemArray:(NSArray*)array;
 -(void)setItemFrame:(id)frame;
-
+-(void)setItemColor:(BOOL)color;
 
 
 

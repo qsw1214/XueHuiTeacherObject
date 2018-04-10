@@ -7,6 +7,7 @@
 //
 
 #import "XHApprovalControl.h"
+#import "XHIntelligentOfficeFrame.h"
 
 @interface XHApprovalControl ()
 
@@ -27,6 +28,7 @@
     self = [super init];
     if (self)
     {
+        [self setItemColor:YES];
         [self addSubview:self.tipImageView];
         [self addSubview:self.tipLabel];
     }
@@ -34,15 +36,18 @@
 }
 
 
-
--(void)resetFrame:(CGRect)frame
+-(void)setItemFrame:(XHIntelligentOfficeFrame*)frame
 {
-    [self setFrame:frame];
-    
-    [self.tipImageView setFrame:CGRectMake(10.0, 10.0, 20.0, 20.0)];
-    [self.tipLabel setFrame:CGRectMake(self.tipImageView.right+10.0, 0, (frame.size.width-(self.tipImageView.right+20.0)), frame.size.height)];
+    [self setFrame:frame.itemFrame];
+    [self.tipImageView setFrame:CGRectMake(10.0, (frame.itemFrame.size.height-20.0)/2.0, 20.0, 20.0)];
+    [self.tipImageView setLayerCornerRadius:(self.tipImageView.height/2.0)];
+    [self.tipLabel setFrame:CGRectMake(self.tipImageView.right+10.0, 0, (frame.itemFrame.size.width-(self.tipImageView.right+20.0)), frame.itemFrame.size.height)];
     
 }
+
+
+
+
 
 #pragma mark - Getter /  Setter
 -(UILabel *)tipLabel
@@ -62,6 +67,16 @@
         _tipImageView = [[UIImageView alloc]init];
     }
     return _tipImageView;
+}
+
+
+-(void)setItemColor:(BOOL)color
+{
+    if (color)
+    {
+        [self.tipImageView setBackgroundColor:[UIColor redColor]];
+        [self.tipLabel setBackgroundColor:[UIColor orangeColor]];
+    }
 }
 
 
