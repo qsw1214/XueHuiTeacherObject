@@ -122,13 +122,125 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x73ed;&#x7ea7;&#x7ba1;&#x7406;/View/XHClassManageContentView.m"
-            timestampString = "545020366.538098"
+            timestampString = "545024688.201405"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "XHClassManageContentView"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x73ed;&#x7ea7;&#x7ba1;&#x7406;/View/XHWeekCollectionView.m"
+            timestampString = "545024688.201799"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "-resetFrame:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x73ed;&#x7ea7;&#x7ba1;&#x7406;/View/XHWeekCollectionView.m"
+            timestampString = "545024688.201867"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "-collectionView:cellForItemAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x73ed;&#x7ea7;&#x7ba1;&#x7406;/View/XHWeekCollectionView.m"
+            timestampString = "545024688.2019269"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "-collectionView:layout:sizeForItemAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x73ed;&#x7ea7;&#x7ba1;&#x7406;/View/XHWeekCollectionView.m"
+            timestampString = "545024688.202013"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "88"
             endingLineNumber = "88"
-            landmarkName = "XHClassManageContentView"
-            landmarkType = "3">
+            landmarkName = "-collectionView:layout:minimumLineSpacingForSectionAtIndex:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x73ed;&#x7ea7;&#x7ba1;&#x7406;/View/XHWeekCollectionView.m"
+            timestampString = "545024688.20208"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "-collectionView:layout:minimumInteritemSpacingForSectionAtIndex:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x73ed;&#x7ea7;&#x7ba1;&#x7406;/View/XHWeekCollectionView.m"
+            timestampString = "545024688.202147"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "-collectionView:layout:insetForSectionAtIndex:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x73ed;&#x7ea7;&#x7ba1;&#x7406;/View/XHWeekCollectionView.m"
+            timestampString = "545024688.202215"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "-collectionView:numberOfItemsInSection:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

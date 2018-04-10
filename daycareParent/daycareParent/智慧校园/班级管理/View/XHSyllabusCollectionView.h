@@ -7,6 +7,8 @@
 //
 
 #import "BaseCollectionView.h"
+#import "XHWeekCollectionViewCell.h"
+
 
 @interface XHSyllabusCollectionView : BaseCollectionView
 

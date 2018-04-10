@@ -7,6 +7,8 @@
 //
 
 #import "XHClassManageContentView.h"
+#import "XHWeekCollectionView.h"
+#import "XHSyllabusCollectionView.h"
 #import <WebKit/WebKit.h>
 
 @interface XHClassManageContentView ()
@@ -18,8 +20,8 @@
 @property (nonatomic,strong) BaseButtonControl *contactParentsControl; //!< 联系家长
 @property (nonatomic,strong) BaseButtonControl *parentMessageControl; //!< 家长留言
 @property (nonatomic,strong) UILabel *weekTipLabel; //!< 星期提示标签
-@property (nonatomic,strong) BaseCollectionView *weekCollectionView; //!< 星期滚动
-@property (nonatomic,strong) BaseCollectionView *syllabusCollectionView; //!< 课程表内容
+@property (nonatomic,strong) XHWeekCollectionView *weekCollectionView; //!< 星期滚动
+@property (nonatomic,strong) XHSyllabusCollectionView *syllabusCollectionView; //!< 课程表内容
 
 
 
@@ -168,29 +170,30 @@
     {
         _weekTipLabel = [[UILabel alloc]init];
         [_weekTipLabel setText:@"课程表"];
+        [_weekTipLabel setBackgroundColor:[UIColor grayColor]];
         [_weekTipLabel setTextAlignment:NSTextAlignmentCenter];
     }
     return _weekTipLabel;
 }
 
 
--(BaseCollectionView *)weekCollectionView
+-(XHWeekCollectionView *)weekCollectionView
 {
     if (!_weekCollectionView)
     {
 
-        _weekCollectionView = [[BaseCollectionView alloc]init];
+        _weekCollectionView = [[XHWeekCollectionView alloc]init];
     }
     return _weekCollectionView;
 }
 
 
--(BaseCollectionView *)syllabusCollectionView
+-(XHSyllabusCollectionView *)syllabusCollectionView
 {
     if (!_syllabusCollectionView)
     {
         
-        _syllabusCollectionView = [[BaseCollectionView alloc]init];
+        _syllabusCollectionView = [[XHSyllabusCollectionView alloc]init];
     }
     return _syllabusCollectionView;
 }

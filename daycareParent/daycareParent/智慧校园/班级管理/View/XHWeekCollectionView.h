@@ -7,7 +7,13 @@
 //
 
 #import "BaseCollectionView.h"
+#import "XHWeekCollectionViewCell.h"
 
-@interface XHWeekCollectionView : BaseCollectionView
+
+
+@interface XHWeekCollectionView : BaseCollectionView <UICollectionViewDelegate,UICollectionViewDataSource>
+
+
+
 
 @end
