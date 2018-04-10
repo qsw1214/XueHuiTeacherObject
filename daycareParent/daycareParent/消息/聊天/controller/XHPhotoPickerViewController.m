@@ -8,25 +8,25 @@
 
 #import "XHPhotoPickerViewController.h"
 #import "XHPhotoThumbCell.h"
-#import "XHPhotoPreviewViewController.h"
 #import "PHAsset+Extend.h"
 #import "Masonry.h"
 @interface XHPhotoPickerViewController ()
 
 <UICollectionViewDelegate,
-UICollectionViewDataSource,
-XHPhotoPreviewDelegate>
+UICollectionViewDataSource>
 
 @property(nonatomic,strong)UICollectionView *photoCollectionView;
 @property(nonatomic,strong)UICollectionViewFlowLayout *colletionLayout;
 @property(nonatomic,strong)UIView *bottomView;
 @property(nonatomic,strong)UIView *line;
-@property(nonatomic,strong)UIButton *previewBtn;
 @property(nonatomic,strong)UIButton *sendBtn;
-@property(nonatomic,strong)TLCountLabel *countLabel;
+@property(nonatomic,strong)XHCountLabel *countLabel;
 @property(nonatomic,strong)NSMutableArray *dataSource;
 @property(nonatomic,strong)NSMutableArray *selectPhotos;
 @end
+
+
+
 
 @implementation XHPhotoPickerViewController
 -(void)viewWillAppear:(BOOL)animated{
@@ -41,14 +41,14 @@ XHPhotoPreviewDelegate>
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"照相机胶卷";
+    [self setNavtionTitle:@"照相机胶卷"];
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
     
     [self.view addSubview:self.photoCollectionView];
     [self.photoCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).offset(0);
+        make.top.equalTo(self.navigationView.mas_bottom).offset(0);
         make.left.equalTo(self.view.mas_left).offset(0);
         make.right.equalTo(self.view.mas_right).offset(0);
     }];
@@ -70,13 +70,6 @@ XHPhotoPreviewDelegate>
         make.height.mas_offset(@0.5);
     }];
     
-    [self.bottomView addSubview:self.previewBtn];
-    [self.previewBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.bottomView.mas_left).offset(0);
-        make.top.equalTo(self.bottomView.mas_top).offset(0);
-        make.bottom.equalTo(self.bottomView.mas_bottom).offset(0);
-        make.width.mas_offset(@50);
-    }];
     
     [self.bottomView addSubview:self.sendBtn];
     [self.sendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -94,10 +87,9 @@ XHPhotoPreviewDelegate>
     
     [self loadPhotos];
 }
-- (void)cancel{
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
-- (void)loadPhotos{
+#pragma mark- 读取本地图片
+- (void)loadPhotos
+{
     void (^reloadPhoto)(void) = ^{
         PHFetchOptions *options = [[PHFetchOptions alloc] init];
         options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
@@ -127,47 +119,33 @@ XHPhotoPreviewDelegate>
         reloadPhoto();
     }
 }
+#pragma mark- 发送图片
 -(void)sendPhotoAction{
-    [self dismissViewControllerAnimated:YES completion:^{
-        if ([self.delegate respondsToSelector:@selector(didSendPhotos:)]) {
-            [self.delegate didSendPhotos:self.selectPhotos];
-        }
-    }];
-}
--(void)previewAction {
-    [self showPreviewWithSelectedAsset:nil];
-}
--(void)showPreviewWithSelectedAsset:(PHAsset *)asset {
-   XHPhotoPreviewViewController *vc = [[XHPhotoPreviewViewController alloc] initWithSelectedAsset:asset assets:self.dataSource];
-    vc.delegate = self;
-    [self.navigationController pushViewController:vc animated:YES];
-}
--(void)selectedPhoto:(PHAsset *)photo{
-    if ([self.selectPhotos indexOfObject:photo] != NSIntegerMax) {
-        return;
+    
+    if ([self.delegate respondsToSelector:@selector(didSendPhotos:)]) {
+        [self.delegate didSendPhotos:self.selectPhotos];
     }
-    [self.selectPhotos addObject:photo];
-    [self updateSelectedCount];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+   
+    
 }
--(void)removePhoto:(PHAsset *)photo{
-    if ([self.selectPhotos indexOfObject:photo] != NSIntegerMax) {
-        [self.selectPhotos removeObject:photo];
-    }
-    [self updateSelectedCount];
-}
+#pragma mark- 更新选择图片数据
 -(void)updateSelectedCount{
     self.countLabel.text = @(self.selectPhotos.count).stringValue;
     self.countLabel.hidden = !self.selectPhotos.count;
     self.sendBtn.enabled = self.selectPhotos.count;
-    self.previewBtn.enabled = self.selectPhotos.count;
 }
+#pragma mark- collectionDelegate
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     XHPhotoThumbCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     cell.item = self.dataSource[indexPath.row];
     @WeakObj(self);
     cell.selectBlock = ^(PHAsset *x){
         @StrongObj(self);
-        if (self.selectPhotos.count > 8 && x.selected) {
+        if (self.selectPhotos.count > 8 && x.selected)
+        {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"最多只能选择9张照片" preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil]];
             [self presentViewController:alert animated:YES completion:nil];
@@ -180,9 +158,9 @@ XHPhotoPreviewDelegate>
     };
     return cell;
 }
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    PHAsset *item = self.dataSource[indexPath.row];
-    [self showPreviewWithSelectedAsset:item];
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
 }
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return self.dataSource.count;
@@ -200,12 +178,7 @@ XHPhotoPreviewDelegate>
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     return 5.0;
 }
--(void)reloadPhotos{
-    [self.photoCollectionView reloadData];
-}
--(void)sendPhotos{
-    [self sendPhotoAction];
-}
+#pragma mark- getter
 -(NSMutableArray *)dataSource{
     if (!_dataSource) {
         _dataSource = [NSMutableArray array];
@@ -232,18 +205,7 @@ XHPhotoPreviewDelegate>
     }
     return _line;
 }
--(UIButton *)previewBtn{
-    if (!_previewBtn) {
-        _previewBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_previewBtn setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
-        [_previewBtn setTitleColor:UIColorFromRGB(0xcccccc) forState:UIControlStateDisabled];
-        [_previewBtn setTitle:@"预览" forState:UIControlStateNormal];
-        [_previewBtn addTarget:self action:@selector(previewAction) forControlEvents:UIControlEventTouchUpInside];
-        _previewBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-        _previewBtn.enabled = NO;
-    }
-    return _previewBtn;
-}
+
 -(UIButton *)sendBtn{
     if (!_sendBtn) {
         _sendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -256,9 +218,9 @@ XHPhotoPreviewDelegate>
     }
     return _sendBtn;
 }
--(TLCountLabel *)countLabel{
+-(XHCountLabel *)countLabel{
     if (!_countLabel) {
-        _countLabel = [[TLCountLabel alloc] init];
+        _countLabel = [[XHCountLabel alloc] init];
         _countLabel.backgroundColor = UIColorFromRGB(0x007AFF);
         _countLabel.textColor = UIColorFromRGB(0xffffff);
         _countLabel.font = [UIFont systemFontOfSize:15];
@@ -288,5 +250,26 @@ XHPhotoPreviewDelegate>
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+@end
+
+@implementation XHCountLabel
+-(instancetype)init{
+    if (self = [super init]) {
+        self.clipsToBounds = YES;
+        self.textAlignment = NSTextAlignmentCenter;
+        self.backgroundColor = UIColorFromRGB(0xff514e);
+        self.font = [UIFont systemFontOfSize:15];
+        self.textColor = UIColorFromRGB(0xffffff);
+    }
+    return self;
+}
+-(CGSize)intrinsicContentSize{
+    CGSize size = [super intrinsicContentSize];
+    return CGSizeMake(MAX(size.width + 8, size.height + 4), size.height + 4);
+}
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    self.layer.cornerRadius = self.frame.size.height / 2.0;
 }
 @end

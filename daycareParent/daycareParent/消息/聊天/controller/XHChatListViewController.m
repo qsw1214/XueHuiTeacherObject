@@ -167,7 +167,7 @@
 {
     RCConversation *model=self.dataArry[indexPath.row];
    
-    XHChatViewController *chat=[[XHChatViewController alloc] init];
+    XHChatViewController *chat=[[XHChatViewController alloc] initHiddenWhenPushHidden];
     
     chat.targetID=model.targetId;
     
@@ -175,7 +175,8 @@
     [chat setNavtionTitle:info.name];
     
     [self.navigationController pushViewController:chat animated:YES];
-     [[XHChatManager shareManager] clearMessagesUnread:model.targetId];
+    
+    [[XHChatManager shareManager] clearMessagesUnread:model.targetId];
     [[XHChatManager shareManager] sendUserInfo];
 }
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath  

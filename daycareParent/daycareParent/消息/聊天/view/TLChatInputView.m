@@ -169,8 +169,8 @@ XHPhotoPickerDelegate>
         case 0:
         {
             XHPhotoPickerViewController *vc = [[XHPhotoPickerViewController alloc] initWithDelegate:self];
-            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-            [self.chatVc presentViewController :nav animated:YES completion:nil];
+           [self.chatVc.navigationController pushViewController:vc animated:YES];
+            
         }
             break;
         case 1:
