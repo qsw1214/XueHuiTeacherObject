@@ -1626,13 +1626,13 @@
 			isa = PBXGroup;
 			children = (
 				046BB1FC207C455700209C9B /* DCURLRouter.plist */,
+				046BB201207C455700209C9B /* UIViewController+DCURLRouter.h */,
 				046BB1FD207C455700209C9B /* UIViewController+DCURLRouter.m */,
 				046BB1FE207C455700209C9B /* DCURLNavgation.h */,
+				046BB203207C455700209C9B /* DCURLNavgation.m */,
+				046BB202207C455700209C9B /* DCURLRouter.h */,
 				046BB1FF207C455700209C9B /* DCURLRouter.m */,
 				046BB200207C455700209C9B /* DCSingleton.h */,
-				046BB201207C455700209C9B /* UIViewController+DCURLRouter.h */,
-				046BB202207C455700209C9B /* DCURLRouter.h */,
-				046BB203207C455700209C9B /* DCURLNavgation.m */,
 			);
 			path = DCURLRouter;
 			sourceTree = "<group>";

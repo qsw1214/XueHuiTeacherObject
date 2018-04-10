@@ -81,8 +81,7 @@
             XHChatViewController *conversationVC = [[XHChatViewController alloc] initHiddenWhenPushHidden];
             [conversationVC setNavtionTitle:self.itemFrame.model.teacherName];
             conversationVC.targetID = [NSString stringWithFormat:@"%@", self.itemFrame.model.userID];
-            
-              [[XHHelper sharedHelper].currentViewController.navigationController pushViewController:conversationVC animated:YES];
+            [DCURLRouter pushViewController:conversationVC animated:YES];
         }
             break;
 #pragma mark case 4 所授课程

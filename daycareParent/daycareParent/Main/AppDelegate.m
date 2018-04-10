@@ -106,6 +106,8 @@
     manager.shouldToolbarUsesTextFieldTintColor = YES;
     manager.enableAutoToolbar = NO;
     
+    [DCURLRouter loadConfigDictFromPlist:@"DCURLRouter.plist"];
+    
     return YES;
 }
 - (void) getUserLocation {
