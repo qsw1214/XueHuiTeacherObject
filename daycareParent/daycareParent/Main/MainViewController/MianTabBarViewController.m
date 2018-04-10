@@ -12,6 +12,7 @@
 #import "XHEducationCloudViewController.h"
 #import "XHEducationCloudViewController.h"
 #import "XHPersonalCenterViewController.h"
+#import "XHClassManageViewController.h"
 #import "TabBarItem.h"
 #import <RongIMLib/RongIMLib.h>
 @interface MianTabBarViewController ()
@@ -35,7 +36,7 @@
 
 -(void)addsubView
 {
-    XHSmartCampusViewController *smartCampus = [[XHSmartCampusViewController alloc] init];
+    XHClassManageViewController *smartCampus = [[XHClassManageViewController alloc] init];
     //创建tabBarItem
     TabBarItem *smartCampusTabBarItem = [[TabBarItem alloc]initWithTitle:@"智慧校园" imageName:@"ico_shouyehui" selectedImageName:@"ico_shouyese"];
     [smartCampus setTabBarItem:smartCampusTabBarItem];
