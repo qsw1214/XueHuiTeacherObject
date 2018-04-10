@@ -32,7 +32,7 @@ UITableViewDataSource>
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setItemContentType:NavigationIconAndTitle withItemType:NavigationItemRightype withIconName:nil withTitle:@"发送"];
+    [self setItemContentType:NavigationTitleType withItemType:NavigationItemRightype withIconName:nil withTitle:@"发送"];
    
     [self.view addSubview:self.mapView];
     [self.mapView mas_makeConstraints:^(MASConstraintMaker *make) {

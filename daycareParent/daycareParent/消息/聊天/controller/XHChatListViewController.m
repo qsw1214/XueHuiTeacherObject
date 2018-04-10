@@ -19,7 +19,7 @@
 #define kTitleList @[@"给老师留言",@"家庭作业",@"通知公告"]
 #define kTitlePic @[@"im_message",@"im_book",@"im_notice"]
 @interface XHChatListViewController ()<UITableViewDelegate,UITableViewDataSource,XHChatManagerDelegate>
-@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)BaseTableView *tableView;
 @property(nonatomic,strong)NSMutableArray *dataArry;
 @property(nonatomic,assign)CGFloat tabbarBottom;
 @property(nonatomic,strong)XHNetWorkConfig *net;

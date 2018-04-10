@@ -56,7 +56,13 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self setItemContentItemHiddenWithType:NavigationRightType withHidden:YES];
     [self setItemContentType:NavigationIconAndTitle withItemType:NavigationItemLeftType withIconName:@"ico_return" withTitle:@"返回"];
-   
+    //去掉留白方法
+    if (@available(iOS 11.0, *))
+    {}
+    else
+    {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
 
 }
 

@@ -25,11 +25,13 @@
     self = [super initWithFrame:frame style:style];
     if (self)
     {
-        if (@available(iOS 11.0, *))
-        {
-            [self setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+        //去掉留白方法
+        if (@available(iOS 11.0, *)) {
+            self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+            self.estimatedRowHeight = 0;
+            self.estimatedSectionHeaderHeight = 0;
+            self.estimatedSectionFooterHeight = 0;
         }
-        
         
         [self setBackgroundColor:RGB(238.0, 238.0, 238.0)];
         [self setSeparatorStyle:UITableViewCellSeparatorStyleNone];
