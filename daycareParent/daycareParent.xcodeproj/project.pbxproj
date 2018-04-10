@@ -10,6 +10,11 @@
 		04291A721FD2A101002D3B5B /* XHBackLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04291A711FD2A101002D3B5B /* XHBackLabel.m */; };
 		04291A7A1FD2AD68002D3B5B /* XHListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04291A791FD2AD68002D3B5B /* XHListCollectionViewCell.m */; };
 		0446B4D5207B558400A1BF1E /* AliyunOSSiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0446B4D4207B558400A1BF1E /* AliyunOSSiOS.framework */; };
+		0446B4DC207B655200A1BF1E /* XHClassManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0446B4DB207B655200A1BF1E /* XHClassManageViewController.m */; };
+		046BB204207C455700209C9B /* DCURLRouter.plist in Resources */ = {isa = PBXBuildFile; fileRef = 046BB1FC207C455700209C9B /* DCURLRouter.plist */; };
+		046BB205207C455700209C9B /* UIViewController+DCURLRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 046BB1FD207C455700209C9B /* UIViewController+DCURLRouter.m */; };
+		046BB206207C455700209C9B /* DCURLRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 046BB1FF207C455700209C9B /* DCURLRouter.m */; };
+		046BB207207C455700209C9B /* DCURLNavgation.m in Sources */ = {isa = PBXBuildFile; fileRef = 046BB203207C455700209C9B /* DCURLNavgation.m */; };
 		4B07CC191FD4DAB800B2DBDA /* XHLeaveRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B07CC181FD4DAB800B2DBDA /* XHLeaveRecordModel.m */; };
 		4B07CC1C1FD4DAC800B2DBDA /* XHLeaveRecordFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B07CC1B1FD4DAC800B2DBDA /* XHLeaveRecordFrame.m */; };
 		4B07CC1D1FD4E48500B2DBDA /* XHLeaveRecordContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B523BDD1FD1584A006DD565 /* XHLeaveRecordContentView.m */; };
@@ -536,6 +541,16 @@
 		04291A781FD2AD68002D3B5B /* XHListCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHListCollectionViewCell.h; sourceTree = "<group>"; };
 		04291A791FD2AD68002D3B5B /* XHListCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHListCollectionViewCell.m; sourceTree = "<group>"; };
 		0446B4D4207B558400A1BF1E /* AliyunOSSiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AliyunOSSiOS.framework; sourceTree = "<group>"; };
+		0446B4DA207B655200A1BF1E /* XHClassManageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHClassManageViewController.h; sourceTree = "<group>"; };
+		0446B4DB207B655200A1BF1E /* XHClassManageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHClassManageViewController.m; sourceTree = "<group>"; };
+		046BB1FC207C455700209C9B /* DCURLRouter.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DCURLRouter.plist; sourceTree = "<group>"; };
+		046BB1FD207C455700209C9B /* UIViewController+DCURLRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+DCURLRouter.m"; sourceTree = "<group>"; };
+		046BB1FE207C455700209C9B /* DCURLNavgation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCURLNavgation.h; sourceTree = "<group>"; };
+		046BB1FF207C455700209C9B /* DCURLRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCURLRouter.m; sourceTree = "<group>"; };
+		046BB200207C455700209C9B /* DCSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSingleton.h; sourceTree = "<group>"; };
+		046BB201207C455700209C9B /* UIViewController+DCURLRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+DCURLRouter.h"; sourceTree = "<group>"; };
+		046BB202207C455700209C9B /* DCURLRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCURLRouter.h; sourceTree = "<group>"; };
+		046BB203207C455700209C9B /* DCURLNavgation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCURLNavgation.m; sourceTree = "<group>"; };
 		4B07CC171FD4DAB800B2DBDA /* XHLeaveRecordModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHLeaveRecordModel.h; sourceTree = "<group>"; };
 		4B07CC181FD4DAB800B2DBDA /* XHLeaveRecordModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHLeaveRecordModel.m; sourceTree = "<group>"; };
 		4B07CC1A1FD4DAC800B2DBDA /* XHLeaveRecordFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHLeaveRecordFrame.h; sourceTree = "<group>"; };
@@ -1574,6 +1589,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0446B4D6207B651A00A1BF1E /* 班级管理 */ = {
+			isa = PBXGroup;
+			children = (
+				0446B4D7207B651A00A1BF1E /* Model */,
+				0446B4D8207B651A00A1BF1E /* View */,
+				0446B4D9207B651A00A1BF1E /* ViewController */,
+			);
+			path = "班级管理";
+			sourceTree = "<group>";
+		};
+		0446B4D7207B651A00A1BF1E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0446B4D8207B651A00A1BF1E /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0446B4D9207B651A00A1BF1E /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0446B4DA207B655200A1BF1E /* XHClassManageViewController.h */,
+				0446B4DB207B655200A1BF1E /* XHClassManageViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		046BB1FB207C455700209C9B /* DCURLRouter */ = {
+			isa = PBXGroup;
+			children = (
+				046BB1FC207C455700209C9B /* DCURLRouter.plist */,
+				046BB1FD207C455700209C9B /* UIViewController+DCURLRouter.m */,
+				046BB1FE207C455700209C9B /* DCURLNavgation.h */,
+				046BB1FF207C455700209C9B /* DCURLRouter.m */,
+				046BB200207C455700209C9B /* DCSingleton.h */,
+				046BB201207C455700209C9B /* UIViewController+DCURLRouter.h */,
+				046BB202207C455700209C9B /* DCURLRouter.h */,
+				046BB203207C455700209C9B /* DCURLNavgation.m */,
+			);
+			path = DCURLRouter;
+			sourceTree = "<group>";
+		};
 		04E5D1301FD397FE0021B842 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -2238,6 +2301,7 @@
 		4B80F2021FCBE43E00BC7B52 /* ThirdLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				046BB1FB207C455700209C9B /* DCURLRouter */,
 				0446B4D4207B558400A1BF1E /* AliyunOSSiOS.framework */,
 				8C1D4794207B3E23005AA0B4 /* IQKeyboardManager */,
 				8C1AA8EB207B272200DDCBB3 /* Rong_Cloud_iOS_IMLib_CallLib_SDK_v2_8_29_Stable-2 */,
@@ -2265,6 +2329,7 @@
 		4B80F2031FCBE43E00BC7B52 /* 智慧校园 */ = {
 			isa = PBXGroup;
 			children = (
+				0446B4D6207B651A00A1BF1E /* 班级管理 */,
 				8CBEE218201884BA007EB93A /* 打卡签到 */,
 				8CBA35F92011BAB900485643 /* 日常点名 */,
 				8CC76474200C8AE3007887C7 /* 调课报备 */,
@@ -3829,6 +3894,7 @@
 			files = (
 				4BCEB7392029750000ED2829 /* wphoto_back@2x.png in Resources */,
 				4B80F28A1FCBF04800BC7B52 /* MJRefresh.bundle in Resources */,
+				046BB204207C455700209C9B /* DCURLRouter.plist in Resources */,
 				4BFB975D1FCCF8CD003EEC8C /* Images.xcassets in Resources */,
 				8CC76485200C9993007887C7 /* XHNewTableViewCell.xib in Resources */,
 				8C7EF53C1FE0BBFD00C029F2 /* 37x-Checkmark@2x.png in Resources */,
@@ -3905,6 +3971,7 @@
 				8C1AA863207B13FA00DDCBB3 /* XHPhotoPickerViewController.m in Sources */,
 				4B80F2421FCBF01B00BC7B52 /* BaseLabelView.m in Sources */,
 				4B3126191FD90AAA000CE894 /* XHDatePickerControl.m in Sources */,
+				0446B4DC207B655200A1BF1E /* XHClassManageViewController.m in Sources */,
 				4B68C9EC20119D460078FEDB /* XHAssignmentHomeWorkViewController.m in Sources */,
 				4B31265C1FDA8F9C000CE894 /* XHAddressBookLecturesControl.m in Sources */,
 				4BCEB7382029750000ED2829 /* WPFunctionView.m in Sources */,
@@ -3980,6 +4047,7 @@
 				4BD33DE61FCD5D6900BC52B6 /* XHFunctionMenuModel.m in Sources */,
 				8C1AA826207B13D200DDCBB3 /* XHNoticeRecordViewController.m in Sources */,
 				4BBC434B1FD1086000555846 /* XHHomeWorkCellContentView.m in Sources */,
+				046BB205207C455700209C9B /* UIViewController+DCURLRouter.m in Sources */,
 				4B80F2C31FCBF04F00BC7B52 /* NSData+ImageContentType.m in Sources */,
 				8C1AA821207B13D200DDCBB3 /* XHAddNoticeRecipientViewController.m in Sources */,
 				4B3126491FDA1FE7000CE894 /* XHAddressBookModel.m in Sources */,
@@ -4057,6 +4125,7 @@
 				8C79740E1FE7795800AF6F6A /* VTGTMBase64.m in Sources */,
 				4B80F28E1FCBF04800BC7B52 /* UIView+MJExtension.m in Sources */,
 				4B80F3241FCBFD6F00BC7B52 /* NSDictionary+MTLMappingAdditions.m in Sources */,
+				046BB207207C455700209C9B /* DCURLNavgation.m in Sources */,
 				4B80F2861FCBF04800BC7B52 /* MJRefreshNormalHeader.m in Sources */,
 				4B80F2081FCBE4E400BC7B52 /* AppDelegate.m in Sources */,
 				4B3126321FD93CC6000CE894 /* TADotView.m in Sources */,
@@ -4269,6 +4338,7 @@
 				4B07CC451FD5106800B2DBDA /* GooeyCircle.m in Sources */,
 				8C1AA870207B13FA00DDCBB3 /* TLPhotoBrowser.m in Sources */,
 				8C1AA892207B162000DDCBB3 /* ParentView.m in Sources */,
+				046BB206207C455700209C9B /* DCURLRouter.m in Sources */,
 				4B8718F020243ABE0023A54C /* NSArray+Category.m in Sources */,
 				8CD401CC202D34C300226E87 /* XHBackgrounduserInfo.m in Sources */,
 				8C1AA8DA207B1A5300DDCBB3 /* UITableView+FDTemplateLayoutCell.m in Sources */,
