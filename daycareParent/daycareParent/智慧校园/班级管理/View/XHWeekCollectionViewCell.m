@@ -38,7 +38,9 @@
 #pragma mark - Getter /  Setter
 -(void)setItemObject:(XHWeekFrame*)object
 {
-    
+    [self.titleLabel setBackgroundColor:[UIColor clearColor]];
+    [self.describeLanel setBackgroundColor:[UIColor clearColor]];
+    [self.contentView setBackgroundColor:[UIColor clearColor]];
    
     //!< 首先重置Frame
     switch (object.model.type)
@@ -47,6 +49,7 @@
         {
             [self.titleLabel setFrame:CGRectMake(0, 0, object.itemSize.width, object.itemSize.height-0.5)];
             [self.describeLanel setFrame:CGRectMake(0, (object.itemSize.height-0.5), object.itemSize.width, 0.5)];
+            [self.describeLanel setBackgroundColor:LineViewColor];
             
         }
             break;
@@ -55,6 +58,7 @@
             [self.titleLabel setFrame:CGRectMake(0, 0, object.itemSize.width, (object.itemSize.height/2.0))];
             [self.describeLanel setFrame:CGRectMake(0, self.titleLabel.bottom, object.itemSize.width, self.titleLabel.height)];
             [self.describeLanel setText:object.model.describe];
+             [self.contentView setBackgroundColor:[UIColor grayColor]];
             
         }
             break;
@@ -86,7 +90,7 @@
     {
         _describeLanel = [[UILabel alloc]init];
         [_describeLanel setTextAlignment:NSTextAlignmentCenter];
-        [_describeLanel setBackgroundColor:LineViewColor];
+        
     }
     return _describeLanel;
 }

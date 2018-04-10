@@ -22,10 +22,21 @@
         
         for (int i = 1; i <= 5; i++)
         {
+          
             XHWeekFrame *frame = [[XHWeekFrame alloc]init];
             XHWeekModel *model = [[XHWeekModel alloc]init];
             [model setType:XHWeekTipType];
             [model setTitle:[NSString stringWithFormat:@"周(%d)",i]];
+            for (int i = 0; i<10; i++)
+            {
+                XHWeekFrame *syFrame = [[XHWeekFrame alloc]init];
+                XHWeekModel *syModel = [[XHWeekModel alloc]init];
+                [syModel setType:XHWeekSyllabusType];
+                [syModel setTitle:[NSString stringWithFormat:@"第%d节",i]];
+                [syModel setDescribe:@"语文"];
+                [syFrame setModel:syModel];
+                [model.syllabusArray addObject:syFrame];
+            }
             [frame setModel:model];
             [self.dataArray addObject:frame];
         }
@@ -69,10 +80,10 @@
 #pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if ([self.deletage respondsToSelector:@selector(didSelectItemObjectAtIndexPath:)])
-//    {
-//        [self.deletage didSelectItemObjectAtIndexPath:[self.dataArray objectAtIndex:indexPath.row]];
-//    }
+    if ([self.weekDeletage respondsToSelector:@selector(didSelectItemObjectAtIndexPath:)])
+    {
+        [self.weekDeletage didSelectItemObjectAtIndexPath:[self.dataArray objectAtIndex:indexPath.row]];
+    }
     
 }
 

@@ -10,8 +10,19 @@
 #import "XHWeekCollectionViewCell.h"
 
 
+@protocol XHWeekCollectionViewDeletage <NSObject>
+
+-(void)didSelectItemObjectAtIndexPath:(id)object;
+
+
+@end
+
+
 
 @interface XHWeekCollectionView : BaseCollectionView <UICollectionViewDelegate,UICollectionViewDataSource>
+
+
+@property (nonatomic,weak) id <XHWeekCollectionViewDeletage> weekDeletage; //!< 代理对象
 
 
 

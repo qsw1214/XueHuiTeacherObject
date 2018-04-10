@@ -16,6 +16,13 @@ typedef NS_ENUM(NSInteger,XHWeekModelType)
 };
 
 
+typedef NS_ENUM(NSInteger,XHWeekModelSlectType)
+{
+    XHWeekSelectType = 1, //!< 选中状态
+    XHWeekNormalType = 2, //!< 未选中状态
+};
+
+
 
 
 @interface XHWeekModel : BaseModel
@@ -23,7 +30,12 @@ typedef NS_ENUM(NSInteger,XHWeekModelType)
 @property (nonatomic,copy) NSString *title; //!< 标题
 @property (nonatomic,copy) NSString *describe; //!< 描述
 
-@property (nonatomic,assign) XHWeekModelType type;
+@property (nonatomic,assign) XHWeekModelType type;  //!< 数据模型类型
+@property (nonatomic,assign) XHWeekModelSlectType selectType; //!< 选中类型
+
+@property (nonatomic,strong) NSMutableArray *syllabusArray; //!< 课程数组
+
+
 
 
 

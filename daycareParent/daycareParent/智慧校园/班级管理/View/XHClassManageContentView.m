@@ -11,7 +11,7 @@
 #import "XHSyllabusCollectionView.h"
 #import <WebKit/WebKit.h>
 
-@interface XHClassManageContentView ()
+@interface XHClassManageContentView () <XHWeekCollectionViewDeletage>
 
 @property (nonatomic,strong) WKWebView *webView; //!< 成绩webView
 @property (nonatomic,strong) BaseButtonControl *achievementControl; //!< 成绩管理
@@ -86,6 +86,14 @@
     
     //!< 重置当前滚动视图的高度
     [self setContentSize:CGSizeMake(frame.size.width, self.syllabusCollectionView.bottom+20.0)];
+}
+
+
+#pragma mark - Delegate Method
+#pragma mark XHWeekCollectionViewDeletage 代理方法
+-(void)didSelectItemObjectAtIndexPath:(XHWeekFrame*)object
+{
+    [self.syllabusCollectionView setItemArray:object.model.syllabusArray];
 }
 
 
@@ -183,6 +191,7 @@
     {
 
         _weekCollectionView = [[XHWeekCollectionView alloc]init];
+        [_weekCollectionView setWeekDeletage:self];
     }
     return _weekCollectionView;
 }

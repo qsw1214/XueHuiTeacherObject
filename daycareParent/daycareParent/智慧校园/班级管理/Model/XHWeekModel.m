@@ -13,4 +13,16 @@
 
 @implementation XHWeekModel
 
+
+
+
+
+-(NSMutableArray *)syllabusArray
+{
+    if (!_syllabusArray)
+    {
+        _syllabusArray = [NSMutableArray array];
+    }
+    return _syllabusArray;
+}
 @end

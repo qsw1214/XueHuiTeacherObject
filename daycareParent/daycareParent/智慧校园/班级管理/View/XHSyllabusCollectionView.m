@@ -11,7 +11,25 @@
 @implementation XHSyllabusCollectionView
 
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self)
+    {
+        [self setDelegate:self];
+        [self setDataSource:self];
+        
+        [self registerClass:[XHWeekCollectionViewCell class] forCellWithReuseIdentifier:CellIdentifier];
+    }
+    return self;
+}
 
+
+-(void)setItemArray:(NSMutableArray *)itemArray
+{
+    [self.dataArray setArray:itemArray];
+    [self reloadData];
+}
 
 
 
@@ -47,12 +65,13 @@
 #pragma mark UICollectionViewDelegateFlowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(120,40.0);
+    XHWeekFrame *frame = [self.dataArray objectAtIndex:indexPath.row];
+    return CGSizeMake(frame.itemSize.width,frame.itemSize.height);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 0;
+    return 5;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
@@ -63,7 +82,7 @@
 
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(0, 0, 0, 0);
+    return UIEdgeInsetsMake(5, 0, 5, 0);
 }
 
 
