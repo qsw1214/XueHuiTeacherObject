@@ -8,7 +8,7 @@
 
 #import "XHIMNoticeViewController.h"
 #import "XHNoticeViewController.h"
-#import "XHChatViewController.h"
+#import "XHChatListViewController.h"
 
 @interface XHIMNoticeViewController ()
 
@@ -19,8 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    XHNoticeViewController * notific = [[XHNoticeViewController alloc] init];
-   XHChatViewController* chat = [[XHChatViewController alloc] init];
-    [self setSegmentedControlItems:@[@"公告",@"消息"] WithControllersArry:@[notific,chat]];
+   XHChatListViewController* chatList = [[XHChatListViewController alloc] initHiddenWhenPushHidden];
+    [self setSegmentedControlItems:@[@"公告",@"消息"] WithControllersArry:@[notific,chatList]];
     [self navtionItemHidden:NavigationItemLeftType];
 }
 

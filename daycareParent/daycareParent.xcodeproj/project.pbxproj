@@ -365,7 +365,6 @@
 		8C1AA861207B13FA00DDCBB3 /* XHChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1AA82D207B13F900DDCBB3 /* XHChatViewController.m */; };
 		8C1AA862207B13FA00DDCBB3 /* XHLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1AA82F207B13F900DDCBB3 /* XHLocationViewController.m */; };
 		8C1AA863207B13FA00DDCBB3 /* XHPhotoPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1AA831207B13F900DDCBB3 /* XHPhotoPickerViewController.m */; };
-		8C1AA864207B13FA00DDCBB3 /* XHPhotoPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1AA833207B13F900DDCBB3 /* XHPhotoPreviewViewController.m */; };
 		8C1AA865207B13FA00DDCBB3 /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1AA836207B13F900DDCBB3 /* NSDate+Utils.m */; };
 		8C1AA866207B13FA00DDCBB3 /* PHAsset+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1AA838207B13F900DDCBB3 /* PHAsset+Extend.m */; };
 		8C1AA867207B13FA00DDCBB3 /* XHChatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1AA83A207B13F900DDCBB3 /* XHChatManager.m */; };
@@ -1252,8 +1251,6 @@
 		8C1AA82F207B13F900DDCBB3 /* XHLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHLocationViewController.m; sourceTree = "<group>"; };
 		8C1AA830207B13F900DDCBB3 /* XHPhotoPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHPhotoPickerViewController.h; sourceTree = "<group>"; };
 		8C1AA831207B13F900DDCBB3 /* XHPhotoPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHPhotoPickerViewController.m; sourceTree = "<group>"; };
-		8C1AA832207B13F900DDCBB3 /* XHPhotoPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHPhotoPreviewViewController.h; sourceTree = "<group>"; };
-		8C1AA833207B13F900DDCBB3 /* XHPhotoPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHPhotoPreviewViewController.m; sourceTree = "<group>"; };
 		8C1AA835207B13F900DDCBB3 /* NSDate+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utils.h"; sourceTree = "<group>"; };
 		8C1AA836207B13F900DDCBB3 /* NSDate+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utils.m"; sourceTree = "<group>"; };
 		8C1AA837207B13F900DDCBB3 /* PHAsset+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PHAsset+Extend.h"; sourceTree = "<group>"; };
@@ -3265,8 +3262,6 @@
 				8C1AA82F207B13F900DDCBB3 /* XHLocationViewController.m */,
 				8C1AA830207B13F900DDCBB3 /* XHPhotoPickerViewController.h */,
 				8C1AA831207B13F900DDCBB3 /* XHPhotoPickerViewController.m */,
-				8C1AA832207B13F900DDCBB3 /* XHPhotoPreviewViewController.h */,
-				8C1AA833207B13F900DDCBB3 /* XHPhotoPreviewViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -4359,7 +4354,6 @@
 				4B3418771FFDC14C00A5EC56 /* UIViewController+ZFPlayerRotation.m in Sources */,
 				8C1AA879207B13FA00DDCBB3 /* XHVoiceMessageCell.m in Sources */,
 				4B07CC451FD5106800B2DBDA /* GooeyCircle.m in Sources */,
-				8C1AA864207B13FA00DDCBB3 /* XHPhotoPreviewViewController.m in Sources */,
 				8C1AA870207B13FA00DDCBB3 /* TLPhotoBrowser.m in Sources */,
 				8C1AA892207B162000DDCBB3 /* ParentView.m in Sources */,
 				046BB206207C455700209C9B /* DCURLRouter.m in Sources */,

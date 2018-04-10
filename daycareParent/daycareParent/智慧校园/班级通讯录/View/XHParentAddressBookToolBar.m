@@ -75,7 +75,7 @@
             [messageInfo saveOrUpdateByColumnName:@"userId" AndColumnValue:[NSString stringWithFormat:@"%@",self.itemFrame.model.userID]];
             
             [[XHChatManager shareManager] sendUserInfo];
-            XHChatViewController *conversationVC = [[XHChatViewController alloc] init];
+            XHChatViewController *conversationVC = [[XHChatViewController alloc] initHiddenWhenPushHidden];
             [conversationVC setNavtionTitle:self.itemFrame.model.teacherName];
             conversationVC.targetID = [NSString stringWithFormat:@"%@", self.itemFrame.model.userID];
             

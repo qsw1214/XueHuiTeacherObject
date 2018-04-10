@@ -13,7 +13,11 @@
 -(void)didSendPhotos:(NSArray *)photos;
 @end
 
-@interface XHPhotoPickerViewController : UIViewController
+@interface XHCountLabel : UILabel
+
+@end
+
+@interface XHPhotoPickerViewController : BaseViewController
 @property(nonatomic,assign)id <XHPhotoPickerDelegate> delegate;
 -(instancetype)initWithDelegate:(id <XHPhotoPickerDelegate>)delegate;
 -(void)sendPhotoAction;

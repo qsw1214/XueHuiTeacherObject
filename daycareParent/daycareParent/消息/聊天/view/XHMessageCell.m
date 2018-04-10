@@ -100,7 +100,7 @@
     else
     {
         XHUserInfo *info=[XHUserInfo sharedUserInfo];
-         //[self.headControl setHeadrUrl:ALGetFileHeadThumbnail(info.guardianModel.headPic)  withName:info.guardianModel.guardianName withType:XHHeaderTeacherType];
+        [self.headControl setHeadrUrl:ALGetFileHeadThumbnail(info.userPic)  withName:info.teacherName withType:XHHeaderTeacherType];
     }
     [self.bubbleImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         if (direction == MessageDirection_RECEIVE) {

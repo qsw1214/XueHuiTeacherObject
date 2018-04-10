@@ -84,7 +84,7 @@
 {
     if ([message.content isKindOfClass:[RCImageMessage class]])
     {
-        [[RCIMClient sharedRCIMClient] sendImageMessage:message.conversationType targetId:message.targetId content:message.content pushContent:nil progress:^(int progress, long messageId) {
+        [[RCIMClient sharedRCIMClient] sendMediaMessage:message.conversationType targetId:message.targetId content:message.content pushContent:nil pushData:nil progress:^(int progress, long messageId) {
             
         } success:^(long messageId) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -98,7 +98,25 @@
                     failedBlock(message);
                 }
             });
+        } cancel:^(long messageId) {
+            
         }];
+//
+//        [[RCIMClient sharedRCIMClient] sendImageMessage:message.conversationType targetId:message.targetId content:message.content pushContent:nil progress:^(int progress, long messageId) {
+//
+//        } success:^(long messageId) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                if (successBlock) {
+//                    successBlock(message);
+//                }
+//            });
+//        } error:^(RCErrorCode errorCode, long messageId) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                if (failedBlock) {
+//                    failedBlock(message);
+//                }
+//            });
+//        }];
     }
     else
     {
