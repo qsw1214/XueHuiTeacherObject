@@ -21,6 +21,7 @@
 		042EFA20207DE66F0089FE83 /* XHHomeWorkContentViwCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042EFA1C207DE66E0089FE83 /* XHHomeWorkContentViwCell.m */; };
 		042EFA21207DE66F0089FE83 /* XHHomeWorkCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042EFA1D207DE66F0089FE83 /* XHHomeWorkCollectionView.m */; };
 		042EFA24207DF2E10089FE83 /* XHClassManageHeaderBoardControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 042EFA23207DF2E10089FE83 /* XHClassManageHeaderBoardControl.m */; };
+		042EFA27207E135E0089FE83 /* XHSyllabusBoardControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 042EFA26207E135E0089FE83 /* XHSyllabusBoardControl.m */; };
 		0446B4D5207B558400A1BF1E /* AliyunOSSiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0446B4D4207B558400A1BF1E /* AliyunOSSiOS.framework */; };
 		0446B4DC207B655200A1BF1E /* XHClassManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0446B4DB207B655200A1BF1E /* XHClassManageViewController.m */; };
 		046BB204207C455700209C9B /* DCURLRouter.plist in Resources */ = {isa = PBXBuildFile; fileRef = 046BB1FC207C455700209C9B /* DCURLRouter.plist */; };
@@ -592,6 +593,8 @@
 		042EFA1F207DE66F0089FE83 /* XHHomeWorkContentViwCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHHomeWorkContentViwCell.h; sourceTree = "<group>"; };
 		042EFA22207DF2E10089FE83 /* XHClassManageHeaderBoardControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHClassManageHeaderBoardControl.h; sourceTree = "<group>"; };
 		042EFA23207DF2E10089FE83 /* XHClassManageHeaderBoardControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHClassManageHeaderBoardControl.m; sourceTree = "<group>"; };
+		042EFA25207E135E0089FE83 /* XHSyllabusBoardControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHSyllabusBoardControl.h; sourceTree = "<group>"; };
+		042EFA26207E135E0089FE83 /* XHSyllabusBoardControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHSyllabusBoardControl.m; sourceTree = "<group>"; };
 		0446B4D4207B558400A1BF1E /* AliyunOSSiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AliyunOSSiOS.framework; sourceTree = "<group>"; };
 		0446B4DA207B655200A1BF1E /* XHClassManageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHClassManageViewController.h; sourceTree = "<group>"; };
 		0446B4DB207B655200A1BF1E /* XHClassManageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHClassManageViewController.m; sourceTree = "<group>"; };
@@ -1803,6 +1806,8 @@
 				046BB209207C465900209C9B /* XHClassManageContentView.m */,
 				042EFA22207DF2E10089FE83 /* XHClassManageHeaderBoardControl.h */,
 				042EFA23207DF2E10089FE83 /* XHClassManageHeaderBoardControl.m */,
+				042EFA25207E135E0089FE83 /* XHSyllabusBoardControl.h */,
+				042EFA26207E135E0089FE83 /* XHSyllabusBoardControl.m */,
 				046BB20B207C4B3200209C9B /* XHWeekCollectionView.h */,
 				046BB20C207C4B3200209C9B /* XHWeekCollectionView.m */,
 				046BB20E207C4B3F00209C9B /* XHSyllabusCollectionView.h */,
@@ -4526,6 +4531,7 @@
 				8C1AA805207B13D200DDCBB3 /* XHParentsMeetingFrame.m in Sources */,
 				4B34187C1FFDC14C00A5EC56 /* ZFPlayerControlView.m in Sources */,
 				4B80F2851FCBF04800BC7B52 /* MJRefreshGifHeader.m in Sources */,
+				042EFA27207E135E0089FE83 /* XHSyllabusBoardControl.m in Sources */,
 				4B80F2811FCBF04800BC7B52 /* MJRefreshAutoStateFooter.m in Sources */,
 				8C7E5BC2207DB07100DA6F15 /* XHSubmitView.m in Sources */,
 				8C1AA820207B13D200DDCBB3 /* XHAddNoticeRecipientGroupViewController.m in Sources */,

@@ -36,10 +36,6 @@
     self = [super init];
     if (self)
     {
-        
-        
-        
-        
         [self setBackgroundColor:[UIColor whiteColor]];
         [self addSubview:self.imageView];
         [self addSubview:self.actualControl];
@@ -61,8 +57,8 @@
 {
     [self setFrame:frame];
     [self setLayerCornerRadius:5.0];
-    [self.layer  setShadowColor:[RGB(200, 200, 200) CGColor]]; //阴影颜色
-    [self.layer setShadowOffset:CGSizeMake(2, 2)];//偏移距离
+    [self.layer  setShadowColor:[RGB(216, 14, 14) CGColor]]; //阴影颜色
+    [self.layer setShadowOffset:CGSizeMake(5, 5)];//偏移距离
     [self.layer setShadowOpacity:0.6]; //不透明度
     [self.layer setShadowRadius:5.0]; //半径
     
@@ -72,22 +68,22 @@
     [self.imageView byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:5.0];
     
     //!< 实到人数Frame
-    [self.actualControl resetFrame:CGRectMake(0, self.imageView.bottom, frame.size.width/3.0, 102.0)];
-    [self.actualControl setTitleEdgeFrame:CGRectMake(0, 0, self.actualControl.width, self.actualControl.height/2.0) withNumberType:0 withAllType:NO];
-    [self.actualControl setTitleEdgeFrame:CGRectMake(0, self.actualControl.height/2.0, self.actualControl.width, self.actualControl.height/2.0) withNumberType:1 withAllType:NO];
+    [self.actualControl resetFrame:CGRectMake(0, self.imageView.bottom, frame.size.width/3.0, 80.0)];
+    [self.actualControl setTitleEdgeFrame:CGRectMake(0, 15, self.actualControl.width, (self.actualControl.height/2.0-15.0)) withNumberType:0 withAllType:NO];
+    [self.actualControl setTitleEdgeFrame:CGRectMake(0, self.actualControl.height/2.0, self.actualControl.width, (self.actualControl.height/2.0-15.0)) withNumberType:1 withAllType:NO];
     [self.actualControl byRoundingCorners:UIRectCornerBottomLeft cornerRadii:5.0];
     
     //!< 请假人数Frame
     [self.leaveControl resetFrame:CGRectMake(self.actualControl.right, self.imageView.bottom, self.actualControl.width, self.actualControl.height)];
-    [self.leaveControl setTitleEdgeFrame:CGRectMake(0, 0, self.leaveControl.width, self.leaveControl.height/2.0) withNumberType:0 withAllType:NO];
-    [self.leaveControl setTitleEdgeFrame:CGRectMake(0, self.leaveControl.height/2.0, self.leaveControl.width, self.leaveControl.height/2.0) withNumberType:1 withAllType:NO];
+    [self.leaveControl setTitleEdgeFrame:CGRectMake(0, 15, self.leaveControl.width, (self.leaveControl.height/2.0-15.0)) withNumberType:0 withAllType:NO];
+    [self.leaveControl setTitleEdgeFrame:CGRectMake(0, (self.leaveControl.height/2.0), self.leaveControl.width, self.leaveControl.height/2.0-15.0) withNumberType:1 withAllType:NO];
     [self.leaveControl resetLineViewFrame:CGRectMake(0.0, 20.0, 0.5, self.leaveControl.height-40.0) withNumberType:0 withAllType:NO];
     [self.leaveControl resetLineViewFrame:CGRectMake(self.leaveControl.width-0.5, 20.0, 0.5, self.leaveControl.height-40.0) withNumberType:1 withAllType:NO];
     
     //!< 未到人数Frame
     [self.lateControl resetFrame:CGRectMake(self.leaveControl.right, self.imageView.bottom, self.leaveControl.width, self.leaveControl.height)];
-    [self.lateControl setTitleEdgeFrame:CGRectMake(0, 0, self.lateControl.width, self.lateControl.height/2.0) withNumberType:0 withAllType:NO];
-    [self.lateControl setTitleEdgeFrame:CGRectMake(0, self.lateControl.height/2.0, self.lateControl.width, self.lateControl.height/2.0) withNumberType:1 withAllType:NO];
+    [self.lateControl setTitleEdgeFrame:CGRectMake(0, 15.0, self.lateControl.width, (self.lateControl.height/2.0-15.0)) withNumberType:0 withAllType:NO];
+    [self.lateControl setTitleEdgeFrame:CGRectMake(0, self.lateControl.height/2.0, self.lateControl.width, (self.lateControl.height/2.0-15.0)) withNumberType:1 withAllType:NO];
     [self.lateControl byRoundingCorners:UIRectCornerBottomRight cornerRadii:5.0];
     
     
@@ -166,7 +162,7 @@
         [_leaveControl setNumberLineView:2];
         [_leaveControl setFont:[UIFont boldSystemFontOfSize:22.0] withNumberType:0 withAllType:NO];
         [_leaveControl setFont:FontLevel3 withNumberType:1 withAllType:NO];
-        [_leaveControl setTextColor:[UIColor whiteColor] withTpe:0 withAllType:NO];
+        [_leaveControl setTextColor:RGB(255,236,112) withTpe:0 withAllType:NO];
         [_leaveControl setTextColor:[UIColor whiteColor] withTpe:1 withAllType:NO];
         [_leaveControl setFont:FontLevel3 withNumberType:1 withAllType:NO];
         [_leaveControl setTextAlignment:NSTextAlignmentCenter withNumberType:0 withAllType:NO];
@@ -187,13 +183,14 @@
         [_lateControl setNumberLabel:2];
         [_lateControl setFont:[UIFont boldSystemFontOfSize:22.0] withNumberType:0 withAllType:NO];
         [_lateControl setFont:FontLevel3 withNumberType:1 withAllType:NO];
-        [_lateControl setTextColor:[UIColor whiteColor] withTpe:0 withAllType:NO];
+        [_lateControl setTextColor:RGB(255,104,105) withTpe:0 withAllType:NO];
         [_lateControl setTextColor:[UIColor whiteColor] withTpe:1 withAllType:NO];
         [_lateControl setFont:FontLevel3 withNumberType:1 withAllType:NO];
         [_lateControl setTextAlignment:NSTextAlignmentCenter withNumberType:0 withAllType:NO];
         [_lateControl setTextAlignment:NSTextAlignmentCenter withNumberType:1 withAllType:NO];
         [_lateControl setText:@"6" withNumberType:0 withAllType:NO];
         [_lateControl setText:@"未到人数" withNumberType:1 withAllType:NO];
+        
     }
     return _lateControl;
 }
@@ -298,6 +295,9 @@
         [self.noticeControl setBackgroundColor:[UIColor purpleColor]];
         [self.contactParentsControl setBackgroundColor:[UIColor darkGrayColor]];
         [self.parentMessageControl setBackgroundColor:[UIColor orangeColor]];
+        [self.leaveControl setItemColor:color];
+        [self.lateControl setItemColor:color];
+        [self.actualControl setItemColor:color];
     }
 }
 
