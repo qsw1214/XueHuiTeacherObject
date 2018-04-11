@@ -82,7 +82,7 @@ static XHUserInfo *userInfo = nil;
              {
                  self.userId=[dic objectItemKey:@"id"];
                  self.teacherName=[dic objectItemKey:@"teacherName"];
-                 self.headPic=[dic objectItemKey:@"headPic"];
+                 self.userPic=[dic objectItemKey:@"headPic"];
              }
          }
       

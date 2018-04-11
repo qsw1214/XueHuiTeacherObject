@@ -18,6 +18,9 @@
 -(void)setLabelTextColor:(UIColor *)color withNumberIndex:(NSInteger)index;
 -(void)setLabelCornerRadius:(CGFloat)radius withNumberIndex:(NSInteger)index;
 -(void)setLabelBackgroundColor:(UIColor *)color withNumberIndex:(NSInteger)index;
+-(void)setLabelAddTapGestureRecognizerTarget:(id)target action:(SEL)action withNumberIndex:(NSInteger)index;
+-(void)setLabelAddGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer withNumberIndex:(NSInteger)index;
+
 
 -(void)setNumberImageView:(NSInteger)number;
 -(void)setImageViewCGRectMake:(CGRect)rect withNumberIndex:(NSInteger)index;
@@ -26,5 +29,19 @@
 -(void)setImageViewCornerRadius:(CGFloat)radius withNumberIndex:(NSInteger)index;
 -(void)setImageViewAlpha:(CGFloat)alpha withNumberIndex:(NSInteger)index;
 -(void)setImageViewBorderColor:(UIColor *)borderColor withBorderWidth:(CGFloat)borderWidth withNumberIndex:(NSInteger)index;
+-(void)setImageViewAddTapGestureRecognizerTarget:(id)target action:(SEL)action withNumberIndex:(NSInteger)index;
+-(void)setImageViewAddGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer withNumberIndex:(NSInteger)index;
+
+-(void)setNumberTextFeild:(NSInteger)number;
+-(void)setTextFeildCGRectMake:(CGRect)rect withNumberIndex:(NSInteger)index;
+-(void)setTextFeildBorderStyle:(UITextBorderStyle)textBorderStyle withNumberIndex:(NSInteger)index;
+-(void)setTextFeildKeyboardType:(UIKeyboardType)keyboardType withNumberIndex:(NSInteger)index;
+-(void)setTextFeildPlaceholder:(NSString *)placeholder withNumberIndex:(NSInteger)index;
+-(void)setTextFeildPlaceholderColor:(UIColor *)color withNumberIndex:(NSInteger)index;
+-(void)setTextFeildPlaceholderFont:(UIFont *)font withNumberIndex:(NSInteger)index;
+-(void)setTextFeildText:(NSString *)text withNumberIndex:(NSInteger)index;
+-(void)setTextFeildTextColor:(UIColor *)color withNumberIndex:(NSInteger)index;
+-(void)setTextFeildTextFont:(UIFont *)font withNumberIndex:(NSInteger)index;
+
 -(void)setHeadPic:(NSString*)pic withName:(NSString*)name withType:(XHHeadType)type;
 @end

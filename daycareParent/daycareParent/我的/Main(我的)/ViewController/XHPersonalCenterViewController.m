@@ -84,7 +84,7 @@
 }
 - (UITableViewCell *)tableView:(BaseTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
     {
-            XHSetTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+        XHSetTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
             cell.setImageView.image=[UIImage imageNamed:contentArry[indexPath.row]];
             cell.setLabel.font=FontLevel2;
             cell.setLabel.text=arry[indexPath.row];

@@ -10,7 +10,6 @@
 #import "XHGuideViewController.h"
 #import "XHLoginViewController.h"
 #import "MainPreviewViewController.h"
-#import "XHNewUserInfoViewController.h"
 #import "AppDelegate.h"
 @implementation MainRootControllerHelper
 
@@ -104,8 +103,6 @@ static MainRootControllerHelper *rootHelper = nil;
             break;
     }
 }
-
-
 
 -(void)autoLoginWithWindow:(UIWindow*)window
 {
