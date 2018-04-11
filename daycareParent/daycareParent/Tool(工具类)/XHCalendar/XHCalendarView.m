@@ -61,7 +61,7 @@
         
         [self addSubviews];
         
-        [self dealData];
+        [self responData];
         
     }
     return self;
@@ -89,11 +89,7 @@
          [self removeFromSuperview];
      }];
 }
--(void)dealData{
-    
-    
-    [self responData];
-}
+
 -(void)addSubviews{
     
     [self addSubview:self.baseView];
@@ -407,6 +403,7 @@
         [_cancleControl setLabelCGRectMake:CGRectMake(0, 0, _cancleControl.width, 0.5) withNumberIndex:0];
         [_cancleControl setLabelBackgroundColor:LineViewColor withNumberIndex:0];
         [_cancleControl setLabelCGRectMake:CGRectMake(0, 0.5, _cancleControl.width, _cancleControl.height-0.5) withNumberIndex:1];
+        [_cancleControl setLabelTextColor:MainColor withNumberIndex:1];
         [_cancleControl setLabelText:@"取消" withNumberIndex:1];
         [_cancleControl setLabelTextAlignment:NSTextAlignmentCenter withNumberIndex:1];
         [_cancleControl setTag:1];
@@ -417,17 +414,18 @@
 -(ParentControl *)sureControl
 {
     if (_sureControl==nil) {
-        _cancleControl=[[ParentControl alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-80)/2.0, 400, (SCREEN_WIDTH-80)/2.0, 45)];
-        [_cancleControl setNumberLabel:2];
-        [_cancleControl setLabelCGRectMake:CGRectMake(0, 0, _cancleControl.width, 0.5) withNumberIndex:0];
-        [_cancleControl setLabelBackgroundColor:LineViewColor withNumberIndex:0];
-        [_cancleControl setLabelCGRectMake:CGRectMake(0, 0.5, _cancleControl.width, _cancleControl.height-0.5) withNumberIndex:1];
-        [_cancleControl setLabelText:@"确定" withNumberIndex:1];
-        [_cancleControl setLabelTextAlignment:NSTextAlignmentCenter withNumberIndex:1];
-        [_cancleControl setTag:2];
-        [_cancleControl addTarget:self action:@selector(controlMethod:) forControlEvents:UIControlEventTouchUpInside];
+        _sureControl=[[ParentControl alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-80)/2.0, 400, (SCREEN_WIDTH-80)/2.0, 45)];
+        [_sureControl setNumberLabel:2];
+        [_sureControl setLabelCGRectMake:CGRectMake(0, 0, _sureControl.width, 0.5) withNumberIndex:0];
+        [_sureControl setLabelBackgroundColor:LineViewColor withNumberIndex:0];
+        [_sureControl setLabelCGRectMake:CGRectMake(0, 0.5, _sureControl.width, _sureControl.height-0.5) withNumberIndex:1];
+        [_sureControl setLabelTextColor:MainColor withNumberIndex:1];
+        [_sureControl setLabelText:@"确定" withNumberIndex:1];
+        [_sureControl setLabelTextAlignment:NSTextAlignmentCenter withNumberIndex:1];
+        [_sureControl setTag:2];
+        [_sureControl addTarget:self action:@selector(controlMethod:) forControlEvents:UIControlEventTouchUpInside];
     }
-    return _cancleControl;
+    return _sureControl;
 }
 -(NSMutableArray *)monthdataA{
     if (!_monthdataA) {
