@@ -25,6 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setNavtionTitle:@"审批列表"];
     // Do any additional setup after loading the view.
     [self getApproveBtn];
     [self getTableView];

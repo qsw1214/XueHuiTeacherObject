@@ -32,6 +32,7 @@ static XHUserInfo *userInfo = nil;
 
 -(void)setItemObject:(NSDictionary*)object
 {
+    
     _sessionId=[object objectItemKey:@"sessionId"];
     _token=[object objectItemKey:@"token"];
     NSDictionary *dic=[object objectItemKey:@"user"];
@@ -39,12 +40,12 @@ static XHUserInfo *userInfo = nil;
     _headPic=[dic objectItemKey:@"headPic"];
     _ID=[dic objectItemKey:@"id"];
     _loginName=[dic objectItemKey:@"loginName"];
-     _nickName=[dic objectItemKey:@"nickName"];
-     _selfId=[dic objectItemKey:@"selfId"];
-      _sex=[dic objectItemKey:@"sex"];
-     _signature=[dic objectItemKey:@"signature"];
+    _nickName=[dic objectItemKey:@"nickName"];
+    _selfId=[dic objectItemKey:@"selfId"];
+    _sex=[dic objectItemKey:@"sex"];
+    _signature=[dic objectItemKey:@"signature"];
     _telphoneNumber=[dic objectItemKey:@"telphoneNumber"];
-     _userType=[dic  objectItemKey:@"userType"];
+    _userType=[dic  objectItemKey:@"userType"];
     _loginIp=[dic objectItemKey:@"loginIp"];
     _isActive=[dic objectItemKey:@"isActive"];
     _isRoot=[dic objectItemKey:@"isRoot"];
@@ -63,9 +64,30 @@ static XHUserInfo *userInfo = nil;
         }
             break;
     }
+    [self getTeacherUserInfo];
+    
     
 }
-
+-(void)getTeacherUserInfo
+{
+    XHNetWorkConfig *net=[[XHNetWorkConfig alloc] init];
+    [net setObject:self.ID forKey:@"id"];
+    [net setObject:self.selfId forKey:@"selfId"];
+    [net postWithUrl:@"pmschool-teacher-api_/teacher/user/get" sucess:^(id object, BOOL verifyObject)
+     {
+         if (verifyObject)
+         {
+             NSDictionary *dic=[object objectItemKey:@"object"];
+             if ([NSObject isDictionary:dic])
+             {
+                 self.userId=[dic objectItemKey:@"id"];
+                 self.teacherName=[dic objectItemKey:@"teacherName"];
+                 self.headPic=[dic objectItemKey:@"headPic"];
+             }
+         }
+      
+    } error:^(NSError *error) {}];
+}
 #pragma mark 获取班级列表
 /**
  获取班级列表

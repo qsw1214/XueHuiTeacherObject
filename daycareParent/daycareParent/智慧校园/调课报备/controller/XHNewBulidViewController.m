@@ -16,6 +16,7 @@
 #import "XHSubjectListModel.h"
 #import "XHDatePickerControl.h"
 #import "XHTeacherAddressBookViewController.h"
+#import "XHHistoryViewController.h"
 #define TITLE  @[@"原任课教师",@"课程名称",@"上课班级",@"调整类型",@"委任教师",@"委任课程",@"上课时间",@"请假时长",@"审批人"]
 @interface XHNewBulidViewController ()<UITableViewDelegate,UITableViewDataSource,XHDatePickerControlDeletage>
 {
@@ -45,6 +46,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self setNavtionTitle:@"调课报备"];
+    [self setItemContentType:NavigationTitleType withItemType:NavigationItemRightype withIconName:nil withTitle:@"历史记录"];
      _bizType=@"1";
     _tableView=[[BaseTableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
     _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
@@ -364,6 +367,12 @@
             [self.navigationController popViewControllerAnimated:YES];
         }
     } error:^(NSError *error) {}];
+}
+-(void)rightItemAction:(BaseNavigationControlItem *)sender
+{
+    XHHistoryViewController *history = [XHHistoryViewController new];
+    history.modelType=XHHistoryCourseReportType;
+    [self.navigationController pushViewController:history animated:YES];
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {

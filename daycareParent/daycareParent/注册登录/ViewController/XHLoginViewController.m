@@ -121,36 +121,12 @@
                 [XHShowHUD showNOHud:@"登录失败！"];
                 return ;
             }
-            [[XHUserInfo sharedUserInfo] getTeachersAddressBook:^(BOOL isOK, NSArray *array)
-             {
-                 if (isOK)
-                 {
-                     [array enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
-                      {
-                          obj = [obj objectItemKey:@"propValue"];
-                          if ([[obj objectItemKey:@"id"] isEqualToString:[XHUserInfo sharedUserInfo].selfId])
-                          {
-                              [XHUserInfo sharedUserInfo].teacherName =[obj objectItemKey:@"teacherName"];//通讯录名字
-                              [XHUserInfo sharedUserInfo].userPic =[obj objectItemKey:@"headPic"];//通讯录头像
-                              [XHUserInfo sharedUserInfo].userId=[obj objectItemKey:@"id"];//通讯录ID
-                          }
-                          
-                      }];
-                     [NSUserDefaults  saveLocalObject:loginModel forKey:AutoLogin];
-                     AppDelegate *app=(AppDelegate *)[UIApplication sharedApplication].delegate;
-                     [app loginRongCloud:[XHUserInfo sharedUserInfo].token];
-                     [app setJpushAlias:[XHUserInfo sharedUserInfo].loginName];
-                     MianTabBarViewController *main=[MianTabBarViewController new];
-                     [kWindow setRootViewController:main];
-                 }
-                 else
-                 {
-                     [XHShowHUD showNOHud:@"登录失败！"];
-                     return ;
-                 }
-                 
-             }];
-            
+            [NSUserDefaults  saveLocalObject:loginModel forKey:AutoLogin];
+            AppDelegate *app=(AppDelegate *)[UIApplication sharedApplication].delegate;
+            [app loginRongCloud:[XHUserInfo sharedUserInfo].token];
+            [app setJpushAlias:[XHUserInfo sharedUserInfo].loginName];
+            MianTabBarViewController *main=[MianTabBarViewController new];
+            [kWindow setRootViewController:main];
         }
         
     } error:^(NSError *error) {
