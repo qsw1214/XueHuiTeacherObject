@@ -22,106 +22,17 @@
     {
         case HomeWorkType:
         {
-            [self setItemFrame:CGRectMake(0, 0, SCREEN_WIDTH, 80.0)];
-            [self setCellHeight:self.itemFrame.size.height];
-        }
-            break;
-        case HomeWorkDetailsType:
-        {
-            CGSize contentSize = [NSObject contentSizeWithTitle:model.workContent withFontOfSize:FontLevel2 withWidth:(SCREEN_WIDTH-90.0)];
-            [self setContentSize:CGSizeMake((SCREEN_WIDTH-90.0), contentSize.height)];
-            
-            switch (model.contentType)
-            {
-                case XHHomeWorkTextType:
-                {
-                    [self setItemFrame:CGRectMake(0, 0, SCREEN_WIDTH, (60.0+contentSize.height+20.0))];
-                    [self setCellHeight:self.itemFrame.size.height];
-                }
-                    break;
-                case XHHomeWorkTextAndImageType:
-                {
-                    if ([model.imageUrlArray count])
-                    {
-                        [model.imageUrlArray enumerateObjectsUsingBlock:^(XHPreviewModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop)
-                         {
-                             [obj setItemSize:CGSizeMake((SCREEN_WIDTH-90.0-30)/3.0, 50.0)];
-                         }];
-                        
-                        if ([model.imageUrlArray count] <= 3)
-                        {
-                            [self setPreviewSize:CGSizeMake((SCREEN_WIDTH-90.0), 60.0)];
-                        }
-                        else
-                        {
-                            [self setPreviewSize:CGSizeMake((SCREEN_WIDTH-90.0), 115.0)];
-                        }
-                    }
-                    else
-                    {
-                        [self setPreviewSize:CGSizeMake(0, 0)];
-                    }
-                    
-                    [self setItemFrame:CGRectMake(0, 0, SCREEN_WIDTH, (60.0+contentSize.height+self.previewSize.height+20.0))];
-                    [self setCellHeight:self.itemFrame.size.height];
-                }
-                    break;
-            }
+            [self setItemFrame:CGRectMake(10, 10, SCREEN_WIDTH-20.0, 100.0)];
+            [self setCellHeight:(self.itemFrame.size.height+10.0)];
         }
             break;
         case HomeWorkNoticeType:
         {
-            [self setItemFrame:CGRectMake(0, 0, SCREEN_WIDTH, 80.0)];
-            [self setCellHeight:self.itemFrame.size.height];
-        }
-            break;
-        case HomeWorkNoticeDetailsType:
-        {
-            CGSize contentSize = [NSObject contentSizeWithTitle:model.workContent withFontOfSize:FontLevel2 withWidth:(SCREEN_WIDTH-90.0)];
-            [self setContentSize:CGSizeMake((SCREEN_WIDTH-90.0), contentSize.height)];
-            
-            switch (model.contentType)
-            {
-                case XHHomeWorkTextType:
-                {
-                    [self setItemFrame:CGRectMake(0, 0, SCREEN_WIDTH, (60.0+contentSize.height+20.0))];
-                    [self setCellHeight:self.itemFrame.size.height];
-                }
-                    break;
-                case XHHomeWorkTextAndImageType:
-                {
-                    if ([model.imageUrlArray count])
-                    {
-                        [model.imageUrlArray enumerateObjectsUsingBlock:^(XHPreviewModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop)
-                         {
-                             [obj setItemSize:CGSizeMake((SCREEN_WIDTH-90.0-30)/3.0, 50.0)];
-                         }];
-                        
-                        if ([model.imageUrlArray count] <= 3)
-                        {
-                            [self setPreviewSize:CGSizeMake((SCREEN_WIDTH-90.0), 60.0)];
-                        }
-                        else
-                        {
-                            [self setPreviewSize:CGSizeMake((SCREEN_WIDTH-90.0), 115.0)];
-                        }
-                    }
-                    else
-                    {
-                        [self setPreviewSize:CGSizeMake(0, 0)];
-                    }
-                    
-                    [self setItemFrame:CGRectMake(0, 0, SCREEN_WIDTH, (60.0+contentSize.height+self.previewSize.height+20.0))];
-                    [self setCellHeight:self.itemFrame.size.height];
-                }
-                    break;
-            }
+            [self setItemFrame:CGRectMake(10, 10, SCREEN_WIDTH-20.0, 100.0)];
+            [self setCellHeight:(self.itemFrame.size.height+10.0)];
         }
             break;
     }
-    
-    
- 
 }
 
 

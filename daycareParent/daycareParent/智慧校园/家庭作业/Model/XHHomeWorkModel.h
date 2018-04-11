@@ -26,9 +26,9 @@ typedef NS_ENUM(NSInteger,HomeWorkModelUnreadType)
 typedef NS_ENUM(NSInteger,HomeWorkModelType)
 {
     HomeWorkType = 1, //!< 家庭作业或通知类型
-    HomeWorkDetailsType = 2,   //!< 家庭作业或通知详情
+//    HomeWorkDetailsType = 2,   //!< 家庭作业或通知详情
     HomeWorkNoticeType = 3,  //!< 通知类型
-    HomeWorkNoticeDetailsType = 4,  //!< 通知详情类型
+//    HomeWorkNoticeDetailsType = 4,  //!< 通知详情类型
 };
 
 
@@ -38,8 +38,6 @@ typedef NS_ENUM(NSInteger,HomeWorkModelType)
 
 @interface XHHomeWorkModel : BaseModel
 
-@property (nonatomic,copy) NSString *headerUrl; //!< 头像
-@property (nonatomic,copy) NSString *userName; //!< 用户名
 @property (nonatomic,copy) NSString *subject; //!< 学科
 @property (nonatomic,copy) NSString *workContent; //!< 作业内容
 @property (nonatomic,copy) NSString *releaseDate; //!< 作业发布日期
@@ -50,10 +48,8 @@ typedef NS_ENUM(NSInteger,HomeWorkModelType)
 @property (nonatomic,copy) NSString *vedioUrl;  //!< 视频播放url地址
 @property (nonatomic,copy) NSString *vedioFirstPicUrl; //!< 视频预览图
 @property (nonatomic,strong) NSMutableArray <XHPreviewModel*> *imageUrlArray; //!< 图片的Url数组
-@property (nonatomic,strong) UIColor *subjectColor; //!< 学科颜色类型
 @property (nonatomic,assign) HomeWorkModelUnreadType homeWorkUnreadType; //!< 是否已读取枚举类型
 @property (nonatomic,assign) HomeWorkModelType homeWorkType; //!< 数据模型的类型
-
 @property (nonatomic,assign) XHHomeWorkContentType contentType; //!< 内容类型
 
 #pragma mark 设置家庭作业对象

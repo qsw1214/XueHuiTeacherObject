@@ -16,7 +16,6 @@
 //!< 设置家庭作业对象
 -(void)setItemObject:(NSDictionary *)object
 {
-    [self setHeaderUrl:ALGetFileHeadThumbnail([object objectItemKey:@"headPic"])];
     [self setSubject:[object objectItemKey:@"subjectName"]];
     [self setPushInfoId:[object objectItemKey:@"pushInfoId"]];
     
@@ -44,7 +43,6 @@
     [self setUnreadType:@"1"];  //!< 因为是本人发布的作业，所以都是已读状态
     [self setGradeName:[object objectItemKey:@"gradeName"]];
     [self setClazzName:[object objectItemKey:@"clazzName"]];
-    [self setUserName:[NSString stringWithFormat:@"%@%@",self.gradeName,self.clazzName]];
     [self setHomeWorkType:HomeWorkType];
     [self setItemArray:self.imageUrlArray];
 }
@@ -56,7 +54,6 @@
 {
     NSDictionary *teacher = [object objectItemKey:@"propValue"];
     NSString *teacherName = [teacher objectItemKey:@"teacherName"];
-    [self setHeaderUrl:ALGetFileHeadThumbnail([teacher objectItemKey:@"headPic"])];
 
     NSMutableArray <XHPreviewModel*> *imageModelArray = [NSMutableArray array];
     for ( int i = 1; i<= 6; i++)
@@ -78,7 +75,6 @@
      }];
 
 
-    [self setUserName:teacherName];
     [self setReleaseDate:[NSString dateStr:[object objectItemKey:@"createTime"]]];
     [self setWorkContent:[object objectItemKey:@"content"]];
     [self setVedioUrl:[object objectItemKey:@"vedioUrl"]];
@@ -110,28 +106,6 @@
     }
 }
 
-
--(void)setSubject:(NSString *)subject
-{
-    _subject = subject;
-    subject = [NSString safeString:subject];
-    if ([subject isEqualToString:@"语文"])
-    {
-        [self setSubjectColor:RGB(255, 138, 101)];
-    }
-    else if ([subject isEqualToString:@"数学"])
-    {
-        [self setSubjectColor:RGB(102, 187, 106)];
-    }
-    else if ([subject isEqualToString:@"英语"])
-    {
-        [self setSubjectColor:RGB(149, 117, 205)];
-    }
-    else
-    {
-        [self setSubjectColor:RGB(255, 143, 0)];
-    }
-}
 
 -(void)setWorkContent:(NSString *)workContent
 {

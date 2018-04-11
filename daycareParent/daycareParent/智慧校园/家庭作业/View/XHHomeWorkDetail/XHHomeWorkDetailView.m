@@ -82,4 +82,7 @@
         [self.deletage didSelectAtIndex:[self.dataArray objectAtIndex:indexPath.row]];
     }
 }
+
+
+
 @end

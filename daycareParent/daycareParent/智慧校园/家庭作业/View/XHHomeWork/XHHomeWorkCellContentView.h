@@ -10,6 +10,9 @@
 #import "BaseView.h"
 #import "XHHomeWorkFrame.h"
 
+#pragma mark 智慧校园->家庭作业记录->内容承载视图->内容呈现的单元格->单元格内容的承载视图
+
+
 @interface XHHomeWorkCellContentView : BaseView
 
 -(void)setItemFrame:(XHHomeWorkFrame*)itemFrame;

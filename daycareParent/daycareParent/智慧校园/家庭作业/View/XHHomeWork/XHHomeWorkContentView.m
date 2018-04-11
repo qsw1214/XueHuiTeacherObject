@@ -109,32 +109,53 @@
 #pragma mark - NetWork Method
 -(void)getServerItemObjectWith:(BaseRefreshType)type
 {
-    [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
-    [self.netWorkConfig postWithUrl:@"zzjt-app-api_schoolWork002" sucess:^(id object, BOOL verifyObject)
-     {
-         if (verifyObject)
-         {
-             [self.dataArray removeAllObjects];
-             NSArray *array = [object objectItemKey:@"object"];
-             
-             [array enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
-              {
-                  NSDictionary *propValue = [obj objectItemKey:@"propValue"];
-                  XHHomeWorkFrame *frame = [[XHHomeWorkFrame alloc]init];
-                  XHHomeWorkModel *model = [[XHHomeWorkModel alloc]init];
-                  [model setItemObject:propValue];
-                  [frame setModel:model];
-                  [self.dataArray addObject:frame];
-                  
-              }];
-             
-             [self.tableView refreshReloadData];
-         }
-     } error:^(NSError *error)
-     {
-         [self.tableView refreshReloadData];
-     }];
+    
+    for (int i= 0 ; i< 10; i++)
+    {
+        XHHomeWorkFrame *frame = [[XHHomeWorkFrame alloc]init];
+        XHHomeWorkModel *model = [[XHHomeWorkModel alloc]init];
+        [model setHomeWorkType:HomeWorkType];
+        [model setReleaseDate:@"2018-12-5"];
+        [model setWorkContent:@"今天开始放假了，你们可以回家好好的玩了"];
+        [model setGradeName:@"高三"];
+        [model setClazzName:@"3班"];
+        [frame setModel:model];
+        [self.dataArray addObject:frame];
+
+        
+    }
+    
+    
+    
+    [self.tableView refreshReloadData];
 }
+//{
+//    [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
+//    [self.netWorkConfig postWithUrl:@"zzjt-app-api_schoolWork002" sucess:^(id object, BOOL verifyObject)
+//     {
+//         if (verifyObject)
+//         {
+//             [self.dataArray removeAllObjects];
+//             NSArray *array = [object objectItemKey:@"object"];
+//
+//             [array enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
+//              {
+//                  NSDictionary *propValue = [obj objectItemKey:@"propValue"];
+//                  XHHomeWorkFrame *frame = [[XHHomeWorkFrame alloc]init];
+//                  XHHomeWorkModel *model = [[XHHomeWorkModel alloc]init];
+//                  [model setItemObject:propValue];
+//                  [frame setModel:model];
+//                  [self.dataArray addObject:frame];
+//
+//              }];
+//
+//             [self.tableView refreshReloadData];
+//         }
+//     } error:^(NSError *error)
+//     {
+//         [self.tableView refreshReloadData];
+//     }];
+//}
 
 
 

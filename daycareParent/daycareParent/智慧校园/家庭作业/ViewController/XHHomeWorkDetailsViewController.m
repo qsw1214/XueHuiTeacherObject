@@ -45,15 +45,13 @@
 {
     XHHomeWorkFrame *frame = [[XHHomeWorkFrame alloc]init];
     XHHomeWorkModel *model = [[XHHomeWorkModel alloc]init];
-    [model setHeaderUrl:object.model.headerUrl];
     [model setSubject:object.model.subject];
-    [model setUserName:object.model.userName];
     [model setReleaseDate:object.model.releaseDate];
     [model setGradeName:object.model.gradeName];
     [model setClazzName:object.model.clazzName];
     [model.imageUrlArray setArray:object.model.imageUrlArray];
     [model setWorkContent:object.model.workContent];
-    [model setHomeWorkType:HomeWorkDetailsType];
+//    [model setHomeWorkType:HomeWorkDetailsType];
     [model setContentType:object.model.contentType];
     [frame setModel:model];
     [self.dataArray addObject:frame];
