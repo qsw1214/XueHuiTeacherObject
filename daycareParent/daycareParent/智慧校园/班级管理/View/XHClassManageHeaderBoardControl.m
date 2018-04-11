@@ -36,6 +36,10 @@
     self = [super init];
     if (self)
     {
+        
+        
+        
+        
         [self setBackgroundColor:[UIColor whiteColor]];
         [self addSubview:self.imageView];
         [self addSubview:self.actualControl];
@@ -57,6 +61,10 @@
 {
     [self setFrame:frame];
     [self setLayerCornerRadius:5.0];
+    [self.layer  setShadowColor:[RGB(200, 200, 200) CGColor]]; //阴影颜色
+    [self.layer setShadowOffset:CGSizeMake(2, 2)];//偏移距离
+    [self.layer setShadowOpacity:0.6]; //不透明度
+    [self.layer setShadowRadius:5.0]; //半径
     
     
     //!< 图片
