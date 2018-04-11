@@ -60,5 +60,5 @@
  */
 +(NSString *)dateStr:(NSString *)dateStr;
 +(NSString *)dateWithDateFormatter:(NSString *)dateFormatter Date:(NSDate *)date;
-
++(BOOL)times:(NSString *)times withMultiple:(NSString *)multiple;
 @end

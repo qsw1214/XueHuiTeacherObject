@@ -9,7 +9,6 @@
 #import "XHClassManageViewController.h"
 #import "XHClassManageContentView.h"
 
-
 @interface XHClassManageViewController ()
 
 @property (nonatomic,strong) XHClassManageContentView *contentView; //!< 内容视图
@@ -22,7 +21,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setNavtionTitle:@"班级管理"];
+   
+   
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,6 +37,7 @@
     {
         [self.view addSubview:self.contentView];
         [self.contentView resetFrame:CGRectMake(0, self.navigationView.bottom,SCREEN_WIDTH, SCREEN_HEIGHT-self.navigationView.height)];
+    
     }
 }
 

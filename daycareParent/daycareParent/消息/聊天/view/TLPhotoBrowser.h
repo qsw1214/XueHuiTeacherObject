@@ -18,7 +18,8 @@
 
 @interface TLPhotoBrowser : UIView
 @property(nonatomic,strong)TLImageScrollView *imageScrollView;
-+(void)showOriginalImage:(UIImage *)originalImage;
++(TLPhotoBrowser *)showOriginalImage:(UIImage *)originalImage;
+-(void)dismiss;
 @end
 
 

@@ -32,6 +32,27 @@
     
     return alertController;
 }
++(UIAlertController *)addtextFeildWithmessage:(NSString *)message controller:(UIViewController *)controller indexBlock:(indexBlock)indexBlock
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+    }];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if (alertController.textFields.firstObject.text.length==0)
+        {
+            [XHShowHUD showNOHud:@"输入内容不能为空"];
+        }
+        else
+        {
+            indexBlock(0,alertController.textFields.firstObject.text);
+        }
+    }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}]];
+    [controller presentViewController:alertController animated:YES completion:nil];
+    
+    return alertController;
+}
+
 +(UIAlertController *)addtextFeildWithController:(UIViewController *)controller indexBlock:(indexBlock)indexBlock
 {
     [[XHBackgrounduserInfo shared] getAdd:YES];

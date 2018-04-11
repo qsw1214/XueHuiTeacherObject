@@ -15,8 +15,9 @@
 #import "XHClassListModel.h"
 #import "XHDayRollCallModel.h"
 #import "XHClassViewController.h"
+#import "XHCalendarView.h"
 #define SIGN_TITLE @[@"未签到",@"已签到",@"请假"]
-@interface XHDayRollCallViewController ()<XHCustomDatePickerViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+@interface XHDayRollCallViewController ()<XHCalendarViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 {
     NSInteger _tag;
     NSInteger _selectNumber;
@@ -33,6 +34,8 @@
 @property(nonatomic,strong)NSMutableArray *otherArry;//!< 请假学生数组
 @property(nonatomic,strong)NSMutableArray *selectArry;//!< 已选学生数组
 @property(nonatomic,copy)NSMutableString *mutableStr;
+@property(nonatomic,strong)XHCalendarView *calendarView;//!< 日历显示
+
 @end
 
 @implementation XHDayRollCallViewController
@@ -59,7 +62,7 @@
 }
 
 #pragma mark-----------选择日期后回调代理方法----------
--(void)getDateStr:(NSString *)dateStr
+-(void)getCalendarDateStr:(NSString *)dateStr
 {
     if (dateStr)
     {
@@ -418,9 +421,7 @@
 #pragma mark-------------点击显示日历按钮--------------
 -(void)rightBtnClick
 {
-    self.datePickerView.delegate=self;
-    self.datePickerView.modelyTpe=XHCustomDatePickerViewModelMouthAndDayType;
-    [self.view addSubview:self.datePickerView];
+    [self.calendarView show];
 }
 #pragma mark-------------全选列表视图--------------
 -(UIView *)selectAllView
@@ -535,7 +536,14 @@
     }
     
 }
-
+-(XHCalendarView *)calendarView
+{
+    if (_calendarView==nil) {
+        
+        _calendarView=[[XHCalendarView alloc] initWithDelegate:self];
+    }
+    return _calendarView;
+}
 
 -(NSMutableArray *)noSignArry
 {

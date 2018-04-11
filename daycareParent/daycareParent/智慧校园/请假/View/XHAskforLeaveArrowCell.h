@@ -13,8 +13,9 @@
 
 
 @property (nonatomic,strong) XHChildListModel *model;
-
-
+@property (nonatomic,strong) UIView *topLineView; //!< 上面的分割线
+@property (nonatomic,strong) UIView *bottomLineView; //!< 下面的分割线
+@property (nonatomic,strong) UILabel *describeLabel; //!< 描述标题
 
 
 /**

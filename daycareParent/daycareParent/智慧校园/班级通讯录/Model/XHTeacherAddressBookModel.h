@@ -23,6 +23,7 @@ typedef NS_ENUM(NSInteger,XHTeacherAddressBookMarkType)
 
 @property (nonatomic,copy) NSString *key; //!< 索引的key值
 @property (nonatomic,copy) NSString *headerUrl; //!< 头像
+@property (nonatomic,copy) NSString *headerPic; //!< 头像
 @property (nonatomic,copy) NSString *teacherName; //!< 头像
 @property (nonatomic,copy) NSString *phone; //!< 头像
 @property (nonatomic,copy) NSString *ID; //!< id

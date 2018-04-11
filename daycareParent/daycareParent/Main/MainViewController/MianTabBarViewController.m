@@ -45,14 +45,13 @@
     [self addChildViewController:smartCampusNavigation];
 
     XHIntelligentOfficeViewController *imNotice = [[XHIntelligentOfficeViewController alloc] init];
-   // [imNotice navtionItemHidden:NavigationItemLeftType];
-    //创建tabBarItem
+  
     TabBarItem *imNoticeTabBarItem = [[TabBarItem alloc]initWithTitle:@"消息" imageName:@"ico_xiaoxihui" selectedImageName:@"ico_xiaoxise"];
     [imNotice setTabBarItem:imNoticeTabBarItem];
     UINavigationController *imNoticeNavigation = [[UINavigationController alloc] initWithRootViewController:imNotice];
     [self addChildViewController:imNoticeNavigation];
 
-    XHEducationCloudViewController *educationCloud = [[XHEducationCloudViewController alloc] init];
+    XHSmartCampusViewController *educationCloud = [[XHSmartCampusViewController alloc] init];
     [educationCloud navtionItemHidden:NavigationItemLeftType];
     //创建tabBarItem
     TabBarItem *educationCloudTabBarItem = [[TabBarItem alloc]initWithTitle:@"浩学云" imageName:@"ico_haoxueyunhui" selectedImageName:@"ico_haoxueyunse"];

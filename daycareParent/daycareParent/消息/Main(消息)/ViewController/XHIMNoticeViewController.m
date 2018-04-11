@@ -22,6 +22,7 @@
    XHChatListViewController* chatList = [[XHChatListViewController alloc] initHiddenWhenPushHidden];
     [self setSegmentedControlItems:@[@"公告",@"消息"] WithControllersArry:@[notific,chatList]];
     [self navtionItemHidden:NavigationItemLeftType];
+   
 }
 
 -(void)didReceiveMemoryWarning {

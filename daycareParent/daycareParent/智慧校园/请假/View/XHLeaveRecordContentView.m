@@ -7,7 +7,7 @@
 //
 
 #import "XHLeaveRecordContentView.h"
-
+#import "XHHistoryViewController.h"
 
 
 @interface XHLeaveRecordContentView () <UITableViewDelegate,UITableViewDataSource>
@@ -69,7 +69,13 @@
     return [[self.dataArray objectAtIndex:indexPath.row] cellHeight];
 }
 
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    XHHistoryViewController *history = [[XHHistoryViewController alloc]init];
+    [history setNavtionTitle:@"请假详情"];
+    history.modelType=XHHistoryAskforLeaveType;
+    [DCURLRouter pushViewController:history animated:YES];
+}
 
 #pragma mark - Action Method
 -(void)refreshHeaderAction
@@ -96,7 +102,7 @@
         {
             
             NSArray *itemArray = [object objectItemKey:@"object"];
-            if (itemArray)
+            if ([NSObject isArray:itemArray])
             {
                 [self.dataArray removeAllObjects];
                 [itemArray enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)

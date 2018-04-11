@@ -59,4 +59,5 @@ typedef NS_ENUM(NSInteger,XHSubjectAndClassModelType)
  */
 +(UIAlertController *)alertWithmessage:(NSString *)message titlesArry:(NSArray *)titleArry controller:(UIViewController *)controller indexBlock:(indexBlock)indexBlock;
 +(UIAlertController *)addtextFeildWithController:(UIViewController *)controller indexBlock:(indexBlock)indexBlock;
++(UIAlertController *)addtextFeildWithmessage:(NSString *)message controller:(UIViewController *)controller indexBlock:(indexBlock)indexBlock;
 @end
