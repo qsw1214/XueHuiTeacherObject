@@ -6,7 +6,7 @@
 //  Copyright © 2017年 XueHui. All rights reserved.
 //
 
-#pragma mark 智慧校园->家庭作业
+#pragma mark 智慧校园->家庭作业记录
 
 #import "BaseViewController.h"
 #import "XHHomeWorkContentView.h"

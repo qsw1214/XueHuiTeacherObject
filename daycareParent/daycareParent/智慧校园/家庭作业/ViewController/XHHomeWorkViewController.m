@@ -21,7 +21,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setNavtionTitle:@"家庭作业"];
+    [self setNavtionTitle:@"家庭作业记录"];
 }
 
 - (void)didReceiveMemoryWarning

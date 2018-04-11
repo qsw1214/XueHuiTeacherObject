@@ -37,7 +37,7 @@
 
 -(void)addsubView
 {
-    XHClassManageViewController *smartCampus = [[XHClassManageViewController alloc] init];
+    XHSmartCampusViewController *smartCampus = [[XHSmartCampusViewController alloc] init];
     //创建tabBarItem
     TabBarItem *smartCampusTabBarItem = [[TabBarItem alloc]initWithTitle:@"智慧校园" imageName:@"ico_shouyehui" selectedImageName:@"ico_shouyese"];
     [smartCampus setTabBarItem:smartCampusTabBarItem];
