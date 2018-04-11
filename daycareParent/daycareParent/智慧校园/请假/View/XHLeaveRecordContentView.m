@@ -72,7 +72,6 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XHHistoryViewController *history = [[XHHistoryViewController alloc]init];
-    [history setNavtionTitle:@"请假详情"];
     history.modelType=XHHistoryAskforLeaveType;
     [DCURLRouter pushViewController:history animated:YES];
 }
