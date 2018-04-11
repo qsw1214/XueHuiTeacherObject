@@ -13,10 +13,14 @@
 		042EFA00207DD1F30089FE83 /* XHHomeWorkDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042EF9FC207DD1F30089FE83 /* XHHomeWorkDetailTableViewCell.m */; };
 		042EFA0D207DD2A10089FE83 /* XHHomeWorkContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042EFA04207DD2A00089FE83 /* XHHomeWorkContentView.m */; };
 		042EFA0E207DD2A10089FE83 /* XHHomeWorkCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042EFA05207DD2A00089FE83 /* XHHomeWorkCellContentView.m */; };
-		042EFA0F207DD2A10089FE83 /* XHHomeWorkContentViwCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042EFA06207DD2A00089FE83 /* XHHomeWorkContentViwCell.m */; };
 		042EFA10207DD2A10089FE83 /* XHHomeWorkTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042EFA09207DD2A10089FE83 /* XHHomeWorkTableViewCell.m */; };
-		042EFA11207DD2A10089FE83 /* XHHomeWorkCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042EFA0A207DD2A10089FE83 /* XHHomeWorkCollectionView.m */; };
 		042EFA12207DD2A10089FE83 /* XHHomeWorkClassCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042EFA0C207DD2A10089FE83 /* XHHomeWorkClassCollectionView.m */; };
+		042EFA15207DE41B0089FE83 /* XHHomeWorkDetailsFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 042EFA14207DE41B0089FE83 /* XHHomeWorkDetailsFrame.m */; };
+		042EFA18207DE4380089FE83 /* XHHomeWorkDetailsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 042EFA17207DE4380089FE83 /* XHHomeWorkDetailsModel.m */; };
+		042EFA1B207DE5230089FE83 /* XHHomeWorkDetailCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042EFA1A207DE5230089FE83 /* XHHomeWorkDetailCellContentView.m */; };
+		042EFA20207DE66F0089FE83 /* XHHomeWorkContentViwCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042EFA1C207DE66E0089FE83 /* XHHomeWorkContentViwCell.m */; };
+		042EFA21207DE66F0089FE83 /* XHHomeWorkCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042EFA1D207DE66F0089FE83 /* XHHomeWorkCollectionView.m */; };
+		042EFA24207DF2E10089FE83 /* XHClassManageHeaderBoardControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 042EFA23207DF2E10089FE83 /* XHClassManageHeaderBoardControl.m */; };
 		0446B4D5207B558400A1BF1E /* AliyunOSSiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0446B4D4207B558400A1BF1E /* AliyunOSSiOS.framework */; };
 		0446B4DC207B655200A1BF1E /* XHClassManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0446B4DB207B655200A1BF1E /* XHClassManageViewController.m */; };
 		046BB204207C455700209C9B /* DCURLRouter.plist in Resources */ = {isa = PBXBuildFile; fileRef = 046BB1FC207C455700209C9B /* DCURLRouter.plist */; };
@@ -572,17 +576,25 @@
 		042EF9FC207DD1F30089FE83 /* XHHomeWorkDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHHomeWorkDetailTableViewCell.m; sourceTree = "<group>"; };
 		042EF9FD207DD1F30089FE83 /* XHHomeWorkDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHHomeWorkDetailView.h; sourceTree = "<group>"; };
 		042EFA01207DD2A00089FE83 /* XHHomeWorkCellContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHHomeWorkCellContentView.h; sourceTree = "<group>"; };
-		042EFA02207DD2A00089FE83 /* XHHomeWorkContentViwCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHHomeWorkContentViwCell.h; sourceTree = "<group>"; };
 		042EFA03207DD2A00089FE83 /* XHHomeWorkClassCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHHomeWorkClassCollectionView.h; sourceTree = "<group>"; };
 		042EFA04207DD2A00089FE83 /* XHHomeWorkContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHHomeWorkContentView.m; sourceTree = "<group>"; };
 		042EFA05207DD2A00089FE83 /* XHHomeWorkCellContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHHomeWorkCellContentView.m; sourceTree = "<group>"; };
-		042EFA06207DD2A00089FE83 /* XHHomeWorkContentViwCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHHomeWorkContentViwCell.m; sourceTree = "<group>"; };
 		042EFA07207DD2A10089FE83 /* XHHomeWorkContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHHomeWorkContentView.h; sourceTree = "<group>"; };
 		042EFA08207DD2A10089FE83 /* XHHomeWorkTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHHomeWorkTableViewCell.h; sourceTree = "<group>"; };
 		042EFA09207DD2A10089FE83 /* XHHomeWorkTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHHomeWorkTableViewCell.m; sourceTree = "<group>"; };
-		042EFA0A207DD2A10089FE83 /* XHHomeWorkCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHHomeWorkCollectionView.m; sourceTree = "<group>"; };
-		042EFA0B207DD2A10089FE83 /* XHHomeWorkCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHHomeWorkCollectionView.h; sourceTree = "<group>"; };
 		042EFA0C207DD2A10089FE83 /* XHHomeWorkClassCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHHomeWorkClassCollectionView.m; sourceTree = "<group>"; };
+		042EFA13207DE41B0089FE83 /* XHHomeWorkDetailsFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHHomeWorkDetailsFrame.h; sourceTree = "<group>"; };
+		042EFA14207DE41B0089FE83 /* XHHomeWorkDetailsFrame.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHHomeWorkDetailsFrame.m; sourceTree = "<group>"; };
+		042EFA16207DE4380089FE83 /* XHHomeWorkDetailsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHHomeWorkDetailsModel.h; sourceTree = "<group>"; };
+		042EFA17207DE4380089FE83 /* XHHomeWorkDetailsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHHomeWorkDetailsModel.m; sourceTree = "<group>"; };
+		042EFA19207DE5230089FE83 /* XHHomeWorkDetailCellContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHHomeWorkDetailCellContentView.h; sourceTree = "<group>"; };
+		042EFA1A207DE5230089FE83 /* XHHomeWorkDetailCellContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHHomeWorkDetailCellContentView.m; sourceTree = "<group>"; };
+		042EFA1C207DE66E0089FE83 /* XHHomeWorkContentViwCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHHomeWorkContentViwCell.m; sourceTree = "<group>"; };
+		042EFA1D207DE66F0089FE83 /* XHHomeWorkCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHHomeWorkCollectionView.m; sourceTree = "<group>"; };
+		042EFA1E207DE66F0089FE83 /* XHHomeWorkCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHHomeWorkCollectionView.h; sourceTree = "<group>"; };
+		042EFA1F207DE66F0089FE83 /* XHHomeWorkContentViwCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHHomeWorkContentViwCell.h; sourceTree = "<group>"; };
+		042EFA22207DF2E10089FE83 /* XHClassManageHeaderBoardControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHClassManageHeaderBoardControl.h; sourceTree = "<group>"; };
+		042EFA23207DF2E10089FE83 /* XHClassManageHeaderBoardControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHClassManageHeaderBoardControl.m; sourceTree = "<group>"; };
 		0446B4D4207B558400A1BF1E /* AliyunOSSiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AliyunOSSiOS.framework; sourceTree = "<group>"; };
 		0446B4DA207B655200A1BF1E /* XHClassManageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHClassManageViewController.h; sourceTree = "<group>"; };
 		0446B4DB207B655200A1BF1E /* XHClassManageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHClassManageViewController.m; sourceTree = "<group>"; };
@@ -1743,10 +1755,16 @@
 		042EF9F9207DD1F30089FE83 /* XHHomeWorkDetail */ = {
 			isa = PBXGroup;
 			children = (
+				042EFA1E207DE66F0089FE83 /* XHHomeWorkCollectionView.h */,
+				042EFA1D207DE66F0089FE83 /* XHHomeWorkCollectionView.m */,
+				042EFA1F207DE66F0089FE83 /* XHHomeWorkContentViwCell.h */,
+				042EFA1C207DE66E0089FE83 /* XHHomeWorkContentViwCell.m */,
 				042EF9FA207DD1F30089FE83 /* XHHomeWorkDetailTableViewCell.h */,
 				042EF9FC207DD1F30089FE83 /* XHHomeWorkDetailTableViewCell.m */,
 				042EF9FD207DD1F30089FE83 /* XHHomeWorkDetailView.h */,
 				042EF9FB207DD1F30089FE83 /* XHHomeWorkDetailView.m */,
+				042EFA19207DE5230089FE83 /* XHHomeWorkDetailCellContentView.h */,
+				042EFA1A207DE5230089FE83 /* XHHomeWorkDetailCellContentView.m */,
 			);
 			path = XHHomeWorkDetail;
 			sourceTree = "<group>";
@@ -1756,12 +1774,8 @@
 			children = (
 				042EFA03207DD2A00089FE83 /* XHHomeWorkClassCollectionView.h */,
 				042EFA0C207DD2A10089FE83 /* XHHomeWorkClassCollectionView.m */,
-				042EFA0B207DD2A10089FE83 /* XHHomeWorkCollectionView.h */,
-				042EFA0A207DD2A10089FE83 /* XHHomeWorkCollectionView.m */,
 				042EFA07207DD2A10089FE83 /* XHHomeWorkContentView.h */,
 				042EFA04207DD2A00089FE83 /* XHHomeWorkContentView.m */,
-				042EFA02207DD2A00089FE83 /* XHHomeWorkContentViwCell.h */,
-				042EFA06207DD2A00089FE83 /* XHHomeWorkContentViwCell.m */,
 				042EFA08207DD2A10089FE83 /* XHHomeWorkTableViewCell.h */,
 				042EFA09207DD2A10089FE83 /* XHHomeWorkTableViewCell.m */,
 				042EFA01207DD2A00089FE83 /* XHHomeWorkCellContentView.h */,
@@ -1796,6 +1810,8 @@
 			children = (
 				046BB208207C465900209C9B /* XHClassManageContentView.h */,
 				046BB209207C465900209C9B /* XHClassManageContentView.m */,
+				042EFA22207DF2E10089FE83 /* XHClassManageHeaderBoardControl.h */,
+				042EFA23207DF2E10089FE83 /* XHClassManageHeaderBoardControl.m */,
 				046BB20B207C4B3200209C9B /* XHWeekCollectionView.h */,
 				046BB20C207C4B3200209C9B /* XHWeekCollectionView.m */,
 				046BB20E207C4B3F00209C9B /* XHSyllabusCollectionView.h */,
@@ -3094,6 +3110,10 @@
 				4BA8C4DB1FCFF35B006CBEBC /* XHHomeWorkModel.m */,
 				4BA8C4DD1FCFF36C006CBEBC /* XHHomeWorkFrame.h */,
 				4BA8C4DE1FCFF36C006CBEBC /* XHHomeWorkFrame.m */,
+				042EFA13207DE41B0089FE83 /* XHHomeWorkDetailsFrame.h */,
+				042EFA14207DE41B0089FE83 /* XHHomeWorkDetailsFrame.m */,
+				042EFA16207DE4380089FE83 /* XHHomeWorkDetailsModel.h */,
+				042EFA17207DE4380089FE83 /* XHHomeWorkDetailsModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4212,6 +4232,7 @@
 			files = (
 				4BB9BEB01FDE6409004F5622 /* XHEducationCloudMenuCell.m in Sources */,
 				8C1AA817207B13D200DDCBB3 /* XHNoticeContentView.m in Sources */,
+				042EFA20207DE66F0089FE83 /* XHHomeWorkContentViwCell.m in Sources */,
 				4B3126161FD90A6E000CE894 /* XHDatePickerView.m in Sources */,
 				8CC22A6F2041087400E36966 /* XHChagePhoneTableViewCell.m in Sources */,
 				4BB792E41FD7B3B400E0ED72 /* BaseMenuControl.m in Sources */,
@@ -4294,13 +4315,13 @@
 				8C42CFCE1FF5D86D00CEDBDA /* XHNewUserInfoViewController.m in Sources */,
 				8C1AA88C207B162000DDCBB3 /* ParentCollectionViewCell.m in Sources */,
 				4B4A00171FE2411200B8A8F8 /* XHDynamicsCell.m in Sources */,
-				042EFA0F207DD2A10089FE83 /* XHHomeWorkContentViwCell.m in Sources */,
 				8C1D47BE207B3E23005AA0B4 /* IQTextView.m in Sources */,
 				8C1AA899207B16AA00DDCBB3 /* UIButton+Category.m in Sources */,
 				4B80F31F1FCBFD6F00BC7B52 /* MTLTransformerErrorHandling.m in Sources */,
 				4B07CC4A1FD5106800B2DBDA /* RotateRect.m in Sources */,
 				8C007D7320107EDF00DD0635 /* XHHistoryDetailTableViewCell.m in Sources */,
 				4B80F2801FCBF04800BC7B52 /* MJRefreshAutoNormalFooter.m in Sources */,
+				042EFA24207DF2E10089FE83 /* XHClassManageHeaderBoardControl.m in Sources */,
 				4B80F2461FCBF01B00BC7B52 /* BaseTextView.m in Sources */,
 				4B80F3181FCBFD6F00BC7B52 /* EXTRuntimeExtensions.m in Sources */,
 				8C1AA823207B13D200DDCBB3 /* XHNoticeDetailViewController.m in Sources */,
@@ -4324,11 +4345,13 @@
 				8C1AA80A207B13D200DDCBB3 /* XHParentsMeetingViewController.m in Sources */,
 				4BD33DE61FCD5D6900BC52B6 /* XHFunctionMenuModel.m in Sources */,
 				8C1AA826207B13D200DDCBB3 /* XHNoticeRecordViewController.m in Sources */,
+				042EFA18207DE4380089FE83 /* XHHomeWorkDetailsModel.m in Sources */,
 				046BB205207C455700209C9B /* UIViewController+DCURLRouter.m in Sources */,
 				4B80F2C31FCBF04F00BC7B52 /* NSData+ImageContentType.m in Sources */,
 				8C1AA821207B13D200DDCBB3 /* XHAddNoticeRecipientViewController.m in Sources */,
 				4B3126491FDA1FE7000CE894 /* XHAddressBookModel.m in Sources */,
 				4B3126431FDA1F4B000CE894 /* XHAddressBookCell.m in Sources */,
+				042EFA21207DE66F0089FE83 /* XHHomeWorkCollectionView.m in Sources */,
 				8C1AA824207B13D200DDCBB3 /* XHNoticeListViewController.m in Sources */,
 				8CC7647D200C8C13007887C7 /* XHNewBulidViewController.m in Sources */,
 				4B11AF381FCCEA25002738F1 /* XHEducationCloudViewController.m in Sources */,
@@ -4367,7 +4390,6 @@
 				4BB792AE1FD7752B00E0ED72 /* XHAskforLeaveArrowCell.m in Sources */,
 				4B577FDC1FF63FB30023ACBC /* MASConstraint.m in Sources */,
 				4BBC43411FD0E43E00555846 /* BaseTableViewCell.m in Sources */,
-				042EFA11207DD2A10089FE83 /* XHHomeWorkCollectionView.m in Sources */,
 				8C1AA811207B13D200DDCBB3 /* XHNoticeRecipientModel.m in Sources */,
 				4B80F2831FCBF04800BC7B52 /* MJRefreshBackNormalFooter.m in Sources */,
 				4B80F3251FCBFD6F00BC7B52 /* NSError+MTLModelException.m in Sources */,
@@ -4498,6 +4520,7 @@
 				8C1AA875207B13FA00DDCBB3 /* XHPhotoMessageCell.m in Sources */,
 				4B80F2C41FCBF04F00BC7B52 /* NSImage+WebCache.m in Sources */,
 				8C80815F1FCE722000C7945A /* XHChildTableViewCell.m in Sources */,
+				042EFA15207DE41B0089FE83 /* XHHomeWorkDetailsFrame.m in Sources */,
 				4BFCFFA32041155F00136671 /* OSSImageUploader.m in Sources */,
 				4B80F32C1FCC108800BC7B52 /* MarqueeLabel.m in Sources */,
 				8C7E5BC8207DB22400DA6F15 /* XHRecipientModel.m in Sources */,
@@ -4527,6 +4550,7 @@
 				4BCEB7352029750000ED2829 /* myPhotoCell.m in Sources */,
 				4B31264C1FDA1FF5000CE894 /* XHAddressBookFrame.m in Sources */,
 				8C1D47C2207B3E23005AA0B4 /* IQToolbar.m in Sources */,
+				042EFA1B207DE5230089FE83 /* XHHomeWorkDetailCellContentView.m in Sources */,
 				4B80F22B1FCBF00E00BC7B52 /* XHNetWorkConfig.m in Sources */,
 				4B80F2411FCBF01B00BC7B52 /* BaseDynamicLabel.m in Sources */,
 				4B80F28C1FCBF04800BC7B52 /* UIScrollView+MJExtension.m in Sources */,

@@ -15,7 +15,7 @@
 @interface XHHomeWorkFrame : BaseFrame
 
 @property (nonatomic,strong) XHHomeWorkModel *model; //!< 数据模型
-@property (nonatomic,assign) CGSize subjectSize; //!< 学科的宽高
+@property (nonatomic,assign) CGSize classSize; //!< 班级的宽高
 @property (nonatomic,assign) CGSize contentSize; //!< 内容的宽高
 @property (nonatomic,assign) CGSize previewSize; //!< 图片的宽高
 

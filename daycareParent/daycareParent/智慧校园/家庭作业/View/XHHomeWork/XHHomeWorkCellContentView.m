@@ -20,7 +20,7 @@
 
 @property (nonatomic,strong) UILabel *dateLabel; //!< 日期标签
 @property (nonatomic,strong) UILabel *contentLabel; //!< 作业标签
-@property (nonatomic,strong) UILabel *classsLael; //!< 班级标签
+@property (nonatomic,strong) UILabel *classLabel; //!< 班级标签
 @property (nonatomic,strong) UILabel *detailsLabel;  //!< 查看详情标签
 @property (nonatomic,strong) UIView *lineView; //!< 分割线
 
@@ -43,7 +43,7 @@
         [self addSubview:self.dateLabel];
         [self addSubview:self.contentLabel];
         [self addSubview:self.detailsLabel];
-        [self addSubview:self.classsLael];
+        [self addSubview:self.classLabel];
         [self addSubview:self.lineView];
     }
     return self;
@@ -69,7 +69,7 @@
             //!< 查看详情
             [self.detailsLabel setFrame:CGRectMake(self.dateLabel.left, (self.dateLabel.bottom+10.0), 120.0, self.dateLabel.height)];
             //!< 班级
-            [self.classsLael setFrame:CGRectMake(self.dateLabel.left, self.detailsLabel.bottom+10.0,itemFrame.itemFrame.size.width-20.0 , self.dateLabel.height)];
+            [self.classLabel setFrame:CGRectMake(self.dateLabel.left, self.detailsLabel.bottom+10.0,itemFrame.itemFrame.size.width-20.0 , self.dateLabel.height)];
             //!< 分割线
             [self.lineView setFrame:CGRectMake(0, itemFrame.itemFrame.size.height-0.5, itemFrame.itemFrame.size.width, 0.5)];
             
@@ -77,7 +77,7 @@
             //设置属性
             
             //赋值
-            [self.classsLael setText:itemFrame.model.clazzName];
+            [self.classLabel setText:itemFrame.model.clazzName];
             [self.dateLabel setText:itemFrame.model.releaseDate];
             [self.contentLabel setText:itemFrame.model.workContent];
             switch (itemFrame.model.homeWorkUnreadType)
@@ -105,7 +105,7 @@
             //!< 查看详情
             [self.detailsLabel setFrame:CGRectMake(self.dateLabel.left, (self.dateLabel.bottom+10.0), 120.0, self.dateLabel.height)];
             //!< 班级
-            [self.classsLael setFrame:CGRectMake(self.dateLabel.left, self.detailsLabel.bottom+10.0,itemFrame.itemFrame.size.width-20.0 , self.dateLabel.height)];
+            [self.classLabel setFrame:CGRectMake(self.dateLabel.left, self.detailsLabel.bottom+10.0,itemFrame.itemFrame.size.width-20.0 , self.dateLabel.height)];
             //!< 分割线
             [self.lineView setFrame:CGRectMake(0, itemFrame.itemFrame.size.height-0.5, itemFrame.itemFrame.size.width, 0.5)];
             
@@ -113,7 +113,7 @@
             //设置属性
             
             //赋值
-            [self.classsLael setText:itemFrame.model.clazzName];
+            [self.classLabel setText:itemFrame.model.clazzName];
             [self.dateLabel setText:itemFrame.model.releaseDate];
             [self.contentLabel setText:itemFrame.model.workContent];
             switch (itemFrame.model.homeWorkUnreadType)
@@ -174,16 +174,16 @@
     }
     return _detailsLabel;
 }
--(UILabel *)classsLael
+-(UILabel *)classLabel
 {
-    if (_classsLael == nil)
+    if (_classLabel == nil)
     {
-        _classsLael = [[UILabel alloc]init];
-        [_classsLael setTextAlignment:NSTextAlignmentCenter];
-        [_classsLael setTextColor:[UIColor whiteColor]];
-        [_classsLael setFont:FontLevel3];
+        _classLabel = [[UILabel alloc]init];
+        [_classLabel setTextAlignment:NSTextAlignmentCenter];
+        [_classLabel setTextColor:[UIColor whiteColor]];
+        [_classLabel setFont:FontLevel3];
     }
-    return _classsLael;
+    return _classLabel;
 }
 
 
@@ -201,7 +201,7 @@
 {
     if (color)
     {
-        [self.classsLael setBackgroundColor:[UIColor yellowColor]];
+        [self.classLabel setBackgroundColor:[UIColor yellowColor]];
         [self.detailsLabel setBackgroundColor:[UIColor grayColor]];
         [self.dateLabel setBackgroundColor:[UIColor darkGrayColor]];
         [self.contentLabel setBackgroundColor:[UIColor purpleColor]];

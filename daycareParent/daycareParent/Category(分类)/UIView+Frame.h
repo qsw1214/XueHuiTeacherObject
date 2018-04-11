@@ -41,6 +41,23 @@
 -(void)setLayerBorderWidth:(CGFloat)width;
 -(void)setBorderColor:(UIColor*)color;
 
+/**
+ 对视图的某个角设置圆角
+
+ @param corners UIRectCorner
+ typedef NS_OPTIONS(NSUInteger, UIRectCorner) {
+ UIRectCornerTopLeft     = 1 << 0,
+ UIRectCornerTopRight    = 1 << 1,
+ UIRectCornerBottomLeft  = 1 << 2,
+ UIRectCornerBottomRight = 1 << 3,
+ UIRectCornerAllCorners  = ~0UL
+ };
+
+ @param radi 圆角半径
+ */
+-(void)byRoundingCorners:(UIRectCorner)corners cornerRadii:(CGFloat)radi;
+
+
 
 
 @end

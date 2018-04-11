@@ -17,7 +17,7 @@
     _model = model;
     
     CGSize subjectSize = [NSObject contentSizeWithTitle:model.subject withFontOfSize:FontLevel3 withWidth:100.0];
-    [self setSubjectSize:CGSizeMake(subjectSize.width+10.0, subjectSize.height)];
+    [self setClassSize:CGSizeMake(subjectSize.width+10.0, subjectSize.height)];
     switch (model.homeWorkType)
     {
         case HomeWorkType:

@@ -192,6 +192,15 @@
     [self.layer setBorderColor:[color CGColor]];
 }
 
+-(void)byRoundingCorners:(UIRectCorner)corners cornerRadii:(CGFloat)radi
+{
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:corners  cornerRadii:CGSizeMake(radi, radi)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    [maskLayer setPath:maskPath.CGPath];
+    [self.layer setMask:maskLayer];
+    [self.layer setMasksToBounds:YES];
+}
+
 
 
 
