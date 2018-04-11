@@ -18,10 +18,9 @@
     NSInteger  _currentS;
     NSTimer *_timer;
     BOOL _ifSelect;
-    UITableView *_tableView;
-    XHBaseBtn *_sureBtn;
 }
-
+@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)XHBaseBtn *sureButton;
 @end
 
 @implementation XHForgetViewController
@@ -33,18 +32,10 @@
     _currentS = 60;
     arry=@[@"帐号",@"验证码",@"新密码",@"新密码"];
     placeArry=@[@"请输入手机号",@"请输入验证码",@"请输入密码",@"请确认密码"];
-    _tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 200)];
-    _tableView.rowHeight=50;
-    _tableView.delegate=self;
-    _tableView.dataSource=self;
-    _tableView.bounces=NO;
-    [_tableView registerNib:[UINib nibWithNibName:@"XHChagePhoneTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
-    [_tableView registerNib:[UINib nibWithNibName:@"XHTelephoneTableViewCell" bundle:nil] forCellReuseIdentifier:@"telephonecell"];
-    [self.view addSubview:_tableView];
-    _sureBtn=[[XHBaseBtn alloc] initWithFrame:CGRectMake(10, 290, SCREEN_WIDTH-20, LOGINBTN_HEIGHT)];
-    [_sureBtn setTitle:@"完成" forState:UIControlStateNormal];
-    [_sureBtn addTarget:self action:@selector(sureBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_sureBtn];
+    
+    [self.view addSubview:self.tableView];
+ 
+    [self.view addSubview:self.sureButton];
     
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -65,7 +56,9 @@
         [cell.verifyBtn setTitleColor:RGB(82, 82, 82) forState:UIControlStateNormal];
         cell.verifyBtn.titleLabel.font=FontLevel3;
         cell.verifyBtn.layer.cornerRadius=CORNER_BTN;
-        [cell.verifyBtn addTarget:self action:@selector(verifyBtnClick) forControlEvents:UIControlEventTouchUpInside];
+        [cell.verifyBtn setTag:1];
+        
+        [cell.verifyBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
     else
@@ -87,26 +80,68 @@
     }
     
 }
--(void)verifyBtnClick
+- (void)buttonClick:(UIButton *)btn
 {
-    
     UITextField *phonepwd=[_tableView viewWithTag:10086];
-    if (![UITextView verifyPhone:phonepwd.text]) {
-        [XHShowHUD showNOHud:@"请输入正确手机号!"];
-        return;
-    }
-    if (_ifSelect==NO) {
-        XHNetWorkConfig *net=[XHNetWorkConfig new];
-        [net setObject:phonepwd.text forKey:@"telphoneNumber"];
-        [net setObject:@"1" forKey:@"type"];
-        [XHShowHUD showTextHud];
-        [net postWithUrl:@"pmschool-teacher-api_/teacher/sms/get" sucess:^(id object, BOOL verifyObject) {
-            if (verifyObject) {
-                [self startCountdown];
+    UITextField *pwd=[_tableView viewWithTag:10086+2];
+    UITextField *surePwd=[_tableView viewWithTag:10086+3];
+    UITextField *verrifypwd=[_tableView viewWithTag:10086+1];
+    switch (btn.tag) {
+        case 1:
+            
+        {
+            if (![UITextView verifyPhone:phonepwd.text]) {
+                [XHShowHUD showNOHud:@"请输入正确手机号!"];
+                return;
             }
-        } error:^(NSError *error) {
-           
-        }];
+            if (_ifSelect==NO) {
+                XHNetWorkConfig *net=[XHNetWorkConfig new];
+                [net setObject:phonepwd.text forKey:@"telphoneNumber"];
+                [net setObject:@"1" forKey:@"type"];
+                [XHShowHUD showTextHud];
+                [net postWithUrl:@"pmschool-teacher-api_/teacher/sms/get" sucess:^(id object, BOOL verifyObject) {
+                    if (verifyObject) {
+                        [self startCountdown];
+                    }
+                } error:^(NSError *error) {
+                    
+                }];
+            }
+        }
+            break;
+            
+        case 2:
+        {
+            if (![UITextView verifyPhone:phonepwd.text]) {
+                [XHShowHUD showNOHud:@"请输入正确手机号!"];
+                return;
+            }
+            if (pwd.text.length<6||surePwd.text.length<6) {
+                [XHShowHUD showNOHud:@"密码至少6位!"];
+                return;
+            }
+            if (![pwd.text isEqualToString:surePwd.text]) {
+                [XHShowHUD showNOHud:@"确认密码不符!"];
+                return;
+            }
+            if (![UITextView verifyCodeMatch:verrifypwd.text]) {
+                [XHShowHUD showNOHud:@"请输入正确的验证码!"];
+                return;
+            }
+            XHNetWorkConfig *net=[XHNetWorkConfig new];
+            [net setObject:phonepwd.text forKey:@"telphoneNumber"];
+            [net setObject:pwd.text forKey:@"password"];
+            [net setObject:verrifypwd.text forKey:@"verificationCode"];
+            [XHShowHUD showTextHud];
+            [net postWithUrl:@"pmschool-teacher-api_/teacher/teacher/retrieve" sucess:^(id object, BOOL verifyObject) {
+                if (verifyObject) {
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+                
+            } error:^(NSError *error) {
+            }];
+        }
+            break;
     }
     
 }
@@ -140,40 +175,7 @@
     }
     [Cell.verifyBtn setTitle:countDownStr(_currentS) forState:UIControlStateNormal];
 }
-- (void)sureBtnClick {
-    UITextField *phonepwd=[_tableView viewWithTag:10086];
-    UITextField *pwd=[_tableView viewWithTag:10086+2];
-    UITextField *surePwd=[_tableView viewWithTag:10086+3];
-    UITextField *verrifypwd=[_tableView viewWithTag:10086+1];
-    if (![UITextView verifyPhone:phonepwd.text]) {
-        [XHShowHUD showNOHud:@"请输入正确手机号!"];
-        return;
-    }
-    if (pwd.text.length<6||surePwd.text.length<6) {
-        [XHShowHUD showNOHud:@"密码至少6位!"];
-        return;
-    }
-    if (![pwd.text isEqualToString:surePwd.text]) {
-        [XHShowHUD showNOHud:@"确认密码不符!"];
-        return;
-    }
-    if (![UITextView verifyCodeMatch:verrifypwd.text]) {
-        [XHShowHUD showNOHud:@"请输入正确的验证码!"];
-        return;
-    }
-    XHNetWorkConfig *net=[XHNetWorkConfig new];
-    [net setObject:phonepwd.text forKey:@"telphoneNumber"];
-    [net setObject:pwd.text forKey:@"password"];
-    [net setObject:verrifypwd.text forKey:@"verificationCode"];
-     [XHShowHUD showTextHud];
-    [net postWithUrl:@"pmschool-teacher-api_/teacher/teacher/retrieve" sucess:^(id object, BOOL verifyObject) {
-        if (verifyObject) {
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-        
-    } error:^(NSError *error) {
-    }];
-}
+
 -(void)textChage
 {
     UITextField *phonepwd=[_tableView viewWithTag:10086];
@@ -182,14 +184,36 @@
     UITextField *verrifypwd=[_tableView viewWithTag:10086+1];
     if ([UITextView verifyPhone:phonepwd.text]&&pwd.text.length>5&&surePwd.text.length>5&&[UITextView verifyCodeMatch:verrifypwd.text])
     {
-        [_sureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.sureButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     else
     {
-        [_sureBtn setTitleColor:LOGIN_BEFORE forState:UIControlStateNormal];
+        [self.sureButton setTitleColor:LOGIN_BEFORE forState:UIControlStateNormal];
     }
 }
-
+-(UITableView *)tableView
+{
+    if (_tableView==nil) {
+        _tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 200)];
+        _tableView.rowHeight=50;
+        _tableView.delegate=self;
+        _tableView.dataSource=self;
+        _tableView.bounces=NO;
+        [_tableView registerNib:[UINib nibWithNibName:@"XHChagePhoneTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
+        [_tableView registerNib:[UINib nibWithNibName:@"XHTelephoneTableViewCell" bundle:nil] forCellReuseIdentifier:@"telephonecell"];
+    }
+    return _tableView;
+}
+-(XHBaseBtn *)sureButton
+{
+    if (_sureButton==nil) {
+        _sureButton=[[XHBaseBtn alloc] initWithFrame:CGRectMake(10, 290, SCREEN_WIDTH-20, LOGINBTN_HEIGHT)];
+        [_sureButton setTitle:@"完成" forState:UIControlStateNormal];
+        [_sureButton setTag:2];
+        [_sureButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _sureButton;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

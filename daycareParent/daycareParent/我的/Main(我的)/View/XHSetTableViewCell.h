@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XHSetTableViewCell : UITableViewCell
+@interface XHSetTableViewCell : ParentTableViewCell
 @property(nonatomic,strong)UIImageView *setImageView;
 @property(nonatomic,strong)XHBackLabel *setContentLabel;
 @property(nonatomic,strong)XHBaseLabel *setLabel;

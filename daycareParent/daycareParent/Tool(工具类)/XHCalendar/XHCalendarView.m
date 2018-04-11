@@ -396,7 +396,6 @@
         UINib *nib = [UINib nibWithNibName:@"LXCalenderCell" bundle:nil];
         [_collectionView registerNib:nib forCellWithReuseIdentifier:@"cell"];
         
-        
     }
     return _collectionView;
 }

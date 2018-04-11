@@ -161,7 +161,7 @@
 #pragma mark- 选择请假类型delegate
 - (void)getItemObject:(NSString *)itemObject atItemIndex:(NSInteger )index
 {
-    kNSLog(itemObject);
+    [self.askforLeaveTypeControl setDescribe:itemObject];
 }
 #pragma mark- submitViewDelegate
 -(void)getItemObject:(NSString *)ItemObject
