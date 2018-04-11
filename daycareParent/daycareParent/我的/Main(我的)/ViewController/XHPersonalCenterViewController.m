@@ -19,9 +19,10 @@
 #import "XHPasswordViewController.h"
 #import "XHAboutUsViewController.h"
 #import "XHCookBookViewController.h"
+#import "XHCalendarView.h"
 #define TITLE_LIST @[@"学习记录",@"收藏资源",@"下载记录",@"我的课程"]
 
-@interface XHPersonalCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface XHPersonalCenterViewController ()<UITableViewDelegate,UITableViewDataSource,XHCalendarViewDelegate>
 {
     UIView *_HeaderView;
     BaseTableView *_tableView;
@@ -62,6 +63,13 @@
     }else {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
+    XHCalendarView *can=[[XHCalendarView alloc] initWithDelegate:self];
+    [can show];
+}
+
+-(void)getCalendarDateStr:(NSString *)dateStr
+{
+    kNSLog(dateStr);
 }
 -(void)viewWillAppear:(BOOL)animated
 {

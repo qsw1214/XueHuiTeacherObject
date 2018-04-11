@@ -513,6 +513,15 @@
 		8CD8CE0E2015D23E0085DD70 /* XHDayRollCallDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8CE0D2015D23E0085DD70 /* XHDayRollCallDetailViewController.m */; };
 		8CD8CE142015E0550085DD70 /* XHDayRollReasonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8CE132015E0550085DD70 /* XHDayRollReasonTableViewCell.m */; };
 		8CDC193B202957F40063E21F /* XHCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CDC193A202957F40063E21F /* XHCustomView.m */; };
+		8CDD6E9A207CA2C5004F0E48 /* LxButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CDD6E7F207CA2C5004F0E48 /* LxButton.m */; };
+		8CDD6E9F207CA2C5004F0E48 /* LXCalendarDayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CDD6E8A207CA2C5004F0E48 /* LXCalendarDayModel.m */; };
+		8CDD6EA0207CA2C5004F0E48 /* LXCalendarHearder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CDD6E8C207CA2C5004F0E48 /* LXCalendarHearder.m */; };
+		8CDD6EA1207CA2C5004F0E48 /* LXCalendarHearder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CDD6E8D207CA2C5004F0E48 /* LXCalendarHearder.xib */; };
+		8CDD6EA2207CA2C5004F0E48 /* LXCalendarMonthModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CDD6E8F207CA2C5004F0E48 /* LXCalendarMonthModel.m */; };
+		8CDD6EA3207CA2C5004F0E48 /* XHCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CDD6E91207CA2C5004F0E48 /* XHCalendarView.m */; };
+		8CDD6EA4207CA2C5004F0E48 /* LXCalendarWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CDD6E93207CA2C5004F0E48 /* LXCalendarWeekView.m */; };
+		8CDD6EA5207CA2C5004F0E48 /* LXCalenderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CDD6E96207CA2C5004F0E48 /* LXCalenderCell.m */; };
+		8CDD6EA6207CA2C5004F0E48 /* LXCalenderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CDD6E97207CA2C5004F0E48 /* LXCalenderCell.xib */; };
 		8CDDA8FF1FDA7A44000B3BAB /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CDDA8FE1FDA7A25000B3BAB /* AssetsLibrary.framework */; };
 		8CDDA9021FDA7A75000B3BAB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CDDA9001FDA7A56000B3BAB /* AudioToolbox.framework */; };
 		8CDDA9031FDA7A7E000B3BAB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CDDA9011FDA7A60000B3BAB /* AVFoundation.framework */; };
@@ -1518,6 +1527,23 @@
 		8CD8CE132015E0550085DD70 /* XHDayRollReasonTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHDayRollReasonTableViewCell.m; sourceTree = "<group>"; };
 		8CDC1939202957F40063E21F /* XHCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHCustomView.h; sourceTree = "<group>"; };
 		8CDC193A202957F40063E21F /* XHCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHCustomView.m; sourceTree = "<group>"; };
+		8CDD6E7E207CA2C5004F0E48 /* LxButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LxButton.h; sourceTree = "<group>"; };
+		8CDD6E7F207CA2C5004F0E48 /* LxButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LxButton.m; sourceTree = "<group>"; };
+		8CDD6E89207CA2C5004F0E48 /* LXCalendarDayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXCalendarDayModel.h; sourceTree = "<group>"; };
+		8CDD6E8A207CA2C5004F0E48 /* LXCalendarDayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXCalendarDayModel.m; sourceTree = "<group>"; };
+		8CDD6E8B207CA2C5004F0E48 /* LXCalendarHearder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXCalendarHearder.h; sourceTree = "<group>"; };
+		8CDD6E8C207CA2C5004F0E48 /* LXCalendarHearder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXCalendarHearder.m; sourceTree = "<group>"; };
+		8CDD6E8D207CA2C5004F0E48 /* LXCalendarHearder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LXCalendarHearder.xib; sourceTree = "<group>"; };
+		8CDD6E8E207CA2C5004F0E48 /* LXCalendarMonthModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXCalendarMonthModel.h; sourceTree = "<group>"; };
+		8CDD6E8F207CA2C5004F0E48 /* LXCalendarMonthModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXCalendarMonthModel.m; sourceTree = "<group>"; };
+		8CDD6E90207CA2C5004F0E48 /* XHCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHCalendarView.h; sourceTree = "<group>"; };
+		8CDD6E91207CA2C5004F0E48 /* XHCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHCalendarView.m; sourceTree = "<group>"; };
+		8CDD6E92207CA2C5004F0E48 /* LXCalendarWeekView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXCalendarWeekView.h; sourceTree = "<group>"; };
+		8CDD6E93207CA2C5004F0E48 /* LXCalendarWeekView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXCalendarWeekView.m; sourceTree = "<group>"; };
+		8CDD6E94207CA2C5004F0E48 /* LXCalender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXCalender.h; sourceTree = "<group>"; };
+		8CDD6E95207CA2C5004F0E48 /* LXCalenderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXCalenderCell.h; sourceTree = "<group>"; };
+		8CDD6E96207CA2C5004F0E48 /* LXCalenderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXCalenderCell.m; sourceTree = "<group>"; };
+		8CDD6E97207CA2C5004F0E48 /* LXCalenderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LXCalenderCell.xib; sourceTree = "<group>"; };
 		8CDDA8FE1FDA7A25000B3BAB /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		8CDDA9001FDA7A56000B3BAB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		8CDDA9011FDA7A60000B3BAB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -2304,6 +2330,7 @@
 		4B80F2001FCBE43E00BC7B52 /* Tool(工具类) */ = {
 			isa = PBXGroup;
 			children = (
+				8CDD6E36207C92B0004F0E48 /* XHCalendar */,
 				8C1AA89A207B183100DDCBB3 /* XHHeader */,
 				8C1AA893207B162D00DDCBB3 /* ParentModel */,
 				8C1AA87A207B161F00DDCBB3 /* ParentView */,
@@ -3743,6 +3770,38 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		8CDD6E36207C92B0004F0E48 /* XHCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				8CDD6E90207CA2C5004F0E48 /* XHCalendarView.h */,
+				8CDD6E91207CA2C5004F0E48 /* XHCalendarView.m */,
+				8CDD6E88207CA2C5004F0E48 /* LXCalendar */,
+			);
+			path = XHCalendar;
+			sourceTree = "<group>";
+		};
+		8CDD6E88207CA2C5004F0E48 /* LXCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				8CDD6E7E207CA2C5004F0E48 /* LxButton.h */,
+				8CDD6E7F207CA2C5004F0E48 /* LxButton.m */,
+				8CDD6E89207CA2C5004F0E48 /* LXCalendarDayModel.h */,
+				8CDD6E8A207CA2C5004F0E48 /* LXCalendarDayModel.m */,
+				8CDD6E8B207CA2C5004F0E48 /* LXCalendarHearder.h */,
+				8CDD6E8C207CA2C5004F0E48 /* LXCalendarHearder.m */,
+				8CDD6E8D207CA2C5004F0E48 /* LXCalendarHearder.xib */,
+				8CDD6E8E207CA2C5004F0E48 /* LXCalendarMonthModel.h */,
+				8CDD6E8F207CA2C5004F0E48 /* LXCalendarMonthModel.m */,
+				8CDD6E92207CA2C5004F0E48 /* LXCalendarWeekView.h */,
+				8CDD6E93207CA2C5004F0E48 /* LXCalendarWeekView.m */,
+				8CDD6E94207CA2C5004F0E48 /* LXCalender.h */,
+				8CDD6E95207CA2C5004F0E48 /* LXCalenderCell.h */,
+				8CDD6E96207CA2C5004F0E48 /* LXCalenderCell.m */,
+				8CDD6E97207CA2C5004F0E48 /* LXCalenderCell.xib */,
+			);
+			path = LXCalendar;
+			sourceTree = "<group>";
+		};
 		8CDDA8FD1FDA7A24000B3BAB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -3942,6 +4001,7 @@
 				8CC7648F200CAA69007887C7 /* XHNewHeardTableViewCell.xib in Resources */,
 				8CC22A732041088E00E36966 /* XHTelephoneTableViewCell.xib in Resources */,
 				4BCEB73A2029750000ED2829 /* wphoto_select_no@2x.png in Resources */,
+				8CDD6EA6207CA2C5004F0E48 /* LXCalenderCell.xib in Resources */,
 				8C331468202AC83200F504A9 /* focusImg.png in Resources */,
 				8C007D7420107EDF00DD0635 /* XHHistoryDetailTableViewCell.xib in Resources */,
 				4B3800FE20075DF3004E74AC /* pageControlDot@3x.png in Resources */,
@@ -3953,6 +4013,7 @@
 				4B80F31A1FCBFD6F00BC7B52 /* Info.plist in Resources */,
 				4B3800FC20075DF3004E74AC /* pageControlDot@2x.png in Resources */,
 				4B577FDA1FF63FB30023ACBC /* LICENSE in Resources */,
+				8CDD6EA1207CA2C5004F0E48 /* LXCalendarHearder.xib in Resources */,
 				8C1AA8F9207B272200DDCBB3 /* release_notes_ios.txt in Resources */,
 				8C5EB0C41FCFF22C002ED0D7 /* XHPassWordTableViewCell.xib in Resources */,
 				4B34187B1FFDC14C00A5EC56 /* ZFPlayer.bundle in Resources */,
@@ -3983,6 +4044,7 @@
 				4B80F27F1FCBF04800BC7B52 /* MJRefreshAutoGifFooter.m in Sources */,
 				8CBA36462011D7B200485643 /* XHCustomDatePickerView.m in Sources */,
 				4B3418761FFDC14C00A5EC56 /* UIView+CustomControlView.m in Sources */,
+				8CDD6EA2207CA2C5004F0E48 /* LXCalendarMonthModel.m in Sources */,
 				8C1AA80F207B13D200DDCBB3 /* XHNoticeRecipientGroupFrame.m in Sources */,
 				4B577FE31FF63FB30023ACBC /* View+MASAdditions.m in Sources */,
 				8C1D47B8207B3E23005AA0B4 /* IQUIScrollView+Additions.m in Sources */,
@@ -3994,6 +4056,7 @@
 				4B577FDB1FF63FB30023ACBC /* MASCompositeConstraint.m in Sources */,
 				4B80F2D81FCBF04F00BC7B52 /* UIView+WebCache.m in Sources */,
 				4B8E661E1FD643400006D641 /* XHCookBookCell.m in Sources */,
+				8CDD6EA0207CA2C5004F0E48 /* LXCalendarHearder.m in Sources */,
 				4B523BDB1FD157F8006DD565 /* XHLeaveRecordViewController.m in Sources */,
 				4B4A001A1FE2437300B8A8F8 /* XHDynamicsCollectionView.m in Sources */,
 				8CD8CE0B2015AC4D0085DD70 /* XHDayRollCallModel.m in Sources */,
@@ -4118,6 +4181,7 @@
 				4B3418731FFDC14C00A5EC56 /* UIImageView+ZFCache.m in Sources */,
 				8C1AA88B207B162000DDCBB3 /* ParentBackLabel.m in Sources */,
 				4B80F3271FCBFD6F00BC7B52 /* NSValueTransformer+MTLInversionAdditions.m in Sources */,
+				8CDD6E9F207CA2C5004F0E48 /* LXCalendarDayModel.m in Sources */,
 				4B80F33A1FCC130C00BC7B52 /* MBProgressHUD.m in Sources */,
 				4BB792AE1FD7752B00E0ED72 /* XHAskforLeaveArrowCell.m in Sources */,
 				4B577FDC1FF63FB30023ACBC /* MASConstraint.m in Sources */,
@@ -4199,6 +4263,7 @@
 				8CC76484200C9993007887C7 /* XHNewTableViewCell.m in Sources */,
 				4BB9BEA31FDE4C54004F5622 /* XHEducationCloudSwitchMenuView.m in Sources */,
 				4B3043D51FEE566C004017C7 /* BaseScrollView.m in Sources */,
+				8CDD6EA5207CA2C5004F0E48 /* LXCalenderCell.m in Sources */,
 				8C1AA88D207B162000DDCBB3 /* ParentControl.m in Sources */,
 				4BB792E31FD79F4F00E0ED72 /* XHSyllabusContentView.m in Sources */,
 				4B3418721FFDC14C00A5EC56 /* UIAlertController+ZFPlayerRotation.m in Sources */,
@@ -4220,6 +4285,7 @@
 				4B3418741FFDC14C00A5EC56 /* UINavigationController+ZFPlayerRotation.m in Sources */,
 				4B80F3281FCBFD6F00BC7B52 /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */,
 				4B3126351FD93CC6000CE894 /* SDCycleScrollView.m in Sources */,
+				8CDD6EA4207CA2C5004F0E48 /* LXCalendarWeekView.m in Sources */,
 				4B8E66181FD641600006D641 /* XHCookDateContentView.m in Sources */,
 				8C1AA815207B13D200DDCBB3 /* XHNoticeCellContentView.m in Sources */,
 				4B34187A1FFDC14C00A5EC56 /* ZFBrightnessView.m in Sources */,
@@ -4262,7 +4328,9 @@
 				4BB9BE9A1FDE4B40004F5622 /* XHEducationCloudContentView.m in Sources */,
 				4B80F2CD1FCBF04F00BC7B52 /* SDWebImageImageIOCoder.m in Sources */,
 				4B07CC491FD5106800B2DBDA /* Line.m in Sources */,
+				8CDD6E9A207CA2C5004F0E48 /* LxButton.m in Sources */,
 				8C1AA866207B13FA00DDCBB3 /* PHAsset+Extend.m in Sources */,
+				8CDD6EA3207CA2C5004F0E48 /* XHCalendarView.m in Sources */,
 				8C1AA827207B13D200DDCBB3 /* XHNoticeViewController.m in Sources */,
 				4B8E66211FD646310006D641 /* XHCookBookModel.m in Sources */,
 				4B11AF3B1FCCEA89002738F1 /* XHPersonalCenterViewController.m in Sources */,

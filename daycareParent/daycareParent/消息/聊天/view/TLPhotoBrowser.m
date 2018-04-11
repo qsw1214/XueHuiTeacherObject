@@ -21,10 +21,12 @@
     }
     return self;
 }
-+(void)showOriginalImage:(UIImage *)originalImage{
+
++(TLPhotoBrowser *)showOriginalImage:(UIImage *)originalImage{
     TLPhotoBrowser *browser = [[TLPhotoBrowser alloc] initWithFrame:kKeyWindow.bounds];
     browser.imageScrollView.img = originalImage;
     [browser show];
+    return browser;
 }
 -(void)show{
     self.alpha = 0;
@@ -34,6 +36,14 @@
     [UIView animateWithDuration:0.25 animations:^{
         self.alpha = 1;
     }];    
+}
+-(void)dismiss
+{
+    [UIView animateWithDuration:0.25 animations:^{
+        self.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
 }
 -(void)imageScrollViewLongTap:(UILongPressGestureRecognizer *)sender{
     if (sender.state != UIGestureRecognizerStateBegan) {
