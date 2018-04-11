@@ -10,8 +10,8 @@
 #import "XHWeekCollectionView.h"
 #import "XHSyllabusCollectionView.h"
 #import <WebKit/WebKit.h>
-
-@interface XHClassManageContentView () <XHWeekCollectionViewDeletage>
+#import "XHDayRollCallViewController.h"
+@interface XHClassManageContentView () <XHWeekCollectionViewDeletage,UIGestureRecognizerDelegate>
 
 @property (nonatomic,strong) WKWebView *webView; //!< 成绩webView
 @property (nonatomic,strong) BaseButtonControl *achievementControl; //!< 成绩管理
@@ -63,6 +63,13 @@
     //!< 考勤情况Frame
     [self.webView setFrame:CGRectMake(0, 0, frame.size.width, 200.0)];
     CGFloat spaceWidth = (frame.size.width-3*80)/4.0;
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]
+                                                    initWithTarget:self
+                                                    action:@selector(handleTap:)];
+    tapGestureRecognizer.delegate = self;
+    [self.webView addGestureRecognizer:tapGestureRecognizer];
+    
     //!< 成绩管理Frame
     [self.achievementControl resetFrame:CGRectMake(spaceWidth, (self.webView.bottom+20.0), 80.0, 80.0)];
     [self.achievementControl setTitleEdgeFrame:CGRectMake(0, 0, self.achievementControl.width, self.achievementControl.height) withNumberType:0 withAllType:NO];
@@ -96,7 +103,12 @@
     [self.syllabusCollectionView setItemArray:object.model.syllabusArray];
 }
 
-
+-(void)handleTap:(UIGestureRecognizer *)gesture
+{
+    XHDayRollCallViewController *day=[[XHDayRollCallViewController alloc] initHiddenWhenPushHidden];
+    
+    [DCURLRouter pushViewController:day animated:YES];
+}
 
 #pragma mark - Getter /  Setter
 -(WKWebView *)webView
@@ -222,6 +234,10 @@
     }
 }
 
+// 允许多个手势并发
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
 
 
 

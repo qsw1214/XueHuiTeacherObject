@@ -73,6 +73,7 @@
     [UIView animateWithDuration:0.25 animations:^{
         
         self.baseView.frame=CGRectMake((SCREEN_WIDTH-300)/2.0, (SCREEN_HEIGHT-440)/2.0, 300, 440);
+        self.calendarHeader.frame = CGRectMake(0, 0, 300, 45);
     } completion:^(BOOL finished){
      
     }];
@@ -357,10 +358,7 @@
             break;
     }
 }
--(void)layoutSubviews{
-    [super layoutSubviews];
-    self.calendarHeader.frame = CGRectMake(0, 0, 300, 45);
-}
+
 #pragma mark---懒加载
 -(LXCalendarHearder *)calendarHeader{
     if (!_calendarHeader) {

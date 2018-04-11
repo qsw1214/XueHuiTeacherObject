@@ -9,7 +9,7 @@
 #import "XHAskforLeaveViewController.h"
 #import "XHLeaveRecordViewController.h"
 #import "XHAskforLeaveContentView.h"
-
+#import "XHLeaveRecordViewController.h"
 
 
 @interface XHAskforLeaveViewController ()
@@ -25,7 +25,7 @@
 {
     [super viewDidLoad];
     [self setNavtionTitle:@"请假"];
-   
+    [self setItemContentType:NavigationTitleType withItemType:NavigationItemRightype withIconName:nil withTitle:@"请假记录"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,7 +44,11 @@
     }
 }
 
-
+-(void)rightItemAction:(BaseNavigationControlItem *)sender
+{
+    XHLeaveRecordViewController *leave=[[XHLeaveRecordViewController alloc] init];
+    [self.navigationController pushViewController:leave animated:YES];
+}
 #pragma mark - Getter / Setter
 -(XHAskforLeaveContentView *)contentView
 {

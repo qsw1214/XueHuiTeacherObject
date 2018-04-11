@@ -9,7 +9,7 @@
 #import "XHSmartCampusViewController.h"
 #import "XHSmartCampusContentView.h"
 #import "XHHomeWorkViewController.h" //!< 家庭作业
-#import "XHAskforLeaveBoardViewController.h" //!< 请假
+#import "XHAskforLeaveViewController.h" //!< 请假
 #import "XHEducationCloudViewController.h" //!< 浩学云（教育云）
 #import "XHCookBookViewController.h" //!<  食谱
 #import "XHSyllabusViewController.h"  //!< 课程表
@@ -105,7 +105,7 @@
 #pragma mark case 5 请假
         case 5:
         {
-            XHAskforLeaveBoardViewController *leave = [[XHAskforLeaveBoardViewController alloc]initHiddenWhenPushHidden];
+            XHAskforLeaveViewController *leave = [[XHAskforLeaveViewController alloc]initHiddenWhenPushHidden];
             [self.navigationController pushViewController:leave animated:YES];
         }
             break;

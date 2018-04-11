@@ -40,15 +40,15 @@
         [self.contentView resetFrame:CGRectMake(0, self.navigationView.bottom, SCREEN_WIDTH, SCREEN_HEIGHT-self.navigationView.height)];
     }
 }
-#pragma mark - Deletage Method
-#pragma mark XHTeacherAddressBookContentViewDeletage
--(void)didSelectRowAtIndexItemObject:(XHTeacherAddressBookFrame *)object
-{
-    if (self.didselectBack)
-    {
-        self.didselectBack(object);
-    }
-}
+//#pragma mark - Deletage Method
+//#pragma mark XHTeacherAddressBookContentViewDeletage
+//-(void)didSelectRowAtIndexItemObject:(XHTeacherAddressBookFrame *)object
+//{
+//    if (self.didselectBack)
+//    {
+//        self.didselectBack(object);
+//    }
+//}
 
 
 -(void)dissmissPopWithItemObjec:(XHTeacherAddressBookFrame *)object

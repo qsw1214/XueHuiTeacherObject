@@ -9,8 +9,6 @@
 #import "XHChatManager.h"
 #import <RongIMLib/RongIMLib.h>
 #import "NSDate+Utils.h"
-//static NSString *RongCloundKey = @"8w7jv4qb8wt3y";//y745wfm844a4v
-
 
 @interface XHChatManager () <RCIMClientReceiveMessageDelegate>
 @property(nonatomic,strong)XHMessageUserInfo *userInfo;
@@ -101,22 +99,6 @@
         } cancel:^(long messageId) {
             
         }];
-//
-//        [[RCIMClient sharedRCIMClient] sendImageMessage:message.conversationType targetId:message.targetId content:message.content pushContent:nil progress:^(int progress, long messageId) {
-//
-//        } success:^(long messageId) {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                if (successBlock) {
-//                    successBlock(message);
-//                }
-//            });
-//        } error:^(RCErrorCode errorCode, long messageId) {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                if (failedBlock) {
-//                    failedBlock(message);
-//                }
-//            });
-//        }];
     }
     else
     {

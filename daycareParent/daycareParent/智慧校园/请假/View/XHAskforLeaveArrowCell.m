@@ -12,10 +12,9 @@
 @interface XHAskforLeaveArrowCell ()
 
 @property (nonatomic,strong) UILabel *titleLabel; //!< 标题
-@property (nonatomic,strong) UILabel *describeLabel; //!< 描述标题
+
 @property (nonatomic,strong) UIImageView *arrowImageView; //!< 箭头图片视图
-@property (nonatomic,strong) UIView *topLineView; //!< 上面的分割线
-@property (nonatomic,strong) UIView *bottomLineView; //!< 下面的分割线
+
 
 
 

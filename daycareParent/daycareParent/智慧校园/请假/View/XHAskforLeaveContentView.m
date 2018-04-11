@@ -17,18 +17,24 @@
 #import "XHTeacherAddressBookViewController.h"
 #import "BaseView.h"
 #import "XHLeaveRecordViewController.h"//!< 请假列表
-
-
-@interface XHAskforLeaveContentView () <BaseTextViewDeletage,XHDatePickerControlDeletage,XHAskforLeavePreviewControlDeletage,CameraManageDeletage>
+#import "XHCustomPickerView.h"//!< 请假类型选择
+#import "XHSubmitView.h"
+@interface XHAskforLeaveContentView () <BaseTextViewDeletage,XHDatePickerControlDeletage,XHAskforLeavePreviewControlDeletage,CameraManageDeletage,XHCustomPickerViewDelegate,XHSubmitViewDelegate>
 
 @property (nonatomic,strong) UIAlertController *alertController; //!< 弹出框视图控制器
 @property (nonatomic,strong) BaseViewController *viewController;
+@property (nonatomic,strong) XHAskforLeaveArrowCell *askforLeaveTypeControl;   //!<请假类型
+@property (nonatomic,strong)XHCustomPickerView *pickerView;//!< 请假类型选择
 @property (nonatomic,strong) UILabel *limitLabel; //!< 输入内容限制
 @property (nonatomic,strong) BaseTextView *reasonTextView;  //!< 原因输入文本域
 @property (nonatomic,strong) XHAskforLeaveAddPhotoControl *addPhotoControl;   //!< 添加照片选项
 @property (nonatomic,strong) XHAskforLeaveArrowCell *startTimeControl;   //!< 开始时间选项
 @property (nonatomic,strong) XHAskforLeaveArrowCell *endTimeControl;   //!< 开始时间选项
-@property (nonatomic,strong) BaseButtonControl *daysleaveControl;   //!< 请假天数
+@property (nonatomic,strong) XHAskforLeaveArrowCell *timeControl;   //!< 请假天数
+@property (nonatomic,strong) UILabel * timeLabel;//!< 请假时长说明
+@property (nonatomic,strong) BaseView *bottomAccessoryView;   //!< 底部附件视图
+
+@property (nonatomic,strong) XHSubmitView * submitView;//!< 提交视图
 @property (nonatomic,strong) XHAskforLeaveChargeTeacherControl *chargeTeacherControl;   //!< 审批人
 @property (nonatomic,strong) XHAskforLeaveSubmitControl *submitControl;   //!< 提交
 
@@ -59,22 +65,24 @@
 {
     [self setFrame:frame];
     
-    [self.reasonTextView resetFrame:CGRectMake(10.0,10.0, frame.size.width-20.0, 60.0)];
+    [self.askforLeaveTypeControl resetFrame:CGRectMake(10.0, 0.0, frame.size.width-20.0, 60)];
+    [self.reasonTextView resetFrame:CGRectMake(self.askforLeaveTypeControl.left,self.askforLeaveTypeControl.bottom+10.0, self.askforLeaveTypeControl.width, 60.0)];
     [self.addPhotoControl resetFrame:CGRectMake(self.reasonTextView.left, self.reasonTextView.bottom+10.0, 70.0, 70.0)];
     [self.limitLabel setFrame:CGRectMake(self.addPhotoControl.right, self.addPhotoControl.bottom-20.0, frame.size.width-self.addPhotoControl.right-20.0, 20.0)];
     [self.startTimeControl resetFrame:CGRectMake(0, self.addPhotoControl.bottom+10.0, frame.size.width, 60.0)];
     [self.endTimeControl resetFrame:CGRectMake(self.startTimeControl.left, self.startTimeControl.bottom, self.startTimeControl.width, self.startTimeControl.height)];
     //设置请假几天的控件Frame
-    [self.daysleaveControl resetFrame:CGRectMake(self.endTimeControl.left, self.endTimeControl.bottom, self.endTimeControl.width, self.endTimeControl.height)];
-    [self.daysleaveControl setTitleEdgeFrame:CGRectMake(10, 0, self.daysleaveControl.width/2.0, self.daysleaveControl.height) withNumberType:0 withAllType:NO];
-    [self.daysleaveControl setInputEdgeFrame:CGRectMake((self.daysleaveControl.width-130.0), 0, 100.0, self.daysleaveControl.height) withNumberType:0 withAllType:NO];
-    [self.daysleaveControl setTitleEdgeFrame:CGRectMake(self.daysleaveControl.width-30, 0, 30, self.daysleaveControl.height) withNumberType:1 withAllType:NO];
-    [self.daysleaveControl resetLineViewFrame:CGRectMake(0, self.daysleaveControl.height-0.5, self.daysleaveControl.width, 0.5) withNumberType:0 withAllType:NO];
-    //审批人
-    [self.chargeTeacherControl resetFrame:CGRectMake(self.daysleaveControl.left, self.daysleaveControl.bottom+10.0, 80.0, 105)];
+    [self.timeControl resetFrame:CGRectMake(self.endTimeControl.left, self.endTimeControl.bottom, self.endTimeControl.width, self.endTimeControl.height)];
     
-    [self.submitControl resetFrame:CGRectMake(10, self.chargeTeacherControl.bottom+20.0, (frame.size.width-20.0), 40.0)];
-    [self setContentSize:CGSizeMake(frame.size.width, self.submitControl.bottom+60.0)];
+    [self.timeLabel setFrame:CGRectMake(15,self.timeControl.bottom,self.askforLeaveTypeControl.width, 40)];
+    [self.bottomAccessoryView resetFrame:CGRectMake(self.endTimeControl.left,self.timeLabel.bottom,SCREEN_WIDTH, 1.0)];
+    [self.submitView resetFrame:CGRectMake(0, self.bottomAccessoryView.bottom, frame.size.width, 190.0)];
+    [self.submitView.submitButton setTag:7];
+    [self.submitView.submitButton addTarget:self action:@selector(controlAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self setContentSize:CGSizeMake(frame.size.width, self.submitView.bottom+20.0)];
+    
+    
+    [self setContentSize:CGSizeMake(frame.size.width, self.submitView.bottom+60.0)];
     
     
   
@@ -84,7 +92,7 @@
 #pragma mark - Action Method
 -(void)controlAction:(UIControl*)sender
 {
-    [self.daysleaveControl resignInputFirstResponder];
+//    [self.timeControl resignInputFirstResponder];
     [self.reasonTextView resignFirstResponder];
     switch (sender.tag)
     {
@@ -92,7 +100,7 @@
         case 1:
         {
             
-            [self.viewController presentViewController:self.alertController animated:YES completion:^{}];
+            [self.pickerView show];
         }
             break;
 #pragma mark case 2 添加图片
@@ -110,6 +118,24 @@
             [[XHDatePickerControl sharedObject] showWithDeletage:self];
         }
             break;
+#pragma mark case 5 请假时长
+            case 5:
+        {
+            UIViewController *vc=[[DCURLRouter sharedDCURLRouter] currentViewController];
+            
+            UIAlertController *alertController= [UIAlertController addtextFeildWithmessage:@"请输入请假时长" controller:vc indexBlock:^(NSInteger index, id object) {
+                if (![NSString times:@"0.5" withMultiple:object])
+                {
+                    [XHShowHUD showNOHud:@"天数最小单位为0.5"];
+                    return ;
+                }
+                [self.timeControl setDescribe:[NSString stringWithFormat:@"%@天",object]];
+                [self.netWorkConfig setObject:object forKey:@"bizDays"];
+                self.timeControl.describeLabel.textColor=RGB(51, 51, 51);
+            }];
+            alertController.textFields.firstObject.keyboardType=UIKeyboardTypeNumbersAndPunctuation;
+        }
+            break;
 #pragma mark case 6  班主任
         case 6:
         {
@@ -125,15 +151,23 @@
         case 7:
         {
             [self uploadImageWithImage:self.addPhotoControl.image withImageName:[XHHelper createGuid] WithContent:self.reasonTextView.text withBeginTime:self.startTimeControl.describe withEndTime:self.endTimeControl.describe
-                           withDayTime:[self.daysleaveControl textFieldTitlewithNumberType:0]
+                           withDayTime:nil
                            withActorId:[XHUserInfo sharedUserInfo].selfId  withShr:self.chargeTeacherControl.teacherAddressBook.model.ID withCsr:@""];
             
         }
             break;
     }
 }
-
-
+#pragma mark- 选择请假类型delegate
+- (void)getItemObject:(NSString *)itemObject atItemIndex:(NSInteger )index
+{
+    kNSLog(itemObject);
+}
+#pragma mark- submitViewDelegate
+-(void)getItemObject:(NSString *)ItemObject
+{
+     kNSLog(ItemObject);
+}
 -(void)addphototAction:(UIControl*)sender
 {
     if (self.addPhotoControl.isAddImage)
@@ -165,14 +199,18 @@
 {
     if (subview)
     {
+        [self addSubview:self.askforLeaveTypeControl];
         [self addSubview:self.reasonTextView];
         [self addSubview:self.addPhotoControl];
         [self addSubview:self.limitLabel];
         [self addSubview:self.startTimeControl];
         [self addSubview:self.endTimeControl];
         [self addSubview:self.chargeTeacherControl];
-        [self addSubview:self.daysleaveControl];
-        [self addSubview:self.submitControl];
+        [self addSubview:self.timeControl];
+        [self addSubview:self.timeLabel];
+        [self addSubview:self.bottomAccessoryView];
+        [self addSubview:self.submitView];
+//        [self addSubview:self.submitControl];
     }
 }
 
@@ -340,7 +378,21 @@
 }
 
 
-
+#pragma mark 请假类型
+-(XHAskforLeaveArrowCell *)askforLeaveTypeControl
+{
+    if (_askforLeaveTypeControl == nil)
+    {
+        _askforLeaveTypeControl = [[XHAskforLeaveArrowCell alloc]init];
+        [_askforLeaveTypeControl setTitle:@"请假类型"];
+        [_askforLeaveTypeControl setDescribe:@"事假"];
+        _askforLeaveTypeControl.topLineView.hidden=YES;
+        [_askforLeaveTypeControl setImageName:@"ico_arrow"];
+        [_askforLeaveTypeControl addTarget:self action:@selector(controlAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_askforLeaveTypeControl setTag:1];
+    }
+    return _askforLeaveTypeControl;
+}
 
 #pragma mark - Getter / Setter
 #pragma mark 请输入请假理由
@@ -420,27 +472,32 @@
     return _endTimeControl;
 }
 
-#pragma mark 请输入天数
--(BaseButtonControl *)daysleaveControl
+#pragma mark 请假时长选项
+-(XHAskforLeaveArrowCell *) timeControl
 {
-    if (!_daysleaveControl)
+    if (_timeControl == nil)
     {
-        _daysleaveControl = [[BaseButtonControl alloc]init];
-        [_daysleaveControl setNumberLabel:2];
-        [_daysleaveControl setNumberTextField:1];
-        [_daysleaveControl setNumberLineView:1];
-        [_daysleaveControl setText:@"请假时长" withNumberType:0 withAllType:NO];
-        [_daysleaveControl setText:@"天" withNumberType:1 withAllType:NO];
-        [_daysleaveControl setFont:FontLevel3 withNumberType:0 withAllType:YES];
-        [_daysleaveControl setTextColor:RGB(14.0, 14.0, 14.0) withTpe:0 withAllType:NO];
-        [_daysleaveControl setTextColor:RGB(64.0, 64.0, 64.0) withTpe:1 withAllType:NO];
-        [_daysleaveControl setinputTextPlaceholder:@"请输入天数" withNumberType:0 withAllType:NO];
-        [_daysleaveControl setInputTintColor:MainColor withNumberType:0 withAllType:NO];
-        [_daysleaveControl addTarget:self action:@selector(controlAction:) forControlEvents:UIControlEventTouchUpInside];
-        [_daysleaveControl setTag:5];
-        [_daysleaveControl setItemColor:NO];
+        _timeControl = [[XHAskforLeaveArrowCell alloc]init];
+        _timeControl.topLineView.hidden=YES;
+        [_timeControl setTitle:@"请假时长（天）"];
+        [_timeControl setDescribe:@"请输入时长"];
+        _timeControl.describeLabel.textColor=RGB(174, 174, 174);
+        [_timeControl addTarget:self action:@selector(controlAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_timeControl setTag:5];
     }
-    return _daysleaveControl;
+    return _timeControl;
+}
+#pragma mark 时长说明
+-(UILabel *)timeLabel
+{
+    if (_timeLabel==nil) {
+        _timeLabel=[[UILabel alloc] init];
+        _timeLabel.font=FontLevel4;
+        _timeLabel.textAlignment=NSTextAlignmentLeft;
+        _timeLabel.textColor=RGB(174, 174, 174);
+        _timeLabel.text=@"请假时长以天为单位，最小为0.5";
+    }
+    return _timeLabel;
 }
 #pragma mark 审批人
 -(XHAskforLeaveChargeTeacherControl *)chargeTeacherControl
@@ -456,6 +513,16 @@
     return _chargeTeacherControl;
 }
 
+#pragma mark 提交视图
+-(XHSubmitView *)submitView
+{
+    if (_submitView == nil)
+    {
+        _submitView = [[XHSubmitView alloc]init];
+        _submitView.delegate=self;
+    }
+    return _submitView;
+}
 
 #pragma mark 提交
 -(XHAskforLeaveSubmitControl *)submitControl
@@ -486,8 +553,22 @@
     }
     return _alertController;
 }
-
-
+-(XHCustomPickerView *)pickerView
+{
+    if (_pickerView==nil) {
+        _pickerView=[[XHCustomPickerView alloc] initWithDelegate:self itemArry:kAskforLeaveList];
+    }
+    return _pickerView;
+}
+-(BaseView *)bottomAccessoryView
+{
+    if (_bottomAccessoryView == nil)
+    {
+        _bottomAccessoryView = [[BaseView alloc]init];
+        [_bottomAccessoryView setBackgroundColor:RGB(243, 243, 243)];
+    }
+    return _bottomAccessoryView;
+}
 -(XHNetWorkConfig *)netWorkConfig
 {
     if (!_netWorkConfig)
