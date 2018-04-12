@@ -7,6 +7,10 @@
 //
 
 #import "XHClassManageHeaderBoardControl.h"
+#import "XHAssignmentHomeWorkViewController.h" //家庭作业
+#import "XHAddNoticeViewController.h"  //发布通知
+#import "XHAchievementViewController.h" //成绩管理
+#import "XHParentAddressBookViewController.h" //联系家长
 
 
 @interface XHClassManageHeaderBoardControl ()
@@ -116,14 +120,8 @@
     
     
     [self setHeight:(self.parentMessageControl.bottom+10.0)];
+    [self setLayerCornerRadius:5.0 withMasksToBounds:YES];
     
-    
-    [self.layer  setShadowColor:[RGB(239,239,239) CGColor]]; //阴影颜色
-    [self.layer setShadowOffset:CGSizeMake(10.0, 10.0)];//偏移距离
-    [self.layer setShadowOpacity:1.0]; //不透明度
-    [self.layer setShadowRadius:10.0]; //半径
-    
-//    [self setLayerCornerRadius:5.0 withMasksToBounds:YES];
 }
 
 
@@ -173,6 +171,57 @@
     [self.lateControl setText:late withNumberType:0 withAllType:NO];
 }
 
+
+#pragma mark 按钮相应方法
+-(void)manageControlAction:(BaseButtonControl*)sender
+{
+    switch (sender.tag)
+    {
+        case 1:
+        case 2:
+        case 3:
+        {
+            
+        }
+            break;
+#pragma mark case 4 成绩管理
+        case 4:
+        {
+            XHAchievementViewController *achievement = [[XHAchievementViewController alloc]initHiddenWhenPushHidden];
+            [DCURLRouter pushViewController:achievement animated:YES];
+        }
+            break;
+#pragma mark case 5 家庭作业
+        case 5:
+        {
+            XHAssignmentHomeWorkViewController *homeWork = [[XHAssignmentHomeWorkViewController alloc]initHiddenWhenPushHidden];
+            
+            [DCURLRouter pushViewController:homeWork animated:YES];
+        }
+            break;
+#pragma mark case 6 发布通知
+        case 6:
+        {
+            XHAddNoticeViewController *notice = [[XHAddNoticeViewController alloc]initHiddenWhenPushHidden];
+            [DCURLRouter pushViewController:notice animated:YES];
+        }
+            break;
+#pragma mark case 7 联系家长
+        case 7:
+        {
+            XHParentAddressBookViewController *parentAddressBook = [[XHParentAddressBookViewController alloc]initHiddenWhenPushHidden];
+            [DCURLRouter pushViewController:parentAddressBook animated:YES];
+        }
+            break;
+#pragma mark case 8 留言消息
+        case 8:
+        {
+            
+        }
+            break;
+    }
+}
+
 #pragma mark - Getter /  Setter
 -(UIImageView *)imageView
 {
@@ -202,6 +251,8 @@
         [_actualControl setTextAlignment:NSTextAlignmentCenter withNumberType:1 withAllType:NO];
         [_actualControl setText:@"34" withNumberType:0 withAllType:NO];
         [_actualControl setText:@"实到人数" withNumberType:1 withAllType:NO];
+        [_actualControl setTag:1];
+        [_actualControl addTarget:self action:@selector(manageControlAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _actualControl;
 }
@@ -224,6 +275,8 @@
         [_leaveControl setTextAlignment:NSTextAlignmentCenter withNumberType:1 withAllType:NO];
         [_leaveControl setText:@"14" withNumberType:0 withAllType:NO];
         [_leaveControl setText:@"请假人数" withNumberType:1 withAllType:NO];
+        [_leaveControl setTag:2];
+        [_leaveControl addTarget:self action:@selector(manageControlAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _leaveControl;
 }
@@ -245,6 +298,8 @@
         [_lateControl setTextAlignment:NSTextAlignmentCenter withNumberType:1 withAllType:NO];
         [_lateControl setText:@"6" withNumberType:0 withAllType:NO];
         [_lateControl setText:@"未到人数" withNumberType:1 withAllType:NO];
+        [_lateControl setTag:3];
+        [_lateControl addTarget:self action:@selector(manageControlAction:) forControlEvents:UIControlEventTouchUpInside];
         
     }
     return _lateControl;
@@ -265,11 +320,13 @@
         [_achievementControl setText:@"成绩管理" withNumberType:0 withAllType:NO];
         [_achievementControl setTextColor:RGB(51,51,51) withTpe:0 withAllType:NO];
         [_achievementControl setFont:FontLevel3 withNumberType:0 withAllType:NO];
+        [_achievementControl setTag:4];
+        [_achievementControl addTarget:self action:@selector(manageControlAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _achievementControl;
 }
 
-
+#pragma mark 家庭作业
 -(BaseButtonControl *)homeWorkControl
 {
     if (!_homeWorkControl)
@@ -283,10 +340,13 @@
         [_homeWorkControl setText:@"家庭作业" withNumberType:0 withAllType:NO];
         [_homeWorkControl setTextColor:RGB(51,51,51) withTpe:0 withAllType:NO];
         [_homeWorkControl setFont:FontLevel3 withNumberType:0 withAllType:NO];
+        [_homeWorkControl setTag:5];
+        [_homeWorkControl addTarget:self action:@selector(manageControlAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _homeWorkControl;
 }
 
+#pragma mark 发布通知
 -(BaseButtonControl *)noticeControl
 {
     if (!_noticeControl)
@@ -300,11 +360,13 @@
         [_noticeControl setText:@"发布通知" withNumberType:0 withAllType:NO];
         [_noticeControl setTextColor:RGB(51,51,51) withTpe:0 withAllType:NO];
         [_noticeControl setFont:FontLevel3 withNumberType:0 withAllType:NO];
+        [_noticeControl setTag:6];
+        [_noticeControl addTarget:self action:@selector(manageControlAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _noticeControl;
 }
 
-
+#pragma mark 联系家长
 -(BaseButtonControl *)contactParentsControl
 {
     if (!_contactParentsControl)
@@ -318,10 +380,14 @@
         [_contactParentsControl setImage:@"ico_calljia" withNumberType:0 withAllType:NO];
         [_contactParentsControl setTextAlignment:NSTextAlignmentCenter withNumberType:0 withAllType:NO];
         [_contactParentsControl setItemColor:NO];
+        [_contactParentsControl setTag:7];
+        [_contactParentsControl addTarget:self action:@selector(manageControlAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _contactParentsControl;
 }
 
+
+#pragma mark 留言消息
 - (BaseButtonControl *)parentMessageControl
 {
     if (!_parentMessageControl)
@@ -331,10 +397,12 @@
         [_parentMessageControl setNumberImageView:1];
         [_parentMessageControl setFont:FontLevel3 withNumberType:0 withAllType:NO];
         [_parentMessageControl setTextColor:RGB(51,51,51) withTpe:0 withAllType:NO];
-        [_parentMessageControl setText:@"家长留言" withNumberType:0 withAllType:NO];
+        [_parentMessageControl setText:@"留言消息" withNumberType:0 withAllType:NO];
         [_parentMessageControl setImage:@"ico_liuyan" withNumberType:0 withAllType:NO];
         [_parentMessageControl setTextAlignment:NSTextAlignmentCenter withNumberType:0 withAllType:NO];
         [_parentMessageControl setItemColor:NO];
+        [_parentMessageControl setTag:8];
+        [_parentMessageControl addTarget:self action:@selector(manageControlAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _parentMessageControl;
 }

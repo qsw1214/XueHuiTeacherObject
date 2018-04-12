@@ -19,13 +19,9 @@
 
 @implementation XHIntelligentOfficeTableViewHeaderView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+
+
+
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self=[super initWithFrame:frame])
@@ -90,7 +86,7 @@
         [_infomationControl setLabelTextColor:RGB(50, 50, 50) withNumberIndex:2];
         [_infomationControl setLabelFont:kFont(13) withNumberIndex:2];
         [_infomationControl setLabelNumberOfLines:0 withNumberIndex:2];
-        [_infomationControl setLabelText:@"  1886年5月1日，资本主义阵营老大哥美国芝加哥工人在这一天不约而同走上街头为争取8小时工作制罢工了，而且席卷全美，人数达35万之多。看来资本主义大老板把他们累的够呛，实在忍无可忍，无需再忍，走上街头罢工不干了去球。既然是罢工吗，难免会有个宣泄扔一个酒瓶，抛个小石块什么的表达不满，结果与警察发生了摩擦，死伤惨重。" withNumberIndex:2];
+        [_infomationControl setLabelText:@"  1886年5月1日，资本主义阵营老大哥美国芝加哥工人在这一天不约而同走上街头为争取8小时工作制罢工了，而且席卷全美，人数达35万之多。" withNumberIndex:2];
         
          [_infomationControl setLabelCGRectMake:CGRectMake(0, 95, (SCREEN_WIDTH-20), 1) withNumberIndex:3];
         [_infomationControl setLabelBackgroundColor:LineViewColor withNumberIndex:3];

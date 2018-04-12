@@ -35,6 +35,46 @@
 
 -(void)setLayerCornerRadius:(CGFloat)radius withMasksToBounds:(BOOL)masksToBounds;
 
+
+
+//subLayer.frame=self.boardControl.frame;
+//
+//subLayer.cornerRadius=8;
+//
+//subLayer.backgroundColor=[[UIColor grayColor] colorWithAlphaComponent:0.5].CGColor;
+//
+//subLayer.masksToBounds=NO;
+//
+//subLayer.shadowColor=[UIColor grayColor].CGColor;
+//
+//subLayer.shadowOffset=CGSizeMake(10,10);
+//
+//subLayer.shadowOpacity=0.5;
+//
+//subLayer.shadowRadius=8;
+
+
+
+
+#pragma mark 圆角和阴影并存
+/**
+ 圆角和阴影并存
+
+ @param radius 圆角半径
+ @param backgroundColor 阴影的背景颜色
+ @param shadowColor 阴影的颜色
+ @param shadowOffset 隐形偏移量
+ @param shadowOpacity 阴影透明度
+ @param shadowRadius 阴影弧度
+ */
+-(void)setLayerShadowCornerRadius:(CGFloat)radius
+              withBackgroundColor:(UIColor*)backgroundColor
+                  withShadowColor:(UIColor*)shadowColor
+                 withShadowOffset:(CGSize)shadowOffset
+                withShadowOpacity:(CGFloat)shadowOpacity
+                 withShadowRadius:(CGFloat)shadowRadius
+                       withTarget:(UIView*)target;
+
 #pragma mark 设置layer的弧度
 /**
  设置layer的宽度

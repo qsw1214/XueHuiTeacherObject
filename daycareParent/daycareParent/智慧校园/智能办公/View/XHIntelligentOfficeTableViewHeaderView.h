@@ -9,6 +9,8 @@
 #import "ParentView.h"
 #pragma mark- 智能办公表头视图
 @interface XHIntelligentOfficeTableViewHeaderView : ParentView
+
+
 -(void)addTimer;
 -(void)invalidate;
 @end
