@@ -8,6 +8,11 @@
 
 #import "BaseControl.h"
 
+typedef void (^XHSyllabusBackBlock) (CGFloat height,BOOL refresh);
+
 @interface XHSyllabusBoardControl : BaseControl
+
+
+-(void)setItemObject:(id)object withBlock:(XHSyllabusBackBlock)blcok;
 
 @end

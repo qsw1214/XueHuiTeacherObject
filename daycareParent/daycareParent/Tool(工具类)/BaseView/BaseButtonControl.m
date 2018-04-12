@@ -395,6 +395,27 @@
 }
 
 
+#pragma mark 重置当前是分割线的颜色
+/**
+ 重置的颜色
+ */
+-(void)resetLineViewColor:(UIColor*)color withNumberType:(NSInteger)type withAllType:(BOOL)allType
+{
+    [self.lineViewArray enumerateObjectsUsingBlock:^(UIView *obj, NSUInteger idx, BOOL *  stop)
+     {
+         if (allType)
+         {
+             [obj setBackgroundColor:color];
+             [obj setHidden:NO];
+         }
+         else if (type == idx)
+         {
+             [obj setBackgroundColor:color];
+             [obj setHidden:NO];
+             *stop = YES;
+         }
+     }];
+}
 
 
 

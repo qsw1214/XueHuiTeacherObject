@@ -23,6 +23,22 @@
     }
 }
 
++(void)enumerateObjectsWithArray:(id)array usingforceBlock:(forceEnumerateBlock)block
+{
+    if ([array isKindOfClass:[NSArray class]] && [array count])
+    {
+        [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+         {
+             block(obj,idx,stop,YES);
+         }];
+    }
+    else
+    {
+        
+        block(nil,0,nil,NO);
+    }
+}
+
 +(void)enumerateObjectsWithArray:(id)array withOptions:(NSEnumerationOptions)options usingBlock:(enumerateBlock)block
 {
     if ([array isKindOfClass:[NSArray class]])

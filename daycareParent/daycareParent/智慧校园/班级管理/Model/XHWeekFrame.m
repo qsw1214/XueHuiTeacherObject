@@ -22,7 +22,7 @@
             break;
         case XHWeekSyllabusType:
         {
-            [self setItemSize:CGSizeMake((SCREEN_WIDTH-50.0)/4.0, 50.0)];
+            [self setItemSize:CGSizeMake((SCREEN_WIDTH-50.0), 50.0)];
         }
             break;
     }

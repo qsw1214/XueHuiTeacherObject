@@ -8,6 +8,13 @@
 
 #import "XHSyllabusCollectionView.h"
 
+
+@interface XHSyllabusCollectionView () <UICollectionViewDelegate,UICollectionViewDataSource>
+
+
+@property (nonatomic,strong) NSMutableArray *itemdataArray;
+@end
+
 @implementation XHSyllabusCollectionView
 
 
@@ -18,17 +25,26 @@
     {
         [self setDelegate:self];
         [self setDataSource:self];
-        
+        [self setBackgroundColor:[UIColor whiteColor]];
         [self registerClass:[XHWeekCollectionViewCell class] forCellWithReuseIdentifier:CellIdentifier];
     }
     return self;
 }
 
+-(void)resetFrame:(CGRect)frame
+{
+    [self setFrame:frame];
+}
+
+
+
 
 -(void)setItemArray:(NSMutableArray *)itemArray
 {
+    NSInteger itemArrayCount = [itemArray count];
+    [self setHeight:(itemArrayCount*50.0)];
     [self.dataArray setArray:itemArray];
-    [self reloadData];
+    [self refreshReloadData];
 }
 
 
@@ -50,18 +66,6 @@
     return cell;
 }
 
-
-
-#pragma mark UICollectionViewDelegate
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-//    if ([self.deletage respondsToSelector:@selector(didSelectItemObjectAtIndexPath:)])
-//    {
-//        [self.deletage didSelectItemObjectAtIndexPath:[self.dataArray objectAtIndex:indexPath.row]];
-//    }
-    
-}
-
 #pragma mark UICollectionViewDelegateFlowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -71,7 +75,7 @@
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 5;
+    return 0;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
@@ -82,8 +86,9 @@
 
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(5, 0, 5, 0);
+    return UIEdgeInsetsMake(0, 0, 0, 0);
 }
+
 
 
 

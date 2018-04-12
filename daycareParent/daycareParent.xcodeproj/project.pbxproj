@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0403A7FB207EE82000648335 /* XHSyllabusHeaderBoardControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0403A7FA207EE82000648335 /* XHSyllabusHeaderBoardControl.m */; };
+		0403A7FE207F0E4400648335 /* XHSyllabusBoltControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0403A7FD207F0E4400648335 /* XHSyllabusBoltControl.m */; };
 		04291A721FD2A101002D3B5B /* XHBackLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04291A711FD2A101002D3B5B /* XHBackLabel.m */; };
 		04291A7A1FD2AD68002D3B5B /* XHListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04291A791FD2AD68002D3B5B /* XHListCollectionViewCell.m */; };
 		042EF9FF207DD1F30089FE83 /* XHHomeWorkDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042EF9FB207DD1F30089FE83 /* XHHomeWorkDetailView.m */; };
@@ -567,6 +569,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0403A7F9207EE82000648335 /* XHSyllabusHeaderBoardControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHSyllabusHeaderBoardControl.h; sourceTree = "<group>"; };
+		0403A7FA207EE82000648335 /* XHSyllabusHeaderBoardControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHSyllabusHeaderBoardControl.m; sourceTree = "<group>"; };
+		0403A7FC207F0E4400648335 /* XHSyllabusBoltControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHSyllabusBoltControl.h; sourceTree = "<group>"; };
+		0403A7FD207F0E4400648335 /* XHSyllabusBoltControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHSyllabusBoltControl.m; sourceTree = "<group>"; };
 		04291A701FD2A101002D3B5B /* XHBackLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHBackLabel.h; sourceTree = "<group>"; };
 		04291A711FD2A101002D3B5B /* XHBackLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHBackLabel.m; sourceTree = "<group>"; };
 		04291A781FD2AD68002D3B5B /* XHListCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHListCollectionViewCell.h; sourceTree = "<group>"; };
@@ -1814,6 +1820,10 @@
 				042EFA23207DF2E10089FE83 /* XHClassManageHeaderBoardControl.m */,
 				042EFA25207E135E0089FE83 /* XHSyllabusBoardControl.h */,
 				042EFA26207E135E0089FE83 /* XHSyllabusBoardControl.m */,
+				0403A7FC207F0E4400648335 /* XHSyllabusBoltControl.h */,
+				0403A7FD207F0E4400648335 /* XHSyllabusBoltControl.m */,
+				0403A7F9207EE82000648335 /* XHSyllabusHeaderBoardControl.h */,
+				0403A7FA207EE82000648335 /* XHSyllabusHeaderBoardControl.m */,
 				046BB20B207C4B3200209C9B /* XHWeekCollectionView.h */,
 				046BB20C207C4B3200209C9B /* XHWeekCollectionView.m */,
 				046BB20E207C4B3F00209C9B /* XHSyllabusCollectionView.h */,
@@ -4376,6 +4386,7 @@
 				4B07CC461FD5106800B2DBDA /* Indicator.m in Sources */,
 				4B31261C1FD91B20000CE894 /* XHAskforLeavePreviewControl.m in Sources */,
 				4B577FE01FF63FB30023ACBC /* MASViewConstraint.m in Sources */,
+				0403A7FB207EE82000648335 /* XHSyllabusHeaderBoardControl.m in Sources */,
 				042EFA0E207DD2A10089FE83 /* XHHomeWorkCellContentView.m in Sources */,
 				4B34187D1FFDC14C00A5EC56 /* ZFPlayerModel.m in Sources */,
 				4BA8C4BB1FCFB6DC006CBEBC /* BaseModel.m in Sources */,
@@ -4410,6 +4421,7 @@
 				8CC76489200CA0BE007887C7 /* XHNewTextFieldTypeTableViewCell.m in Sources */,
 				4B80F2C21FCBF04F00BC7B52 /* MKAnnotationView+WebCache.m in Sources */,
 				8C5EB0BE1FCFEF6C002ED0D7 /* XHPasswordViewController.m in Sources */,
+				0403A7FE207F0E4400648335 /* XHSyllabusBoltControl.m in Sources */,
 				4B80F31C1FCBFD6F00BC7B52 /* MTLModel+NSCoding.m in Sources */,
 				4B49763D1FECFDE600338D37 /* XHDynamicsPreviewCollectionViewCell.m in Sources */,
 				8C1AA86E207B13FA00DDCBB3 /* TLChatEmojiBoard.m in Sources */,
@@ -4886,7 +4898,7 @@
 					"-ObjC",
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jt.xhm;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jt.xhm-yaolizhi";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -4965,7 +4977,7 @@
 					"-ObjC",
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jt.xhm;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jt.xhm-yaolizhi";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

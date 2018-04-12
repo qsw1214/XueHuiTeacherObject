@@ -150,7 +150,11 @@ typedef NS_ENUM(NSInteger,BaseControlModelType)
 -(void)resetLineViewFrame:(CGRect)frame withNumberType:(NSInteger)type withAllType:(BOOL)allType;
 
 
-
+#pragma mark 重置当前是分割线的颜色
+/**
+ 重置的颜色
+ */
+-(void)resetLineViewColor:(UIColor*)color withNumberType:(NSInteger)type withAllType:(BOOL)allType;
 
 
 
