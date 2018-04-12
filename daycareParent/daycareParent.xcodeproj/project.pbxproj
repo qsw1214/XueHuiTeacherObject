@@ -449,6 +449,8 @@
 		8C2A1EB5207F080B0099C3FE /* XHIntelligentOfficeListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A1EB4207F080B0099C3FE /* XHIntelligentOfficeListView.m */; };
 		8C2A1EB8207F1F3F0099C3FE /* XHIntelligentOfficeSignInView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A1EB7207F1F3F0099C3FE /* XHIntelligentOfficeSignInView.m */; };
 		8C2A1EBB207F321B0099C3FE /* XHSignCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A1EBA207F321B0099C3FE /* XHSignCollectionViewCell.m */; };
+		8C2A1EBE207F4AF40099C3FE /* XHClassSignView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A1EBD207F4AF40099C3FE /* XHClassSignView.m */; };
+		8C2A1EC1207F5C740099C3FE /* XHSignListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A1EC0207F5C740099C3FE /* XHSignListView.m */; };
 		8C33144D202A993B00F504A9 /* XHNewDynamicsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C33144C202A993B00F504A9 /* XHNewDynamicsViewController.m */; };
 		8C331450202AA15300F504A9 /* XHNewDynamicsContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C33144F202AA15300F504A9 /* XHNewDynamicsContentView.m */; };
 		8C331457202AAF3800F504A9 /* VideoManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C331456202AAF3800F504A9 /* VideoManagerViewController.m */; };
@@ -1438,6 +1440,10 @@
 		8C2A1EB7207F1F3F0099C3FE /* XHIntelligentOfficeSignInView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHIntelligentOfficeSignInView.m; sourceTree = "<group>"; };
 		8C2A1EB9207F321B0099C3FE /* XHSignCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHSignCollectionViewCell.h; sourceTree = "<group>"; };
 		8C2A1EBA207F321B0099C3FE /* XHSignCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHSignCollectionViewCell.m; sourceTree = "<group>"; };
+		8C2A1EBC207F4AF40099C3FE /* XHClassSignView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHClassSignView.h; sourceTree = "<group>"; };
+		8C2A1EBD207F4AF40099C3FE /* XHClassSignView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHClassSignView.m; sourceTree = "<group>"; };
+		8C2A1EBF207F5C740099C3FE /* XHSignListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHSignListView.h; sourceTree = "<group>"; };
+		8C2A1EC0207F5C740099C3FE /* XHSignListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHSignListView.m; sourceTree = "<group>"; };
 		8C33144B202A993B00F504A9 /* XHNewDynamicsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNewDynamicsViewController.h; sourceTree = "<group>"; };
 		8C33144C202A993B00F504A9 /* XHNewDynamicsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNewDynamicsViewController.m; sourceTree = "<group>"; };
 		8C33144E202AA15300F504A9 /* XHNewDynamicsContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNewDynamicsContentView.h; sourceTree = "<group>"; };
@@ -3885,6 +3891,10 @@
 				8CD8CE132015E0550085DD70 /* XHDayRollReasonTableViewCell.m */,
 				8C9D92FC201F1A8600F4A28E /* XHClassTableViewCell.h */,
 				8C9D92FD201F1A8600F4A28E /* XHClassTableViewCell.m */,
+				8C2A1EBC207F4AF40099C3FE /* XHClassSignView.h */,
+				8C2A1EBD207F4AF40099C3FE /* XHClassSignView.m */,
+				8C2A1EBF207F5C740099C3FE /* XHSignListView.h */,
+				8C2A1EC0207F5C740099C3FE /* XHSignListView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -4477,6 +4487,7 @@
 				4B3126341FD93CC6000CE894 /* SDCollectionViewCell.m in Sources */,
 				4B80F31B1FCBFD6F00BC7B52 /* MTLJSONAdapter.m in Sources */,
 				8C1D47C0207B3E23005AA0B4 /* IQPreviousNextView.m in Sources */,
+				8C2A1EC1207F5C740099C3FE /* XHSignListView.m in Sources */,
 				4B1066A71FD7D1FA004A7CB7 /* XHAchievementCellContentView.m in Sources */,
 				8CC76484200C9993007887C7 /* XHNewTableViewCell.m in Sources */,
 				4BB9BEA31FDE4C54004F5622 /* XHEducationCloudSwitchMenuView.m in Sources */,
@@ -4513,6 +4524,7 @@
 				4B91107B1FD7BA3300841505 /* XHSyllabusCellContentView.m in Sources */,
 				8CC22A742041088E00E36966 /* XHTelephoneTableViewCell.m in Sources */,
 				8C1AA86F207B13FA00DDCBB3 /* TLChatInputView.m in Sources */,
+				8C2A1EBE207F4AF40099C3FE /* XHClassSignView.m in Sources */,
 				4B80F3201FCBFD6F00BC7B52 /* MTLValueTransformer.m in Sources */,
 				4BBC43481FD0F68200555846 /* BaseFrame.m in Sources */,
 				4B49763A1FECFCB400338D37 /* XHDynamicsPreviewControl.m in Sources */,

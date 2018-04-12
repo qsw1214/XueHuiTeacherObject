@@ -344,7 +344,7 @@
             if (self.calendarModel)
             {
                 if ([self.delegate respondsToSelector:@selector(getCalendarDateStr:)]) {
-                    [self.delegate getCalendarDateStr:kFormat(@"%ld年%ld月%ld日",self.calendarModel.year,self.calendarModel.month,self.calendarModel.day)];
+                    [self.delegate getCalendarDateStr:kFormat(@"%ld-%ld-%ld",self.calendarModel.year,self.calendarModel.month,self.calendarModel.day)];
                     [self dismiss];
                 }
                 
