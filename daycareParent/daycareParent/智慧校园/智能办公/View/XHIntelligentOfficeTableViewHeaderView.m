@@ -10,10 +10,10 @@
 #import "XHIntelligentOfficeSignInView.h"
 #import "XHIntelligentOfficeListView.h"
 @interface XHIntelligentOfficeTableViewHeaderView()
-@property(nonatomic,strong)XHIntelligentOfficeSignInView *signInView;
-@property(nonatomic,strong)XHIntelligentOfficeListView *listView;
-@property(nonatomic,strong)ParentControl *infomationControl;
-@property(nonatomic,strong)ParentLabel *tipLabel;
+@property(nonatomic,strong) XHIntelligentOfficeSignInView *signInView;
+@property(nonatomic,strong) XHIntelligentOfficeListView *listView;
+@property(nonatomic,strong) ParentControl *infomationControl;
+@property(nonatomic,strong) ParentLabel *tipLabel;
 @end
 
 
@@ -35,7 +35,7 @@
         [self addSubview:self.signInView];
         [self addSubview:self.listView];
         [self addSubview:self.infomationControl];
-         [self addSubview:self.tipLabel];
+        [self addSubview:self.tipLabel];
     }
     return self;
 }
@@ -43,10 +43,12 @@
 {
     [self.signInView addTimer];
 }
+
 -(void)invalidate
 {
     [self.signInView invalidate];
 }
+
 -(XHIntelligentOfficeSignInView *)signInView
 {
     if (_signInView==nil) {
@@ -64,7 +66,8 @@
 
 -(ParentControl *)infomationControl
 {
-    if (_infomationControl==nil) {
+    if (_infomationControl==nil)
+    {
         _infomationControl=[[ParentControl alloc] init];
         _infomationControl.backgroundColor=[UIColor whiteColor];
         _infomationControl.layer.cornerRadius=7;

@@ -13,8 +13,28 @@
 -(void)setModel:(XHIntelligentOfficeModel *)model
 {
     _model = model;
-    [self setItemFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200.0)];
-    [self setCellHeight:self.itemFrame.size.height];
+    
+    
+    switch (model.modelType)
+    {
+        case XHIntelligentOfficeClassSwitchingType:
+        {
+            [self setItemFrame:CGRectMake(10.0, 10.0, (SCREEN_WIDTH-20.0), 160.0)];
+        }
+            break;
+        case XHIntelligentOfficeAskforleaveType:
+        {
+            [self setItemFrame:CGRectMake(10.0, 10.0, (SCREEN_WIDTH-20.0), 115.0)];
+        }
+            break;
+        case XHIntelligentOfficeTakeOverClassType:
+        {
+            [self setItemFrame:CGRectMake(10.0, 10.0, (SCREEN_WIDTH-20.0), 115.0)];
+        }
+            break;
+    }
+    
+    [self setCellHeight:(self.itemFrame.size.height+10.0)];
 }
 
 @end

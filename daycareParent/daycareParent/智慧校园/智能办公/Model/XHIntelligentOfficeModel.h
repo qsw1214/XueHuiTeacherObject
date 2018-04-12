@@ -15,6 +15,7 @@ typedef NS_ENUM(NSInteger,XHIntelligentOfficeModelType)
     XHIntelligentOfficeTakeOverClassType = 3, //!<  代课类型
 };
 
+
 typedef NS_ENUM(NSInteger,XHIntelligentOfficeApproveModelType)
 {
     XHIntelligentOfficeUnknownApproveType = 1,    //!< 未审批类型
@@ -26,8 +27,18 @@ typedef NS_ENUM(NSInteger,XHIntelligentOfficeApproveModelType)
 
 @interface XHIntelligentOfficeModel : BaseModel
 
+@property (nonatomic,copy) NSString *date;
+@property (nonatomic,copy) NSString *title;
+@property (nonatomic,copy) NSString *startTime;
+@property (nonatomic,copy) NSString *endTime;
+@property (nonatomic,copy) NSString *teacher; //!< 当前老师
+@property (nonatomic,copy) NSString *targetTeacher; //!< 对方老师
+@property (nonatomic,copy) NSString *approveMark; //!< 审批状态
 
-@property (nonatomic,assign) XHIntelligentOfficeModelType type;
 
-@property (nonatomic,assign) XHIntelligentOfficeApproveModelType approveType;
+
+@property (nonatomic,assign) XHIntelligentOfficeModelType modelType; //!< 数据模型
+@property (nonatomic,assign) XHIntelligentOfficeApproveModelType approveType; //!< 审批类型
+
+
 @end

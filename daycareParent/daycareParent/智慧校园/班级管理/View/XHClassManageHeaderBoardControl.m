@@ -139,9 +139,8 @@
 -(void)queryAttendanceCountWithClazzid:(NSString*)clazzid withBlock:(XHClassManageHeaderBoardBackBlock)block
 {
     XHNetWorkConfig *netWorkConfig = [[XHNetWorkConfig alloc]init];
-    [netWorkConfig setObject:@"" forKey:@"time"];
     [netWorkConfig setObject:clazzid forKey:@"clazzId"];
-    [netWorkConfig postWithUrl:@"queryAttendanceCount" sucess:^(id object, BOOL verifyObject)
+    [netWorkConfig postWithUrl:@"zzjt-app-api_attendanceSheet003" sucess:^(id object, BOOL verifyObject)
      {
          if (verifyObject)
          {
@@ -249,7 +248,7 @@
         [_actualControl setFont:FontLevel3 withNumberType:1 withAllType:NO];
         [_actualControl setTextAlignment:NSTextAlignmentCenter withNumberType:0 withAllType:NO];
         [_actualControl setTextAlignment:NSTextAlignmentCenter withNumberType:1 withAllType:NO];
-        [_actualControl setText:@"34" withNumberType:0 withAllType:NO];
+        [_actualControl setText:@"0" withNumberType:0 withAllType:NO];
         [_actualControl setText:@"实到人数" withNumberType:1 withAllType:NO];
         [_actualControl setTag:1];
         [_actualControl addTarget:self action:@selector(manageControlAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -273,7 +272,7 @@
         [_leaveControl setFont:FontLevel3 withNumberType:1 withAllType:NO];
         [_leaveControl setTextAlignment:NSTextAlignmentCenter withNumberType:0 withAllType:NO];
         [_leaveControl setTextAlignment:NSTextAlignmentCenter withNumberType:1 withAllType:NO];
-        [_leaveControl setText:@"14" withNumberType:0 withAllType:NO];
+        [_leaveControl setText:@"0" withNumberType:0 withAllType:NO];
         [_leaveControl setText:@"请假人数" withNumberType:1 withAllType:NO];
         [_leaveControl setTag:2];
         [_leaveControl addTarget:self action:@selector(manageControlAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -296,7 +295,7 @@
         [_lateControl setFont:FontLevel3 withNumberType:1 withAllType:NO];
         [_lateControl setTextAlignment:NSTextAlignmentCenter withNumberType:0 withAllType:NO];
         [_lateControl setTextAlignment:NSTextAlignmentCenter withNumberType:1 withAllType:NO];
-        [_lateControl setText:@"6" withNumberType:0 withAllType:NO];
+        [_lateControl setText:@"0" withNumberType:0 withAllType:NO];
         [_lateControl setText:@"未到人数" withNumberType:1 withAllType:NO];
         [_lateControl setTag:3];
         [_lateControl addTarget:self action:@selector(manageControlAction:) forControlEvents:UIControlEventTouchUpInside];
