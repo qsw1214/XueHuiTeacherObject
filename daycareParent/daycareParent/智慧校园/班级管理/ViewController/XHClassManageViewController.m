@@ -22,6 +22,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setNavtionColor:MainColor];
     [self setItemContentItemHiddenWithType:NavigationLeftType withHidden:YES];
     
     @WeakObj(self);

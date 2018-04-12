@@ -72,7 +72,10 @@
 
 #pragma mark 计算文本的宽度和高度
 -(CGSize)contentSizeWithTitle:(NSString*)content withFontOfSize:(UIFont*)font withWidth:(CGFloat)maxWidth;
-
+#pragma mark 计算文本的宽度
+- (CGFloat)getWidthWithTitle:(NSString *)title font:(UIFont *)font;
+#pragma mark 计算文本的高度
+- (CGFloat)getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont *)font;
 #pragma mark 计算文本的宽度和高度
 +(CGSize)contentSizeWithTitle:(NSString*)content withFontOfSize:(UIFont*)font withWidth:(CGFloat)maxWidth;
 

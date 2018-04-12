@@ -52,10 +52,10 @@
     [self.view addSubview:self.navigationView];
     [self.navigationView setNavtionTitleColor:RGB(44.0, 44.0, 44.0)];
     [self.navigationView resetFrame:CGRectMake(0, 0, SCREEN_WIDTH, [[XHHelper sharedHelper] isIphoneX]  ? 64+30 :64)];
-    [self setNavtionColor:MainColor];
+    [self setNavtionColor:[UIColor whiteColor]];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self setItemContentItemHiddenWithType:NavigationRightType withHidden:YES];
-    [self setItemContentType:NavigationIconAndTitle withItemType:NavigationItemLeftType withIconName:@"ico_return" withTitle:@"返回"];
+    [self setItemContentType:NavigationIconAndTitle withItemType:NavigationItemLeftType withIconName:@"ico_arr_back" withTitle:@"返回"];
     //去掉留白方法
     if (@available(iOS 11.0, *))
     {}

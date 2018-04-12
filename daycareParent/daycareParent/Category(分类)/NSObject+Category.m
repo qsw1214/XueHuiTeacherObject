@@ -191,7 +191,27 @@
     //译文本高度
     return ContentSize;
 }
-
+#pragma mark 计算文本的宽度
+- (CGFloat)getWidthWithTitle:(NSString *)title font:(UIFont *)font
+{
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, CGFLOAT_MAX, 0)];
+    label.text = title;
+    label.font = font;
+    [label sizeToFit];
+    return label.frame.size.width;
+}
+#pragma mark 计算文本的高度
+- (CGFloat)getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont *)font
+{
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, 0)];
+    label.text = title;
+    label.font = font;
+    label.numberOfLines = 0;
+    [label sizeToFit];
+    CGFloat height = label.frame.size.height;
+    return height;
+}
 #pragma mark 计算文本的宽度和高度
 +(CGSize)contentSizeWithTitle:(NSString*)content withFontOfSize:(UIFont*)font withWidth:(CGFloat)maxWidth
 {

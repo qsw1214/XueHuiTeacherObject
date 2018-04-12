@@ -16,17 +16,19 @@
 #import "XHDayRollCallModel.h"
 #import "XHClassViewController.h"
 #import "XHCalendarView.h"
+#import "XHClassSignView.h"//!< 签到视图
+#import "XHSignListView.h"//!< 签到列表视图
 #define SIGN_TITLE @[@"未签到",@"已签到",@"请假"]
 @interface XHDayRollCallViewController ()<XHCalendarViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 {
+
     NSInteger _tag;
     NSInteger _selectNumber;
     NSString *_dateStr;
     NSInteger _number;
 }
-@property(nonatomic,strong)UIView *headView;
-@property(nonatomic,strong)BaseButtonControl *rightBtn;
-@property(nonatomic,strong)UIView *signView;
+@property(nonatomic,strong)XHClassSignView *classSignView;
+@property(nonatomic,strong)XHSignListView *signListView;
 @property(nonatomic,strong)BaseCollectionView *collectionView;
 @property(nonatomic,strong)UIView *selectAllView;//!< 处理未签到视图
 @property(nonatomic,strong)NSMutableArray *noSignArry;//!< 未签到学生数组
@@ -44,13 +46,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setNavtionTitle:@"日常点名"];
+    [self setItemContentType:NavigationIconype withItemType:NavigationItemRightype withIconName:@"ico_date" withTitle:nil];
     _number=0;
-    [self.view addSubview:self.headView];
-    [self.view addSubview:self.rightBtn];
-    [self.view addSubview:self.signView];
+    [self.classSignView resetFrame:CGRectMake(15, self.navigationView.bottom+15, SCREEN_WIDTH-30, 80)];
+    [self.view addSubview:self.classSignView];
+    [self.signListView resetFrame:CGRectMake(0, self.classSignView.bottom, SCREEN_WIDTH, 40)];
+    [self.view addSubview:self.signListView];
     [self.view addSubview:self.collectionView];
+    
      [self.collectionView showRefresHeaderWithTarget:self withSelector:@selector(refreshHead)];
     [self.collectionView beginRefreshing];
+    
     [self.collectionView setTipType:TipTitleAndTipImage withTipTitle:@"同学们都去偷懒喽" withTipImage:@"img_bad"];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshHead) name:@"noticeName" object:nil];
     
@@ -66,9 +72,7 @@
 {
     if (dateStr)
     {
-        NSString *str=[dateStr componentsSeparatedByString:@"年"][1];
-        [self.rightBtn setText:str withNumberType:0 withAllType:NO];
-        _dateStr=[NSDate dateStr:dateStr FromFormatter:@"yyyy年MM月dd日" ToFormatter:YY_DEFAULT_TIME_FORM];
+        _dateStr=dateStr;
         [_collectionView beginRefreshing];
     }
     
@@ -83,15 +87,17 @@
 }
 
 #pragma mark-------------未签到列表按钮方法--------------
--(void)btnClick:(BaseButtonControl *)btn
+-(void)btnClick:(ParentControl *)control
 {
 
-    BaseButtonControl *lastBtn=[self.view viewWithTag:_tag];
-    [lastBtn setTextColor:[UIColor blackColor] withTpe:0 withAllType:NO];
-    [lastBtn setTextBackGroundColor:[UIColor clearColor] withTpe:1 withAllType:NO];
-    [btn setTextColor:[UIColor orangeColor] withTpe:0 withAllType:NO];
-    [btn setTextBackGroundColor:[UIColor orangeColor] withTpe:1 withAllType:NO];
-    _tag=btn.tag;
+    ParentControl *lastBtn=[self.view viewWithTag:_tag];
+    [lastBtn setLabelTextColor:RGB(102, 102, 102) withNumberIndex:0];
+    [lastBtn setLabelBackgroundColor:[UIColor clearColor] withNumberIndex:1];
+    
+    [control setLabelTextColor:MainColor withNumberIndex:0];
+    [control setLabelBackgroundColor:MainColor withNumberIndex:1];
+    
+    _tag=control.tag;
     [self getDataArry];
     [_collectionView refreshReloadData];
     
@@ -100,15 +106,15 @@
 -(void)getSelectAllView
 {
     if (_tag==10) {
-        self.collectionView.frame=CGRectMake(0, 184, SCREEN_WIDTH,SCREEN_HEIGHT-234);
+        self.collectionView.frame=CGRectMake(0, self.navigationView.bottom+175, SCREEN_WIDTH,SCREEN_HEIGHT-(self.navigationView.bottom+175)-50);
     }
     else if (_tag==11)
     {
-        self.collectionView.frame=CGRectMake(0, 184, SCREEN_WIDTH,SCREEN_HEIGHT-184);
+        self.collectionView.frame=CGRectMake(0, self.navigationView.bottom+175, SCREEN_WIDTH,SCREEN_HEIGHT-(self.navigationView.bottom+175));
     }
     else
     {
-        self.collectionView.frame=CGRectMake(0, 184, SCREEN_WIDTH,SCREEN_HEIGHT-184);
+        self.collectionView.frame=CGRectMake(0, self.navigationView.bottom+175, SCREEN_WIDTH,SCREEN_HEIGHT-(self.navigationView.bottom+175));
     }
     if ([self.dataArray count]&&_tag==10&&[NSDate isSameDay:[NSDate getDateWithDateStr:_dateStr formatter:YY_DEFAULT_TIME_FORM] twoDate:[NSDate getDate:[NSDate date] formatter:YY_DEFAULT_TIME_FORM]])
     {
@@ -338,88 +344,27 @@
     [self getSelectAllView];
     [self refreshSelectAll];//!< 恢复未选中状态
 }
-#pragma mark-------------出勤率视图--------------
--(UIView *)headView
+
+#pragma mark-------------未签到列表视图--------------
+-(XHSignListView *)signListView
 {
-    if (_headView==nil) {
-        _headView=[[UIView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 70)];
-        _headView.backgroundColor=RGB(254, 248, 242);
-        [self.view addSubview:_headView];
-        NSArray *arry=@[@"班级",@"应到人数",@"实到人数",@"出勤率"];
-        for (int i=0; i<4; i++) {
-            XHBaseLabel *label=[[XHBaseLabel alloc] initWithFrame:CGRectMake(i*SCREEN_WIDTH/4.0, 0, SCREEN_WIDTH/4.0, 40)];
-            label.text=arry[i];
-            //label.backgroundColor=[UIColor redColor];
-            label.textAlignment=NSTextAlignmentCenter;
-            [_headView addSubview:label];
-            XHBaseBtn *btn=[[XHBaseBtn alloc] initWithFrame:CGRectMake(label.left, label.bottom-5, label.width, label.height-10)];
-            btn.tag=100+i;
-            btn.layer.cornerRadius=0;
-            btn.backgroundColor=[UIColor clearColor];
-            //[btn setTitle:arr[i] forState:UIControlStateNormal];
-            [btn setTitleColor:RGB(63, 163, 63) forState:UIControlStateNormal];
-            if (i==0) {
-                [btn addTarget:self action:@selector(classBtnMethod) forControlEvents:UIControlEventTouchUpInside];
-            }
-            
-            [_headView addSubview:btn];
-        }
+    if (_signListView==nil) {
+        
+        _signListView=[[XHSignListView alloc] init];
+       
         
     }
-    return _headView;
-}
-#pragma mark-------------未签到列表视图--------------
--(UIView *)signView
-{
-    if (_signView==nil) {
-        for (int i=0; i<2; i++) {
-            UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, _headView.bottom+49*i, SCREEN_WIDTH, 1)];
-            label.backgroundColor=RGB(224, 224, 224);
-            [self.view addSubview:label];
-        }
-        for (int i=0; i<3; i++) {
-            BaseButtonControl *btn=[[BaseButtonControl alloc] initWithFrame:CGRectMake(i*SCREEN_WIDTH/3.0, _headView.bottom, SCREEN_WIDTH/3.0, 50)];
-            [btn setNumberLabel:2];
-            [btn setText:SIGN_TITLE[i] withNumberType:0 withAllType:NO];
-            [btn setTextAlignment:NSTextAlignmentCenter withNumberType:0 withAllType:NO];
-            [btn setTitleEdgeFrame:CGRectMake(0, 0, btn.width, btn.height-2) withNumberType:0 withAllType:NO];
-            [btn setTitleEdgeFrame:CGRectMake(btn.width*0.15, btn.height-2, btn.width*0.7, 2) withNumberType:1 withAllType:NO];
-            btn.tag=10+i;
-            [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
-            if (i==0) {
-                [btn setTextColor:[UIColor orangeColor] withTpe:0 withAllType:NO];
-                [btn setTextBackGroundColor:[UIColor orangeColor] withTpe:1 withAllType:NO];
-                _tag=10;
-            }
-            [self.view addSubview:btn];
-            
-        }
+    for (int i=0; i<_signListView.signControlArry.count; i++)
+    {
+        ParentControl *control=_signListView.signControlArry[i];
+        _tag=1;
+        [control addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
-    
-    return _signView;
-}
--(BaseButtonControl *)rightBtn
-{
-    if (_rightBtn==nil) {
-        _rightBtn=[[BaseButtonControl alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-110, 20, 100, 44)];
-        //_rightBtn.backgroundColor=[UIColor yellowColor];
-        [_rightBtn setNumberImageView:1];
-        [_rightBtn setNumberLabel:1];
-        [_rightBtn setImageEdgeFrame:CGRectMake(5, 15, 16, 16) withNumberType:0 withAllType:NO];
-        [_rightBtn setImage:@"ico_date" withNumberType:0 withAllType:NO];
-        [_rightBtn setTitleEdgeFrame:CGRectMake(25, 0, 70, 45) withNumberType:0 withAllType:NO];
-        [_rightBtn setTextColor:[UIColor whiteColor] withTpe:0 withAllType:NO];
-        [_rightBtn setFont:FontLevel3 withNumberType:0 withAllType:NO];
-        //[_rightBtn setTextBackGroundColor:[UIColor redColor] withTpe:0 withAllType:NO];
-        [_rightBtn setText:[NSString dateWithDateFormatter:@"MM月dd日" Date:[NSDate date]] withNumberType:0 withAllType:NO];
-        _dateStr=[NSDate getDateStrWithDateFormatter:YY_DEFAULT_TIME_FORM Date:[NSDate date]];
-        [_rightBtn addTarget:self action:@selector(rightBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _rightBtn;
+    return _signListView;
 }
 
 #pragma mark-------------点击显示日历按钮--------------
--(void)rightBtnClick
+-(void)rightItemAction:(BaseNavigationControlItem *)sender
 {
     [self.calendarView show];
 }
@@ -487,7 +432,7 @@
         layout.minimumLineSpacing = 5;
         layout.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5);
         layout.scrollDirection=UICollectionViewScrollDirectionVertical;
-        _collectionView = [[BaseCollectionView alloc]initWithFrame:CGRectMake(0, 184, SCREEN_WIDTH,SCREEN_HEIGHT-234) collectionViewLayout:layout];
+        _collectionView = [[BaseCollectionView alloc]initWithFrame:CGRectMake(0, self.navigationView.bottom+175, SCREEN_WIDTH,SCREEN_HEIGHT-(self.navigationView.bottom+175)) collectionViewLayout:layout];
         _collectionView.backgroundColor = [UIColor whiteColor];
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
@@ -544,7 +489,13 @@
     }
     return _calendarView;
 }
-
+-(XHClassSignView *)classSignView
+{
+    if (_classSignView==nil) {
+        _classSignView=[[XHClassSignView alloc] init];
+    }
+    return _classSignView;
+}
 -(NSMutableArray *)noSignArry
 {
     if (_noSignArry==nil) {
