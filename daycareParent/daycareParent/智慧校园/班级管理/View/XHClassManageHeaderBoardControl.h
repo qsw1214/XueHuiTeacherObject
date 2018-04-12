@@ -10,6 +10,12 @@
 
 #import "BaseControl.h"
 
+
+typedef void (^XHClassManageHeaderBoardBackBlock) (BOOL refresh);
+
 @interface XHClassManageHeaderBoardControl : BaseControl
+
+
+-(void)setItemObject:(id)object withBlock:(XHClassManageHeaderBoardBackBlock)block;
 
 @end

@@ -27,8 +27,14 @@ typedef NS_ENUM(NSInteger,XHWeekModelSlectType)
 
 @interface XHWeekModel : BaseModel
 
-@property (nonatomic,copy) NSString *title; //!< 标题
-@property (nonatomic,copy) NSString *describe; //!< 描述
+@property (nonatomic,strong) NSString *monday; //!< 周一标签
+@property (nonatomic,strong) NSString *tuesday; //!< 周二标签
+@property (nonatomic,strong) NSString *wednesday; //!< 周三标签
+@property (nonatomic,strong) NSString *thursday; //!< 周四标签
+@property (nonatomic,strong) NSString *friday; //!< 周五标签
+
+
+@property (nonatomic,assign) NSInteger markType; //!< 周五标签
 
 @property (nonatomic,assign) XHWeekModelType type;  //!< 数据模型类型
 @property (nonatomic,assign) XHWeekModelSlectType selectType; //!< 选中类型

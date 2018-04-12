@@ -14,4 +14,8 @@
 
 @interface XHClassManageContentView : BaseScrollView
 
+
+-(void)setItemObject:(id)object;
+
+
 @end

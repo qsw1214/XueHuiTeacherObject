@@ -27,14 +27,11 @@
             XHWeekModel *model = [[XHWeekModel alloc]init];
             [model setType:XHWeekTipType];
             [model setSelectType:XHWeekNormalType];
-            [model setTitle:[NSString stringWithFormat:@"周(%d)",i]];
             for (int i = 0; i<10; i++)
             {
                 XHWeekFrame *syFrame = [[XHWeekFrame alloc]init];
                 XHWeekModel *syModel = [[XHWeekModel alloc]init];
                 [syModel setType:XHWeekSyllabusType];
-                [syModel setTitle:[NSString stringWithFormat:@"第%d节",i]];
-                [syModel setDescribe:@"语文"];
                 [syFrame setModel:syModel];
                 [model.syllabusArray addObject:syFrame];
             }

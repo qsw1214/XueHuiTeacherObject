@@ -34,24 +34,24 @@
     self = [super initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     if (self)
     {
-//        CGFloat Height = [XHHelper sharedHelpe]
+        CGFloat Height = [[XHHelper sharedHelper] isIphoneX] ? 94 :64;
         [self setDeletage:deletage];
         [self addSubview:self.dropDownMenuCollectionView];
         switch (type)
         {
             case DropLeftType:
             {
-                [self.dropDownMenuCollectionView setFrame:CGRectMake(40.0, 64, 120, 0)];
+                [self.dropDownMenuCollectionView setFrame:CGRectMake(40.0, Height, 120, 0)];
             }
                 break;
             case DropCenterType:
             {
-                [self.dropDownMenuCollectionView setFrame:CGRectMake((SCREEN_WIDTH-120)/2.0, 64, 120, 0)];
+                [self.dropDownMenuCollectionView setFrame:CGRectMake((SCREEN_WIDTH-120)/2.0, Height, 120, 0)];
             }
                 break;
             case DropRightType:
             {
-                [self.dropDownMenuCollectionView setFrame:CGRectMake(SCREEN_WIDTH-140.0, 64, 120, 0)];
+                [self.dropDownMenuCollectionView setFrame:CGRectMake(SCREEN_WIDTH-140.0, Height, 120, 0)];
             }
                 break;
         }

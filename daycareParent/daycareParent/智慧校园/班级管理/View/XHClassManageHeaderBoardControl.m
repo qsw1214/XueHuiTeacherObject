@@ -36,7 +36,7 @@
     self = [super init];
     if (self)
     {
-        [self setBackgroundColor:[UIColor whiteColor]];
+        [self setBackgroundColor:RGB(250.0, 250.0, 250.0)];
         [self addSubview:self.imageView];
         [self addSubview:self.actualControl];
         [self addSubview:self.leaveControl];
@@ -56,11 +56,8 @@
 -(void)resetFrame:(CGRect)frame
 {
     [self setFrame:frame];
-    [self setLayerCornerRadius:5.0];
-    [self.layer  setShadowColor:[RGB(216, 14, 14) CGColor]]; //阴影颜色
-    [self.layer setShadowOffset:CGSizeMake(5, 5)];//偏移距离
-    [self.layer setShadowOpacity:0.6]; //不透明度
-    [self.layer setShadowRadius:5.0]; //半径
+   
+  
     
     
     //!< 图片
@@ -115,8 +112,66 @@
     [self.parentMessageControl setLayerBorderWidth:1.0];
     [self.parentMessageControl setBorderColor:MainColor];
     [self.parentMessageControl setLayerCornerRadius:5.0];
+    
+    
+    
+    [self setHeight:(self.parentMessageControl.bottom+10.0)];
+    
+    
+    [self.layer  setShadowColor:[RGB(239,239,239) CGColor]]; //阴影颜色
+    [self.layer setShadowOffset:CGSizeMake(5.0, 5.0)];//偏移距离
+    [self.layer setShadowOpacity:1.0]; //不透明度
+    [self.layer setShadowRadius:5.0]; //半径
+    
+//    [self setLayerCornerRadius:5.0 withMasksToBounds:YES];
 }
 
+
+
+
+#pragma mark - 设置班级id用于获取当前班级考勤情况
+-(void)setItemObject:(id)object withBlock:(XHClassManageHeaderBoardBackBlock)block
+{
+    [self queryAttendanceCountWithClazzid:object withBlock:block];
+}
+
+
+
+#pragma mark  获取考勤情况
+-(void)queryAttendanceCountWithClazzid:(NSString*)clazzid withBlock:(XHClassManageHeaderBoardBackBlock)block
+{
+    XHNetWorkConfig *netWorkConfig = [[XHNetWorkConfig alloc]init];
+    [netWorkConfig setObject:@"" forKey:@"time"];
+    [netWorkConfig setObject:clazzid forKey:@"clazzId"];
+    [netWorkConfig postWithUrl:@"queryAttendanceCount" sucess:^(id object, BOOL verifyObject)
+     {
+         if (verifyObject)
+         {
+             NSDictionary *objectDictionary = [object objectItemKey:@"object"] ;
+             NSDictionary *propValue = [objectDictionary objectItemKey:@"propValue"];
+             NSString *attendanceCount = [propValue objectItemKey:@"attendanceCount"];  //!< 实到人数
+             NSString *noAttendanceCount = [propValue objectItemKey:@"noAttendanceCount"]; //!< 未到人数
+             NSString *bizCount = [propValue objectItemKey:@"bizCount"]; //!< 请假人数
+             
+             [self setActual:attendanceCount withLeave:bizCount withLate:noAttendanceCount];
+             block(YES);
+         }
+         
+     } error:^(NSError *error)
+    {
+        block(YES);
+    }];
+}
+
+
+
+#pragma mark 填充考勤情况
+-(void)setActual:(NSString*)actual withLeave:(NSString*)levae withLate:(NSString*)late
+{
+    [self.actualControl setText:actual withNumberType:0 withAllType:NO];
+    [self.leaveControl setText:levae withNumberType:0 withAllType:NO];
+    [self.lateControl setText:late withNumberType:0 withAllType:NO];
+}
 
 #pragma mark - Getter /  Setter
 -(UIImageView *)imageView

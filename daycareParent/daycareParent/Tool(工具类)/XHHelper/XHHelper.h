@@ -68,6 +68,14 @@
 +(NSString*)weekdayWithDate:(NSString*)fromDate;
 
 /**
+ 根据当前日期，获取当前是星期几（周日、周一、周二、周三、周四、周五、周六）
+ 
+ @param fromDate 当前日期
+ @return 返回星期几
+ */
++(NSInteger)weekdayWithNowDate:(NSDate*)fromDate;
+
+/**
  判断是否为iphonex
  
  @return 判断是否为iphonex

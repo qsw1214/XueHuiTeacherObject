@@ -33,6 +33,8 @@
  */
 -(void)setLayerCornerRadius:(CGFloat)radius;
 
+-(void)setLayerCornerRadius:(CGFloat)radius withMasksToBounds:(BOOL)masksToBounds;
+
 #pragma mark 设置layer的弧度
 /**
  设置layer的宽度
@@ -52,12 +54,25 @@
  UIRectCornerBottomRight = 1 << 3,
  UIRectCornerAllCorners  = ~0UL
  };
+ @param masksToBounds 是否切除外漏的视图
+ @param radi 圆角半径
+ */
+-(void)byRoundingCorners:(UIRectCorner)corners cornerRadii:(CGFloat)radi withMasksToBounds:(BOOL)masksToBounds;
 
+/**
+ 对视图的某个角设置圆角
+ 
+ @param corners UIRectCorner
+ typedef NS_OPTIONS(NSUInteger, UIRectCorner) {
+ UIRectCornerTopLeft     = 1 << 0,
+ UIRectCornerTopRight    = 1 << 1,
+ UIRectCornerBottomLeft  = 1 << 2,
+ UIRectCornerBottomRight = 1 << 3,
+ UIRectCornerAllCorners  = ~0UL
+ };
  @param radi 圆角半径
  */
 -(void)byRoundingCorners:(UIRectCorner)corners cornerRadii:(CGFloat)radi;
-
-
 
 
 @end

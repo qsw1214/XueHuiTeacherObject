@@ -67,6 +67,11 @@ static XHUserInfo *userInfo = nil;
     [self getTeacherUserInfo];
     
     
+    
+    
+    [self getClassList:^(BOOL isOK, NSMutableArray *classListArry)
+    {}];
+    
 }
 -(void)getTeacherUserInfo
 {
