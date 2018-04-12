@@ -90,6 +90,11 @@
     [self.headerBoardControl setFrame:CGRectMake(0, 0, frame.size.width, 50.0)];
     //!< 添加头部信息
     [self.boardControl resetFrame:CGRectMake(15.0, 0, (frame.size.width-30.0), 100.0)];
+    
+    [self setLayerShadowCornerRadius:5.0 withBackgroundColor:[UIColor grayColor] withShadowColor:[UIColor grayColor] withShadowOffset:CGSizeMake(10.0, 10.0) withShadowOpacity:1.0 withShadowRadius:5.0 withTarget:self.boardControl];
+    
+    
+    
     //!< “课程表”提示
     [self.syllabusBoardControl resetFrame:CGRectMake(self.boardControl.left, (self.boardControl.bottom+20.0), self.boardControl.width, 100.0)];
     

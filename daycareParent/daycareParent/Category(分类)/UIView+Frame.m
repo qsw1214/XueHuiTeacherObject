@@ -187,6 +187,44 @@
     [self.layer setMasksToBounds:masksToBounds];
 }
 
+#pragma mark 圆角和阴影并存
+/**
+ 圆角和阴影并存
+ 
+ @param radius 圆角半径
+ @param backgroundColor 阴影的背景颜色
+ @param shadowColor 阴影的颜色
+ @param shadowOffset 隐形偏移量
+ @param shadowOpacity 阴影透明度
+ @param shadowRadius 阴影弧度
+ */
+-(void)setLayerShadowCornerRadius:(CGFloat)radius
+              withBackgroundColor:(UIColor*)backgroundColor
+                  withShadowColor:(UIColor*)shadowColor
+                 withShadowOffset:(CGSize)shadowOffset
+                withShadowOpacity:(CGFloat)shadowOpacity
+                 withShadowRadius:(CGFloat)shadowRadius
+                       withTarget:(UIView*)target
+{
+    CALayer *subLayer = [CALayer layer];
+    subLayer.frame = target.frame;
+    
+    subLayer.cornerRadius = radius;
+    
+    subLayer.backgroundColor = [backgroundColor colorWithAlphaComponent:0.5].CGColor;
+    
+    subLayer.masksToBounds=NO;
+    
+    subLayer.shadowColor=[shadowColor CGColor];
+    
+    subLayer.shadowOffset=shadowOffset;
+    
+    subLayer.shadowOpacity=shadowOpacity;
+    
+    subLayer.shadowRadius=shadowRadius;
+    
+    [self.layer insertSublayer:subLayer below:target.layer];
+}
 
 -(void)setLayerBorderWidth:(CGFloat)width
 {
