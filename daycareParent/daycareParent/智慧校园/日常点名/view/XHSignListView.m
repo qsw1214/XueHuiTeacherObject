@@ -7,6 +7,7 @@
 //
 
 #import "XHSignListView.h"
+#import "XHDayRollCallModel.h"
 #define SIGN_TITLE @[@"未签到",@"已签到",@"请假"]
 @implementation XHSignListView
 
@@ -50,6 +51,32 @@
         [self.signControlArry addObject:btn];
         [self addSubview:btn];
         
+    }
+}
+-(void)setItemObjectArry:(NSMutableArray *)arry
+{
+    XHDayRollCallModel *model=arry.firstObject;
+    switch (model.modelType) {
+        case DayRollCallNOSignType:
+        {
+            ParentControl *control=[self viewWithTag:1];
+            [control setLabelText:[NSString stringWithFormat:@"%@(%zd)",SIGN_TITLE[0],arry.count] withNumberIndex:0];
+            
+        }
+            break;
+            
+       case DayRollCallSignType:
+        {
+            ParentControl *control=[self viewWithTag:2];
+            [control setLabelText:[NSString stringWithFormat:@"%@(%zd)",SIGN_TITLE[1],arry.count] withNumberIndex:0];
+        }
+            break;
+            case DayRollCallOtherType:
+        {
+            ParentControl *control=[self viewWithTag:3];
+            [control setLabelText:[NSString stringWithFormat:@"%@(%zd)",SIGN_TITLE[2],arry.count] withNumberIndex:0];
+        }
+            break;
     }
 }
 -(NSMutableArray *)signControlArry

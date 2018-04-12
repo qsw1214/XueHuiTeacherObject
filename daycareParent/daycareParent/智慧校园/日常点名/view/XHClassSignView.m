@@ -34,10 +34,6 @@
     if (self=[super init]) {
         self.backgroundColor=MainColor;
         [self setLayerCornerRadius:9];
-        [self.classLabel setText:@"三四班"];
-        [self.signLabel setText:@"人数:150"];
-        [self.allClassLabel setText:@"/150"];
-        [self.attendanceLabel setText:@"100%"];
         
         [self addSubview:self.classLabel];
         [self addSubview:self.signLabel];
@@ -51,10 +47,20 @@
 {
     [self setFrame:frame];
     self.classLabel.frame=CGRectMake(15, 15, frame.size.width, 20);
+    
+}
+-(void)refreshClassView:(XHClassListModel *)model propValueDic:(NSDictionary *)propValueDic
+{
+    [self.classLabel setText:[NSString safeString:model.gradeAndClassName]];
+    [self.signLabel setText:[NSString stringWithFormat:@"人数:%@",[propValueDic objectItemKey:@"attendanceCnt"]]];
+    [self.allClassLabel setText:[NSString stringWithFormat:@"/%@",[propValueDic objectItemKey:@"sum"]]];
+    [self.attendanceLabel setText:[propValueDic objectItemKey:@"pre"]];
+    
     self.signLabel.frame=CGRectMake(15, self.classLabel.bottom+15, [self.signLabel getWidthWithTitle:self.signLabel.text font:kFont(15)], 15);
     self.allClassLabel.frame=CGRectMake(self.signLabel.right,self.classLabel.bottom+15 , [self.allClassLabel getWidthWithTitle:self.allClassLabel.text font:kFont(15)], 15);
     self.rosterLabel.frame=CGRectMake(self.allClassLabel.right+20, self.classLabel.bottom+15, [self.rosterLabel getWidthWithTitle:self.rosterLabel.text font:kFont(15)], 15);
     self.attendanceLabel.frame=CGRectMake(self.rosterLabel.right, self.classLabel.bottom+15, 50, 15);
+    
 }
 -(UILabel *)classLabel
 {

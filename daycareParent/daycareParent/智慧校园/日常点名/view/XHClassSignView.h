@@ -9,5 +9,5 @@
 #import "ParentView.h"
 
 @interface XHClassSignView : ParentView
-
+-(void)refreshClassView:(XHClassListModel *)model propValueDic:(NSDictionary *)propValueDic;
 @end
