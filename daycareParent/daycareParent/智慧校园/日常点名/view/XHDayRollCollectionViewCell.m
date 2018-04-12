@@ -23,7 +23,7 @@
         _nameLabel.font=FontLevel3;
         [self.contentView addSubview:_nameLabel];
         _selectImgView=[[UIImageView alloc] initWithFrame:CGRectMake((self.contentView.bounds.size.width-10)/2.0, _nameLabel.bottom-5, 10, 10)];
-        _selectImgView.image=[UIImage imageNamed:@"ico_no"];
+        _selectImgView.image=[UIImage imageNamed:@"dot_no_one"];
         [self.contentView addSubview:_selectImgView];
         
     }
@@ -38,11 +38,11 @@
         {
             _selectImgView.hidden=NO;
             if (model.IfSelect) {
-               _selectImgView.image=[UIImage imageNamed:@"ico_yes"];
+               _selectImgView.image=[UIImage imageNamed:@"dot_yes_one"];
             }
             else
             {
-                _selectImgView.image=[UIImage imageNamed:@"ico_no"];
+                _selectImgView.image=[UIImage imageNamed:@"dot_no_one"];
             }
         }
             break;

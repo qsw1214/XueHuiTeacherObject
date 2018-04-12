@@ -105,10 +105,10 @@
 #pragma mark-------------刷新全选视图数据--------------
 -(void)getSelectAllView
 {
-    if (_tag==10) {
+    if (_tag==1) {
         self.collectionView.frame=CGRectMake(0, self.navigationView.bottom+175, SCREEN_WIDTH,SCREEN_HEIGHT-(self.navigationView.bottom+175)-50);
     }
-    else if (_tag==11)
+    else if (_tag==2)
     {
         self.collectionView.frame=CGRectMake(0, self.navigationView.bottom+175, SCREEN_WIDTH,SCREEN_HEIGHT-(self.navigationView.bottom+175));
     }
@@ -116,7 +116,7 @@
     {
         self.collectionView.frame=CGRectMake(0, self.navigationView.bottom+175, SCREEN_WIDTH,SCREEN_HEIGHT-(self.navigationView.bottom+175));
     }
-    if ([self.dataArray count]&&_tag==10&&[NSDate isSameDay:[NSDate getDateWithDateStr:_dateStr formatter:YY_DEFAULT_TIME_FORM] twoDate:[NSDate getDate:[NSDate date] formatter:YY_DEFAULT_TIME_FORM]])
+    if ([self.dataArray count]&&_tag==1&&[NSDate isSameDay:[NSDate getDateWithDateStr:_dateStr formatter:YY_DEFAULT_TIME_FORM] twoDate:[NSDate getDate:[NSDate date] formatter:YY_DEFAULT_TIME_FORM]])
     {
         [self.view addSubview:self.selectAllView];
     }
@@ -220,21 +220,21 @@
 
     for (int i=0; i<3; i++) {
         
-        BaseButtonControl *signBtn=[self.view viewWithTag:10+i];
+        ParentControl *signBtn=[self.signListView viewWithTag:1+i];
         switch (i) {
-            case 0:
-            {
-                [signBtn setText:[NSString stringWithFormat:@"%@(%zd)",SIGN_TITLE[i],self.noSignArry.count] withNumberType:0 withAllType:NO];
-            }
-                break;
             case 1:
             {
-                [signBtn setText:[NSString stringWithFormat:@"%@(%zd)",SIGN_TITLE[i],self.signArry.count] withNumberType:0 withAllType:NO];
+                [signBtn setLabelText:[NSString stringWithFormat:@"%@(%zd)",SIGN_TITLE[i],self.noSignArry.count] withNumberIndex:0];
             }
                 break;
             case 2:
             {
-                [signBtn setText:[NSString stringWithFormat:@"%@(%zd)",SIGN_TITLE[i],self.otherArry.count] withNumberType:0 withAllType:NO];
+                [signBtn setLabelText:[NSString stringWithFormat:@"%@(%zd)",SIGN_TITLE[i],self.signArry.count] withNumberIndex:0];
+            }
+                break;
+            case 3:
+            {
+                [signBtn setLabelText:[NSString stringWithFormat:@"%@(%zd)",SIGN_TITLE[i],self.otherArry.count] withNumberIndex:0];
             }
                 break;
                 
@@ -266,7 +266,7 @@
         btn.selected=!btn.selected;
         if (btn.selected==YES)
         {
-            [btn setImage:@"icoyixuan" withNumberType:0 withAllType:NO];
+            [btn setImage:@"dot_all" withNumberType:0 withAllType:NO];
             _selectNumber=self.dataArray.count;
             [self.selectArry setArray:self.dataArray];
             for (int i=0; i<self.dataArray.count; i++) {
@@ -279,7 +279,7 @@
         {
             _selectNumber=0;
             [self.selectArry removeAllObjects];
-            [btn setImage:@"icoweixuan" withNumberType:0 withAllType:NO];
+            [btn setImage:@"dot_no_all" withNumberType:0 withAllType:NO];
             for (int i=0; i<self.dataArray.count; i++) {
                 XHDayRollCallModel *model=self.dataArray[i];
                 model.IfSelect=NO;
@@ -307,10 +307,10 @@
                     BaseButtonControl *lastBtn=[self.view viewWithTag:_tag];
                     [lastBtn setTextColor:[UIColor blackColor] withTpe:0 withAllType:NO];
                     [lastBtn setTextBackGroundColor:[UIColor clearColor] withTpe:1 withAllType:NO];
-                    BaseButtonControl *nowBtn=[self.view viewWithTag:btn.tag==52?12:11];
+                    BaseButtonControl *nowBtn=[self.view viewWithTag:btn.tag==52?2:1];
                     [nowBtn setTextColor:[UIColor orangeColor] withTpe:0 withAllType:NO];
                     [nowBtn setTextBackGroundColor:[UIColor orangeColor] withTpe:1 withAllType:NO];
-                    _tag=btn.tag==52?12:11;
+                    _tag=btn.tag==52?2:1;
                 }
                 [self.collectionView beginRefreshing];
             } error:^(NSError *error) {
@@ -323,13 +323,13 @@
 -(void)getDataArry
 {
     
-    if (_tag==10) {
+    if (_tag==1) {
         [self.dataArray setArray:self.noSignArry];
     }
-    if (_tag==11) {
+    if (_tag==2) {
         [self.dataArray setArray:self.signArry];
     }
-    if (_tag==12) {
+    if (_tag==3) {
        [self.dataArray setArray:self.otherArry];
     }
     [self defaultImagView];
@@ -387,7 +387,7 @@
                 {
                     [btn setNumberImageView:1];
                     [btn setImageEdgeFrame:CGRectMake(10, 15, 20, 20) withNumberType:0 withAllType:NO];
-                    [btn setImage:@"icoweixuan" withNumberType:0 withAllType:NO];
+                    [btn setImage:@"dot_all" withNumberType:0 withAllType:NO];
                     [btn setTitleEdgeFrame:CGRectMake(40, 0, btn.width-40, 50) withNumberType:0 withAllType:NO];
                     [btn setText:@"全选" withNumberType:0 withAllType:NO];
                 }
@@ -403,7 +403,7 @@
                 {
                     [btn setTitleEdgeFrame:CGRectMake(0, 0, btn.width, 50) withNumberType:0 withAllType:NO];
                     [btn setText:@"请假" withNumberType:0 withAllType:NO];
-                    [btn setTextBackGroundColor:RGB(236, 63, 27) withTpe:0 withAllType:NO];
+                    [btn setTextBackGroundColor:RGB(231, 160, 83) withTpe:0 withAllType:NO];
                     [btn setTextAlignment:NSTextAlignmentCenter withNumberType:0 withAllType:NO];
                     [btn setTextColor:[UIColor whiteColor] withTpe:0 withAllType:NO];
                 }
@@ -412,7 +412,7 @@
                 {
                     [btn setTitleEdgeFrame:CGRectMake(0, 0, btn.width, 50) withNumberType:0 withAllType:NO];
                     [btn setText:@"签到" withNumberType:0 withAllType:NO];
-                    [btn setTextBackGroundColor:RGB(63, 163, 63) withTpe:0 withAllType:NO];
+                    [btn setTextBackGroundColor:RGB(68, 196, 155) withTpe:0 withAllType:NO];
                     [btn setTextAlignment:NSTextAlignmentCenter withNumberType:0 withAllType:NO];
                     [btn setTextColor:[UIColor whiteColor] withTpe:0 withAllType:NO];
                 }
@@ -458,7 +458,7 @@
 {
     XHDayRollCollectionViewCell *cell=[_collectionView cellForItemAtIndexPath:indexPath];
     XHDayRollCallModel *model=self.dataArray[indexPath.row];
-    if (_tag==10)
+    if (_tag==1)
     {
        model.IfSelect=!model.IfSelect;
         [cell setItemObject:model];
@@ -474,7 +474,7 @@
         }
         [self refreshSelectAll];
     }
-    if (_tag==12) {
+    if (_tag==2) {
         XHDayRollCallDetailViewController *detail=[[XHDayRollCallDetailViewController alloc] init];
         detail.model=self.dataArray[indexPath.row];
         [self.navigationController pushViewController:detail animated:YES];
