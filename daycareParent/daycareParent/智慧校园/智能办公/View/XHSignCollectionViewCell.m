@@ -41,7 +41,7 @@
     self.bgLabel.frame=CGRectMake(0, 10, self.contentView.frame.size.width, 1);
     self.quanLabel.frame=CGRectMake((self.contentView.frame.size.width-7)/2.0, self.bgLabel.bottom-self.bgLabel.height/2.0-7/2.0, 7, 7);
     [self.quanLabel setLayerCornerRadius:7/2.0];
-    self.imageView.frame=CGRectMake((self.contentView.frame.size.width-7)/2.0, self.bgLabel.bottom-self.bgLabel.height/2.0-18/2.0, 18, 18);
+    self.imageView.frame=CGRectMake((self.contentView.frame.size.width-18)/2.0, self.bgLabel.bottom-self.bgLabel.height/2.0-18/2.0, 18, 18);
      [self.imageView setLayerCornerRadius:18/2.0];
     self.timeLabel.frame=CGRectMake(0, self.imageView.bottom, self.contentView.frame.size.width, self.contentView.frame.size.height-self.imageView.height-20);
     
