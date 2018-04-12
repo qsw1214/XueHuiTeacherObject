@@ -19,11 +19,12 @@
 @interface TLPhotoBrowser : UIView
 @property(nonatomic,strong)TLImageScrollView *imageScrollView;
 +(TLPhotoBrowser *)showOriginalImage:(UIImage *)originalImage;
--(void)dismiss;
++(TLPhotoBrowser *)showOriginalImageUrl:(NSString *)originalImageUrl;
 @end
 
 
 @interface TLImageScrollView : UIScrollView <UIScrollViewDelegate>
 @property(nonatomic,assign)id <TLImageScrollViewDelegate> actionDelegate;
+@property(nonatomic,strong)UIImageView *photoView;
 @property(nonatomic,strong)UIImage *img;
 @end

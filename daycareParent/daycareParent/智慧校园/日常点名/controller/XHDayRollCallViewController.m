@@ -538,8 +538,8 @@
 }
 -(XHCalendarView *)calendarView
 {
-    if (_calendarView==nil) {
-        
+    if (_calendarView==nil)
+    {
         _calendarView=[[XHCalendarView alloc] initWithDelegate:self];
     }
     return _calendarView;

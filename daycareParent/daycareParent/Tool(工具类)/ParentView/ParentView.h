@@ -10,6 +10,7 @@
 
 @interface ParentView : UIView
 @property(nonatomic,strong)UIView *baseView;
+-(void)resetFrame:(CGRect)frame;
 -(void)setItemObject:(id)object;
 -(void)setItemObjectArry:(NSMutableArray *)arry;
 @end

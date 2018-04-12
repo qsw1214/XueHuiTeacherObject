@@ -10,4 +10,5 @@
 
 @interface ParentCollectionViewCell : UICollectionViewCell
 -(void)setItemObject:(id)object;
+-(void)setItemObject:(id)object withIndexPathRow:(NSInteger)row;
 @end

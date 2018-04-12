@@ -92,6 +92,7 @@
 
 -(void)addSubviews{
     
+    self.baseView.frame=CGRectMake(SCREEN_WIDTH/2.0, SCREEN_HEIGHT/2.0, 0, 0);
     [self addSubview:self.baseView];
     self.baseView.layer.cornerRadius=8;
     self.baseView.layer.masksToBounds=YES;
@@ -232,8 +233,7 @@
                 {
                     
                     model.isToday = YES;
-                    self.calendarModel=model;
-                    
+                
                 }
                 if (i > [[NSDate date] dateDay] + firstWeekday - 1)
                 {
@@ -348,6 +348,10 @@
                     [self dismiss];
                 }
                 
+            }
+            else
+            {
+                [XHShowHUD showNOHud:@"请选择日期"];
             }
             
         }

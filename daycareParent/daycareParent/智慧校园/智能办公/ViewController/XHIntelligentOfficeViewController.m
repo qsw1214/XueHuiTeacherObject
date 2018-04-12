@@ -8,13 +8,13 @@
 
 #import "XHIntelligentOfficeViewController.h"
 #import "XHIntelligentOfficeCell.h"
-
+#import "XHIntelligentOfficeTableViewHeaderView.h"
 @interface XHIntelligentOfficeViewController () <UITableViewDelegate,UITableViewDataSource>
 
 
 @property (nonatomic,strong) BaseTableView *tableView;
 
-
+@property (nonatomic,strong) XHIntelligentOfficeTableViewHeaderView *headerView;
 @end
 
 @implementation XHIntelligentOfficeViewController
@@ -23,12 +23,12 @@
 {
     [super viewDidLoad];
     [self setNavtionTitle:@"智能办公"];
-    
+    [self navtionHidden:YES];
     for (int i = 0; i < 1; i++)
     {
         XHIntelligentOfficeFrame *frame = [[XHIntelligentOfficeFrame alloc]init];
         XHIntelligentOfficeModel *model = [[XHIntelligentOfficeModel alloc]init];
-        [model setType:XHIntelligentOfficeHeaderType];
+        [model setType:XHIntelligentOfficeClassSwitchingType];
         [frame setModel: model];
         [self.dataArray addObject:frame];
         
@@ -39,7 +39,7 @@
     {
         XHIntelligentOfficeFrame *frame = [[XHIntelligentOfficeFrame alloc]init];
         XHIntelligentOfficeModel *model = [[XHIntelligentOfficeModel alloc]init];
-        [model setType:XHIntelligentOfficeApprovalType];
+        [model setType:XHIntelligentOfficeTakeOverClassType];
         [frame setModel: model];
         [self.dataArray addObject:frame];
     }
@@ -49,7 +49,7 @@
     {
         XHIntelligentOfficeFrame *frame = [[XHIntelligentOfficeFrame alloc]init];
         XHIntelligentOfficeModel *model = [[XHIntelligentOfficeModel alloc]init];
-        [model setType:XHIntelligentOfficeContentType];
+        [model setType:XHIntelligentOfficeAskforleaveType];
         [frame setModel: model];
         [self.dataArray addObject:frame];
     }
@@ -68,8 +68,8 @@
     if (subview)
     {
         [self.view addSubview:self.tableView];
-        [self.tableView resetFrame:CGRectMake(0, self.navigationView.bottom, SCREEN_WIDTH, SCREEN_HEIGHT-self.navigationView.bottom)];
-        
+        [self.tableView resetFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        self.tableView.tableHeaderView=self.headerView;
         [self.tableView refreshReloadData];
     }
 }
@@ -124,7 +124,22 @@
     return _tableView;
 }
 
-
-
+-(XHIntelligentOfficeTableViewHeaderView *)headerView
+{
+    if (_headerView==nil) {
+        _headerView=[[XHIntelligentOfficeTableViewHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 545)];
+    }
+    return _headerView;
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.headerView addTimer];
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.headerView invalidate];
+}
 
 @end

@@ -43,7 +43,6 @@
         [self addSubview:self.contentLabel];
         [self addSubview:self.approverLabel];
         [self addSubview:self.dotImageView];
-        
     }
     return self;
 }
@@ -62,7 +61,25 @@
     [self.contentLabel setFrame:CGRectMake(self.titleLabel.left, self.titleLabel.bottom+10.0, (frame.itemFrame.size.width-(self.titleLabel.left+20.0)), 40.0)];
     [self.approverLabel setFrame:CGRectMake(frame.itemFrame.size.width-110.0, self.contentLabel.bottom+10.0, 100.0, 20.0)];
     [self.timeline setFrame:CGRectMake((10+((20-0.5)/2.0)),self.dotImageView.top , 0.5, frame.itemFrame.size.height)];
-    
+    switch (frame.model.type) {
+        case XHIntelligentOfficeClassSwitchingType:
+            
+        {
+            [self.titleLabel setText:@"调课申请"];
+        }
+            break;
+            
+        case XHIntelligentOfficeTakeOverClassType:
+        {
+             [self.titleLabel setText:@"代课申请"];
+        }
+            break;
+            case XHIntelligentOfficeAskforleaveType:
+        {
+            [self.titleLabel setText:@"请假申请"];
+        }
+            break;
+    }
 }
 
 
