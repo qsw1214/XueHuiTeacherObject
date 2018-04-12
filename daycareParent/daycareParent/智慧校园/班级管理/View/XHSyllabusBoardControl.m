@@ -286,7 +286,7 @@
         _weekTipLabel = [[UILabel alloc]init];
         [_weekTipLabel setText:@"课程表"];
         [_weekTipLabel setFont:[UIFont systemFontOfSize:15.0]];
-        [_weekTipLabel setBackgroundColor:RGB(81,200,162)];
+        [_weekTipLabel setTextColor:RGB(81,200,162)];
         [_weekTipLabel setTextAlignment:NSTextAlignmentCenter];
     }
     return _weekTipLabel;

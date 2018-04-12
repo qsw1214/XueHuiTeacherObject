@@ -226,6 +226,61 @@ static XHNetWorkConfig *net = nil;
     
 }
 
+
+#pragma mark -
+- (void)postWithIntegrityUrl:(NSString *)url
+             sucess:(NetWorkSucessBlock)sucessBlock
+              error:(NetWorkErrorBlock)errorBlock
+{
+    
+    if ([AFNetworkingHelper connectedToNetWork])
+    {
+        
+        switch (self.option)
+        {
+            case XHNetWorkOptionService:
+            {
+                url = [NSString stringWithFormat:@"%@%@",ServiceBaseUrl,url];
+            }
+                break;
+            case XHNetWorkOptionH5ixueHui:
+            {
+                url = [NSString stringWithFormat:@"%@/server%@",H5iXueHuiBaseUrl,url];
+            }
+                break;
+            case XHNetWorkOptionLocation:
+            {
+                url = [NSString stringWithFormat:@"%@%@",LocationBaseUrl,url];
+                self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", nil];
+            }
+                break;
+        }
+        
+        NSLog(@"url****************%@",url);
+        
+        [self POST:url parameters:self.paramDictionary  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+         {
+             NSLog(@"sussess===============%@",responseObject);
+             BOOL verifyObject = [self verifyResPonseObject:responseObject];
+             responseObject = [self analyzingObject:responseObject];
+             sucessBlock(responseObject,verifyObject);
+             NSLog(@"object===============%@",responseObject);
+             
+         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+         {
+             [XHShowHUD showNOHud:@"请求失败，请尝试重试！"];
+             NSLog(@"error===============%@",error);
+             errorBlock(error);
+             
+         }];
+    }
+    else
+    {
+        [self alertFailed];
+    }
+    
+}
+
 - (void)postFormDataObjectWithUrl:(NSString *)url
                           constructingBodyWithBlock:(NetWorkConstructingBodyWithBlock)constructingBodyWithBlock
                                              sucess:(NetWorkSucessBlock)sucessBlock
