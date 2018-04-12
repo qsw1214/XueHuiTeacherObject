@@ -119,9 +119,9 @@
     
     
     [self.layer  setShadowColor:[RGB(239,239,239) CGColor]]; //阴影颜色
-    [self.layer setShadowOffset:CGSizeMake(5.0, 5.0)];//偏移距离
+    [self.layer setShadowOffset:CGSizeMake(10.0, 10.0)];//偏移距离
     [self.layer setShadowOpacity:1.0]; //不透明度
-    [self.layer setShadowRadius:5.0]; //半径
+    [self.layer setShadowRadius:10.0]; //半径
     
 //    [self setLayerCornerRadius:5.0 withMasksToBounds:YES];
 }

@@ -42,7 +42,7 @@
 -(void)setItemArray:(NSMutableArray *)itemArray
 {
     NSInteger itemArrayCount = [itemArray count];
-    [self setHeight:(itemArrayCount*50.0+5.0)];
+    [self setHeight:(itemArrayCount*50.0)];
     [self.dataArray setArray:itemArray];
     [self refreshReloadData];
 }

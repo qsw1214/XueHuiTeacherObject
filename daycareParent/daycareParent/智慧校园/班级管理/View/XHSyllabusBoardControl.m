@@ -218,7 +218,7 @@
 {
     
     [self.syllabusCollectionView setItemArray:self.dataArray];
-    CGFloat height = (self.syllabusCollectionView.bottom+20.0);
+    CGFloat height = (self.syllabusCollectionView.bottom+30.0);
     [self setHeight:height];
     if (self.syllabusCollectionView.height >= 50.0)
     {
@@ -285,7 +285,8 @@
     {
         _weekTipLabel = [[UILabel alloc]init];
         [_weekTipLabel setText:@"课程表"];
-        [_weekTipLabel setBackgroundColor:RGB(239,239,239)];
+        [_weekTipLabel setFont:[UIFont systemFontOfSize:15.0]];
+        [_weekTipLabel setBackgroundColor:RGB(81,200,162)];
         [_weekTipLabel setTextAlignment:NSTextAlignmentCenter];
     }
     return _weekTipLabel;
