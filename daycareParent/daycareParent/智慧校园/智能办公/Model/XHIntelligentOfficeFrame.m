@@ -10,30 +10,10 @@
 
 @implementation XHIntelligentOfficeFrame
 
-
 -(void)setModel:(XHIntelligentOfficeModel *)model
 {
     _model = model;
-    
-    switch (model.type)
-    {
-        case XHIntelligentOfficeHeaderType:
-        {
-            [self setItemFrame:CGRectMake(0, 0, SCREEN_WIDTH, 300.0)];
-        }
-            break;
-        case XHIntelligentOfficeApprovalType:
-        {
-            [self setItemFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50.0)];
-        }
-            break;
-        case XHIntelligentOfficeContentType:
-        {
-            [self setItemFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200.0)];
-        }
-            break;
-    }
-    
+    [self setItemFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200.0)];
     [self setCellHeight:self.itemFrame.size.height];
 }
 

@@ -18,6 +18,8 @@
 -(void)setLabelTextColor:(UIColor *)color withNumberIndex:(NSInteger)index;
 -(void)setLabelCornerRadius:(CGFloat)radius withNumberIndex:(NSInteger)index;
 -(void)setLabelBackgroundColor:(UIColor *)color withNumberIndex:(NSInteger)index;
+-(void)setLabelNumberOfLines:(NSInteger)numberOfLines withNumberIndex:(NSInteger)index;
+-(void)setLabelAlpha:(CGFloat)alpha withNumberIndex:(NSInteger)index;
 -(void)setLabelAddTapGestureRecognizerTarget:(id)target action:(SEL)action withNumberIndex:(NSInteger)index;
 -(void)setLabelAddGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer withNumberIndex:(NSInteger)index;
 

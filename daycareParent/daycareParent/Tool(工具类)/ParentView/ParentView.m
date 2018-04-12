@@ -18,10 +18,14 @@
 {
     
 }
+-(void)resetFrame:(CGRect)frame
+{
+    
+}
 -(UIView *)baseView
 {
     if (_baseView==nil) {
-        _baseView=[[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2.0, SCREEN_HEIGHT/2.0, 0, 0)];
+        _baseView=[[UIView alloc]init];
         _baseView.backgroundColor=[UIColor whiteColor];
     }
     return _baseView;

@@ -49,6 +49,16 @@
     ParentLabel *label=self.numberLabelArry[index];
     [label setText:[NSString safeString:text]];
 }
+-(void)setLabelNumberOfLines:(NSInteger)numberOfLines withNumberIndex:(NSInteger)index
+{
+    ParentLabel *label=self.numberLabelArry[index];
+    [label setNumberOfLines:numberOfLines];
+}
+-(void)setLabelAlpha:(CGFloat)alpha withNumberIndex:(NSInteger)index
+{
+    ParentLabel *label=self.numberLabelArry[index];
+    [label setAlpha:alpha];
+}
 -(void)setLabelAddTapGestureRecognizerTarget:(id)target action:(SEL)action withNumberIndex:(NSInteger)index
 {
     ParentLabel *label=self.numberLabelArry[index];

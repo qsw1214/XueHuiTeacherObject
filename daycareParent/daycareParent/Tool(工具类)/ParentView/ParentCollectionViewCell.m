@@ -14,4 +14,8 @@
 {
     
 }
+-(void)setItemObject:(id)object withIndexPathRow:(NSInteger)row
+{
+    
+}
 @end

@@ -42,8 +42,7 @@
     {
         self.tabbarBottom=0;
     }
-     self.view.backgroundColor=RGB(239, 239, 239);
-    [self setItemContentItemHiddenWithType:NavigationLeftType withHidden:YES];
+    self.view.backgroundColor=RGB(239, 239, 239);
     [self setNavtionTitle:@"消息"];
     
     self.tableView.delegate=self;

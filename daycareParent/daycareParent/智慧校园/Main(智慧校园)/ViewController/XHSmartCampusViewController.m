@@ -22,7 +22,7 @@
 #import "XHAddNoticeViewController.h" //!< 通知公告
 #import "XHDayRollCallViewController.h"//!< 日常点名
 #import "XHNewBulidViewController.h"//!< 课程报备
-
+#import "XHChatListViewController.h"
 #import "XHPunchSignViewController.h"//!< 打卡签到
 #import "XHAddressBoardViewController.h" //!< 通讯录
 
@@ -128,7 +128,7 @@
 #pragma mark case 8 班级动态
         case 8:
         {
-            XHDynamicsViewController *dynamics = [[XHDynamicsViewController alloc]initHiddenWhenPushHidden];
+            XHChatListViewController *dynamics = [[XHChatListViewController alloc]initHiddenWhenPushHidden];
             [self.navigationController pushViewController:dynamics animated:YES];
         }
             break;

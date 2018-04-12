@@ -10,12 +10,17 @@
 
 typedef NS_ENUM(NSInteger,XHIntelligentOfficeModelType)
 {
-    XHIntelligentOfficeHeaderType = 1,    //!< 头部类型
-    XHIntelligentOfficeApprovalType = 2, //!< 提醒类型
-    XHIntelligentOfficeContentType = 3, //!< 内容类型
+    XHIntelligentOfficeAskforleaveType = 1,    //!< 请假类型
+    XHIntelligentOfficeClassSwitchingType = 2, //!< 调课类型
+    XHIntelligentOfficeTakeOverClassType = 3, //!<  代课类型
 };
 
-
+typedef NS_ENUM(NSInteger,XHIntelligentOfficeApproveModelType)
+{
+    XHIntelligentOfficeUnknownApproveType = 1,    //!< 未审批类型
+    XHIntelligentOfficeApproveType = 2, //!< 审批通过类型
+    XHIntelligentOfficeNOApproveType = 3, //!<  审批拒绝类型
+};
 
 
 
@@ -24,4 +29,5 @@ typedef NS_ENUM(NSInteger,XHIntelligentOfficeModelType)
 
 @property (nonatomic,assign) XHIntelligentOfficeModelType type;
 
+@property (nonatomic,assign) XHIntelligentOfficeApproveModelType approveType;
 @end
