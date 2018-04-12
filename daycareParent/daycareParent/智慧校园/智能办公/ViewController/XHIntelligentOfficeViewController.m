@@ -24,11 +24,17 @@
     [super viewDidLoad];
     [self setNavtionTitle:@"智能办公"];
     [self navtionHidden:YES];
+    
     for (int i = 0; i < 1; i++)
     {
         XHIntelligentOfficeFrame *frame = [[XHIntelligentOfficeFrame alloc]init];
         XHIntelligentOfficeModel *model = [[XHIntelligentOfficeModel alloc]init];
-        [model setType:XHIntelligentOfficeClassSwitchingType];
+        [model setModelType:XHIntelligentOfficeClassSwitchingType];
+        [model setStartTime:@"2017-03-11 第二节语文课"];
+        [model setTeacher:@"姚立志"];
+        [model setEndTime:@"2017-03-17 第二节语文课"];
+        [model setTargetTeacher:@"光头强"];
+        [model setApproveType:XHIntelligentOfficeNOApproveType];
         [frame setModel: model];
         [self.dataArray addObject:frame];
         
@@ -39,7 +45,10 @@
     {
         XHIntelligentOfficeFrame *frame = [[XHIntelligentOfficeFrame alloc]init];
         XHIntelligentOfficeModel *model = [[XHIntelligentOfficeModel alloc]init];
-        [model setType:XHIntelligentOfficeTakeOverClassType];
+        [model setModelType:XHIntelligentOfficeTakeOverClassType];
+        [model setStartTime:@"2017-03-11 第三节美术"];
+        [model setTeacher:@"光头强"];
+        [model setApproveType:XHIntelligentOfficeUnknownApproveType];
         [frame setModel: model];
         [self.dataArray addObject:frame];
     }
@@ -49,7 +58,11 @@
     {
         XHIntelligentOfficeFrame *frame = [[XHIntelligentOfficeFrame alloc]init];
         XHIntelligentOfficeModel *model = [[XHIntelligentOfficeModel alloc]init];
-        [model setType:XHIntelligentOfficeAskforleaveType];
+        [model setModelType:XHIntelligentOfficeAskforleaveType];
+        [model setStartTime:@"2017-03-11 15:36"];
+        [model setEndTime:@"2017-03-17 18:30"];
+        [model setTargetTeacher:@"光头强"];
+        [model setApproveType:XHIntelligentOfficeApproveType];
         [frame setModel: model];
         [self.dataArray addObject:frame];
     }

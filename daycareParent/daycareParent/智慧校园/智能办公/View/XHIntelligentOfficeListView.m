@@ -7,27 +7,25 @@
 //
 
 #import "XHIntelligentOfficeListView.h"
-#import "XHAddressBoardViewController.h"
+#import "XHAddressBoardViewController.h" //通讯录
+#import "XHCookBookViewController.h" //食谱
+
 
 #define kTitle @[@"通讯录",@"调代课",@"今日课程",@"请假",@"食谱管理"]
 #define kTitlePic @[@"ico_txl",@"ico_daike",@"ico_kec",@"ico_qingjia",@"ico_shipu"]
+
 @implementation XHIntelligentOfficeListView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 -(instancetype)initWithFrame:(CGRect)frame
 {
-    if (self=[super initWithFrame:frame]) {
-        for (int i=0 ; i<5; i++) {
+    if (self=[super initWithFrame:frame])
+    {
+        for (int i=0 ; i<5; i++)
+        {
             ParentControl *control=[[ParentControl alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/5.0*i, 0, SCREEN_WIDTH/5.0, 85)];
             control.backgroundColor=[UIColor whiteColor];
             [control setNumberImageView:1];
-             [control setNumberLabel:1];
+            [control setNumberLabel:1];
             [control setImageViewCGRectMake:CGRectMake((SCREEN_WIDTH/5.0-30)/2.0, 15, 30, 30) withNumberIndex:0];
             [control setImageViewName:kTitlePic[i] withNumberIndex:0];
             [control setLabelCGRectMake:CGRectMake(0, 45, SCREEN_WIDTH/5.0, 25) withNumberIndex:0];
@@ -44,8 +42,9 @@
 }
 -(void)controlMethod:(UIControl *)control
 {
-    switch (control.tag) {
-#pragma mark- 通讯录
+    switch (control.tag)
+    {
+#pragma mark case 1 通讯录
         case 1:
         {
             XHAddressBoardViewController *address=[[XHAddressBoardViewController alloc] initHiddenWhenPushHidden];
@@ -53,28 +52,30 @@
             [DCURLRouter pushViewController:address animated:YES];
         }
             break;
-#pragma mark- 调代课
+#pragma mark case 2 调代课
         case 2:
         {
             
         }
             break;
-#pragma mark- 今日课程
+#pragma mark case 3 今日课程
             case 3:
         {
             
         }
             break;
-#pragma mark- 请假
+#pragma mark case 4 请假
             case 4:
         {
             
         }
             break;
-#pragma mark- 食谱管理
+#pragma mark case 5 食谱管理
         case 5:
         {
-            
+            XHCookBookViewController *cookBook = [[XHCookBookViewController alloc]initHiddenWhenPushHidden];
+            [cookBook setNavtionTitle:@"食谱管理"];
+            [DCURLRouter pushViewController:cookBook animated:YES];
         }
             break;
     }

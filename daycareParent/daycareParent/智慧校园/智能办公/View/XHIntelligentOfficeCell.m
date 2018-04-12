@@ -29,6 +29,8 @@
     self = [super init];
     if (self)
     {
+        
+        [self.contentView setBackgroundColor:RGB(229.0, 229.0, 229.0)];
         [self.contentView addSubview:self.contentControl];
     }
     return self;
