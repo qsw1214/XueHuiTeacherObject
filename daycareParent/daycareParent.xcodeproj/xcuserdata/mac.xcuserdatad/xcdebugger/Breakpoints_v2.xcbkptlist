@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x98df;&#x8c31;/ViewController/XHCookBookViewController.m"
-            timestampString = "545292095.03406"
+            timestampString = "545293189.713308"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "111"
@@ -26,7 +26,7 @@
                   moduleName = "daycareParent"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mac/XueHuiTeacherObject/daycareParent/daycareParent/%E6%99%BA%E6%85%A7%E6%A0%A1%E5%9B%AD/%E9%A3%9F%E8%B0%B1/ViewController/XHCookBookViewController.m"
-                  timestampString = "545291850.323529"
+                  timestampString = "545293189.9134099"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "111"
@@ -41,7 +41,7 @@
                   moduleName = "daycareParent"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mac/XueHuiTeacherObject/daycareParent/daycareParent/%E6%99%BA%E6%85%A7%E6%A0%A1%E5%9B%AD/%E9%A3%9F%E8%B0%B1/ViewController/XHCookBookViewController.m"
-                  timestampString = "545291850.325895"
+                  timestampString = "545293189.915671"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "111"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x98df;&#x8c31;/ViewController/XHCookBookViewController.m"
-            timestampString = "545292095.0341671"
+            timestampString = "545293189.7133811"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "113"
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x98df;&#x8c31;/ViewController/XHCookBookViewController.m"
-            timestampString = "545292095.034223"
+            timestampString = "545293189.713438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "77"
@@ -90,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x98df;&#x8c31;/ViewController/XHCookBookViewController.m"
-            timestampString = "545292095.034276"
+            timestampString = "545293189.713491"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "53"
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x73ed;&#x7ea7;&#x7ba1;&#x7406;/View/XHSyllabusBoardControl.m"
-            timestampString = "545292095.0343519"
+            timestampString = "545293189.713547"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "62"
@@ -121,45 +121,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x73ed;&#x7ea7;&#x7ba1;&#x7406;/View/XHClassManageHeaderBoardControl.m"
-            timestampString = "545292095.034451"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
-            landmarkName = "-setItemObject:withBlock:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x73ed;&#x7ea7;&#x7ba1;&#x7406;/View/XHClassManageHeaderBoardControl.m"
-            timestampString = "545292095.034516"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
-            landmarkName = "-queryAttendanceCountWithClazzid:withBlock:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x73ed;&#x7ea7;&#x7ba1;&#x7406;/View/XHSyllabusBoardControl.m"
-            timestampString = "545292095.0345711"
+            timestampString = "545293189.713679"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "132"
             endingLineNumber = "132"
             landmarkName = "-getSyllabusWithClassid:withBlock:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x73ed;&#x7ea7;&#x7ba1;&#x7406;/View/XHClassManageHeaderBoardControl.m"
+            timestampString = "545293189.713733"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
+            landmarkName = "-manageControlAction:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

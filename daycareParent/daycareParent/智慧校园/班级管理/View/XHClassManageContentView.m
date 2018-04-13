@@ -67,7 +67,7 @@
 -(void)withClassid:(NSString*)classid
 {
     @WeakObj(self);
-    [self.boardControl setItemObject:classid withBlock:^(BOOL refresh)
+    [self.boardControl  setItemObject:classid withBlock:^(BOOL refresh)
      {
          @StrongObj(self);
          [self refreshReloadData];

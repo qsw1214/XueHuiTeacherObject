@@ -136,14 +136,15 @@
 -(void)setItemObject:(id)object withBlock:(XHClassManageHeaderBoardBackBlock)block
 {
     [self setClassid:object];
-    [self queryAttendanceCountWithClazzid:object withBlock:block];
+    [self queryAttendanceCountWithClazzid:object withBackBlock:YES withBlock:block];
 }
 
 
 
 #pragma mark  获取考勤情况
--(void)queryAttendanceCountWithClazzid:(NSString*)clazzid withBlock:(XHClassManageHeaderBoardBackBlock)block
+-(void)queryAttendanceCountWithClazzid:(NSString*)clazzid withBackBlock:(BOOL)backBlock withBlock:(XHClassManageHeaderBoardBackBlock)block
 {
+    
     XHNetWorkConfig *netWorkConfig = [[XHNetWorkConfig alloc]init];
     [netWorkConfig setObject:clazzid forKey:@"clazzId"];
     [netWorkConfig postWithUrl:@"zzjt-app-api_attendanceSheet003" sucess:^(id object, BOOL verifyObject)
@@ -157,14 +158,22 @@
              NSString *bizCount = [propValue objectItemKey:@"bizCount"]; //!< 请假人数
              
              [self setActual:attendanceCount withLeave:bizCount withLate:noAttendanceCount];
-             block(YES);
+             if (backBlock)
+             {
+                 block(YES);
+             }
+             
          }
          
      } error:^(NSError *error)
-    {
-        block(YES);
-    }];
+     {
+         if (backBlock)
+         {
+             block(YES);
+         }
+     }];
 }
+
 
 
 
@@ -192,7 +201,7 @@
              {
                  if (refresh)
                  {
-                     
+                     [self queryAttendanceCountWithClazzid:self.classid withBackBlock:NO withBlock:nil];
                  }
                  
              }];

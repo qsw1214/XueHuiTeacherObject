@@ -101,6 +101,7 @@
 -(void)didSelectItemObjectAtIndexPath:(XHDropDownMenuModel*)object
 {
     [self.contentView setItemObject:object.model];
+    [self.dropDownControl setText:object.title withNumberType:0 withAllType:NO];
 }
 
 #pragma mark - Getter /  Setter
