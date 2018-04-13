@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "XHDayRollCallModel.h"
 @interface XHDayRollCollectionViewCell : UICollectionViewCell
-@property(nonatomic,strong)UIImageView *headImgView;
+@property(nonatomic,strong)XHHeaderControl *headImgViewControl;
 @property(nonatomic,strong)XHBaseLabel *nameLabel;
 @property(nonatomic,strong)UIImageView *selectImgView;
 -(void)setItemObject:(XHDayRollCallModel *)model;
