@@ -25,7 +25,6 @@
     NSInteger _tag;
     NSInteger _selectNumber;
     NSString *_dateStr;
-    NSInteger _number;
 }
 @property(nonatomic,strong)XHClassSignView *classSignView;
 @property(nonatomic,strong)XHSignListView *signListView;
@@ -47,7 +46,6 @@
     // Do any additional setup after loading the view.
     [self setNavtionTitle:@"课堂点名"];
     [self setItemContentType:NavigationIconype withItemType:NavigationItemRightype withIconName:@"ico_date" withTitle:nil];
-    _number=2;
     _dateStr=[NSDate getDateStrWithDateFormatter:YY_DEFAULT_TIME_FORM Date:[NSDate date]];
     [self.view addSubview:self.classSignView];
     [self.view addSubview:self.signListView];
@@ -71,68 +69,66 @@
 #pragma mark- 刷新表数据
 -(void)refreshHead
 {
-    [[XHUserInfo sharedUserInfo] getClassList:^(BOOL isOK, NSMutableArray *classListArry) {
-        if (isOK) {
-            XHClassListModel *model=[XHUserInfo sharedUserInfo].classListArry[_number];
-            
-            [self.netWorkConfig setObject:_dateStr forKey:@"time"];
-            [self.netWorkConfig setObject:model.clazzId forKey:@"clazzId"];
-            [self.netWorkConfig postWithUrl:@"zzjt-app-api_attendanceSheet001" sucess:^(id object, BOOL verifyObject) {
-                if (verifyObject)
+    if (self.classListModel)
+    {
+        [self.netWorkConfig setObject:_dateStr forKey:@"time"];
+        [self.netWorkConfig setObject:self.classListModel.clazzId forKey:@"clazzId"];
+        [self.netWorkConfig postWithUrl:@"zzjt-app-api_attendanceSheet001" sucess:^(id object, BOOL verifyObject) {
+            if (verifyObject)
+            {
+                NSDictionary *objectDic=[object objectItemKey:@"object"];
+                NSDictionary *propValueDic=[objectDic objectItemKey:@"propValue"];
+                NSArray *arr=[propValueDic objectItemKey:@"attendanceSheetList"];
+                
+                if ([NSObject isArray:arr])
                 {
-                    NSDictionary *objectDic=[object objectItemKey:@"object"];
-                    NSDictionary *propValueDic=[objectDic objectItemKey:@"propValue"];
-                    NSArray *arr=[propValueDic objectItemKey:@"attendanceSheetList"];
-                    
-                    if ([NSObject isArray:arr])
+                    [self.noSignArry removeAllObjects];
+                    [self.signArry removeAllObjects];
+                    [self.otherArry removeAllObjects];
+                    for (NSDictionary *dic in arr)
                     {
-                        [self.noSignArry removeAllObjects];
-                        [self.signArry removeAllObjects];
-                        [self.otherArry removeAllObjects];
-                        for (NSDictionary *dic in arr)
+                        NSDictionary *Dic=[dic objectItemKey:@"propValue"];
+                        XHDayRollCallModel *model=[[XHDayRollCallModel alloc] initWithDic:Dic];
+                        if (![NSDate isSameDay:[NSDate getDateWithDateStr:_dateStr formatter:YY_DEFAULT_TIME_FORM] twoDate:[NSDate getDate:[NSDate date] formatter:YY_DEFAULT_TIME_FORM]])
                         {
-                            NSDictionary *Dic=[dic objectItemKey:@"propValue"];
-                            XHDayRollCallModel *model=[[XHDayRollCallModel alloc] initWithDic:Dic];
-                            if (![NSDate isSameDay:[NSDate getDateWithDateStr:_dateStr formatter:YY_DEFAULT_TIME_FORM] twoDate:[NSDate getDate:[NSDate date] formatter:YY_DEFAULT_TIME_FORM]])
+                            model.modelType=DayRollCallBeforType;
+                        }
+                        switch (model.modelType)
+                        {
+                            case DayRollCallNOSignType:
+                            case DayRollCallBeforType:
                             {
-                                model.modelType=DayRollCallBeforType;
+                                [self.noSignArry addObject:model];
                             }
-                            switch (model.modelType)
+                                break;
+                            case DayRollCallSignType:
                             {
-                                case DayRollCallNOSignType:
-                                    case DayRollCallBeforType:
-                                {
-                                    [self.noSignArry addObject:model];
-                                }
-                                    break;
-                                case DayRollCallSignType:
-                                {
-                                    [self.signArry addObject:model];
-                                }
-                                    break;
-                                case DayRollCallOtherType:
-                                {
-                                    [self.otherArry addObject:model];
-                                }
-                                    break;
+                                [self.signArry addObject:model];
                             }
+                                break;
+                            case DayRollCallOtherType:
+                            {
+                                [self.otherArry addObject:model];
+                            }
+                                break;
                         }
                     }
-                    
-                    [self.classSignView refreshClassView:model propValueDic:propValueDic];
-                    [self getDataArry];
-                    
                 }
-                [_collectionView refreshReloadData];
-            } error:^(NSError *error) {
-                [_collectionView refreshReloadData];
-            }];
-        }
-        else
-        {
+                
+                [self.classSignView refreshClassView:self.classListModel propValueDic:propValueDic];
+                [self getDataArry];
+                
+            }
             [_collectionView refreshReloadData];
-        }
-    }];
+        } error:^(NSError *error) {
+            [_collectionView refreshReloadData];
+        }];
+    }
+    else
+    {
+        [_collectionView refreshReloadData];
+    }
+      
     
 }
 #pragma mark- 更新数据源

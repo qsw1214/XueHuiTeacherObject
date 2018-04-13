@@ -532,7 +532,6 @@
 		8CBA35FF2011BBDB00485643 /* XHDayRollCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA35FE2011BBDB00485643 /* XHDayRollCallViewController.m */; };
 		8CBA36462011D7B200485643 /* XHCustomDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA36452011D7B200485643 /* XHCustomDatePickerView.m */; };
 		8CBEE21420185A57007EB93A /* SegmentedControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBEE21320185A57007EB93A /* SegmentedControlViewController.m */; };
-		8CBEE21720186D41007EB93A /* XHCourseReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBEE21620186D41007EB93A /* XHCourseReportViewController.m */; };
 		8CBEE21E201884F8007EB93A /* XHPunchSignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBEE21D201884F8007EB93A /* XHPunchSignViewController.m */; };
 		8CC22A6E2041087400E36966 /* XHChagePhoneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CC22A6B2041087300E36966 /* XHChagePhoneTableViewCell.xib */; };
 		8CC22A6F2041087400E36966 /* XHChagePhoneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC22A6D2041087400E36966 /* XHChagePhoneTableViewCell.m */; };
@@ -1610,8 +1609,6 @@
 		8CBA36452011D7B200485643 /* XHCustomDatePickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHCustomDatePickerView.m; sourceTree = "<group>"; };
 		8CBEE21220185A57007EB93A /* SegmentedControlViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SegmentedControlViewController.h; sourceTree = "<group>"; };
 		8CBEE21320185A57007EB93A /* SegmentedControlViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SegmentedControlViewController.m; sourceTree = "<group>"; };
-		8CBEE21520186D41007EB93A /* XHCourseReportViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHCourseReportViewController.h; sourceTree = "<group>"; };
-		8CBEE21620186D41007EB93A /* XHCourseReportViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHCourseReportViewController.m; sourceTree = "<group>"; };
 		8CBEE21C201884F8007EB93A /* XHPunchSignViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHPunchSignViewController.h; sourceTree = "<group>"; };
 		8CBEE21D201884F8007EB93A /* XHPunchSignViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHPunchSignViewController.m; sourceTree = "<group>"; };
 		8CC22A6B2041087300E36966 /* XHChagePhoneTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XHChagePhoneTableViewCell.xib; sourceTree = "<group>"; };
@@ -4065,8 +4062,6 @@
 		8CC76475200C8AE3007887C7 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				8CBEE21520186D41007EB93A /* XHCourseReportViewController.h */,
-				8CBEE21620186D41007EB93A /* XHCourseReportViewController.m */,
 				8CC7647B200C8C13007887C7 /* XHNewBulidViewController.h */,
 				8CC7647C200C8C13007887C7 /* XHNewBulidViewController.m */,
 				8CC7647E200C8C2A007887C7 /* XHHistoryViewController.h */,
@@ -4377,7 +4372,6 @@
 				4B07CC1D1FD4E48500B2DBDA /* XHLeaveRecordContentView.m in Sources */,
 				4B80F2441FCBF01B00BC7B52 /* BaseTableView.m in Sources */,
 				4B4D7FF2201AC5C0001D0BB0 /* XHParentAddressBookToolBar.m in Sources */,
-				8CBEE21720186D41007EB93A /* XHCourseReportViewController.m in Sources */,
 				4B80F27F1FCBF04800BC7B52 /* MJRefreshAutoGifFooter.m in Sources */,
 				8CBA36462011D7B200485643 /* XHCustomDatePickerView.m in Sources */,
 				4B3418761FFDC14C00A5EC56 /* UIView+CustomControlView.m in Sources */,
@@ -4535,11 +4529,8 @@
 				8C1AA811207B13D200DDCBB3 /* XHNoticeRecipientModel.m in Sources */,
 				4B80F2831FCBF04800BC7B52 /* MJRefreshBackNormalFooter.m in Sources */,
 				4B80F3251FCBFD6F00BC7B52 /* NSError+MTLModelException.m in Sources */,
-
 				8C2E72FE2080598A00D6E451 /* XHCoursePeportModel.m in Sources */,
-
 				042F0DCF20805C1300B26553 /* XHCookBookHeader.m in Sources */,
-
 				4B550E4D1FF364AD004CF7ED /* XHSortedArrayComparator.m in Sources */,
 				4BB8E21B2046333C0081FC6D /* XHDropDownMenuCell.m in Sources */,
 				4B80F31D1FCBFD6F00BC7B52 /* MTLModel.m in Sources */,
