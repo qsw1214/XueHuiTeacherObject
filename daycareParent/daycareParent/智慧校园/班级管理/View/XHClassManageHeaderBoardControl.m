@@ -12,7 +12,7 @@
 #import "XHAchievementViewController.h" //成绩管理
 #import "XHParentAddressBookViewController.h" //联系家长
 #import "XHDayRollCallViewController.h"  //班级点名
-
+#import "XHChatListViewController.h"//聊天列表
 
 @interface XHClassManageHeaderBoardControl ()
 
@@ -224,7 +224,8 @@
 #pragma mark case 8 留言消息
         case 8:
         {
-            
+            XHChatListViewController *chatList=[[XHChatListViewController alloc] initHiddenWhenPushHidden];
+            [DCURLRouter pushViewController:chatList animated:YES];
         }
             break;
     }

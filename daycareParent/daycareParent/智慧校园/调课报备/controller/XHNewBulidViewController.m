@@ -215,7 +215,7 @@ typedef NS_ENUM(NSInteger,XHNewBulidModelType)
     
     if (indexPath.row >self.dataArray.count)
     {
-        [self.calendarView show];
+        
     }
     else
     {
@@ -224,7 +224,7 @@ typedef NS_ENUM(NSInteger,XHNewBulidModelType)
             switch (indexPath.row) {
                 case 1:
                 {
-                    
+                    [self.calendarView show];
                 }
                     break;
                     

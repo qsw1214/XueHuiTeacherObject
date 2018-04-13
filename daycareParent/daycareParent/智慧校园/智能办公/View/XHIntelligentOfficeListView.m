@@ -9,7 +9,7 @@
 #import "XHIntelligentOfficeListView.h"
 #import "XHAddressBoardViewController.h" //通讯录
 #import "XHCookBookViewController.h" //食谱
-
+#import "XHNewBulidViewController.h"//调代课
 
 #define kTitle @[@"通讯录",@"调代课",@"今日课程",@"请假",@"食谱管理"]
 #define kTitlePic @[@"ico_txl",@"ico_daike",@"ico_kec",@"ico_qingjia",@"ico_shipu"]
@@ -55,7 +55,8 @@
 #pragma mark case 2 调代课
         case 2:
         {
-            
+            XHNewBulidViewController *new=[[XHNewBulidViewController alloc] initHiddenWhenPushHidden];
+            [DCURLRouter pushViewController:new animated:YES];
         }
             break;
 #pragma mark case 3 今日课程

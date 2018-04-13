@@ -272,6 +272,10 @@
                     ParentControl *control=[self.signListView viewWithTag:_tag];
                     [control setLabelTextColor:MainColor withNumberIndex:0];
                     [control setLabelBackgroundColor:MainColor withNumberIndex:1];
+                    if (self.isRefresh)
+                    {
+                        self.isRefresh(YES);
+                    }
                 }
                 [self.collectionView beginRefreshing];
             } error:^(NSError *error) {
