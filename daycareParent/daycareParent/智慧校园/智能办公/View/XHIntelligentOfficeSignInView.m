@@ -8,44 +8,73 @@
 
 #import "XHIntelligentOfficeSignInView.h"
 #import "XHSignCollectionViewCell.h"
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <AMapLocationKit/AMapLocationKit.h>
+#import "XHPunchSignRecordViewController.h"
+
+
 @interface XHIntelligentOfficeSignInView()<UICollectionViewDelegate,
 UICollectionViewDataSource>
-@property(nonatomic,strong)ParentImageView *bgImageView;
-@property(nonatomic,strong)ParentControl *signControl;
-@property(nonatomic,strong)UIButton  *signHistoryButton;
-@property(nonatomic,strong)ParentControl *signListControl;
-@property(nonatomic,strong)UICollectionView *signListCollectionView;
-@property(nonatomic,strong)UICollectionViewFlowLayout *colletionLayout;
-@property(nonatomic,strong)NSMutableArray *dataSource;
-@property(nonatomic,strong)NSTimer *timer;
+
+
+@property (nonatomic,strong) AMapLocationManager *locationManager;
+@property(nonatomic,strong) ParentImageView *bgImageView;
+@property(nonatomic,strong) ParentControl *signControl;
+@property(nonatomic,strong) UIButton  *signHistoryButton;
+@property(nonatomic,strong) ParentControl *signListControl;
+@property(nonatomic,strong) UICollectionView *signListCollectionView;
+@property(nonatomic,strong) UICollectionViewFlowLayout *colletionLayout;
+@property(nonatomic,strong) NSMutableArray *dataArray;
+@property(nonatomic,strong) NSTimer *timer;
+
+
+
 @end
 
 @implementation XHIntelligentOfficeSignInView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+
+
+
 -(instancetype)initWithFrame:(CGRect)frame
 {
-    if (self=[super initWithFrame:frame]) {
+    if (self=[super initWithFrame:frame])
+    {
         self.backgroundColor=[UIColor whiteColor];
         [self addSubview:self.bgImageView];
         [self addSubview:self.signControl];
         [self addSubview:self.signHistoryButton];
         [self addSubview:self.signListCollectionView];
+        
+        
+        
+        for (int i = 0; i< 2; i++)
+        {
+            XHIntelligentOfficeSignModel *model = [[XHIntelligentOfficeSignModel alloc]init];
+            [model setDate:@"08:23"];
+            [self.dataArray addObject:model];
+        }
+        
+        for (int i = 0; i< 2; i++)
+        {
+            XHIntelligentOfficeSignModel *model = [[XHIntelligentOfficeSignModel alloc]init];
+            [self.dataArray addObject:model];
+        }
+        
+        
     }
     return self;
 }
+
+
 -(void)resetFrame:(CGRect)frame
 {
     [self setFrame:frame];
     self.signListCollectionView.frame=CGRectMake(5, frame.size.height-20-50, frame.size.width-85, 50);
     
     self.signHistoryButton.frame=CGRectMake(SCREEN_WIDTH-65-10, frame.size.height-20-40, 65, 30);
+    
+    [self.signListCollectionView reloadData];
 }
 -(void)addTimer
 {
@@ -65,33 +94,124 @@ UICollectionViewDataSource>
 -(void)controlMethod:(UIControl *)control
 {
     kNSLog(@"时间签到");
+    
+    
+    switch (control.tag)
+    {
+#pragma mark case 1 打卡签到
+        case 1:
+        {
+            [self startLocation];
+        }
+            break;
+#pragma mark case 2 签到记录
+        case 2:
+        {
+            XHPunchSignRecordViewController *signRecord = [[XHPunchSignRecordViewController alloc]initHiddenWhenPushHidden];
+            [DCURLRouter pushViewController:signRecord animated:YES];
+        }
+            break;
+    }
+    
+    
 }
+
+
+
+
+
+
 #pragma mark- collectionDelegate
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
     XHSignCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    [cell setItemObject:nil withIndexPathRow:indexPath.row];
+    [cell setItemObject:[self.dataArray objectAtIndex:indexPath.row]];
     return cell;
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
 }
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 4;
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return [self.dataArray count];
 }
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat width = (UI_SCREEN_WIDTH - 85) / 4;
-    return CGSizeMake(width, width);
+
+
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat width = (UI_SCREEN_WIDTH - 85.0) / 4;
+    return CGSizeMake(width, 50.0);
 }
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
     return 0.0;
 }
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     return 0.0;
 }
+
+
+
+
+#pragma mark - Private Method
+#pragma mark 开始打卡定位
+- (void)startLocation
+{
+    [XHShowHUD showTextHud:@"获取位置..."];
+    // 带逆地理（返回坐标和地址信息）
+    @WeakObj(self);
+    [self.locationManager requestLocationWithReGeocode:YES completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error)
+    {
+        @StrongObj(self);
+        [XHShowHUD hideHud];
+        if (error)
+        {
+            NSLog(@"locError:---%ld===%@",(long)error.code, error.localizedDescription);
+            [XHShowHUD showNOHud:@"获取位置信息失败"];
+        }
+        
+        if (regeocode)
+        {
+            
+            [self signWithLocation:location];
+        }
+    }];
+    
+}
+#pragma mark  打卡方法
+- (void)signWithLocation:(CLLocation *)location
+{
+    XHNetWorkConfig *netWorkConfig = [[XHNetWorkConfig alloc]init];
+    [netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"selfId"];
+    [netWorkConfig setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
+    [netWorkConfig setObject:[NSString stringWithFormat:@"%@",@(location.coordinate.latitude)] forKey:@"latitude"];
+    [netWorkConfig setObject:[NSString stringWithFormat:@"%@",@(location.coordinate.longitude)] forKey:@"longitude"];
+    [netWorkConfig postWithUrl:@"pmschool-teacher-api_/teacher/attendanceSheet/signIn" sucess:^(id object, BOOL verifyObject)
+    {
+        if (verifyObject)
+        {
+            [XHShowHUD showOKHud:@"签到成功!"];
+        }
+        
+    } error:^(NSError *error)
+    {
+        
+    }];
+}
+
+
+
+
+#pragma mark - Getter /  Setter
 -(ParentImageView *)bgImageView
 {
     if (_bgImageView==nil) {
@@ -151,7 +271,6 @@ UICollectionViewDataSource>
         _signListCollectionView.scrollsToTop = YES;
         _signListCollectionView.alwaysBounceVertical = YES;
         [_signListCollectionView registerClass:[XHSignCollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
-        _signListCollectionView.backgroundColor = [UIColor whiteColor];
     }
     return _signListCollectionView;
 }
@@ -176,11 +295,28 @@ UICollectionViewDataSource>
     }
     return _signHistoryButton;
 }
--(NSMutableArray *)dataSource
+-(NSMutableArray *)dataArray
 {
-    if (_dataSource==nil) {
-        _dataSource=[[NSMutableArray alloc] init];
+    if (_dataArray==nil) {
+        _dataArray=[[NSMutableArray alloc] init];
     }
-    return _dataSource;
+    return _dataArray;
+}
+
+
+-(AMapLocationManager *)locationManager
+{
+    if (!_locationManager)
+    {
+        
+        _locationManager = [[AMapLocationManager alloc] init];
+        // 带逆地理信息的一次定位（返回坐标和地址信息）
+        [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+        //   定位超时时间，最低2s，此处设置为10s
+        [_locationManager setLocationTimeout:10];
+        //   逆地理请求超时时间，最低2s，此处设置为10s
+        [_locationManager setReGeocodeTimeout:10];
+    }
+    return _locationManager;
 }
 @end

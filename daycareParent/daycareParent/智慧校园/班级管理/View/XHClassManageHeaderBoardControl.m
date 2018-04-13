@@ -11,9 +11,14 @@
 #import "XHAddNoticeViewController.h"  //发布通知
 #import "XHAchievementViewController.h" //成绩管理
 #import "XHParentAddressBookViewController.h" //联系家长
+#import "XHDayRollCallViewController.h"  //班级点名
 
 
 @interface XHClassManageHeaderBoardControl ()
+
+
+
+@property (nonatomic,copy) NSString *classid; //!< 班级id
 
 @property (nonatomic,strong) UIImageView *imageView;
 
@@ -130,6 +135,7 @@
 #pragma mark - 设置班级id用于获取当前班级考勤情况
 -(void)setItemObject:(id)object withBlock:(XHClassManageHeaderBoardBackBlock)block
 {
+    [self setClassid:object];
     [self queryAttendanceCountWithClazzid:object withBlock:block];
 }
 
@@ -176,11 +182,13 @@
 {
     switch (sender.tag)
     {
+#pragma mark - case 123 考勤
         case 1:
         case 2:
         case 3:
         {
-            
+            XHDayRollCallViewController *dayroll = [[XHDayRollCallViewController alloc]initHiddenWhenPushHidden];
+            [DCURLRouter pushViewController:dayroll animated:YES];
         }
             break;
 #pragma mark case 4 成绩管理

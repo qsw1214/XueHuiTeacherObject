@@ -7,7 +7,12 @@
 //
 
 #import "ParentCollectionViewCell.h"
+#import "XHIntelligentOfficeSignModel.h"
+
 
 @interface XHSignCollectionViewCell : ParentCollectionViewCell
+
+
+
 
 @end

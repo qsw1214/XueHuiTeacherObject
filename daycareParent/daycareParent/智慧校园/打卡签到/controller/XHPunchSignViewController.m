@@ -169,6 +169,9 @@
         [XHShowHUD showNOHud:err.domain delay:2.0f];
     }];
 }
+
+
+
 #pragma mark - loaddata
 - (void)loadData:(NSDate *)endDate beginDate:(NSDate *)beginDate
 {
@@ -176,6 +179,8 @@
     [self.netWorkConfig setObject:[XHUserInfo sharedUserInfo].schoolId forKey:@"schoolId"];
     [self.netWorkConfig setObject:[NSDate getDateStrWithDateFormatter:ALL_DEFAULT_TIME_FORM Date:beginDate] forKey:@"beginTime"];
     [self.netWorkConfig setObject:[NSDate getDateStrWithDateFormatter:ALL_DEFAULT_TIME_FORM Date:[NSDate getDayAfterWithDate:endDate dayAfter:1]] forKey:@"endTime"];
+    
+    
     [self.netWorkConfig postWithUrl:@"pmschool-teacher-api_/teacher/attendanceSheet/list" sucess:^(id object, BOOL verifyObject) {
         if (verifyObject) {
             [self.dataArray removeAllObjects];

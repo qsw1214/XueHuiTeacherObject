@@ -170,7 +170,8 @@
     if (!_dateLabel)
     {
         _dateLabel = [[UILabel alloc]init];
-        [_dateLabel setText:@"2018-04-10 12:35:26"];
+        [_dateLabel setTextColor:RGB(51,51,51)];
+        [_dateLabel setFont:[UIFont systemFontOfSize:13.0]];
     }
     return _dateLabel;
 }
@@ -181,6 +182,7 @@
     {
         _titleLabel = [[UILabel alloc]init];
         [_titleLabel setFont:[UIFont boldSystemFontOfSize:16.0]];
+        [_titleLabel setTextColor:RGB(51,51,51)];
         [_titleLabel setText:@"调课申请"];
     }
     return _titleLabel;
@@ -205,6 +207,7 @@
     if (!_targetTeacherLabel)
     {
         _targetTeacherLabel = [[UILabel alloc]init];
+        [_targetTeacherLabel setTextColor:RGB(51,51,51)];
         [_targetTeacherLabel setFont:[UIFont systemFontOfSize:13.0]];
         [_targetTeacherLabel setNumberOfLines:0];
         [_targetTeacherLabel setText:@"轩逸的优势主要在于舒适性，这也是日产品牌一贯的特点。轩逸的座椅是三者里对身体承托承最好的，侧围及椅背都能与身体很好的接触，且能起到不弱的支撑作用，坐在上面比较放松。行驶起来后，轩逸的CVT变速箱的表现会异常平顺，再加上较软的悬架可以将颠簸尽量过滤，会给带来较强的舒适性。还有点值得一提，轩逸的两款高配车型可以选装日产的i-SAFETY智能防碰撞系统，主动安全性方面的表现是另外两款车型无法相比的。"];
@@ -217,8 +220,8 @@
     if (!_startTimeLabel)
     {
         _startTimeLabel = [[UILabel alloc]init];
+        [_startTimeLabel setTextColor:RGB(51,51,51)];
         [_startTimeLabel setFont:[UIFont systemFontOfSize:13.0]];
-        [_startTimeLabel setText:@"审批人：姚立志"];
     }
     return _startTimeLabel;
 }
@@ -228,8 +231,8 @@
     if (!_endTimeLabel)
     {
         _endTimeLabel = [[UILabel alloc]init];
+        [_endTimeLabel setTextColor:RGB(51,51,51)];
         [_endTimeLabel setFont:[UIFont systemFontOfSize:13.0]];
-        [_endTimeLabel setText:@"审批人：姚立志"];
     }
     return _endTimeLabel;
 }
@@ -240,8 +243,8 @@
     if (!_teacherLabel)
     {
         _teacherLabel = [[UILabel alloc]init];
+        [_teacherLabel setTextColor:RGB(51,51,51)];
         [_teacherLabel setFont:[UIFont systemFontOfSize:13.0]];
-        [_teacherLabel setText:@"审批人：姚立志"];
     }
     return _teacherLabel;
 }

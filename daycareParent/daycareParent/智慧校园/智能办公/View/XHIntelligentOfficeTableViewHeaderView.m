@@ -10,10 +10,13 @@
 #import "XHIntelligentOfficeSignInView.h"
 #import "XHIntelligentOfficeListView.h"
 @interface XHIntelligentOfficeTableViewHeaderView()
-@property(nonatomic,strong) XHIntelligentOfficeSignInView *signInView;
-@property(nonatomic,strong) XHIntelligentOfficeListView *listView;
-@property(nonatomic,strong) ParentControl *infomationControl;
-@property(nonatomic,strong) ParentLabel *tipLabel;
+
+
+
+@property(nonatomic,strong) XHIntelligentOfficeSignInView *signInView; //!< 签到视图
+@property(nonatomic,strong) XHIntelligentOfficeListView *listView; //!< 几个智能办公按钮
+@property(nonatomic,strong) ParentControl *infomationControl;  //!< 学校通知
+@property(nonatomic,strong) ParentLabel *tipLabel; //!< 提示标签
 @end
 
 
@@ -89,7 +92,7 @@
         [_infomationControl setLabelTextColor:RGB(50, 50, 50) withNumberIndex:2];
         [_infomationControl setLabelFont:kFont(13) withNumberIndex:2];
         [_infomationControl setLabelNumberOfLines:0 withNumberIndex:2];
-        [_infomationControl setLabelText:@"  1886年5月1日，资本主义阵营老大哥美国芝加哥工人在这一天不约而同走上街头为争取8小时工作制罢工了，而且席卷全美，人数达35万之多。" withNumberIndex:2];
+        [_infomationControl setLabelText:@"  1886年5月1日，资本主义阵营老大哥美国芝加哥工1886年5月1日，资本主义阵营老大哥美国芝加哥工188" withNumberIndex:2];
         
          [_infomationControl setLabelCGRectMake:CGRectMake(0, 95, (SCREEN_WIDTH-20), 1) withNumberIndex:3];
         [_infomationControl setLabelBackgroundColor:LineViewColor withNumberIndex:3];
