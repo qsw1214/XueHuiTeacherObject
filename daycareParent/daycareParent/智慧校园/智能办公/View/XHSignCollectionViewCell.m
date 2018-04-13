@@ -36,26 +36,33 @@
         [self.dotView setLayerCornerRadius:(self.dotView.height/2.0)];
         [self.imageView setFrame:CGRectMake(((frame.size.width-15.0)/2.0), 2.5, 15.0, 15.0)];
         [self.dateLabel setFrame:CGRectMake(0.0, 25.0, frame.size.width, 25.0)];
-        [self.dateLabel setBackgroundColor:[UIColor orangeColor]];
-       
         
-//        [self.contentView setBackgroundColor:[UIColor orangeColor]];
     }
     return self;
 }
 -(void)setItemObject:(XHIntelligentOfficeSignModel*)object
 {
-    if (object.date)
+    switch (object.modelType)
     {
-        [self.imageView setHidden:NO];
-        [self.dateLabel setText:object.date];
+        case XHIntelligentOfficeSignEmptyType:
+        {
+            [self.imageView setHidden:YES];
+            [self.dateLabel setText:@""];
+        }
+            break;
+        case XHIntelligentOfficeSigWeekAndDateType:
+        {
+            [self.imageView setHidden:YES];
+            [self.dateLabel setText:object.date];
+        }
+            break;
+        case XHIntelligentOfficeSignTimeType:
+        {
+            [self.imageView setHidden:NO];
+            [self.dateLabel setText:object.date];
+        }
+            break;
     }
-    else
-    {
-        [self.imageView setHidden:YES];
-        [self.dateLabel setText:@""];
-    }
-    
 }
 
 

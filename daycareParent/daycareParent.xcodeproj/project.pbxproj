@@ -27,8 +27,8 @@
 		042F0D9420803B4C00B26553 /* XHPunchSignRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F0D9320803B4C00B26553 /* XHPunchSignRecordViewController.m */; };
 		042F0D9720803B7C00B26553 /* XHPunchSignRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F0D9620803B7C00B26553 /* XHPunchSignRecordModel.m */; };
 		042F0D9A20803B8E00B26553 /* XHPunchSignRecordFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F0D9920803B8E00B26553 /* XHPunchSignRecordFrame.m */; };
-		042F0D9D20803BB000B26553 /* XHPunchSignRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F0D9C20803BB000B26553 /* XHPunchSignRecordCell.m */; };
 		042F0DA020804A0600B26553 /* XHIntelligentOfficeSignModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F0D9F20804A0600B26553 /* XHIntelligentOfficeSignModel.m */; };
+		042F0DA3208056DB00B26553 /* XHPunchSignRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F0DA1208056DA00B26553 /* XHPunchSignRecordCell.m */; };
 		0446B4D5207B558400A1BF1E /* AliyunOSSiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0446B4D4207B558400A1BF1E /* AliyunOSSiOS.framework */; };
 		0446B4DC207B655200A1BF1E /* XHClassManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0446B4DB207B655200A1BF1E /* XHClassManageViewController.m */; };
 		046BB204207C455700209C9B /* DCURLRouter.plist in Resources */ = {isa = PBXBuildFile; fileRef = 046BB1FC207C455700209C9B /* DCURLRouter.plist */; };
@@ -617,10 +617,10 @@
 		042F0D9620803B7C00B26553 /* XHPunchSignRecordModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHPunchSignRecordModel.m; sourceTree = "<group>"; };
 		042F0D9820803B8E00B26553 /* XHPunchSignRecordFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHPunchSignRecordFrame.h; sourceTree = "<group>"; };
 		042F0D9920803B8E00B26553 /* XHPunchSignRecordFrame.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHPunchSignRecordFrame.m; sourceTree = "<group>"; };
-		042F0D9B20803BB000B26553 /* XHPunchSignRecordCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHPunchSignRecordCell.h; sourceTree = "<group>"; };
-		042F0D9C20803BB000B26553 /* XHPunchSignRecordCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHPunchSignRecordCell.m; sourceTree = "<group>"; };
 		042F0D9E20804A0600B26553 /* XHIntelligentOfficeSignModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHIntelligentOfficeSignModel.h; sourceTree = "<group>"; };
 		042F0D9F20804A0600B26553 /* XHIntelligentOfficeSignModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHIntelligentOfficeSignModel.m; sourceTree = "<group>"; };
+		042F0DA1208056DA00B26553 /* XHPunchSignRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHPunchSignRecordCell.m; sourceTree = "<group>"; };
+		042F0DA2208056DA00B26553 /* XHPunchSignRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHPunchSignRecordCell.h; sourceTree = "<group>"; };
 		0446B4D4207B558400A1BF1E /* AliyunOSSiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AliyunOSSiOS.framework; sourceTree = "<group>"; };
 		0446B4DA207B655200A1BF1E /* XHClassManageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHClassManageViewController.h; sourceTree = "<group>"; };
 		0446B4DB207B655200A1BF1E /* XHClassManageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHClassManageViewController.m; sourceTree = "<group>"; };
@@ -3960,8 +3960,8 @@
 			children = (
 				8C9D92EB201EEBF200F4A28E /* XHPunchSignTableViewCell.h */,
 				8C9D92EC201EEBF200F4A28E /* XHPunchSignTableViewCell.m */,
-				042F0D9B20803BB000B26553 /* XHPunchSignRecordCell.h */,
-				042F0D9C20803BB000B26553 /* XHPunchSignRecordCell.m */,
+				042F0DA2208056DA00B26553 /* XHPunchSignRecordCell.h */,
+				042F0DA1208056DA00B26553 /* XHPunchSignRecordCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -4595,12 +4595,12 @@
 				8C1AA866207B13FA00DDCBB3 /* PHAsset+Extend.m in Sources */,
 				8CDD6EA3207CA2C5004F0E48 /* XHCalendarView.m in Sources */,
 				8C1AA827207B13D200DDCBB3 /* XHNoticeViewController.m in Sources */,
-				042F0D9D20803BB000B26553 /* XHPunchSignRecordCell.m in Sources */,
 				4B8E66211FD646310006D641 /* XHCookBookModel.m in Sources */,
 				4B11AF3B1FCCEA89002738F1 /* XHPersonalCenterViewController.m in Sources */,
 				8C1AA805207B13D200DDCBB3 /* XHParentsMeetingFrame.m in Sources */,
 				4B34187C1FFDC14C00A5EC56 /* ZFPlayerControlView.m in Sources */,
 				4B80F2851FCBF04800BC7B52 /* MJRefreshGifHeader.m in Sources */,
+				042F0DA3208056DB00B26553 /* XHPunchSignRecordCell.m in Sources */,
 				042EFA27207E135E0089FE83 /* XHSyllabusBoardControl.m in Sources */,
 				4B80F2811FCBF04800BC7B52 /* MJRefreshAutoStateFooter.m in Sources */,
 				8C7E5BC2207DB07100DA6F15 /* XHSubmitView.m in Sources */,
