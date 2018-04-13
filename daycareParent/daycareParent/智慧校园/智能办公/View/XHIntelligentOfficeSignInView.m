@@ -185,11 +185,13 @@ UICollectionViewDataSource>
         if (verifyObject)
         {
             [XHShowHUD showOKHud:@"签到成功!"];
+            
+            [self getSign:YES];
         }
         
     } error:^(NSError *error)
     {
-        
+        [XHShowHUD showOKHud:@"签到失败!"];
     }];
 }
 
@@ -212,7 +214,7 @@ UICollectionViewDataSource>
                     NSDictionary *itemObject = [obj objectItemKey:@"propValue"];
                     NSString *time = [itemObject objectItemKey:@"shortTime"];
                     XHIntelligentOfficeSignModel *model = [[XHIntelligentOfficeSignModel alloc]init];
-                    [model setModelType:XHIntelligentOfficeSigWeekAndDateType];
+                    [model setModelType:XHIntelligentOfficeSignTimeType];
                     [model setDate:time];
                     [self.dataArray addObject:model];
                 }

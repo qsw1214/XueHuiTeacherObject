@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x98df;&#x8c31;/ViewController/XHCookBookViewController.m"
-            timestampString = "545293533.063161"
+            timestampString = "545295692.566223"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "111"
@@ -26,12 +26,12 @@
                   moduleName = "daycareParent"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mac/XueHuiTeacherObject/daycareParent/daycareParent/%E6%99%BA%E6%85%A7%E6%A0%A1%E5%9B%AD/%E9%A3%9F%E8%B0%B1/ViewController/XHCookBookViewController.m"
-                  timestampString = "545293533.079416"
+                  timestampString = "545295692.8427041"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "111"
                   endingLineNumber = "111"
-                  offsetFromSymbolStart = "180">
+                  offsetFromSymbolStart = "176">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -41,12 +41,12 @@
                   moduleName = "daycareParent"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mac/XueHuiTeacherObject/daycareParent/daycareParent/%E6%99%BA%E6%85%A7%E6%A0%A1%E5%9B%AD/%E9%A3%9F%E8%B0%B1/ViewController/XHCookBookViewController.m"
-                  timestampString = "545293533.082245"
+                  timestampString = "545295692.8451459"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "111"
                   endingLineNumber = "111"
-                  offsetFromSymbolStart = "16">
+                  offsetFromSymbolStart = "20">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x98df;&#x8c31;/ViewController/XHCookBookViewController.m"
-            timestampString = "545293533.063235"
+            timestampString = "545295692.56631"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "113"
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x98df;&#x8c31;/ViewController/XHCookBookViewController.m"
-            timestampString = "545293533.063292"
+            timestampString = "545295692.566368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "77"
@@ -90,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x98df;&#x8c31;/ViewController/XHCookBookViewController.m"
-            timestampString = "545293533.063345"
+            timestampString = "545295692.566422"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "53"
@@ -121,13 +121,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x73ed;&#x7ea7;&#x7ba1;&#x7406;/View/XHClassManageHeaderBoardControl.m"
-            timestampString = "545293574.23788"
+            filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x6253;&#x5361;&#x7b7e;&#x5230;/controller/XHPunchSignRecordViewController.m"
+            timestampString = "545295692.566532"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
-            landmarkName = "-queryAttendanceCountWithClazzid:withBackBlock:withBlock:"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
+            landmarkName = "-refreshHeaderAction"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -137,13 +137,125 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x73ed;&#x7ea7;&#x7ba1;&#x7406;/View/XHClassManageHeaderBoardControl.m"
-            timestampString = "545293582.173577"
+            filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x667a;&#x80fd;&#x529e;&#x516c;/View/XHIntelligentOfficeSignInView.m"
+            timestampString = "545295692.566915"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
-            landmarkName = "-queryAttendanceCountWithClazzid:withBackBlock:withBlock:"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
+            landmarkName = "-signWithLocation:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x667a;&#x80fd;&#x529e;&#x516c;/View/XHIntelligentOfficeSignInView.m"
+            timestampString = "545295692.5672311"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
+            landmarkName = "-startLocation"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x667a;&#x80fd;&#x529e;&#x516c;/View/XHIntelligentOfficeSignInView.m"
+            timestampString = "545295692.567533"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "-signWithLocation:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x667a;&#x80fd;&#x529e;&#x516c;/View/XHIntelligentOfficeSignInView.m"
+            timestampString = "545295692.567829"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
+            landmarkName = "-getSign:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x667a;&#x80fd;&#x529e;&#x516c;/View/XHIntelligentOfficeSignInView.m"
+            timestampString = "545295692.56812"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
+            landmarkName = "-getSign:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x667a;&#x80fd;&#x529e;&#x516c;/View/XHIntelligentOfficeSignInView.m"
+            timestampString = "545295692.568413"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
+            landmarkName = "-getSign:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x667a;&#x80fd;&#x529e;&#x516c;/View/XHIntelligentOfficeSignInView.m"
+            timestampString = "545295692.568709"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
+            landmarkName = "-getSign:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "daycareParent/&#x667a;&#x6167;&#x6821;&#x56ed;/&#x6253;&#x5361;&#x7b7e;&#x5230;/controller/XHPunchSignRecordViewController.m"
+            timestampString = "545295692.568966"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "-getNetWorkDataWithType:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
