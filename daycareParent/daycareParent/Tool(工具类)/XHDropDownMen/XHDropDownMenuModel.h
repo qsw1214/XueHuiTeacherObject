@@ -13,6 +13,7 @@
 //继承父类中“objectID”属性
 @property (nonatomic,strong) NSString *title;
 
+@property (nonatomic,strong) id model;
 
 
 

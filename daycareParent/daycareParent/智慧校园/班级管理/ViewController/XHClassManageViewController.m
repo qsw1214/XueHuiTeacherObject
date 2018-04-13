@@ -79,6 +79,7 @@
                  XHDropDownMenuModel *model = [[XHDropDownMenuModel alloc]init];
                  [model setTitle:obj.gradeAndClassName];
                  [model setObjectID:obj.clazzId];
+                 [model setModel:obj];
                  [itt addObject:model];
              }];
              
@@ -99,7 +100,7 @@
 #pragma mark XHDropDownMenuControlDeletage
 -(void)didSelectItemObjectAtIndexPath:(XHDropDownMenuModel*)object
 {
-    [self.contentView setItemObject:object];
+    [self.contentView setItemObject:object.model];
 }
 
 #pragma mark - Getter /  Setter
