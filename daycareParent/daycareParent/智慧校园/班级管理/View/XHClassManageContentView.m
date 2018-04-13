@@ -50,10 +50,11 @@
 }
 
 
--(void)setItemObject:(id)object
+-(void)setItemObject:(XHClassListModel*)object
 {
-    [self setClassid:object];
-    [self withClassid:object];
+    [self.boardControl setClassModel:object];
+    [self setClassid:object.clazzId];
+    [self withClassid:object.clazzId];
 }
 
 

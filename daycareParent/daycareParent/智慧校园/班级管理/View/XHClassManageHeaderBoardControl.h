@@ -14,8 +14,9 @@
 typedef void (^XHClassManageHeaderBoardBackBlock) (BOOL refresh);
 
 @interface XHClassManageHeaderBoardControl : BaseControl
-
+@property (nonatomic,strong) XHClassListModel *classModel; //!< 班级id
 
 -(void)setItemObject:(id)object withBlock:(XHClassManageHeaderBoardBackBlock)block;
+
 
 @end
