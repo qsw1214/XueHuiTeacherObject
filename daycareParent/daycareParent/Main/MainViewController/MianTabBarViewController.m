@@ -51,7 +51,7 @@
     UINavigationController *imNoticeNavigation = [[UINavigationController alloc] initWithRootViewController:imNotice];
     [self addChildViewController:imNoticeNavigation];
 
-    XHSmartCampusViewController *educationCloud = [[XHSmartCampusViewController alloc] init];
+    XHEducationCloudViewController *educationCloud = [[XHEducationCloudViewController alloc] init];
     [educationCloud navtionItemHidden:NavigationItemLeftType];
     //创建tabBarItem
     TabBarItem *educationCloudTabBarItem = [[TabBarItem alloc]initWithTitle:@"浩学云" imageName:@"ico_haoxueyunhui" selectedImageName:@"ico_haoxueyunse"];

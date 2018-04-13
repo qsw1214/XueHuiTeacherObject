@@ -128,7 +128,7 @@
 #pragma mark case 8 班级动态
         case 8:
         {
-            XHChatListViewController *dynamics = [[XHChatListViewController alloc]initHiddenWhenPushHidden];
+            XHDynamicsViewController *dynamics = [[XHDynamicsViewController alloc]initHiddenWhenPushHidden];
             [self.navigationController pushViewController:dynamics animated:YES];
         }
             break;

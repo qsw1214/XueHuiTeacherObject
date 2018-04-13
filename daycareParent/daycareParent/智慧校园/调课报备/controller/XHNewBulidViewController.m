@@ -215,16 +215,17 @@ typedef NS_ENUM(NSInteger,XHNewBulidModelType)
     
     if (indexPath.row >self.dataArray.count)
     {
-        [self.calendarView show];
+        
     }
     else
     {
+         [self.calendarView show];
         if (self.modelType==XHNewBulidMelodyType)
         {
             switch (indexPath.row) {
                 case 1:
                 {
-                    
+                   
                 }
                     break;
                     
