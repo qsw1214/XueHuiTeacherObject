@@ -42,6 +42,9 @@
 		042F0DC920805ADD00B26553 /* XHAlertControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F0DC520805ADC00B26553 /* XHAlertControl.m */; };
 		042F0DCC20805BEF00B26553 /* XHCookBookHeaderItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F0DCB20805BEF00B26553 /* XHCookBookHeaderItemCell.m */; };
 		042F0DCF20805C1300B26553 /* XHCookBookHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F0DCE20805C1300B26553 /* XHCookBookHeader.m */; };
+		042F0DD22080878F00B26553 /* XHDateSwitchControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F0DD02080878F00B26553 /* XHDateSwitchControl.m */; };
+		042F0DD82080880F00B26553 /* XHDatePickerBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F0DD42080880F00B26553 /* XHDatePickerBoard.m */; };
+		042F0DD92080880F00B26553 /* XHDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F0DD72080880F00B26553 /* XHDatePicker.m */; };
 		0446B4D5207B558400A1BF1E /* AliyunOSSiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0446B4D4207B558400A1BF1E /* AliyunOSSiOS.framework */; };
 		0446B4DC207B655200A1BF1E /* XHClassManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0446B4DB207B655200A1BF1E /* XHClassManageViewController.m */; };
 		046BB204207C455700209C9B /* DCURLRouter.plist in Resources */ = {isa = PBXBuildFile; fileRef = 046BB1FC207C455700209C9B /* DCURLRouter.plist */; };
@@ -663,6 +666,12 @@
 		042F0DCB20805BEF00B26553 /* XHCookBookHeaderItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHCookBookHeaderItemCell.m; sourceTree = "<group>"; };
 		042F0DCD20805C1300B26553 /* XHCookBookHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHCookBookHeader.h; sourceTree = "<group>"; };
 		042F0DCE20805C1300B26553 /* XHCookBookHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHCookBookHeader.m; sourceTree = "<group>"; };
+		042F0DD02080878F00B26553 /* XHDateSwitchControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHDateSwitchControl.m; sourceTree = "<group>"; };
+		042F0DD12080878F00B26553 /* XHDateSwitchControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHDateSwitchControl.h; sourceTree = "<group>"; };
+		042F0DD42080880F00B26553 /* XHDatePickerBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHDatePickerBoard.m; sourceTree = "<group>"; };
+		042F0DD52080880F00B26553 /* XHDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHDatePicker.h; sourceTree = "<group>"; };
+		042F0DD62080880F00B26553 /* XHDatePickerBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHDatePickerBoard.h; sourceTree = "<group>"; };
+		042F0DD72080880F00B26553 /* XHDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHDatePicker.m; sourceTree = "<group>"; };
 		0446B4D4207B558400A1BF1E /* AliyunOSSiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AliyunOSSiOS.framework; sourceTree = "<group>"; };
 		0446B4DA207B655200A1BF1E /* XHClassManageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHClassManageViewController.h; sourceTree = "<group>"; };
 		0446B4DB207B655200A1BF1E /* XHClassManageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHClassManageViewController.m; sourceTree = "<group>"; };
@@ -1898,6 +1907,17 @@
 			path = XHAlert;
 			sourceTree = "<group>";
 		};
+		042F0DD32080880F00B26553 /* XHDatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				042F0DD42080880F00B26553 /* XHDatePickerBoard.m */,
+				042F0DD52080880F00B26553 /* XHDatePicker.h */,
+				042F0DD62080880F00B26553 /* XHDatePickerBoard.h */,
+				042F0DD72080880F00B26553 /* XHDatePicker.m */,
+			);
+			path = XHDatePicker;
+			sourceTree = "<group>";
+		};
 		0446B4D6207B651A00A1BF1E /* 班级管理 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2660,6 +2680,7 @@
 		4B80F2001FCBE43E00BC7B52 /* Tool(工具类) */ = {
 			isa = PBXGroup;
 			children = (
+				042F0DD32080880F00B26553 /* XHDatePicker */,
 				042F0DBD20805ADC00B26553 /* XHAlert */,
 				042F0DA420805A4300B26553 /* XHInfiniteRotation */,
 				8CDD6E36207C92B0004F0E48 /* XHCalendar */,
@@ -4056,6 +4077,8 @@
 		8CBEE21B201884BA007EB93A /* view */ = {
 			isa = PBXGroup;
 			children = (
+				042F0DD12080878F00B26553 /* XHDateSwitchControl.h */,
+				042F0DD02080878F00B26553 /* XHDateSwitchControl.m */,
 				8C9D92EB201EEBF200F4A28E /* XHPunchSignTableViewCell.h */,
 				8C9D92EC201EEBF200F4A28E /* XHPunchSignTableViewCell.m */,
 				042F0DA2208056DA00B26553 /* XHPunchSignRecordCell.h */,
@@ -4397,6 +4420,7 @@
 				8C1D47B8207B3E23005AA0B4 /* IQUIScrollView+Additions.m in Sources */,
 				8C1AA867207B13FA00DDCBB3 /* XHChatManager.m in Sources */,
 				8C331469202AC83200F504A9 /* PlayVideoViewController.m in Sources */,
+				042F0DD22080878F00B26553 /* XHDateSwitchControl.m in Sources */,
 				8C1AA88F207B162000DDCBB3 /* ParentLabel.m in Sources */,
 				8C8081731FCEABE600C7945A /* XHBaseBtn.m in Sources */,
 				8C1D47C1207B3E23005AA0B4 /* IQTitleBarButtonItem.m in Sources */,
@@ -4508,6 +4532,7 @@
 				8C1AA813207B13D200DDCBB3 /* XHAddNoticeContentView.m in Sources */,
 				4B3126461FDA1F75000CE894 /* XHAddressBookCellContentView.m in Sources */,
 				4BCEB7242029503900ED2829 /* XHAssignmentHomeWorkCollectionViewCell.m in Sources */,
+				042F0DD92080880F00B26553 /* XHDatePicker.m in Sources */,
 				4B34187E1FFDC14C00A5EC56 /* ZFPlayerView.m in Sources */,
 				8C1AA809207B13D200DDCBB3 /* XHParentsMeetingContentView.m in Sources */,
 				4B07CC1C1FD4DAC800B2DBDA /* XHLeaveRecordFrame.m in Sources */,
@@ -4668,6 +4693,7 @@
 				4BBC43481FD0F68200555846 /* BaseFrame.m in Sources */,
 				4B49763A1FECFCB400338D37 /* XHDynamicsPreviewControl.m in Sources */,
 				4BB792B91FD780C300E0ED72 /* XHAskforLeaveSubmitControl.m in Sources */,
+				042F0DD82080880F00B26553 /* XHDatePickerBoard.m in Sources */,
 				4BEBC8D420045EDA00FD6915 /* XHDynamicsHeaderControl.m in Sources */,
 				8C1AA869207B13FA00DDCBB3 /* XHPlaceholderTextView.m in Sources */,
 				4B80F28B1FCBF04800BC7B52 /* MJRefreshConst.m in Sources */,
@@ -5058,7 +5084,7 @@
 					"-ObjC",
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jt.xhm-yaolizhi";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jt.xhm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -5137,7 +5163,7 @@
 					"-ObjC",
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jt.xhm-yaolizhi";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jt.xhm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

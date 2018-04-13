@@ -27,7 +27,7 @@
 @property(nonatomic,strong)XHCustomView *classListView;
 @property(nonatomic,strong)XHCustomDatePickerView *datePickerView;//!< 日期选择器
 
-@property(nonatomic,copy)void(^isRefresh)(BOOL refresh);
+@property(nonatomic,copy) void(^isRefresh)(BOOL refresh);
 #pragma mark 初始化Tabbar自动隐藏
 -(instancetype)initHiddenWhenPushHidden;
 
