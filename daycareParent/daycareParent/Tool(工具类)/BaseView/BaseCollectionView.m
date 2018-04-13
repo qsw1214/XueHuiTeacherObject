@@ -112,6 +112,13 @@
 }
 
 
+-(void)resetHeight:(CGFloat)height
+{
+    [self setHeight:height];
+    
+    [self.tipView setFrame:CGRectMake(0, 0, self.frame.size.width, height)];
+}
+
 
 #pragma mark 设置提醒类型、提醒标题、提醒图标
 /**
@@ -135,6 +142,7 @@
     if (_tipView == nil)
     {
         _tipView = [[BaseTipView alloc]init];
+        [_tipView setItemColor:NO];
     }
     return _tipView;
 }

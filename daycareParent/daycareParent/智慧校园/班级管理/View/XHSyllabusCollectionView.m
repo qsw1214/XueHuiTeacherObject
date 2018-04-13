@@ -42,7 +42,8 @@
 -(void)setItemArray:(NSMutableArray *)itemArray
 {
     NSInteger itemArrayCount = [itemArray count];
-    [self setHeight:(itemArrayCount*50.0)];
+    [self resetHeight:(itemArrayCount ? (itemArrayCount*50.0) : 100)];
+//    [self setHeight:(itemArrayCount*50.0)];
     [self.dataArray setArray:itemArray];
     [self refreshReloadData];
 }
@@ -51,8 +52,9 @@
 
 #pragma mark - Deletage Method
 #pragma mark UICollectionViewDataSource
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+- (NSInteger)collectionView:(BaseCollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+    [collectionView tipViewWithArray:self.dataArray];
     return [self.dataArray count];
 }
 

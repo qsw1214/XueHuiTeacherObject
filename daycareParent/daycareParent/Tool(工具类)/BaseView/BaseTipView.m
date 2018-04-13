@@ -114,7 +114,8 @@
 {
     if (color)
     {
-        [self.tipButton setBackgroundColor:[UIColor redColor]];
+        [self setBackgroundColor:[UIColor orangeColor]];
+        [self.tipButton setBackgroundColor:[UIColor purpleColor]];
     }
 }
 

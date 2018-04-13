@@ -159,7 +159,7 @@
     [kWindow addSubview:self];
     [UIView animateWithDuration:0.25 animations:^{
         
-        [self.dropDownMenuCollectionView setHeight:200.0];
+        [self.dropDownMenuCollectionView setHeight:150.0];
         
     } completion:^(BOOL finished){}];
 }

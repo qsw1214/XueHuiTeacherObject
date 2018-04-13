@@ -23,6 +23,7 @@
 -(instancetype)init;
 -(instancetype)initWithType:(UICollectionViewScrollDirection)type;
 
+-(void)resetHeight:(CGFloat)height;
 
 
 
