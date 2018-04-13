@@ -47,11 +47,6 @@
     [self setNavtionTitle:@"课堂点名"];
     [self setItemContentType:NavigationIconype withItemType:NavigationItemRightype withIconName:@"ico_date" withTitle:nil];
     _dateStr=[NSDate getDateStrWithDateFormatter:YY_DEFAULT_TIME_FORM Date:[NSDate date]];
-    [self.view addSubview:self.classSignView];
-    [self.view addSubview:self.signListView];
-    [self.view addSubview:self.collectionView];
-    
-    
     [self.classSignView resetFrame:CGRectMake(15, self.navigationView.bottom+15, SCREEN_WIDTH-30, 80)];
     [self.signListView resetFrame:CGRectMake(0, self.classSignView.bottom, SCREEN_WIDTH, 40)];
     [self.signListView.signControlArry enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -59,6 +54,9 @@
         _tag=1;
         [control addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
     }];
+    [self.view addSubview:self.classSignView];
+    [self.view addSubview:self.signListView];
+    [self.view addSubview:self.collectionView];
     [self.collectionView showRefresHeaderWithTarget:self withSelector:@selector(refreshHead)];
     [self.collectionView beginRefreshing];
     
@@ -175,16 +173,16 @@
 #pragma mark- 是否显示全选视图
 -(void)getSelectAllView
 {
-    if (_tag==1) {
-        self.collectionView.frame=CGRectMake(0, self.navigationView.bottom+175, SCREEN_WIDTH,SCREEN_HEIGHT-(self.navigationView.bottom+175)-50);
+    if (_tag==1&&[NSDate isSameDay:[NSDate getDateWithDateStr:_dateStr formatter:YY_DEFAULT_TIME_FORM] twoDate:[NSDate getDate:[NSDate date] formatter:YY_DEFAULT_TIME_FORM]]) {
+        self.collectionView.frame=CGRectMake(0, self.signListView.bottom+10, SCREEN_WIDTH,SCREEN_HEIGHT-(self.signListView.bottom+10)-50);
     }
     else if (_tag==2)
     {
-        self.collectionView.frame=CGRectMake(0, self.navigationView.bottom+175, SCREEN_WIDTH,SCREEN_HEIGHT-(self.navigationView.bottom+175));
+        self.collectionView.frame=CGRectMake(0, self.signListView.bottom+10, SCREEN_WIDTH,SCREEN_HEIGHT-(self.signListView.bottom+10));
     }
     else
     {
-        self.collectionView.frame=CGRectMake(0, self.navigationView.bottom+175, SCREEN_WIDTH,SCREEN_HEIGHT-(self.navigationView.bottom+175));
+        self.collectionView.frame=CGRectMake(0, self.signListView.bottom+10, SCREEN_WIDTH,SCREEN_HEIGHT-(self.signListView.bottom+10));
     }
     if ([self.dataArray count]&&_tag==1&&[NSDate isSameDay:[NSDate getDateWithDateStr:_dateStr formatter:YY_DEFAULT_TIME_FORM] twoDate:[NSDate getDate:[NSDate date] formatter:YY_DEFAULT_TIME_FORM]])
     {
@@ -330,7 +328,7 @@
         layout.minimumLineSpacing = 5;
         layout.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5);
         layout.scrollDirection=UICollectionViewScrollDirectionVertical;
-        _collectionView = [[BaseCollectionView alloc]initWithFrame:CGRectMake(0, self.navigationView.bottom+175, SCREEN_WIDTH,SCREEN_HEIGHT-(self.navigationView.bottom+175)) collectionViewLayout:layout];
+        _collectionView = [[BaseCollectionView alloc]initWithFrame:CGRectMake(0, self.signListView.bottom+10, SCREEN_WIDTH,SCREEN_HEIGHT-(self.signListView.bottom+10)) collectionViewLayout:layout];
         _collectionView.backgroundColor = [UIColor whiteColor];
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;

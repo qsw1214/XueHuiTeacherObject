@@ -14,11 +14,8 @@
 #import "MianTabBarViewController.h"
 #import "AppDelegate.h"
 #import "XHChildListModel.h"
+#import "XHLoginTableViewCell.h"
 @interface XHLoginViewController ()<UITableViewDelegate,UITableViewDataSource>
-{
-    NSArray *frontArry;
-    NSArray *placeArry;
-}
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)XHBaseBtn *sureButton;
 @property(nonatomic,strong)UIButton *forgetButton;
@@ -36,9 +33,7 @@
     imageView.layer.masksToBounds=YES;
     imageView.image=[UIImage imageNamed:@"tubiao"];
     [self.view addSubview:imageView];
-    frontArry=@[@"帐号",@"密码"];
-    placeArry=@[@"请输入手机号",@"请输入密码"];
-   
+    
     [self.view addSubview:self.tableView];
     
     [self.view addSubview:self.sureButton];
@@ -49,23 +44,16 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return kTitle.count;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 58;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    XHPassWordTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.textLb.text=frontArry[indexPath.row];
-    cell.textFD.tag=indexPath.row+10086;
-    if (indexPath.row==1) {
-        cell.textFD.secureTextEntry=YES;
-    }
-    else
-    {
-        cell.textFD.keyboardType=UIKeyboardTypeNumberPad;
-    }
-    [cell.textFD addTarget:self action:@selector(textChage) forControlEvents:UIControlEventEditingChanged];
-    cell.textFD.placeholder=placeArry[indexPath.row];
+    XHLoginTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    [cell setItemObject:nil withIndexPathRow:indexPath.row];
     return cell;
 }
 - (void)buttonClick:(UIButton *)btn
@@ -126,38 +114,28 @@
     
     
 }
--(void)textChage
-{
-    UITextField *telePhone=[_tableView viewWithTag:10086];
-    UITextField *pwd=[_tableView viewWithTag:10086+1];
-    if ([UITextView verifyPhone:telePhone.text]&&pwd.text.length>5)
-    {
-        [self.sureButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    }
-    else
-    {
-        [self.sureButton  setTitleColor:LOGIN_BEFORE forState:UIControlStateNormal];
-    }
-}
+
 -(UITableView *)tableView
 {
     if (_tableView==nil) {
         
-        _tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 210, SCREEN_WIDTH, 100)];
+        _tableView=[[UITableView alloc] initWithFrame:CGRectMake(40, 210, SCREEN_WIDTH-80, 116)];
+        _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+        _tableView.center=CGPointMake(SCREEN_WIDTH/2.0, SCREEN_HEIGHT/2.0);
         _tableView.delegate=self;
         _tableView.dataSource=self;
         _tableView.bounces=NO;
-        _tableView.rowHeight=LOGINBTN_HEIGHT;
-        [_tableView registerNib:[UINib nibWithNibName:@"XHPassWordTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
+        [_tableView registerClass:[XHLoginTableViewCell class] forCellReuseIdentifier:@"cell"];
     }
     return _tableView;
 }
 -(XHBaseBtn *)sureButton
 {
     if (_sureButton==nil) {
-        _sureButton=[[XHBaseBtn alloc] initWithFrame:CGRectMake(10, 340, SCREEN_WIDTH-20, LOGINBTN_HEIGHT)];
-        _sureButton.backgroundColor=RGB(228, 133, 19);
-        [_sureButton setTitle:@"登录" forState:UIControlStateNormal];
+        _sureButton=[[XHBaseBtn alloc] initWithFrame:CGRectMake(40, SCREEN_HEIGHT/2.0+110, SCREEN_WIDTH-80, 44)];
+        [_sureButton setBackgroundColor:MainColor];
+        //[_sureButton setBackgroundImage:[UIImage imageNamed:@"btn_logn"] forState:UIControlStateNormal];
+        [_sureButton setTitle:@"没错，就是我！" forState:UIControlStateNormal];
         [_sureButton setTag:1];
         [_sureButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -171,7 +149,7 @@
         _forgetButton.center=CGPointMake(SCREEN_WIDTH/2.0, SCREEN_HEIGHT-40);
         [_forgetButton setTitle:@"忘记密码" forState:UIControlStateNormal];
         _forgetButton.titleLabel.font=FontLevel2;
-        [_forgetButton setTitleColor:RGB(228, 133, 19) forState:UIControlStateNormal];
+        [_forgetButton setTitleColor:MainColor forState:UIControlStateNormal];
         [_forgetButton setTag:2];
         [_forgetButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
