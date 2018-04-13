@@ -12,7 +12,7 @@
 
 
 
-@interface XHPunchSignRecordViewController () <UITableViewDelegate,UITableViewDataSource>
+@interface XHPunchSignRecordViewController () <UITableViewDelegate,UITableViewDataSource,XHDateSwitchControlDelegate>
 
 @property (nonatomic,strong) XHDateSwitchControl *dateSwitchControl;
 @property (nonatomic,strong) BaseTableView *tableView;

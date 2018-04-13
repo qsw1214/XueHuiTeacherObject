@@ -354,6 +354,85 @@ static XHHelper *helper = nil;
 }
 
 
+/**
+ 根据当前日期，获取当前是星期几（周日、周一、周二、周三、周四、周五、周六）
+ 
+ @param fromDate 当前日期
+ @return 返回星期几
+ */
++(NSString*)weekdayStringWithNowDate:(NSDate*)fromDate
+{
+    
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [calendar components:NSCalendarUnitWeekday fromDate:fromDate];
+    
+    NSInteger weekday = [components weekday];
+    NSString *weekdayString = @"星期日";
+    switch (weekday)
+    {
+        case 1:
+        {
+            weekdayString = @"星期日";
+        }
+            break;
+        case 2:
+        {
+            weekdayString = @"星期一";
+        }
+            break;
+        case 3:
+        {
+            weekdayString = @"星期二";
+        }
+            break;
+        case 4:
+        {
+            weekdayString = @"星期三";
+        }
+            break;
+        case 5:
+        {
+            weekdayString = @"星期四";
+        }
+            break;
+        case 6:
+        {
+            weekdayString = @"星期五";
+        }
+            break;
+        case 7:
+        {
+            weekdayString = @"星期六";
+        }
+            break;
+    }
+    
+    
+    
+    NSLog(@"weekday:%zd==%@",weekday,weekdayString);
+    return weekdayString;
+}
+
+
+
+/**
+ 返回当前日期 如：4月30日
+
+ @return 4月30日
+ */
++(NSString*)monthAndDay
+{
+    // 创建 格式 对象
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    // 设置 日期 格式 可以根据自己的需求 随时调整， 否则计算的结果可能为 nil
+    [formatter setDateFormat:@"MM月dd日"];
+    // 将NSDate 转换为 字符串日期 类型
+    NSString *date = [formatter stringFromDate:[NSDate date]];
+    return date;
+}
+
+
 - (BOOL)isIphoneX {
     
     struct utsname systemInfo;
