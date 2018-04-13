@@ -224,12 +224,12 @@
     {
         
         //!< 顶部铆钉
-        [self.topBoltControl resetFrame:CGRectMake(-5.0, self.syllabusHeaderBoardControl.bottom-7.5, 30.0, 15.0)];
+        [self.topBoltControl resetFrame:CGRectMake(-5.0, self.syllabusHeaderBoardControl.bottom-12.5, 30.0, 20.0)];
         [self.topBoltControl setLayerCornerRadius:5.0];
         
         if (self.syllabusCollectionView.height >= 150.0)
         {
-            [self.bottomBoltControl resetFrame:CGRectMake(self.topBoltControl.left, self.height-(80+(15.0/2.0)), 30.0, 15.0)];
+            [self.bottomBoltControl resetFrame:CGRectMake(self.topBoltControl.left, self.height-(80+(20.0/2.0)), 30.0, 20.0)];
             [self.bottomBoltControl setLayerCornerRadius:5.0];
         }
     }
