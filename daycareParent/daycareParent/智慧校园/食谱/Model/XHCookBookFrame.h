@@ -13,11 +13,8 @@
 @interface XHCookBookFrame : BaseFrame
 
 @property (nonatomic,strong) XHCookBookModel *model;
-
-
-
-
-@property (nonatomic,assign) CGRect contentFrame;
+@property (nonatomic,assign) CGSize itemSize;
+@property (nonatomic,assign) CGSize contentSize;
 
 
 

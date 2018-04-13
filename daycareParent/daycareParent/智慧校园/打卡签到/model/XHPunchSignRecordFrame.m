@@ -13,11 +13,8 @@
 -(void)setModel:(XHPunchSignRecordModel *)model
 {
     _model = model;
-    
-    [self setItemFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60.0)];
-    
+    [self setItemFrame:CGRectMake(0, 0, SCREEN_WIDTH, 75.0)];
     [self setCellHeight:self.itemFrame.size.height];
-    
 }
 
 @end

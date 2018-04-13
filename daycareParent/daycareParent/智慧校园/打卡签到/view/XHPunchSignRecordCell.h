@@ -1,17 +1,20 @@
 //
-//  XHPunchSignRecordCell.h
+//  XHRegisterTableViewCell.h
 //  daycareParent
 //
-//  Created by mac on 2018/4/13.
-//  Copyright © 2018年 XueHui. All rights reserved.
+//  Created by Git on 2017/11/29.
+//  Copyright © 2017年 XueHui. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "BaseTableViewCell.h"
 #import "XHPunchSignRecordFrame.h"
 
+
+
 @interface XHPunchSignRecordCell : BaseTableViewCell
 
+@property (nonatomic,strong) XHPunchSignRecordFrame *itemFrame;
 
-@property (nonatomic,strong) XHPunchSignRecordFrame *recordFrame;
 
 @end

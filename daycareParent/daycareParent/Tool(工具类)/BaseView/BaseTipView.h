@@ -46,5 +46,7 @@ typedef NS_ENUM(NSInteger,BaseTipViewType)
 
 
 
+-(void)setItemColor:(BOOL)color;
+
 
 @end

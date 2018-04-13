@@ -24,7 +24,6 @@
     if (self)
     {
         [self setHidesBottomBarWhenPushed:YES];
-        [self addSubViews:YES];
     }
    return self;
 }
@@ -36,7 +35,6 @@
     if (self)
     {
         [[XHHelper sharedHelper] setCurrentViewController:self];
-        [self addSubViews:YES];
     }
     return self;
 }
@@ -63,6 +61,9 @@
     {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
+    
+    
+    [self addSubViews:YES];
 
 }
 

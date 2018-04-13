@@ -21,13 +21,15 @@
 @property (nonatomic,strong) MJRefreshAutoNormalFooter *animateFooter; //!< 脚部
 
 -(instancetype)init;
+-(instancetype)initWithType:(UICollectionViewScrollDirection)type;
+
+-(void)resetHeight:(CGFloat)height;
+
 
 
 -(void)resetFrame:(CGRect)frame;
-/**
- 开始刷新
- */
--(void)beginRefreshing;
+
+
 
 #pragma mark 设置头部和脚部的标题
 /**
@@ -84,7 +86,12 @@
 
 -(void)setItemArray:(NSMutableArray*)itemArray;
 
+#pragma mark 进入刷新
 
+/**
+ 开始刷新
+ */
+-(void)beginRefreshing;
 
 @end
 

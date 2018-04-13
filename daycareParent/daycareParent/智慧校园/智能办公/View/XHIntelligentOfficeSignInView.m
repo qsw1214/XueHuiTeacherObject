@@ -46,22 +46,6 @@ UICollectionViewDataSource>
         [self addSubview:self.signHistoryButton];
         [self addSubview:self.signListCollectionView];
         
-        
-        
-        for (int i = 0; i< 2; i++)
-        {
-            XHIntelligentOfficeSignModel *model = [[XHIntelligentOfficeSignModel alloc]init];
-            [model setDate:@"08:23"];
-            [self.dataArray addObject:model];
-        }
-        
-        for (int i = 0; i< 2; i++)
-        {
-            XHIntelligentOfficeSignModel *model = [[XHIntelligentOfficeSignModel alloc]init];
-            [self.dataArray addObject:model];
-        }
-        
-        
     }
     return self;
 }
@@ -74,7 +58,8 @@ UICollectionViewDataSource>
     
     self.signHistoryButton.frame=CGRectMake(SCREEN_WIDTH-65-10, frame.size.height-20-40, 65, 30);
     
-    [self.signListCollectionView reloadData];
+    
+    [self getSign:YES];
 }
 -(void)addTimer
 {
@@ -208,6 +193,97 @@ UICollectionViewDataSource>
     }];
 }
 
+
+
+#pragma mark 获取四个考勤记录
+-(void)getSign:(BOOL)ool
+{
+    XHNetWorkConfig *netWorkConfig = [[XHNetWorkConfig alloc]init];
+    [netWorkConfig setObject:[XHUserInfo sharedUserInfo].selfId forKey:@"teacherId"];
+    [netWorkConfig postWithUrl:@"zzjt-app-api_attendanceSheet004" sucess:^(id object, BOOL verifyObject)
+    {
+        if (verifyObject)
+        {
+            NSArray *objectArray = [object objectForKey:@"object"];
+            [NSArray enumerateObjectsWithArray:objectArray usingforceBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop, BOOL forceStop)
+            {
+                if (forceStop)
+                {
+                    NSDictionary *itemObject = [obj objectItemKey:@"propValue"];
+                    NSString *time = [itemObject objectItemKey:@"shortTime"];
+                    XHIntelligentOfficeSignModel *model = [[XHIntelligentOfficeSignModel alloc]init];
+                    [model setModelType:XHIntelligentOfficeSigWeekAndDateType];
+                    [model setDate:time];
+                    [self.dataArray addObject:model];
+                }
+            }];
+            
+            
+            NSInteger count = [self.dataArray count];
+            if (count)
+            {
+                NSInteger forCount = (4 - count);
+                for (int i= 0; i < forCount; i++)
+                {
+                    XHIntelligentOfficeSignModel *model = [[XHIntelligentOfficeSignModel alloc]init];
+                    [model setDate:@""];
+                    [model setModelType:XHIntelligentOfficeSignEmptyType];
+                    [self.dataArray addObject:model];
+                }
+            }
+            else
+            {
+                for (int i= 0 ; i <4; i++)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                        case 3:
+                        {
+                            XHIntelligentOfficeSignModel *model = [[XHIntelligentOfficeSignModel alloc]init];
+                            [model setDate:@""];
+                            [model setModelType:XHIntelligentOfficeSignEmptyType];
+                            [self.dataArray addObject:model];
+                        }
+                            break;
+                        case 1:
+                        {
+                            XHIntelligentOfficeSignModel *model = [[XHIntelligentOfficeSignModel alloc]init];
+                            [model setDate:@"4月30日"];
+                            [model setModelType:XHIntelligentOfficeSigWeekAndDateType];
+                            [self.dataArray addObject:model];
+                        }
+                            break;
+                        case 2:
+                        {
+                            XHIntelligentOfficeSignModel *model = [[XHIntelligentOfficeSignModel alloc]init];
+                            [model setDate:@"星期五"];
+                            [model setModelType:XHIntelligentOfficeSigWeekAndDateType];
+                            [self.dataArray addObject:model];
+                        }
+                            break;
+                    }
+                }
+            }
+        }
+        
+        [self.signListCollectionView reloadData];
+        
+    } error:^(NSError *error)
+     {
+         
+         
+         for (int i= 0; i < 4; i++)
+         {
+             XHIntelligentOfficeSignModel *model = [[XHIntelligentOfficeSignModel alloc]init];
+             [model setDate:@""];
+             [model setModelType:XHIntelligentOfficeSignEmptyType];
+             [self.dataArray addObject:model];
+         }
+         
+         [self.signListCollectionView reloadData];
+     }];
+}
 
 
 

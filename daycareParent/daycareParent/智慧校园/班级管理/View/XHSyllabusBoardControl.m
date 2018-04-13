@@ -255,6 +255,7 @@
    
     //!< 课程表
     [self.syllabusCollectionView resetFrame:CGRectMake(self.syllabusHeaderBoardControl.left, self.syllabusHeaderBoardControl.bottom, self.syllabusHeaderBoardControl.width, 0)];
+    [self.syllabusCollectionView setTipType:TipTitleType withTipTitle:@"暂无课程" withTipImage:nil];
     
 }
 

@@ -37,17 +37,32 @@
     if (subview)
     {
         [self.view addSubview:self.tableView];
+        [self.tableView setBackgroundColor:[UIColor whiteColor]];
         [self.tableView resetFrame:CGRectMake(0, self.navigationView.bottom, SCREEN_WIDTH, SCREEN_HEIGHT-self.navigationView.bottom)];
         
         
         
         
-        for (int i = 0; i<20; i++)
+        for (int i = 0; i<4; i++)
         {
             XHPunchSignRecordFrame *frame = [[XHPunchSignRecordFrame alloc]init];
             XHPunchSignRecordModel *model = [[XHPunchSignRecordModel alloc]init];
             [model setTitle:@"签到成功！"];
             [model setDate:@"2018-04-25"];
+            [model setTime:@"12:56:36"];
+            [model setMarkIcon:@"ico_morning"];
+            [frame setModel:model];
+            [self.dataArray addObject:frame];
+        }
+        
+        for (int i = 0; i<12; i++)
+        {
+            XHPunchSignRecordFrame *frame = [[XHPunchSignRecordFrame alloc]init];
+            XHPunchSignRecordModel *model = [[XHPunchSignRecordModel alloc]init];
+            [model setTitle:@"签到成功！"];
+            [model setDate:@"2018-04-25"];
+            [model setTime:@"12:56:36"];
+            [model setMarkIcon:@"ico_afternoon"];
             [frame setModel:model];
             [self.dataArray addObject:frame];
         }
@@ -75,7 +90,7 @@
     {
         cell = [[XHPunchSignRecordCell alloc]init];
     }
-    [cell setRecordFrame:[self.dataArray objectAtIndex:indexPath.row]];
+    [cell setItemFrame:[self.dataArray objectAtIndex:indexPath.row]];
     return cell;
 }
 
