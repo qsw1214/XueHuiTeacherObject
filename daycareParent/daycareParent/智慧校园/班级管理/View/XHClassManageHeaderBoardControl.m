@@ -188,6 +188,7 @@
         case 3:
         {
             XHDayRollCallViewController *dayroll = [[XHDayRollCallViewController alloc]initHiddenWhenPushHidden];
+            [dayroll setClassId:self.classid];
             [DCURLRouter pushViewController:dayroll animated:YES];
         }
             break;
