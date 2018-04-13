@@ -48,6 +48,7 @@
             break;
             case DayRollCallOtherType:
             case DayRollCallSignType:
+            case DayRollCallBeforType:
         {
              _selectImgView.hidden=YES;
         }

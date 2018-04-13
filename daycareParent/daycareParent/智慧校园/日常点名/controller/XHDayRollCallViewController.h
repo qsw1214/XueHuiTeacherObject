@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 #pragma mark-------------日常点名--------------
 @interface XHDayRollCallViewController : BaseViewController
-
+@property(nonatomic,strong)NSString *classId;
 @end

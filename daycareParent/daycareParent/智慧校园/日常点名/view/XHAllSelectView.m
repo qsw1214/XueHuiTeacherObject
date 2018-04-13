@@ -14,7 +14,6 @@
 {
     if (self=[super initWithFrame:frame])
     {
-        self.backgroundColor=RGB(239, 239, 239);
         UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 1)];
         label.backgroundColor=RGB(224, 224, 224);
         [self addSubview:label];
@@ -31,6 +30,7 @@
                     [btn setImageViewName:@"dot_all" withNumberIndex:0];
                     [btn setLabelCGRectMake:CGRectMake(40, 0, btn.width-40, 50) withNumberIndex:0];
                     [btn setLabelText:@"全选" withNumberIndex:0];
+                    [btn setLabelTextColor:RGB(87, 211, 171) withNumberIndex:0];
                 }
                     break;
                 case 1:
@@ -38,6 +38,7 @@
                     [btn setLabelCGRectMake:CGRectMake(0, 0, btn.width, 50) withNumberIndex:0];
                     [btn setLabelTextAlignment:NSTextAlignmentCenter withNumberIndex:0];
                     [btn setLabelText:@"已选0人" withNumberIndex:0];
+                    [btn setLabelchageMarkColor:RGB(231, 160, 83) allColor:RGB(87, 211, 171) startString:@"选" endString:@"人" MarkFondSize:16 withNumberIndex:0];
                 }
                     break;
                 case 2:
@@ -69,14 +70,15 @@
     ParentControl *selectbtn=[self viewWithTag:50];
     ParentControl *btn=[self viewWithTag:51];
     [btn setLabelText:[NSString stringWithFormat:@"已选%zd人",selectNumber] withNumberIndex:0];
-    if (selectNumber==dataArry.count)
+    [btn setLabelchageMarkColor:RGB(231, 160, 83) allColor:RGB(87, 211, 171) startString:@"选" endString:@"人" MarkFondSize:16 withNumberIndex:0];
+    if (selectNumber!=0)
     {
-        [selectbtn setImageViewName:@"icoyixuan" withNumberIndex:0];
+        [selectbtn setImageViewName:@"dot_all" withNumberIndex:0];
     }
     else
     {
         selectbtn.selected=NO;
-        [selectbtn setImageViewName:@"icoweixuan" withNumberIndex:0];
+        [selectbtn setImageViewName:@"dot_no_all" withNumberIndex:0];
     }
 }
 -(void)selectBtnMethod:(ParentControl *)control

@@ -50,17 +50,18 @@
     [self setItemContentType:NavigationIconype withItemType:NavigationItemRightype withIconName:@"ico_date" withTitle:nil];
     _number=2;
     _dateStr=[NSDate getDateStrWithDateFormatter:YY_DEFAULT_TIME_FORM Date:[NSDate date]];
-    [self.classSignView resetFrame:CGRectMake(15, self.navigationView.bottom+15, SCREEN_WIDTH-30, 80)];
     [self.view addSubview:self.classSignView];
+    [self.view addSubview:self.signListView];
+    [self.view addSubview:self.collectionView];
+    
+    
+    [self.classSignView resetFrame:CGRectMake(15, self.navigationView.bottom+15, SCREEN_WIDTH-30, 80)];
     [self.signListView resetFrame:CGRectMake(0, self.classSignView.bottom, SCREEN_WIDTH, 40)];
     [self.signListView.signControlArry enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         ParentControl *control=(ParentControl *)obj;
         _tag=1;
         [control addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
     }];
-    [self.view addSubview:self.signListView];
-    [self.view addSubview:self.collectionView];
-    
     [self.collectionView showRefresHeaderWithTarget:self withSelector:@selector(refreshHead)];
     [self.collectionView beginRefreshing];
     
@@ -82,32 +83,42 @@
                     NSDictionary *objectDic=[object objectItemKey:@"object"];
                     NSDictionary *propValueDic=[objectDic objectItemKey:@"propValue"];
                     NSArray *arr=[propValueDic objectItemKey:@"attendanceSheetList"];
-                    [self.noSignArry removeAllObjects];
-                    [self.signArry removeAllObjects];
-                    [self.otherArry removeAllObjects];
-                    for (NSDictionary *dic in arr)
+                    
+                    if ([NSObject isArray:arr])
                     {
-                        NSDictionary *Dic=[dic objectItemKey:@"propValue"];
-                        XHDayRollCallModel *model=[[XHDayRollCallModel alloc] initWithDic:Dic];
-                        switch (model.modelType)
+                        [self.noSignArry removeAllObjects];
+                        [self.signArry removeAllObjects];
+                        [self.otherArry removeAllObjects];
+                        for (NSDictionary *dic in arr)
                         {
-                            case DayRollCallNOSignType:
+                            NSDictionary *Dic=[dic objectItemKey:@"propValue"];
+                            XHDayRollCallModel *model=[[XHDayRollCallModel alloc] initWithDic:Dic];
+                            if (![NSDate isSameDay:[NSDate getDateWithDateStr:_dateStr formatter:YY_DEFAULT_TIME_FORM] twoDate:[NSDate getDate:[NSDate date] formatter:YY_DEFAULT_TIME_FORM]])
                             {
-                                [self.noSignArry addObject:model];
+                                model.modelType=DayRollCallBeforType;
                             }
-                                break;
-                            case DayRollCallSignType:
+                            switch (model.modelType)
                             {
-                                [self.signArry addObject:model];
+                                case DayRollCallNOSignType:
+                                    case DayRollCallBeforType:
+                                {
+                                    [self.noSignArry addObject:model];
+                                }
+                                    break;
+                                case DayRollCallSignType:
+                                {
+                                    [self.signArry addObject:model];
+                                }
+                                    break;
+                                case DayRollCallOtherType:
+                                {
+                                    [self.otherArry addObject:model];
+                                }
+                                    break;
                             }
-                                break;
-                            case DayRollCallOtherType:
-                            {
-                                [self.otherArry addObject:model];
-                            }
-                                break;
                         }
                     }
+                    
                     [self.classSignView refreshClassView:model propValueDic:propValueDic];
                     [self getDataArry];
                     
@@ -138,7 +149,7 @@
         [self.dataArray setArray:self.otherArry];
     }
     [self defaultImagView];
-    [self.signListView setItemObjectArry:self.dataArray];
+    [self.signListView getNosignCount:self.noSignArry.count signCount:self.signArry.count askforCount:self.otherArry.count];
     [_selectArry removeAllObjects];
     _selectNumber=0;
     for (int i=0; i<self.dataArray.count; i++) {
@@ -252,13 +263,15 @@
                 if (verifyObject)
                 {
                     [XHShowHUD hideHud];
-                    ParentControl *lastBtn=[self.view viewWithTag:_tag];
+                    ParentControl *lastBtn=[self.signListView viewWithTag:_tag];
                     [lastBtn setLabelTextColor:RGB(102, 102, 102) withNumberIndex:0];
                     [lastBtn setLabelBackgroundColor:[UIColor clearColor] withNumberIndex:1];
                     
+                    _tag=control.tag==52?3:2;
+                    
+                    ParentControl *control=[self.signListView viewWithTag:_tag];
                     [control setLabelTextColor:MainColor withNumberIndex:0];
                     [control setLabelBackgroundColor:MainColor withNumberIndex:1];
-                    _tag=control.tag==52?3:2;
                 }
                 [self.collectionView beginRefreshing];
             } error:^(NSError *error) {
@@ -403,7 +416,7 @@
 }
 -(void)defaultImagView
 {
-    if (_tag==11)
+    if (_tag==2)
     {
         [self.collectionView setTipType:TipTitleAndTipImage withTipTitle:@"同学们都去偷懒喽" withTipImage:@"img_bad"];
     }

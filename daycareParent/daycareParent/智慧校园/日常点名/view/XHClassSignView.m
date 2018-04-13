@@ -52,9 +52,12 @@
 -(void)refreshClassView:(XHClassListModel *)model propValueDic:(NSDictionary *)propValueDic
 {
     [self.classLabel setText:[NSString safeString:model.gradeAndClassName]];
-    [self.signLabel setText:[NSString stringWithFormat:@"人数:%@",[propValueDic objectItemKey:@"attendanceCnt"]]];
-    [self.allClassLabel setText:[NSString stringWithFormat:@"/%@",[propValueDic objectItemKey:@"sum"]]];
-    [self.attendanceLabel setText:[propValueDic objectItemKey:@"pre"]];
+    
+    [self.signLabel setText:[NSString stringWithFormat:@"人数：%@",[NSString safeString:[propValueDic objectItemKey:@"attendanceCnt"]]]];
+    
+    [self.allClassLabel setText:[NSString stringWithFormat:@"/%@人",[NSString safeString:[propValueDic objectItemKey:@"sum"]]]];
+    
+    [self.attendanceLabel setText:[NSString safeString:[propValueDic objectItemKey:@"pre"]]];
     
     self.signLabel.frame=CGRectMake(15, self.classLabel.bottom+15, [self.signLabel getWidthWithTitle:self.signLabel.text font:kFont(15)], 15);
     self.allClassLabel.frame=CGRectMake(self.signLabel.right,self.classLabel.bottom+15 , [self.allClassLabel getWidthWithTitle:self.allClassLabel.text font:kFont(15)], 15);
@@ -86,7 +89,7 @@
     if (_allClassLabel==nil) {
         _allClassLabel=[[UILabel alloc] init];
         _allClassLabel.font=kFont(15);
-         _allClassLabel.textColor=[UIColor whiteColor];
+        _allClassLabel.textColor=RGB(190, 254, 233);
     }
     return _allClassLabel;
 }
@@ -96,7 +99,7 @@
         _rosterLabel=[[UILabel alloc] init];
         _rosterLabel.font=kFont(15);
          _rosterLabel.textColor=[UIColor whiteColor];
-        [_rosterLabel setText:@"出勤率:"];
+        [_rosterLabel setText:@"出勤率："];
     }
     return _rosterLabel;
 }

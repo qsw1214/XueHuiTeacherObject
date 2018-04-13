@@ -13,6 +13,7 @@ typedef NS_ENUM(NSInteger,XHDayRollCallModelType)
     DayRollCallNOSignType = 0,//!< 未签到
     DayRollCallSignType = 1,//!< 签到
     DayRollCallOtherType = 2,//!< 请假
+    DayRollCallBeforType = 3,//!< 当天前
 };
 
 @interface XHDayRollCallModel : NSObject
