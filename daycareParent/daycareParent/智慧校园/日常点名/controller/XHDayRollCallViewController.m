@@ -22,7 +22,6 @@
 #define SIGN_TITLE @[@"未签到",@"已签到",@"请假"]
 @interface XHDayRollCallViewController ()<XHCalendarViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,XHAllSelectViewDelegate>
 {
-
     NSInteger _tag;
     NSInteger _selectNumber;
     NSString *_dateStr;
@@ -46,7 +45,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self setNavtionTitle:@"日常点名"];
+    [self setNavtionTitle:@"课堂点名"];
     [self setItemContentType:NavigationIconype withItemType:NavigationItemRightype withIconName:@"ico_date" withTitle:nil];
     _number=2;
     _dateStr=[NSDate getDateStrWithDateFormatter:YY_DEFAULT_TIME_FORM Date:[NSDate date]];
@@ -75,6 +74,7 @@
     [[XHUserInfo sharedUserInfo] getClassList:^(BOOL isOK, NSMutableArray *classListArry) {
         if (isOK) {
             XHClassListModel *model=[XHUserInfo sharedUserInfo].classListArry[_number];
+            
             [self.netWorkConfig setObject:_dateStr forKey:@"time"];
             [self.netWorkConfig setObject:model.clazzId forKey:@"clazzId"];
             [self.netWorkConfig postWithUrl:@"zzjt-app-api_attendanceSheet001" sucess:^(id object, BOOL verifyObject) {

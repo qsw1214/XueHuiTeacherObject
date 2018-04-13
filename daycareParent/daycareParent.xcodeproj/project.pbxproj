@@ -457,6 +457,7 @@
 		8C2A1EBB207F321B0099C3FE /* XHSignCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A1EBA207F321B0099C3FE /* XHSignCollectionViewCell.m */; };
 		8C2A1EBE207F4AF40099C3FE /* XHClassSignView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A1EBD207F4AF40099C3FE /* XHClassSignView.m */; };
 		8C2A1EC1207F5C740099C3FE /* XHSignListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A1EC0207F5C740099C3FE /* XHSignListView.m */; };
+		8C2E72FE2080598A00D6E451 /* XHCoursePeportModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E72FD2080598A00D6E451 /* XHCoursePeportModel.m */; };
 		8C33144D202A993B00F504A9 /* XHNewDynamicsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C33144C202A993B00F504A9 /* XHNewDynamicsViewController.m */; };
 		8C331450202AA15300F504A9 /* XHNewDynamicsContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C33144F202AA15300F504A9 /* XHNewDynamicsContentView.m */; };
 		8C331457202AAF3800F504A9 /* VideoManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C331456202AAF3800F504A9 /* VideoManagerViewController.m */; };
@@ -1462,6 +1463,8 @@
 		8C2A1EBD207F4AF40099C3FE /* XHClassSignView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHClassSignView.m; sourceTree = "<group>"; };
 		8C2A1EBF207F5C740099C3FE /* XHSignListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHSignListView.h; sourceTree = "<group>"; };
 		8C2A1EC0207F5C740099C3FE /* XHSignListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHSignListView.m; sourceTree = "<group>"; };
+		8C2E72FC2080598A00D6E451 /* XHCoursePeportModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHCoursePeportModel.h; sourceTree = "<group>"; };
+		8C2E72FD2080598A00D6E451 /* XHCoursePeportModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHCoursePeportModel.m; sourceTree = "<group>"; };
 		8C33144B202A993B00F504A9 /* XHNewDynamicsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNewDynamicsViewController.h; sourceTree = "<group>"; };
 		8C33144C202A993B00F504A9 /* XHNewDynamicsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNewDynamicsViewController.m; sourceTree = "<group>"; };
 		8C33144E202AA15300F504A9 /* XHNewDynamicsContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNewDynamicsContentView.h; sourceTree = "<group>"; };
@@ -3860,6 +3863,8 @@
 				8C02627320230F4600BFB98A /* XHApproveModel.m */,
 				8C94DBB220243FC50048B9CC /* XHApproveDetailModel.h */,
 				8C94DBB320243FC50048B9CC /* XHApproveDetailModel.m */,
+				8C2E72FC2080598A00D6E451 /* XHCoursePeportModel.h */,
+				8C2E72FD2080598A00D6E451 /* XHCoursePeportModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -4446,6 +4451,7 @@
 				8C1AA811207B13D200DDCBB3 /* XHNoticeRecipientModel.m in Sources */,
 				4B80F2831FCBF04800BC7B52 /* MJRefreshBackNormalFooter.m in Sources */,
 				4B80F3251FCBFD6F00BC7B52 /* NSError+MTLModelException.m in Sources */,
+				8C2E72FE2080598A00D6E451 /* XHCoursePeportModel.m in Sources */,
 				4B550E4D1FF364AD004CF7ED /* XHSortedArrayComparator.m in Sources */,
 				4BB8E21B2046333C0081FC6D /* XHDropDownMenuCell.m in Sources */,
 				4B80F31D1FCBFD6F00BC7B52 /* MTLModel.m in Sources */,

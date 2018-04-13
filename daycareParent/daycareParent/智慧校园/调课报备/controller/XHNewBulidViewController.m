@@ -17,17 +17,31 @@
 #import "XHDatePickerControl.h"
 #import "XHTeacherAddressBookViewController.h"
 #import "XHHistoryViewController.h"
-#define TITLE  @[@"原任课教师",@"课程名称",@"上课班级",@"调整类型",@"委任教师",@"委任课程",@"上课时间",@"请假时长",@"审批人"]
-@interface XHNewBulidViewController ()<UITableViewDelegate,UITableViewDataSource,XHDatePickerControlDeletage>
+#import "XHCoursePeportModel.h"
+#import "XHCalendarView.h"
+typedef NS_ENUM(NSInteger,XHNewBulidModelType)
 {
-    BaseTableView *_tableView;
+    XHNewBulidMelodyType=1,//!<调课类型
+    XHNewBulidTipsayType=2,//!< 代课类型
+    //    XHCoursePeportRemarkType=3,//!< 备注类型
+    //    XHCoursePeportApproveType=4,//!< 审批类型
+    //    XHCoursePeportCopyToType=5,//!< 抄送类型
+};
+#define TITLE  @[@"原任课教师",@"课程名称",@"上课班级",@"调整类型",@"委任教师",@"委任课程",@"上课时间",@"请假时长",@"审批人"]
+//!<调课类型
+#define kMelodyTitleArry @[@"调课日期",@"调课班级",@"调课节次",@"调课科目",@"对方教师",@"对方日期",@"对方节次",@"对方班级"]
+#define kMelodyBackTitleArry @[@"请选择>",@"请输入",@"请选择>",@"请选择>",@"请输入",@"请选择>",@"请选择>",@"请选择>"]
+//!<代课类型
+#define kTipsayTitleArry @[@"代课日期",@"代课节次",@"代课科目",@"代课教师",@"上课班级"]
+#define kTipsayBackTitleArry @[@"请选择>",@"请输入",@"请选择>",@"请选择>",@"请输入"]
+@interface XHNewBulidViewController ()<UITableViewDelegate,UITableViewDataSource,XHDatePickerControlDeletage,XHCalendarViewDelegate>
+{
+    
     NSInteger _tag;
     NSString * _bizType ;  //!< 业务类型(1:调课 2:代课)
      NSString *_formerSubject ;//!< 原任课程
     NSString *_formerSubjectId ;//!< 原任课程Id
     NSString *_clazzName ; //!< 班级名字
-    NSString *_formerTeacher ; //!< 原任教师
-    NSString *_formerTeacherId;//!<原任老师Id
     NSString *_appointedTeacher ;   //!< 委任教师
     NSString *_appointedTeacherId ;   //!< 委任教师Id
      NSString *_appointedSubject;//!<委任课程
@@ -39,6 +53,9 @@
     NSString *_shrName;//!< 审核人（限制一位审核人）
     NSString *_shrHeadPic;//!< 审核人头像（限制一位审核人）
 }
+@property(nonatomic,strong)BaseTableView *tableView;
+@property(nonatomic,assign)XHNewBulidModelType modelType;
+@property(nonatomic,strong)XHCalendarView *calendarView;
 @end
 
 @implementation XHNewBulidViewController
@@ -49,53 +66,18 @@
     [self setNavtionTitle:@"调课报备"];
     [self setItemContentType:NavigationTitleType withItemType:NavigationItemRightype withIconName:nil withTitle:@"历史记录"];
      _bizType=@"1";
-    _tableView=[[BaseTableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
-    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
-    _tableView.delegate=self;
-    _tableView.dataSource=self;
-    [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-    //[_tableView registerNib:[UINib nibWithNibName:@"XHNewTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
-     [_tableView registerClass:[XHNewTableViewCell class] forCellReuseIdentifier:@"cell"];
-    [_tableView registerNib:[UINib nibWithNibName:@"XHNewTextFieldTypeTableViewCell" bundle:nil] forCellReuseIdentifier:@"textcell"];
-      [_tableView registerNib:[UINib nibWithNibName:@"XHNewHeardTableViewCell" bundle:nil] forCellReuseIdentifier:@"headcell"];
-    [_tableView registerClass:[XHNewChageTypeTableViewCell class] forCellReuseIdentifier:@"chageTypeCell"];
-    [self.view addSubview:_tableView];
-    [XHShowHUD showTextHud];
-    [[XHUserInfo sharedUserInfo] getTeachersAddressBook:^(BOOL isOK, NSArray *array)
-     {
-         if (isOK)
-         {
-             [XHShowHUD hideHud];
-             [array enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop)
-              {
-                  obj=[obj objectItemKey:@"propValue"];
-                  XHTeacherAddressBookFrame *frame = [XHTeacherAddressBookFrame alloc];
-                  XHTeacherAddressBookModel *model = [[XHTeacherAddressBookModel alloc]init];
-                  [model setItemObject:obj];
-                  [frame setModel:model];
-                  if ([[XHUserInfo sharedUserInfo].selfId isEqualToString:model.ID])
-                  {
-                      _formerTeacher=model.teacherName;
-                      _formerTeacherId=model.ID;
-                  }
-                  [_tableView reloadData];
-              }];
-             
-         }
-         
-     }];
+    [self.view addSubview:self.tableView];//,@"备注",@"审批人",@"抄送人"
+    [self refrehDataType:XHNewBulidMelodyType];
+    [self.tableView reloadData];
 }
--(void)refreshHead
-{
-    [_tableView refreshReload];
-}
+#pragma mark- tableviewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 9;
+    return self.dataArray.count+2;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row==8) {
+    if (indexPath.row>self.dataArray.count) {
         return 180;
     }
     else
@@ -105,94 +87,124 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (indexPath.row) {
-            case 3:
-        {
-            XHNewChageTypeTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"chageTypeCell" forIndexPath:indexPath];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.titleLabel.text=TITLE[indexPath.row];
-            [cell.melodyBtn addTarget:self action:@selector(selectBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-            [cell.otherBtn addTarget:self action:@selector(selectBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-            return cell;
-        }
-            
-            break;
-        case 7:
-        {
-            XHNewTextFieldTypeTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"textcell" forIndexPath:indexPath];
-           cell.accessoryType = UITableViewCellAccessoryNone;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.titleLabel.text=TITLE[indexPath.row];
-            cell.textFeild.hidden=NO;
-            cell.selectLabel.text=@"节课程";
-            cell.textFeild.text=[NSString safeString:_subjectNum];
-            cell.textFeild.keyboardType=UIKeyboardTypeNumberPad;
-            [cell.textFeild addTarget:self action:@selector(textChage:) forControlEvents:UIControlEventEditingChanged];
-            return cell;
-        }
-            break;
-        case 8:
-        {
-            XHNewHeardTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"headcell" forIndexPath:indexPath];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.approveLabel.text=TITLE[indexPath.row];
-            [cell.sureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [cell.headBtn addTarget:self action:@selector(headBtnClick) forControlEvents:UIControlEventTouchUpInside];
-            [cell.sureBtn addTarget:self action:@selector(sureBtnClick) forControlEvents:UIControlEventTouchUpInside];
-            [cell.headBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:[NSString safeString:_shrHeadPic]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
-            cell.nameLabel.text=[NSString safeString:_shrName];
-            return cell;
-        }
-            
-            break;
-            
-        default:
-            
-        {
-            XHNewTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-            cell.selectLabel.text=@"请选择";
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.titleLabel.text=TITLE[indexPath.row];
-            switch (indexPath.row) {
-                case 0:
-                {
-                    cell.selectLabel.text=[NSString safeString:_formerTeacher];
-                    cell.accessoryType = UITableViewCellAccessoryNone;
-                }
-                    break;
-                case 1:
-                {
-                    cell.selectLabel.text=[[NSString safeString:_formerSubject] isEqualToString:@""]?@"请选择":_formerSubject;
-                }
-                    break;
-                case 2:
-                {
-                    cell.selectLabel.text=[[NSString safeString:_clazzName] isEqualToString:@""]?@"请输入":_clazzName;
-                    cell.accessoryType = UITableViewCellAccessoryNone;
-                }
-                    break;
-                    case 4:
-                {
-                    cell.selectLabel.text=[[NSString safeString:_appointedTeacher] isEqualToString:@""]?@"请选择":_appointedTeacher;
-                }
-                    break;
-                case 5:
-                {
-                    cell.selectLabel.text=[[NSString safeString:_appointedSubject] isEqualToString:@""]?@"请选择":_appointedSubject;
-                }
-                    break;
-                case 6:
-                {
-                    cell.selectLabel.text=[[NSString safeString:_beginTime] isEqualToString:@""]?@"请选择":_beginTime;
-                }
-                    break;
-                
-            }
-            return cell;
-        }
-           
-            break;
+    if (indexPath.row==0)
+    {
+        XHNewChageTypeTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"chageTypeCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.titleLabel.text=@"类型选择";
+        [cell.melodyBtn addTarget:self action:@selector(selectBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.otherBtn addTarget:self action:@selector(selectBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        return cell;
     }
+    else if (indexPath.row>self.dataArray.count)
+    {
+        XHNewHeardTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"headcell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.approveLabel.text=@"审批人";
+        [cell.sureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [cell.headBtn addTarget:self action:@selector(headBtnClick) forControlEvents:UIControlEventTouchUpInside];
+        [cell.sureBtn addTarget:self action:@selector(sureBtnClick) forControlEvents:UIControlEventTouchUpInside];
+        [cell.headBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:[NSString safeString:_shrHeadPic]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
+        cell.nameLabel.text=[NSString safeString:_shrName];
+        return cell;
+    }
+    else
+    {
+        XHCoursePeportModel *model=self.dataArray[indexPath.row-1];
+        XHNewTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+        cell.titleLabel.text=model.title;
+        cell.selectLabel.text=model.backTitle;
+        return cell;
+    }
+    
+//    switch (indexPath.row) {
+//            case 3:
+//        {
+//            XHNewChageTypeTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"chageTypeCell" forIndexPath:indexPath];
+//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//            cell.titleLabel.text=TITLE[indexPath.row];
+//            [cell.melodyBtn addTarget:self action:@selector(selectBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+//            [cell.otherBtn addTarget:self action:@selector(selectBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+//            return cell;
+//        }
+//
+//            break;
+//        case 7:
+//        {
+//            XHNewTextFieldTypeTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"textcell" forIndexPath:indexPath];
+//           cell.accessoryType = UITableViewCellAccessoryNone;
+//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//            cell.titleLabel.text=TITLE[indexPath.row];
+//            cell.textFeild.hidden=NO;
+//            cell.selectLabel.text=@"节课程";
+//            cell.textFeild.text=[NSString safeString:_subjectNum];
+//            cell.textFeild.keyboardType=UIKeyboardTypeNumberPad;
+//            [cell.textFeild addTarget:self action:@selector(textChage:) forControlEvents:UIControlEventEditingChanged];
+//            return cell;
+//        }
+//            break;
+//        case 8:
+//        {
+//            XHNewHeardTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"headcell" forIndexPath:indexPath];
+//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//            cell.approveLabel.text=TITLE[indexPath.row];
+//            [cell.sureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//            [cell.headBtn addTarget:self action:@selector(headBtnClick) forControlEvents:UIControlEventTouchUpInside];
+//            [cell.sureBtn addTarget:self action:@selector(sureBtnClick) forControlEvents:UIControlEventTouchUpInside];
+//            [cell.headBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:[NSString safeString:_shrHeadPic]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"addman"]];
+//            cell.nameLabel.text=[NSString safeString:_shrName];
+//            return cell;
+//        }
+//
+//            break;
+//
+//        default:
+//
+//        {
+//            XHNewTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+//            cell.selectLabel.text=@"请选择";
+//            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//            cell.titleLabel.text=TITLE[indexPath.row];
+//            switch (indexPath.row) {
+//                case 0:
+//                {
+//                    cell.selectLabel.text=[NSString safeString:[XHUserInfo sharedUserInfo].teacherName];
+//                    cell.accessoryType = UITableViewCellAccessoryNone;
+//                }
+//                    break;
+//                case 1:
+//                {
+//                    cell.selectLabel.text=[[NSString safeString:_formerSubject] isEqualToString:@""]?@"请选择":_formerSubject;
+//                }
+//                    break;
+//                case 2:
+//                {
+//                    cell.selectLabel.text=[[NSString safeString:_clazzName] isEqualToString:@""]?@"请输入":_clazzName;
+//                    cell.accessoryType = UITableViewCellAccessoryNone;
+//                }
+//                    break;
+//                    case 4:
+//                {
+//                    cell.selectLabel.text=[[NSString safeString:_appointedTeacher] isEqualToString:@""]?@"请选择":_appointedTeacher;
+//                }
+//                    break;
+//                case 5:
+//                {
+//                    cell.selectLabel.text=[[NSString safeString:_appointedSubject] isEqualToString:@""]?@"请选择":_appointedSubject;
+//                }
+//                    break;
+//                case 6:
+//                {
+//                    cell.selectLabel.text=[[NSString safeString:_beginTime] isEqualToString:@""]?@"请选择":_beginTime;
+//                }
+//                    break;
+//
+//            }
+//            return cell;
+//        }
+//
+//            break;
+//    }
     
    
 }
@@ -200,6 +212,34 @@
 {
    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    
+    if (indexPath.row >self.dataArray.count)
+    {
+        [self.calendarView show];
+    }
+    else
+    {
+        if (self.modelType==XHNewBulidMelodyType)
+        {
+            switch (indexPath.row) {
+                case 1:
+                {
+                    
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            
+        }
+    }
+    
+
+    /*
     switch (indexPath.row) {
              case 4:
         {
@@ -229,13 +269,13 @@
                 cell.selectLabel.text=model.subjectName;
                 switch (indexPath.row) {
                     case 1:
-                        
+
                     {
                         _formerSubjectId=model.ID;
                         _formerSubject=model.subjectName;
                     }
                         break;
-                        
+
                     case 5:
                     {
                         _appointedSubjectId=model.ID;
@@ -244,7 +284,7 @@
                         break;
                 }
             }];
-            
+
         }
             break;
         case 2:
@@ -257,26 +297,33 @@
 
         }
             break;
-        
+
             case 6:
         {
              [[XHDatePickerControl sharedObject] showWithDeletage:self];
         }
             break;
     }
+     */
+}
+-(void)getCalendarDateStr:(NSString *)dateStr
+{
+    kNSLog(dateStr);
 }
 #pragma mark-------------选择调课类型按钮方法--------------
 -(void)selectBtnClick:(BaseButtonControl *)btn
 {
-    NSIndexPath *  indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+    NSIndexPath *  indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     //找到对应的cell
     XHNewChageTypeTableViewCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
+    
     switch (btn.tag) {
         case 100:
         {
             [cell.melodyBtn setImage:@"ico_yes" withNumberType:0 withAllType:NO];
             [cell.otherBtn setImage:@"ico_no" withNumberType:0 withAllType:NO];
             _bizType=@"1";
+            [self refrehDataType:XHNewBulidMelodyType];
         }
             break;
 
@@ -285,9 +332,46 @@
                 [cell.melodyBtn setImage:@"ico_no" withNumberType:0 withAllType:NO];
                 [cell.otherBtn setImage:@"ico_yes" withNumberType:0 withAllType:NO];
                 _bizType=@"2";
+                 [self refrehDataType:XHNewBulidTipsayType];
             }
             break;
     }
+    [self.tableView  reloadData];
+}
+-(void)refrehDataType:(XHNewBulidModelType)modeltype
+{
+    
+      [self.dataArray removeAllObjects];
+    switch (modeltype) {
+        case XHNewBulidTipsayType:
+        {
+            [kTipsayTitleArry enumerateObjectsUsingBlock:^(NSString * obj, NSUInteger idx, BOOL * _Nonnull stop)
+             {
+                 XHCoursePeportModel *model=[[XHCoursePeportModel alloc] init];
+                 model.title=obj;
+                 model.backTitle=kTipsayBackTitleArry[idx];
+                 [self.dataArray addObject:model];
+             }];
+            self.modelType=XHNewBulidTipsayType;
+        }
+            break;
+            
+        case XHNewBulidMelodyType:
+        {
+            [kMelodyTitleArry enumerateObjectsUsingBlock:^(NSString * obj, NSUInteger idx, BOOL * _Nonnull stop)
+             {
+                 XHCoursePeportModel *model=[[XHCoursePeportModel alloc] init];
+                 model.title=obj;
+                 model.backTitle=kMelodyBackTitleArry[idx];
+                 
+                 [self.dataArray addObject:model];
+             }];
+            self.modelType=XHNewBulidMelodyType;
+        }
+            break;
+    }
+  
+    
 }
 #pragma mark  选择时间选择器代理方法
 -(void)datePickerClickObject:(NSString*)date
@@ -377,6 +461,28 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+}
+-(BaseTableView *)tableView
+{
+    if (_tableView==nil) {
+        _tableView=[[BaseTableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
+        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
+        _tableView.delegate=self;
+        _tableView.dataSource=self;
+        [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+        [_tableView registerClass:[XHNewTableViewCell class] forCellReuseIdentifier:@"cell"];
+        [_tableView registerNib:[UINib nibWithNibName:@"XHNewTextFieldTypeTableViewCell" bundle:nil] forCellReuseIdentifier:@"textcell"];
+        [_tableView registerNib:[UINib nibWithNibName:@"XHNewHeardTableViewCell" bundle:nil] forCellReuseIdentifier:@"headcell"];
+        [_tableView registerClass:[XHNewChageTypeTableViewCell class] forCellReuseIdentifier:@"chageTypeCell"];
+    }
+    return _tableView;
+}
+-(XHCalendarView *)calendarView
+{
+    if (_calendarView==nil) {
+        _calendarView=[[XHCalendarView alloc] initWithDelegate:self];
+    }
+    return _calendarView;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
