@@ -251,7 +251,7 @@ UICollectionViewDataSource>
                         case 1:
                         {
                             XHIntelligentOfficeSignModel *model = [[XHIntelligentOfficeSignModel alloc]init];
-                            [model setDate:@"4月30日"];
+                            [model setDate:[XHHelper monthAndDay]];
                             [model setModelType:XHIntelligentOfficeSigWeekAndDateType];
                             [self.dataArray addObject:model];
                         }
@@ -259,7 +259,7 @@ UICollectionViewDataSource>
                         case 2:
                         {
                             XHIntelligentOfficeSignModel *model = [[XHIntelligentOfficeSignModel alloc]init];
-                            [model setDate:@"星期五"];
+                            [model setDate:[XHHelper weekdayStringWithNowDate:[NSDate date]]];
                             [model setModelType:XHIntelligentOfficeSigWeekAndDateType];
                             [self.dataArray addObject:model];
                         }
@@ -269,6 +269,7 @@ UICollectionViewDataSource>
             }
         }
         
+        NSLog(@"%@==%@",[XHHelper weekdayStringWithNowDate:[NSDate date]],[XHHelper monthAndDay]);
         [self.signListCollectionView reloadData];
         
     } error:^(NSError *error)
