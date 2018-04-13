@@ -50,5 +50,6 @@
 #import "XHDropDownMenuControl.h"
 #import "XHHeaderControl.h"
 #import "DCURLRouter.h"
+#import "XHAlertModel.h"
 
 #endif /* Header_h */

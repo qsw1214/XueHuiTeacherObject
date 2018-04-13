@@ -81,7 +81,7 @@
     if (subview)
     {
         [self.view addSubview:self.tableView];
-        [self.tableView resetFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        [self.tableView resetFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-self.navigationView.bottom)];
         self.tableView.tableHeaderView=self.headerView;
         [self.tableView refreshReloadData];
     }

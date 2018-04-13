@@ -7,15 +7,20 @@
 //
 
 #import "XHCookBookViewController.h"
-#import "XHCookDateContentView.h"
-#import "XHCookDetailsContentView.h"
-#import "XHCreateRecipeViewController.h"
+#import "XHCookBookCell.h"
+#import "XHCookBookHeader.h"
 
 
-@interface XHCookBookViewController () <XHCookDateContentViewDeletage,XHCustomViewDelegate>
 
-@property (nonatomic,strong) XHCookDateContentView *dateContentView; //!< 日期内容视图
-@property (nonatomic,strong) XHCookDetailsContentView *detailsContentView; //!< 详情内容视图
+
+@interface XHCookBookViewController () <UITableViewDelegate,UITableViewDataSource,XHCookBookHeaderDeletage>
+
+
+
+@property (nonatomic,strong) XHCookBookHeader *cookBookHeader;  //!< 头部星期选择视图
+@property (nonatomic,strong) NSMutableArray *cookBookItemArray; //!< 食谱内容数组
+@property (nonatomic,strong) BaseTableView *tableView; //!< 表视图
+
 
 @end
 
@@ -25,8 +30,8 @@
 {
     [super viewDidLoad];
     [self setNavtionTitle:@"食谱"];
-    [self setItemContentType:NavigationIconype withItemType:NavigationItemRightype withIconName:@"ico_createrecipe" withTitle:nil];
     
+    [self getCookBookWithSchoolId:[XHUserInfo sharedUserInfo].schoolId];
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,7 +42,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-   [self getCookBookWithSchoolId:[XHUserInfo sharedUserInfo].schoolId];
     
 }
 
@@ -47,30 +51,53 @@
 {
     if (subview)
     {
-        [self.view addSubview:self.dateContentView];
-        [self.view addSubview:self.detailsContentView];
-        [self.dateContentView resetFrame:CGRectMake(0, self.navigationView.bottom, 90.0, SCREEN_HEIGHT-self.navigationView.height)];
-        [self.detailsContentView resetFrame:CGRectMake(self.dateContentView.right, self.dateContentView.top, SCREEN_WIDTH-self.dateContentView.width, self.dateContentView.height)];
+        [self.cookBookHeader resetFrame:CGRectMake(0.0, self.navigationView.bottom, self.navigationView.width, 80.0)];
+        [self.view addSubview:self.cookBookHeader];
+        [self.tableView resetFrame:CGRectMake(0, self.cookBookHeader.bottom, SCREEN_WIDTH, SCREEN_HEIGHT-self.cookBookHeader.bottom)];
+        [self.tableView setTipType:TipTitleAndTipImage withTipTitle:@"暂无食谱" withTipImage:@"pic_nothing"];
+        [self.view addSubview:self.tableView];
     }
+    
 }
-
-
-#pragma mark - Action Method
-#pragma mark 右侧按钮相应的方法
--(void)rightItemAction:(BaseNavigationControlItem *)sender
-{
-    XHCreateRecipeViewController *recipe = [[XHCreateRecipeViewController alloc]init];
-    [self.navigationController pushViewController:recipe animated:YES];
-}
-
-
 
 #pragma mark - Deletage Method
-#pragma mark XHCookDateContentViewDeletage
--(void)didSelectItemObject:(XHCookBookFrame *)frame
+- (NSInteger)tableView:(BaseTableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    [self.detailsContentView setItemObject:frame];
+    [tableView tableTipViewWithArray:self.cookBookItemArray];
+    return [self.cookBookItemArray count];
 }
+
+- (XHCookBookCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    XHCookBookCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil)
+    {
+        cell = [[XHCookBookCell alloc]init];
+    }
+    [cell setItemFrame:[self.cookBookItemArray objectAtIndex:indexPath.row]];
+    return cell;
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [[self.cookBookItemArray objectAtIndex:indexPath.row] cellHeight];
+}
+
+
+#pragma mark XHAddressBookHeaderDelegate
+-(void)didSelectItem:(XHChildListModel *)model
+{
+   
+}
+
+#pragma mark XHCookBookHeaderDeletage
+-(void)didSelectItemObject:(XHCookBookFrame *)model
+{
+    [self.cookBookItemArray setArray:model.model.contentArray];
+    [self.tableView refreshReloadData];
+}
+
 
 
 
@@ -92,7 +119,7 @@
                   XHCookBookFrame *frame = [[XHCookBookFrame alloc]init];
                   XHCookBookModel *model = [[XHCookBookModel alloc]init];
                   [model setDate:[obj objectItemKey:@"date"]];
-                  [model setModeType:CookBookDateType];
+                  [model setModeType:CookBookWeekType];
                   NSArray <NSDictionary*> *itemArray = [obj objectItemKey:@"recipe"];
                   [itemArray enumerateObjectsUsingBlock:^(NSDictionary *itemObj, NSUInteger idx, BOOL *stop)
                    {
@@ -103,44 +130,59 @@
                        [itemFrame setModel:itemModel];
                        [model.contentArray addObject:itemFrame];
                    }];
-                  
+
                   [frame setModel:model];
                   [self.dataArray addObject:frame];
               }];
-             
-             [self.dateContentView setItemArray:self.dataArray];
+
+              [self.cookBookHeader setItemArray:self.dataArray];
          }
-         
-         [XHShowHUD hideHud];
      } error:^(NSError *error)
      {
-         [XHShowHUD hideHud];
-         [self.dateContentView setItemArray:self.dataArray];
+         [self.tableView refreshReloadData];
      }];
 }
 
-#pragma mark - Getter / Setter
--(XHCookDateContentView *)dateContentView
-{
-    if (_dateContentView == nil)
-    {
-        _dateContentView = [[XHCookDateContentView alloc]initWithDeletage:self];
-    }
-    return _dateContentView;
-}
 
--(XHCookDetailsContentView *)detailsContentView
+
+#pragma mark 右侧按钮相应的方法
+-(void)rightItemAction:(BaseNavigationControlItem*)sender
 {
-    if (_detailsContentView == nil)
-    {
-        _detailsContentView = [[XHCookDetailsContentView alloc]initWithDeletage:self];
-    }
-    return _detailsContentView;
+    
 }
 
 
 
+#pragma mark - Getter /  Setter
+-(XHCookBookHeader *)cookBookHeader
+{
+    if (!_cookBookHeader)
+    {
+        _cookBookHeader = [[XHCookBookHeader alloc]initWithDelegate:self];
+    }
+    return _cookBookHeader;
+}
 
 
+-(NSMutableArray *)cookBookItemArray
+{
+    if (!_cookBookItemArray)
+    {
+        _cookBookItemArray = [NSMutableArray array];
+    }
+    return _cookBookItemArray;
+}
+
+
+-(BaseTableView *)tableView
+{
+    if (!_tableView)
+    {
+        _tableView = [[BaseTableView alloc]init];
+        [_tableView setDelegate:self];
+        [_tableView setDataSource:self];
+    }
+    return _tableView;
+}
 
 @end
