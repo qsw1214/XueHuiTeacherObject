@@ -10,4 +10,5 @@
 
 @interface XHSignListView : ParentView
 @property(nonatomic,strong)NSMutableArray *signControlArry;
+-(void)getNosignCount:(NSInteger)nosignCount signCount:(NSInteger)signCount askforCount:(NSInteger)askforCount;
 @end

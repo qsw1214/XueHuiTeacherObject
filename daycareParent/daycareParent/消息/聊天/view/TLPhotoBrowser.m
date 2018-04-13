@@ -32,7 +32,7 @@
 +(TLPhotoBrowser *)showOriginalImageUrl:(NSString *)originalImageUrl
 {
     TLPhotoBrowser *browser = [[TLPhotoBrowser alloc] initWithFrame:kKeyWindow.bounds];
-    [browser.imageScrollView.photoView sd_setImageWithURL:[NSURL URLWithString:originalImageUrl] placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
+    [browser.imageScrollView.photoView sd_setImageWithURL:[NSURL URLWithString:[NSString safeString:originalImageUrl]] placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
     [browser show];
     return browser;
 }

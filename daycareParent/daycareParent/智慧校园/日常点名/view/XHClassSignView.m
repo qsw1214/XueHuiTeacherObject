@@ -34,10 +34,6 @@
     if (self=[super init]) {
         self.backgroundColor=MainColor;
         [self setLayerCornerRadius:9];
-        [self.classLabel setText:@"三四班"];
-        [self.signLabel setText:@"人数:150"];
-        [self.allClassLabel setText:@"/150"];
-        [self.attendanceLabel setText:@"100%"];
         
         [self addSubview:self.classLabel];
         [self addSubview:self.signLabel];
@@ -51,10 +47,23 @@
 {
     [self setFrame:frame];
     self.classLabel.frame=CGRectMake(15, 15, frame.size.width, 20);
+    
+}
+-(void)refreshClassView:(XHClassListModel *)model propValueDic:(NSDictionary *)propValueDic
+{
+    [self.classLabel setText:[NSString safeString:model.gradeAndClassName]];
+    
+    [self.signLabel setText:[NSString stringWithFormat:@"人数：%@",[NSString safeString:[propValueDic objectItemKey:@"attendanceCnt"]]]];
+    
+    [self.allClassLabel setText:[NSString stringWithFormat:@"/%@人",[NSString safeString:[propValueDic objectItemKey:@"sum"]]]];
+    
+    [self.attendanceLabel setText:[NSString safeString:[propValueDic objectItemKey:@"pre"]]];
+    
     self.signLabel.frame=CGRectMake(15, self.classLabel.bottom+15, [self.signLabel getWidthWithTitle:self.signLabel.text font:kFont(15)], 15);
     self.allClassLabel.frame=CGRectMake(self.signLabel.right,self.classLabel.bottom+15 , [self.allClassLabel getWidthWithTitle:self.allClassLabel.text font:kFont(15)], 15);
     self.rosterLabel.frame=CGRectMake(self.allClassLabel.right+20, self.classLabel.bottom+15, [self.rosterLabel getWidthWithTitle:self.rosterLabel.text font:kFont(15)], 15);
     self.attendanceLabel.frame=CGRectMake(self.rosterLabel.right, self.classLabel.bottom+15, 50, 15);
+    
 }
 -(UILabel *)classLabel
 {
@@ -80,7 +89,7 @@
     if (_allClassLabel==nil) {
         _allClassLabel=[[UILabel alloc] init];
         _allClassLabel.font=kFont(15);
-         _allClassLabel.textColor=[UIColor whiteColor];
+        _allClassLabel.textColor=RGB(190, 254, 233);
     }
     return _allClassLabel;
 }
@@ -90,7 +99,7 @@
         _rosterLabel=[[UILabel alloc] init];
         _rosterLabel.font=kFont(15);
          _rosterLabel.textColor=[UIColor whiteColor];
-        [_rosterLabel setText:@"出勤率:"];
+        [_rosterLabel setText:@"出勤率："];
     }
     return _rosterLabel;
 }

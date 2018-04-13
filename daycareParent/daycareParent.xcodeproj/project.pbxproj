@@ -46,6 +46,7 @@
 		046BB228207CA15200209C9B /* XHIntelligentOfficeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046BB227207CA15200209C9B /* XHIntelligentOfficeCell.m */; };
 		046BB22B207CA63B00209C9B /* XHIntelligentOfficeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 046BB22A207CA63B00209C9B /* XHIntelligentOfficeModel.m */; };
 		046BB22E207CA64B00209C9B /* XHIntelligentOfficeFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 046BB22D207CA64B00209C9B /* XHIntelligentOfficeFrame.m */; };
+		049A1FA7207F996300DDAB98 /* XHAllSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 049A1FA6207F996300DDAB98 /* XHAllSelectView.m */; };
 		4B07CC191FD4DAB800B2DBDA /* XHLeaveRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B07CC181FD4DAB800B2DBDA /* XHLeaveRecordModel.m */; };
 		4B07CC1C1FD4DAC800B2DBDA /* XHLeaveRecordFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B07CC1B1FD4DAC800B2DBDA /* XHLeaveRecordFrame.m */; };
 		4B07CC1D1FD4E48500B2DBDA /* XHLeaveRecordContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B523BDD1FD1584A006DD565 /* XHLeaveRecordContentView.m */; };
@@ -653,6 +654,8 @@
 		046BB22A207CA63B00209C9B /* XHIntelligentOfficeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHIntelligentOfficeModel.m; sourceTree = "<group>"; };
 		046BB22C207CA64B00209C9B /* XHIntelligentOfficeFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHIntelligentOfficeFrame.h; sourceTree = "<group>"; };
 		046BB22D207CA64B00209C9B /* XHIntelligentOfficeFrame.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHIntelligentOfficeFrame.m; sourceTree = "<group>"; };
+		049A1FA5207F996300DDAB98 /* XHAllSelectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHAllSelectView.h; sourceTree = "<group>"; };
+		049A1FA6207F996300DDAB98 /* XHAllSelectView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHAllSelectView.m; sourceTree = "<group>"; };
 		4B07CC171FD4DAB800B2DBDA /* XHLeaveRecordModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHLeaveRecordModel.h; sourceTree = "<group>"; };
 		4B07CC181FD4DAB800B2DBDA /* XHLeaveRecordModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHLeaveRecordModel.m; sourceTree = "<group>"; };
 		4B07CC1A1FD4DAC800B2DBDA /* XHLeaveRecordFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHLeaveRecordFrame.h; sourceTree = "<group>"; };
@@ -3912,6 +3915,8 @@
 				8C2A1EBD207F4AF40099C3FE /* XHClassSignView.m */,
 				8C2A1EBF207F5C740099C3FE /* XHSignListView.h */,
 				8C2A1EC0207F5C740099C3FE /* XHSignListView.m */,
+				049A1FA5207F996300DDAB98 /* XHAllSelectView.h */,
+				049A1FA6207F996300DDAB98 /* XHAllSelectView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -4382,6 +4387,7 @@
 				8C2A1EAF207EF1600099C3FE /* XHIntelligentOfficeTableViewHeaderView.m in Sources */,
 				4BCEB7372029750000ED2829 /* UIImage+fixOrientation.m in Sources */,
 				8C2A1EB5207F080B0099C3FE /* XHIntelligentOfficeListView.m in Sources */,
+				049A1FA7207F996300DDAB98 /* XHAllSelectView.m in Sources */,
 				4BB792CD1FD7930D00E0ED72 /* XHAchievementViewController.m in Sources */,
 				8CF3417F200F3ECF0055D6BD /* XHNewDetailViewController.m in Sources */,
 				4B3126401FDA1F26000CE894 /* XHAddressBookContentView.m in Sources */,

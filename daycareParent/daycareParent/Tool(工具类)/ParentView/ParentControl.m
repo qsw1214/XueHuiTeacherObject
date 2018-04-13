@@ -99,7 +99,11 @@
     label.layer.cornerRadius=radius;
     label.layer.masksToBounds=YES;
 }
-
+-(void)setLabelchageMarkColor:(UIColor *)markcolor allColor:(UIColor *)allColor startString:(NSString *)startString endString:(NSString *)endString MarkFondSize:(CGFloat)fondSize withNumberIndex:(NSInteger)index
+{
+    ParentLabel *label=self.numberLabelArry[index];
+    [label messageAction:label startString:startString endString:endString andAllColor:allColor andMarkColor:markcolor andMarkFondSize:fondSize];
+}
 -(void)setLabelBackgroundColor:(UIColor *)color withNumberIndex:(NSInteger)index
 {
     ParentLabel *label=self.numberLabelArry[index];

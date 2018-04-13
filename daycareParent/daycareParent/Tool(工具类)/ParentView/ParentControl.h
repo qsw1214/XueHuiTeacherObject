@@ -22,7 +22,7 @@
 -(void)setLabelAlpha:(CGFloat)alpha withNumberIndex:(NSInteger)index;
 -(void)setLabelAddTapGestureRecognizerTarget:(id)target action:(SEL)action withNumberIndex:(NSInteger)index;
 -(void)setLabelAddGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer withNumberIndex:(NSInteger)index;
-
+-(void)setLabelchageMarkColor:(UIColor *)markcolor allColor:(UIColor *)allColor startString:(NSString *)startString endString:(NSString *)endString MarkFondSize:(CGFloat)fondSize withNumberIndex:(NSInteger)index;
 
 -(void)setNumberImageView:(NSInteger)number;
 -(void)setImageViewCGRectMake:(CGRect)rect withNumberIndex:(NSInteger)index;
