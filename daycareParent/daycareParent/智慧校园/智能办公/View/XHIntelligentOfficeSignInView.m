@@ -350,6 +350,7 @@ UICollectionViewDataSource>
         _signListCollectionView.scrollsToTop = YES;
         _signListCollectionView.alwaysBounceVertical = YES;
         [_signListCollectionView registerClass:[XHSignCollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+        [_signListCollectionView setBackgroundColor:[UIColor whiteColor]];
     }
     return _signListCollectionView;
 }
