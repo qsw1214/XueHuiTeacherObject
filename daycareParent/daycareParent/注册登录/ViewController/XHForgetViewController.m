@@ -9,12 +9,12 @@
 #import "XHForgetViewController.h"
 #import "XHChagePhoneTableViewCell.h"
 #import "XHTelephoneTableViewCell.h"
+#import "XHChageTelephoneTableViewCell.h"
+#import "XHVerifyTableViewCell.h"
 #define countDownStr(s) [NSString stringWithFormat:@"%ld秒后重发",s]
 #define reviewTitle @"重新发送"
 @interface XHForgetViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
-    NSArray *arry;
-    NSArray *placeArry;
     NSInteger  _currentS;
     NSTimer *_timer;
     BOOL _ifSelect;
@@ -30,62 +30,46 @@
     // Do any additional setup after loading the view.
     [self setNavtionTitle:@"找回密码"];
     _currentS = 60;
-    arry=@[@"帐号",@"验证码",@"新密码",@"新密码"];
-    placeArry=@[@"请输入手机号",@"请输入验证码",@"请输入密码",@"请确认密码"];
     
     [self.view addSubview:self.tableView];
  
-    [self.view addSubview:self.sureButton];
+    [self.tableView addSubview:self.sureButton];
     
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return 3;
+}
+-(CGFloat )tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0.01;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row==1) {
-        XHChagePhoneTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.titleLabel.text=@"验证码";
-        cell.textFD.placeholder=@"请输入验证码";
-        cell.textFD.keyboardType=UIKeyboardTypeNumberPad;
-        cell.textFD.tag=1+10086;
-        [cell.textFD addTarget:self action:@selector(textChage) forControlEvents:UIControlEventEditingChanged];
-        cell.verifyBtn.backgroundColor=RGB(245, 245, 245);
-        [cell.verifyBtn setTitleColor:RGB(82, 82, 82) forState:UIControlStateNormal];
-        cell.verifyBtn.titleLabel.font=FontLevel3;
-        cell.verifyBtn.layer.cornerRadius=CORNER_BTN;
-        [cell.verifyBtn setTag:1];
+        XHVerifyTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"telephonecell" forIndexPath:indexPath];
+        cell.modelType=XHVerifyForgetType;
+        [cell setItemObject:nil withIndexPathRow:indexPath.row];
         
-        [cell.verifyBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.verifyButton setTag:1];
+        [cell.verifyButton addTarget:self action:@selector(BnttonClick:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
     else
     {
-        XHTelephoneTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"telephonecell" forIndexPath:indexPath];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.telephoneLabel.text=arry[indexPath.row];
-        cell.telephoneTF.placeholder=placeArry[indexPath.row];
-        cell.telephoneTF.tag=indexPath.row+10086;
-        [cell.telephoneTF addTarget:self action:@selector(textChage) forControlEvents:UIControlEventEditingChanged];
-        if (indexPath.row==0) {
-            cell.telephoneTF.keyboardType=UIKeyboardTypeNumberPad;
-        }
-        else
-        {
-            cell.telephoneTF.secureTextEntry=YES;
-        }
+        XHChageTelephoneTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+        cell.modelType=XHVerifyForgetType;
+        [cell setItemObject:nil withIndexPathRow:indexPath.row];
+        
         return cell;
     }
     
 }
-- (void)buttonClick:(UIButton *)btn
+- (void)BnttonClick:(UIButton *)btn
 {
     UITextField *phonepwd=[_tableView viewWithTag:10086];
-    UITextField *pwd=[_tableView viewWithTag:10086+2];
-    UITextField *surePwd=[_tableView viewWithTag:10086+3];
     UITextField *verrifypwd=[_tableView viewWithTag:10086+1];
+    UITextField *pwd=[_tableView viewWithTag:10086+2];
     switch (btn.tag) {
         case 1:
             
@@ -116,12 +100,8 @@
                 [XHShowHUD showNOHud:@"请输入正确手机号!"];
                 return;
             }
-            if (pwd.text.length<6||surePwd.text.length<6) {
+            if (pwd.text.length<6) {
                 [XHShowHUD showNOHud:@"密码至少6位!"];
-                return;
-            }
-            if (![pwd.text isEqualToString:surePwd.text]) {
-                [XHShowHUD showNOHud:@"确认密码不符!"];
                 return;
             }
             if (![UITextView verifyCodeMatch:verrifypwd.text]) {
@@ -176,41 +156,26 @@
     [Cell.verifyBtn setTitle:countDownStr(_currentS) forState:UIControlStateNormal];
 }
 
--(void)textChage
-{
-    UITextField *phonepwd=[_tableView viewWithTag:10086];
-    UITextField *pwd=[_tableView viewWithTag:10086+2];
-    UITextField *surePwd=[_tableView viewWithTag:10086+3];
-    UITextField *verrifypwd=[_tableView viewWithTag:10086+1];
-    if ([UITextView verifyPhone:phonepwd.text]&&pwd.text.length>5&&surePwd.text.length>5&&[UITextView verifyCodeMatch:verrifypwd.text])
-    {
-        [self.sureButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    }
-    else
-    {
-        [self.sureButton setTitleColor:LOGIN_BEFORE forState:UIControlStateNormal];
-    }
-}
 -(UITableView *)tableView
 {
     if (_tableView==nil) {
-        _tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 200)];
+        _tableView=[[BaseTableView alloc] initWithFrame:CGRectMake(0, self.navigationView.bottom, SCREEN_WIDTH, SCREEN_HEIGHT-self.navigationView.bottom) style:UITableViewStyleGrouped];
         _tableView.rowHeight=50;
+        _tableView.backgroundColor=[UIColor whiteColor];
         _tableView.delegate=self;
         _tableView.dataSource=self;
-        _tableView.bounces=NO;
-        [_tableView registerNib:[UINib nibWithNibName:@"XHChagePhoneTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
-        [_tableView registerNib:[UINib nibWithNibName:@"XHTelephoneTableViewCell" bundle:nil] forCellReuseIdentifier:@"telephonecell"];
+        [_tableView registerClass:[XHChageTelephoneTableViewCell class] forCellReuseIdentifier:@"cell"];
+        [_tableView registerClass:[XHVerifyTableViewCell class] forCellReuseIdentifier:@"telephonecell"];
     }
     return _tableView;
 }
 -(XHBaseBtn *)sureButton
 {
     if (_sureButton==nil) {
-        _sureButton=[[XHBaseBtn alloc] initWithFrame:CGRectMake(10, 290, SCREEN_WIDTH-20, LOGINBTN_HEIGHT)];
+        _sureButton=[[XHBaseBtn alloc] initWithFrame:CGRectMake(40, 180, SCREEN_WIDTH-80, 44)];
         [_sureButton setTitle:@"完成" forState:UIControlStateNormal];
+        [_sureButton addTarget:self action:@selector(BnttonClick:) forControlEvents:UIControlEventTouchUpInside];
         [_sureButton setTag:2];
-        [_sureButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _sureButton;
 }

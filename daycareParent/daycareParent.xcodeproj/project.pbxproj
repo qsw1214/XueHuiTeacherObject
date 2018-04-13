@@ -474,6 +474,9 @@
 		8C2A1EBE207F4AF40099C3FE /* XHClassSignView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A1EBD207F4AF40099C3FE /* XHClassSignView.m */; };
 		8C2A1EC1207F5C740099C3FE /* XHSignListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A1EC0207F5C740099C3FE /* XHSignListView.m */; };
 		8C2E72FE2080598A00D6E451 /* XHCoursePeportModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E72FD2080598A00D6E451 /* XHCoursePeportModel.m */; };
+		8C2E730620808ACF00D6E451 /* XHLoginTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E730520808ACF00D6E451 /* XHLoginTableViewCell.m */; };
+		8C2E730B20808D8400D6E451 /* XHChageTelephoneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E730720808D8400D6E451 /* XHChageTelephoneTableViewCell.m */; };
+		8C2E730C20808D8400D6E451 /* XHVerifyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E730820808D8400D6E451 /* XHVerifyTableViewCell.m */; };
 		8C33144D202A993B00F504A9 /* XHNewDynamicsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C33144C202A993B00F504A9 /* XHNewDynamicsViewController.m */; };
 		8C331450202AA15300F504A9 /* XHNewDynamicsContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C33144F202AA15300F504A9 /* XHNewDynamicsContentView.m */; };
 		8C331457202AAF3800F504A9 /* VideoManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C331456202AAF3800F504A9 /* VideoManagerViewController.m */; };
@@ -1512,6 +1515,12 @@
 		8C2A1EC0207F5C740099C3FE /* XHSignListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHSignListView.m; sourceTree = "<group>"; };
 		8C2E72FC2080598A00D6E451 /* XHCoursePeportModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHCoursePeportModel.h; sourceTree = "<group>"; };
 		8C2E72FD2080598A00D6E451 /* XHCoursePeportModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHCoursePeportModel.m; sourceTree = "<group>"; };
+		8C2E730420808ACF00D6E451 /* XHLoginTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHLoginTableViewCell.h; sourceTree = "<group>"; };
+		8C2E730520808ACF00D6E451 /* XHLoginTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHLoginTableViewCell.m; sourceTree = "<group>"; };
+		8C2E730720808D8400D6E451 /* XHChageTelephoneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHChageTelephoneTableViewCell.m; sourceTree = "<group>"; };
+		8C2E730820808D8400D6E451 /* XHVerifyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHVerifyTableViewCell.m; sourceTree = "<group>"; };
+		8C2E730920808D8400D6E451 /* XHVerifyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHVerifyTableViewCell.h; sourceTree = "<group>"; };
+		8C2E730A20808D8400D6E451 /* XHChageTelephoneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHChageTelephoneTableViewCell.h; sourceTree = "<group>"; };
 		8C33144B202A993B00F504A9 /* XHNewDynamicsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNewDynamicsViewController.h; sourceTree = "<group>"; };
 		8C33144C202A993B00F504A9 /* XHNewDynamicsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHNewDynamicsViewController.m; sourceTree = "<group>"; };
 		8C33144E202AA15300F504A9 /* XHNewDynamicsContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHNewDynamicsContentView.h; sourceTree = "<group>"; };
@@ -3175,6 +3184,12 @@
 				8CC22A712041088D00E36966 /* XHTelephoneTableViewCell.h */,
 				8CC22A722041088D00E36966 /* XHTelephoneTableViewCell.m */,
 				8CC22A702041088D00E36966 /* XHTelephoneTableViewCell.xib */,
+				8C2E730420808ACF00D6E451 /* XHLoginTableViewCell.h */,
+				8C2E730520808ACF00D6E451 /* XHLoginTableViewCell.m */,
+				8C2E730A20808D8400D6E451 /* XHChageTelephoneTableViewCell.h */,
+				8C2E730720808D8400D6E451 /* XHChageTelephoneTableViewCell.m */,
+				8C2E730920808D8400D6E451 /* XHVerifyTableViewCell.h */,
+				8C2E730820808D8400D6E451 /* XHVerifyTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4614,6 +4629,7 @@
 				4B80F27A1FCBF04800BC7B52 /* MJRefreshAutoFooter.m in Sources */,
 				8C4C208D202039000051642B /* XHSubjectListModel.m in Sources */,
 				8C1AA81D207B13D200DDCBB3 /* XHNoticeUniteContentView.m in Sources */,
+				8C2E730B20808D8400D6E451 /* XHChageTelephoneTableViewCell.m in Sources */,
 				042F0DB320805A4400B26553 /* XHPageCollectionViewItemCell.m in Sources */,
 				8C1AA86B207B13FA00DDCBB3 /* XHRecordVoice.m in Sources */,
 				046BB210207C4B3F00209C9B /* XHSyllabusCollectionView.m in Sources */,
@@ -4700,6 +4716,7 @@
 				4B80F32C1FCC108800BC7B52 /* MarqueeLabel.m in Sources */,
 				8C7E5BC8207DB22400DA6F15 /* XHRecipientModel.m in Sources */,
 				4B5A3AEE1FCE785600504229 /* XHScrollPreviewControl.m in Sources */,
+				8C2E730C20808D8400D6E451 /* XHVerifyTableViewCell.m in Sources */,
 				8C019F691FF4C365005EBC2C /* FMDatabaseQueue.m in Sources */,
 				8C8081701FCEAB7C00C7945A /* XHBaseLabel.m in Sources */,
 				4B3126361FD93CC6000CE894 /* UIView+SDExtension.m in Sources */,
@@ -4742,6 +4759,7 @@
 				4B3418F61FFF14F100A5EC56 /* XHVideoControl.m in Sources */,
 				8CC7648E200CAA69007887C7 /* XHNewHeardTableViewCell.m in Sources */,
 				4BCEB72120294FF200ED2829 /* XHAssignmentHomeWorkCollectionView.m in Sources */,
+				8C2E730620808ACF00D6E451 /* XHLoginTableViewCell.m in Sources */,
 				8C33146C202AC83200F504A9 /* UIView+Tools.m in Sources */,
 				8C1AA80D207B13D200DDCBB3 /* XHNoticeModel.m in Sources */,
 				8C7E5BBF207DA98300DA6F15 /* XHCustomPickerView.m in Sources */,

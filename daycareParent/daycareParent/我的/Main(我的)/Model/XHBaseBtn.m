@@ -21,7 +21,7 @@
     [super awakeFromNib];
     self.backgroundColor=MainColor;
     self.titleLabel.font=FontLevel2;
-    [self setTitleColor:LOGIN_BEFORE  forState:UIControlStateNormal];
+    [self setTitleColor:[UIColor whiteColor]  forState:UIControlStateNormal];
     self.layer.cornerRadius=CORNER_BTN;
 
 }
@@ -30,7 +30,7 @@
     if (self=[super initWithFrame:frame]) {
         self.backgroundColor=MainColor;
         self.titleLabel.font=FontLevel2;
-        [self setTitleColor:LOGIN_BEFORE  forState:UIControlStateNormal];
+        [self setTitleColor:[UIColor whiteColor]   forState:UIControlStateNormal];
         self.layer.cornerRadius=CORNER_BTN;
     }
     return self;
